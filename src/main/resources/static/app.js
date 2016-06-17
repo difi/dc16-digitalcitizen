@@ -33,7 +33,7 @@ class RadioButtonMe extends React.Component {
     render () {
         return (
             <div>
-                <input type="radio" name="who" value="Me" {...this.props}/> Sør for meg selv
+                <input type="radio" name="who" value="Me" {...this.props}/> Søk for meg selv
             </div>
         );
     }
