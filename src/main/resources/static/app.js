@@ -1,5 +1,5 @@
 /**
- * Set the radio buttons into one form together in one form.
+ * Set the radio buttons together into one form.
  */
 var RadioButtons = React.createClass({
    render: function () {
@@ -15,7 +15,7 @@ var RadioButtons = React.createClass({
 })
 
 /**
- * Create a radio button component.
+ * Create the radio button component that let you apply for another person
  */
 class RadioButtonOther extends React.Component {
     render () {
@@ -27,7 +27,7 @@ class RadioButtonOther extends React.Component {
     }
 }
 /**
- * Create a radio button component.
+ * Create the radio button component that let you apply for yourself
  */
 class RadioButtonMe extends React.Component {
     render () {
@@ -40,7 +40,7 @@ class RadioButtonMe extends React.Component {
 }
 
 /**
- * When radio button me is clicked this appears on screen.
+ * When radio button me is clicked this appears on screen. - entry box for name of the applicant
  */
 class SearchForMe extends React.Component {
     render () {
@@ -53,7 +53,7 @@ class SearchForMe extends React.Component {
 }
 
 /**
- * When radio button other is clicked this appears on screen.
+ * When radio button other is clicked this appears on screen. - entry box for pnr and name of the applicant
  */
 class SearchForOther extends  React.Component {
     render () {
@@ -67,15 +67,15 @@ class SearchForOther extends  React.Component {
 }
 
 /**
- * This handles which radio button is clicked, and what information to show on the screen.
- * @return true and false depending on which radio button is active.
+ * Handles which radio button is clicked, and which information to show on the screen.
+ * @return true or false depending on which radio button is active.
  */
 class RadioButtonClick extends React.Component {
     constructor () {
         super();
 
         this.state = {
-             clicked1: false,
+            clicked1: false,
             clicked2: false
         };
 
