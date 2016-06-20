@@ -7,7 +7,7 @@ import { Application } from './Application.jsx';
 
 //
 var dataMe = [
-    { name: "FØDSELSNUMMER"},
+    { name: "Fødselsnr"},
     {name: "Fornavn"},
     {  name: "Etternavn"},
     {   name: "Sivilstatus"},
@@ -32,7 +32,6 @@ var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
-
 ReactDOM.render(
-    <h1 App worked />, document.getElementById("content")
+    <Application data={data} />, document.getElementById("content")
 );

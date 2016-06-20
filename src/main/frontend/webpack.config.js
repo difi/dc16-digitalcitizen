@@ -1,47 +1,34 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-const TARGET = process.env.npm_lifecycle_event;
+const path = require('path');
 const merge = require('webpack-merge');
-const common = {
-    entry: './src/app.js',
 
+const TARGET = process.env.npm_lifecycle_event;
+const PATHS = {
+    source: path.join(__dirname, 'app/app.js'),
+    output: path.join(__dirname, '../../../target/classes/static')
+};
+
+const common = {
+    entry: [
+        PATHS.source
+    ],
     output: {
-        path: '../../../target/classes/static/',
+        path: PATHS.output,
         publicPath: '',
         filename: 'bundle.js'
     },
     module: {
-        loaders: [
-            {
-                test: /\.css$/,
-                loader: "style!css"
-            },
-            {
-                test: /\.jsx?$/,
-                include: [
-                    path.resolve(__dirname, "./src")
-                ],
-                loader: 'babel',
-                query: {
-                    presets: ['es2015', 'react']
-                }
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
-            }
-        ]
+        loaders: [{
+            exclude: /node_modules/,
+            loader: 'babel'
+        }, {
+            test: /\.css$/,
+            loader: 'style!css'
+        }]
     },
-    plugins: [
-        new ExtractTextPlugin("[name].css")
-    ]
+    resolve: {
+        extensions: ["", ".tsx", ".ts", ".jsx", ".js"]
+    },
 };
-
 
 if (TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
@@ -60,3 +47,8 @@ if (TARGET === 'start' || !TARGET) {
         devtool: 'source-map'
     });
 }
+
+if (TARGET === 'build') {
+    module.exports = merge(common, {});
+}
+
