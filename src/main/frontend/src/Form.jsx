@@ -1,16 +1,31 @@
 import TextField from './TextField.jsx';
+import DropDown from './DropDown.jsx';
 import React from 'react';
 
 export class Form extends React.Component{
-
     render() {
         return (
-            <div>
-                <h1>{this.props.name}</h1>
+            <form action="">
+                <h2>{this.props.name}</h2>
                 {this.props.data.map(function(field, i){
-                    return (<TextField key={i} text={field.name}/>);
+                    if(field.type=="TextField"){
+                        return (
+                            <div>
+                                <h2>{this.props.name}</h2>
+                                <TextField key={i} text={field.name}/>
+                            </div>
+                        );
+                    }
+                    else if (field.type=="DropDown") {
+                        return (<div>
+                                <h2>{this.props.name}</h2>
+                                <DropDown key={i}/> {field.name}
+                            </div>
+                        );
+                    }
+
                 })}
-            </div>
+            </form>
         );
     }
 };
