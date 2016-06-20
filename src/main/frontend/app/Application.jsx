@@ -37,16 +37,17 @@ export class Application extends React.Component{
 class SearchForMe extends React.Component {
 render() {
     return (
-    this.props.data.map(function(forms, i){
-    if (forms.type == "Meg" || forms.type == "Paarorende") {
-        return (
-            <Form key={i} name={forms.formname} data={forms.data}/>
-        );
-    } else if (forms.type == "Soker" || forms.type == "Paarorende") {
-        return (
-            <Form key={i} name={forms.formname} data={forms.data}/>
-        );
-    }})
+        this.props.data.map(function(forms, i){
+            if (forms.type == "radio") {
+                return ( <div>
+                    <Form key={i} name={forms.formname} data={forms.data}/>
+                </div> )
+            } else {
+                return ( <div>
+                    <RadioButton/>
+                </div> )
+            }
+        })
     )
 }
 }
