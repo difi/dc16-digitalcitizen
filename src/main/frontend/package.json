@@ -16,7 +16,17 @@
     "less": "^2.6.0",
     "less-loader": "^2.2.2",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.13"
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1",
+    "ava": "^0.12.0",
+    "babel-preset-airbnb": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "bell-on-bundler-error-plugin": "^1.0.8",
+    "chai": "^3.5.0",
+    "enzyme": "^2.0.0",
+    "jsdom": "^8.1.0",
+    "react-addons-test-utils": "^0.14.7",
+    "sinon": "^1.17.3"
   },
   "dependencies": {
     "babel-runtime": "^6.3.19",
@@ -29,11 +39,16 @@
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0",
-    "react-router-bootstrap": "^0.20.1"
+    "react-router-bootstrap": "^0.20.1",
+    "axios": "^0.9.1",
+    "md5": "^2.0.0"
+
   },
   "scripts": {
     "watch": "webpack -d --watch",
     "dev-build": "webpack -d --display-modules",
-    "prod-build": "webpack -d -p"
+    "prod-build": "webpack -d -p",
+    "test": "mocha -w test/helpers/browser.js test/*.spec.js",
+    "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
   }
 }

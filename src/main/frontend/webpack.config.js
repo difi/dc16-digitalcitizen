@@ -4,10 +4,13 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: "./src/app.js",
+   
     output: {
         path: '../../../target/classes/static/',
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: 'http://localhost:7700/bundle'
     },
+
     module: {
         loaders: [
             {
