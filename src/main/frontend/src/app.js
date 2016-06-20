@@ -6,29 +6,35 @@ import ReactDOM from 'react-dom';
 import { Application } from './Application.jsx';
 
 //
+var dataRadio = [
+    {name: "Meg", type: "RadioButton"},
+    {name: "Andre", type: "RadioButton"}
+]
+
 var dataMe = [
-    { name: "Fødselnr"},
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {   name: "Sivilstatus"},
-    {   name: "Nasjonalitet"},
-    {name: "E-post"}];
+    {name: "Fødselnr", type: "TextField"},
+    {name: "Fornavn", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "Sivilstatus", type: "TextField"},
+    {name: "Nasjonalitet", type: "TextField"},
+    {name: "E-post", type: "TextField"}];
 
 var dataApplicant = [
-    { name: "Adresse"},
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {name: "E-post"}];
+    {name: "Adresse", type: "TextField"},
+    {name: "Fornavn", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "E-post", type: "TextField"}];
 
 var dataDep = [
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {   name: "Sivilstatus"},
-    {   name: "Telefonnummer"},
-    {name: "E-post"}];
+    {name: "Fornavn", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "Sivilstatus", type: "TextField"},
+    {name: "Telefonnummer", type: "TextField"},
+    {name: "E-post", type: "TextField"}];
 
 
 var data = [
+    {formname: "Søker du sykehjemsplass for deg selv eller på vegne av noen andre?", data: dataRadio},
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
