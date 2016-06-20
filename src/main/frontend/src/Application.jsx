@@ -15,13 +15,8 @@ export class Application extends React.Component{
             <div>
                 <h1>Søk sykehjemsplass</h1>
                 <h2>Søker du sykehjemsplass for deg selv eller på vegne av noen andre?</h2>
-                {this.props.data.map(function (field, i) {
-                    if (field.type=="RadioButton"){
-                        return (<div>
-                                <RadioButton key={i} /> {field.name}
-                            </div>
-                        );
-                }})};
+                <RadioButtonClick />
+
                 {this.props.data.map(function(forms, i){
                     return (
                         <Form key={i} name={forms.formname} data={forms.data}/>
@@ -32,6 +27,22 @@ export class Application extends React.Component{
     }
 };
 
+class SearchForMe extends React.Component {
+render() {
+    return (
+    this.props.data.map(function(forms, i){
+    if (forms.type == "Meg" || forms.type == "Paarorende") {
+        return (
+            <Form key={i} name={forms.formname} data={forms.data}/>
+        );
+    } else if (forms.type == "Soker" || forms.type == "Paarorende") {
+        return (
+            <Form key={i} name={forms.formname} data={forms.data}/>
+        );
+    }})
+    )
+}
+}
 
 /**
  * Create a radio button component.
@@ -97,3 +108,12 @@ class RadioButtonClick extends React.Component {
         );
     }
 }
+
+
+/*{this.props.data.map(function (field, i) {
+ if (field.type=="RadioButton"){
+ return (<div>
+ <RadioButton key={i} /> {field.name}
+ </div>
+ );
+ }})};*/

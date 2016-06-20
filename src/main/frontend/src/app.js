@@ -34,10 +34,10 @@ var dataDep = [
 
 
 var data = [
-    {formname: "Søker du sykehjemsplass for deg selv eller på vegne av noen andre?", data: dataRadio},
-    {formname: "Om den som ønsker plass", data: dataMe},
-    {formname: "Om deg som søker", data: dataApplicant},
-    {formname: "Om pårørende", data: dataDep}];
+   // {formname: "Søker du sykehjemsplass for deg selv eller på vegne av noen andre?", data: dataRadio},
+    {formname: "Om den som ønsker plass", data: dataMe, type: "Meg"},
+    {formname: "Om deg som søker", data: dataApplicant, type: "Soker"},
+    {formname: "Om pårørende", data: dataDep, type: "Paarorende"}];
 
 ReactDOM.render(
     <Application data={data}/>, document.getElementById("content")
