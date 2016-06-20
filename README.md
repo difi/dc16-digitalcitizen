@@ -12,3 +12,24 @@ Poenget er å illustrere at innbygger er digital og blir møtt med ett uniformt 
 Søknad om sykehjemsplass er valgt fordi denne illustrerer hvordan innbyggere må forholde seg til flere kommuner. Søknaden er ofte fylt ut av verger/familiemedlemmer som bur andre plasser enn den som har behovet for plass.
 
 Tanken er å løse oppgaven med stor grad av bruk av dagens fellesløsninger – meldingsutveksling, Altinn REST API og DPI.
+
+
+
+For å kjøre Webpack med Hot Reload.
+
+Kjør Application på vanlig måte.
+
+I terminalen naviger til src/main/frontend
+
+Første ganng må en del ekstra tillegg installeres:(
+npm install webpack-merge
+npm install webpack-dev-server
+npm install babel-preset-stage-1
+)
+
+For å starte opp dev server - kjør
+npm start.
+
+Applikasjonen vil nå kjøre på localhost:9090 og vil av og til oppdatere seg med om du lagrer .js filene.
+
+Om den skulle stoppe Avbryt terminalscriptet og kjør på nytt.
