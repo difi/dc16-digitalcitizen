@@ -32,6 +32,7 @@ var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
+
 ReactDOM.render(
     <Application data={data} />, document.getElementById("content")
 );
