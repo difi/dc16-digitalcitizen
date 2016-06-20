@@ -34,10 +34,9 @@ var dataDep = [
 
 
 var data = [
-    {formname: "Radio", data: dataRadio, type: "radio"},
-    {formname: "Om den som ønsker plass", data: dataMe, type: "radio"},
-    {formname: "Om deg som søker", data: dataApplicant, type: "test"},
-    {formname: "Om pårørende", data: dataDep, type: "radio"}];
+    {formname: "Om den som ønsker plass", data: dataMe},
+    {formname: "Om deg som søker", data: dataApplicant},
+    {formname: "Om pårørende", data: dataDep}];
 
 ReactDOM.render(
     <Application data={data} />, document.getElementById("content")
