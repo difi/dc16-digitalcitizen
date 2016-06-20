@@ -34,6 +34,10 @@
   "scripts": {
     "watch": "webpack -d --watch",
     "dev-build": "webpack -d --display-modules",
-    "prod-build": "webpack -d -p"
+    "prod-build": "webpack -d -p",
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --inline ",
+    "eslint": "eslint app"
+
   }
 }
