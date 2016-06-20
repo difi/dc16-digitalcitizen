@@ -14,6 +14,7 @@ import React from 'react';
 
         return (
             <input
+                //placeholder={this.props.name}
                 type="text"
                 value={this.state.value}
                 onChange={this.handleChange}

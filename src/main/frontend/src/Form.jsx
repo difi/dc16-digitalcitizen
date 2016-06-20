@@ -5,12 +5,14 @@ export class Form extends React.Component{
 
     render() {
         return (
-            <div>
+            <form>
                 <h1>{this.props.name}</h1>
                 {this.props.data.map(function(field, i){
                     return (<TextField key={i} text={field.name}/>);
                 })}
-            </div>
+                <h3>{this.props.name}</h3>
+
+            </form>
         );
     }
 };
