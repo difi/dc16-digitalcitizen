@@ -15,12 +15,19 @@ export class Application extends React.Component{
             <div>
                 <h1>Søk sykehjemsplass</h1>
                 <h2>Søker du sykehjemsplass for deg selv eller på vegne av noen andre?</h2>
+                
                 <RadioButtonClick />
 
                 {this.props.data.map(function(forms, i){
-                    return (
-                        <Form key={i} name={forms.formname} data={forms.data}/>
-                    )
+                    if (forms.type == "radio") {
+                            return ( <div>
+                                <Form key={i} name={forms.formname} data={forms.data}/>
+                            </div> )
+                        } else {
+                            return ( <div>
+                                <RadioButton/>
+                            </div> )
+                        }
                 })}
             </div>
         )
