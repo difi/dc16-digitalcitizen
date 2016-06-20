@@ -7,7 +7,7 @@ import { Application } from './Application.jsx';
 
 //
 var dataMe = [
-    { name: "FØDSELSNUMMER"},
+    { name: "Fødselnr"},
     {name: "Fornavn"},
     {  name: "Etternavn"},
     {   name: "Sivilstatus"},

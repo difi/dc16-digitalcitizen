@@ -5,39 +5,22 @@
 1 verbose cli   'dev-build' ]
 2 info using npm@2.15.5
 3 info using node@v4.4.5
-4 verbose run-script [ 'predev-build', 'dev-build', 'postdev-build' ]
-5 info predev-build sbmfp-frontend@0.0.1
-6 info dev-build sbmfp-frontend@0.0.1
-7 verbose unsafe-perm in lifecycle true
-8 info sbmfp-frontend@0.0.1 Failed to exec dev-build script
-9 verbose stack Error: sbmfp-frontend@0.0.1 dev-build: `webpack -d --display-modules`
-9 verbose stack Exit status 1
-9 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:217:16)
-9 verbose stack     at emitTwo (events.js:87:13)
-9 verbose stack     at EventEmitter.emit (events.js:172:7)
-9 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
-9 verbose stack     at emitTwo (events.js:87:13)
-9 verbose stack     at ChildProcess.emit (events.js:172:7)
-9 verbose stack     at maybeClose (internal/child_process.js:827:16)
-9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-10 verbose pkgid sbmfp-frontend@0.0.1
-11 verbose cwd C:\Users\camp-vhe\Documents\GitHub\dc16-digitalcitizen
-12 error Windows_NT 6.1.7601
-13 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run-script" "dev-build"
-14 error node v4.4.5
-15 error npm  v2.15.5
-16 error code ELIFECYCLE
-17 error sbmfp-frontend@0.0.1 dev-build: `webpack -d --display-modules`
-17 error Exit status 1
-18 error Failed at the sbmfp-frontend@0.0.1 dev-build script 'webpack -d --display-modules'.
-18 error This is most likely a problem with the sbmfp-frontend package,
-18 error not with npm itself.
-18 error Tell the author that this fails on your system:
-18 error     webpack -d --display-modules
-18 error You can get information on how to open an issue for this project with:
-18 error     npm bugs sbmfp-frontend
-18 error Or if that isn't available, you can get their info via:
-18 error
-18 error     npm owner ls sbmfp-frontend
-18 error There is likely additional logging output above.
-19 verbose exit [ 1, true ]
+4 verbose stack Error: missing script: dev-build
+4 verbose stack     at run (C:\Program Files\nodejs\node_modules\npm\lib\run-script.js:142:19)
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\run-script.js:58:5
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:356:5
+4 verbose stack     at checkBinReferences_ (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:320:45)
+4 verbose stack     at final (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:354:3)
+4 verbose stack     at then (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:124:5)
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:311:12
+4 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
+5 verbose cwd C:\Users\camp-vhe\Documents\GitHub\dc16-digitalcitizen
+6 error Windows_NT 6.1.7601
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run-script" "dev-build"
+8 error node v4.4.5
+9 error npm  v2.15.5
+10 error missing script: dev-build
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
