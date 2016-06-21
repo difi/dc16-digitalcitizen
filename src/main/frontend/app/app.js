@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import $ from 'jquery';
 import { Application } from './Application.jsx';
 
 //
@@ -34,6 +34,6 @@ var data = [
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
 
-ReactDOM.render(
-    <Application data={data} />, document.getElementById("content")
-);
+
+ReactDOM.render(<h1>So nothing works</h1>, document.getElementById('container'));
+

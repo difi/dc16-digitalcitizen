@@ -19,7 +19,10 @@ const common = {
     module: {
         loaders: [{
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel',
+            query: {
+                presets: ['react', 'es2015']
+            }
         }, {
             test: /\.css$/,
             loader: 'style!css'
