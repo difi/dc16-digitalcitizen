@@ -1,4 +1,6 @@
 import TextField from './TextField.jsx';
+import DropDown from './DropDown.jsx';
+
 import React from 'react';
 
 export class Form extends React.Component{
@@ -15,13 +17,13 @@ export class Form extends React.Component{
                             </div>
                         );
                     }
-                    /*else if (field.type=="DropDown") {
+                    else if (field.type=="DropDown") {
                         return (<div>
                                 <h2>{this.props.name}</h2>
                                 <DropDown key={i}/> {field.name}
                             </div>
                         );
-                    }*/
+                    }
 
                 })}
             </form>

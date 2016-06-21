@@ -11,7 +11,7 @@ var dataMe = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "Sivilstatus", type: "TextField"},
-    {name: "Nasjonalitet", type: "TextField"},
+    {name: "Nasjonalitet", type: "DropDown"},
     {name: "E-post", type: "TextField"}];
 
 var dataApplicant = [
@@ -27,18 +27,10 @@ var dataDep = [
     {name: "Telefonnummer", type: "TextField"},
     {name: "E-post", type: "TextField"}];
 
-var dropDown = [
-    {name: "Norsk", type: "DropDown"},
-    {name: "Svensk", type: "DropDown"},
-    {name: "Dansk", type: "DropDown"},
-    {name: "Finsk", type: "DropDown"}
-]
-
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
-    {formname: "Om pårørende", data: dataDep},
-    {formname: "Nasjonalitet", data:dropDown}];
+    {formname: "Om pårørende", data: dataDep}];
 
 ReactDOM.render(
     <Application data={data} />, document.getElementById("content")
