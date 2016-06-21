@@ -17,7 +17,7 @@ import React from 'react';
                 <label>{this.state.value}: </label>
                 <input
                     type="text"
-                    placeholder={this.state.value}
+                    placeholder={this.props.text}
                     onChange={this.handleChange}/>
             </div>
         );

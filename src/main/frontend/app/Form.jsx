@@ -5,7 +5,6 @@ export class Form extends React.Component{
     render() {
         return (
             <div>
-                <h2>{this.props.name}</h2>
                 {this.props.data.map(function(field, i){
                     if(field.type=="TextField"){
                     return (
