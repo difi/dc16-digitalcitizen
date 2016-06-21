@@ -1,5 +1,6 @@
 import TextField from './TextField.jsx';
 import React from 'react';
+import DropDown from './DropDown.jsx';
 
 export class Form extends React.Component{
     render() {
@@ -14,12 +15,12 @@ export class Form extends React.Component{
                             </div>
                         );
                     }
-                    /*else if (field.type=="RadioButton"){
+                    else if (field.type=="DropDown"){
                      return (<div>
-                     <RadioButton key={i} /> {field.name}
+                     <DropDown key={i} /> {field.name}
                      </div>
                      );
-                     }*/
+                    }
 
                 })}
             </div>
