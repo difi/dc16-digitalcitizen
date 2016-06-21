@@ -6,10 +6,6 @@ import ReactDOM from 'react-dom';
 import { Application } from './Application.jsx';
 
 //
-var dataRadio = [
-    {name: "Meg", type: "RadioButton"},
-    {name: "Andre", type: "RadioButton"}
-]
 
 var dataMe = [
     { name: "Fødselsnr", type: "TextField"},

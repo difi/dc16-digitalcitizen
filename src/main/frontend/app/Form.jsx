@@ -4,7 +4,7 @@ import React from 'react';
 export class Form extends React.Component{
     render() {
         return (
-            <form action="">
+            <div>
                 <h2>{this.props.name}</h2>
                 {this.props.data.map(function(field, i){
                     if(field.type=="TextField"){
@@ -22,7 +22,7 @@ export class Form extends React.Component{
                     }*/
 
                 })}
-            </form>
+            </div>
         );
     }
 };
