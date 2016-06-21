@@ -1,12 +1,12 @@
 /**
  * Created by camp-hst on 20.06.2016.
  */
-import React, { Component } from 'react';
-import Dropdown from './Dropdown.js'
+/*import React, { Component } from 'react';
+import DropdownList from './DropdownList.jsx'
 
 const options = require('./nationalities');
 
-class NationalityDropDown extends Component({
+class DropDown extends Component({
     constructor (props) {
         super(props)
         this.state = {
@@ -16,7 +16,6 @@ class NationalityDropDown extends Component({
     },
 
     _onSelect (option) {
-        console.log('You selected ', option.label)
         this.setState({selected: option})
     },
 
@@ -24,14 +23,15 @@ class NationalityDropDown extends Component({
         const defaultOption = this.state.selected
         return (
             <div>
-                <h4>Nasjonaliteter</h4>
-                <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Velg..." />
+                <DropdownList options={options} onChange={this._onSelect} value={defaultOption} placeholder="Velg..." ></DropdownList>
             </div>
-        );
-    }
-});
+        )
+    },
 
-export default NationalityDropDown;
+)};
+
+
+export default DropDown;/*
 
 
 
