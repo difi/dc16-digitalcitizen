@@ -1,11 +1,22 @@
 "use strict";
+import {createStore, combineReducers} from 'redux';
+import {reducer as formReducer} from 'redux-form';
+const reducers = {
+    // ... your other reducers here ...
+    form: formReducer     // <---- Mounted at 'form'. See note below.
+}
+import { Provider } from 'react-redux';
+const reducer = combineReducers(reducers);
+const store = createStore(reducer);
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import { Application } from './Application.jsx';
-
+import SynchronousValidationForm from './ReduxForm.jsx';
 //
+
 
 var dataMe = [
     { name: "Fødselsnr", type: "TextField"},
@@ -35,5 +46,7 @@ var data = [
     {formname: "Om pårørende", data: dataDep}];
 
 
-ReactDOM.render(<h1>So nothing works</h1>, document.getElementById('container'));
+ReactDOM.render( <Provider store={store}>
+    <SynchronousValidationForm />
+</Provider>, document.getElementById('content'));
 
