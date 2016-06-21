@@ -1,48 +1,37 @@
 /**
  * Created by camp-hst on 20.06.2016.
  */
-import React from 'react';
-import Select from 'react-select';
+import React, { Component } from 'react';
+import Dropdown from './Dropdown.js'
 
-var DropDown= React.createClass({
-    displayName: 'Nasjonalitet',
-    propTypes: {
-        label: React.PropTypes.string
-    },
-    getInitialState () {
-        return {};
+const options = require('./nationalities');
+
+class NationalityDropDown extends Component({
+    constructor (props) {
+        super(props)
+        this.state = {
+            selected: options[0]
+        }
+        this._onSelect = this._onSelect.bind(this)
     },
 
-    getDefaultProps () {
-        return {
-            label: 'Nasjonalitet:'
-        };
-    },
-    getInitialState () {
-        return {
-            national: 'NATIONAL',
-            disabled: false,
-            selectValue: 'no',
-        };
-    },
-    updateValue (newValue) {
-        this.setState({
-            selectValue: newValue
-        });
+    _onSelect (option) {
+        console.log('You selected ', option.label)
+        this.setState({selected: option})
     },
 
     render () {
-        var options = DATA.NATIONAL;
+        const defaultOption = this.state.selected
         return (
             <div>
-                <h3>{this.props.label}</h3>
-                <Select options={options} value={this.state.selectValue} onChange={this.updateValue}/>
+                <h4>Nasjonaliteter</h4>
+                <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Velg..." />
             </div>
         );
     }
 });
 
-export default DropDown;
+export default NationalityDropDown;
 
 
 
