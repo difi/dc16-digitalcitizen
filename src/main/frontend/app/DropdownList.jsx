@@ -1,8 +1,6 @@
 import React from 'react';
 
 var DropdownList = React.createClass({
-
-
     
     propTypes: {
         id: React.PropTypes.string.isRequired,

@@ -9,7 +9,7 @@ var dataMe = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "Sivilstatus", type: "TextField"},
-    {name: "Nasjonalitet", type: "DropDown"},
+    {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"}];
 
 var dataApplicant = [

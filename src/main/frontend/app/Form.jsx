@@ -1,7 +1,7 @@
 import TextField from './TextField.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
-import countries from './nationalities.js';
+import dropdownContent from './dropdown-list-content.js';
 
 export class Form extends React.Component {
 
@@ -17,16 +17,29 @@ export class Form extends React.Component {
                             </div>
                         );
                     }
-                    else if (field.type == "DropDown") {
+                    else if (field.type == "Dropdown") {
+                        var options = [], label, value;
+                        switch (field.name){
+                            case "Nasjonalitet":
+                                options = dropdownContent.NATIONAL;
+                                label = 'country';
+                                value = 'code';
+                                break;
+                            case "Familie":
+                                options = dropdownContent.RELATIONS;
+                                label = 'relation';
+                                value = 'value';
+                                break;
+                        }
                         return (<div>
                                 <DropdownList id='dropdown-list'
-                                          options={countries.NATIONAL}
-                                          labelField='country'
-                                          valueField='country'/>
+                                          options={options}
+                                          labelField={label}
+                                          valueField={value}/>
                             </div>
                         );
                     }
-
+                    
                 })}
             </div>
         );
