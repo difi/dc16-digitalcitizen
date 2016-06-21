@@ -6,32 +6,34 @@ import ReactDOM from 'react-dom';
 import { Application } from './Application.jsx';
 
 //
+
 var dataMe = [
-    { name: "Fødselsnr"},
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {   name: "Sivilstatus"},
-    {   name: "Nasjonalitet"},
+    { name: "Fødselsnr", type: "TextField"},
+    {name: "Fornavn", type: "TextField"},
+    {  name: "Etternavn", type: "TextField"},
+    {   name: "Sivilstatus", type: "TextField"},
+    {   name: "Nasjonalitet", type: "TextField"},
     {name: "E-post"}];
 
 var dataApplicant = [
-    { name: "Adresse"},
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {name: "E-post"}];
+    {name: "Adresse", type: "TextField"},
+    {name: "Fornavn", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "E-post", type: "TextField"}];
 
 var dataDep = [
-    {name: "Fornavn"},
-    {  name: "Etternavn"},
-    {   name: "Sivilstatus"},
-    {   name: "Telefonnummer"},
-    {name: "E-post"}];
+    {name: "Fornavn", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "Sivilstatus", type: "TextField"},
+    {name: "Telefonnummer", type: "TextField"},
+    {name: "E-post", type: "TextField"}];
 
 
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
+
 ReactDOM.render(
 <Application data={data} />, document.getElementById("content")
 );
