@@ -1,11 +1,9 @@
 "use strict";
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { Application } from './Application.jsx';
 
-//
+
 var dataMe = [
     {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},

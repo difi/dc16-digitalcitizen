@@ -28,7 +28,6 @@ export class Application extends React.Component{
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
         return (
-            <div>
                 <RadioButtonClick callBackParent={this.onChildChange} />
                 {this.props.data.map(function(forms, i){
 
@@ -39,7 +38,7 @@ export class Application extends React.Component{
                         <Form key={i} name={forms.formname} data={forms.data}/>
                     )}
                 })}
-            </div>
+            </form>
         )
     }
 };

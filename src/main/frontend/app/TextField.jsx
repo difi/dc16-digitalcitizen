@@ -20,7 +20,6 @@ import React from 'react';
                     placeholder={this.state.value}
                     onChange={this.handleChange}/>
             </div>
-
         );
     }
 });
