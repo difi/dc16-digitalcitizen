@@ -1,42 +1,54 @@
 const path = require('path');
 const merge = require('webpack-merge');
-var webpack = require('webpack')
+
+const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
     source: path.join(__dirname, 'app/app.js'),
-    output: path.join(__dirname, 'dist')
+    output: path.join(__dirname, '../../../target/classes/static')
 };
 
-module.exports = {
-    devtool: 'eval',
+const common = {
     entry: [
-        './app/app.js',
-        'webpack-dev-server/client?http://0.0.0.0:9090', // WebpackDevServer host and port
-        'webpack/hot/only-dev-server' // "only" prevents reload on syntax errors
-
+        PATHS.source
     ],
     output: {
         path: PATHS.output,
-        publicPath: '/static/',
+        publicPath: '',
         filename: 'bundle.js'
     },
-
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ],
     module: {
         loaders: [{
-            test: /\.jsx?$/,
             exclude: /node_modules/,
-            include: path.join(__dirname, 'app'),
-            loaders: ['react-hot', 'babel']
-        },
-            {
-                test: /\.html$/,
-                loader: "file?name=[name].[ext]"
-
+            loader: 'babel'
+        }, {
+            test: /\.css$/,
+            loader: 'style!css'
         }]
-    }
+    },
+    resolve: {
+        extensions: ["", ".tsx", ".ts", ".jsx", ".js"]
+    },
 };
+
+if (TARGET === 'start' || !TARGET) {
+    module.exports = merge(common, {
+        devServer: {
+            port: 9090,
+            proxy: {
+                '/*': {
+                    target: 'http://localhost:8080',
+                    secure: false,
+                    prependPath: false
+                }
+            },
+            publicPath: 'http://localhost:9090/',
+            historyApiFallback: true
+        },
+        devtool: 'source-map'
+    });
+}
+
+if (TARGET === 'build') {
+    module.exports = merge(common, {});
+}
+
