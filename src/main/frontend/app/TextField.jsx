@@ -13,11 +13,13 @@ import React from 'react';
     render: function() {
 
         return (
-            <input
-                type="text"
-                value={this.state.value}
-                onChange={this.handleChange}
-            />
+            <div>
+                <label>{this.state.value}: </label>
+                <input
+                    type="text"
+                    placeholder={this.state.value}
+                    onChange={this.handleChange}/>
+            </div>
         );
     }
 });
