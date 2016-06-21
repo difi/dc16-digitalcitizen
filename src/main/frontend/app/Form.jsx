@@ -13,6 +13,7 @@ export class Form extends React.Component {
                     if (field.type == "TextField") {
                         return (
                             <div>
+                                <label>{field.name}: </label>
                                 <TextField key={i} text={field.name}/>
                             </div>
                         );
@@ -32,6 +33,7 @@ export class Form extends React.Component {
                                 break;
                         }
                         return (<div>
+                                <label>{field.name}: </label>
                                 <DropdownList id='dropdown-list'
                                           options={options}
                                           labelField={label}

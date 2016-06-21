@@ -13,13 +13,10 @@ import React from 'react';
     render: function() {
 
         return (
-            <div>
-                <label>{this.props.text}: </label>
                 <input
                     type="text"
                     placeholder={this.state.value}
                     onChange={this.handleChange}/>
-            </div>
         );
     }
 });
