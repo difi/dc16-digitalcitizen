@@ -2,7 +2,7 @@ class RadioButtonMe extends React.Component {
     render () {
         return (
             <div>
-                <input type="radio" name="who" value="Me" {...this.props}/> Søk for meg selv
+                <input className="radio-button" type="radio" name="who" value="Me" {...this.props}/> Søk for meg selv
             </div>
         );
     }
@@ -15,7 +15,7 @@ class RadioButtonOther extends React.Component {
     render () {
         return (
             <div>
-                <input type="radio" name="who" value="Other" {...this.props}/> Søk på vegne av noen andre
+                <input className="radio-button" type="radio" name="who" value="Other" {...this.props}/> Søk på vegne av noen andre
             </div>
         );
     }

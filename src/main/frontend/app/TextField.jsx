@@ -13,12 +13,12 @@ import React from 'react';
     render: function() {
 
         return (
-            <div>
-                <label>{this.state.value}: </label>
-                <input
-                    type="text"
-                    placeholder={this.state.value}
-                    onChange={this.handleChange}/>
+            <div className="form-row">
+                <label className="form-orw-label">{this.state.value}:</label>
+                <input className="form-row-container-input"
+                       type="text"
+                       placeholder={this.state.value}
+                       onChange={this.handleChange}/>
             </div>
         );
     }
