@@ -1,7 +1,9 @@
 import React from 'react';
 
-var Dropdown = React.createClass({
+var DropdownList = React.createClass({
 
+
+    
     propTypes: {
         id: React.PropTypes.string.isRequired,
         options: React.PropTypes.array.isRequired,
@@ -81,4 +83,4 @@ var Dropdown = React.createClass({
 
 });
 
-export default Dropdown
+export default DropdownList

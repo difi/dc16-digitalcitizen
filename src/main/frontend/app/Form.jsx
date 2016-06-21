@@ -1,6 +1,6 @@
 import TextField from './TextField.jsx';
 import React from 'react';
-import Dropdown from './Dropdown.jsx';
+import DropdownList from './DropdownList.jsx';
 import countries from './nationalities.js';
 
 export class Form extends React.Component {
@@ -19,7 +19,7 @@ export class Form extends React.Component {
                     }
                     else if (field.type == "DropDown") {
                         return (<div>
-                                <Dropdown id='dropdown-menu'
+                                <DropdownList id='dropdown-list'
                                           options={countries.NATIONAL}
                                           labelField='country'
                                           valueField='country'/>
