@@ -2,13 +2,25 @@ import TextField from './TextField.jsx';
 import React from 'react';
 
 export class Form extends React.Component{
-
     render() {
         return (
             <div>
-                <h1>{this.props.name}</h1>
+                <h2>{this.props.name}</h2>
                 {this.props.data.map(function(field, i){
-                    return (<TextField key={i} text={field.name}/>);
+                    if(field.type=="TextField"){
+                    return (
+                        <div>
+                            <TextField key={i} text={field.name}/>
+                        </div>
+                    );
+                    }
+                    /*else if (field.type=="RadioButton"){
+                    return (<div>
+                                <RadioButton key={i} /> {field.name}
+                            </div>
+                    );
+                    }*/
+
                 })}
             </div>
         );
