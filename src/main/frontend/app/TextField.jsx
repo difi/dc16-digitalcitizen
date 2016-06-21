@@ -14,7 +14,7 @@ import React from 'react';
 
         return (
             <div>
-                <label>{this.state.value}: </label>
+                <label>{this.props.text}: </label>
                 <input
                     type="text"
                     placeholder={this.state.value}

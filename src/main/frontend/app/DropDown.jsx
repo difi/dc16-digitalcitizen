@@ -1,48 +1,84 @@
-/**
- * Created by camp-hst on 20.06.2016.
- */
 import React from 'react';
-import Select from 'react-select';
 
-var DropDown= React.createClass({
-    displayName: 'Nasjonalitet',
+var Dropdown = React.createClass({
+
     propTypes: {
-        label: React.PropTypes.string
-    },
-    getInitialState () {
-        return {};
+        id: React.PropTypes.string.isRequired,
+        options: React.PropTypes.array.isRequired,
+        value: React.PropTypes.oneOfType(
+            [
+                React.PropTypes.number,
+                React.PropTypes.string
+            ]
+        ),
+        valueField: React.PropTypes.string,
+        labelField: React.PropTypes.string,
+        onChange: React.PropTypes.func
     },
 
-    getDefaultProps () {
+    getDefaultProps: function () {
         return {
-            label: 'Nasjonalitet:'
+            value: "Norge",
+            valueField: 'value',
+            labelField: 'label',
+            onChange: null
         };
     },
-    getInitialState () {
+
+    getInitialState: function () {
+        var selected = this.getSelectedFromProps(this.props);
         return {
-            national: 'NATIONAL',
-            disabled: false,
-            selectValue: 'no',
-        };
+            selected: selected
+        }
     },
-    updateValue (newValue) {
+
+    componentWillReceiveProps: function (nextProps) {
+        var selected = this.getSelectedFromProps(nextProps);
         this.setState({
-            selectValue: newValue
+            selected: selected
         });
     },
 
-    render () {
-        var options = DATA.NATIONAL;
+    getSelectedFromProps(props) {
+        var selected;
+        if (props.value === null && props.options.length !== 0) {
+            selected = props.options[0][props.valueField];
+        } else {
+            selected = props.value;
+        }
+        return selected;
+    },
+
+    render: function () {
+        var self = this;
+        var options = self.props.options.map(function (option) {
+            return (
+                <option key={option[self.props.valueField]} value={option[self.props.valueField]}>
+                    {option[self.props.labelField]}
+                </option>
+            )
+        });
         return (
-            <div>
-                <h3>{this.props.label}</h3>
-                <Select options={options} value={this.state.selectValue} onChange={this.updateValue}/>
-            </div>
-        );
+            <select id={this.props.id}
+                    className='form-control'
+                    value={this.state.selected}
+                    onChange={this.handleChange}>
+                {options}
+            </select>
+        )
+    },
+
+    handleChange: function (e) {
+        if (this.props.onChange) {
+            var change = {
+                oldValue: this.state.selected,
+                newValue: e.target.value
+            }
+            this.props.onChange(change);
+        }
+        this.setState({selected: e.target.value});
     }
+
 });
 
-export default DropDown;
-
-
-
+export default Dropdown
