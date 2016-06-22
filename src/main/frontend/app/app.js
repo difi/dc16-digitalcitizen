@@ -17,6 +17,7 @@ var dataApplicant = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "E-post", type: "TextField"},
+    {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
