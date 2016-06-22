@@ -47,9 +47,10 @@ var DropdownList = React.createClass({
         }
         return selected;
     },
-
+    
     render: function () {
         var self = this;
+
         var options = self.props.options.map(function (option) {
             return (
                 <option key={option[self.props.valueField]} value={option[self.props.valueField]}>

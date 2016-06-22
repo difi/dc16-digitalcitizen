@@ -2,6 +2,7 @@ import TextField from './TextField.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
+import AddressField from './AddressField.jsx';
 
 export class Form extends React.Component {
 
@@ -38,18 +39,18 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
+                        return (
+                            <div>
+                                <AddressField />
+                                <label>{field.name}: </label>
+                                <DropdownList id='dropdown-list'
+                                              options={options}
+                                              labelField={label}
+                                              value={defaultValue}
+                                              valueField={value}/>
+                            </div>
+                        );
                     }
-                    return (
-                        <div>
-                            <label>{field.name}: </label>
-                            <DropdownList id='dropdown-list'
-                                          options={options}
-                                          labelField={label}
-                                          value={defaultValue}
-                                          valueField={value}/>
-                        </div>
-                    );
-
                 })}
             </div>
         );
