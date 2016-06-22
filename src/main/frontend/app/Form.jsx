@@ -1,4 +1,5 @@
 import TextField from './TextField.jsx';
+import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
 
 export class Form extends React.Component{
@@ -13,6 +14,14 @@ export class Form extends React.Component{
                             <TextField key={i} text={field.name}/>
                         </div>
                     );
+                    }
+                    else if(field.type=="AutoComplete"){
+
+                        return(
+                        <div>
+                            <p>Fastlege</p>
+                            <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
+                            </div>);
                     }
                     /*else if (field.type=="RadioButton"){
                     return (<div>

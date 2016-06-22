@@ -11,13 +11,17 @@ import SynchronousValidationForm from './ReduxForm.jsx';
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
+var fastleger = ["Ola Nordmann", "Kari Nordmann"]
+
 var dataMe = [
     { name: "Fødselsnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {  name: "Etternavn", type: "TextField"},
     {   name: "Adresse", type: "TextField"},
     {   name: "Nasjonalitet", type: "DropDown"},
-    {name: "E-post", type: "TextField"}];
+    {name: "E-post", type: "TextField"},
+    {name: "Fastlege", type: "AutoComplete", data: fastleger}
+    ];
 
 var dataApplicant = [
     {name: "Adresse", type: "TextField"},
