@@ -22,9 +22,9 @@ var dataApplicant = [
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Sivilstatus", type: "Dropdown"},
     {name: "Telefonnummer", type: "TextField"},
-    {name: "E-post", type: "TextField"}];
+    {name: "E-post", type: "TextField"},
+    {name: "Relasjon", type: "Dropdown"}];
 
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
