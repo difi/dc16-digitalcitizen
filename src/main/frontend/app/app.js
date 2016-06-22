@@ -7,7 +7,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import { Application } from './Application.jsx';
-import 'bootstrap/dist/css/bootstrap.css';
 import SynchronousValidationForm from './ReduxForm.jsx';
 
 const reducer = combineReducers(reducers);
