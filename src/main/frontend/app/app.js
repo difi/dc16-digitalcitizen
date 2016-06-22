@@ -22,7 +22,7 @@ var dataApplicant = [
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Sivilstatus", type: "TextField"},
+    {name: "Sivilstatus", type: "Dropdown"},
     {name: "Telefonnummer", type: "TextField"},
     {name: "E-post", type: "TextField"}];
 
