@@ -8,7 +8,7 @@ var dataMe = [
     {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Sivilstatus", type: "TextField"},
+    {name: "Sivilstatus", type: "Dropdown"},
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"}];
 
@@ -16,7 +16,8 @@ var dataApplicant = [
     {name: "Adresse", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "E-post", type: "TextField"}];
+    {name: "E-post", type: "TextField"},
+    {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
     {name: "Fornavn", type: "TextField"},

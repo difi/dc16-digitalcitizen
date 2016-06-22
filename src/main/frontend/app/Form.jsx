@@ -27,9 +27,14 @@ export class Form extends React.Component {
                                 label = 'country';
                                 value = 'code';
                                 break;
-                            case "Familie":
+                            case "Relasjon":
                                 options = dropdownContent.RELATIONS;
                                 label = 'relation';
+                                value = 'value';
+                                break;
+                            case "Sivilstatus":
+                                options = dropdownContent.CIVILSTATUS;
+                                label = 'status';
                                 value = 'value';
                                 break;
                         }
