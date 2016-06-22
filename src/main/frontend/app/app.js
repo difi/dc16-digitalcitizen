@@ -1,4 +1,5 @@
 "use strict";
+
 import { Provider } from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 import reducers from './reducers.js';
@@ -8,14 +9,16 @@ import $ from 'jquery';
 import { Application } from './Application.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import SynchronousValidationForm from './ReduxForm.jsx';
-//
+
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
-var fastleger = ["Ola Nordmann", "Kari Nordmann"]
+var fastleger = ["Ola Nordmann", "Kari Nordmann"];
+
+
 
 var dataMe = [
-    { name: "Fødselsnr", type: "TextField"},
+    {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {  name: "Etternavn", type: "TextField"},
     {   name: "Adresse", type: "TextField"},
@@ -28,7 +31,8 @@ var dataApplicant = [
     {name: "Adresse", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "E-post", type: "TextField"}];
+    {name: "E-post", type: "TextField"},
+    {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
@@ -36,8 +40,8 @@ var dataDep = [
     {name: "Adresse", type: "TextField"},
     {name: "Postnr", type: "TextField"},
     {name: "Postnr", type: "TextField"},
-    {name: "Telefon", type: "TextField"}];
-
+    {name: "Telefon", type: "TextField"},
+    {name: "Relasjon", type: "Dropdown"}];
 
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
