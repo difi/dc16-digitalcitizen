@@ -2,7 +2,6 @@ import TextField from './TextField.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
-import Button from 'react-bootstrap/lib/Button';
 
 export class Form extends React.Component {
 
@@ -14,18 +13,19 @@ export class Form extends React.Component {
                     if (field.type == "TextField") {
                         return (
                             <div>
-                                <label>{field.name}: </label> <br />
+                                <label>{field.name}: </label>
                                 <TextField key={i} text={field.name}/>
                             </div>
                         );
                     }
                     else if (field.type == "Dropdown") {
-                        var options = [], label, value;
+                        var options = [], label, value, defaultValue;
                         switch (field.name) {
                             case "Nasjonalitet":
                                 options = dropdownContent.NATIONAL;
                                 label = 'country';
                                 value = 'code';
+                                defaultValue = 'NO';
                                 break;
                             case "Relasjon":
                                 options = dropdownContent.RELATIONS;
@@ -39,14 +39,14 @@ export class Form extends React.Component {
                                 break;
                         }
                     }
-                    return (<div>
+                    return (
+                        <div>
                             <label>{field.name}: </label>
                             <DropdownList id='dropdown-list'
                                           options={options}
                                           labelField={label}
-                                          value='NO'
+                                          value={defaultValue}
                                           valueField={value}/>
-                            <Button>Helo</Button>
                         </div>
                     );
 
