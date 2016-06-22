@@ -22,7 +22,7 @@ var dataMe = [
     {name: "Fornavn", type: "TextField"},
     {  name: "Etternavn", type: "TextField"},
     {   name: "Adresse", type: "TextField"},
-    {   name: "Nasjonalitet", type: "DropDown"},
+    {   name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}
     ];
