@@ -4,9 +4,10 @@ import React from 'react';
 import $ from 'jquery';
 import { Form } from './Form.jsx';
 require('!style!css!less!./Application.less');
-import RadioButtonClick from './RadioButtons.jsx'; 
+import RadioButtonClick from './RadioButtons.jsx';
 
-
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
 
 
 export class Application extends React.Component{
@@ -31,20 +32,21 @@ export class Application extends React.Component{
         var firstRender = this.state.firstRender;
         return (
             <form>
+                <PageHeader>Søk sykehjemsplass</PageHeader>
                 <RadioButtonClick callBackParent={this.onChildChange} />
-                {this.props.data.map(function(forms, i){
-
-                    if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
+                <Row>
+                    {this.props.data.map(function(forms, i){
+                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
                     }
-                else{
-                    return (
-                        <Form key={i} name={forms.formname} data={forms.data}/>
-                    )}
-                })}
+                    else{
+                        return (
+                            <Form key={i} name={forms.formname} data={forms.data}/>
+                        )}
+                    })}
+                </Row>
 
                     <button type="submit" onClick={this.handleSubmit}> Submit
                     </button>
-
             </form>
 
         )

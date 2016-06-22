@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 class RadioButtonMe extends React.Component {
     render () {
         return (
@@ -7,7 +10,7 @@ class RadioButtonMe extends React.Component {
         );
     }
 }
-import React from 'react';
+
 /**
  * Create a radio button component.
  */
@@ -58,11 +61,9 @@ export default class RadioButtonClick extends React.Component {
     render () {
         return (
             <div>
+                <h3>Hvem ønsker du å søke for?</h3>
                 <RadioButtonMe onClick={this.handleClick1} />
-
-
                 <RadioButtonOther onClick={this.handleClick2} />
-
             </div>
         );
     }
