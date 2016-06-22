@@ -79,3 +79,8 @@ export function check_personalnumber_no( pno ) {
     return true;}
 
 
+export function checkPhoneNumber(value){
+    
+}
+
+
