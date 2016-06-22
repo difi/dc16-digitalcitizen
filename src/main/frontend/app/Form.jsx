@@ -2,6 +2,7 @@ import TextField from './TextField.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
+import Button from 'react-bootstrap/lib/Button';
 
 export class Form extends React.Component {
 
@@ -13,14 +14,14 @@ export class Form extends React.Component {
                     if (field.type == "TextField") {
                         return (
                             <div>
-                                <label>{field.name}: </label>
+                                <label>{field.name}: </label> <br />
                                 <TextField key={i} text={field.name}/>
                             </div>
                         );
                     }
                     else if (field.type == "Dropdown") {
                         var options = [], label, value;
-                        switch (field.name){
+                        switch (field.name) {
                             case "Nasjonalitet":
                                 options = dropdownContent.NATIONAL;
                                 label = 'country';
@@ -32,16 +33,18 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
-                        return (<div>
-                                <label>{field.name}: </label>
-                                <DropdownList id='dropdown-list'
+                    }
+                    return (<div>
+                            <label>{field.name}: </label>
+                            <DropdownList id='dropdown-list'
                                           options={options}
                                           labelField={label}
+                                          value='NO'
                                           valueField={value}/>
-                            </div>
-                        );
-                    }
-                    
+                            <Button>Helo</Button>
+                        </div>
+                    );
+
                 })}
             </div>
         );

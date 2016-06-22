@@ -18,7 +18,6 @@ var DropdownList = React.createClass({
 
     getDefaultProps: function () {
         return {
-            value: "Norge",
             valueField: 'value',
             labelField: 'label',
             onChange: null
