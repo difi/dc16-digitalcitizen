@@ -10,7 +10,8 @@ var dataMe = [
     {name: "Etternavn", type: "TextField"},
     {name: "Sivilstatus", type: "Dropdown"},
     {name: "Nasjonalitet", type: "Dropdown"},
-    {name: "E-post", type: "TextField"}];
+    {name: "E-post", type: "TextField"},
+    {name: "Bor sammen med", type: "RadioButton"}];
 
 var dataApplicant = [
     {name: "Adresse", type: "TextField"},
