@@ -35,7 +35,7 @@ var data = [
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep},
     
-    {formname: "Relasjon", data:dataFam}];
+    //{formname: "Relasjon", data:dataFam}];
 
 
 ReactDOM.render(

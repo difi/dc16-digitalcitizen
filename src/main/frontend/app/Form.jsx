@@ -1,6 +1,5 @@
 import TextField from './TextField.jsx';
 import React from 'react';
-//import { RadioButtonRelations } from './RadioButtonRelations.jsx';
 
 export class Form extends React.Component{
     render() {
@@ -16,8 +15,7 @@ export class Form extends React.Component{
                     );
                     }
                 })}
-
             </div>
         );
     }
-}
+};
