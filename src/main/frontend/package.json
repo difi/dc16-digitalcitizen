@@ -10,7 +10,9 @@
     "prod-build": "webpack -d -p",
     "build": "webpack",
     "start": "webpack-dev-server --hot --inline --content-base resources/static/",
-    "eslint": "eslint app"
+    "eslint": "eslint app",
+    "test": "karma start --single-run --browsers PhantomJS",
+    "test:watch": "./node_modules/karma/bin/karma start"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
