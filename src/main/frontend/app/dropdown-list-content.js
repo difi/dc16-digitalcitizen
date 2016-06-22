@@ -261,6 +261,14 @@ exports.RELATIONS = [
 ];
 
 
+exports.CIVILSTATUS = [
+    {value: 0, status: "Gift"},
+    {value: 1, status: "Ugift"},
+    {value: 2, status: "Samboer"},
+    {value: 3, status: "Enke"}
+];
+
+
 
 
 

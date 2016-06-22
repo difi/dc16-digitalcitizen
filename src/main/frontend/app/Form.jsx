@@ -31,6 +31,11 @@ export class Form extends React.Component {
                                 label = 'relation';
                                 value = 'value';
                                 break;
+                            case "Sivilstatus":
+                                options = dropdownContent.CIVILSTATUS;
+                                label = 'status';
+                                value = 'value';
+                                break;
                         }
                         return (<div>
                                 <label>{field.name}: </label>

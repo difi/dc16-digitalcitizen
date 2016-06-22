@@ -8,7 +8,7 @@ var dataMe = [
     {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Sivilstatus", type: "TextField"},
+    {name: "Sivilstatus", type: "Dropdown"},
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"}];
 
