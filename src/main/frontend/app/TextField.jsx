@@ -1,8 +1,5 @@
 import React from 'react';
 
-var Col = require('react-bootstrap/lib/Col');
-var FormControl = require('react-bootstrap/lib/FormControl');
-
 
  var TextField = React.createClass( {
     //Sets initial state of textfields to a given text
@@ -16,12 +13,10 @@ var FormControl = require('react-bootstrap/lib/FormControl');
     render: function() {
 
         return (
-            <Col sm={6}>
-                <FormControl
+                <input
                     type="text"
                     placeholder={this.state.value}
                     onChange={this.handleChange}/>
-            </Col>
         );
     }
 });

@@ -4,8 +4,7 @@ import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
 
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
+var Row = require('react-bootstrap/lib/Row')
 
 
 export class Form extends React.Component {
@@ -18,11 +17,8 @@ export class Form extends React.Component {
                     if (field.type == "TextField") {
                         return (
                             <Row>
-                                <Col sm={2}>
-                                    <label>{field.name}: </label>
-                                </Col>
-                                    <TextField key={i} text={field.name}/>
-                                
+                                <label>{field.name}: </label>
+                                <TextField key={i} text={field.name}/>
                             </Row>
                         );
                     }
@@ -48,16 +44,13 @@ export class Form extends React.Component {
                         }
 
                     return (
-                        <Row><Col sm={2}>
-                                <label>{field.name}: </label>
-                            </Col>
-                            <Col sm={6}>
-                                <DropdownList id='dropdown-list'
+                        <Row>
+                            <label>{field.name}: </label>
+                            <DropdownList id='dropdown-list'
                                           options={options}
                                           labelField={label}
                                           value={defaultValue}
                                           valueField={value}/>
-                            </Col>
                         </Row>
                     )}
                     else if(field.type=="AutoComplete"){
