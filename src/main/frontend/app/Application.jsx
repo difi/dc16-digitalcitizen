@@ -4,18 +4,16 @@ import React from 'react';
 import $ from 'jquery';
 import { Form } from './Form.jsx';
 require('!style!css!less!./Application.less');
-import RadioButtonClick from './RadioButtons.jsx'; 
-
-
+import RadioButtonClick from './RadioButtons.jsx';
 
 
 export class Application extends React.Component{
     constructor() {
-        super()
+        super();
         this.state = {
             writesForOthers: false,
             firstRender: true
-        }
+        };
         this.onChildChange = this.onChildChange.bind(this)
     }
     onChildChange(others){
@@ -42,5 +40,5 @@ export class Application extends React.Component{
             </form>
         )
     }
-};
+}
 
