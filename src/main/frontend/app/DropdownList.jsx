@@ -59,12 +59,12 @@ var DropdownList = React.createClass({
             )
         });
         return (
-            <select id={this.props.id}
+                <select id={this.props.id}
                     className='form-control'
                     value={this.state.selected}
                     onChange={this.handleChange}>
                 {options}
-            </select>
+                </select>
         )
     },
 
