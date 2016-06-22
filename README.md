@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/difi/dc16-digitalcitizen.svg?branch=master)](https://travis-ci.org/difi/dc16-digitalcitizen)
 [![Codecov](https://codecov.io/gh/difi/dc16-digitalcitizen/branch/master/graph/badge.svg)](https://codecov.io/gh/difi/dc16-digitalcitizen)
+[![Stories in Ready](https://badge.waffle.io/difi/dc16-digitalcitizen.png?label=ready&title=Ready)](https://waffle.io/difi/dc16-digitalcitizen)
 
 Det er i dag den enkelte kommunes ansvar å tilby en elektronisk løsning for sykehjemsplass. Dette er en søknad som i stor grad består av ustrukturert informasjon (fritekst) og er ofte «digitalisert» gjennom et PDF-skjema. 
 
