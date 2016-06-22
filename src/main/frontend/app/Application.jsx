@@ -28,7 +28,7 @@ export class Application extends React.Component{
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
         return (
-            <form >
+            <form>
                 <RadioButtonClick callBackParent={this.onChildChange} />
                 {this.props.data.map(function(forms, i){
 
