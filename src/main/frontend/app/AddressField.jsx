@@ -2,12 +2,15 @@ import React from 'react';
 import $ from 'jquery'
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
+var FormControl = require('react-bootstrap/lib/FormControl');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
 
 
 var AddressField = React.createClass({
     //Sets initial state of textfields to a given text
     getInitialState: function () {
-        return {value: '', municipality: '', country: 'NO'};
+        return {value: '', municipality: '', country: 'NO', street: ''};
     },
     /**Makes a call to the Bring API with the postal code given by the user
      * in order to retrieve the corresponding municipality
@@ -37,6 +40,10 @@ var AddressField = React.createClass({
         }
     },
 
+    handleStreetChange: function (event) {
+        this.setState({street: event.target.value});
+    },
+
     /**Updates the country state when the user selects a new option in
      * the {@link DropdownList}. Clears previous retrieved data.
      *
@@ -46,27 +53,43 @@ var AddressField = React.createClass({
         this.setState({country: event['newValue']});
         this.setState({municipality: ''});
         this.setState({value: ''});
+        this.setState({street: ''})
     },
 
     render: function () {
         return (
-            <div>
-
-                <DropdownList
-                    id='dropdown-list'
-                    options={dropdownContent.NATIONAL}
-                    labelField='country'
-                    value={this.state.country}
-                    valueField='code'
-                    onChange={this.handleDropdownChange}/>
-
-                <input
-                    type="text"
-                    placeholder='Postnummer'
-                    value={this.state.value}
-                    onChange={this.handleChange}/>
-                <label>{this.state.municipality}</label>
-            </div>
+            <Row>
+                <Col sm={3}>
+                    <DropdownList
+                        id='dropdown-list'
+                        options={dropdownContent.NATIONAL}
+                        labelField='country'
+                        value={this.state.country}
+                        valueField='code'
+                        onChange={this.handleDropdownChange}/>
+                </Col>
+                <Col sm={3}>
+                    <FormControl
+                        type="text"
+                        placeholder='Gateadresse'
+                        value={this.state.street}
+                        onChange={this.handleStreetChange}/>
+                </Col>
+                <Col sm={3}>
+                    <FormControl
+                        type="text"
+                        placeholder='Postnummer'
+                        value={this.state.value}
+                        onChange={this.handleChange}/>
+                </Col>
+                <Col sm={3}>
+                    <FormControl
+                        type="text"
+                        placeholder='Poststed'
+                        value={this.state.municipality}
+                        disabled/>
+                </Col>
+            </Row>
         );
     }
 });
