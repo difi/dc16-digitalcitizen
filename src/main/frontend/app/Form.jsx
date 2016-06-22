@@ -3,19 +3,22 @@ import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
 
+var Row = require('react-bootstrap/lib/Row')
+
+
 export class Form extends React.Component {
 
     render() {
         return (
             <div>
-                <h2>{this.props.name}</h2>
+                <h3>{this.props.name}</h3>
                 {this.props.data.map(function (field, i) {
                     if (field.type == "TextField") {
                         return (
-                            <div>
+                            <Row>
                                 <label>{field.name}: </label>
                                 <TextField key={i} text={field.name}/>
-                            </div>
+                            </Row>
                         );
                     }
                     else if (field.type == "Dropdown") {
@@ -40,14 +43,14 @@ export class Form extends React.Component {
                         }
                     }
                     return (
-                        <div>
+                        <Row>
                             <label>{field.name}: </label>
                             <DropdownList id='dropdown-list'
                                           options={options}
                                           labelField={label}
                                           value={defaultValue}
                                           valueField={value}/>
-                        </div>
+                        </Row>
                     );
 
                 })}
