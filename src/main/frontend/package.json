@@ -11,7 +11,7 @@
     "dev-build": "webpack -d --display-modules",
     "prod-build": "webpack -d -p",
     "build": "webpack",
-    "start": "webpack-dev-server --hot --inline ",
+    "start": "webpack-dev-server --hot --inline --content-base resources/static/",
     "eslint": "eslint app"
   },
 
