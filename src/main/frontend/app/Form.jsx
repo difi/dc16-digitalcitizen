@@ -1,4 +1,5 @@
 import TextField from './TextField.jsx';
+import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
@@ -45,7 +46,7 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
-                    }
+
                     return (
                         <Row><Col sm={2}>
                                 <label>{field.name}: </label>
@@ -58,7 +59,15 @@ export class Form extends React.Component {
                                           valueField={value}/>
                             </Col>
                         </Row>
-                    );
+                    )}
+                    else if(field.type=="AutoComplete"){
+
+                        return(
+                        <div>
+                            <p>Fastlege</p>
+                            <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
+                            </div>);
+                    }
 
                 })}
             </div>

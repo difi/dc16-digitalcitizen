@@ -24,7 +24,9 @@ export class Application extends React.Component{
         firstRender: false
         })
     }
-
+    handleSubmit(){
+        console.log("Submitting");
+    }
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
@@ -42,7 +44,11 @@ export class Application extends React.Component{
                         )}
                     })}
                 </Row>
+
+                    <button type="submit" onClick={this.handleSubmit}> Submit
+                    </button>
             </form>
+
         )
     }
 };
