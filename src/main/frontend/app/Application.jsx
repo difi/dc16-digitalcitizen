@@ -29,22 +29,17 @@ export class Application extends React.Component{
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
         return (
-            <form action="">
-                <PageHeader>Søk sykehjemsplass</PageHeader>
-                <Row>
-                    <RadioButtonClick callBackParent={this.onChildChange} />
-                </Row>
-                <Row>
-                    {this.props.data.map(function(forms, i){
-                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
+            <form>
+                <RadioButtonClick callBackParent={this.onChildChange} />
+                {this.props.data.map(function(forms, i){
 
-                        }
-                        else{
-                            return (
-                                <Form key={i} name={forms.formname} data={forms.data}/>
-                        )}
-                    })}
-                </Row>
+                    if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
+                    }
+                else{
+                    return (
+                        <Form key={i} name={forms.formname} data={forms.data}/>
+                    )}
+                })}
             </form>
         )
     }
