@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 
  var TextField = React.createClass( {
@@ -13,15 +14,31 @@ import React from 'react';
     render: function() {
 
         return (
-            <div className="form-row">
-                <label className="form-orw-label">{this.state.value}:</label>
-                <input className="form-row-container-input"
-                       type="text"
-                       placeholder={this.state.value}
-                       onChange={this.handleChange}/>
+            <div>
+                <label>{this.state.value}:</label>
+                <input
+                    type="text"
+                    placeholder={this.state.value}
+                    onChange={this.handleChange}/>
             </div>
         );
     }
 });
 
 export default TextField;
+
+/*
+<label>{this.state.value}:</label>
+<input
+type="text"
+placeholder={this.state.value}
+onChange={this.handleChange}/>
+
+ <FormGroup controlId="formHorizontalName">
+ <Col componentClass={ControlLabel} sm={2}>
+ {this.state.value}:
+ </Col>
+ <Col sm={8}>
+ <FormControl type="text" placeholder={this.state.value} onChange={this.handleChange} />
+ </Col>
+ </FormGroup>*/

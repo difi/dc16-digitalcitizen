@@ -58,9 +58,8 @@ export default class RadioButtonClick extends React.Component {
     render () {
         return (
             <div>
+                <h3>Hvem ønsker du å søke for?</h3>
                 <RadioButtonMe onClick={this.handleClick1} />
-
-
                 <RadioButtonOther onClick={this.handleClick2} />
 
             </div>

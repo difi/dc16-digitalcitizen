@@ -2,8 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Bootstrap from 'react-bootstap';
-
 import { Application } from './Application.jsx';
 
 //
@@ -35,16 +33,7 @@ var data = [
     {formname: "Om deg som søker", data: dataApplicant},
     {formname: "Om pårørende", data: dataDep}];
 
-const buttonInstance = (
-    <div>
-        <ButtonToolbar>
-            <Button bsStyle="primary" bsSize="large">LargeButton</Button>
-        </ButtonToolbar>
-    </div>
-);
-
-//ReactDOM.render(buttonInstance, mountNode);
 
 ReactDOM.render(
-    buttonInstance, document.getElementById("content")
+    <Application data={data} />, document.getElementById("content")
 );

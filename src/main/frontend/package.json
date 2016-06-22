@@ -4,8 +4,6 @@
   "description": "SBMFP Frontend",
   "license": "MIT",
   "repository": "yeah",
-
-
   "scripts": {
     "watch": "webpack -d --watch",
     "dev-build": "webpack -d --display-modules",
@@ -14,7 +12,6 @@
     "start": "webpack-dev-server --hot --inline ",
     "eslint": "eslint app"
   },
-
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.4",
@@ -34,17 +31,19 @@
     "less": "^2.6.0",
     "less-loader": "^2.2.2",
     "babel-plugin-transform-object-assign": "^6.5.0"
-
   },
   "dependencies": {
-    "babel-runtime": "^6.3.19",
-    "babel-polyfill": "^6.5.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "axios": "^0.9.1",
+    "babel-polyfill": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
+    "babel-runtime": "^6.3.19",
+    "extract-text-webpack-plugin": "^1.0.1",
     "history": "^2.0.0",
+    "jquery": "^2.1.4",
     "lodash": "^4.5.1",
+    "moment": "^2.10.6",
     "react": "^0.14.7",
+    "react-bootstrap": "^0.28.5",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
@@ -52,10 +51,6 @@
     "react-router-redux": "^4.0.4",
     "redux": "^3.3.1",
     "redux-simple-router": "^2.0.4",
-    "redux-thunk": "^2.0.1",
-    "jquery": "^2.1.4",
-    "moment": "^2.10.6",
-    "react-bootstrap": "^0.28.3"
+    "redux-thunk": "^2.0.1"
   }
-
 }
