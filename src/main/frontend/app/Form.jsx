@@ -13,7 +13,7 @@ export class Form extends React.Component {
 
     render() {
         return (
-            <div>
+            <compontentClass>
                 <h3>{this.props.name}</h3>
                 {this.props.data.map(function (field, i) {
                     if (field.type == "TextField") {
@@ -60,8 +60,6 @@ export class Form extends React.Component {
                                           value={defaultValue}
                                           valueField={value}/>
                             </Col>
-                            <Col sm={3} md={3}>
-                            </Col>
                         </Row>
                     )}
                     else if(field.type=="AutoComplete"){
@@ -78,18 +76,18 @@ export class Form extends React.Component {
                     }
                     else if (field.type == "AddressField") {
                         return (
-                            <Row>
-                                <Col sm={2}>
+                            <Row className="form-row">
+                                <Col sm={1.5} md={1}>
                                     <label>{field.name}: </label>
                                 </Col>
-                                <Col sm={6}>
-                                    <AddressField />
+                                <AddressField />
+                                <Col sm={3} md={3}>
                                 </Col>
                             </Row>
                         )
                     }
                 })}
-            </div>
+            </compontentClass>
         );
     }
 }

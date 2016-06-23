@@ -43,8 +43,6 @@ export class Application extends React.Component{
                             <Form key={i} name={forms.formname} data={forms.data}/>
                         )}
                     })}
-                    <button type="submit" onClick={this.handleSubmit}> Submit
-                    </button>
             </form>
 
         )

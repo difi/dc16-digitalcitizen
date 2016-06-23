@@ -22,8 +22,6 @@ var dataMe = [
     {name: "Etternavn", type: "TextField"},
     {name: "Telefon", type: "TextField"},
     {name: "Adresse", type: "AddressField"},
-    {name: "Postnr", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "Sivilstatus", type: "Dropdown"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}
@@ -33,9 +31,7 @@ var dataApplicant = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "Telefon", type: "TextField"},
-    {name: "Adresse", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
+    {name: "Adresse", type: "AddressField"},
     {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
@@ -43,8 +39,6 @@ var dataDep = [
     {name: "Etternavn", type: "TextField"},
     {name: "Telefon", type: "TextField"},
     {name: "Adresse", type: "AddressField"},
-    {name: "Postnr", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
     {name: "Relasjon", type: "Dropdown"}];
 
 var data = [
