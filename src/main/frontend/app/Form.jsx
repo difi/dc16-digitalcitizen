@@ -77,7 +77,7 @@ export class Form extends React.Component {
                                     <label>{field.name}: </label>
                                 </Col>
                                 <Col sm={6}>
-                                    <AddressField />
+                                    <AddressField includeCountry={field.includeCountry}/>
                                 </Col>
                             </Row>
                         )
