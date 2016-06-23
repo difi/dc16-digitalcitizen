@@ -41,10 +41,18 @@ var dataDep = [
     {name: "Telefon", type: "TextField"},
     {name: "Relasjon", type: "Dropdown"}];
 
+
+var dataWhy = [
+    {name: "Hvorfor søker du plass?", type:"TextArea"},
+    {name: "Hva er det du trenger hjelp med i hverdagen?", type:"TextArea"}
+]
+
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
-    {formname: "Om pårørende", data: dataDep}];
+    {formname: "Om pårørende", data: dataDep},
+    {formname: "Hvorfor du søker", data: dataWhy}
+];
 
 
 ReactDOM.render( <Provider store={store}>
