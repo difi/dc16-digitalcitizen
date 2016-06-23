@@ -10,10 +10,10 @@
 
     <groupId>no.difi.citizen</groupId>
     <artifactId>citizen</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <scm>
-        <tag>0.2.0</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/difi/dc16-digitalcitizen</url>
         <connection>scm:git:https://github.com/difi/dc16-digitalcitizen.git</connection>
         <developerConnection>scm:git:git@github.com:difi/dc16-digitalcitizen.git</developerConnection>
