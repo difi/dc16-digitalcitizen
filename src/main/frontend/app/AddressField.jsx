@@ -66,60 +66,66 @@ var AddressField = React.createClass({
     },
 
     render: function () {
-
         if (this.props.includeCountry) {
             return (
-                <Row>
-                    <Col sm={3}>
-                        <DropdownList
-                            id='dropdown-list'
-                            options={dropdownContent.NATIONAL}
-                            labelField='country'
-                            value={this.state.country}
-                            valueField='code'
-                            onChange={this.handleDropdownChange}/>
-                    </Col>
-                    <Col sm={3}>
-                        <FormControl
-                            type="text"
-                            placeholder='Gateadresse'
-                            value={this.state.street}
-                            onChange={this.handleStreetChange}/>
-                    </Col>
-                    <Col sm={3}>
-                        <FormControl
-                            type="text"
-                            placeholder='Postnummer'
-                            value={this.state.value}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={3}>
-                        <FormControl
-                            type="text"
-                            placeholder='Poststed'
-                            value={this.state.municipality}
-                            disabled/>
-                    </Col>
-                </Row>
+                <Col sm={7.5} md={8}>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12}>
+                            <FormControl
+                                type="text"
+                                placeholder='Gateadresse'
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5}>
+                            <DropdownList
+                                id='dropdown-list'
+                                options={dropdownContent.NATIONAL}
+                                labelField='country'
+                                value={this.state.country}
+                                valueField='code'
+                                onChange={this.handleDropdownChange}/>
+                        </Col>
+                        <Col sm={3} md={3}>
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={4} md={4}>
+                            <FormControl
+                                type="text"
+                                placeholder='Poststed'
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </Col>
             );
         } else {
             return (
-                <Row>
-                    <Col sm={3}>
+            <Col sm={7.5} md={8}>
+                <Row className="form-row-address">
+                    <Col sm={12} md={12}>
                         <FormControl
                             type="text"
                             placeholder='Gateadresse'
                             value={this.state.street}
                             onChange={this.handleStreetChange}/>
                     </Col>
-                    <Col sm={3}>
+                </Row>
+                <Row className="form-row-address">
+                    <Col sm={5} md={5}>
                         <FormControl
                             type="text"
                             placeholder='Postnummer'
                             value={this.state.value}
                             onChange={this.handleChange}/>
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={7} md={7}>
                         <FormControl
                             type="text"
                             placeholder='Poststed'
@@ -127,6 +133,7 @@ var AddressField = React.createClass({
                             disabled/>
                     </Col>
                 </Row>
+            </Col>
             );
         }
     }

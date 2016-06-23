@@ -2,6 +2,8 @@ var React = require( 'react' );
 
 var ListGroup = require('react-bootstrap/lib/ListGroup.js');
 var ListGroupItem = require('react-bootstrap/lib/ListGroupItem.js');
+var Col = require('react-bootstrap/lib/Col');
+var FormControl = require('react-bootstrap/lib/FormControl');
 
 function customWhere(arr, t) {
     var results = [];
@@ -47,7 +49,7 @@ var TypeAhead = React.createClass({
             this.items = [];
 
             var searchResult = this.state.selected || (
-                    <div className="list-group typeahead">
+                    <div>
                         {this.items}
                     </div>
                 );
@@ -65,13 +67,26 @@ var TypeAhead = React.createClass({
             }, this);
 
             return (
-                <div className="field-group">
-                    <input type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
+                <Col sm={7.5} md={8}>
+                    <FormControl type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
                            onChange={this.handleChange} onKeyDown={this.selectItem} onFocus={this.handleFocus} />
                     {searchResult}
-                </div>
+                </Col>
             );
         }
     });
 
 export default TypeAhead;
+
+
+/*
+ <div className="list-group typeahead">
+ {this.items}
+ </div>
+
+
+<div className="field-group">
+ <FormControl type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
+ onChange={this.handleChange} onKeyDown={this.selectItem} onFocus={this.handleFocus} />
+ {searchResult}
+ </div>*/

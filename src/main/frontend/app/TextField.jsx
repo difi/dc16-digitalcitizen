@@ -16,7 +16,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
     render: function() {
 
         return (
-            <Col sm={6}>
+            <Col sm={7.5} md={8}>
                 <FormControl
                     type="text"
                     placeholder={this.state.value}

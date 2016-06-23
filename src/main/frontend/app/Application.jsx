@@ -8,6 +8,7 @@ import RadioButtonClick from './RadioButtons.jsx';
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
 
 
 export class Application extends React.Component{
@@ -34,7 +35,6 @@ export class Application extends React.Component{
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
                 <RadioButtonClick callBackParent={this.onChildChange} />
-                <Row>
                     {this.props.data.map(function(forms, i){
                         if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
                     }
@@ -43,10 +43,6 @@ export class Application extends React.Component{
                             <Form key={i} name={forms.formname} data={forms.data}/>
                         )}
                     })}
-                </Row>
-
-                    <button type="submit" onClick={this.handleSubmit}> Submit
-                    </button>
             </form>
 
         )
