@@ -38,7 +38,6 @@ var dataDep = [
     {name: "Etternavn", type: "TextField"},
     {name: "Adresse", type: "AddressField"},
     {name: "Postnr", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
     {name: "Telefon", type: "TextField"},
     {name: "Relasjon", type: "Dropdown"}];
 
