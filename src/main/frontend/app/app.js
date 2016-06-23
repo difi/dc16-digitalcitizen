@@ -21,7 +21,7 @@ var dataMe = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "Telefon", type: "TextField"},
-    {name: "Adresse", type: "TextField"},
+    {name: "Adresse", type: "AddressField"},
     {name: "Postnr", type: "TextField"},
     {name: "Postnr", type: "TextField"},
     {name: "Nasjonalitet", type: "Dropdown"},
@@ -42,7 +42,7 @@ var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
     {name: "Telefon", type: "TextField"},
-    {name: "Adresse", type: "TextField"},
+    {name: "Adresse", type: "AddressField"},
     {name: "Postnr", type: "TextField"},
     {name: "Postnr", type: "TextField"},
     {name: "Relasjon", type: "Dropdown"}];
