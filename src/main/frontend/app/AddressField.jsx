@@ -8,10 +8,19 @@ var Col = require('react-bootstrap/lib/Col');
 
 
 var AddressField = React.createClass({
-    //Sets initial state of textfields to a given text
+
+    propTypes: {
+        includeCountry: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {includeCountry: true};
+    },
+
     getInitialState: function () {
         return {value: '', municipality: '', country: 'NO', street: ''};
     },
+
     /**Makes a call to the Bring API with the postal code given by the user
      * in order to retrieve the corresponding municipality
      *
@@ -57,40 +66,69 @@ var AddressField = React.createClass({
     },
 
     render: function () {
-        return (
-            <Row>
-                <Col sm={3}>
-                    <DropdownList
-                        id='dropdown-list'
-                        options={dropdownContent.NATIONAL}
-                        labelField='country'
-                        value={this.state.country}
-                        valueField='code'
-                        onChange={this.handleDropdownChange}/>
-                </Col>
-                <Col sm={3}>
-                    <FormControl
-                        type="text"
-                        placeholder='Gateadresse'
-                        value={this.state.street}
-                        onChange={this.handleStreetChange}/>
-                </Col>
-                <Col sm={3}>
-                    <FormControl
-                        type="text"
-                        placeholder='Postnummer'
-                        value={this.state.value}
-                        onChange={this.handleChange}/>
-                </Col>
-                <Col sm={3}>
-                    <FormControl
-                        type="text"
-                        placeholder='Poststed'
-                        value={this.state.municipality}
-                        disabled/>
-                </Col>
-            </Row>
-        );
+
+        if (this.props.includeCountry) {
+            return (
+                <Row>
+                    <Col sm={3}>
+                        <DropdownList
+                            id='dropdown-list'
+                            options={dropdownContent.NATIONAL}
+                            labelField='country'
+                            value={this.state.country}
+                            valueField='code'
+                            onChange={this.handleDropdownChange}/>
+                    </Col>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Gateadresse'
+                            value={this.state.street}
+                            onChange={this.handleStreetChange}/>
+                    </Col>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Postnummer'
+                            value={this.state.value}
+                            onChange={this.handleChange}/>
+                    </Col>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Poststed'
+                            value={this.state.municipality}
+                            disabled/>
+                    </Col>
+                </Row>
+            );
+        } else {
+            return (
+                <Row>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Gateadresse'
+                            value={this.state.street}
+                            onChange={this.handleStreetChange}/>
+                    </Col>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Postnummer'
+                            value={this.state.value}
+                            onChange={this.handleChange}/>
+                    </Col>
+                    <Col sm={3}>
+                        <FormControl
+                            type="text"
+                            placeholder='Poststed'
+                            value={this.state.municipality}
+                            disabled/>
+                    </Col>
+                </Row>
+            );
+        }
     }
 });
 
