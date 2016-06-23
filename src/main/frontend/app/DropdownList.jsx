@@ -47,9 +47,10 @@ var DropdownList = React.createClass({
         }
         return selected;
     },
-
+    
     render: function () {
         var self = this;
+
         var options = self.props.options.map(function (option) {
             return (
                 <option key={option[self.props.valueField]} value={option[self.props.valueField]}>
@@ -58,12 +59,12 @@ var DropdownList = React.createClass({
             )
         });
         return (
-            <select id={this.props.id}
+                <select id={this.props.id}
                     className='form-control'
                     value={this.state.selected}
                     onChange={this.handleChange}>
                 {options}
-            </select>
+                </select>
         )
     },
 

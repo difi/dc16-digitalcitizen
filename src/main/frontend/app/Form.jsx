@@ -1,22 +1,31 @@
 import TextField from './TextField.jsx';
+import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
+import AddressField from './AddressField.jsx';
 import dropdownContent from './dropdown-list-content.js';
 import {RadioButtonRelations} from './RadioButtonRelations';
+
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+
 
 export class Form extends React.Component {
 
     render() {
         return (
             <div>
-                <h2>{this.props.name}</h2>
+                <h3>{this.props.name}</h3>
                 {this.props.data.map(function (field, i) {
                     if (field.type == "TextField") {
                         return (
-                            <div>
-                                <label>{field.name}: </label>
+                            <Row>
+                                <Col sm={2}>
+                                    <label>{field.name}: </label>
+                                </Col>
                                 <TextField key={i} text={field.name}/>
-                            </div>
+
+                            </Row>
                         );
                     }
 
@@ -40,6 +49,7 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
+<<<<<<< HEAD
                     }
                     return (
                         <div>
@@ -51,6 +61,42 @@ export class Form extends React.Component {
                                           valueField={value}/>
                         </div>
                     );
+=======
+
+                        return (
+                            <Row><Col sm={2}>
+                                <label>{field.name}: </label>
+                            </Col>
+                                <Col sm={6}>
+                                    <DropdownList id='dropdown-list'
+                                                  options={options}
+                                                  labelField={label}
+                                                  value={defaultValue}
+                                                  valueField={value}/>
+                                </Col>
+                            </Row>
+                        )
+                    }
+                    else if (field.type == "AutoComplete") {
+                        return (
+                            <div>
+                                <p>Fastlege</p>
+                                <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
+                            </div>);
+                    }
+                    else if (field.type == "AddressField") {
+                        return (
+                            <Row>
+                                <Col sm={2}>
+                                    <label>{field.name}: </label>
+                                </Col>
+                                <Col sm={6}>
+                                    <AddressField />
+                                </Col>
+                            </Row>
+                        )
+                    }
+>>>>>>> refs/remotes/origin/master
                 })}
             </div>
         );

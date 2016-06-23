@@ -19,15 +19,29 @@ const common = {
     module: {
         loaders: [{
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel',
+            query: {
+                presets: ['react', 'es2015']
+            }
         }, {
             test: /\.css$/,
             loader: 'style!css'
-        }]
+        },
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+            {
+                test: /\.json$/,
+                loader: 'json'
+            }
+        ]
     },
     resolve: {
         extensions: ["", ".tsx", ".ts", ".jsx", ".js"]
     },
+    externals: {
+        'jsdom': 'window',
+        'cheerio': 'window',
+        'react/lib/ExecutionEnvironment': true
+    }
 };
 
 if (TARGET === 'start' || !TARGET) {

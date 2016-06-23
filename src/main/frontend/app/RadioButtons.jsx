@@ -1,5 +1,9 @@
 import React from 'react';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 class RadioButtonMe extends React.Component {
     render () {
         return (
@@ -9,6 +13,10 @@ class RadioButtonMe extends React.Component {
         );
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 /**
  * Create a radio button component.
  */
@@ -59,9 +67,15 @@ export default class RadioButtonClick extends React.Component {
     render () {
         return (
             <div>
+<<<<<<< HEAD
                 <RadioButtonMe onClick={this.handleClick1}/>
                 <RadioButtonOther onClick={this.handleClick2}/>
 
+=======
+                <h3>Hvem ønsker du å søke for?</h3>
+                <RadioButtonMe onClick={this.handleClick1} />
+                <RadioButtonOther onClick={this.handleClick2} />
+>>>>>>> refs/remotes/origin/master
             </div>
         );
     }
