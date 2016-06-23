@@ -27,41 +27,25 @@ export class Application extends React.Component{
         })
     }
     handleSubmit(){
-        var formdata = {
-            name: "Name",
-            age: "Old"
-        };
-        // Send the form data.
-        var xmlhttp = new XMLHttpRequest();
-        var _this = this;
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState === 4) {
-                var response = JSON.parse(xmlhttp.responseText);
-                if (xmlhttp.status === 200 && response.status === 'OK') {
-                    _this.setState({ type: 'success', message: 'We have received your message and will get in touch shortly. Thanks!' });
-                }
-                else {
-                    _this.setState({ type: 'danger', message: 'Sorry, there has been an error. Please try again later or send us an email at info@example.com.' });
-                }
-            }
-        };
-        xmlhttp.open('POST', 'send', true);
-        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xmlhttp.send(this.requestBuildQueryString(formData));
-    }
-    /**
-     * Transforms an object into a URL querystring.
-     *
-     * @param object params
-     * @return string the formatted querystring.
-     */
-    requestBuildQueryString(params) {
-    var queryString = [];
-    for(var property in params)
-        if (params.hasOwnProperty(property)) {
-            queryString.push(encodeURIComponent(property) + '=' + encodeURIComponent(params[property]));
-        }
-    return queryString.join('&');
+
+        $.ajax({
+            url: './send',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+
+            data: JSON.stringify({ location: "Boston" }),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
 }
 
     render() {
