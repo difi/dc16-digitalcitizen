@@ -22,7 +22,7 @@ describe("Textfield", function() {
         const wrapper = shallow(<TextField/>);
         const input = wrapper.find('FormControl');
         input.simulate('change', { target: { value: 'Hello' } });
-        expect(wrapper.state.value).to.be("Hello");
+        expect(wrapper.state().value).to.equal("Hello");
     });
 
 });
