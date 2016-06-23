@@ -21,7 +21,7 @@ export class Form extends React.Component {
                         return (
                             <Row className="form-row">
                                 <Col sm={1.5} md={1}>
-                                    <label>{field.name}: </label>
+                                    <label>{field.name} </label>
                                 </Col>
                                     <TextField key={i} text={field.name}/>
                                 <Col sm={3} md={3}>
@@ -52,7 +52,7 @@ export class Form extends React.Component {
                     return (
                         <Row className="form-row">
                             <Col sm={1.5} md={1}>
-                                <label>{field.name}: </label>
+                                <label>{field.name} </label>
                             </Col>
                             <Col sm={7.5} md={8}>
                                 <DropdownList id='dropdown-list'
@@ -68,7 +68,7 @@ export class Form extends React.Component {
                         return(
                         <Row className="form-row">
                             <Col sm={1.5} md={1}>
-                                <label>{field.name}: </label>
+                                <label>{field.name} </label>
                             </Col>
                             <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
                             <Col sm={3} md={3}>
@@ -79,7 +79,7 @@ export class Form extends React.Component {
                         return (
                             <Row className="form-row">
                                 <Col sm={1.5} md={1}>
-                                    <label>{field.name}: </label>
+                                    <label>{field.name} </label>
                                 </Col>
                                 <AddressField includeCountry={field.includeCountry}/>
                                 <Col sm={3} md={3}>
@@ -89,12 +89,13 @@ export class Form extends React.Component {
                     }
                     else if (field.type =="TextArea"){
                         return (
-                            <Row>
-                                <Col sm={2}>
-                                    <label>{field.name}: </label>
+                            <Row className="form-row">
+                                <Col sm={3} md={3}>
+                                    <label>{field.name} </label>
                                 </Col>
                                 <TextArea key={i} text={field.name}/>
-
+                                <Col sm={3} md={3}>
+                                </Col>
                             </Row>
                         );
                     }
