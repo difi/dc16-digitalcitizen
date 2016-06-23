@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery'
 
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -12,6 +13,20 @@ var FormControl = require('react-bootstrap/lib/FormControl');
     //Updates textfields
     handleChange: function(event) {
         this.setState({value: event.target.value});
+
+        $.ajax({
+            url: './send',
+            method: 'POST',
+            data: { name: "John", location: "Boston" },
+            success: function (data) {
+                console.log("data sent")
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
+
     },
     render: function() {
 
