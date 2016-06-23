@@ -1,7 +1,9 @@
-var RadioGroup=require('pui-react-radio').RadioGroup;
-var Radio=require('pui-react-radio').Radio;
+import React from 'react';
 
-var RelationsButton=React.createClass({
+//var RadioGroup=require('pui-react-radio').RadioGroup;
+//var Radio=require('pui-react-radio').Radio;
+
+var RadioButtonRelations=React.createClass({
     getInitialState:function(){
         return {
             selection: null
@@ -56,3 +58,5 @@ var RelationsButton=React.createClass({
         );
     }
 });
+
+export default RadioButtonRelations;

@@ -2,6 +2,7 @@ import TextField from './TextField.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
+import {RadioButtonRelations} from './RadioButtonRelations';
 
 export class Form extends React.Component {
 
@@ -18,6 +19,7 @@ export class Form extends React.Component {
                             </div>
                         );
                     }
+
                     else if (field.type == "Dropdown") {
                         var options = [], label, value, defaultValue;
                         switch (field.name) {
@@ -49,7 +51,6 @@ export class Form extends React.Component {
                                           valueField={value}/>
                         </div>
                     );
-
                 })}
             </div>
         );
