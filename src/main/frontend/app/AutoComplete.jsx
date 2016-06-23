@@ -77,16 +77,3 @@ var TypeAhead = React.createClass({
     });
 
 export default TypeAhead;
-
-
-/*
- <div className="list-group typeahead">
- {this.items}
- </div>
-
-
-<div className="field-group">
- <FormControl type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
- onChange={this.handleChange} onKeyDown={this.selectItem} onFocus={this.handleFocus} />
- {searchResult}
- </div>*/

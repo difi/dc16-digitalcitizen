@@ -9,6 +9,7 @@ import RadioButtonClick from './RadioButtons.jsx';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
 
 
 export class Application extends React.Component{
@@ -31,6 +32,7 @@ export class Application extends React.Component{
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
+        var button = !firstRender ? <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk sykehjemsplass</Button> : null;
         return (
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
@@ -40,9 +42,20 @@ export class Application extends React.Component{
                     }
                     else{
                         return (
+                        <compontentClass>
                             <Form key={i} name={forms.formname} data={forms.data}/>
+                        </compontentClass>
                         )}
                     })}
+                <Row className="form-row">
+                    <Col sm={7} md={7}>
+                    </Col>
+                    <Col sm={2} md={2}>
+                        {button}
+                    </Col>
+                    <Col sm={3} md={3}>
+                    </Col>
+                </Row>
             </form>
 
         )
