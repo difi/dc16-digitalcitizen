@@ -14,17 +14,14 @@ const store = createStore(reducer);
 
 var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
-
-
 var dataMe = [
     {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
-    {  name: "Etternavn", type: "TextField"},
-    {   name: "Adresse", type: "AddressField"},
-    {   name: "Nasjonalitet", type: "Dropdown"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "Adresse", type: "AddressField"},
+    {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"},
-    {name: "Fastlege", type: "AutoComplete", data: fastleger}
-    ];
+    {name: "Fastlege", type: "AutoComplete", data: fastleger}];
 
 var dataApplicant = [
     {name: "Adresse", type: "TextField"},

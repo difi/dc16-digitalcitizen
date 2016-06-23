@@ -4,7 +4,6 @@ import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import AddressField from './AddressField.jsx';
 import dropdownContent from './dropdown-list-content.js';
-import {RadioButtonRelations} from './RadioButtonRelations';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -28,7 +27,6 @@ export class Form extends React.Component {
                             </Row>
                         );
                     }
-
                     else if (field.type == "Dropdown") {
                         var options = [], label, value, defaultValue;
                         switch (field.name) {
@@ -49,19 +47,6 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
-<<<<<<< HEAD
-                    }
-                    return (
-                        <div>
-                            <label>{field.name}: </label>
-                            <DropdownList id='dropdown-list'
-                                          options={options}
-                                          labelField={label}
-                                          value={defaultValue}
-                                          valueField={value}/>
-                        </div>
-                    );
-=======
 
                         return (
                             <Row><Col sm={2}>
@@ -96,7 +81,6 @@ export class Form extends React.Component {
                             </Row>
                         )
                     }
->>>>>>> refs/remotes/origin/master
                 })}
             </div>
         );
