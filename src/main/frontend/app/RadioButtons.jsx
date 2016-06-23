@@ -1,11 +1,16 @@
 import React from 'react';
 
+<<<<<<< HEAD
+=======
+var Row = require('react-bootstrap/lib/Row');
+
+>>>>>>> refs/remotes/origin/master
 class RadioButtonMe extends React.Component {
     render () {
         return (
-            <div>
-                <input type="radio" name="who" value="Me" {...this.props}/> Jeg søker sykehjemplass for meg selv
-            </div>
+            <Row className="form-row">
+                <input type="radio" name="who" value="Me" {...this.props}/> Jeg søker sykehjemsplass for meg selv
+            </Row>
         );
     }
 }
@@ -16,9 +21,9 @@ class RadioButtonMe extends React.Component {
 class RadioButtonOther extends React.Component {
     render () {
         return (
-            <div>
-                <input type="radio" name="who" value="Other" {...this.props}/> Jeg søker sykehjemplass på vegne av noen andre
-            </div>
+            <Row className="form-row">
+                <input type="radio" name="who" value="Other" {...this.props}/> Jeg søker sykehjemsplass på vegne av noen andre
+            </Row>
         );
     }
 }
