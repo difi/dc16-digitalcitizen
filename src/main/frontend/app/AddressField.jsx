@@ -8,10 +8,19 @@ var Col = require('react-bootstrap/lib/Col');
 
 
 var AddressField = React.createClass({
-    //Sets initial state of textfields to a given text
+
+    propTypes: {
+        includeCountry: React.PropTypes.bool
+    },
+
+    getDefaultProps: function () {
+        return {includeCountry: true};
+    },
+
     getInitialState: function () {
         return {value: '', municipality: '', country: 'NO', street: ''};
     },
+
     /**Makes a call to the Bring API with the postal code given by the user
      * in order to retrieve the corresponding municipality
      *
@@ -57,44 +66,76 @@ var AddressField = React.createClass({
     },
 
     render: function () {
-        return (
+        if (this.props.includeCountry) {
+            return (
+                <Col sm={7.5} md={8}>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12}>
+                            <FormControl
+                                type="text"
+                                placeholder='Gateadresse'
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5}>
+                            <DropdownList
+                                id='dropdown-list'
+                                options={dropdownContent.NATIONAL}
+                                labelField='country'
+                                value={this.state.country}
+                                valueField='code'
+                                onChange={this.handleDropdownChange}/>
+                        </Col>
+                        <Col sm={3} md={3}>
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={4} md={4}>
+                            <FormControl
+                                type="text"
+                                placeholder='Poststed'
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </Col>
+            );
+        } else {
+            return (
             <Col sm={7.5} md={8}>
-            <Row className="form-row-address">
-                <Col sm={12} md={12}>
-                    <FormControl
-                        type="text"
-                        placeholder='Gateadresse'
-                        value={this.state.street}
-                        onChange={this.handleStreetChange}/>
-                </Col>
-            </Row>
-            <Row className="form-row-address">
-                <Col sm={5} md={5}>
-                    <DropdownList
-                        id='dropdown-list'
-                        options={dropdownContent.NATIONAL}
-                        labelField='country'
-                        value={this.state.country}
-                        valueField='code'
-                        onChange={this.handleDropdownChange}/>
-                </Col>
-                <Col sm={3} md={3}>
-                    <FormControl
-                        type="text"
-                        placeholder='Postnummer'
-                        value={this.state.value}
-                        onChange={this.handleChange}/>
-                </Col>
-                <Col sm={4} md={4}>
-                    <FormControl
-                        type="text"
-                        placeholder='Poststed'
-                        value={this.state.municipality}
-                        disabled/>
-                </Col>
-            </Row>
+                <Row className="form-row-address">
+                    <Col sm={12} md={12}>
+                        <FormControl
+                            type="text"
+                            placeholder='Gateadresse'
+                            value={this.state.street}
+                            onChange={this.handleStreetChange}/>
+                    </Col>
+                </Row>
+                <Row className="form-row-address">
+                    <Col sm={5} md={5}>
+                        <FormControl
+                            type="text"
+                            placeholder='Postnummer'
+                            value={this.state.value}
+                            onChange={this.handleChange}/>
+                    </Col>
+                    <Col sm={7} md={7}>
+                        <FormControl
+                            type="text"
+                            placeholder='Poststed'
+                            value={this.state.municipality}
+                            disabled/>
+                    </Col>
+                </Row>
             </Col>
-        );
+            );
+        }
     }
 });
 
