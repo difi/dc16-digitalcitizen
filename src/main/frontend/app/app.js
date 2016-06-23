@@ -20,7 +20,7 @@ var dataMe = [
     {name: "Fødselnr", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {  name: "Etternavn", type: "TextField"},
-    {   name: "Adresse", type: "TextField"},
+    {   name: "Adresse", type: "AddressField"},
     {   name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}
@@ -36,7 +36,7 @@ var dataApplicant = [
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Adresse", type: "TextField"},
+    {name: "Adresse", type: "AddressField"},
     {name: "Postnr", type: "TextField"},
     {name: "Telefon", type: "TextField"},
     {name: "Relasjon", type: "Dropdown"}];
