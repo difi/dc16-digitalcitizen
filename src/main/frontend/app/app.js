@@ -17,28 +17,28 @@ var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
 
 var dataMe = [
-    {name: "Fødselnr", type: "TextField"},
+    {name: "Fødselsnr.", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
-    {  name: "Etternavn", type: "TextField"},
-    {   name: "Adresse", type: "AddressField", includeCountry: false},
-    {   name: "Nasjonalitet", type: "Dropdown"},
-    {name: "E-post", type: "TextField"},
+    {name: "Etternavn", type: "TextField"},
+    {name: "Telefon", type: "TextField"},
+    {name: "Adresse", type: "AddressField", includeCountry: false},
+    {name: "Nasjonalitet", type: "Dropdown"},
+    {name: "Sivilstatus", type: "Dropdown"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}
     ];
 
 var dataApplicant = [
-    {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "E-post", type: "TextField"},
+    {name: "Telefon", type: "TextField"},
+    {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Adresse", type: "AddressField", includeCountry: true},
-    {name: "Postnr", type: "TextField"},
     {name: "Telefon", type: "TextField"},
+    {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"}];
 
 
