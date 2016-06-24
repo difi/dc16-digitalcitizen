@@ -4,42 +4,25 @@
 
 import React from 'react';
 
+import AddressField from './AddressField.jsx';
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 
-var checked = false;
 
 export default class PersonWithNeed extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            isChecked: false
-        }
-        this.handlePno = this.handlePno.bind(this);
-    }
-
     handleClickBack() {
-        console.log("State 2")
-        return (this.props.nextStep(2));
+        console.log("State 3")
+        return (this.props.nextStep(3));
     }
 
     handleClickNext() {
-        if (checked == false) {
-            console.log("State 5")
-            return (this.props.nextStep(5));
-        } else if (checked == true) {
-            console.log("State 4")
-            return (this.props.nextStep(4));
-        }
+        console.log("State 5")
+        return (this.props.nextStep(5));
     }
-
-    handlePno() {
-        this.setState({isChecked: !this.state.isChecked});
-        checked = !this.state.isChecked;
-    }
-
+    
     handleChange(event) {
         this.setState({value: event.target.value});
     }
@@ -48,28 +31,6 @@ export default class PersonWithNeed extends React.Component {
         return (
             <div>
                 <Row className="form-row">
-                    <Col sm={1.5} md={2}>
-                        <label>Fødselsnummer</label>
-                    </Col>
-                    <Col sm={4.5} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder="Fødselsnummer"
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={6} md={7}></Col>
-                </Row>
-                <Row className="form-row">
-                    <Col sm={1.5} md={2}></Col>
-                    <Col sm={3} md={5}>
-                        <input type="checkbox" name="noPno" checked={this.state.isChecked} onChange={this.handlePno}/> Jeg kan ikke
-                        fødselsnummeret
-                    </Col>
-                    <Col sm={1} md={1}>
-                    </Col>
-                    <Col sm={6} md={4}></Col>
-                </Row>
-                <Row className="form-row-name">
                     <Col sm={1.5} md={2}>
                         <label>Navn</label>
                     </Col>
@@ -81,6 +42,31 @@ export default class PersonWithNeed extends React.Component {
                     </Col>
                     <Col sm={6} md={7}></Col>
                 </Row>
+                <Row className="form-row">
+                    <Col sm={1.5} md={2}>
+                        <label>Folkeregistrert adresse</label>
+                    </Col>
+                    <Col sm={4.5} md={5}>
+                        <AddressField includeCountry={false} />
+                    </Col>
+                    <Col sm={1} md={1}>
+                    </Col>
+                    <Col sm={6} md={4}></Col>
+                </Row>
+                <Row className="form-row-name">
+                    <Col sm={1.5} md={2}>
+                        <label>Telefon</label>
+                    </Col>
+                    <Col sm={4.5} md={5}>
+                        <FormControl
+                            type="text"
+                            placeholder="Telefonnr"
+                            onChange={this.handleChange}/>
+                    </Col>
+                    <Col sm={6} md={7}></Col>
+                </Row>
+
+
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;

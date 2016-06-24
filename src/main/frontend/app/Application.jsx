@@ -7,6 +7,7 @@ require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
 import WhosSearching from './WhosSearchingForm.jsx';
 import PersonWithNeed from './PersonWithNeedForm';
+import PersonWithNeedInfo from './PersonWithNeedInfoForm'
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
@@ -38,7 +39,7 @@ export class Application extends React.Component{
         return (
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
-                <PersonWithNeed />
+                <PersonWithNeedInfo />
 
 
 
