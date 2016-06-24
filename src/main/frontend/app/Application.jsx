@@ -10,14 +10,15 @@ var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+import RelationForm from './RelationForm';
 
 
 export default class Application extends React.Component {
     constructor() {
-        super()
+        super();
         this.state = {
             step: 1
-        }
+        };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues=this.saveValues.bind(this);
         this.previousStep=this.saveValues.bind(this);
@@ -74,7 +75,7 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 2:
-                content = <
+                content = <RelationForm
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
