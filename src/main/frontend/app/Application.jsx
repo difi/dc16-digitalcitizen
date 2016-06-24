@@ -11,7 +11,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import RelationForm from './RelationForm';
-
+import SpecialNeeds from './SpecialNeeds';
 
 export default class Application extends React.Component {
     constructor() {
@@ -25,9 +25,10 @@ export default class Application extends React.Component {
     }
 
 
-    nextStep(step) {
+    nextStep() {
+        console.log("test");
         this.setState({
-            step: this.state.step + step
+            step: this.state.step + 1
         })
     }
 
@@ -36,9 +37,9 @@ export default class Application extends React.Component {
 
     }
 
-    previousStep(step) {
+    previousStep() {
         this.setState({
-            step: this.state.step - step
+            step: this.state.step - 1
         })
     }
 
@@ -69,17 +70,17 @@ export default class Application extends React.Component {
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
         switch (this.state.step) {
-            case 1:
-                content = <p Hallooo
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+            case 1: content =
+                <AccountFields fieldValues={fieldValues}
+                               nextStep={this.nextStep}
+                               previousStep={this.previousStep}
+                               saveValues={this.saveValues} />;
                 break;
             case 2:
-                content = <RelationForm
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                content = <p> TEST VIEW 2 </p>;
                 break;
-            case 3:
+            /*case 3:
+                
                 content = <
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -104,12 +105,16 @@ export default class Application extends React.Component {
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
-                break;
+                break; */
         }
 
         return (
-            {header},
-            {content}
+            <div>
+                {header}
+                {content}
+                <Button onClick={this.handleSubmit}> Submit form </Button>
+            </div>
+
         )
     }
 }
