@@ -2,7 +2,7 @@
 
 import React from 'react';
 import $ from 'jquery';
-import { Form } from './Form.jsx';
+import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
 
@@ -12,36 +12,36 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
 
-export class Application extends React.Component{
+export default class Application extends React.Component {
     constructor() {
         super()
         this.state = {
-            writesForOthers: false,
-            firstRender: true
+            step: 1
         }
-        this.onChildChange = this.onChildChange.bind(this)
+        this.nextStep = this.nextStep.bind(this);
+        this.saveValues=this.saveValues.bind(this);
+        this.previousStep=this.saveValues.bind(this);
     }
-    onChildChange(others){
-        this.setState({writesForOthers: others,
-        firstRender: false
-        })
-    }
+
+
     nextStep(step) {
         this.setState({
-            step: this.state.step+step
+            step: this.state.step + step
         })
-}
-    saveValues(data){
+    }
+
+    saveValues(data) {
 
 
     }
 
-    previousStep(step){
+    previousStep(step) {
         this.setState({
-            step: this.state.step-step
+            step: this.state.step - step
         })
     }
-    handleSubmit(){
+
+    handleSubmit() {
 
         $.ajax({
             url: './send',
@@ -51,7 +51,7 @@ export class Application extends React.Component{
             },
             method: 'POST',
 
-            data: JSON.stringify({ location: "Boston" }),
+            data: JSON.stringify({location: "Boston"}),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -61,38 +61,56 @@ export class Application extends React.Component{
             }.bind(this)
         });
 
-}
+    }
 
     render() {
-        var writesOthers = this.state.writesForOthers;
-        var firstRender = this.state.firstRender;
-        var button = !firstRender ? <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk sykehjemsplass</Button> : null;
-        return (
-            <form>
-                <PageHeader>Søk sykehjemsplass</PageHeader>
-                <RadioButtonClick callBackParent={this.onChildChange} />
-                    {this.props.data.map(function(forms, i){
-                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
-                    }
-                    else{
-                        return (
-                        <compontentClass>
-                            <Form key={i} name={forms.formname} data={forms.data}/>
-                        </compontentClass>
-                        )}
-                    })}
-                <Row className="form-row">
-                    <Col sm={7} md={7}>
-                    </Col>
-                    <Col sm={2} md={2}>
-                        {button}
-                    </Col>
-                    <Col sm={3} md={3}>
-                    </Col>
-                </Row>
-            </form>
 
+        var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
+        var content;
+        switch (this.state.step) {
+            case 1:
+                content = <p Hallooo
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 2:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 3:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 4:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 5:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 6:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 7:
+                content = <
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    submitRegistration={this.handleSubmit}/>;
+                break;
+        }
+
+        return (
+            {header},
+            {content}
         )
     }
-};
+}
+
 

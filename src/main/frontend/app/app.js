@@ -6,9 +6,10 @@ import reducers from './reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Application } from './Application.jsx';
+//import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
+import RelationForm from './RelationForm.jsx';
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -57,6 +58,6 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
-    <Buttons />
+    <RelationForm />
 </Provider>, document.getElementById('content'));
 
