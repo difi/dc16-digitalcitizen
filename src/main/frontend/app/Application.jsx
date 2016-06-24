@@ -12,18 +12,31 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var assign = require('object-assign');
 
-// TODO: Update object fields to match the form data & make a matching model on the server.
+// TODO: Update object fields to match the form data & make matching model(s) on the server.
 var fieldValues = {
     // First form
-    name: null,
-    location: null
+    isApplyingForSelf: null,    // Boolean
     // Second form
-
+    relation: null,             // String
+    isDependent: null,          // Boolean
     // Third form
-
+    person: {                   // Person object
+        pnr: null,                  // String
+        name: null,                 // String
+        address: null,              // String or object?
+        telephone: null             // String
+    },
     // Fourth form
-
+    doctor: {                   // Doctor Object (add more fields?)
+        name: null                  // String
+    },
     // Fifth form
+    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: null,         // String
+    // Seventh form
+    specialNeeds: null,         // String     
+    needsInterpreter: null      // Boolean
 };
 
 export class Application extends React.Component {
@@ -50,7 +63,7 @@ export class Application extends React.Component {
     }
 
     saveValues(field_value) {
-            fieldValues = assign({}, fieldValues, field_value)
+        fieldValues = assign({}, fieldValues, field_value)
     }
 
     previousStep(step) {
@@ -60,7 +73,6 @@ export class Application extends React.Component {
     }
 
     handleSubmit() {
-
         $.ajax({
             url: './send',
             headers: {
@@ -77,12 +89,16 @@ export class Application extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
     }
 
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
+        var data = {dependents: [{name: 'test'}]};
+        this.saveValues(data);
+        this.handleSubmit();
+
+
         var button = !firstRender ?
             <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk
                 sykehjemsplass</Button> : null;
