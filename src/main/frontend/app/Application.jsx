@@ -26,6 +26,21 @@ export class Application extends React.Component{
         firstRender: false
         })
     }
+    nextStep(step) {
+        this.setState({
+            step: this.state.step+step
+        })
+}
+    saveValues(data){
+
+
+    }
+
+    previousStep(step){
+        this.setState({
+            step: this.state.step-step
+        })
+    }
     handleSubmit(){
 
         $.ajax({
