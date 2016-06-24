@@ -4,7 +4,8 @@ import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import AddressField from './AddressField.jsx';
 import dropdownContent from './dropdown-list-content.js';
-import TextArea from './TextArea.jsx'; 
+//import RadioButtonList from './RadioButtonRelations.jsx';
+import TextArea from './TextArea.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -23,7 +24,7 @@ export class Form extends React.Component {
                                 <Col sm={1.5} md={1}>
                                     <label>{field.name}: </label>
                                 </Col>
-                                    <TextField key={i} text={field.name}/>
+                                <TextField key={i} text={field.name}/>
                                 <Col sm={3} md={3}>
                                 </Col>
                             </Row>
@@ -49,31 +50,31 @@ export class Form extends React.Component {
                                 value = 'value';
                                 break;
                         }
-                    return (
-                        <Row className="form-row">
-                            <Col sm={1.5} md={1}>
-                                <label>{field.name}: </label>
-                            </Col>
-                            <Col sm={7.5} md={8}>
-                                <DropdownList id='dropdown-list'
-                                          options={options}
-                                          labelField={label}
-                                          value={defaultValue}
-                                          valueField={value}/>
-                            </Col>
-                        </Row>
-                    )}
+                        return (
+                            <Row className="form-row">
+                                <Col sm={1.5} md={1}>
+                                    <label>{field.name}: </label>
+                                </Col>
+                                <Col sm={7.5} md={8}>
+                                    <DropdownList id='dropdown-list'
+                                                  options={options}
+                                                  labelField={label}
+                                                  value={defaultValue}
+                                                  valueField={value}/>
+                                </Col>
+                            </Row>
+                        )}
                     else if(field.type=="AutoComplete"){
 
                         return(
-                        <Row className="form-row">
-                            <Col sm={1.5} md={1}>
-                                <label>{field.name}: </label>
-                            </Col>
-                            <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
-                            <Col sm={3} md={3}>
-                            </Col>
-                        </Row>);
+                            <Row className="form-row">
+                                <Col sm={1.5} md={1}>
+                                    <label>{field.name}: </label>
+                                </Col>
+                                <TypeAhead key={i} array={field.data} placeholder="Skriv inn søkers fastlege"/>
+                                <Col sm={3} md={3}>
+                                </Col>
+                            </Row>);
                     }
                     else if (field.type == "AddressField") {
                         return (
@@ -87,6 +88,17 @@ export class Form extends React.Component {
                             </Row>
                         )
                     }
+                    else if (field.type=="RadioButton"){
+                        return(
+                            <Row className="form-group">
+                                <Col sm={2} md={1}>
+                                    <label>{field.name}: </label>
+                                </Col>
+
+                            </Row>
+                        );
+                    }
+                        //Text box
                     else if (field.type =="TextArea"){
                         return (
                             <Row>
@@ -94,10 +106,10 @@ export class Form extends React.Component {
                                     <label>{field.name}: </label>
                                 </Col>
                                 <TextArea key={i} text={field.name}/>
-
                             </Row>
                         );
                     }
+
                 })}
             </compontentClass>
         );

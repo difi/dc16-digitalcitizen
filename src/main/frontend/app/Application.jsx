@@ -9,6 +9,7 @@ import RadioButtonClick from './RadioButtons.jsx';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
 
 
 export class Application extends React.Component{
@@ -31,26 +32,24 @@ export class Application extends React.Component{
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
+        var button = !firstRender ? <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk sykehjemsplass</Button> : null;
         return (
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
                 <RadioButtonClick callBackParent={this.onChildChange} />
-                    {this.props.data.map(function(forms, i){
-                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
-                        }
-                        else{
-                            return (
+                {this.props.data.map(function(forms, i){
+                    if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
+                    }
+                    else{
+                        return (
+                            <compontentClass>
                                 <Form key={i} name={forms.formname} data={forms.data}/>
-                            )}
-                    })}
-<<<<<<< HEAD
-                </Row>
-
-                <button type="submit" onClick={this.handleSubmit}> Submit
-                </button>
-=======
->>>>>>> refs/remotes/origin/master
+                            </compontentClass>
+                        )}
+                })}
+                
             </form>
+
         )
     }
 };

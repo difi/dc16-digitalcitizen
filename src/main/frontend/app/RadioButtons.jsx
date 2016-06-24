@@ -1,10 +1,7 @@
 import React from 'react';
 
-<<<<<<< HEAD
-=======
 var Row = require('react-bootstrap/lib/Row');
 
->>>>>>> refs/remotes/origin/master
 class RadioButtonMe extends React.Component {
     render () {
         return (

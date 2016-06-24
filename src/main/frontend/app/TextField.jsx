@@ -16,8 +16,11 @@ var FormControl = require('react-bootstrap/lib/FormControl');
     render: function() {
 
         return (
-            <Col sm={7.5} md={8}>
+            <Col sm={6} md={6}>
                 <FormControl
+                    requiered
+                    componentClass="textarea"
+                    bsSize="ls"
                     type="text"
                     placeholder={this.state.value}
                     onChange={this.handleChange}/>

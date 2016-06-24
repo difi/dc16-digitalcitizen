@@ -19,42 +19,42 @@ var RadioButtonRelations=React.createClass({
     render: function() {
         return (
             /*
-            <div>
-                <label>{this.state.value}</label>
-                <input
-                    type="text"
-                    placeholder={this.state.value}
-                    onChange={this.change}
-                />
-            </div>
-            */
+             <div>
+             <label>{this.state.value}</label>
+             <input
+             type="text"
+             placeholder={this.state.value}
+             onChange={this.change}
+             />
+             </div>
+             */
 
-             <form role="form" className="form-horizontal">
-             <div className="form-group">
-             <Col md={3}>
-             <label>Relasjon</label>
-             </Col>
-             <Col md={21}>
-             <RadioGroup name="stuff" onChange={this.change}>
-             <Radio value="stuff2">Barn</Radio>
-             <Radio value="stuff3">Søsken</Radio>
-             <Radio value="special">Fastlege</Radio>
-             </RadioGroup>
-             </Col>
-             </div>
-5
-             {this.state.selection === 'special' && (
-             <div className="form-group">
-             <Col md={3}>
-             <label>Input for videre info</label>
-             </Col>
-             <Col md={21}>
-             <label htmlFor="exampleInput">Videre info</label>
-             <input type="email" className="form-control" id="exampleInput" placeholder="Fyll inn informasjon" />
-             </Col>
-             </div>
-             )}
-             </form>
+            <form role="form" className="form-horizontal">
+                <div className="form-group">
+                    <Col md={3}>
+                        <label>Relasjon</label>
+                    </Col>
+                    <Col md={21}>
+                        <RadioGroup name="stuff" onChange={this.change}>
+                            <Radio value="stuff2">Barn</Radio>
+                            <Radio value="stuff3">Søsken</Radio>
+                            <Radio value="special">Fastlege</Radio>
+                        </RadioGroup>
+                    </Col>
+                </div>
+                5
+                {this.state.selection === 'special' && (
+                    <div className="form-group">
+                        <Col md={3}>
+                            <label>Input for videre info</label>
+                        </Col>
+                        <Col md={21}>
+                            <label htmlFor="exampleInput">Videre info</label>
+                            <input type="email" className="form-control" id="exampleInput" placeholder="Fyll inn informasjon" />
+                        </Col>
+                    </div>
+                )}
+            </form>
         );
     }
 });
