@@ -8,7 +8,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-export default class Buttons extends React.Component {
+export default class WhosSearching extends React.Component {
     handleClickMe() {
         console.log("State 5")
         return (this.props.nextStep(5));
@@ -21,25 +21,21 @@ export default class Buttons extends React.Component {
 
     render() {
         return (
-            <div>
+            <componentClass>
                 <Row>
-                    <Col xs={1} md={3}></Col>
-                    <Col xs={10} md={6}>
+                    <Col>
                         <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary" bsSize="large">Jeg
                             søker sykehjemsplass for meg selv</Button>
                     </Col>
-                    <Col xs={1} md={3}></Col>
                 </Row>
                 <Row>
-                    <Col xs={1} md={3}></Col>
-                    <Col xs={10} md={6}>
+                    <Col>
                         <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                 bsSize="large">Jeg søker sykehjemsplass på vegne av noen
                             andre</Button>
                     </Col>
-                    <Col xs={1} md={3}></Col>
                 </Row>
-            </div>
+            </componentClass>
         )
     }
 };
