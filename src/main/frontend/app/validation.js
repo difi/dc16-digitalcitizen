@@ -1,28 +1,18 @@
-/**
- * Created by camp-vhe on 21.06.2016.
- */
-
 const isEmpty = value => value === undefined || value === null || value === '';
 
-export function email(value) {
+export function CheckEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
     if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
         return 'Invalid email address';
     }
 }
 
-export function required(value) {
-    if (isEmpty(value)) {
-        return 'Required';
-    }
-}
-
-export function integer(value) {
+export function CheckInteger(value) {
     if (!Number.isInteger(Number(value))) {
         return 'Must be an integer';
     }
 }
-export function check_personalnumber_no( pno ) {
+export function CheckPersonalnumberNo( pno ) {
     // Check length
     if( pno.length != 11 )
         return false;
@@ -79,8 +69,20 @@ export function check_personalnumber_no( pno ) {
     return true;}
 
 
-export function checkPhoneNumber(value){
-    
+export function CheckPhoneNumber(phoneNo){
+    var checkPhone = /^\d{8}$/;
+    if (phoneNo.value.match(checkPhone)) {
+        return true;
+    } else {
+        return "Ugyldig telefonnr";
+    }
 }
 
-
+export function CheckPostCode(postCode) {
+    var checkPost = /^[0-9]{4}$/;
+    if (postCode == checkPost) {
+        return true;
+    } else {
+        return "Ugyldig postnummer";
+    }
+}

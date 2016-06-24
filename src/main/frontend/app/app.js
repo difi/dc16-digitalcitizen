@@ -9,6 +9,7 @@ import $ from 'jquery';
 import { Application } from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
 
+
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 

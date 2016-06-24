@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { Form } from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
+import Buttons from './WhosSearchingForm.jsx';
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
@@ -36,6 +37,9 @@ export class Application extends React.Component{
         return (
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
+                <Buttons />
+
+
                 <RadioButtonClick callBackParent={this.onChildChange} />
                     {this.props.data.map(function(forms, i){
                         if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
