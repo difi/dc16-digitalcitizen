@@ -27,8 +27,27 @@ export class Application extends React.Component{
         })
     }
     handleSubmit(){
-        console.log("Submitting");
-    }
+
+        $.ajax({
+            url: './send',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+
+            data: JSON.stringify({ location: "Boston" }),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
+}
+
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
