@@ -2,7 +2,7 @@
 
 import React from 'react';
 import $ from 'jquery';
-import { Form } from './Form.jsx';
+import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
 
@@ -10,9 +10,23 @@ var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+var assign = require('object-assign');
 
+// TODO: Update object fields to match the form data & make a matching model on the server.
+var fieldValues = {
+    // First form
+    name: null,
+    location: null
+    // Second form
 
-export class Application extends React.Component{
+    // Third form
+
+    // Fourth form
+
+    // Fifth form
+};
+
+export class Application extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -21,27 +35,31 @@ export class Application extends React.Component{
         }
         this.onChildChange = this.onChildChange.bind(this)
     }
-    onChildChange(others){
-        this.setState({writesForOthers: others,
-        firstRender: false
+
+    onChildChange(others) {
+        this.setState({
+            writesForOthers: others,
+            firstRender: false
         })
     }
+
     nextStep(step) {
         this.setState({
-            step: this.state.step+step
+            step: this.state.step + step
         })
-}
-    saveValues(data){
-
-
     }
 
-    previousStep(step){
+    saveValues(field_value) {
+            fieldValues = assign({}, fieldValues, field_value)
+    }
+
+    previousStep(step) {
         this.setState({
-            step: this.state.step-step
+            step: this.state.step - step
         })
     }
-    handleSubmit(){
+
+    handleSubmit() {
 
         $.ajax({
             url: './send',
@@ -50,8 +68,7 @@ export class Application extends React.Component{
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-
-            data: JSON.stringify({ location: "Boston" }),
+            data: JSON.stringify(fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -61,26 +78,29 @@ export class Application extends React.Component{
             }.bind(this)
         });
 
-}
+    }
 
     render() {
         var writesOthers = this.state.writesForOthers;
         var firstRender = this.state.firstRender;
-        var button = !firstRender ? <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk sykehjemsplass</Button> : null;
+        var button = !firstRender ?
+            <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk
+                sykehjemsplass</Button> : null;
         return (
             <form>
                 <PageHeader>Søk sykehjemsplass</PageHeader>
-                <RadioButtonClick callBackParent={this.onChildChange} />
-                    {this.props.data.map(function(forms, i){
-                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
+                <RadioButtonClick callBackParent={this.onChildChange}/>
+                {this.props.data.map(function (forms, i) {
+                    if (!(writesOthers) && forms.formname == "Om deg som søker" || firstRender) {
                     }
-                    else{
+                    else {
                         return (
-                        <compontentClass>
-                            <Form key={i} name={forms.formname} data={forms.data}/>
-                        </compontentClass>
-                        )}
-                    })}
+                            <compontentClass>
+                                <Form key={i} name={forms.formname} data={forms.data}/>
+                            </compontentClass>
+                        )
+                    }
+                })}
                 <Row className="form-row">
                     <Col sm={7} md={7}>
                     </Col>
@@ -94,5 +114,6 @@ export class Application extends React.Component{
 
         )
     }
-};
+}
+;
 
