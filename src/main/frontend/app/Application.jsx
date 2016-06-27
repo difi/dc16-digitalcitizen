@@ -16,6 +16,8 @@ var Button = require('react-bootstrap/lib/Button');
 import RelationForm from './RelationForm';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
+import GeneralPractitioner from './GeneralPractitioner';
+
 
 var fieldValues = {
     // First form
@@ -105,36 +107,42 @@ export default class Application extends React.Component {
         switch (this.state.step) {
             case 1:
                 content = < WhosSearching
-                    nextStep={this.nextStep.}
+                    nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 2:
                 content = <RelationForm
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
                 content = <PersonWithNeedForm
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 5:
-                content = <
+                content = <GeneralPractitioner
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
                 content = < NeedsForm
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
                 content = < SpecialNeeds
+                    fieldValues = {fieldValues}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
