@@ -28,18 +28,21 @@ export default class WhosSearching extends React.Component {
     render() {
         return (
             <componentClass>
+                <label className="form-header">Hvem søker du sykehjemsplass for?</label>
                 <Row>
-                    <Col>
+                    <Col sm={7} md={6}>
                         <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary" bsSize="large">Jeg
                             søker sykehjemsplass for meg selv</Button>
                     </Col>
+                    <Col sm={7} md={6}></Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col sm={7} md={6}>
                         <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                 bsSize="large">Jeg søker sykehjemsplass på vegne av noen
                             andre</Button>
                     </Col>
+                    <Col sm={7} md={6}></Col>
                 </Row>
             </componentClass>
         )

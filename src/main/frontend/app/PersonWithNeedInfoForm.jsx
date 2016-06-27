@@ -12,13 +12,13 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 
 
-export default class PersonWithNeed extends React.Component {
+export default class PersonWithNeedInfo extends React.Component {
     constructor() {
         super()
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
-
+    
     handleClickBack() {
         console.log("State 3");
         (this.props.previousStep(3));
@@ -39,11 +39,12 @@ export default class PersonWithNeed extends React.Component {
     render() {
         return (
             <div>
+                <label className="form-header">Informasjon om person med behov</label>
                 <Row className="form-row">
-                    <Col sm={1.5} md={2}>
+                    <Col sm={2} md={2}>
                         <label>Navn</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
+                    <Col sm={5} md={5}>
                         <FormControl
                             type="text"
                             placeholder="Navn"
@@ -53,28 +54,26 @@ export default class PersonWithNeed extends React.Component {
                     <Col sm={6} md={7}></Col>
                 </Row>
                 <Row className="form-row">
-                    <Col sm={1.5} md={2}>
+                    <Col sm={2} md={2}>
                         <label>Folkeregistrert adresse</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
-                        <AddressField includeCountry={false}/>
+                    <Col sm={5} md={5}>
+                        <AddressField includeCountry={false} />
                     </Col>
-                    <Col sm={1} md={1}>
-                    </Col>
-                    <Col sm={6} md={4}></Col>
+                    <Col sm={5} md={5}></Col>
                 </Row>
-                <Row className="form-row-name">
-                    <Col sm={1.5} md={2}>
+                <Row className="form-row">
+                    <Col sm={2} md={2}>
                         <label>Telefon</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
+                    <Col sm={5} md={5}>
                         <FormControl
                             type="text"
                             defaultValue={this.props.fieldValues.person.telephone}
                             placeholder="Telefonnr"
                             onChange={this.handleChange}/>
                     </Col>
-                    <Col sm={6} md={7}></Col>
+                    <Col sm={5} md={5}></Col>
                 </Row>
 
 

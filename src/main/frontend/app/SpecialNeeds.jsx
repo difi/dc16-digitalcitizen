@@ -38,11 +38,13 @@ export default class SpecialNeeds extends React.Component {
         var fieldsForm = fields.map(function (field, i) {
 
             return (
-                <Row className="form-row">
-                    <Col sm={3} md={3}>
+                <Row className="form-row-special">
+                    <Col sm={4} md={3}>
                         <label>{field} </label>
                     </Col>
-                    <TextArea ref="testarea" value="hello"/>
+                    <Col sm={5} md={6}>
+                        <TextArea ref="testarea" value="hello"/>
+                    </Col>
                     <Col sm={3} md={3}>
                     </Col>
                 </Row>

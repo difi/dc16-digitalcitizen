@@ -26,14 +26,16 @@ export default class GeneralPractitioner extends React.Component {
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         return (
-            <div>
+            <componentClass>
+                <label className="form-header">Velg søkers fastlege</label>
                 <Row className="form-row">
-                    <Col sm={1.5} md={1}>
+                    <Col sm={2} md={1}>
                         <label>Fastlege</label>
                     </Col>
-                    <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
-                    <Col sm={3} md={3}>
+                    <Col sm={5} md={6}>
+                        <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
                     </Col>
+                    <Col sm={6} md={7}></Col>
                 </Row>
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
@@ -47,7 +49,7 @@ export default class GeneralPractitioner extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
-            </div>);
+            </componentClass>
+        );
     }
 }
-

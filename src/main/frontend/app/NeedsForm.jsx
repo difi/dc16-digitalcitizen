@@ -9,7 +9,7 @@ var Button = require('react-bootstrap/lib/Button');
 export default class NeedsForm extends React.Component {
     constructor() {
         super();
-        this.handleChange=this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
             value: null
         };
@@ -38,23 +38,23 @@ export default class NeedsForm extends React.Component {
         }
 
 
-    
-    handleChange(r){
+
+    handleChange(r) {
         this.setState({
             value: r
         });
     }
 
     render() {
-        return(
-            <div>
-                <p> Skøker du om kortidsopphold eller langtidsopphold? </p>
+        return (
+            <componentClass>
+                <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
                 <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
                     {Radio => (
                         <div>
-                            <Radio value="shortStay" /> Kortidsopphold
+                            <Radio value="shortStay"/> Kortidsopphold
                             <br/>
-                            <Radio value="longStay" /> Langtidsopphold
+                            <Radio value="longStay"/> Langtidsopphold
                         </div>
                     )}
                 </RadioGroup>
@@ -70,7 +70,7 @@ export default class NeedsForm extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
-            </div>
-            )
+            </componentClass>
+        )
     }
 }

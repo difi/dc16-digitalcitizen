@@ -88,7 +88,7 @@ var AddressField = React.createClass({
                                 valueField='code'
                                 onChange={this.handleDropdownChange}/>
                         </Col>
-                        <Col sm={3} md={3}>
+                        <Col sm={2} md={2}>
                             <FormControl
                                 type="text"
                                 placeholder='Postnummer'
@@ -108,32 +108,32 @@ var AddressField = React.createClass({
         } else {
             return (
                 <div>
-                <Row className="form-row-address">
-                    <Col sm={12} md={12}>
-                        <FormControl
-                            type="text"
-                            placeholder='Gateadresse'
-                            value={this.state.street}
-                            onChange={this.handleStreetChange}/>
-                    </Col>
-                </Row>
-                <Row className="form-row-address">
-                    <Col sm={5} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder='Postnummer'
-                            value={this.state.value}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={7} md={7}>
-                        <FormControl
-                            type="text"
-                            placeholder='Poststed'
-                            value={this.state.municipality}
-                            disabled/>
-                    </Col>
-                </Row>
-                    </div>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Adresse'
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={7} md={7} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Sted'
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </div>
             );
         }
     }
