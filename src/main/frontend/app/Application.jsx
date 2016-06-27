@@ -5,6 +5,7 @@ import $ from 'jquery';
 import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
+var assign = require('object-assign');
 import WhosSearching from './WhosSearchingForm.jsx';
 import PersonWithNeed from './PersonWithNeedForm';
 import PersonWithNeedInfo from './PersonWithNeedInfoForm'
@@ -18,6 +19,8 @@ import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
 import GeneralPractitioner from './GeneralPractitioner';
 
+
+// TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 var fieldValues = {
     // First form
@@ -48,6 +51,7 @@ var fieldValues = {
 };
 
 export default class Application extends React.Component {
+
     constructor() {
         super();
         this.state = {
@@ -55,21 +59,21 @@ export default class Application extends React.Component {
             prevStep: 1
         };
         this.nextStep = this.nextStep.bind(this);
-        this.saveValues=this.saveValues.bind(this);
-        this.previousStep=this.saveValues.bind(this);
+        this.saveValues = this.saveValues.bind(this);
+        this.previousStep = this.previousStep.bind(this);
     }
-
-
-    nextStep(step) {
+    
+    onChildChange(others) {
         this.setState({
             prevStep: this.state.step,
             step: this.state.step + step
         })
     }
 
-        saveValues(data) {
 
 
+    saveValues(field_value) {
+        fieldValues = assign({}, fieldValues, field_value)
     }
 
     previousStep() {
@@ -78,8 +82,13 @@ export default class Application extends React.Component {
         })
     }
 
-    handleSubmit() {
+    nextStep(step) {
+        this.setState({
+            step: this.state.step + step
+        })
+    }
 
+    handleSubmit() {
         $.ajax({
             url: './send',
             headers: {
@@ -87,8 +96,7 @@ export default class Application extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-
-            data: JSON.stringify({location: "Boston"}),
+            data: JSON.stringify(fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -97,13 +105,13 @@ export default class Application extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
     }
 
     render() {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
+        //TODO: Remove test data and update the content to actual forms
         switch (this.state.step) {
             case 1:
                 content = < WhosSearching
@@ -152,12 +160,47 @@ export default class Application extends React.Component {
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
+
+
+
+                     
                 break;
+
+            /*
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 4:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 5:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 6:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 7:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}
+             submitRegistration={this.handleSubmit}/>;
+             break; */
+                
         }
 
         return (
-            {header},
-            {content}
+            <div>
+                {header}
+                {content}
+                <Button onClick={this.handleSubmit}> Submit form </Button>
+            </div>
         )
     }
 }

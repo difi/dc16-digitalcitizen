@@ -95,6 +95,8 @@ export default class PersonWithNeed extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
+                <Button onClick={this.props.previousStep.bind(null, 1)}> Previous </Button>
+                <Button onClick={this.props.nextStep.bind(null, 1)}> Next </Button>
             </div>
         )
     }

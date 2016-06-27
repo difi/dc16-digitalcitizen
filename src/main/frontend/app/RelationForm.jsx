@@ -62,6 +62,8 @@ export default class RelationForm extends React.Component{
             </RadioGroup>
                 <br></br>
                 {content}
+                <Button onClick={this.props.previousStep.bind(null, 1)}> Previous </Button>
+                <Button onClick={this.props.nextStep.bind(null, 1)}> Next </Button>
 
                 </div>
 
