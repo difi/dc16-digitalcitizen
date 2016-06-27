@@ -10,15 +10,11 @@ export default class SpecialNeeds extends React.Component {
     nextStep() {
         // Get values via this.refs
         var data = {
-            relation     : "test"
+            relation     : ReactDOM.findDOMNode(this.refs.testarea).children[0].value
         };
-        console.log(ReactDOM.findDOMNode(this.refs.testarea).children[0]);
-
-        console.log(ReactDOM.findDOMNode(this.refs.yolo));
-
         this.props.saveValues(data);
-        //this.props.nextStep();
-        console.log(data)
+        this.props.nextStep();
+        console.log(data);
     }
 
     render() {
@@ -30,7 +26,7 @@ export default class SpecialNeeds extends React.Component {
                     <Col sm={3} md={3}>
                         <label>{field} </label>
                     </Col>
-                    <TextArea value="hello"/>
+                    <TextArea ref="testarea" value="hello"/>
                     <Col sm={3} md={3}>
                     </Col>
                 </Row>
@@ -39,13 +35,10 @@ export default class SpecialNeeds extends React.Component {
         return (
             <div>
                 {fieldsForm}
-                <TextArea ref="testarea" />
+                <Button ref="button" onClick={this.props.previousStep.bind(this)}>Previous</Button>
                 <Button ref="button" onClick={this.nextStep.bind(this)}>Next</Button>
             </div>
         );
     }
-
-
-
 
 }

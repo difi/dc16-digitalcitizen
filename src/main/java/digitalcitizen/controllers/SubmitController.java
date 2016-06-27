@@ -16,6 +16,7 @@ public class SubmitController {
         // TODO: Validate form
         // TODO: Add application to database?
         // TODO: Return a PDF-file to the user?
+        System.out.println("Submission received");
 
         return submission;
     }

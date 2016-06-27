@@ -49,10 +49,9 @@ export default class Application extends React.Component {
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
-        this.previousStep = this.saveValues.bind(this);
+        this.previousStep = this.previousStep.bind(this);
     }
-
-
+    
     onChildChange(others) {
         this.setState({
             writesForOthers: others,
@@ -93,28 +92,49 @@ export default class Application extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
     }
 
     render() {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
+        //TODO: Remove test data and update the content to actual forms
         switch (this.state.step) {
             case 1:
                 content =
                     <SpecialNeeds fieldValues={fieldValues}
-                                   nextStep={this.nextStep.bind(null, 2)}
-                                   previousStep={this.previousStep}
-                                   saveValues={this.saveValues}/>;
+                                  nextStep={this.nextStep.bind(null, 1)}
+                                  previousStep={this.previousStep.bind(null, 0)}
+                                  saveValues={this.saveValues}/>;
                 break;
             case 2:
-                content = <p> TEST VIEW 2 </p>;
+                content =
+                    <div>
+                        <p> TESTVIEW 2 </p>
+                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
+                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
+                        <Button onClick={this.nextStep.bind(null, 2)}> Last page </Button>
+                    </div>;
                 break;
             case 3:
-                content = <p> TESTVIEW 3</p>;
+                content =
+                    <div>
+                        <p> TESTVIEW 3 </p>
+                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
+                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
+                    </div>;
+                break;
+            case 4:
+                content =
+                    <div>
+                        <p> TESTVIEW 4 </p>
+                        <Button onClick={this.previousStep.bind(null, 3)}> First page </Button>
+                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
+                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
+                    </div>;
+                break;
 
-                /*
+            /*
              content = <
              nextStep={this.nextStep}
              saveValues={this.saveValues}/>;
@@ -140,6 +160,7 @@ export default class Application extends React.Component {
              saveValues={this.saveValues}
              submitRegistration={this.handleSubmit}/>;
              break; */
+                
         }
 
         return (
