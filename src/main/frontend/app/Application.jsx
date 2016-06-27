@@ -5,48 +5,97 @@ import $ from 'jquery';
 import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
-import WhosSearching from './WhosSearchingForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm'
+
+var assign = require('object-assign');
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+
+import WhosSearching from './WhosSearchingForm';
 import RelationForm from './RelationForm';
+import PersonWithNeedForm from './PersonWithNeedForm';
+import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
+import GeneralPractitioner from './GeneralPractitioner';
+import SpecialNeeds from './SpecialNeeds';
+import NeedsForm from'./NeedsForm';
+
+
+
+
+// TODO: Update object fields to match the form data & make matching model(s) on the server.
+
+var fieldValues = {
+    // First form
+    isApplyingForSelf: null,    // Boolean
+    // Second form
+    relation: null,             // String
+    guardianName: null,          //String
+    familyRelation: null,        //String
+    isDependent: null,          // Boolean
+    // Third form
+    person: {                   // Person object
+        pnr: null,                  // String
+        name: null,                 // String
+        address: null,              // String or object?
+        telephone: null             // String
+    },
+    // Fourth form
+    doctor: {                   // Doctor Object (add more fields?)
+        name: null                  // String
+    },
+    // Fifth form
+    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: null,         // String
+    // Seventh form
+    specialNeeds: null,         // String
+    needsInterpreter: null      // Boolean
+};
 
 
 export default class Application extends React.Component {
+
     constructor() {
         super();
         this.state = {
-            step: 1
+            step: 1,
+            prevStep: 1
         };
         this.nextStep = this.nextStep.bind(this);
-        this.saveValues=this.saveValues.bind(this);
-        this.previousStep=this.saveValues.bind(this);
+        this.saveValues = this.saveValues.bind(this);
+        this.previousStep = this.previousStep.bind(this);
+
     }
-
-
-    nextStep(step) {
+    
+    onChildChange(others) {
         this.setState({
+            prevStep: this.state.step,
             step: this.state.step + step
         })
     }
 
-    saveValues(data) {
 
 
+    saveValues(field_value) {
+        fieldValues = assign({}, fieldValues, field_value)
     }
 
     previousStep(step) {
         this.setState({
-            step: this.state.step - step
+            step: step
+        })
+    }
+
+    nextStep(step) {
+        this.setState({
+            prevStep: this.state.step,
+            step: step
         })
     }
 
     handleSubmit() {
-
         $.ajax({
             url: './send',
             headers: {
@@ -54,8 +103,7 @@ export default class Application extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-
-            data: JSON.stringify({location: "Boston"}),
+            data: JSON.stringify(fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -64,55 +112,99 @@ export default class Application extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
     }
 
     render() {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
+        //TODO: Remove test data and update the content to actual forms
         switch (this.state.step) {
             case 1:
-                content = <p Hallooo
+                content = < WhosSearching
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 2:
                 content = <RelationForm
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
-                content = <
+                content = <PersonWithNeedForm
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 4:
-                content = <
+                content = <PersonWithNeedInfoForm
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 5:
-                content = <
+                content = <GeneralPractitioner
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
-                content = <
+                content = < NeedsForm
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
-                content = <
+                content = < SpecialNeeds
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
+
                 break;
+
+            /*
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 4:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 5:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 6:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}/>;
+             break;
+             case 7:
+             content = <
+             nextStep={this.nextStep}
+             saveValues={this.saveValues}
+             submitRegistration={this.handleSubmit}/>;
+             break; */
+                
         }
 
         return (
-            {header},
-            {content}
+            <div>
+                {header}
+                {content}
+                <Button onClick={this.handleSubmit} visible={false}> Submit form </Button>
+            </div>
         )
     }
 }
