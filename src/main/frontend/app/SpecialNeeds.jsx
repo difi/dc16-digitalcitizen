@@ -20,7 +20,7 @@ export default class SpecialNeeds extends React.Component {
     render() {
         var fields = ["Har du noen medisinke behov vi burde vite om", "Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått", "Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l"];
         var fieldsForm = fields.map(function (field, i) {
-
+            
             return (
                 <Row className="form-row">
                     <Col sm={3} md={3}>

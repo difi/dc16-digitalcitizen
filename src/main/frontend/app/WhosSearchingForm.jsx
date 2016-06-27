@@ -9,14 +9,33 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
 export default class WhosSearching extends React.Component {
+
+
+    constructor() {
+        super();
+        this.handleClickMe = this.handleClickMe.bind(this);
+        this.handleClickOther = this.handleClickOther.bind(this);
+    }
+
+    saveFieldValues(status){
+        var data = {
+            isApplyingForSelf: status
+        };
+        this.props.saveValues(data);
+        console.log(data);
+    }
+
+    nextStep(status) {
+        this.saveFieldValues(status);
+        this.props.nextStep();
+    }
+
     handleClickMe() {
-        console.log("State 6")
-        return (this.props.nextStep(6));
+        this.nextStep(true);
     }
 
     handleClickOther() {
-        console.log("State 2")
-        return (this.props.nextStep(2));
+        this.nextStep(false);
     }
 
     render() {

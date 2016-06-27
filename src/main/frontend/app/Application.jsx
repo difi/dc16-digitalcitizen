@@ -8,7 +8,7 @@ import RadioButtonClick from './RadioButtons.jsx';
 var assign = require('object-assign');
 import WhosSearching from './WhosSearchingForm.jsx';
 import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm'
+import PersonWithNeedInfoForm from './PersonWithNeedInfoForm'
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
@@ -16,6 +16,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import RelationForm from './RelationForm';
 import SpecialNeeds from './SpecialNeeds';
+import NeedsForm from './NeedsForm';
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 var fieldValues = {
@@ -28,7 +29,12 @@ var fieldValues = {
     person: {                   // Person object
         pnr: null,                  // String
         name: null,                 // String
-        address: null,              // String or object?
+        address: {                  // Address Object
+            country: null,              // String
+            streetAddress: null,        // String
+            zipcode: null,              // String
+            postal: null                // String
+        },
         telephone: null             // String
     },
     // Fourth form
@@ -55,7 +61,7 @@ export default class Application extends React.Component {
         this.saveValues = this.saveValues.bind(this);
         this.previousStep = this.previousStep.bind(this);
     }
-    
+
     onChildChange(others) {
         this.setState({
             writesForOthers: others,
@@ -64,7 +70,8 @@ export default class Application extends React.Component {
     }
 
     saveValues(field_value) {
-        fieldValues = assign({}, fieldValues, field_value)
+        fieldValues = assign({}, fieldValues, field_value);
+        console.log(fieldValues);
     }
 
     previousStep(step) {
@@ -113,30 +120,32 @@ export default class Application extends React.Component {
                 break;
             case 2:
                 content =
-                    <div>
-                        <p> TESTVIEW 2 </p>
-                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
-                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
-                        <Button onClick={this.nextStep.bind(null, 2)}> Last page </Button>
-                    </div>;
+                    <PersonWithNeedInfoForm fieldValues={fieldValues}
+                                            nextStep={this.nextStep.bind(null, 1)}
+                                            previousStep={this.previousStep.bind(null, 1)}
+                                            saveValues={this.saveValues}/>;
                 break;
             case 3:
                 content =
-                    <div>
-                        <p> TESTVIEW 3 </p>
-                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
-                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
-                    </div>;
+                    <RelationForm fieldValues={fieldValues}
+                                  nextStep={this.nextStep.bind(null, 1)}
+                                  previousStep={this.previousStep.bind(null, 1)}
+                                  saveValues={this.saveValues}/>;
                 break;
             case 4:
                 content =
-                    <div>
-                        <p> TESTVIEW 4 </p>
-                        <Button onClick={this.previousStep.bind(null, 3)}> First page </Button>
-                        <Button onClick={this.previousStep.bind(null, 1)}> Previous </Button>
-                        <Button onClick={this.nextStep.bind(null, 1)}> Next </Button>
-                    </div>;
+                    <WhosSearching fieldValues={fieldValues}
+                                   nextStep={this.nextStep.bind(null, 1)}
+                                   previousStep={this.previousStep.bind(null, 0)}
+                                   saveValues={this.saveValues}/>;
                 break;
+            
+            case 5:
+                content =
+                    <NeedsForm fieldValues={fieldValues}
+                                   nextStep={this.nextStep.bind(null, 1)}
+                                   previousStep={this.previousStep.bind(null, 0)}
+                                   saveValues={this.saveValues}/>;
 
             /*
              content = <
@@ -164,7 +173,7 @@ export default class Application extends React.Component {
              saveValues={this.saveValues}
              submitRegistration={this.handleSubmit}/>;
              break; */
-                
+
         }
 
         return (
