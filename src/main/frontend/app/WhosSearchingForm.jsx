@@ -10,8 +10,8 @@ var Button = require('react-bootstrap/lib/Button');
 
 export default class WhosSearching extends React.Component {
     handleClickMe() {
-        console.log("State 5")
-        return (this.props.nextStep(5));
+        console.log("State 6")
+        return (this.props.nextStep(6));
     }
 
     handleClickOther() {
