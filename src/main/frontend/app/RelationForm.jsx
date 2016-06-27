@@ -29,10 +29,10 @@ export default class RelationForm extends React.Component{
     render() {
         var content = <p/>;
         if(this.state.value=="guardian"){
-            content = <div><p>Navnet på den du er verge for</p><DropdownList id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
+            content = <div><p>Navnet på den du er verge for</p><DropdownList id="1" options={[{name: "Velg..."}, {name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
         }
         else if(this.state.value=="family"){
-                content = <div><DropdownList id="1" options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
+                content = <div><DropdownList id="1" options={[{name: "Velg..."},{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
                     <Checkbox>
                     Registrer meg som pårørende
                 </Checkbox>
