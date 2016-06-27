@@ -90,7 +90,7 @@ export class Form extends React.Component {
                     else if (field.type =="TextArea"){
                         return (
                             <Row className="form-row">
-                                <Col sm={3} md={3}>
+                                <Col sm={2} md={2}>
                                     <label>{field.name} </label>
                                 </Col>
                                 <TextArea key={i} text={field.name}/>

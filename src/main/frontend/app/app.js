@@ -11,6 +11,7 @@ import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
 import SpecialNeeds from './SpecialNeeds.jsx';
 
+
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
