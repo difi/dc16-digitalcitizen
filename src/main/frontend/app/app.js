@@ -6,8 +6,11 @@ import reducers from './reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Application } from './Application.jsx';
+//import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
+import Buttons from './buttons.jsx';
+import SpecialNeeds from './SpecialNeeds.jsx';
+
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -16,39 +19,58 @@ var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
 
 var dataMe = [
-    {name: "Fødselnr", type: "TextField"},
+    {name: "Fødselsnr.", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
+<<<<<<< HEAD
     {name: "Adresse", type: "TextField"},
     {name: "Sivilstatus", type: "Dropdown"},
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}];
+=======
+    {name: "Telefon", type: "TextField"},
+    {name: "Adresse", type: "AddressField", includeCountry: false},
+    {name: "Nasjonalitet", type: "Dropdown"},
+    {name: "Sivilstatus", type: "Dropdown"},
+    {name: "Fastlege", type: "AutoComplete", data: fastleger}
+    ];
+>>>>>>> refs/remotes/origin/citizen_0.2
 
 var dataApplicant = [
-    {name: "Adresse", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "E-post", type: "TextField"},
+    {name: "Telefon", type: "TextField"},
+    {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"}];
 
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
-    {name: "Adresse", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
-    {name: "Postnr", type: "TextField"},
     {name: "Telefon", type: "TextField"},
+<<<<<<< HEAD
     {name: "Relasjon", type: "Dropdown"},
     {name: "Ønsker du å legge til pårørende?", type: "RadioButton"}];
+=======
+    {name: "Adresse", type: "AddressField", includeCountry: true},
+    {name: "Relasjon", type: "Dropdown"}];
+>>>>>>> refs/remotes/origin/citizen_0.2
+
+
+var dataWhy = [
+    {name: "Hvorfor søker du plass?", type:"TextArea"},
+    {name: "Hva er det du trenger hjelp med i hverdagen?", type:"TextArea"}
+]
 
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
-    {formname: "Om pårørende", data: dataDep}];
+    {formname: "Om pårørende", data: dataDep},
+    {formname: "Hvorfor du søker", data: dataWhy}
+];
 
 
 ReactDOM.render( <Provider store={store}>
-    <Application data={data} />
+    <SpecialNeeds />
 </Provider>, document.getElementById('content'));
 

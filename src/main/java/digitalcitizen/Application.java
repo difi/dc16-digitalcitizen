@@ -18,6 +18,7 @@ public class Application {
 
     @RequestMapping("/api/hello")
     public Map<String, String> hello() {
+        System.out.println("hello");
         return ImmutableMap.of(
                 "name", "World",
                 "counter", Long.toString(counter.getAndIncrement()),
