@@ -13,11 +13,14 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-import WhosSearching from './WhosSearchingForm.jsx';
+import WhosSearching from './WhosSearchingForm';
 import RelationForm from './RelationForm';
-import PersonWithNeed from './PersonWithNeedForm.jsx';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm.jsx'
+import PersonWithNeed from './PersonWithNeedForm';
+import PersonWithNeedInfo from './PersonWithNeedInfoForm';
+import GeneralPractitioner from './GeneralPractitioner';
+import NeedsForm from './NeedsForm';
 import SpecialNeeds from './SpecialNeeds';
+
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 var fieldValues = {

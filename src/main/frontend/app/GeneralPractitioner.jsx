@@ -7,15 +7,19 @@ import TypeAhead from './AutoComplete';
 export default class GeneralPractitioner extends React.Component {
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
-        return(
-            <Row className="form-row">
-                <Col sm={1.5} md={1}>
-                    <label>Fastlege</label>
-                </Col>
-                <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
-                <Col sm={3} md={3}>
-                </Col>
-            </Row>);
+        return (
+            <componentClass>
+                <label className="form-header">Velg søkers fastlege</label>
+                <Row className="form-row">
+                    <Col sm={2} md={1}>
+                        <label>Fastlege</label>
+                    </Col>
+                    <Col sm={5} md={6}>
+                        <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
+                    </Col>
+                    <Col sm={6} md={7}></Col>
+                </Row>
+            </componentClass>
+        );
     }
 }
-

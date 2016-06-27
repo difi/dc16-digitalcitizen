@@ -8,33 +8,33 @@ var RadioGroup = require('react-radio-group');
 export default class NeedsForm extends React.Component {
     constructor() {
         super();
-        this.handleChange=this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
             value: null
         }
     }
 
-    
-    handleChange(r){
+
+    handleChange(r) {
         this.setState({
             value: r
         });
     }
 
     render() {
-        return(
-            <div>
-                <p> Skøker du om kortidsopphold eller langtidsopphold? </p>
+        return (
+            <componentClass>
+                <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
                 <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
                     {Radio => (
                         <div>
-                            <Radio value="shortStay" /> Kortidsopphold
+                            <Radio value="shortStay"/> Kortidsopphold
                             <br/>
-                            <Radio value="longStay" /> Langtidsopphold
+                            <Radio value="longStay"/> Langtidsopphold
                         </div>
                     )}
                 </RadioGroup>
-            </div>
-            )
+            </componentClass>
+        )
     }
 }
