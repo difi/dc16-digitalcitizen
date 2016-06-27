@@ -8,15 +8,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+
 import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
+import GeneralPractitioner from './GeneralPractitioner.jsx';
 
-import WhosSearching from './WhosSearchingForm.jsx';
-import RelationForm from './RelationForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm.jsx';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm.jsx'
-import SpecialNeeds from './SpecialNeeds.jsx';
 
 
 const reducer = combineReducers(reducers);
@@ -69,28 +66,3 @@ var data = [
 ReactDOM.render( <Provider store={store}>
     <Application />
 </Provider>, document.getElementById('content'));
-
-
-/*
- ReactDOM.render( <Provider store={store}>
- <RelationForm />
- </Provider>, document.getElementById('content'));
- */
-
-/*
- ReactDOM.render( <Provider store={store}>
- <PersonWithNeed />
- </Provider>, document.getElementById('content'));
- */
-
-/*
- ReactDOM.render( <Provider store={store}>
- <PersonWithNeedInfo />
- </Provider>, document.getElementById('content'));
- */
-
-/*
- ReactDOM.render( <Provider store={store}>
- <SpecialNeeds />
- </Provider>, document.getElementById('content'));
- */
