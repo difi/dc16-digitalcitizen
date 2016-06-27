@@ -107,7 +107,7 @@ var AddressField = React.createClass({
             );
         } else {
             return (
-            <Col sm={7.5} md={8}>
+                <div>
                 <Row className="form-row-address">
                     <Col sm={12} md={12}>
                         <FormControl
@@ -133,7 +133,7 @@ var AddressField = React.createClass({
                             disabled/>
                     </Col>
                 </Row>
-            </Col>
+                    </div>
             );
         }
     }
