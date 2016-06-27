@@ -18,6 +18,8 @@ import RelationForm from './RelationForm';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
 import GeneralPractitioner from './GeneralPractitioner';
+import PersonWithNeedForm from './PersonWithNeedForm';
+import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
 
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -76,15 +78,16 @@ export default class Application extends React.Component {
         fieldValues = assign({}, fieldValues, field_value)
     }
 
-    previousStep() {
+    previousStep(step) {
         this.setState({
-            step: this.state.prevStep
+            step: step
         })
     }
 
     nextStep(step) {
         this.setState({
-            step: this.state.step + step
+            prevStep: this.state.step,
+            step: step
         })
     }
 
@@ -161,9 +164,6 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
 
-
-
-                     
                 break;
 
             /*
@@ -199,7 +199,7 @@ export default class Application extends React.Component {
             <div>
                 {header}
                 {content}
-                <Button onClick={this.handleSubmit}> Submit form </Button>
+                <Button onClick={this.handleSubmit} visible={false}> Submit form </Button>
             </div>
         )
     }
