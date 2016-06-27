@@ -50,41 +50,46 @@ export default class PersonWithNeed extends React.Component {
         return (
             <componetnClass>
                 <label className="form-header">Informasjon om person med behov</label>
-                <Row className="form-row">
-                    <Col sm={5} md={2}>
-                        <label>Fødselsnummer</label>
-                    </Col>
-                    <Col sm={7} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder="Fødselsnummer"
-                            defaultValue={this.props.fieldValues.person.pnr}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={0} md={5}></Col>
-                </Row>
-                <Row className="form-row">
-                    <Col sm={5} md={2}></Col>
-                    <Col sm={7} md={5}>
-                        <input type="checkbox" name="noPno" checked={this.state.isChecked} onChange={this.handlePno}/> Jeg kan ikke
-                        fødselsnummeret
-                    </Col>
+                <div className="form-container">
+                    <Row className="form-row">
+                        <Col sm={5} md={2}>
+                            <label>Fødselsnummer</label>
+                        </Col>
+                        <Col sm={7} md={5}>
+                            <FormControl
+                                type="text"
+                                placeholder="Fødselsnummer"
+                                defaultValue={this.props.fieldValues.person.pnr}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={0} md={5}></Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sm={5} md={2}></Col>
+                        <Col sm={7} md={5}>
+                            <input type="checkbox" name="noPno" checked={this.state.isChecked}
+                                   onChange={this.handlePno}/> Jeg kan ikke
+                            fødselsnummeret
+                        </Col>
 
-                    <Col sm={0} md={5}></Col>
-                </Row>
-                <Row className="form-row-name">
-                    <Col sm={5} md={2}>
-                        <label>Navn</label>
-                    </Col>
-                    <Col sm={7} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder="Navn"
-                            defaultValue={this.props.fieldValues.person.name}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={0} md={5}></Col>
-                </Row>
+                        <Col sm={0} md={5}></Col>
+                    </Row>
+                    <Row className="form-row-name">
+                        <Col sm={5} md={2}>
+                            <label>Navn</label>
+                        </Col>
+                        <Col sm={7} md={5}>
+                            <FormControl
+                                type="text"
+                                placeholder="Navn"
+                                defaultValue={this.props.fieldValues.person.name}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={0} md={5}></Col>
+                    </Row>
+                </div>
+
+
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;

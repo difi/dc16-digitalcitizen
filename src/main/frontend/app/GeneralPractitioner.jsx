@@ -28,15 +28,18 @@ export default class GeneralPractitioner extends React.Component {
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
+                <div className="form-container">
                 <Row className="form-row">
-                    <Col sm={2} md={1}>
+                    <Col sm={5} md={2}>
                         <label>Fastlege</label>
                     </Col>
-                    <Col sm={5} md={6}>
+                    <Col sm={5} md={5}>
                         <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
                     </Col>
-                    <Col sm={6} md={7}></Col>
+                    <Col md={7}></Col>
                 </Row>
+                </div>
+
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;

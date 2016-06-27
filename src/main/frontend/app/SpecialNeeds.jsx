@@ -42,7 +42,7 @@ export default class SpecialNeeds extends React.Component {
                     <Col sm={4} md={3}>
                         <label>{field} </label>
                     </Col>
-                    <Col sm={5} md={6}>
+                    <Col sm={5} md={5}>
                         <TextArea ref="testarea" value="hello"/>
                     </Col>
                     <Col sm={3} md={3}>
@@ -52,7 +52,10 @@ export default class SpecialNeeds extends React.Component {
         });
         return (
             <div>
-                {fieldsForm}
+                <label className="form-header">Har du noen spessielle behov?</label>
+                <div className="form-container">
+                    {fieldsForm}
+                    </div>
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;

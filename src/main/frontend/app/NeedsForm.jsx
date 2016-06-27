@@ -13,30 +13,29 @@ export default class NeedsForm extends React.Component {
         this.state = {
             value: null
         };
-            this.handleClickBack = this.handleClickBack.bind(this);
-            this.handleClickNext = this.handleClickNext.bind(this);
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
+    }
+
+    handleClickBack() {
+        if (this.props.fieldValues.isApplyingForSelf) {
+            this.props.previousStep(1);
+        }
+        else if (this.props.fieldValues.adress == null) {
+            this.props.previousStep(3);
+        }
+        else {
+            this.props.previousStep(5);
         }
 
-        handleClickBack() {
-            if( this.props.fieldValues.isApplyingForSelf){
-                this.props.previousStep(1);
-            }
-            else if( this.props.fieldValues.adress==null){
-                this.props.previousStep(3);
-            }
-            else{
-                this.props.previousStep(5);
-            }
+    }
 
-        }
+    handleClickNext() {
 
-        handleClickNext() {
+        console.log("State 6");
+        this.props.nextStep(7);
 
-            console.log("State 6");
-            this.props.nextStep(7);
-
-        }
-
+    }
 
 
     handleChange(r) {
@@ -49,15 +48,18 @@ export default class NeedsForm extends React.Component {
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
-                <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
-                    {Radio => (
-                        <div>
-                            <Radio value="shortStay"/> Kortidsopphold
-                            <br/>
-                            <Radio value="longStay"/> Langtidsopphold
-                        </div>
-                    )}
-                </RadioGroup>
+                <div className="form-container">
+                    <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
+                        {Radio => (
+                            <div>
+                                <Radio value="shortStay"/> Kortidsopphold
+                                <br/>
+                                <Radio value="longStay"/> Langtidsopphold
+                            </div>
+                        )}
+                    </RadioGroup>
+                </div>
+
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
