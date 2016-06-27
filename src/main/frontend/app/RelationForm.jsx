@@ -12,7 +12,7 @@ export default class RelationForm extends React.Component{
         super();
         this.handleChange=this.handleChange.bind(this);
         this.state = {
-            value: null,
+            value: this.props.fieldValues.relation,
             verger: null
         }
     }
@@ -28,18 +28,19 @@ export default class RelationForm extends React.Component{
     }
     render() {
         var content = <p/>;
+        //Decides content based on checked radio button
         if(this.state.value=="guardian"){
-            content = <div><p>Navnet på den du er verge for</p><DropdownList id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
+            content = <div><p>Navnet på den du er verge for</p><DropdownList defaultValue ={this.props.fieldValues.guardianName} id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
         }
         else if(this.state.value=="family"){
-                content = <div><DropdownList id="1" options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
-                    <Checkbox>
+                content = <div><DropdownList id="1" defaultValue = {this.props.fieldValues.familyRelation} options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
+                    <Checkbox checked={this.props.fieldValues.isDependent}>
                     Registrer meg som pårørende
                 </Checkbox>
                 </div>
             }
         else if(this.state.value=="other"){
-            content =  <Checkbox>
+            content =  <Checkbox checked={this.props.fieldValues.isDependent}>
                 Registrer meg som pårørende
             </Checkbox>
 

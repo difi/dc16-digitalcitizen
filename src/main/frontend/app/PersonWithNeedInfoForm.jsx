@@ -38,6 +38,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Navn"
+                            defaultValue={this.props.fieldValues.person.name}
                             onChange={this.handleChange}/>
                     </Col>
                     <Col sm={6} md={7}></Col>
@@ -60,6 +61,7 @@ export default class PersonWithNeed extends React.Component {
                     <Col sm={4.5} md={5}>
                         <FormControl
                             type="text"
+                            defaultValue={this.props.fieldValues.person.telephone}
                             placeholder="Telefonnr"
                             onChange={this.handleChange}/>
                     </Col>

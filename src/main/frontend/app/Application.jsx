@@ -17,6 +17,33 @@ import RelationForm from './RelationForm';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
 
+var fieldValues = {
+    // First form
+    isApplyingForSelf: null,    // Boolean
+    // Second form
+    relation: null,             // String
+    guardianName: null,          //String
+    familyRelation: null,        //String
+    isDependent: null,          // Boolean
+    // Third form
+    person: {                   // Person object
+        pnr: null,                  // String
+        name: null,                 // String
+        address: null,              // String or object?
+        telephone: null             // String
+    },
+    // Fourth form
+    doctor: {                   // Doctor Object (add more fields?)
+        name: null                  // String
+    },
+    // Fifth form
+    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: null,         // String
+    // Seventh form
+    specialNeeds: null,         // String
+    needsInterpreter: null      // Boolean
+};
 
 export default class Application extends React.Component {
     constructor() {
@@ -77,7 +104,7 @@ export default class Application extends React.Component {
         var content;
         switch (this.state.step) {
             case 1:
-                content = <p Hallooo
+                content = < WhosSearching
                     nextStep={this.nextStep.}
                     saveValues={this.saveValues}/>;
                 break;
@@ -87,12 +114,12 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
-                content = <
+                content = <PersonWithNeedForm
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 4:
-                content = <
+                content = <PersonWithNeedInfoForm
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
