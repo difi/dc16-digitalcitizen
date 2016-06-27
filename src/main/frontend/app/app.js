@@ -9,7 +9,7 @@ import $ from 'jquery';
 //import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
-import SpecialNeeds from './SpecialNeeds.jsx';
+import GeneralPractitioner from './GeneralPractitioner.jsx';
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -58,6 +58,6 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
-    <SpecialNeeds />
+    <GeneralPractitioner />
 </Provider>, document.getElementById('content'));
 
