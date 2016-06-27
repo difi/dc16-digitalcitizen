@@ -28,7 +28,7 @@ export default class RelationForm extends React.Component{
     handleClickNext() {
 
             console.log("State 3")
-            this.props.nextStep(4);
+            this.props.nextStep(3);
 
     }
 

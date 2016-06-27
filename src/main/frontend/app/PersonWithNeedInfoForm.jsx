@@ -12,7 +12,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 
 
-export default class PersonWithNeed extends React.Component {
+export default class PersonWithNeedInfo extends React.Component {
     constructor() {
         super()
         this.handleClickBack = this.handleClickBack.bind(this);
