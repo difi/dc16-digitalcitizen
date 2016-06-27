@@ -1,5 +1,8 @@
-
 import React from 'react';
+
+var Col = require('react-bootstrap/lib/Col');
+var FormControl = require('react-bootstrap/lib/FormControl');
+
 
  var TextField = React.createClass( {
     //Sets initial state of textfields to a given text
@@ -13,13 +16,15 @@ import React from 'react';
     render: function() {
 
         return (
-            <input
-                type="text"
-                value={this.state.value}
-                onChange={this.handleChange}
-            />
+            <Col sm={7.5} md={8}>
+                <FormControl
+                    type="text"
+                    placeholder={this.state.value}
+                    onChange={this.handleChange}/>
+            </Col>
         );
     }
 });
 
 export default TextField;
+
