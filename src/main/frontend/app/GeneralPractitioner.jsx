@@ -1,56 +1,40 @@
 import React from 'react';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-import TextArea from './TextArea';
+require('!style!css!less!./Application.less');
+import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM= require('react-dom');
-
-export default class SpecialNeeds extends React.Component {
+export default class GeneralPractitioner extends React.Component {
     constructor() {
-        super()
+        super();
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
     handleClickBack() {
-        console.log("State 6");
-        (this.props.previousStep(6));
+        console.log("State 4");
+        this.props.previousStep(4);
     }
 
     handleClickNext() {
 
-        console.log("State 7");
-        this.props.nextStep(7);
+        console.log("State 6");
+        this.props.nextStep(6);
 
-    }
-    nextStep() {
-        // Get values via this.refs
-        var data = {
-            relation     : ReactDOM.findDOMNode(this.refs.testarea).children[0].value
-        };
-        this.props.saveValues(data);
-        this.props.nextStep();
-        console.log(data);
     }
 
     render() {
-        var fields = ["Har du noen medisinke behov vi burde vite om", "Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått", "Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l"];
-        var fieldsForm = fields.map(function (field, i) {
-
-            return (
+        var fastleger = ["Ola Nordmann", "Kari Nordmann"];
+        return (
+            <div>
                 <Row className="form-row">
-                    <Col sm={3} md={3}>
-                        <label>{field} </label>
+                    <Col sm={1.5} md={1}>
+                        <label>Fastlege</label>
                     </Col>
-                    <TextArea ref="testarea" value="hello"/>
+                    <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
                     <Col sm={3} md={3}>
                     </Col>
                 </Row>
-            )
-        });
-        return (
-            <div>
-                {fieldsForm}
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
@@ -63,8 +47,7 @@ export default class SpecialNeeds extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
-            </div>
-        );
+            </div>);
     }
-
 }
+

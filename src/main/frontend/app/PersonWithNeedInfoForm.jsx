@@ -13,18 +13,27 @@ var Button = require('react-bootstrap/lib/Button');
 
 
 export default class PersonWithNeed extends React.Component {
+    constructor() {
+        super()
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
+    }
+
     handleClickBack() {
-        console.log("State 3")
-        return (this.props.nextStep(3));
+        console.log("State 3");
+        (this.props.previousStep(3));
     }
 
     handleClickNext() {
-        console.log("State 5")
-        return (this.props.nextStep(5));
+
+        console.log("State 5");
+        this.props.nextStep(5);
+
     }
-    
+
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({
+            value: event.target.value});
     }
 
     render() {
@@ -38,6 +47,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Navn"
+                            defaultValue={this.props.fieldValues.person.name}
                             onChange={this.handleChange}/>
                     </Col>
                     <Col sm={6} md={7}></Col>
@@ -47,7 +57,7 @@ export default class PersonWithNeed extends React.Component {
                         <label>Folkeregistrert adresse</label>
                     </Col>
                     <Col sm={4.5} md={5}>
-                        <AddressField includeCountry={false} />
+                        <AddressField includeCountry={false}/>
                     </Col>
                     <Col sm={1} md={1}>
                     </Col>
@@ -60,6 +70,7 @@ export default class PersonWithNeed extends React.Component {
                     <Col sm={4.5} md={5}>
                         <FormControl
                             type="text"
+                            defaultValue={this.props.fieldValues.person.telephone}
                             placeholder="Telefonnr"
                             onChange={this.handleChange}/>
                     </Col>
@@ -79,6 +90,7 @@ export default class PersonWithNeed extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
+
             </div>
         )
     }

@@ -6,9 +6,10 @@ import reducers from './reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-//import Application from './Application.jsx';//
+import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
+<<<<<<< HEAD
 import SpecialNeeds from './SpecialNeeds.jsx';
 import PersonWithNeed from './PersonWithNeedForm.jsx';
 import RelationForm from './RelationForm.jsx';
@@ -16,6 +17,9 @@ import AddRelation from './AddRelations.jsx';
 import WhosSearching from './WhosSearchingForm.jsx';
 import Forms from './Form.jsx';
 import AddRelationsToForm from './AddRelationsForm.jsx';
+=======
+import GeneralPractitioner from './GeneralPractitioner.jsx';
+>>>>>>> refs/remotes/origin/citizen_0.2
 
 
 const reducer = combineReducers(reducers);
@@ -65,5 +69,11 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
+<<<<<<< HEAD
     <Forms />
     </Provider>, document.getElementById('content'));
+=======
+    <Application />
+</Provider>, document.getElementById('content'));
+
+>>>>>>> refs/remotes/origin/citizen_0.2
