@@ -104,6 +104,7 @@ export default class RelationForm extends React.Component{
                         <FormControl
                             type="text"
                             placeholder="Relasjon"
+                            required
                             onChange={this.handleTextChange}/>
                     </Col>
                     <Col sm={7.5} md={7}></Col>

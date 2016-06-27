@@ -12,7 +12,7 @@ export function CheckInteger(value) {
         return 'Must be an integer';
     }
 }
-export function CheckPersonalnumberNo( pno ) {
+export function checkPersonalnumberNo( pno ) {
     // Check length
     if( pno.length != 11 )
         return false;

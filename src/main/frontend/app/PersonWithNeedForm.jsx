@@ -10,6 +10,12 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var Formsy = require('formsy-react');
 var checked = false;
+import TextField from './TextField';
+import checkPersonalnumberNo from './validation';
+
+Formsy.addValidationRule("isPnr", (values, value) =>{
+    return checkPersonalnumberNo(value);
+});
 
 export default class PersonWithNeed extends React.Component {
     constructor() {
@@ -56,9 +62,11 @@ export default class PersonWithNeed extends React.Component {
                         <label>Fødselsnummer</label>
                     </Col>
                     <Col sm={7} md={5}>
-                        <FormControl
+                        <TextField
                             type="text"
                             placeholder="Fødselsnummer"
+                            validations="isPnr"
+                            validationError="Vennligst oppgi gyldig person-nummer"
                             defaultValue={this.props.fieldValues.person.pnr}
                             onChange={this.handleChange}/>
                     </Col>
