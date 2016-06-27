@@ -3,7 +3,7 @@ import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
 import dropdownContent from './dropdown-list-content.js';
-import RadioButtons from './RadioButtons2.jsx';
+//import RadioButtons from './RadioButtonRelations.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -78,7 +78,6 @@ export class Form extends React.Component {
                             </div>
                         );
                     }
-
                 })}
             </div>
         );

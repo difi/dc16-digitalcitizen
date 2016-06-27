@@ -5,7 +5,7 @@ import $ from 'jquery';
 import { Form } from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
-
+import RadioButtonClickRelation from './RadioButtons.jsx';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 
@@ -44,11 +44,9 @@ export class Application extends React.Component{
                         )}
                     })}
                 </Row>
-
                     <button type="submit" onClick={this.handleSubmit}> Submit
                     </button>
             </form>
-
         )
     }
 };

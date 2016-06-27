@@ -23,7 +23,6 @@ var dataMe = [
     {name: "Sivilstatus", type: "Dropdown"},
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "E-post", type: "TextField"},
-    {name: "Bor sammen med", type: "RadioButton"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger}];
 
 var dataApplicant = [
@@ -40,7 +39,8 @@ var dataDep = [
     {name: "Postnr", type: "TextField"},
     {name: "Postnr", type: "TextField"},
     {name: "Telefon", type: "TextField"},
-    {name: "Relasjon", type: "Dropdown"}];
+    {name: "Relasjon", type: "Dropdown"},
+    {name: "Ønsker du å legge til pårørende?", type: "RadioButton"}];
 
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
