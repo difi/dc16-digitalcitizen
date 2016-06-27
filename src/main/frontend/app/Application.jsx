@@ -4,22 +4,23 @@ import React from 'react';
 import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
 require('!style!css!less!./Application.less');
-import RadioButtonClick from './unused/RadioButtons.jsx';
+
 var assign = require('object-assign');
-import WhosSearching from './WhosSearchingForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm'
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+
+import WhosSearching from './WhosSearchingForm';
 import RelationForm from './RelationForm';
-import SpecialNeeds from './SpecialNeeds';
-import NeedsForm from'./NeedsForm';
-import GeneralPractitioner from './GeneralPractitioner';
 import PersonWithNeedForm from './PersonWithNeedForm';
 import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
+import GeneralPractitioner from './GeneralPractitioner';
+import SpecialNeeds from './SpecialNeeds';
+import NeedsForm from'./NeedsForm';
+
+
 
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -52,6 +53,7 @@ var fieldValues = {
     needsInterpreter: null      // Boolean
 };
 
+
 export default class Application extends React.Component {
 
     constructor() {
@@ -63,6 +65,7 @@ export default class Application extends React.Component {
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
         this.previousStep = this.previousStep.bind(this);
+
     }
     
     onChildChange(others) {
