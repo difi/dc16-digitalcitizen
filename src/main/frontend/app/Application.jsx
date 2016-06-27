@@ -11,13 +11,16 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import RelationForm from './RelationForm';
+import SpecialNeeds from './SpecialNeeds';
+import NeedsForm from'./NeedsForm';
 
 
 export default class Application extends React.Component {
     constructor() {
         super();
         this.state = {
-            step: 1
+            step: 1,
+            prevStep: 1
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues=this.saveValues.bind(this);
@@ -27,18 +30,19 @@ export default class Application extends React.Component {
 
     nextStep(step) {
         this.setState({
+            prevStep: this.state.step,
             step: this.state.step + step
         })
     }
 
-    saveValues(data) {
+        saveValues(data) {
 
 
     }
 
-    previousStep(step) {
+    previousStep() {
         this.setState({
-            step: this.state.step - step
+            step: this.state.prevStep
         })
     }
 
@@ -71,7 +75,7 @@ export default class Application extends React.Component {
         switch (this.state.step) {
             case 1:
                 content = <p Hallooo
-                    nextStep={this.nextStep}
+                    nextStep={this.nextStep.}
                     saveValues={this.saveValues}/>;
                 break;
             case 2:
@@ -95,12 +99,12 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
-                content = <
+                content = < NeedsForm
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
-                content = <
+                content = < SpecialNeeds
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
