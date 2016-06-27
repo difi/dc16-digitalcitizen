@@ -73,7 +73,7 @@ export class Form extends React.Component {
                     else if (field.type == "RadioButton") {
                         return (
                             <div>
-                                <label>{field.name}: </label>
+                                <label>{field.name}:</label>
                                 <RadioButtons/>
                             </div>
                         );
