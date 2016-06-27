@@ -5,15 +5,17 @@ import $ from 'jquery';
 import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
+
 import WhosSearching from './WhosSearchingForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfo from './PersonWithNeedInfoForm'
+import RelationForm from './RelationForm.jsx';
+import PersonWithNeed from './PersonWithNeedForm.jsx';
+import PersonWithNeedInfo from './PersonWithNeedInfoForm.jsx'
+import SpecialNeeds from './SpecialNeeds.jsx';
 
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-import RelationForm from './RelationForm';
 
 
 export default class Application extends React.Component {
@@ -23,8 +25,8 @@ export default class Application extends React.Component {
             step: 1
         };
         this.nextStep = this.nextStep.bind(this);
-        this.saveValues=this.saveValues.bind(this);
-        this.previousStep=this.saveValues.bind(this);
+        this.saveValues = this.saveValues.bind(this);
+        this.previousStep = this.saveValues.bind(this);
     }
 
 
@@ -70,49 +72,53 @@ export default class Application extends React.Component {
     render() {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
-        var content;
-        switch (this.state.step) {
-            case 1:
-                content = <p Hallooo
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 2:
-                content = <RelationForm
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 3:
-                content = <
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 4:
-                content = <
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 5:
-                content = <
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 6:
-                content = <
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
-                break;
-            case 7:
-                content = <
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    submitRegistration={this.handleSubmit}/>;
-                break;
-        }
+        /*var content;
+         switch (this.state.step) {
+         case 1:
+         content = <p Hallooo
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 2:
+         content = <RelationForm
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 3:
+         content = <
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 4:
+         content = <
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 5:
+         content = <
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 6:
+         content = <
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}/>;
+         break;
+         case 7:
+         content = <
+         nextStep={this.nextStep}
+         saveValues={this.saveValues}
+         submitRegistration={this.handleSubmit}/>;
+         break;
+         }*/
 
         return (
-            {header},
-            {content}
+            /*{header},
+             {content} */
+            <componentClass>
+                <PageHeader>Søk sykehjemsplass</PageHeader>
+                <PersonWithNeedInfo/>
+            </componentClass>
         )
     }
 }
