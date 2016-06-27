@@ -13,25 +13,27 @@ var checked = false;
 
 export default class PersonWithNeed extends React.Component {
     constructor() {
-        super()
+        super();
         this.state = {
             isChecked: false
-        }
+        };
         this.handlePno = this.handlePno.bind(this);
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
     }
 
     handleClickBack() {
-        console.log("State 2")
-        return (this.props.nextStep(2));
+        console.log("State 2");
+        (this.props.previousStep(2));
     }
 
     handleClickNext() {
         if (checked == false) {
-            console.log("State 5")
-            return (this.props.nextStep(5));
+            console.log("State 6");
+            (this.props.nextStep(6));
         } else if (checked == true) {
-            console.log("State 4")
-            return (this.props.nextStep(4));
+            console.log("State 4");
+            (this.props.nextStep(4));
         }
     }
 
@@ -95,8 +97,7 @@ export default class PersonWithNeed extends React.Component {
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
-                <Button onClick={this.props.previousStep.bind(null, 1)}> Previous </Button>
-                <Button onClick={this.props.nextStep.bind(null, 1)}> Next </Button>
+
             </div>
         )
     }
