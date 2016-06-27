@@ -4,19 +4,33 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var RadioGroup = require('react-radio-group');
+var FormControl = require('react-bootstrap/lib/FormControl');
+var Button = require('react-bootstrap/lib/Button');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-var FormControl = require('react-bootstrap/lib/FormControl');
 
-
-export default class RelationForm extends React.Component {
+export default class RelationForm extends React.Component{
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             value: null,
             verger: null
-        }
+        };
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
+    }
+
+    handleClickBack() {
+        console.log("State 1")
+        (this.props.previousStep(1));
+    }
+
+    handleClickNext() {
+
+            console.log("State 3")
+            this.props.nextStep(3);
+
     }
 
     handleChange(r) {
@@ -32,7 +46,6 @@ export default class RelationForm extends React.Component {
     render() {
         var content = <p/>;
         if (this.state.value == "guardian") {
-            content =
                 <componentClass>
                     <Row className="form-row">
                         <Col sm={5} md={6}>
@@ -103,6 +116,23 @@ export default class RelationForm extends React.Component {
                 </Row>
             </componentClass>
 
+        //Decides content based on checked radio button
+       /* if(this.state.value=="guardian"){
+            content = <div><p>Navnet på den du er verge for</p><DropdownList defaultValue ={this.props.fieldValues.guardianName} id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
+        }
+        else if(this.state.value=="family"){
+                content = <div><DropdownList id="1" defaultValue = {this.props.fieldValues.familyRelation} options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
+                    <Checkbox checked={this.props.fieldValues.isDependent}>
+                    Registrer meg som pårørende
+                </Checkbox>
+                </div>
+            }
+        else if(this.state.value=="other"){
+            content =  <Checkbox checked={this.props.fieldValues.isDependent}>
+                Registrer meg som pårørende
+            </Checkbox>
+*/
+
         }
 
         return (
@@ -121,6 +151,18 @@ export default class RelationForm extends React.Component {
                     )}
                 </RadioGroup>
                 {content}
+                <Row className="back-forward-buttons">
+                    <Col sm={1.5} md={2}>
+                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                            Tilbake</Button>
+                    </Col>
+                    <Col sm={6} md={6}></Col>
+                    <Col sm={1.5} md={2}>
+                        <Button onClick={this.handleClickNext} className="button-next"
+                                bsStyle="success">Neste &rarr;</Button>
+                    </Col>
+                    <Col sm={6} md={2}></Col>
+                </Row>
 
             </componentClass>
 

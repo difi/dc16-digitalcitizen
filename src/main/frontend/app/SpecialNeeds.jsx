@@ -6,7 +6,23 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM= require('react-dom');
 
 export default class SpecialNeeds extends React.Component {
+    constructor() {
+        super()
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
+    }
 
+    handleClickBack() {
+        console.log("State 6");
+        (this.props.previousStep(6));
+    }
+
+    handleClickNext() {
+
+        console.log("State 7");
+        this.props.nextStep(7);
+
+    }
     nextStep() {
         // Get values via this.refs
         var data = {
@@ -37,8 +53,18 @@ export default class SpecialNeeds extends React.Component {
         return (
             <div>
                 {fieldsForm}
-                <Button ref="button" onClick={this.props.previousStep.bind(this)}>Previous</Button>
-                <Button ref="button" onClick={this.nextStep.bind(this)}>Next</Button>
+                <Row className="back-forward-buttons">
+                    <Col sm={1.5} md={2}>
+                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                            Tilbake</Button>
+                    </Col>
+                    <Col sm={6} md={6}></Col>
+                    <Col sm={1.5} md={2}>
+                        <Button onClick={this.handleClickNext} className="button-next"
+                                bsStyle="success">Neste &rarr;</Button>
+                    </Col>
+                    <Col sm={6} md={2}></Col>
+                </Row>
             </div>
         );
     }

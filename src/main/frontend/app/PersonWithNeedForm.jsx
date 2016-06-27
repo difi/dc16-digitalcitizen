@@ -13,25 +13,27 @@ var checked = false;
 
 export default class PersonWithNeed extends React.Component {
     constructor() {
-        super()
+        super();
         this.state = {
             isChecked: false
-        }
+        };
         this.handlePno = this.handlePno.bind(this);
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
     }
 
     handleClickBack() {
-        console.log("State 2")
-        return (this.props.nextStep(2));
+        console.log("State 2");
+        (this.props.previousStep(2));
     }
 
     handleClickNext() {
         if (checked == false) {
-            console.log("State 5")
-            return (this.props.nextStep(5));
+            console.log("State 6");
+            (this.props.nextStep(6));
         } else if (checked == true) {
-            console.log("State 4")
-            return (this.props.nextStep(4));
+            console.log("State 4");
+            (this.props.nextStep(4));
         }
     }
 
@@ -56,6 +58,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Fødselsnummer"
+                            defaultValue={this.props.fieldValues.person.pnr}
                             onChange={this.handleChange}/>
                     </Col>
                     <Col sm={0} md={5}></Col>
@@ -77,6 +80,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Navn"
+                            defaultValue={this.props.fieldValues.person.name}
                             onChange={this.handleChange}/>
                     </Col>
                     <Col sm={0} md={5}></Col>
