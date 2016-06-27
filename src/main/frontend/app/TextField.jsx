@@ -42,7 +42,7 @@ var TextField = React.createClass({
 
         var errorMessage = this.getErrorMessage();
         return (
-            <div classname={className}>
+            <div classname={classname}>
             <Col sm={7.5} md={8}>
                 <FormGroup controlId="formValidationError2" validationState="error">
                     <FormControl
