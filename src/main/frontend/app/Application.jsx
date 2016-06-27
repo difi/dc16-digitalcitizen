@@ -113,36 +113,42 @@ export default class Application extends React.Component {
             case 2:
                 content = <RelationForm
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
                 content = <PersonWithNeedForm
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 5:
                 content = <GeneralPractitioner
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
                 content = < NeedsForm
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
                 content = < SpecialNeeds
                     fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
