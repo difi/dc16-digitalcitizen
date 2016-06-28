@@ -146,6 +146,7 @@ export default class Application extends React.Component {
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
