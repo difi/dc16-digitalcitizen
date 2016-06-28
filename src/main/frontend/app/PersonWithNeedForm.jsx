@@ -39,10 +39,10 @@ export default class PersonWithNeed extends React.Component {
             (this.props.nextStep(4));
         }
     }
-    
-    saveFieldValues(){
+
+    saveFieldValues() {
         var data = {
-            person : { 
+            person: {
                 pnr: ReactDOM.findDOMNode(this.refs.pno).value,
                 name: ReactDOM.findDOMNode(this.refs.name).value,
                 address: this.props.fieldValues.person.address,
@@ -66,54 +66,53 @@ export default class PersonWithNeed extends React.Component {
         return (
             <componetnClass>
                 <label className="form-header">Informasjon om person med behov</label>
-                <Row className="form-row">
-                    <Col sm={5} md={2}>
-                        <label>Fødselsnummer</label>
-                    </Col>
-                    <Col sm={7} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder="Fødselsnummer"
-                            ref="pno"
-                            defaultValue={this.props.fieldValues.person.pnr}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={0} md={5}></Col>
-                </Row>
-                <Row className="form-row">
-                    <Col sm={5} md={2}></Col>
-                    <Col sm={7} md={5}>
-                        <input type="checkbox" name="noPno" checked={this.state.isChecked} onChange={this.handlePno}/> Jeg kan ikke
-                        fødselsnummeret
-                    </Col>
+                <div className="form-container">
+                    <Row className="form-row">
+                        <Col sx={4} md={4}>
+                            <label>Fødselsnummer</label>
+                        </Col>
+                        <Col sx={8} md={8}>
+                            <FormControl
+                                type="text"
+                                placeholder="Fødselsnummer"
+                                ref="pno"
+                                defaultValue={this.props.fieldValues.person.pnr}
+                                onChange={this.handleChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sx={4} md={4}></Col>
+                        <Col sx={8} md={8}>
+                            <input type="checkbox" name="noPno" checked={this.state.isChecked}
+                                   onChange={this.handlePno}/> Jeg kan ikke
+                            fødselsnummeret
+                        </Col>
+                    </Row>
+                    <Row className="form-row-name">
+                        <Col sx={4} md={4}>
+                            <label>Navn</label>
+                        </Col>
+                        <Col sx={8} md={8}>
+                            <FormControl
+                                type="text"
+                                placeholder="Navn"
+                                ref="name"
+                                defaultValue={this.props.fieldValues.person.name}
+                                onChange={this.handleChange}/>
+                        </Col>
+                    </Row>
+                </div>
 
-                    <Col sm={0} md={5}></Col>
-                </Row>
-                <Row className="form-row-name">
-                    <Col sm={5} md={2}>
-                        <label>Navn</label>
-                    </Col>
-                    <Col sm={7} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder="Navn"
-                            ref="name"
-                            defaultValue={this.props.fieldValues.person.name}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={0} md={5}></Col>
-                </Row>
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
             </componetnClass>
         )
