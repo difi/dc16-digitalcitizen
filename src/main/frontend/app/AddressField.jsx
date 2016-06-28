@@ -9,161 +9,159 @@ var ReactDOM = require('react-dom');
 
 var AddressField = React.createClass({
 
-        propTypes: {
-            includeCountry: React.PropTypes.bool
-        },
+    propTypes: {
+        includeCountry: React.PropTypes.bool
+    },
 
-        getDefaultProps: function () {
-            return {includeCountry: true};
-        },
+    getDefaultProps: function () {
+        return {includeCountry: true};
+    },
 
-        getInitialState: function () {
-            return {value: '', municipality: '', country: 'NO', street: ''};
-        },
+    getInitialState: function () {
+        return {value: '', municipality: '', country: 'NO', street: ''};
+    },
 
-        /**Makes a call to the Bring API with the postal code given by the user
-         * in order to retrieve the corresponding municipality
-         *
-         * @param event
-         */
-        handleChange: function (event) {
-            this.setState({value: event.target.value});
+    /**Makes a call to the Bring API with the postal code given by the user
+     * in order to retrieve the corresponding municipality
+     *
+     * @param event
+     */
+    handleChange: function (event) {
+        this.setState({value: event.target.value});
 
-            //We only make a call to the API if the number of characters in the input field is greater than 3.
-            if (event.target.value.length > 3) {
-                $.ajax({
-                    url: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&country='
-                    + this.state.country + '&pnr=' + event.target.value,
-                    dataType: 'json',
-                    cache: false,
-                    success: function (data) {
-                        // Set the municipality state equal to the retrieved data
-                        this.setState({municipality: data['result']});
-                    }.bind(this),
-                    error: function (xhr, status, err) {
-                        console.error(this.props.url, status, err.toString());
-                    }.bind(this)
-                });
-            } else {
-                this.setState({municipality: ''});
-            }
-        },
-
-        handleStreetChange: function (event) {
-            this.setState({street: event.target.value});
-        },
-
-        /**Updates the country state when the user selects a new option in
-         * the {@link DropdownList}. Clears previous retrieved data.
-         *
-         * @param event
-         */
-        handleDropdownChange: function (event) {
-            this.setState({country: event['newValue']});
+        //We only make a call to the API if the number of characters in the input field is greater than 3.
+        if (event.target.value.length > 3) {
+            $.ajax({
+                url: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&country='
+                + this.state.country + '&pnr=' + event.target.value,
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    // Set the municipality state equal to the retrieved data
+                    this.setState({municipality: data['result']});
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        } else {
             this.setState({municipality: ''});
-            this.setState({value: ''});
-            this.setState({street: ''})
-        },
-
-
-        getFieldValues(){
-
-            var country;
-            if (this.props.includeCountry) {
-                country = ReactDOM.findDOMNode(this.refs.country).value;
-            }
-            else {
-                country = null;
-            }
-            return {
-                country: country,
-                streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
-                zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
-                postal: ReactDOM.findDOMNode(this.refs.postal).value
-            }
-        },
-
-
-        render: function () {
-            if (this.props.includeCountry) {
-                return (
-                    <Col sm={7.5} md={8}>
-                        <Row className="form-row-address">
-                            <Col sm={12} md={12}>
-                                <FormControl
-                                    type="text"
-                                    placeholder='Gateadresse'
-                                    ref="streetAddress"
-                                    value={this.state.street}
-                                    onChange={this.handleStreetChange}/>
-                            </Col>
-                        </Row>
-                        <Row className="form-row-address">
-                            <Col sm={5} md={5}>
-                                <DropdownList
-                                    id='dropdown-list'
-                                    options={dropdownContent.NATIONAL}
-                                    labelField='country'
-                                    value={this.state.country}
-                                    ref="country"
-                                    valueField='code'
-                                    onChange={this.handleDropdownChange}/>
-                            </Col>
-                            <Col sm={3} md={3}>
-                                <FormControl
-                                    type="text"
-                                    placeholder='Postnummer'
-                                    value={this.state.value}
-                                    ref="zipcode"
-                                    onChange={this.handleChange}/>
-                            </Col>
-                            <Col sm={4} md={4}>
-                                <FormControl
-                                    type="text"
-                                    placeholder='Poststed'
-                                    ref="postal"
-                                    value={this.state.municipality}
-                                    disabled/>
-                            </Col>
-                        </Row>
-                    </Col>
-                );
-            } else {
-                return (
-                    <div>
-                        <Row className="form-row-address">
-                            <Col sm={12} md={12}>
-                                <FormControl
-                                    type="text"
-                                    ref="streetAddress"
-                                    placeholder='Gateadresse'
-                                    value={this.state.street}
-                                    onChange={this.handleStreetChange}/>
-                            </Col>
-                        </Row>
-                        <Row className="form-row-address">
-                            <Col sm={5} md={5}>
-                                <FormControl
-                                    type="text"
-                                    placeholder='Postnummer'
-                                    ref="zipcode"
-                                    value={this.state.value}
-                                    onChange={this.handleChange}/>
-                            </Col>
-                            <Col sm={7} md={7}>
-                                <FormControl
-                                    type="text"
-                                    ref="postal"
-                                    placeholder='Poststed'
-                                    value={this.state.municipality}
-                                    disabled/>
-                            </Col>
-                        </Row>
-                    </div>
-                );
-            }
         }
-    })
-    ;
+    },
+
+    handleStreetChange: function (event) {
+        this.setState({street: event.target.value});
+    },
+
+    /**Updates the country state when the user selects a new option in
+     * the {@link DropdownList}. Clears previous retrieved data.
+     *
+     * @param event
+     */
+    handleDropdownChange: function (event) {
+        this.setState({country: event['newValue']});
+        this.setState({municipality: ''});
+        this.setState({value: ''});
+        this.setState({street: ''})
+    },
+
+
+    getFieldValues(){
+
+        var country;
+        if (this.props.includeCountry) {
+            country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
+        }
+        else {
+            country = null;
+        }
+        return {
+            country: country,
+            streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
+            zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
+            postal: ReactDOM.findDOMNode(this.refs.postal).value
+        }
+    },
+
+    render: function () {
+        if (this.props.includeCountry) {
+            return (
+                <Col sm={7.5} md={8}>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12}>
+                            <FormControl
+                                type="text"
+                                placeholder='Gateadresse'
+                                ref="streetAddress"
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5}>
+                            <DropdownList
+                                id='dropdown-list'
+                                options={dropdownContent.NATIONAL}
+                                labelField='country'
+                                ref="country"
+                                value={this.state.country}
+                                valueField='code'
+                                onChange={this.handleDropdownChange}/>
+                        </Col>
+                        <Col sm={2} md={2}>
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                ref="zipcode"
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={4} md={4}>
+                            <FormControl
+                                type="text"
+                                ref="postal"
+                                placeholder='Poststed'
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </Col>
+            );
+        } else {
+            return (
+                <div>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Adresse'
+                                ref="streetAddress"
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                ref="zipcode"
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={7} md={7} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Sted'
+                                ref="postal"
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </div>
+            );
+        }
+    }
+});
 
 export default AddressField;

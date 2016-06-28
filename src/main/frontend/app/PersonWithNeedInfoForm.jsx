@@ -10,12 +10,29 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM= require('react-dom');
+var ReactDOM = require('react-dom');
 
+export default class PersonWithNeedInfo extends React.Component {
+    constructor() {
+        super()
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickNext = this.handleClickNext.bind(this);
+    }
 
-export default class PersonWithNeed extends React.Component {
+    handleClickBack() {
+        console.log("State 3");
+        this.saveFieldValues();
+        (this.props.previousStep(3));
+    }
 
-    saveFieldValues(){
+    handleClickNext() {
+
+        console.log("State 5");
+        this.saveFieldValues();
+        this.props.nextStep(5);
+
+    }
+    saveFieldValues() {
         // Get values via this.refs
         var address = this.refs.addressfield.getFieldValues();
         var data = {
@@ -29,75 +46,66 @@ export default class PersonWithNeed extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
-    
-    nextStep() {
-        this.saveFieldValues();
-        this.props.nextStep();
-    }
-    
-    previousStep(){
-        this.saveFieldValues();
-        this.props.previousStep();
-    }
-
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({
+            value: event.target.value
+        });
     }
-
     render() {
         return (
             <div>
+                <label className="form-header">Informasjon om person med behov</label>
                 <Row className="form-row">
-                    <Col sm={1.5} md={2}>
+                    <Col sm={2} md={2}>
                         <label>Navn</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
+                    <Col sm={5} md={5}>
                         <FormControl
                             type="text"
                             ref="name"
                             placeholder="Navn"
+                            defaultValue={this.props.fieldValues.person.name}
                             onChange={this.handleChange}/>
                     </Col>
                     <Col sm={6} md={7}></Col>
                 </Row>
                 <Row className="form-row">
-                    <Col sm={1.5} md={2}>
+                    <Col sm={2} md={2}>
                         <label>Folkeregistrert adresse</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
+                    <Col sm={5} md={5}>
                         <AddressField ref='addressfield' includeCountry={false}/>
                     </Col>
-                    <Col sm={1} md={1}>
-                    </Col>
-                    <Col sm={6} md={4}></Col>
+                    <Col sm={5} md={5}></Col>
                 </Row>
-                <Row className="form-row-name">
-                    <Col sm={1.5} md={2}>
+                <Row className="form-row">
+                    <Col sm={2} md={2}>
                         <label>Telefon</label>
                     </Col>
-                    <Col sm={4.5} md={5}>
+                    <Col sm={5} md={5}>
                         <FormControl
                             type="text"
                             ref="phone"
+                            defaultValue={this.props.fieldValues.person.telephone}
                             placeholder="Telefonnr"
                             onChange={this.handleChange}/>
                     </Col>
-                    <Col sm={6} md={7}></Col>
+                    <Col sm={5} md={5}></Col>
                 </Row>
-
 
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
-                        <Button onClick={this.previousStep.bind(this)} className="button-next" bsStyle="success">&larr;
+                        <Button onClick={this.handleClickNext} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sm={6} md={6}></Col>
                     <Col sm={1.5} md={2}>
-                        <Button onClick={this.nextStep.bind(this)} className="button-next"
+                        <Button onClick={this.handleClickBack} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                     <Col sm={6} md={2}></Col>
                 </Row>
+
             </div>
         )
     }

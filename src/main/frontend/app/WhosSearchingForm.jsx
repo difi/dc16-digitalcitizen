@@ -10,7 +10,6 @@ var Button = require('react-bootstrap/lib/Button');
 
 export default class WhosSearching extends React.Component {
 
-
     constructor() {
         super();
         this.handleClickMe = this.handleClickMe.bind(this);
@@ -25,34 +24,39 @@ export default class WhosSearching extends React.Component {
         console.log(data);
     }
 
-    nextStep(status) {
+    nextStep(status, step) {
         this.saveFieldValues(status);
-        this.props.nextStep();
+        this.props.nextStep(step);
     }
-
+    
     handleClickMe() {
-        this.nextStep(true);
+        console.log("State 6")
+        this.nextStep(true, 6)
     }
 
     handleClickOther() {
-        this.nextStep(false);
+        console.log("State 2")
+        this.nextStep(false, 2);
     }
 
     render() {
         return (
             <componentClass>
+                <label className="form-header">Hvem søker du sykehjemsplass for?</label>
                 <Row>
-                    <Col>
+                    <Col sm={7} md={6}>
                         <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary" bsSize="large">Jeg
                             søker sykehjemsplass for meg selv</Button>
                     </Col>
+                    <Col sm={7} md={6}></Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col sm={7} md={6}>
                         <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                 bsSize="large">Jeg søker sykehjemsplass på vegne av noen
                             andre</Button>
                     </Col>
+                    <Col sm={7} md={6}></Col>
                 </Row>
             </componentClass>
         )
