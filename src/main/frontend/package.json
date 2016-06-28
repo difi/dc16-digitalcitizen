@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --hot --inline --content-base resources/static/",
     "eslint": "eslint app",
-    "test": "karma start --single-run --browsers PhantomJS",
+    "test": "karma start --single-run --browsers Chrome",
     "test:watch": "./node_modules/karma/bin/karma start"
   },
   "devDependencies": {
@@ -60,7 +60,6 @@
     "lodash": "^4.5.1",
     "moment": "^2.10.6",
     "react-addons-test-utils": "^15.1.0",
-    "react-bootstrap": "^0.29.5",
     "react": "^0.14.7",
     "react-bootstrap": "^0.29.5",
     "react-dom": "^0.14.7",

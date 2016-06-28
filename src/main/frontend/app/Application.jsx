@@ -2,9 +2,8 @@
 
 import React from 'react';
 import $ from 'jquery';
-import {Form} from './Form.jsx';
+import {Form} from './unused/Form.jsx';
 require('!style!css!less!./Application.less');
-import RadioButtonClick from './RadioButtons.jsx';
 
 var assign = require('object-assign');
 import WhosSearching from './WhosSearchingForm.jsx';
@@ -22,6 +21,7 @@ import NeedsForm from'./NeedsForm';
 
 
 
+
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 var fieldValues = {
@@ -31,13 +31,13 @@ var fieldValues = {
     relation: null,             // String
     guardianName: null,          //String
     familyRelation: null,        //String
-    isDependent: null,          // Boolean
+    isDependent: false,          // Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String
         name: null,                 // String
         address: {                  // Address Object
-            country: null,              // String
+            country: "NO",              // String
             streetAddress: null,        // String
             zipcode: null,              // String
             postal: null                // String
@@ -121,7 +121,7 @@ export default class Application extends React.Component {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
-        //TODO: Remove test data and update the content to actual forms
+
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
@@ -137,6 +137,7 @@ export default class Application extends React.Component {
                 break;
             case 3:
                 content = <PersonWithNeedForm
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
@@ -170,34 +171,7 @@ export default class Application extends React.Component {
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
-    
 
-            /*
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 4:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 5:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 6:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 7:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}
-             submitRegistration={this.handleSubmit}/>;
-             break; */
 
         }
 

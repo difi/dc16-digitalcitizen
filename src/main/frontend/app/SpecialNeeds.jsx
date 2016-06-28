@@ -6,8 +6,13 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
 export default class SpecialNeeds extends React.Component {
-    constructor() {
-        super();
+
+    constructor(props) {
+        super(props);
+        this.setState({
+            
+        });
+
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
@@ -36,7 +41,8 @@ export default class SpecialNeeds extends React.Component {
     }
 
     render() {
-        var fields = ["Har du noen medisinke behov vi burde vite om", "Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått", "Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l)"];
+        var fields = ["Har du noen medisinske behov vi burde vite om", "Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått", "Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l"];
+
         var fieldsForm = fields.map(function (field, i) {
             var textAreaRef;
             switch (i) {

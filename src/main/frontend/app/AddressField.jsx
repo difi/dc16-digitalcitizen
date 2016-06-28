@@ -18,7 +18,7 @@ var AddressField = React.createClass({
     },
 
     getInitialState: function () {
-        return {value: '', municipality: '', country: 'NO', street: ''};
+        return {value: this.props.address.zipcode, municipality: this.props.address.postal, country: this.props.address.country, street: this.props.address.streetAddress};
     },
 
     /**Makes a call to the Bring API with the postal code given by the user
@@ -93,7 +93,7 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Gateadresse'
                                 ref="streetAddress"
-                                value={this.state.street}
+                                value={this.props.address.streetAddress}
                                 onChange={this.handleStreetChange}/>
                         </Col>
                     </Row>
@@ -105,6 +105,7 @@ var AddressField = React.createClass({
                                 labelField='country'
                                 ref="country"
                                 value={this.state.country}
+                                defaultValue = {this.props.address.country}
                                 valueField='code'
                                 onChange={this.handleDropdownChange}/>
                         </Col>
@@ -113,7 +114,7 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Postnummer'
                                 ref="zipcode"
-                                value={this.state.value}
+                                defaultValue={this.props.address.zipcode}
                                 onChange={this.handleChange}/>
                         </Col>
                         <Col sm={4} md={4}>
@@ -121,7 +122,7 @@ var AddressField = React.createClass({
                                 type="text"
                                 ref="postal"
                                 placeholder='Poststed'
-                                value={this.state.municipality}
+                                defaultValue={this.props.address.postal}
                                 disabled/>
                         </Col>
                     </Row>

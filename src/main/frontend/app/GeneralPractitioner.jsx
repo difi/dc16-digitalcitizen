@@ -7,8 +7,11 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
 export default class GeneralPractitioner extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.setState({
+            name: this.props.fieldValues.doctor.name
+        })
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
@@ -32,7 +35,9 @@ export default class GeneralPractitioner extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
-
+    handleChange(event){
+        this.setState({name: event.target.value})
+    }
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         return (
@@ -44,7 +49,7 @@ export default class GeneralPractitioner extends React.Component {
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"/>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={this.state.name} onChange={this.handleChange}/>
                         </Col>
                     </Row>
                 </div>
