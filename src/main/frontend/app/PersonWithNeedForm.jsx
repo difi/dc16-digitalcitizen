@@ -18,9 +18,10 @@ class PersonWithNeed extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isChecked: false,
+            isChecked: this.props.fieldValues.gotPNRnumber,
             pnr: this.props.fieldValues.person.pnr,
             name: this.props.fieldValues.person.name
+
         };
         this.handlePno = this.handlePno.bind(this);
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -48,6 +49,7 @@ class PersonWithNeed extends React.Component {
 
     saveFieldValues() {
         var data = {
+            gotPNRNumber: checked,
             person: {
                 pnr: ReactDOM.findDOMNode(this.refs.pno).value,
                 name: ReactDOM.findDOMNode(this.refs.name).value,
