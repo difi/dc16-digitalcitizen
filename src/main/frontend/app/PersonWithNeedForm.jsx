@@ -12,7 +12,7 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var checked = false;
 
-import checkPersonalnumberNo from'./validation.js';
+import {checkPersonalnumberNo} from'./validation.js';
 
 class PersonWithNeed extends React.Component {
     constructor(props) {
