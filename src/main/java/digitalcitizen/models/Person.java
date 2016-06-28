@@ -7,7 +7,7 @@ public class Person {
 
     private String pnr;
     private String name;
-    private String address;
+    private Address address;
     private String telephone;
 
     public Person(){
@@ -37,11 +37,13 @@ public class Person {
         this.name = name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
+
+
 }

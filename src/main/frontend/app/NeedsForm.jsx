@@ -6,6 +6,7 @@ var RadioGroup = require('react-radio-group');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+
 export default class NeedsForm extends React.Component {
     constructor() {
         super();
@@ -17,26 +18,32 @@ export default class NeedsForm extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
+    saveFieldValues() {
+        var data = {
+            lengthOfStay: this.state.value
+        };
+        this.props.saveValues(data);
+        console.log(data);
+    }
+
     handleClickBack() {
+        this.saveFieldValues();
         if (this.props.fieldValues.isApplyingForSelf) {
             this.props.previousStep(1);
         }
-        else if (this.props.fieldValues.adress == null) {
+        else if (this.props.fieldValues.address == null) {
             this.props.previousStep(3);
         }
         else {
             this.props.previousStep(5);
         }
-
     }
 
     handleClickNext() {
-
-        console.log("State 6");
+        this.saveFieldValues();
+        console.log("State 7");
         this.props.nextStep(7);
-
     }
-
 
     handleChange(r) {
         this.setState({
@@ -48,13 +55,14 @@ export default class NeedsForm extends React.Component {
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
+
                 <div className="form-container">
                     <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
                         {Radio => (
                             <div>
-                                <Radio value="shortStay"/> Kortidsopphold
+                                <Radio value="short"/> Kortidsopphold
                                 <br/>
-                                <Radio value="longStay"/> Langtidsopphold
+                                <Radio value="long"/> Langtidsopphold
                             </div>
                         )}
                     </RadioGroup>
