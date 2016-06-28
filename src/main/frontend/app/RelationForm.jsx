@@ -12,13 +12,14 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
 export default class RelationForm extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
         this.state = {
-            value: null,
+            value: this.props.fieldValues.relation,
+            typeOfRelation: this.props.fieldValues.typeOfRelation,
             verger: null,
-            isDependent: false
+            isDependent: this.props.fieldValues.isDependent,
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
@@ -41,19 +42,22 @@ export default class RelationForm extends React.Component {
         // Get values via this.refs
         var isDependent = this.state.isDependent;
         var nameOfChild = null;
-        var familyRelation = null;
+        var typeOfRelation = null;
         if (this.state.value == "guardian") {
             isDependent = true;
             nameOfChild = this.refs.nameOfChild.getDropdownValue();
-            familyRelation = "guardian"
+            typeOfRelation = "guardian"
         }
-        if (this.state.value == "family") {
-            familyRelation = this.refs.familyRelation.getDropdownValue();
+        else if (this.state.value == "family") {
+            typeOfRelation = this.refs.familyRelation.getDropdownValue();
+        }
+        else{
+            typeOfRelation= ReactDOM.findDOMNode(this.refs.otherRelation).value;
         }
 
         var data = {
             relation: this.state.value,
-            familyRelation: familyRelation,
+            typeOfRelation: typeOfRelation,
             dependent: isDependent,
             nameOfChild: nameOfChild
         };
@@ -80,6 +84,8 @@ export default class RelationForm extends React.Component {
 
     render() {
         var content = <p/>;
+
+
         switch (this.state.value) {
             case "guardian":
                 content =
@@ -144,6 +150,7 @@ export default class RelationForm extends React.Component {
                         <Col sm={6} md={6}>
                             <FormControl
                                 type="text"
+                                ref="otherRelation"
                                 placeholder="Relasjon"
                                 onChange={this.handleTextChange}/>
                         </Col>

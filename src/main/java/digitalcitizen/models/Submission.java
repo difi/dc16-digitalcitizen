@@ -12,8 +12,7 @@ public class Submission {
     // Second form
     private String relation;
     private String guardianName;
-    private String familyRelation;
-
+    private String typeOfRelation;
     private boolean isDependent;
     // Third form
     private Person person;
@@ -47,14 +46,6 @@ public class Submission {
         this.guardianName = guardianName;
     }
 
-    public String getFamilyRelation() {
-        return familyRelation;
-    }
-
-    public void setFamilyRelation(String familyRelation) {
-        this.familyRelation = familyRelation;
-    }
-
     public String getMedicalNeeds() {
         return medicalNeeds;
     }
@@ -69,6 +60,14 @@ public class Submission {
 
     public void setOtherNeeds(String otherNeeds) {
         this.otherNeeds = otherNeeds;
+    }
+
+    public String getTypeOfRelation() {
+        return typeOfRelation;
+    }
+
+    public void setTypeOfRelation(String typeOfRelation) {
+        this.typeOfRelation = typeOfRelation;
     }
 
     public boolean isApplyingForSelf() {

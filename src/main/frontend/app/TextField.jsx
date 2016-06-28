@@ -38,17 +38,20 @@ var TextField = React.createClass({
 
 
     render: function () {
-
+      
         return (
+
             <Col sm={7.5} md={8}>
                 <FormGroup controlId="formValidationError2" validationState="error">
                     <FormControl
                         type="text"
                         placeholder={this.state.value}
                         onChange={this.handleChange}/>
+                    <span>{errorMessage}</span>
                     <FormControl.Feedback/>
                 </FormGroup>
             </Col>
+
 
         );
     }

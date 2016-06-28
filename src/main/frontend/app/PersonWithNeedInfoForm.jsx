@@ -17,12 +17,14 @@ export default class PersonWithNeedInfo extends React.Component {
         super()
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.handleChange=this.handleChange.bind(this);
     }
 
     handleClickBack() {
         console.log("State 3");
         this.saveFieldValues();
-        (this.props.previousStep(3));
+        this.props.previousStep(3);
     }
 
     handleClickNext() {
@@ -38,7 +40,7 @@ export default class PersonWithNeedInfo extends React.Component {
         var address = this.refs.addressfield.getFieldValues();
         var data = {
             person: {
-                pnr: "???",
+                pnr: this.props.fieldValues.person.pnr,
                 name: ReactDOM.findDOMNode(this.refs.name).value,
                 address: address,
                 telephone: ReactDOM.findDOMNode(this.refs.phone).value
@@ -77,7 +79,7 @@ export default class PersonWithNeedInfo extends React.Component {
                             <label>Folkeregistrert adresse</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <AddressField ref='addressfield' includeCountry={false}/>
+                            <AddressField ref='addressfield' address={this.props.fieldValues.person.address} includeCountry={false}/>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -103,6 +105,7 @@ export default class PersonWithNeedInfo extends React.Component {
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next" bsStyle="success">Neste &rarr;</Button>
+
                     </Col>
                 </Row>
 
