@@ -8,8 +8,10 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var Formsy = require('formsy-react');
+
+var ReactDOM = require('react-dom');
 var checked = false;
+
 import checkPersonalnumberNo from'./validation.js';
 
 class PersonWithNeed extends React.Component {
@@ -25,11 +27,13 @@ class PersonWithNeed extends React.Component {
     }
 
     handleClickBack() {
+        this.saveFieldValues();
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
     handleClickNext() {
+        this.saveFieldValues();
         if (checked == false) {
             console.log("State 6");
             (this.props.nextStep(6));
@@ -37,6 +41,19 @@ class PersonWithNeed extends React.Component {
             console.log("State 4");
             (this.props.nextStep(4));
         }
+    }
+    
+    saveFieldValues(){
+        var data = {
+            person : { 
+                pnr: ReactDOM.findDOMNode(this.refs.pno).value,
+                name: ReactDOM.findDOMNode(this.refs.name).value,
+                address: this.props.fieldValues.person.address,
+                telephone: this.props.fieldValues.person.telephone
+            }
+        };
+        this.props.saveValues(data);
+        console.log(data);
     }
 
     handlePno() {
@@ -50,8 +67,9 @@ class PersonWithNeed extends React.Component {
 
     render() {
         //Add fields from redux form to component so they can be connected
+        console.log(this.props.fieldValues.person.pnr);
         const {fields: {pnr, name}} = this.props;
-
+        console.log(this.props.fieldValues.person.pnr);
         return (
             <form>
                 <componentClass>
@@ -64,10 +82,9 @@ class PersonWithNeed extends React.Component {
 
                             <FormControl
                                 type="text"
-
-
+                                ref="pno"
                                 placeholder="Fødselsnummer"
-                                defaultValue={this.props.fieldValues.person.pnr}
+                                value={this.props.fieldValues.person.pnr}
                                 onChange={this.handleChange}
                                 //Connects field to redux form component//
                                 {...pnr}
@@ -97,8 +114,10 @@ class PersonWithNeed extends React.Component {
                             <FormControl
                                 type="text"
                                 placeholder="Navn"
+                                ref="name"
                                 defaultValue={this.props.fieldValues.person.name}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange}
+                                {...name}/>
                         </Col>
                         <Col sm={0} md={5}></Col>
                     </Row>

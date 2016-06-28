@@ -6,20 +6,18 @@ import {Form} from './unused/Form.jsx';
 require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
-
+import WhosSearching from './WhosSearchingForm.jsx';
+import PersonWithNeed from './PersonWithNeedForm';
+import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-
-import WhosSearching from './WhosSearchingForm';
 import RelationForm from './RelationForm';
 import PersonWithNeedForm from './PersonWithNeedForm';
-import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
-
 
 
 
@@ -38,7 +36,12 @@ var fieldValues = {
     person: {                   // Person object
         pnr: null,                  // String
         name: null,                 // String
-        address: null,              // String or object?
+        address: {                  // Address Object
+            country: "NO",              // String
+            streetAddress: null,        // String
+            zipcode: null,              // String
+            postal: null                // String
+        },
         telephone: null             // String
     },
     // Fourth form
@@ -50,8 +53,9 @@ var fieldValues = {
     // Sixth form
     lengthOfStay: null,         // String
     // Seventh form
-    specialNeeds: null,         // String
-    needsInterpreter: null      // Boolean
+    medicalNeeds: null,         // String
+    conditionChanges: null,     // String
+    otherNeeds: null            // String
 };
 
 
@@ -68,18 +72,17 @@ export default class Application extends React.Component {
         this.previousStep = this.previousStep.bind(this);
 
     }
-    
+
     onChildChange(others) {
         this.setState({
             prevStep: this.state.step,
             step: this.state.step + step
         })
     }
-
-
-
+    
     saveValues(field_value) {
-        fieldValues = assign({}, fieldValues, field_value)
+        fieldValues = assign({}, fieldValues, field_value);
+        console.log(fieldValues);
     }
 
     previousStep(step) {
@@ -118,10 +121,10 @@ export default class Application extends React.Component {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
-        //TODO: Remove test data and update the content to actual forms
+
         switch (this.state.step) {
             case 1:
-                content = < WhosSearching
+                content = <WhosSearching
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
@@ -169,35 +172,7 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
 
-                break;
 
-            /*
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 4:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 5:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 6:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}/>;
-             break;
-             case 7:
-             content = <
-             nextStep={this.nextStep}
-             saveValues={this.saveValues}
-             submitRegistration={this.handleSubmit}/>;
-             break; */
-                
         }
 
         return (

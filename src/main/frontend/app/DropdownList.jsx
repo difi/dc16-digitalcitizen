@@ -1,8 +1,9 @@
 import React from 'react';
+var ReactDOM = require('react-dom');
 require('!style!css!less!./Application.less');
 
 var DropdownList = React.createClass({
-    
+
     propTypes: {
         id: React.PropTypes.string.isRequired,
         options: React.PropTypes.array.isRequired,
@@ -48,7 +49,11 @@ var DropdownList = React.createClass({
         }
         return selected;
     },
-    
+
+    getDropdownValue(){
+        return ReactDOM.findDOMNode(this.refs.selectlist).value;
+    },
+
     render: function () {
         var self = this;
 
@@ -71,12 +76,13 @@ var DropdownList = React.createClass({
         });
 
         return (
-                <select id={this.props.id}
+            <select id={this.props.id}
                     className='form-control'
+                    ref="selectlist"
                     value={this.state.selected}
                     onChange={this.handleChange}>
                 {options}
-                </select>
+            </select>
         )
     },
 
