@@ -8,6 +8,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
+var ReactDOM = require('react-dom');
 
 var checked = false;
 
@@ -23,11 +24,13 @@ export default class PersonWithNeed extends React.Component {
     }
 
     handleClickBack() {
+        this.saveFieldValues();
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
     handleClickNext() {
+        this.saveFieldValues();
         if (checked == false) {
             console.log("State 6");
             (this.props.nextStep(6));
@@ -35,6 +38,19 @@ export default class PersonWithNeed extends React.Component {
             console.log("State 4");
             (this.props.nextStep(4));
         }
+    }
+    
+    saveFieldValues(){
+        var data = {
+            person : { 
+                pnr: ReactDOM.findDOMNode(this.refs.pno).value,
+                name: ReactDOM.findDOMNode(this.refs.name).value,
+                address: this.props.fieldValues.person.address,
+                telephone: this.props.fieldValues.person.telephone
+            }
+        };
+        this.props.saveValues(data);
+        console.log(data);
     }
 
     handlePno() {
@@ -58,6 +74,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Fødselsnummer"
+                            ref="pno"
                             defaultValue={this.props.fieldValues.person.pnr}
                             onChange={this.handleChange}/>
                     </Col>
@@ -80,6 +97,7 @@ export default class PersonWithNeed extends React.Component {
                         <FormControl
                             type="text"
                             placeholder="Navn"
+                            ref="name"
                             defaultValue={this.props.fieldValues.person.name}
                             onChange={this.handleChange}/>
                     </Col>

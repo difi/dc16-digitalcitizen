@@ -45,6 +45,11 @@ var TypeAhead = React.createClass({
         componentWillReceiveProps: function(nextProps) {
             this.setState({value: nextProps.value || '', index: -1, selected: true});
         },
+    
+        getFieldValue(){
+            return this.state.value;
+        },
+    
         render: function() {
             this.items = [];
 

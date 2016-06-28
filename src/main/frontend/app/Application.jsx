@@ -53,8 +53,9 @@ var fieldValues = {
     // Sixth form
     lengthOfStay: null,         // String
     // Seventh form
-    specialNeeds: null,         // String
-    needsInterpreter: null      // Boolean
+    medicalNeeds: null,         // String
+    conditionChanges: null,     // String
+    otherNeeds: null            // String
 };
 
 

@@ -4,6 +4,8 @@ var Col = require('react-bootstrap/lib/Col');
 require('!style!css!less!./Application.less');
 import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
+var ReactDOM = require('react-dom');
+
 export default class GeneralPractitioner extends React.Component {
     constructor() {
         super();
@@ -12,17 +14,25 @@ export default class GeneralPractitioner extends React.Component {
     }
 
     handleClickBack() {
+        this.saveFieldValues();
         console.log("State 4");
         this.props.previousStep(4);
     }
 
     handleClickNext() {
-
+        this.saveFieldValues();
         console.log("State 6");
         this.props.nextStep(6);
-
     }
 
+    saveFieldValues() {
+        var data = {
+            doctor : { name: this.refs.doctorSelect.getFieldValue() }
+        };
+        this.props.saveValues(data);
+        console.log(data);
+    }
+    
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         return (
@@ -33,7 +43,7 @@ export default class GeneralPractitioner extends React.Component {
                         <label>Fastlege</label>
                     </Col>
                     <Col sm={5} md={6}>
-                        <TypeAhead array={fastleger} placeholder="Skriv inn søkers fastlege"/>
+                        <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"/>
                     </Col>
                     <Col sm={6} md={7}></Col>
                 </Row>
