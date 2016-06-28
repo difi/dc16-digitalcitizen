@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class Submission {
 
     // First form
-    private boolean isApplyingForSelf;
+    private boolean applyingForSelf;
     // Second form
     private String relation;
     private String guardianName;
     private String typeOfRelation;
-    private boolean isDependent;
+    private boolean dependent;
     // Third form
     private Person person;
     // Fourth form
@@ -71,20 +71,21 @@ public class Submission {
     }
 
     public boolean isApplyingForSelf() {
-        return isApplyingForSelf;
+        return applyingForSelf;
     }
 
     public void setApplyingForSelf(boolean applyingForSelf) {
-        isApplyingForSelf = applyingForSelf;
+        this.applyingForSelf = applyingForSelf;
     }
 
     public boolean isDependent() {
-        return isDependent;
+        return dependent;
     }
 
     public void setDependent(boolean dependent) {
-        isDependent = dependent;
+        this.dependent = dependent;
     }
+
 
     public String getRelation() {
         return relation;
