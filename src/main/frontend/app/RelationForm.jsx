@@ -52,7 +52,7 @@ export default class RelationForm extends React.Component {
             typeOfRelation = this.refs.typeOfRelation.getDropdownValue();
         }
         else{
-            typeOfRelation=this.refs.otherRelation.getValue();
+            typeOfRelation= ReactDOM.findDOMNode(this.refs.otherRelation).value;
         }
 
         var data = {
