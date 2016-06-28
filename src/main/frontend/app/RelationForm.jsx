@@ -56,7 +56,7 @@ export default class RelationForm extends React.Component{
                     <Row className="form-row">
                         <Col sm={4.5} md={5}>
                             <DropdownList id="1"
-                                          options={[{name: "Ola"}, {name: "Kari"}]}
+                                          options={[{name: "Velg..."}, {name: "Ola"}, {name: "Kari"}]}
                                           labelField="name"
                                           valueField="name"
                                           defaultValue = 'Velg person'/>
@@ -76,7 +76,7 @@ export default class RelationForm extends React.Component{
                 <Row className="form-row">
                     <Col sm={4.5} md={5}>
                         <DropdownList id="1"
-                                      options={[{name: "Søsken"}, {name: "Barn"}]}
+                                      options={[{name: "Velg..."}, {name: "Søsken"}, {name: "Barn"}]}
                                       labelField="name"
                                       valueField="name"
                                       defaultValue = 'Velg relasjon'/>
@@ -123,6 +123,7 @@ export default class RelationForm extends React.Component{
         else if(this.state.value=="family"){
                 content = <div><DropdownList id="1" defaultValue = {this.props.fieldValues.familyRelation} options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
                     <Checkbox checked={this.props.fieldValues.isDependent}>
+>>>>>>> 2d8e88c3a835972a2f844dd1233052769186e31a
                     Registrer meg som pårørende
                 </Checkbox>
                 </div>
