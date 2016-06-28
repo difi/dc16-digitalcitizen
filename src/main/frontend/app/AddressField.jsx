@@ -5,7 +5,7 @@ import dropdownContent from './dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-
+var ReactDOM = require('react-dom');
 
 var AddressField = React.createClass({
 
@@ -65,6 +65,24 @@ var AddressField = React.createClass({
         this.setState({street: ''})
     },
 
+
+    getFieldValues(){
+
+        var country;
+        if (this.props.includeCountry) {
+            country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
+        }
+        else {
+            country = null;
+        }
+        return {
+            country: country,
+            streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
+            zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
+            postal: ReactDOM.findDOMNode(this.refs.postal).value
+        }
+    },
+
     render: function () {
         if (this.props.includeCountry) {
             return (
@@ -74,6 +92,7 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Gateadresse'
+                                ref="streetAddress"
                                 value={this.state.street}
                                 onChange={this.handleStreetChange}/>
                         </Col>
@@ -84,6 +103,7 @@ var AddressField = React.createClass({
                                 id='dropdown-list'
                                 options={dropdownContent.NATIONAL}
                                 labelField='country'
+                                ref="country"
                                 value={this.state.country}
                                 valueField='code'
                                 onChange={this.handleDropdownChange}/>
@@ -92,12 +112,14 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Postnummer'
+                                ref="zipcode"
                                 value={this.state.value}
                                 onChange={this.handleChange}/>
                         </Col>
                         <Col sm={4} md={4}>
                             <FormControl
                                 type="text"
+                                ref="postal"
                                 placeholder='Poststed'
                                 value={this.state.municipality}
                                 disabled/>
@@ -113,6 +135,7 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Adresse'
+                                ref="streetAddress"
                                 value={this.state.street}
                                 onChange={this.handleStreetChange}/>
                         </Col>
@@ -122,6 +145,7 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Postnummer'
+                                ref="zipcode"
                                 value={this.state.value}
                                 onChange={this.handleChange}/>
                         </Col>
@@ -129,6 +153,7 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Sted'
+                                ref="postal"
                                 value={this.state.municipality}
                                 disabled/>
                         </Col>

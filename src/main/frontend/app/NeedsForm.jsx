@@ -33,13 +33,20 @@ export default class NeedsForm extends React.Component {
             this.props.previousStep(5);
         }
     }
+    saveFieldValues() {
+        var data = {
+            lengthOfStay: this.state.value
+        };
+        this.props.saveValues(data);
+        console.log(data);
+    }
 
     //Handle the click on the next-button
     handleClickNext() {
-        console.log("State 6");
+        this.saveFieldValues();
+        console.log("State 7");
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(7);
-
     }
 
     //Handle change in the radio-buttons
@@ -58,26 +65,29 @@ export default class NeedsForm extends React.Component {
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
-                <RadioGroup className="needs" selectedValue={this.state.value} onChange={this.handleChange}>
-                    {Radio => (
-                        <div>
-                            <Radio value="shortStay"/> Kortidsopphold
-                            <br/>
-                            <Radio value="longStay"/> Langtidsopphold
-                        </div>
-                    )}
-                </RadioGroup>
+
+                <div className="form-container">
+                    <RadioGroup className="needs" selectedValue={this.state.value} onChange={this.handleChange}>
+                        {Radio => (
+                            <div>
+                                <Radio value="short"/> Kortidsopphold
+                                <br/>
+                                <Radio value="long"/> Langtidsopphold
+                            </div>
+                        )}
+                    </RadioGroup>
+                </div>
+
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
             </componentClass>
         )
