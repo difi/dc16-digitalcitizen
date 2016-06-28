@@ -1,7 +1,4 @@
 import React from 'react';
-var FormGroup = require('react-bootstrap/lib/FormGroup');
-var Radio = require('react-bootstrap/lib/Radio');
-var Checkbox = require('react-bootstrap/lib/Checkbox');
 var RadioGroup = require('react-radio-group');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -11,13 +8,31 @@ export default class NeedsForm extends React.Component {
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
+
+        //None of the radio-buttons are chosen
         this.state = {
             value: null
         };
+
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
+    //Handle the click on the back-button
+    handleClickBack() {
+        //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
+        if( this.props.fieldValues.isApplyingForSelf){
+            this.props.previousStep(1);
+        }
+        //If no adress is possible to obtain, the previous step is step 3 - PersonWithNeedInfoForm
+        else if( this.props.fieldValues.adress==null){
+            this.props.previousStep(3);
+        }
+        //Else the previous step is step 5 - PersonWithNeedForm
+        else{
+            this.props.previousStep(5);
+        }
+    }
     saveFieldValues() {
         var data = {
             lengthOfStay: this.state.value
@@ -26,38 +41,33 @@ export default class NeedsForm extends React.Component {
         console.log(data);
     }
 
-    handleClickBack() {
-        this.saveFieldValues();
-        if (this.props.fieldValues.isApplyingForSelf) {
-            this.props.previousStep(1);
-        }
-        else if (this.props.fieldValues.address == null) {
-            this.props.previousStep(3);
-        }
-        else {
-            this.props.previousStep(5);
-        }
-    }
-
+    //Handle the click on the next-button
     handleClickNext() {
         this.saveFieldValues();
         console.log("State 7");
+        //The next step is step 7 - SpecialNeeds
         this.props.nextStep(7);
     }
 
+    //Handle change in the radio-buttons
+    //@param r - the radio button chosen
     handleChange(r) {
+        //Set the state to the pushed radio-button
         this.setState({
             value: r
         });
     }
 
+    //RadioGroup: Showing radio-buttons. Call handleChange when a button is clicked, but
+    // do not send an argument, because react already knows which argument to use.
+    //@return The view of the NeedsForm.
     render() {
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
 
                 <div className="form-container">
-                    <RadioGroup name="needs" selectedValue={this.state.value} onChange={this.handleChange}>
+                    <RadioGroup className="needs" selectedValue={this.state.value} onChange={this.handleChange}>
                         {Radio => (
                             <div>
                                 <Radio value="short"/> Kortidsopphold
