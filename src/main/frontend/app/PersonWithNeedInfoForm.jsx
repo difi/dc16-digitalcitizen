@@ -43,53 +43,49 @@ export default class PersonWithNeedInfo extends React.Component {
                 <label className="form-header">Informasjon om person med behov</label>
                 <div className="form-container">
                     <Row className="form-row">
-                        <Col sm={2} md={2}>
+                        <Col sm={4} md={4}>
                             <label>Navn</label>
                         </Col>
-                        <Col sm={5} md={5}>
+                        <Col sm={8} md={8}>
                             <FormControl
                                 type="text"
                                 placeholder="Navn"
                                 defaultValue={this.props.fieldValues.person.name}
                                 onChange={this.handleChange}/>
                         </Col>
-                        <Col sm={6} md={7}></Col>
                     </Row>
                     <Row className="form-row">
-                        <Col sm={2} md={2}>
+                        <Col sm={4} md={4}>
                             <label>Folkeregistrert adresse</label>
                         </Col>
-                        <Col sm={5} md={5}>
+                        <Col sm={8} md={8}>
                             <AddressField includeCountry={false}/>
                         </Col>
-                        <Col sm={5} md={5}></Col>
                     </Row>
                     <Row className="form-row">
-                        <Col sm={2} md={2}>
+                        <Col sm={4} md={4}>
                             <label>Telefon</label>
                         </Col>
-                        <Col sm={5} md={5}>
+                        <Col sm={8} md={8}>
                             <FormControl
                                 type="text"
                                 defaultValue={this.props.fieldValues.person.telephone}
                                 placeholder="Telefonnr"
                                 onChange={this.handleChange}/>
                         </Col>
-                        <Col sm={5} md={5}></Col>
                     </Row>
                 </div>
 
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
 
             </div>

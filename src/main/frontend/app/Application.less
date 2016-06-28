@@ -4,6 +4,7 @@ html {
 
 .form-container {
   height: 250px;
+  width: 700px;
 }
 
 .form-center {
@@ -49,7 +50,8 @@ html {
 }
 
 .back-forward-buttons {
-  margin-top: 50px;
+  width: 700px;
+  margin-left: 15px;
 }
 
 .form-radio-group {
@@ -63,36 +65,38 @@ input[type=radio] {
   margin-bottom: 20px;
 }
 
-/* Hidden placeholder */
 select option[disabled]:first-child {
   display: none;
 }
 
+@media screen and (max-width: 1000px) and (min-width: 770px) {
+  html {
+    margin: 40px 40px 0 40px;
+  }
 
-/*.form {
-  font-family: Arial, sans-serif;
-  font-size: 11pt;
-  display: block;
+  .form-container {
+    height: 400px;
+    width: 400px;
+  }
+
+  .back-forward-buttons {
+    width: 400px;
+    margin-left: 15px;
+  }
 }
 
-.form-row {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
+@media screen and (max-width: 770px) {
+  html {
+    margin: 40px 20px 0 20px;
+  }
 
-.form-row-label {
-  display: block;
-  margin-right: 20px;
-}
+  .form-container {
+    height: 450px;
+    width: 200px;
+  }
 
-h3 {
-  margin-top: 35px;
+  .back-forward-buttons {
+    width: 200px;
+    margin-left: 15px;
+  }
 }
-
-.typeahead{
-    position: absolute;
-    z-index: 1; // or more
-    width: 300px; // or 300px, etc
-}
-*/

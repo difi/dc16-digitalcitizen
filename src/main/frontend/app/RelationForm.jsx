@@ -48,40 +48,40 @@ export default class RelationForm extends React.Component {
         if (this.state.value == "guardian") {
                 content = <componentClass>
                     <Row className="form-row">
-                        <Col sm={5} md={6}>
+                        <Col sm={6} md={6}>
                             <label>Hvem ønsker sykehjemsplass?</label>
                         </Col>
-                        <Col sm={7} md={6}></Col>
+                        <Col sm={6} md={6}></Col>
                     </Row>
                     <Row className="form-row">
-                        <Col sm={4.5} md={5}>
+                        <Col sm={6} md={6}>
                             <DropdownList id="1"
                                           options={[{name: "Velg..."}, {name: "Ola"}, {name: "Kari"}]}
                                           labelField="name"
                                           valueField="name"
                                           defaultValue = 'Velg person'/>
                         </Col>
-                        <Col sm={7.5} md={7}></Col>
+                        <Col sm={6} md={6}></Col>
                     </Row>
                 </componentClass >
         }
         else if (this.state.value == "family") {
             content = <componentClass>
                 <Row className="form-row">
-                    <Col sm={5} md={6}>
+                    <Col sm={6} md={6}>
                         <label>Hva er din relasjon til personen med behov?</label>
                     </Col>
-                    <Col sm={7} md={6}></Col>
+                    <Col sm={6} md={6}></Col>
                 </Row>
                 <Row className="form-row">
-                    <Col sm={4.5} md={5}>
+                    <Col sm={6} md={6}>
                         <DropdownList id="1"
                                       options={[{name: "Velg..."}, {name: "Søsken"}, {name: "Barn"}]}
                                       labelField="name"
                                       valueField="name"
                                       defaultValue='Velg relasjon'/>
                     </Col>
-                    <Col sm={7.5} md={7}></Col>
+                    <Col sm={6} md={6}></Col>
                 </Row>
                 <Row className="form-row">
                     <Col sm={3} md={5}>
@@ -94,19 +94,19 @@ export default class RelationForm extends React.Component {
         else if (this.state.value == "other") {
             content = <componentClass>
                 <Row className="form-row">
-                    <Col sm={5} md={6}>
+                    <Col sm={6} md={6}>
                         <label>Hva er din relasjon til personen med behov?</label>
                     </Col>
-                    <Col sm={7} md={6}></Col>
+                    <Col sm={6} md={6}></Col>
                 </Row>
                 <Row className="form-row">
-                    <Col sm={4.5} md={5}>
+                    <Col sm={6} md={6}>
                         <FormControl
                             type="text"
-                            placeholder="Relasjon"
+                            placeholder="Din relasjon"
                             onChange={this.handleTextChange}/>
                     </Col>
-                    <Col sm={7.5} md={7}></Col>
+                    <Col sm={6} md={6}></Col>
                 </Row>
                 <Row className="form-row">
                     <Col sm={3} md={5}>
@@ -156,17 +156,17 @@ export default class RelationForm extends React.Component {
                     </RadioGroup>
                     {content}
                 </div>
+
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
 
             </componentClass>
