@@ -4,7 +4,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var RadioGroup = require('react-radio-group');
-
+import dropdownContent from './dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -49,7 +49,7 @@ export default class RelationForm extends React.Component {
             typeOfRelation = "guardian"
         }
         else if (this.state.value == "family") {
-            typeOfRelation = this.refs.typeOfRelation.getDropdownValue();
+            typeOfRelation = this.refs.familyRelation.getDropdownValue();
         }
         else{
             typeOfRelation= ReactDOM.findDOMNode(this.refs.otherRelation).value;
@@ -58,14 +58,13 @@ export default class RelationForm extends React.Component {
         var data = {
             relation: this.state.value,
             typeOfRelation: typeOfRelation,
-            isDependent: isDependent,
+            dependent: isDependent,
             nameOfChild: nameOfChild
         };
 
         this.props.saveValues(data);
         console.log(data);
     }
-
 
     handleChange(r) {
         this.setState({
@@ -122,10 +121,10 @@ export default class RelationForm extends React.Component {
                         <Row className="form-row">
                             <Col sm={6} md={6}>
                                 <DropdownList id="1"
-                                              ref="typeOfRelation"
-                                              options={[{name: "Velg..."},{name: "Søsken"}, {name: "Barn"}]}
-                                              labelField="name"
-                                              valueField="name"
+                                              ref="familyRelation"
+                                              options={dropdownContent.RELATIONS}
+                                              labelField="relation"
+                                              valueField="value"
                                               defaultValue='Velg relasjon'/>
                             </Col>
                             <Col sm={6} md={6}></Col>
