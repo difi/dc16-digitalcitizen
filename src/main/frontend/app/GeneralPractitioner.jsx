@@ -7,8 +7,11 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
 export default class GeneralPractitioner extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.setState({
+            name: this.props.fieldValues.doctor.name
+        })
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
@@ -27,37 +30,40 @@ export default class GeneralPractitioner extends React.Component {
 
     saveFieldValues() {
         var data = {
-            doctor : { name: this.refs.doctorSelect.getFieldValue() }
+            doctor: {name: this.refs.doctorSelect.getFieldValue()}
         };
         this.props.saveValues(data);
         console.log(data);
     }
-    
+    handleChange(event){
+        this.setState({name: event.target.value})
+    }
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
-                <Row className="form-row">
-                    <Col sm={2} md={1}>
-                        <label>Fastlege</label>
-                    </Col>
-                    <Col sm={5} md={6}>
-                        <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"/>
-                    </Col>
-                    <Col sm={6} md={7}></Col>
-                </Row>
+                <div className="form-container">
+                    <Row className="form-row">
+                        <Col sm={4} md={4}>
+                            <label>Fastlege</label>
+                        </Col>
+                        <Col sm={8} md={8}>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={this.state.name} onChange={this.handleChange}/>
+                        </Col>
+                    </Row>
+                </div>
+
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
             </componentClass>
         );

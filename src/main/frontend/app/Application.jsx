@@ -31,7 +31,7 @@ var fieldValues = {
     relation: null,             // String
     guardianName: null,          //String
     familyRelation: null,        //String
-    isDependent: null,          // Boolean
+    isDependent: false,          // Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String

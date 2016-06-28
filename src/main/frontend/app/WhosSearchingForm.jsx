@@ -42,22 +42,22 @@ export default class WhosSearching extends React.Component {
     render() {
         return (
             <componentClass>
-                <label className="form-header">Hvem søker du sykehjemsplass for?</label>
-                <Row>
-                    <Col sm={7} md={6}>
-                        <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary" bsSize="large">Jeg
-                            søker sykehjemsplass for meg selv</Button>
-                    </Col>
-                    <Col sm={7} md={6}></Col>
-                </Row>
-                <Row>
-                    <Col sm={7} md={6}>
-                        <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
-                                bsSize="large">Jeg søker sykehjemsplass på vegne av noen
-                            andre</Button>
-                    </Col>
-                    <Col sm={7} md={6}></Col>
-                </Row>
+                <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
+                <div className="form-container">
+                    <Row>
+                        <Col>
+                            <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
+                                    bsSize="large">Ja, for meg selv</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
+                                    bsSize="large">Nei, for noen andre</Button>
+                        </Col>
+                    </Row>
+                       
+                </div>
             </componentClass>
         )
     }
