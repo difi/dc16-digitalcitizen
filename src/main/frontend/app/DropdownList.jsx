@@ -1,4 +1,5 @@
 import React from 'react';
+require('!style!css!less!./Application.less');
 
 var DropdownList = React.createClass({
     
@@ -52,12 +53,23 @@ var DropdownList = React.createClass({
         var self = this;
 
         var options = self.props.options.map(function (option) {
-            return (
-                <option key={option[self.props.valueField]} value={option[self.props.valueField]}>
-                    {option[self.props.labelField]}
-                </option>
-            )
+            if(option[self.props.valueField]=="Velg..."){
+                return (
+                    <option key={option[self.props.valueField]} selected disabled value={option[self.props.valueField]}>
+                        {option[self.props.labelField]}
+                    </option>
+                )
+
+            } else {
+                return (
+                    <option key={option[self.props.valueField]} value={option[self.props.valueField]}>
+                        {option[self.props.labelField]}
+                    </option>
+                )
+
+            }
         });
+
         return (
                 <select id={this.props.id}
                     className='form-control'

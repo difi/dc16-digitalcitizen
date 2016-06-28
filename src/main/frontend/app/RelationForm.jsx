@@ -46,24 +46,24 @@ export default class RelationForm extends React.Component {
     render() {
         var content = <p/>;
         if (this.state.value == "guardian") {
-            content = <componentClass>
-                <Row className="form-row">
-                    <Col sm={5} md={6}>
-                        <label>Hvem ønsker sykehjemsplass?</label>
-                    </Col>
-                    <Col sm={7} md={6}></Col>
-                </Row>
-                <Row className="form-row">
-                    <Col sm={4.5} md={5}>
-                        <DropdownList id="1"
-                                      options={[{name: "Ola"}, {name: "Kari"}]}
-                                      labelField="name"
-                                      valueField="name"
-                                      defaultValue='Velg person'/>
-                    </Col>
-                    <Col md={7}></Col>
-                </Row>
-            </componentClass >
+                content = <componentClass>
+                    <Row className="form-row">
+                        <Col sm={5} md={6}>
+                            <label>Hvem ønsker sykehjemsplass?</label>
+                        </Col>
+                        <Col sm={7} md={6}></Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sm={4.5} md={5}>
+                            <DropdownList id="1"
+                                          options={[{name: "Velg..."}, {name: "Ola"}, {name: "Kari"}]}
+                                          labelField="name"
+                                          valueField="name"
+                                          defaultValue = 'Velg person'/>
+                        </Col>
+                        <Col sm={7.5} md={7}></Col>
+                    </Row>
+                </componentClass >
         }
         else if (this.state.value == "family") {
             content = <componentClass>
@@ -76,7 +76,7 @@ export default class RelationForm extends React.Component {
                 <Row className="form-row">
                     <Col sm={4.5} md={5}>
                         <DropdownList id="1"
-                                      options={[{name: "Søsken"}, {name: "Barn"}]}
+                                      options={[{name: "Velg..."}, {name: "Søsken"}, {name: "Barn"}]}
                                       labelField="name"
                                       valueField="name"
                                       defaultValue='Velg relasjon'/>
@@ -116,22 +116,23 @@ export default class RelationForm extends React.Component {
                 </Row>
             </componentClass>
 
-            //Decides content based on checked radio button
-            /* if(this.state.value=="guardian"){
-             content = <div><p>Navnet på den du er verge for</p><DropdownList defaultValue ={this.props.fieldValues.guardianName} id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
-             }
-             else if(this.state.value=="family"){
-             content = <div><DropdownList id="1" defaultValue = {this.props.fieldValues.familyRelation} options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
-             <Checkbox checked={this.props.fieldValues.isDependent}>
-             Registrer meg som pårørende
-             </Checkbox>
-             </div>
-             }
-             else if(this.state.value=="other"){
-             content =  <Checkbox checked={this.props.fieldValues.isDependent}>
-             Registrer meg som pårørende
-             </Checkbox>
-             */
+
+        //Decides content based on checked radio button
+       /* if(this.state.value=="guardian"){
+            content = <div><p>Navnet på den du er verge for</p><DropdownList defaultValue ={this.props.fieldValues.guardianName} id="1" options={[{name: "Ola"}, {name: "Kari"}]} labelField="name" valueField="name"/></div>
+        }
+        else if(this.state.value=="family"){
+                content = <div><DropdownList id="1" defaultValue = {this.props.fieldValues.familyRelation} options={[{name: "Søsken"}, {name: "Barn"}]} labelField="name" valueField="name"/>
+                    <Checkbox checked={this.props.fieldValues.isDependent}>
+                    Registrer meg som pårørende
+                </Checkbox>
+                </div>
+            }
+        else if(this.state.value=="other"){
+            content =  <Checkbox checked={this.props.fieldValues.isDependent}>
+                Registrer meg som pårørende
+            </Checkbox>
+*/
 
         }
 
