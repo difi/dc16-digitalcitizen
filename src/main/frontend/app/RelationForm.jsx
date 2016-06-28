@@ -54,8 +54,8 @@ export default class RelationForm extends React.Component {
 
         var data = {
             relation: this.state.value,
-            typeOfRelation: typeOfRelation,
-            isDependent: isDependent,
+            familyRelation: typeOfRelation,
+            dependent: isDependent,
             nameOfChild: nameOfChild
         };
 

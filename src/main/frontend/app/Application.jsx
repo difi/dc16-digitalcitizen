@@ -26,12 +26,12 @@ import NeedsForm from'./NeedsForm';
 
 var fieldValues = {
     // First form
-    isApplyingForSelf: null,    // Boolean
+    applyingForSelf: null,    // Boolean
     // Second form
     relation: null,             // String
     guardianName: null,          //String
     familyRelation: null,        //String
-    isDependent: null,          // Boolean
+    dependent: null,          // Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String

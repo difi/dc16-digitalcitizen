@@ -18,7 +18,7 @@ export default class WhosSearching extends React.Component {
 
     saveFieldValues(status){
         var data = {
-            isApplyingForSelf: status
+            applyingForSelf: status
         };
         this.props.saveValues(data);
         console.log(data);
