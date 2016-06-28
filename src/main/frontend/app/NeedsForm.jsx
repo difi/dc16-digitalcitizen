@@ -8,11 +8,11 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
 export default class NeedsForm extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
         this.state = {
-            value: null
+            value: this.state.props.fieldValues.lengthOfStay;
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
