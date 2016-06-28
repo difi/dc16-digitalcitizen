@@ -5,18 +5,11 @@ import $ from 'jquery';
 import {Form} from './Form.jsx';
 require('!style!css!less!./Application.less');
 import RadioButtonClick from './RadioButtons.jsx';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import RadioButtonClickRelation from './RadioButtons.jsx';
-=======
-=======
 var assign = require('object-assign');
->>>>>>> refs/remotes/origin/citizen_0.2
 import WhosSearching from './WhosSearchingForm.jsx';
 import PersonWithNeed from './PersonWithNeedForm';
 import PersonWithNeedInfo from './PersonWithNeedInfoForm'
 
->>>>>>> refs/remotes/origin/citizen_0.2
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -71,7 +64,7 @@ export default class Application extends React.Component {
         this.saveValues = this.saveValues.bind(this);
         this.previousStep = this.previousStep.bind(this);
     }
-    
+
     onChildChange(others) {
         this.setState({
             prevStep: this.state.step,
@@ -118,27 +111,6 @@ export default class Application extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-        var writesOthers = this.state.writesForOthers;
-        var firstRender = this.state.firstRender;
-        return (
-            <form>
-                <PageHeader>Søk sykehjemsplass</PageHeader>
-                <RadioButtonClick callBackParent={this.onChildChange} />
-                <Row>
-                    {this.props.data.map(function(forms, i){
-                        if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
-                    }
-                    else{
-                        return (
-                            <Form key={i} name={forms.formname} data={forms.data}/>
-                        )}
-                    })}
-                </Row>
-                    <button type="submit" onClick={this.handleSubmit}> Submit
-                    </button>
-            </form>
-=======
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
@@ -220,21 +192,15 @@ export default class Application extends React.Component {
              saveValues={this.saveValues}
              submitRegistration={this.handleSubmit}/>;
              break; */
-                
+
         }
 
         return (
-<<<<<<< HEAD
-            {header},
-            {content}
->>>>>>> refs/remotes/origin/citizen_0.2
-=======
             <div>
                 {header}
                 {content}
                 <Button onClick={this.handleSubmit} visible={false}> Submit form </Button>
             </div>
->>>>>>> refs/remotes/origin/citizen_0.2
         )
     }
 }

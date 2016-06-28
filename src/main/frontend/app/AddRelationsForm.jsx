@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-export const fields = [ 'firstName', 'lastName', 'email', 'sex', 'favoriteColor', 'employed', 'notes' ]
- 
+export const fields = [ 'firstName', 'lastName', 'email' ]
+
 class AddRelationsToForm extends Component {
     render() {
         const {
-            fields: { firstName, lastName, email, sex, favoriteColor, employed, notes },
+            fields: { firstName, lastName, email },
             handleSubmit,
             resetForm,
             submitting

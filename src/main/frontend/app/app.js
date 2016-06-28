@@ -9,18 +9,10 @@ import $ from 'jquery';
 import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
-<<<<<<< HEAD
-import SpecialNeeds from './SpecialNeeds.jsx';
-import PersonWithNeed from './PersonWithNeedForm.jsx';
-import RelationForm from './RelationForm.jsx';
+import GeneralPractitioner from './GeneralPractitioner.jsx';
+import SimpleFormDemo from './AddRelationsForm.jsx';
 import AddRelation from './AddRelations.jsx';
 import WhosSearching from './WhosSearchingForm.jsx';
-import Forms from './Form.jsx';
-import AddRelationsToForm from './AddRelationsForm.jsx';
-=======
-import GeneralPractitioner from './GeneralPractitioner.jsx';
->>>>>>> refs/remotes/origin/citizen_0.2
-
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -28,7 +20,7 @@ const store = createStore(reducer);
 var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
 
-/*
+
 var dataMe = [
     {name: "Fødselsnr.", type: "TextField"},
     {name: "Fornavn", type: "TextField"},
@@ -47,7 +39,6 @@ var dataApplicant = [
     {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"}];
 
-*/
 var dataDep = [
     {name: "Fornavn", type: "TextField"},
     {name: "Etternavn", type: "TextField"},
@@ -55,11 +46,12 @@ var dataDep = [
     {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"}];
 
-/*
+
 var dataWhy = [
     {name: "Hvorfor søker du plass?", type:"TextArea"},
-    {name: "Hva er det du trenger hjelp med i hverdagen?", type:"TextArea"}];
-*/
+    {name: "Hva er det du trenger hjelp med i hverdagen?", type:"TextArea"}
+]
+
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
@@ -69,11 +61,5 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
-<<<<<<< HEAD
-    <Forms />
+    <AddRelation />
     </Provider>, document.getElementById('content'));
-=======
-    <Application />
-</Provider>, document.getElementById('content'));
-
->>>>>>> refs/remotes/origin/citizen_0.2

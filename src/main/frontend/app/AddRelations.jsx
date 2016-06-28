@@ -13,7 +13,7 @@ export default class AddRelation extends React.Component{
             <componentClass>
                 <Row>
                     <Col>
-                        <Button onClick={this.handleClickMe} className="button-search" bsStyle="success" bsSize="medium">Jeg
+                        <Button onClick={this.handleClick} className="button-search" bsStyle="success" bsSize="medium">Jeg
                             ønsker å legge til pårørende</Button>
                     </Col>
                 </Row>
