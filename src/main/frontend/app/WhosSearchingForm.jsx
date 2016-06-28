@@ -11,7 +11,6 @@ var Button = require('react-bootstrap/lib/Button');
 export default class WhosSearching extends React.Component {
     constructor() {
         super();
-        this.handleClickRelations = this.handleClickRelations(this);
         this.handleClickMe = this.handleClickMe.bind(this);
         this.handleClickOther = this.handleClickOther.bind(this);
     }
@@ -39,13 +38,6 @@ export default class WhosSearching extends React.Component {
                     <Col>
                         <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                 bsSize="large">Jeg søker sykehjemsplass på vegne av noen
-                            andre</Button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Button onClick={this.handleClickRelations} className="button-search" bsStyle="primary"
-                                bsSize="large">Ja
                             andre</Button>
                     </Col>
                 </Row>

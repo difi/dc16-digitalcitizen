@@ -10,9 +10,11 @@ import Application from './Application.jsx';//
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './buttons.jsx';
 import GeneralPractitioner from './GeneralPractitioner.jsx';
-import SimpleFormDemo from './AddRelationsForm.jsx';
+import AddRelationsToForm from './AddRelationsForm.jsx';
 import AddRelation from './AddRelations.jsx';
 import WhosSearching from './WhosSearchingForm.jsx';
+import Forms from './Form.jsx';
+import PersonWithNeed from './PersonWithNeedForm.jsx';
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -61,5 +63,5 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
-    <AddRelation />
+    <Application />
     </Provider>, document.getElementById('content'));
