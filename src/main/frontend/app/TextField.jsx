@@ -38,11 +38,9 @@ var TextField = React.createClass({
 
 
     render: function () {
-        var className = this.showRequired() ? 'required' : this.showError() ? 'error' : null;
-
-        var errorMessage = this.getErrorMessage();
+      
         return (
-            <div classname={classname}>
+
             <Col sm={7.5} md={8}>
                 <FormGroup controlId="formValidationError2" validationState="error">
                     <FormControl
@@ -53,7 +51,7 @@ var TextField = React.createClass({
                     <FormControl.Feedback/>
                 </FormGroup>
             </Col>
-                </div>
+
 
         );
     }

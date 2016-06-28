@@ -23,6 +23,7 @@ import NeedsForm from'./NeedsForm';
 
 
 
+
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 var fieldValues = {
@@ -133,6 +134,7 @@ export default class Application extends React.Component {
                 break;
             case 3:
                 content = <PersonWithNeedForm
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}

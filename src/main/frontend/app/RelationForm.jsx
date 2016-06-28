@@ -46,7 +46,7 @@ export default class RelationForm extends React.Component{
     render() {
         var content = <p/>;
         if (this.state.value == "guardian") {
-                <componentClass>
+                content = <componentClass>
                     <Row className="form-row">
                         <Col sm={5} md={6}>
                             <label>Hvem ønsker sykehjemsplass?</label>
