@@ -9,11 +9,13 @@ var ReactDOM = require('react-dom');
 export default class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             name: this.props.fieldValues.doctor.name
-        })
+        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleClickBack() {
@@ -40,6 +42,7 @@ export default class GeneralPractitioner extends React.Component {
     }
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
+        var name = this.state.name;
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
@@ -49,7 +52,7 @@ export default class GeneralPractitioner extends React.Component {
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={this.state.name} onChange={this.handleChange}/>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={name} onChange={this.handleChange}/>
                         </Col>
                     </Row>
                 </div>

@@ -14,7 +14,7 @@ var ReactDOM = require('react-dom');
 
 export default class PersonWithNeedInfo extends React.Component {
     constructor() {
-        super()
+        super();
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);

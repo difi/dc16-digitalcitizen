@@ -62,6 +62,7 @@ class PersonWithNeed extends React.Component {
     handlePno() {
         this.setState({isChecked: !this.state.isChecked});
         checked = !this.state.isChecked;
+
     }
 
     handlePNRChange(event) {
@@ -75,7 +76,9 @@ class PersonWithNeed extends React.Component {
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, name}} = this.props;
-
+        if(this.state.isChecked){
+            //TODO: Gray out and empty PNR Number
+        }
         return (
             <form>
                 <componentClass>

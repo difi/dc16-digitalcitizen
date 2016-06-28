@@ -73,7 +73,7 @@ var AddressField = React.createClass({
             country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
         }
         else {
-            country = null;
+            country = "NO";
         }
         return {
             country: country,

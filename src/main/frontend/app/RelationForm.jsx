@@ -19,7 +19,7 @@ export default class RelationForm extends React.Component {
             value: this.props.fieldValues.relation,
             typeOfRelation: this.props.fieldValues.typeOfRelation,
             verger: null,
-            isDependent: this.props.fieldValues.isDependent,
+            isDependent: this.props.fieldValues.isDependent
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
@@ -132,7 +132,7 @@ export default class RelationForm extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={3} md={5}>
-                                <Checkbox ref="setDependent" onClick={this.handleDependentChange}> Registrer meg som
+                                <Checkbox ref="setDependent" onClick={this.handleDependentChange} checked={this.state.isDependent}> Registrer meg som
                                     pårørende</Checkbox>
                             </Col>
                             <Col sm={9} md={7}></Col>
@@ -159,7 +159,7 @@ export default class RelationForm extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col sm={3} md={5}>
-                            <Checkbox ref="setDependent" onClick={this.handleDependentChange}> Registrer meg som
+                            <Checkbox ref="setDependent" onClick={this.handleDependentChange} checked={this.state.isDependent}> Registrer meg som
                                 pårørende</Checkbox>
                         </Col>
                         <Col sm={9} md={7}></Col>
