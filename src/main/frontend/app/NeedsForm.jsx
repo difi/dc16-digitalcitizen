@@ -51,13 +51,13 @@ export default class NeedsForm extends React.Component {
         });
     }
 
+    //RadioGroup: Showing radio-buttons. Call handleChange when a button is clicked, but
+    // do not send an argument, because react already knows which argument to use.
     //@return The view of the NeedsForm.
     render() {
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
-                <!-- Showing radio-buttons. Call handleChange when a button is clicked, but
-                do not send an argument, because react already knows which argument to use.-->
                 <RadioGroup className="needs" selectedValue={this.state.value} onChange={this.handleChange}>
                     {Radio => (
                         <div>
@@ -67,7 +67,6 @@ export default class NeedsForm extends React.Component {
                         </div>
                     )}
                 </RadioGroup>
-                <!-- Showing the next and previous buttons. -->
                 <Row className="back-forward-buttons">
                     <Col sm={1.5} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;

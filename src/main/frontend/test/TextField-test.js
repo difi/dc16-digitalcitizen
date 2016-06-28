@@ -18,10 +18,6 @@ describe("Textfield", function() {
         const wrapper = shallow(<TextField/>);
         expect(wrapper.find('Col')).to.have.length(1);
     });
-    it("should handle change", function() {
-        const wrapper = shallow(<TextField/>);
-        expect(wrapper.props().handleChange).to.be.defined;
-    });
 
     it('should update state at change', function(){
         const wrapper = shallow(<TextField/>);
