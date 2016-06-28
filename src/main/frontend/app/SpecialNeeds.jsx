@@ -52,31 +52,32 @@ export default class SpecialNeeds extends React.Component {
 
             return (
                 <Row className="form-row-special">
-                    <Col sm={4} md={3}>
-                        <label>{field} </label>
+                    <Col sm={4} md={4}>
+                        <label className="from-col-address">{field} </label>
                     </Col>
-                    <Col sm={5} md={6}>
+                    <Col sm={8} md={8}>
                         <TextArea ref={textAreaRef} value="hello"/>
-                    </Col>
-                    <Col sm={3} md={3}>
                     </Col>
                 </Row>
             )
         });
         return (
             <div>
-                {fieldsForm}
+                <label className="form-header">Har du noen spessielle behov?</label>
+                <div className="form-container">
+                    {fieldsForm}
+                    </div>
+
                 <Row className="back-forward-buttons">
-                    <Col sm={1.5} md={2}>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
-                    <Col sm={6} md={6}></Col>
-                    <Col sm={1.5} md={2}>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
-                    <Col sm={6} md={2}></Col>
                 </Row>
             </div>
         );

@@ -72,7 +72,7 @@ var TypeAhead = React.createClass({
             }, this);
 
             return (
-                <Col sm={7.5} md={8}>
+                <Col>
                     <FormControl type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
                            onChange={this.handleChange} onKeyDown={this.selectItem} onFocus={this.handleFocus} />
                     {searchResult}
