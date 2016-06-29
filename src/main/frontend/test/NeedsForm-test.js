@@ -12,21 +12,47 @@ import {expect} from 'chai';
 //Import the file we want to test.
 import NeedsForm from '../app/NeedsForm.jsx';
 
+var fieldValues = {
+    // First form
+    applyingForSelf: null,    // Boolean
+    // Second form
+    relation: null,             // String
+    guardianName: null,          //String
+    typeOfRelation: null,        //String
+    dependent: null,          // Boolean
+    gotPNRnumber: false,        //Boolean
+    // Third form
+    person: {                   // Person object
+        pnr: null,                  // String
+        name: null,                 // String
+        address: {                  // Address Object
+            country: "NO",              // String
+            streetAddress: null,        // String
+            zipcode: null,              // String
+            postal: null                // String
+        },
+        telephone: null             // String
+    },
+    // Fourth form
+    doctor: {                   // Doctor Object (add more fields?)
+        name: null                  // String
+    },
+    // Fifth form
+    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: null,         // String
+    // Seventh form
+    medicalNeeds: null,         // String
+    conditionChanges: null,     // String
+    otherNeeds: null            // String
+};
+
 describe("NeedsForm", function() {
     //Radio-buttons
     it('should have RadioGroup', function () {
-        const  wrapper = shallow(<NeedsForm/>);
+        const  wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/> );
         expect(wrapper.find('.needs')).to.have.length(1);
     });
-
-    it('value for the radio-buttons should have null as initial state', function () {
-        const wrapper = mount(<NeedsForm/>);
-        expect(wrapper.state().value).to.equal(null);
-    });
-
-    //TODO: Check that the radio-buttons are doing what they are supposed to, when this functionality is added
-    //Look at Simulations on http://brewhouse.io/2016/03/18/accelerate-your-react-testing-with-enzyme.html
-    //for example of how to do this.
 
     //Next and previous buttons
     it('should have two "normal" buttons - next and previous', function () {
@@ -47,4 +73,6 @@ describe("NeedsForm", function() {
     //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
     //they are "react-radio-group" elements.
 
+
+    //Mulig vi må sjekke Application, med dens verdier
 });
