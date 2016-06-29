@@ -144,8 +144,7 @@ export default class RelationForm extends React.Component {
 
     render() {
         var content = <p/>;
-
-
+        
         switch (this.state.value) {
             case "guardian":
                 content =
