@@ -18,7 +18,7 @@ function customWhere(arr, t) {
 
 var TypeAhead = React.createClass({
         getInitialState: function() {
-            return {value: '', index: -1, selected: true};
+            return {value: this.props.value, index: -1, selected: true};
         },
         handleClick: function(e) {
             this.setState({value: e.target.innerHTML, selected: true});

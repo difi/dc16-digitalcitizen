@@ -4,7 +4,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var RadioGroup = require('react-radio-group');
-
+import dropdownContent from './dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -12,17 +12,60 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
 export default class RelationForm extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            value: null,
-            verger: null,
-            isDependent: false
-        };
+
+        switch (this.props.fieldValues.relation) {
+            case "guardian":
+                this.state = {
+                    guardianRelation: this.props.fieldValues.nameOfChild,
+                    value: this.props.fieldValues.relation,
+
+                    typeOfRelation: this.props.fieldValues.typeOfRelation,
+                    verger: null,
+                    isDependent: this.props.fieldValues.dependent
+                };
+                break;
+
+
+            case "family":
+                this.state = {
+                    familyRelation: this.props.fieldValues.typeOfRelation,
+                    value: this.props.fieldValues.relation,
+
+                    typeOfRelation: this.props.fieldValues.typeOfRelation,
+                    verger: null,
+                    isDependent: this.props.fieldValues.dependent
+                };
+                break;
+            case "other":
+                this.state = {
+                    otherRelation: this.props.fieldValues.typeOfRelation,
+                    value: this.props.fieldValues.relation,
+
+                    typeOfRelation: this.props.fieldValues.typeOfRelation,
+                    verger: null,
+                    isDependent: this.props.fieldValues.dependent
+                };
+                break;
+            default:
+                this.state = {
+                    value: this.props.fieldValues.relation,
+
+                    typeOfRelation: this.props.fieldValues.typeOfRelation,
+                    verger: null,
+                    isDependent: this.props.fieldValues.dependent
+                }
+        }
+
+
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.handleDependentChange = this.handleDependentChange.bind(this);
+        this.handleGuardianChange = this.handleGuardianChange.bind(this);
+        this.handleFamilyRelationChange = this.handleFamilyRelationChange.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
     }
 
     handleClickBack() {
@@ -34,7 +77,13 @@ export default class RelationForm extends React.Component {
     handleClickNext() {
         console.log("State 3");
         this.saveFieldValues();
-        this.props.nextStep(3);
+        if (this.state.value == "guardian") {
+            this.props.nextStep(6);
+        }
+        else {
+
+            this.props.nextStep(3);
+        }
     }
 
     saveFieldValues() {
@@ -47,21 +96,23 @@ export default class RelationForm extends React.Component {
             nameOfChild = this.refs.nameOfChild.getDropdownValue();
             typeOfRelation = "guardian"
         }
-        if (this.state.value == "family") {
-            typeOfRelation = this.refs.typeOfRelation.getDropdownValue();
+        else if (this.state.value == "family") {
+            typeOfRelation = this.refs.familyRelation.getDropdownValue();
+        }
+        else {
+            typeOfRelation = ReactDOM.findDOMNode(this.refs.otherRelation).value;
         }
 
         var data = {
             relation: this.state.value,
             typeOfRelation: typeOfRelation,
-            isDependent: isDependent,
+            dependent: isDependent,
             nameOfChild: nameOfChild
         };
 
         this.props.saveValues(data);
         console.log(data);
     }
-
 
     handleChange(r) {
         this.setState({
@@ -76,11 +127,25 @@ export default class RelationForm extends React.Component {
     }
 
     handleTextChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({otherRelation: event.target.value});
+    }
+
+    handleFamilyRelationChange(change) {
+        this.setState({
+            familyRelation: change.newValue
+        });
+    }
+
+    handleGuardianChange(change) {
+        this.setState({
+            guardianRelation: change.newValue
+        });
     }
 
     render() {
         var content = <p/>;
+
+
         switch (this.state.value) {
             case "guardian":
                 content =
@@ -98,6 +163,8 @@ export default class RelationForm extends React.Component {
                                               options={[{name: "Velg..."},{name: "Ola"}, {name: "Kari"}]}
                                               labelField="name"
                                               valueField="name"
+                                              onChange={this.handleGuardianChange}
+                                              value={this.state.guardianRelation}
                                               defaultValue='Velg person'/>
                             </Col>
                             <Col sm={6} md={6}></Col>
@@ -116,17 +183,20 @@ export default class RelationForm extends React.Component {
                         <Row className="form-row">
                             <Col sm={6} md={6}>
                                 <DropdownList id="1"
-                                              ref="typeOfRelation"
-                                              options={[{name: "Velg..."},{name: "Søsken"}, {name: "Barn"}]}
-                                              labelField="name"
-                                              valueField="name"
+                                              ref="familyRelation"
+                                              options={dropdownContent.RELATIONS}
+                                              labelField="relation"
+                                              valueField="value"
+                                              value={this.state.familyRelation}
+                                              onChange={this.handleFamilyRelationChange}
                                               defaultValue='Velg relasjon'/>
                             </Col>
                             <Col sm={6} md={6}></Col>
                         </Row>
                         <Row className="form-row">
                             <Col sm={3} md={5}>
-                                <Checkbox ref="setDependent" onClick={this.handleDependentChange}> Registrer meg som
+                                <Checkbox ref="setDependent" onClick={this.handleDependentChange}
+                                          checked={this.state.isDependent}> Registrer meg som
                                     pårørende</Checkbox>
                             </Col>
                             <Col sm={9} md={7}></Col>
@@ -145,14 +215,17 @@ export default class RelationForm extends React.Component {
                         <Col sm={6} md={6}>
                             <FormControl
                                 type="text"
+                                ref="otherRelation"
                                 placeholder="Relasjon"
+                                value={this.state.otherRelation}
                                 onChange={this.handleTextChange}/>
                         </Col>
                         <Col sm={6} md={6}></Col>
                     </Row>
                     <Row className="form-row">
                         <Col sm={3} md={5}>
-                            <Checkbox ref="setDependent" onClick={this.handleDependentChange}> Registrer meg som
+                            <Checkbox ref="setDependent" onClick={this.handleDependentChange}
+                                      checked={this.state.isDependent}> Registrer meg som
                                 pårørende</Checkbox>
                         </Col>
                         <Col sm={9} md={7}></Col>

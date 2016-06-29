@@ -1,10 +1,10 @@
-import TextField from './TextField.jsx';
-import TypeAhead from './AutoComplete.jsx';
+import TextField from '../TextField.jsx';
+import TypeAhead from '../AutoComplete.jsx';
 import React from 'react';
-import DropdownList from './DropdownList.jsx';
-import AddressField from './AddressField.jsx';
-import dropdownContent from './dropdown-list-content.js';
-import TextArea from './TextArea.jsx'; 
+import DropdownList from '../DropdownList.jsx';
+import AddressField from '../AddressField.jsx';
+import dropdownContent from '../dropdown-list-content.js';
+import TextArea from '../TextArea.jsx'; 
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
