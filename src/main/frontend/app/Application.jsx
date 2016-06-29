@@ -18,6 +18,7 @@ import PersonWithNeedForm from './PersonWithNeedForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
+import AddDependent from './AddDependent';
 
 
 
@@ -166,6 +167,14 @@ export default class Application extends React.Component {
                 break;
             case 7:
                 content = < SpecialNeeds
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    submitRegistration={this.handleSubmit}/>;
+                break;
+            case 8:
+                content = < AddDependent
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
