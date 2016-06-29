@@ -72,7 +72,5 @@ describe("NeedsForm", function() {
 
     //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
     //they are "react-radio-group" elements.
-
-
-    //Mulig vi må sjekke Application, med dens verdier
+    
 });
