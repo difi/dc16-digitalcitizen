@@ -101,7 +101,7 @@ export default class SpecialNeeds extends React.Component {
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClickNext} className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
+                                bsStyle="success">Send inn søknad &rarr;</Button>
                     </Col>
                 </Row>
             </div>
