@@ -13,6 +13,7 @@ import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './unused/buttons.jsx';
 import GeneralPractitioner from './GeneralPractitioner.jsx';
+import PersonWithNeedForm from './PersonWithNeedForm.jsx';
 
 
 
@@ -77,10 +78,5 @@ var data = [
 
 
 ReactDOM.render( <Provider store={store}>
-<<<<<<< HEAD
     <Application data={data} />
     </Provider>, document.getElementById('content'));
-=======
-    <Application />
-</Provider>, document.getElementById('content'));
->>>>>>> refs/remotes/origin/citizen_0.2

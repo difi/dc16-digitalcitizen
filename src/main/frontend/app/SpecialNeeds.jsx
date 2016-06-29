@@ -55,6 +55,7 @@ export default class SpecialNeeds extends React.Component {
                 case 2: textAreaRef = "otherNeeds";
                     break;
             }
+            
 
             return (
                 <Row className="form-row-special">

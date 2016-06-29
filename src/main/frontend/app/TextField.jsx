@@ -38,18 +38,8 @@ var TextField = React.createClass({
 
 
     render: function () {
-      
+
         return (
-<<<<<<< HEAD
-            <Col sm={6} md={6}>
-                <FormControl
-                    requiered
-                    componentClass="textarea"
-                    bsSize="ls"
-                    type="text"
-                    placeholder={this.state.value}
-                    onChange={this.handleChange}/>
-=======
 
             <Col sm={7.5} md={8}>
                 <FormGroup controlId="formValidationError2" validationState="error">
@@ -60,7 +50,6 @@ var TextField = React.createClass({
                     <span>{errorMessage}</span>
                     <FormControl.Feedback/>
                 </FormGroup>
->>>>>>> refs/remotes/origin/citizen_0.2
             </Col>
 
 
@@ -69,4 +58,3 @@ var TextField = React.createClass({
 });
 
 export default TextField;
-

@@ -13,14 +13,11 @@ var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-<<<<<<< HEAD
-=======
 import RelationForm from './RelationForm';
 import PersonWithNeedForm from './PersonWithNeedForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
->>>>>>> refs/remotes/origin/citizen_0.2
 
 
 
@@ -83,7 +80,7 @@ export default class Application extends React.Component {
             step: this.state.step + step
         })
     }
-    
+
     saveValues(field_value) {
         fieldValues = assign({}, fieldValues, field_value);
         console.log(fieldValues);
@@ -94,17 +91,11 @@ export default class Application extends React.Component {
             step: step
         })
     }
-<<<<<<< HEAD
-    onChildChange(others){
-        this.setState({writesForOthers: others,
-            firstRender: false
-=======
 
     nextStep(step) {
         this.setState({
             prevStep: this.state.step,
             step: step
->>>>>>> refs/remotes/origin/citizen_0.2
         })
     }
 
@@ -128,28 +119,6 @@ export default class Application extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-        var writesOthers = this.state.writesForOthers;
-        var firstRender = this.state.firstRender;
-        var button = !firstRender ? <Button className="button-search" bsStyle="primary" type="submit" onClick={this.handleSubmit}>Søk sykehjemsplass</Button> : null;
-        return (
-            <form>
-                <PageHeader>Søk sykehjemsplass</PageHeader>
-                <RadioButtonClick callBackParent={this.onChildChange} />
-                {this.props.data.map(function(forms, i){
-                    if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
-                    }
-                    else{
-                        return (
-                            <compontentClass>
-                                <Form key={i} name={forms.formname} data={forms.data}/>
-                            </compontentClass>
-                        )}
-                })}
-                
-            </form>
-=======
->>>>>>> refs/remotes/origin/citizen_0.2
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
@@ -216,9 +185,6 @@ export default class Application extends React.Component {
             </div>
         )
     }
-<<<<<<< HEAD
-};
-=======
 }
 
 
@@ -242,4 +208,3 @@ export default class Application extends React.Component {
  <Col sm={3} md={3}>
  </Col>
  </Row>*/
->>>>>>> refs/remotes/origin/citizen_0.2
