@@ -13,15 +13,23 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import {checkPhoneNumber} from'./validation.js';
 import {reduxForm} from 'redux-form';
+import {onlyLettersInString} from "./validation.js";
+import {onlyDigitsInString} from './validation.js'
+import {alphaNumericInString} from './validation.js'
 
 
 class PersonWithNeedInfo extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: this.props.fieldValues.person.name,
+            number: this.props.fieldValues.person.telephone
+        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleNumberChange = this.handleNumberChange.bind(this);
     }
 
     handleClickBack() {
@@ -53,10 +61,23 @@ class PersonWithNeedInfo extends React.Component {
         console.log(data);
     }
 
-    handleChange(event) {
+    handleNameChange(event) {
+        var text = onlyLettersInString(event.target.value);
         this.setState({
-            value: event.target.value
+            name: text
         });
+    }
+    handleNumberChange(event){
+        var text = onlyDigitsInString(event.target.value);
+        this.setState({
+            name: text
+        })
+    }
+    handleKey(e){
+        const re = /[0-9]+/g;
+        if(!re.test(e.key)){
+            e.preventDefault();
+        }
     }
 
     render() {
@@ -75,8 +96,8 @@ class PersonWithNeedInfo extends React.Component {
                                     type="text"
                                     ref="name"
                                     placeholder="Navn"
-                                    defaultValue={this.props.fieldValues.person.name}
-                                    onChange={this.handleChange}/>
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -94,11 +115,12 @@ class PersonWithNeedInfo extends React.Component {
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormControl
-                                    type="text"
+                                    type="numeric"
                                     ref="phone"
-                                    defaultValue={this.props.fieldValues.person.telephone}
+                                    value={this.state.number}
                                     placeholder="Telefonnr"
-                                    onChange={this.handleChange}
+                                    onKeyPress={this.handleKey}
+                                    onChange={this.handleNumberChange}
                                     {...number}
 
                                 />
