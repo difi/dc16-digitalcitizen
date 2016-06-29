@@ -89,3 +89,18 @@ export function CheckPostCode(postCode) {
         return "Ugyldig postnummer";
     }
 }
+
+export function onlyLettersInString(str){
+    if(str){
+    return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
+}
+
+export function onlyDigitsInString(str){
+    if(str){
+    return str.replace(/[^0-9\s]+/g, '');}
+}
+
+export function alphaNumericInString(str){
+    if(str){
+    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');}
+}

@@ -10,6 +10,7 @@ var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
+import {onlyLettersInString} from "./validation.js";
 
 export default class RelationForm extends React.Component {
     constructor(props) {
@@ -127,7 +128,8 @@ export default class RelationForm extends React.Component {
     }
 
     handleTextChange(event) {
-        this.setState({otherRelation: event.target.value});
+        var text = onlyLettersInString(event.target.value);
+        this.setState({otherRelation: text});
     }
 
     handleFamilyRelationChange(change) {
@@ -144,7 +146,7 @@ export default class RelationForm extends React.Component {
 
     render() {
         var content = <p/>;
-        
+
         switch (this.state.value) {
             case "guardian":
                 content =
@@ -215,6 +217,7 @@ export default class RelationForm extends React.Component {
                             <FormControl
                                 type="text"
                                 ref="otherRelation"
+                                pattern="[A-Za-zæøåÆØÅ]"
                                 placeholder="Relasjon"
                                 value={this.state.otherRelation}
                                 onChange={this.handleTextChange}/>
