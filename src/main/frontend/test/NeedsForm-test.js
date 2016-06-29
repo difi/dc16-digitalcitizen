@@ -56,7 +56,7 @@ describe("NeedsForm", function() {
 
     //Next and previous buttons
     it('should have two "normal" buttons - next and previous', function () {
-        const wrapper = shallow(<NeedsForm/>);
+        const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/>);
         expect(wrapper.find('Button')).to.have.length(2);
     });
 
