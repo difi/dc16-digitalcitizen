@@ -16,8 +16,9 @@ var TextArea = React.createClass( {
     render: function() {
 
         return (
-            <Col sm={6}>
+            <Col>
                 <FormControl
+                    required
                     componentClass="textarea"
                     bsSize="lg"
                     type="text"

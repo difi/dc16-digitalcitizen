@@ -1,13 +1,20 @@
 "use strict";
 
+
 import { Provider } from 'react-redux';
 import {createStore, combineReducers} from 'redux';
-import reducers from './reducers.js';
+import reducers from './unused/reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Application } from './Application.jsx';
+
+
+import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
+import Buttons from './unused/buttons.jsx';
+import GeneralPractitioner from './GeneralPractitioner.jsx';
+
+
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -68,6 +75,12 @@ var data = [
 ];
 
 
+
 ReactDOM.render( <Provider store={store}>
+<<<<<<< HEAD
     <Application data={data} />
     </Provider>, document.getElementById('content'));
+=======
+    <Application />
+</Provider>, document.getElementById('content'));
+>>>>>>> refs/remotes/origin/citizen_0.2
