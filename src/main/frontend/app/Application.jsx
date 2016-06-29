@@ -168,15 +168,14 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
-                content = < SpecialNeeds
+                content = < AddDependent
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.handleSubmit}
-                    saveValues={this.saveValues}
-                    submitRegistration={this.handleSubmit}/>;
+                    saveValues={this.saveValues}/>;
                 break;
             case 8:
-                content = < AddDependent
+                content = < SpecialNeeds
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}

@@ -27,12 +27,12 @@ export default class AddDependent extends React.Component {
 
     handleClickBack() {
         this.saveFieldValues();
-        (this.props.previousStep(5));
+        (this.props.previousStep(6));
     }
 
     handleClickNext() {
         this.saveFieldValues();
-        this.props.nextStep(7);
+        this.props.nextStep(8);
     }
 
 
@@ -112,16 +112,24 @@ export default class AddDependent extends React.Component {
                                        showDeleteButton={true}/>
                     </div>
                 </div>
-                <Row className="back-forward-buttons">
+                <Row className="addDepButton">
                     <Col sx={2} sm={2} md={2}>
                         <Button onClick={this.handleClick} bsStyle="info">Legg til pårørende</Button>
                     </Col>
                     <Col sx={7} sm={8} md={4}> </Col>
-                    <Col sx={2} sm={2} md={2}>
-                    </Col>
-
                 </Row>
-                <Button onClick={this.handleClickNext} bsStyle="info">Neste</Button>
+                <Row className="back-forward-buttons">
+                    <Col sx={2} sm={2} md={2}>
+                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                            Tilbake</Button>
+                    </Col>
+                    <Col sx={7} sm={8} md={8}></Col>
+                    <Col sx={2} sm={2} md={2}>
+                        <Button onClick={this.handleClickNext} className="button-next"
+                                bsStyle="success">Neste &rarr;</Button>
+
+                    </Col>
+                </Row>
             </div>
         );
     }
