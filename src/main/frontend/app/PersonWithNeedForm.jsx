@@ -103,9 +103,8 @@ class PersonWithNeed extends React.Component {
                                         type="text"
                                         placeholder="Fødselsnummer"
                                         ref="pno"
-                                        value={this.state.pnr}
-                                        onChange={this.handlePNRChange}
-                                        //Connects field to redux form component//
+                                        //value={this.state.pnr}
+                                        //onChange={this.handlePNRChange}
                                         //{...pnr} Removing this resets the text field
                                     disabled/>
                                     {pnr.touched && pnr.error && <div>{pnr.error}</div>}
@@ -116,8 +115,7 @@ class PersonWithNeed extends React.Component {
                                 <Col sx={4} md={4}></Col>
                                 <Col sx={8} md={8}>
                                     <input type="checkbox" name="noPno" checked={this.state.isChecked}
-                                           onChange={this.handlePno}/> Jeg kan ikke
-                                    fødselsnummeret
+                                           onChange={this.handlePno}/> Jeg kan ikke fødselsnummeret
                                 </Col>
                                 <Col sm={0} md={5}></Col>
                             </Row>
@@ -138,7 +136,6 @@ class PersonWithNeed extends React.Component {
                                 <Col sm={0} md={5}></Col>
                             </Row>
                         </div>
-
 
                         <Row className="back-forward-buttons">
                             <Col sx={2} sm={2} md={2}>
@@ -204,9 +201,7 @@ class PersonWithNeed extends React.Component {
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
-
                     </div>
-
 
                     <Row className="back-forward-buttons">
                         <Col sx={2} sm={2} md={2}>
