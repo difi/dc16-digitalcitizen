@@ -27,12 +27,13 @@ import AddDependent from './AddDependent';
 
 var fieldValues = {
     // First form
-    isApplyingForSelf: null,    // Boolean
+    applyingForSelf: null,    // Boolean
     // Second form
     relation: null,             // String
     guardianName: null,          //String
-    familyRelation: null,        //String
-    isDependent: false,          // Boolean
+    typeOfRelation: null,        //String
+    dependent: null,          // Boolean
+    gotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String
@@ -146,6 +147,7 @@ export default class Application extends React.Component {
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
@@ -169,7 +171,7 @@ export default class Application extends React.Component {
                 content = < SpecialNeeds
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
-                    nextStep={this.nextStep}
+                    nextStep={this.handleSubmit}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
                 break;
@@ -188,7 +190,7 @@ export default class Application extends React.Component {
             <div>
                 {header}
                 {content}
-                <Button onClick={this.handleSubmit} visible={false}> Submit form </Button>
+
             </div>
         )
     }

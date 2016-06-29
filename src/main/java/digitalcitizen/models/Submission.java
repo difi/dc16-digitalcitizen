@@ -6,11 +6,14 @@ import java.util.ArrayList;
  * Created by camp-vhe on 23.06.2016.
  */
 public class Submission {
+
     // First form
-    private boolean isApplyingForSelf;
+    private boolean applyingForSelf;
     // Second form
     private String relation;
-    private boolean isDependent;
+    private String guardianName;
+    private String typeOfRelation;
+    private boolean dependent;
     // Third form
     private Person person;
     // Fourth form
@@ -20,19 +23,69 @@ public class Submission {
     // Sixth form
     private String lengthOfStay;
     // Seventh form
-    private String specialNeeds;
-    private Boolean needsInterpreter;
+    private String medicalNeeds;
+    private String conditionChanges;
+    private String otherNeeds;
 
     public Submission(){
     }
 
+    public String getConditionChanges() {
+        return conditionChanges;
+    }
+
+    public void setConditionChanges(String conditionChanges) {
+        this.conditionChanges = conditionChanges;
+    }
+
+    public String getGuardianName() {
+        return guardianName;
+    }
+
+    public void setGuardianName(String guardianName) {
+        this.guardianName = guardianName;
+    }
+
+    public String getMedicalNeeds() {
+        return medicalNeeds;
+    }
+
+    public void setMedicalNeeds(String medicalNeeds) {
+        this.medicalNeeds = medicalNeeds;
+    }
+
+    public String getOtherNeeds() {
+        return otherNeeds;
+    }
+
+    public void setOtherNeeds(String otherNeeds) {
+        this.otherNeeds = otherNeeds;
+    }
+
+    public String getTypeOfRelation() {
+        return typeOfRelation;
+    }
+
+    public void setTypeOfRelation(String typeOfRelation) {
+        this.typeOfRelation = typeOfRelation;
+    }
+
     public boolean isApplyingForSelf() {
-        return isApplyingForSelf;
+        return applyingForSelf;
     }
 
     public void setApplyingForSelf(boolean applyingForSelf) {
-        isApplyingForSelf = applyingForSelf;
+        this.applyingForSelf = applyingForSelf;
     }
+
+    public boolean isDependent() {
+        return dependent;
+    }
+
+    public void setDependent(boolean dependent) {
+        this.dependent = dependent;
+    }
+
 
     public String getRelation() {
         return relation;
@@ -50,9 +103,6 @@ public class Submission {
         this.person = person;
     }
 
-    public boolean isDependent() {
-        return isDependent;
-    }
 
     public Doctor getDoctor() {
         return doctor;
@@ -60,10 +110,6 @@ public class Submission {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public void setDependent(boolean dependent) {
-        isDependent = dependent;
     }
 
     public ArrayList<Dependent> getDependents() {
@@ -83,20 +129,5 @@ public class Submission {
         this.lengthOfStay = lengthOfStay;
     }
 
-    public Boolean getNeedsInterpreter() {
-        return needsInterpreter;
     }
 
-    public void setNeedsInterpreter(Boolean needsInterpreter) {
-        this.needsInterpreter = needsInterpreter;
-    }
-
-    public String getSpecialNeeds() {
-        return specialNeeds;
-    }
-
-    public void setSpecialNeeds(String specialNeeds) {
-        this.specialNeeds = specialNeeds;
-    }
-
-}

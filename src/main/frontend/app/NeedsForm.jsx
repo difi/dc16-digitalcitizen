@@ -25,7 +25,7 @@ export default class NeedsForm extends React.Component {
             this.props.previousStep(1);
         }
         //If no adress is possible to obtain, the previous step is step 3 - PersonWithNeedInfoForm
-        else if( this.props.fieldValues.adress==null){
+        else if( this.props.fieldValues.person.address.zipcode==null){
             this.props.previousStep(3);
         }
         //Else the previous step is step 5 - PersonWithNeedForm
