@@ -146,6 +146,7 @@ export default class Application extends React.Component {
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
@@ -169,7 +170,7 @@ export default class Application extends React.Component {
                 content = < SpecialNeeds
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
-                    nextStep={this.nextStep}
+                    nextStep={this.handleSubmit}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
 
@@ -180,7 +181,7 @@ export default class Application extends React.Component {
             <div>
                 {header}
                 {content}
-                <Button onClick={this.handleSubmit} visible={false}> Submit form </Button>
+
             </div>
         )
     }

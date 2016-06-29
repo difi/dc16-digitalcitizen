@@ -8,11 +8,12 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-
 var ReactDOM = require('react-dom');
 var checked = false;
+import {onlyLettersInString} from "./validation.js";
+import {onlyDigitsInString} from './validation.js'
 
-import checkPersonalnumberNo from'./validation.js';
+import {checkPersonalnumberNo} from'./validation.js';
 
 class PersonWithNeed extends React.Component {
     constructor(props) {
@@ -68,10 +69,20 @@ class PersonWithNeed extends React.Component {
     }
 
     handlePNRChange(event) {
-        this.setState({pnr: event.target.value});
+        console.log(event.target.value);
+        var text = onlyDigitsInString(event.target.value);
+        console.log(text);
+        this.setState({pnr: text});
     }
     handleNameChange(event) {
-        this.setState({name: event.target.value});
+        var text = onlyLettersInString(event.target.value);
+        this.setState({name: text});
+    }
+    handleKey(e){
+        const re = /[0-9]+/g;
+        if(!re.test(e.key)){
+            e.preventDefault();
+        }
     }
 
     render() {
@@ -96,6 +107,7 @@ class PersonWithNeed extends React.Component {
                                     placeholder="Fødselsnummer"
                                     ref="pno"
                                     value={this.state.pnr}
+                                    onKeyPress={this.handleKey}
                                     onChange={this.handlePNRChange}
                                     //Connects field to redux form component//
                                     {...pnr}
@@ -126,7 +138,7 @@ class PersonWithNeed extends React.Component {
                                     type="text"
                                     placeholder="Navn"
                                     ref="name"
-                                    defaultValue={this.state.name}
+                                    value={this.state.name}
                                     onChange={this.handleNameChange}
                                     {...name}/>
                             </Col>
@@ -165,7 +177,7 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeed = reduxForm({
     form: 'PersonWithNeed',
-    fields: ["pnr", "Navn"],
+    fields: ["pnr", "name"],
     validate
 }, null, null)(PersonWithNeed);
 

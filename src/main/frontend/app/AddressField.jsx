@@ -6,7 +6,8 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var ReactDOM = require('react-dom');
-
+import {onlyDigitsInString} from './validation.js'
+import {alphaNumericInString} from './validation.js'
 var AddressField = React.createClass({
 
     propTypes: {
@@ -27,13 +28,14 @@ var AddressField = React.createClass({
      * @param event
      */
     handleChange: function (event) {
-        this.setState({value: event.target.value});
+        var zipcode = onlyDigitsInString(event.target.value);
+        this.setState({value: zipcode});
 
         //We only make a call to the API if the number of characters in the input field is greater than 3.
-        if (event.target.value.length > 3) {
+        if (zipcode.length > 3) {
             $.ajax({
                 url: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&country='
-                + this.state.country + '&pnr=' + event.target.value,
+                + this.state.country + '&pnr=' + zipcode,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
@@ -50,7 +52,8 @@ var AddressField = React.createClass({
     },
 
     handleStreetChange: function (event) {
-        this.setState({street: event.target.value});
+        var street = alphaNumericInString(event.target.value);
+        this.setState({street: street});
     },
 
     /**Updates the country state when the user selects a new option in

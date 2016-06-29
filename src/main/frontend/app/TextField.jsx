@@ -47,7 +47,7 @@ var TextField = React.createClass({
                         type="text"
                         placeholder={this.state.value}
                         onChange={this.handleChange}/>
-                    <span>{errorMessage}</span>
+                
                     <FormControl.Feedback/>
                 </FormGroup>
             </Col>
