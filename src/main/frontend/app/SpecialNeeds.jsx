@@ -62,6 +62,22 @@ export default class SpecialNeeds extends React.Component {
 
     render() {
 
+<<<<<<< HEAD
+=======
+        var fieldsForm = fields.map(function (field, i) {
+            var textAreaRef;
+            switch (i) {
+                case 0:
+                    textAreaRef = "medicalNeeds";
+                    break;
+                case 1:
+                    textAreaRef = "conditionChanges";
+                    break;
+                case 2: textAreaRef = "otherNeeds";
+                    break;
+            }
+            
+>>>>>>> refs/heads/expo_vm
 
         return (
             <div>
