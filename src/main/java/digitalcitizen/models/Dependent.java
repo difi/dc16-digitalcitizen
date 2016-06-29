@@ -7,11 +7,45 @@ public class Dependent {
 
     // TODO: Superclass for Dependent and Person?
 
-    private String name;
-    private String address;
+    private String firstName;
+    private String lastName;
     private String telephone;
+    private String email;
+    private String relation;
 
     public Dependent(){
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
     }
 
     public String getTelephone() {
@@ -20,22 +54,6 @@ public class Dependent {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
 }

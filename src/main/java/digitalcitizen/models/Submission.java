@@ -120,7 +120,6 @@ public class Submission {
         this.dependents = dependents;
     }
 
-
     public String getLengthOfStay() {
         return lengthOfStay;
     }
