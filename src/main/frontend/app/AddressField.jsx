@@ -5,8 +5,9 @@ import dropdownContent from './dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-
-
+var ReactDOM = require('react-dom');
+import {onlyDigitsInString} from './validation.js'
+import {alphaNumericInString} from './validation.js'
 var AddressField = React.createClass({
 
     propTypes: {
@@ -18,7 +19,7 @@ var AddressField = React.createClass({
     },
 
     getInitialState: function () {
-        return {value: '', municipality: '', country: 'NO', street: ''};
+        return {value: this.props.address.zipcode, municipality: this.props.address.postal, country: this.props.address.country, street: this.props.address.streetAddress};
     },
 
     /**Makes a call to the Bring API with the postal code given by the user
@@ -27,13 +28,14 @@ var AddressField = React.createClass({
      * @param event
      */
     handleChange: function (event) {
-        this.setState({value: event.target.value});
+        var zipcode = onlyDigitsInString(event.target.value);
+        this.setState({value: zipcode});
 
         //We only make a call to the API if the number of characters in the input field is greater than 3.
-        if (event.target.value.length > 3) {
+        if (zipcode.length > 3) {
             $.ajax({
                 url: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&country='
-                + this.state.country + '&pnr=' + event.target.value,
+                + this.state.country + '&pnr=' + zipcode,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
@@ -50,7 +52,8 @@ var AddressField = React.createClass({
     },
 
     handleStreetChange: function (event) {
-        this.setState({street: event.target.value});
+        var street = alphaNumericInString(event.target.value);
+        this.setState({street: street});
     },
 
     /**Updates the country state when the user selects a new option in
@@ -65,6 +68,24 @@ var AddressField = React.createClass({
         this.setState({street: ''})
     },
 
+
+    getFieldValues(){
+
+        var country;
+        if (this.props.includeCountry) {
+            country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
+        }
+        else {
+            country = "NO";
+        }
+        return {
+            country: country,
+            streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
+            zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
+            postal: ReactDOM.findDOMNode(this.refs.postal).value
+        }
+    },
+
     render: function () {
         if (this.props.includeCountry) {
             return (
@@ -74,7 +95,8 @@ var AddressField = React.createClass({
                             <FormControl
                                 type="text"
                                 placeholder='Gateadresse'
-                                value={this.state.street}
+                                ref="streetAddress"
+                                value={this.props.address.streetAddress}
                                 onChange={this.handleStreetChange}/>
                         </Col>
                     </Row>
@@ -84,22 +106,26 @@ var AddressField = React.createClass({
                                 id='dropdown-list'
                                 options={dropdownContent.NATIONAL}
                                 labelField='country'
+                                ref="country"
                                 value={this.state.country}
+                                defaultValue = {this.props.address.country}
                                 valueField='code'
                                 onChange={this.handleDropdownChange}/>
                         </Col>
-                        <Col sm={3} md={3}>
+                        <Col sm={2} md={2}>
                             <FormControl
                                 type="text"
                                 placeholder='Postnummer'
-                                value={this.state.value}
+                                ref="zipcode"
+                                defaultValue={this.props.address.zipcode}
                                 onChange={this.handleChange}/>
                         </Col>
                         <Col sm={4} md={4}>
                             <FormControl
                                 type="text"
+                                ref="postal"
                                 placeholder='Poststed'
-                                value={this.state.municipality}
+                                defaultValue={this.props.address.postal}
                                 disabled/>
                         </Col>
                     </Row>
@@ -107,33 +133,36 @@ var AddressField = React.createClass({
             );
         } else {
             return (
-            <Col sm={7.5} md={8}>
-                <Row className="form-row-address">
-                    <Col sm={12} md={12}>
-                        <FormControl
-                            type="text"
-                            placeholder='Gateadresse'
-                            value={this.state.street}
-                            onChange={this.handleStreetChange}/>
-                    </Col>
-                </Row>
-                <Row className="form-row-address">
-                    <Col sm={5} md={5}>
-                        <FormControl
-                            type="text"
-                            placeholder='Postnummer'
-                            value={this.state.value}
-                            onChange={this.handleChange}/>
-                    </Col>
-                    <Col sm={7} md={7}>
-                        <FormControl
-                            type="text"
-                            placeholder='Poststed'
-                            value={this.state.municipality}
-                            disabled/>
-                    </Col>
-                </Row>
-            </Col>
+                <div>
+                    <Row className="form-row-address">
+                        <Col sm={12} md={12} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Adresse'
+                                ref="streetAddress"
+                                value={this.state.street}
+                                onChange={this.handleStreetChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={5} md={5} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Postnummer'
+                                ref="zipcode"
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
+                        </Col>
+                        <Col sm={7} md={7} className="from-col-address">
+                            <FormControl
+                                type="text"
+                                placeholder='Sted'
+                                ref="postal"
+                                value={this.state.municipality}
+                                disabled/>
+                        </Col>
+                    </Row>
+                </div>
             );
         }
     }

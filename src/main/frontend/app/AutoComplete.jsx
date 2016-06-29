@@ -18,7 +18,7 @@ function customWhere(arr, t) {
 
 var TypeAhead = React.createClass({
         getInitialState: function() {
-            return {value: '', index: -1, selected: true};
+            return {value: this.props.value, index: -1, selected: true};
         },
         handleClick: function(e) {
             this.setState({value: e.target.innerHTML, selected: true});
@@ -45,6 +45,11 @@ var TypeAhead = React.createClass({
         componentWillReceiveProps: function(nextProps) {
             this.setState({value: nextProps.value || '', index: -1, selected: true});
         },
+    
+        getFieldValue(){
+            return this.state.value;
+        },
+    
         render: function() {
             this.items = [];
 
@@ -67,7 +72,7 @@ var TypeAhead = React.createClass({
             }, this);
 
             return (
-                <Col sm={7.5} md={8}>
+                <Col>
                     <FormControl type="text" id={this.props.id} required className="form-control" value={this.state.value} placeholder={this.props.placeholder}
                            onChange={this.handleChange} onKeyDown={this.selectItem} onFocus={this.handleFocus} />
                     {searchResult}

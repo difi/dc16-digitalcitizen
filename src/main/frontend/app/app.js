@@ -1,13 +1,20 @@
 "use strict";
 
+
 import { Provider } from 'react-redux';
 import {createStore, combineReducers} from 'redux';
-import reducers from './reducers.js';
+import reducers from './unused/reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Application } from './Application.jsx';
+
+
+import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
+import Buttons from './unused/buttons.jsx';
+import GeneralPractitioner from './GeneralPractitioner.jsx';
+
+
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
@@ -55,7 +62,7 @@ var data = [
 ];
 
 
-ReactDOM.render( <Provider store={store}>
-    <Application data={data} />
-</Provider>, document.getElementById('content'));
 
+ReactDOM.render( <Provider store={store}>
+    <Application />
+</Provider>, document.getElementById('content'));

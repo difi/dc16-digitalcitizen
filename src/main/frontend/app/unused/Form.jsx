@@ -1,10 +1,10 @@
-import TextField from './TextField.jsx';
-import TypeAhead from './AutoComplete.jsx';
+import TextField from '../TextField.jsx';
+import TypeAhead from '../AutoComplete.jsx';
 import React from 'react';
-import DropdownList from './DropdownList.jsx';
-import AddressField from './AddressField.jsx';
-import dropdownContent from './dropdown-list-content.js';
-import TextArea from './TextArea.jsx'; 
+import DropdownList from '../DropdownList.jsx';
+import AddressField from '../AddressField.jsx';
+import dropdownContent from '../dropdown-list-content.js';
+import TextArea from '../TextArea.jsx'; 
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -90,7 +90,7 @@ export class Form extends React.Component {
                     else if (field.type =="TextArea"){
                         return (
                             <Row className="form-row">
-                                <Col sm={3} md={3}>
+                                <Col sm={2} md={2}>
                                     <label>{field.name} </label>
                                 </Col>
                                 <TextArea key={i} text={field.name}/>
