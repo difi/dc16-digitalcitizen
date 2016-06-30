@@ -50,6 +50,7 @@ var fieldValues = {
 };
 
 describe("NeedsForm", function() {
+
     //Radio-buttons
     it('should have RadioGroup', function () {
         //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
@@ -74,4 +75,21 @@ describe("NeedsForm", function() {
         //Expect to find a button with ID back.
         expect(wrapper.find('#back')).to.have.length(1);
     });
+<<<<<<< HEAD
+
+    //TODO: Sjekk at de gjør det de skal
+    /*it('back button should go to the previous page when pushed', function () {
+        const wrapper = shallow(<NeedsForm/>);
+        const backbutton = wrapper.find('.button-next');
+        wrapper.setState({adress: null});
+        backbutton.simulate('click');
+        expect(this.props.previousStep).to.equal('1');
+    });
+*/
+
 });
+    //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
+    //they are "react-radio-group" elements
+=======
+});
+>>>>>>> refs/remotes/origin/master
