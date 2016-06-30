@@ -75,7 +75,6 @@ describe("NeedsForm", function() {
         //Expect to find a button with ID back.
         expect(wrapper.find('#back')).to.have.length(1);
     });
-<<<<<<< HEAD
 
     //TODO: Sjekk at de gjør det de skal
     /*it('back button should go to the previous page when pushed', function () {
@@ -88,8 +87,5 @@ describe("NeedsForm", function() {
 */
 
 });
-    //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
-    //they are "react-radio-group" elements
-=======
-});
->>>>>>> refs/remotes/origin/master
+
+

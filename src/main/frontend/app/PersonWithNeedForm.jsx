@@ -12,6 +12,7 @@ var ReactDOM = require('react-dom');
 var checked = false;
 import {onlyLettersInString} from "./validation.js";
 import {onlyDigitsInString} from './validation.js'
+export const fields =  ["pnr", "name"];
 
 import {checkPersonalnumberNo} from'./validation.js';
 
@@ -173,8 +174,8 @@ class PersonWithNeed extends React.Component {
                                     type="text"
                                     placeholder="Fødselsnummer"
                                     ref="pno"
-                                    value={this.state.pnr}
-                                    onKeyPress={this.handleKey}
+                                    //value={this.state.pnr}
+                                    //onKeyPress={this.handleKey}
                                     onChange={this.handlePNRChange}
                                     //Connects field to redux form component//
                                     {...pnr}
@@ -240,8 +241,9 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeed = reduxForm({
     form: 'PersonWithNeed',
-    fields: ["pnr", "name"],
+    fields,
+    destroyOnUnmount: false,
     validate
-}, null, null)(PersonWithNeed);
+})(PersonWithNeed);
 
 export default PersonWithNeed

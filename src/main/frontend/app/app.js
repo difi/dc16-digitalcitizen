@@ -16,9 +16,7 @@ import GeneralPractitioner from './GeneralPractitioner.jsx';
 import PersonWithNeedForm from './PersonWithNeedForm.jsx';
 
 
-
-const reducer = combineReducers(reducers);
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
