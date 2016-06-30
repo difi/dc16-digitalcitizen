@@ -1,7 +1,7 @@
 /**
  * Created by camp-cha on 24.06.2016.
  */
-
+import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
 var Row = require('react-bootstrap/lib/Row');
@@ -21,7 +21,8 @@ class PersonWithNeed extends React.Component {
         this.state = {
             isChecked: this.props.fieldValues.gotPNRnumber,
             pnr: this.props.fieldValues.person.pnr,
-            name: this.props.fieldValues.person.name
+            name: this.props.fieldValues.person.name,
+            validForm: (this.props.fieldValues.pnr && this.props.fieldValues.name) || (this.props.fieldValues.isChecked && this.props.fieldValues.name)
 
         };
         this.handlePno = this.handlePno.bind(this);
@@ -29,6 +30,7 @@ class PersonWithNeed extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.handlePNRChange = this.handlePNRChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleKey = this.handleKey.bind(this);
     }
 
     handleClickBack() {
@@ -50,7 +52,7 @@ class PersonWithNeed extends React.Component {
 
     saveFieldValues() {
         var data = {
-            gotPNRNumber: checked,
+            gotPNRnumber: checked,
             person: {
                 pnr: ReactDOM.findDOMNode(this.refs.pno).value,
                 name: ReactDOM.findDOMNode(this.refs.name).value,
@@ -65,14 +67,13 @@ class PersonWithNeed extends React.Component {
     handlePno() {
         this.setState({isChecked: !this.state.isChecked});
         checked = !this.state.isChecked;
-
     }
 
     handlePNRChange(event) {
-        console.log(event.target.value);
+
         var text = onlyDigitsInString(event.target.value);
         console.log(text);
-        this.setState({pnr: text});
+
     }
     handleNameChange(event) {
         var text = onlyLettersInString(event.target.value);
@@ -83,14 +84,80 @@ class PersonWithNeed extends React.Component {
         if(!re.test(e.key)){
             e.preventDefault();
         }
+        this.setState({pnr: e.target.value});
+    }
+    componentWillUpdate(nextProps, nextState) {
+        nextState.validForm = (nextState.pnr && nextState.name) || (nextState.isChecked && nextState.name);
     }
 
     render() {
+
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, name}} = this.props;
         if(this.state.isChecked){
-            //TODO: Gray out and empty PNR Number
+            return(
+                <form>
+                    <componentClass>
+                        <label className="form-header">Informasjon om person med behov</label>
+                        <div className="form-container">
+                            <Row className="form-row">
+                                <Col sx={4} md={4}>
+                                    <label>Fødselsnummer</label>
+                                </Col>
+                                <Col sx={8} md={8}>
+                                    <FormControl
+                                        type="text"
+                                        placeholder="Fødselsnummer"
+                                        ref="pno"
+                                        //value={this.state.pnr}
+                                        //onChange={this.handlePNRChange}
+                                        //{...pnr} Removing this resets the text field
+                                    disabled/>
+                                    {pnr.touched && pnr.error && <div>{pnr.error}</div>}
+
+                                </Col>
+                            </Row>
+                            <Row className="form-row">
+                                <Col sx={4} md={4}></Col>
+                                <Col sx={8} md={8}>
+                                    <input type="checkbox" name="noPno" checked={this.state.isChecked}
+                                           onChange={this.handlePno}/> Jeg kan ikke fødselsnummeret
+                                </Col>
+                                <Col sm={0} md={5}></Col>
+                            </Row>
+
+                            <Row className="form-row-name">
+                                <Col sx={4} md={4}>
+                                    <label>Navn</label>
+                                </Col>
+                                <Col sx={8} md={8}>
+                                    <FormControl
+                                        type="text"
+                                        placeholder="Navn"
+                                        ref="name"
+                                        defaultValue={this.state.name}
+                                        onChange={this.handleNameChange}
+                                        {...name}/>
+                                </Col>
+                                <Col sm={0} md={5}></Col>
+                            </Row>
+                        </div>
+
+                        <Row className="back-forward-buttons">
+                            <Col sx={2} sm={2} md={2}>
+                                <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                                    Tilbake</Button>
+                            </Col>
+                            <Col sx={7} sm={8} md={8}></Col>
+                            <Col sx={2} sm={2} md={2}>
+                                <Button onClick={this.handleClickNext} className="button-next"
+                                        bsStyle="success">Neste &rarr;</Button>
+                            </Col>
+                        </Row>
+                    </componentClass>
+                </form>
+            )
         }
         return (
             <form>
@@ -111,9 +178,7 @@ class PersonWithNeed extends React.Component {
                                     onChange={this.handlePNRChange}
                                     //Connects field to redux form component//
                                     {...pnr}
-
                                 />
-
                                 {pnr.touched && pnr.error && <div>{pnr.error}</div>}
 
                             </Col>
@@ -133,19 +198,17 @@ class PersonWithNeed extends React.Component {
                                 <label>Navn</label>
                             </Col>
                             <Col sx={8} md={8}>
-
                                 <FormControl
                                     type="text"
                                     placeholder="Navn"
                                     ref="name"
                                     value={this.state.name}
                                     onChange={this.handleNameChange}
-                                    {...name}/>
+                                    />
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
                     </div>
-
 
                     <Row className="back-forward-buttons">
                         <Col sx={2} sm={2} md={2}>
@@ -154,7 +217,7 @@ class PersonWithNeed extends React.Component {
                         </Col>
                         <Col sx={7} sm={8} md={8}></Col>
                         <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext} className="button-next"
+                            <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
                                     bsStyle="success">Neste &rarr;</Button>
                         </Col>
                     </Row>

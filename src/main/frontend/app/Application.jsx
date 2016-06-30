@@ -18,6 +18,7 @@ import PersonWithNeedForm from './PersonWithNeedForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
+import AddDependent from './AddDependent';
 
 
 
@@ -80,7 +81,7 @@ export default class Application extends React.Component {
             step: this.state.step + step
         })
     }
-    
+
     saveValues(field_value) {
         fieldValues = assign({}, fieldValues, field_value);
         console.log(fieldValues);
@@ -167,10 +168,17 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
-                content = < SpecialNeeds
+                content = < AddDependent
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.handleSubmit}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 8:
+                content = < SpecialNeeds
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
+                    nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
         }

@@ -38,7 +38,7 @@ var TextField = React.createClass({
 
 
     render: function () {
-      
+
         return (
 
             <Col sm={7.5} md={8}>
@@ -47,7 +47,6 @@ var TextField = React.createClass({
                         type="text"
                         placeholder={this.state.value}
                         onChange={this.handleChange}/>
-                
                     <FormControl.Feedback/>
                 </FormGroup>
             </Col>
@@ -58,4 +57,3 @@ var TextField = React.createClass({
 });
 
 export default TextField;
-

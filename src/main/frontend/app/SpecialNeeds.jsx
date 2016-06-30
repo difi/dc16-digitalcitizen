@@ -23,14 +23,14 @@ export default class SpecialNeeds extends React.Component {
 
     handleClickBack() {
         this.saveFieldsValues();
-        console.log("State 6");
-        (this.props.previousStep(6));
+        console.log("State 7");
+        (this.props.previousStep(7));
     }
 
     handleClickNext() {
         this.saveFieldsValues();
-        console.log("State 7");
-        this.props.nextStep(7);
+        console.log("State 8");
+        this.props.nextStep(8);
     }
 
     saveFieldsValues() {
@@ -91,7 +91,7 @@ export default class SpecialNeeds extends React.Component {
                             <FormControl componentClass="textarea" ref="otherNeeds" value={this.state.otherNeeds} onChange={this.handleOtherChange}/>
                         </Col>
                     </Row>
-                    </div>
+                </div>
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
@@ -107,5 +107,4 @@ export default class SpecialNeeds extends React.Component {
             </div>
         );
     }
-
 }
