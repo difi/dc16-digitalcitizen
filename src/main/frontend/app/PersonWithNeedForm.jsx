@@ -112,8 +112,8 @@ class PersonWithNeed extends React.Component {
                                         ref="pno"
                                         //value={this.state.pnr}
                                         //onChange={this.handlePNRChange}
-                                        //{...pnr} Removing this resets the text field
-                                    disabled/>
+                                        //{...pnr}
+                                        disabled/>
                                     {pnr.touched && pnr.error && <div>{pnr.error}</div>}
 
                                 </Col>
@@ -138,7 +138,8 @@ class PersonWithNeed extends React.Component {
                                         ref="name"
                                         defaultValue={this.state.name}
                                         onChange={this.handleNameChange}
-                                        {...name}/>
+                                        {...name}
+                                    />
                                 </Col>
                                 <Col sm={0} md={5}></Col>
                             </Row>
@@ -204,7 +205,8 @@ class PersonWithNeed extends React.Component {
                                     ref="name"
                                     value={this.state.name}
                                     onChange={this.handleNameChange}
-                                    />
+                                    {...name}
+                                />
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
