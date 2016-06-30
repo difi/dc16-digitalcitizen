@@ -5,6 +5,7 @@
 import React from 'react';
 
 import AddressField from './AddressField.jsx';
+import NavigationButtons from './NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -137,20 +138,11 @@ class PersonWithNeedInfo extends React.Component {
                             </Col>
                         </Row>
                     </div>
-
-                    <Row className="back-forward-buttons">
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                                Tilbake</Button>
-                        </Col>
-                        <Col sx={7} sm={8} md={8}></Col>
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext} disabled={!this.state.validForm}className="button-next"
-                                    bsStyle="success">Neste &rarr;</Button>
-
-                        </Col>
-                    </Row>
-
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        disabled={!this.state.validForm}
+                    />
                 </div>
             </form>
         )

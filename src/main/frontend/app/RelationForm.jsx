@@ -1,5 +1,6 @@
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
+import NavigationButtons from './NavigationButtons.jsx';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
@@ -9,7 +10,8 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var PageItem = require('react-bootstrap/lib/PageItem');
+
+
 var ReactDOM = require('react-dom');
 import {onlyLettersInString} from "./validation.js";
 
@@ -257,18 +259,11 @@ export default class RelationForm extends React.Component {
                     </RadioGroup>
                     {content}
                 </div>
-                <hr />
-                <Row style={{marginTop: '15px'}}>
-                    <Col xs={6} sm={6} md={6} lg={6}>
-                        <Button className="back-btn" onClick={this.handleClickBack}>&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col xs={6} sm={6} md={6} lg={6}>
-                        <Button className="next-btn" disabled={!this.state.validForm} onClick={this.handleClickNext}>
-                            Neste &rarr;
-                    </Button>
-                </Col>
-            </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!this.state.validForm}
+                />
     </div>
     )
     }

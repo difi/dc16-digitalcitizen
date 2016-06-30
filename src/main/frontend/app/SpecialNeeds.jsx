@@ -1,9 +1,11 @@
 import React from 'react';
+import NavigationButtons from './NavigationButtons.jsx';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
+
 export default class SpecialNeeds extends React.Component {
 
     constructor(props) {
@@ -93,17 +95,11 @@ export default class SpecialNeeds extends React.Component {
                     </Row>
                 </div>
 
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
-                                bsStyle="success">Send inn søknad &rarr;</Button>
-                    </Col>
-                </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!this.state.validForm}
+                />
             </div>
         );
     }

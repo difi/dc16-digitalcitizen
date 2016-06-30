@@ -4,6 +4,8 @@
 import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import NavigationButtons from './NavigationButtons.jsx';
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -144,17 +146,11 @@ class PersonWithNeed extends React.Component {
                             </Row>
                         </div>
 
-                        <Row className="back-forward-buttons">
-                            <Col sx={2} sm={2} md={2}>
-                                <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                                    Tilbake</Button>
-                            </Col>
-                            <Col sx={7} sm={8} md={8}></Col>
-                            <Col sx={2} sm={2} md={2}>
-                                <Button onClick={this.handleClickNext} className="button-next"
-                                        bsStyle="success">Neste &rarr;</Button>
-                            </Col>
-                        </Row>
+                        <NavigationButtons
+                            handleClickBack={this.handleClickBack}
+                            handleClickNext={this.handleClickNext}
+                            disabled={false}
+                        />
                     </componentClass>
                 </form>
             )
@@ -209,18 +205,11 @@ class PersonWithNeed extends React.Component {
                             <Col sm={0} md={5}></Col>
                         </Row>
                     </div>
-
-                    <Row className="back-forward-buttons">
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                                Tilbake</Button>
-                        </Col>
-                        <Col sx={7} sm={8} md={8}></Col>
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
-                                    bsStyle="success">Neste &rarr;</Button>
-                        </Col>
-                    </Row>
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        disabled={!this.state.validForm}
+                    />
                 </componentClass>
             </form>
         )

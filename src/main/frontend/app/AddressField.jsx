@@ -115,7 +115,7 @@ var AddressField = React.createClass({
                         <Col sm={2} md={2}>
                             <FormControl
                                 type="text"
-                                placeholder='Postnummer'
+                                placeholder='Postnr.'
                                 ref="zipcode"
                                 defaultValue={this.props.address.zipcode}
                                 onChange={this.handleChange}/>

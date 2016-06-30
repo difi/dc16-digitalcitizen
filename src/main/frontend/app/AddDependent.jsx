@@ -5,6 +5,12 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import DependentForm from './DependentForm.jsx';
 require('!style!css!less!./Application.less');
+import NavigationButtons from './NavigationButtons.jsx';
+
+// TODO: Remove "Add Dependent"-button when 3 forms are displayed
+
+var DISPLAY_FORM = 'block';
+var HIDE_FORM = 'none';
 
 export default class AddDependent extends React.Component {
     constructor() {
@@ -13,8 +19,8 @@ export default class AddDependent extends React.Component {
             clicked: false,
             numDep: 1,
             showForm1: true,
-            showForm2: false,
-            showForm3: false
+            showForm2: HIDE_FORM,
+            showForm3: HIDE_FORM
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClickForm2 = this.handleClickForm2.bind(this);
@@ -23,7 +29,6 @@ export default class AddDependent extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
     }
-
 
     handleClickBack() {
         this.saveFieldValues();
@@ -35,22 +40,19 @@ export default class AddDependent extends React.Component {
         this.props.nextStep(8);
     }
 
-
     handleClick() {
 
         if (this.state.numDep < 3) {
-            if (!this.state.showForm2) {
+            if (this.state.showForm2 == HIDE_FORM) {
                 console.log("vis form 2");
-                this.refs.form2.showForm();
                 this.setState({
-                    showForm2: true,
+                    showForm2: DISPLAY_FORM,
                     numDep: this.state.numDep += 1
                 });
             } else {
                 console.log("vis form 3");
-                this.refs.form3.showForm();
                 this.setState({
-                    showForm3: true,
+                    showForm3: DISPLAY_FORM,
                     numDep: this.state.numDep += 1
                 });
             }
@@ -60,10 +62,10 @@ export default class AddDependent extends React.Component {
     saveFieldValues() {
         var form2Data = null;
         var form3Data = null;
-        if (this.state.showForm2) {
+        if (this.state.showForm2 == DISPLAY_FORM) {
             form2Data = this.refs.form2.getFieldValues()
         }
-        if (this.state.showForm3) {
+        if (this.state.showForm3 == DISPLAY_FORM) {
             form3Data = this.refs.form3.getFieldValues()
         }
         var data = {
@@ -77,18 +79,17 @@ export default class AddDependent extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
-
-
+    
     handleClickForm2() {
         this.setState({
-            showForm2: false,
+            showForm2: HIDE_FORM,
             numDep: this.state.numDep -= 1
         });
     }
 
     handleClickForm3() {
         this.setState({
-            showForm3: false,
+            showForm3: HIDE_FORM,
             numDep: this.state.numDep -= 1
         });
     }
@@ -98,40 +99,30 @@ export default class AddDependent extends React.Component {
             <div>
                 <div>
                     <label className="form-header"> Informasjon om pårørende </label>
-                    <div className="dependent-wrapper">
-                        <div id="dep1">
+                    <div>
+                        <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" showForm={this.state.showForm1} showDeleteButton={false}/>
                         </div>
                         <br/>
-                        <div id="dep2">
-                            <DependentForm ref="form2" showForm={this.state.showForm2} onClick={this.handleClickForm2}
+                        <div id="dep2" style={{display: this.state.showForm2}} className="depedent-form-wrapper">
+                            <DependentForm ref="form2" onClick={this.handleClickForm2}
                                            showDeleteButton={true}/>
                         </div>
                         <br/>
-                        <div id="dep3">
-                            <DependentForm ref="form3" showForm={this.state.showForm3} onClick={this.handleClickForm3}
+                        <div id="dep3" style={{display: this.state.showForm3}} className="depedent-form-wrapper">
+                            <DependentForm ref="form3" onClick={this.handleClickForm3}
                                            showDeleteButton={true}/>
                         </div>
                     </div>
                 </div>
-                <Row className="addDepButton">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClick} bsStyle="info">Legg til pårørende</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={4}> </Col>
+                <Row className="addDepButton from-row">
+                        <Button onClick={this.handleClick} bsStyle="info">+ Legg til pårørende</Button>
                 </Row>
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
-
-                    </Col>
-                </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={false} // TODO update to !this.state.validform
+                />
             </div>
         );
     }
