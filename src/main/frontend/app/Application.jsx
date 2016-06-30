@@ -81,7 +81,7 @@ export default class Application extends React.Component {
             step: this.state.step + step
         })
     }
-    
+
     saveValues(field_value) {
         fieldValues = assign({}, fieldValues, field_value);
         console.log(fieldValues);

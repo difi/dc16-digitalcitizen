@@ -4,6 +4,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
+
 export default class NeedsForm extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,8 @@ export default class NeedsForm extends React.Component {
 
         //None of the radio-buttons are chosen
         this.state = {
-            value: this.props.fieldValues.lengthOfStay
+            value: this.props.fieldValues.lengthOfStay,
+            validForm: this.props.fieldValues.lengthOfStay
         };
 
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -21,14 +23,14 @@ export default class NeedsForm extends React.Component {
     //Handle the click on the back-button
     handleClickBack() {
         //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
-        if( this.props.fieldValues.isApplyingForSelf){
+        if( this.props.fieldValues.applyingForSelf){
             this.props.previousStep(1);
         }
         //If no adress is possible to obtain, the previous step is step 3 - PersonWithNeedInfoForm
         else if( this.props.fieldValues.person.address.zipcode==null){
             this.props.previousStep(3);
         }
-        //Else the previous step is step 5 - PersonWithNeedForm
+        //Else the previous step is step 5 - General Practitioner
         else{
             this.props.previousStep(5);
         }
@@ -57,6 +59,9 @@ export default class NeedsForm extends React.Component {
             value: r
         });
     }
+    componentWillUpdate(nextProps, nextState) {
+        nextState.validForm = nextState.value;
+    }
 
     //RadioGroup: Showing radio-buttons. Call handleChange when a button is clicked, but
     // do not send an argument, because react already knows which argument to use.
@@ -80,12 +85,12 @@ export default class NeedsForm extends React.Component {
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                        <Button id="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
+                        <Button id="next" onClick={this.handleClickNext} disabled={!this.state.validForm}className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>

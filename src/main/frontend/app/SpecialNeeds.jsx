@@ -91,7 +91,7 @@ export default class SpecialNeeds extends React.Component {
                             <FormControl componentClass="textarea" ref="otherNeeds" value={this.state.otherNeeds} onChange={this.handleOtherChange}/>
                         </Col>
                     </Row>
-                    </div>
+                </div>
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
@@ -107,5 +107,4 @@ export default class SpecialNeeds extends React.Component {
             </div>
         );
     }
-
 }

@@ -23,13 +23,15 @@ class PersonWithNeedInfo extends React.Component {
         super(props);
         this.state = {
             name: this.props.fieldValues.person.name,
-            number: this.props.fieldValues.person.telephone
+            number: this.props.fieldValues.person.telephone,
+            validForm: false
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleNumberChange = this.handleNumberChange.bind(this);
+        this.handleKey=this.handleKey.bind(this);
     }
 
     handleClickBack() {
@@ -70,7 +72,7 @@ class PersonWithNeedInfo extends React.Component {
     handleNumberChange(event){
         var text = onlyDigitsInString(event.target.value);
         this.setState({
-            name: text
+            number: text
         })
     }
     handleKey(e){
@@ -78,6 +80,12 @@ class PersonWithNeedInfo extends React.Component {
         if(!re.test(e.key)){
             e.preventDefault();
         }
+        this.setState({
+            number: e.target.value
+        })
+    }
+    componentWillUpdate(nextProps, nextState) {
+        nextState.validForm = (nextState.name && nextState.number );
     }
 
     render() {
@@ -137,7 +145,7 @@ class PersonWithNeedInfo extends React.Component {
                         </Col>
                         <Col sx={7} sm={8} md={8}></Col>
                         <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext} className="button-next"
+                            <Button onClick={this.handleClickNext} disabled={!this.state.validForm}className="button-next"
                                     bsStyle="success">Neste &rarr;</Button>
 
                         </Col>
