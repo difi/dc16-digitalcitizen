@@ -3,7 +3,7 @@
 import React from 'react';
 import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
-require('!style!css!less!./Application.less');
+//require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
 import WhosSearching from './WhosSearchingForm.jsx';
@@ -173,15 +173,16 @@ export default class Application extends React.Component {
                     nextStep={this.handleSubmit}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
-
-
         }
 
         return (
             <div>
                 {header}
+                <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
+                    <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
                 {content}
-
+                    </Col>
+            </Col>
             </div>
         )
     }
