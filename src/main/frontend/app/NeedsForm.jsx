@@ -4,6 +4,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
+
 export default class NeedsForm extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +29,7 @@ export default class NeedsForm extends React.Component {
         else if( this.props.fieldValues.person.address.zipcode==null){
             this.props.previousStep(3);
         }
-        //Else the previous step is step 5 -
+        //Else the previous step is step 5 - General Practitioner
         else{
             this.props.previousStep(5);
         }
@@ -80,12 +81,12 @@ export default class NeedsForm extends React.Component {
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                        <Button id="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
+                        <Button id="next" onClick={this.handleClickNext} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>
