@@ -8,6 +8,7 @@ var ReactDOM= require('react-dom');
 import DropdownList from './DropdownList.jsx';
 var FormControl = require('react-bootstrap/lib/FormControl');
 import dropdownContent from './dropdown-list-content.js';
+require('!style!css!less!./Application.less');
 
 
 export default class DependentForm extends React.Component {
@@ -21,6 +22,7 @@ export default class DependentForm extends React.Component {
 
     }
 
+    /*
     saveFieldsValues() {
         // Get values via this.refs
         var data = {
@@ -32,6 +34,7 @@ export default class DependentForm extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
+    */
 
     handleClickRemove() {
         this.setState({
@@ -39,7 +42,7 @@ export default class DependentForm extends React.Component {
         });
         this.props.onClick();
     }
-    
+
     showForm(){
         this.setState({
             showForm: true
@@ -57,8 +60,7 @@ export default class DependentForm extends React.Component {
     }
 
     render() {
-
-        var deleteButton = this.props.showDeleteButton ? <Button onClick={this.handleClickRemove}>X</Button> : '';
+        var deleteButton = this.props.showDeleteButton ? <Button className="close" aria-label="Close" onClick={this.handleClickRemove}><span aria-hidden="true">&times;</span></Button> : '';
 
         if (this.state.showForm) {
             var fields = ["Fornavn", "Etternavn", "Telefon", "E-post"];
@@ -91,11 +93,11 @@ export default class DependentForm extends React.Component {
                 )
             });
             return (
-                <div>
-                    <div className="form-container">
-                        {deleteButton}
+                <div className="form-style-10">
+                    {deleteButton}
+                    <div class="section"><h4>Pårørende</h4></div>
+                    <div className="inner-wrap">
                         {fieldsForm}
-
                         <Row className="form-row-special">
                             <Col sm={4} md={4}>
                                 <label className="from-col-address">Relasjon</label>
@@ -113,7 +115,6 @@ export default class DependentForm extends React.Component {
         }
     }
 }
-
 
 
 

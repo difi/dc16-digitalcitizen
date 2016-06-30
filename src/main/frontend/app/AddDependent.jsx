@@ -4,7 +4,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import DependentForm from './DependentForm.jsx';
-import dropdownContent from './dropdown-list-content.js';
+require('!style!css!less!./Application.less');
 
 export default class AddDependent extends React.Component {
     constructor() {
@@ -98,18 +98,20 @@ export default class AddDependent extends React.Component {
             <div>
                 <div>
                     <label className="form-header"> Informasjon om pårørende </label>
-                    <div id="dep1">
-                        <DependentForm ref="form1" showForm={this.state.showForm1} showDeleteButton={false}/>
-                    </div>
-                    <br/>
-                    <div id="dep2">
-                        <DependentForm ref="form2" showForm={this.state.showForm2} onClick={this.handleClickForm2}
-                                       showDeleteButton={true}/>
-                    </div>
-                    <br/>
-                    <div id="dep3">
-                        <DependentForm ref="form3" showForm={this.state.showForm3} onClick={this.handleClickForm3}
-                                       showDeleteButton={true}/>
+                    <div className="dependent-wrapper">
+                        <div id="dep1">
+                            <DependentForm ref="form1" showForm={this.state.showForm1} showDeleteButton={false}/>
+                        </div>
+                        <br/>
+                        <div id="dep2">
+                            <DependentForm ref="form2" showForm={this.state.showForm2} onClick={this.handleClickForm2}
+                                           showDeleteButton={true}/>
+                        </div>
+                        <br/>
+                        <div id="dep3">
+                            <DependentForm ref="form3" showForm={this.state.showForm3} onClick={this.handleClickForm3}
+                                           showDeleteButton={true}/>
+                        </div>
                     </div>
                 </div>
                 <Row className="addDepButton">
