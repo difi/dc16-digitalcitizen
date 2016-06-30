@@ -14,7 +14,9 @@ import NeedsForm from '../app/NeedsForm.jsx';
 
 describe("NeedsForm", function() {
     it('should have two radiobuttons', function () {
-        
+        const app = mount(<Application/>);
+
+
     });
 
     //Sjekk at radio-knappene eksisterer

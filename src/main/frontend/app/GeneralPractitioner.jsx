@@ -10,12 +10,14 @@ export default class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.fieldValues.doctor.name
+            name: this.props.fieldValues.doctor.name,
+            validForm: this.props.fieldValues.doctor.name
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.handleChange = this.handleChange.bind(this);
+
     }
 
     handleClickBack() {
@@ -38,11 +40,18 @@ export default class GeneralPractitioner extends React.Component {
         console.log(data);
     }
     handleChange(event){
-        this.setState({name: event.target.value})
+        console.log("Handles change");
+        this.setState({name: event.target.value,
+        validForm: event.target.value})
     }
+
+
+
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         var name = this.state.name;
+        console.log(name);
+
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
@@ -64,7 +73,7 @@ export default class GeneralPractitioner extends React.Component {
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
+                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>

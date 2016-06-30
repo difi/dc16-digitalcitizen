@@ -25,7 +25,8 @@ export default class RelationForm extends React.Component {
 
                     typeOfRelation: this.props.fieldValues.typeOfRelation,
                     verger: null,
-                    isDependent: this.props.fieldValues.dependent
+                    isDependent: this.props.fieldValues.dependent,
+                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.guardianRelation)
                 };
                 break;
 
@@ -37,7 +38,8 @@ export default class RelationForm extends React.Component {
 
                     typeOfRelation: this.props.fieldValues.typeOfRelation,
                     verger: null,
-                    isDependent: this.props.fieldValues.dependent
+                    isDependent: this.props.fieldValues.dependent,
+                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.typeOfRelation)
                 };
                 break;
             case "other":
@@ -47,7 +49,8 @@ export default class RelationForm extends React.Component {
 
                     typeOfRelation: this.props.fieldValues.typeOfRelation,
                     verger: null,
-                    isDependent: this.props.fieldValues.dependent
+                    isDependent: this.props.fieldValues.dependent,
+                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.typeOfRelation)
                 };
                 break;
             default:
@@ -56,7 +59,8 @@ export default class RelationForm extends React.Component {
 
                     typeOfRelation: this.props.fieldValues.typeOfRelation,
                     verger: null,
-                    isDependent: this.props.fieldValues.dependent
+                    isDependent: this.props.fieldValues.dependent,
+                    validForm: false
                 }
         }
 
@@ -144,8 +148,13 @@ export default class RelationForm extends React.Component {
         });
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        nextState.validForm = (nextState.value && (nextState.otherRelation || nextState.familyRelation || nextState.guardianRelation));
+    }
+
     render() {
         var content = <p/>;
+
 
         switch (this.state.value) {
             case "guardian":
@@ -263,7 +272,7 @@ export default class RelationForm extends React.Component {
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} className="button-next"
+                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>

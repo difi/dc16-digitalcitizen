@@ -24,7 +24,10 @@ var TypeAhead = React.createClass({
             this.setState({value: e.target.innerHTML, selected: true});
         },
         handleChange: function(e) {
+            if(e.target.value.length == 1 && e.target.value.length==0){
+            this.props.onChange(e);}
             this.setState({value: e.target.value, selected: false, index: 0});
+
         },
         selectItem: function(e) {
             if (this.state.selected) return;
