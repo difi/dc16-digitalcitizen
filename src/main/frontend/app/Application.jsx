@@ -20,8 +20,6 @@ import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
 
 
-
-
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 var fieldValues = {
@@ -131,45 +129,48 @@ export default class Application extends React.Component {
                 break;
             case 2:
                 content = <RelationForm
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    name = {fieldValues.person.name}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    name = {fieldValues.person.name}/>
+
                 break;
             case 5:
                 content = <GeneralPractitioner
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
                 content = < NeedsForm
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
                 content = < SpecialNeeds
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.handleSubmit}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;

@@ -168,4 +168,14 @@ var AddressField = React.createClass({
     }
 });
 
+
+
+
+AddressField = reduxForm({
+    form: 'AddressField',
+    fields: ["address", "zipcode"],
+    destroyOnUnmount: false,
+}, null, null)(AddressField);
+
+
 export default AddressField;
