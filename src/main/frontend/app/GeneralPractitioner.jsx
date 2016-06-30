@@ -40,7 +40,7 @@ export default class GeneralPractitioner extends React.Component {
         console.log(data);
     }
     handleChange(event){
-        console.log("Handles change");
+        
         this.setState({name: event.target.value,
         validForm: event.target.value})
     }
@@ -50,7 +50,7 @@ export default class GeneralPractitioner extends React.Component {
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         var name = this.state.name;
-        console.log(name);
+        
 
         return (
             <componentClass>
