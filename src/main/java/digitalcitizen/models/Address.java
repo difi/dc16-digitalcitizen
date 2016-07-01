@@ -14,6 +14,13 @@ public class Address {
     public Address(){
     }
 
+    public Address(String postal, String country, String streetAddress, String zipcode) {
+        this.postal = postal;
+        this.country = country;
+        this.streetAddress = streetAddress;
+        this.zipcode = zipcode;
+    }
+
     public String getPostal() {
         return postal;
     }
