@@ -40,9 +40,15 @@ class PersonWithNeedInfo extends React.Component {
 
     }
 
-    saveFieldValues() {
+    saveFieldValues(name, number) {
         // Get values via this.refs
-        var address = this.refs.addressfield.getFieldValues();
+        const {fields: {street, zipcode, postal}} = this.props;
+        var address = {
+            street: street.value,
+            zipcode: zipcode.value,
+            postal: postal.value,
+            country: "NO"
+        }
         var data = {
             person: {
                 pnr: this.props.fieldValues.person.pnr,
@@ -58,8 +64,8 @@ class PersonWithNeedInfo extends React.Component {
 
 
     render() {
-        const {fields: {name, number}} = this.props;
-        var valid = name.value && number.value;
+        const {fields: {name, number, street, zipcode}} = this.props;
+        var valid = name.value && number.value && street.value && zipcode.value;
         console.log(valid);
         return (
             <form>
@@ -75,7 +81,7 @@ class PersonWithNeedInfo extends React.Component {
                                     type="text"
                                     ref="name"
                                     placeholder="Navn"
-                                    defaultValue={this.props.name}
+                                   
                                     {...name}/>
                             </Col>
                         </Row>
@@ -139,8 +145,8 @@ const validate = values => {
 
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeedInfo = reduxForm({
-    form: 'PersonWithNeedInfo',
-    fields: ["name", "number"],
+    form: 'application',
+    fields: ["name", "number", "street", "zipcode", "postal"],
     destroyOnUnmount: false,
     validate
 }, null, null)(PersonWithNeedInfo);

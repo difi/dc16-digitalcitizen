@@ -59,8 +59,6 @@ class PersonWithNeed extends React.Component {
 
         const {fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value) || (name.value && checked.value);
-
-        console.log(this.props.name);
         if(checked.value){
             return(
                 <form>
@@ -76,6 +74,7 @@ class PersonWithNeed extends React.Component {
                                         type="text"
                                         placeholder="Fødselsnummer"
                                         ref="pno"
+
                                         //value={this.state.pnr}
                                         //onChange={this.handlePNRChange}
                                         //{...pnr} Removing this resets the text field
@@ -101,7 +100,6 @@ class PersonWithNeed extends React.Component {
                                         type="text"
                                         placeholder="Navn"
                                         ref="name"
-                                        value={this.props.name}
                                         {...name}/>
                                 </Col>
                                 <Col sm={0} md={5}></Col>
@@ -148,7 +146,7 @@ class PersonWithNeed extends React.Component {
                         <Row className="form-row">
                             <Col sx={4} md={4}></Col>
                             <Col sx={8} md={8}>
-                                <input type="checkbox" name="noPno" {...checked}/> Jeg kan ikke
+                                <input type="checkbox" name="noPno" defaultSelected={this.props.fieldValues.gotPNRnumber}{...checked}/> Jeg kan ikke
                                 fødselsnummeret
                             </Col>
                             <Col sm={0} md={5}></Col>
@@ -163,7 +161,7 @@ class PersonWithNeed extends React.Component {
                                     type="text"
                                     placeholder="Navn"
                                     ref="name"
-                                    value={this.props.name}
+                                    defaultValue={this.props.fieldValues.person.name}
                                     {...name}
                                     />
                             </Col>
@@ -200,7 +198,7 @@ const validate = values => {
 
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeed = reduxForm({
-    form: 'PersonWithNeed',
+    form: 'application',
     fields,
     destroyOnUnmount: false,
     validate

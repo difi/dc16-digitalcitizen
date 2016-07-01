@@ -117,7 +117,7 @@ export default class Application extends React.Component {
     }
 
     render() {
-
+      
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
 
@@ -188,24 +188,3 @@ export default class Application extends React.Component {
     }
 }
 
-
-/*<RadioButtonClick callBackParent={this.onChildChange} />
- {this.props.data.map(function(forms, i){
- if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
- }
- else{
- return (
- <compontentClass>
- <Form key={i} name={forms.formname} data={forms.data}/>
- </compontentClass>
- )}
- })}
- <Row className="form-row">
- <Col sm={7} md={7}>
- </Col>
- <Col sm={2} md={2}>
- {button}
- </Col>
- <Col sm={3} md={3}>
- </Col>
- </Row>*/

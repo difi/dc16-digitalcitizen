@@ -6,7 +6,7 @@ import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 
-export default class GeneralPractitioner extends React.Component {
+ class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -81,3 +81,11 @@ export default class GeneralPractitioner extends React.Component {
         );
     }
 }
+
+GeneralPractitioner = reduxForm({
+    form: 'application',
+    fields: ["doctorName"],
+    destroyOnUnmount: false,
+}, null, null)(GeneralPractitioner);
+
+export default GeneralPractitioner

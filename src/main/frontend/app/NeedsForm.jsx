@@ -85,7 +85,7 @@ export default class NeedsForm extends React.Component {
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
-                        <Button id="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                        <Button id="back" ref="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>

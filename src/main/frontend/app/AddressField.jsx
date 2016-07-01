@@ -8,6 +8,7 @@ var Col = require('react-bootstrap/lib/Col');
 var ReactDOM = require('react-dom');
 import {onlyDigitsInString} from './validation.js'
 import {alphaNumericInString} from './validation.js'
+import {reduxForm} from 'redux-form';
 var AddressField = React.createClass({
 
     propTypes: {
@@ -19,7 +20,7 @@ var AddressField = React.createClass({
     },
 
     getInitialState: function () {
-        return {value: this.props.address.zipcode, municipality: this.props.address.postal, country: this.props.address.country, street: this.props.address.streetAddress};
+        return { country: this.props.address.country};
     },
 
     /**Makes a call to the Bring API with the postal code given by the user
@@ -27,9 +28,20 @@ var AddressField = React.createClass({
      *
      * @param event
      */
+
+    changeHandler: function (zip) {
+        return (event) => {
+            zip.onChange(event);
+            this.handleChange(event);
+        }
+    },
     handleChange: function (event) {
-        var zipcode = onlyDigitsInString(event.target.value);
-        this.setState({value: zipcode});
+        var zipcode = event.target.value;
+
+        if(!zipcode){
+            return;
+        }
+        console.log(zipcode);
 
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
@@ -40,21 +52,18 @@ var AddressField = React.createClass({
                 cache: false,
                 success: function (data) {
                     // Set the municipality state equal to the retrieved data
-                    this.setState({municipality: data['result']});
+                    this.props.fields.postal.onChange(data['result']);
+                    console.log(data['result]'])
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
         } else {
-            this.setState({municipality: ''});
+            this.props.fields.postal.onChange('');
         }
     },
-
-    handleStreetChange: function (event) {
-        var street = alphaNumericInString(event.target.value);
-        this.setState({street: street});
-    },
+    
 
     /**Updates the country state when the user selects a new option in
      * the {@link DropdownList}. Clears previous retrieved data.
@@ -87,6 +96,8 @@ var AddressField = React.createClass({
     },
 
     render: function () {
+        const {fields: {street, zipcode, postal}} = this.props;
+
         if (this.props.includeCountry) {
             return (
                 <Col sm={7.5} md={8}>
@@ -96,8 +107,7 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Gateadresse'
                                 ref="streetAddress"
-                                value={this.props.address.streetAddress}
-                                onChange={this.handleStreetChange}/>
+                                {...street}/>
                         </Col>
                     </Row>
                     <Row className="form-row-address">
@@ -117,8 +127,8 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Postnummer'
                                 ref="zipcode"
-                                defaultValue={this.props.address.zipcode}
-                                onChange={this.handleChange}/>
+                                {...zipcode}
+                                onChange={this.changeHandler(zipcode)}/>
                         </Col>
                         <Col sm={4} md={4}>
                             <FormControl
@@ -140,8 +150,7 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Adresse'
                                 ref="streetAddress"
-                                value={this.state.street}
-                                onChange={this.handleStreetChange}/>
+                                {...street}/>
                         </Col>
                     </Row>
                     <Row className="form-row-address">
@@ -150,16 +159,20 @@ var AddressField = React.createClass({
                                 type="text"
                                 placeholder='Postnummer'
                                 ref="zipcode"
-                                value={this.state.value}
-                                onChange={this.handleChange}/>
+                                {...zipcode}
+                                onChange={this.changeHandler(zipcode)}
+                                />
                         </Col>
                         <Col sm={7} md={7} className="from-col-address">
                             <FormControl
                                 type="text"
                                 placeholder='Sted'
                                 ref="postal"
-                                value={this.state.municipality}
-                                disabled/>
+                                {...postal}
+                                disabled
+
+
+                                />
                         </Col>
                     </Row>
                 </div>
@@ -168,12 +181,9 @@ var AddressField = React.createClass({
     }
 });
 
-
-
-
 AddressField = reduxForm({
-    form: 'AddressField',
-    fields: ["address", "zipcode"],
+    form: 'application',
+    fields: ["street", "zipcode", "postal"],
     destroyOnUnmount: false,
 }, null, null)(AddressField);
 

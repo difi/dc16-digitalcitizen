@@ -10,13 +10,13 @@ import {reducer as form} from 'redux-form';
 const reducers = combineReducers({
     // ... your other reducers here ...
     form: form.normalize({
-        PersonWithNeed: {
+        application: {
             pnr: value => onlyDigitsInString(value),
-            name: value=> onlyLettersInString(value)
-        },
-        PersonWithNeedInfoForm: {
-            name: value=>onlyLettersInString(value),
-            number: value=>onlyDigitsInString(value)
+            name: value=> onlyLettersInString(value),
+            number: value=>onlyDigitsInString(value),
+            zipcode: value=>onlyDigitsInString(value),
+          
+
 
         }
     })
@@ -24,3 +24,5 @@ const reducers = combineReducers({
 
 
 export default reducers ;
+
+
