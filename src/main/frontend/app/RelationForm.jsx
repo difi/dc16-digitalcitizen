@@ -162,7 +162,7 @@ export default class RelationForm extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label>Hvem ønsker sykehjemsplass?</label>
+                                <label id="guardian">Hvem ønsker sykehjemsplass?</label>
                             </Col>
                             <Col sm={6} md={6}></Col>
                         </Row>
@@ -186,7 +186,7 @@ export default class RelationForm extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label>Hva er din relasjon til personen med behov?</label>
+                                <label id="family">Hva er din relasjon til personen med behov?</label>
                             </Col>
                             <Col sm={6} md={6}></Col>
                         </Row>
@@ -217,7 +217,7 @@ export default class RelationForm extends React.Component {
                 content = <componentClass>
                     <Row className="form-row">
                         <Col sm={6} md={6}>
-                            <label>Hva er din relasjon til personen med behov?</label>
+                            <label id="other">Hva er din relasjon til personen med behov?</label>
                         </Col>
                         <Col sm={6} md={6}></Col>
                     </Row>
@@ -248,7 +248,7 @@ export default class RelationForm extends React.Component {
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
-                    <RadioGroup name="relation" selectedValue={this.state.value} onChange={this.handleChange}>
+                    <RadioGroup className="relation" selectedValue={this.state.value} onChange={this.handleChange}>
                         {Radio => (
                             <div className="form-radio-group">
                                 <Radio className="radio-button" value="guardian"/>Jeg er verge for den jeg søker på
@@ -267,12 +267,12 @@ export default class RelationForm extends React.Component {
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                        <Button onClick={this.handleClickBack} id="back" className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
+                        <Button onClick={this.handleClickNext} id="next" disabled={!this.state.validForm} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>
@@ -300,27 +300,13 @@ export default class RelationForm extends React.Component {
  */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Updated Radio-buttons, but does not work completely
+/*<div className="relation">
+ <Radio id="guardian-radio" className="radio-button" value="guardian" checked={this.state.value === 'guardian'} onChange={this.handleChange}/>Jeg er verge for den jeg søker på
+ vegne av
+ <Radio id="family-radio" className="radio-button" value="family" checked={this.state.value === 'family'} onChange={this.handleChange}/>Jeg er i familie med den jeg søker på
+ vegne
+ av
+ <Radio id="other-radio" className="radio-button" value="other" checked={this.state.value === 'other'} onChange={this.handleChange}/>Annet
+ </div>
+ */
