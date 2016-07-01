@@ -25,7 +25,7 @@ class SpecialNeeds extends React.Component {
         this.saveFieldsValues(medical, changes, other);
         console.log("State 7");
         this.props.nextStep(8);
-
+    }
 
     saveFieldsValues(medical, changes, other) {
         // Get values via this.refs
