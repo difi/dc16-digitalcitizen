@@ -60,7 +60,6 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-
 export default class Application extends React.Component {
 
     constructor() {
@@ -171,7 +170,7 @@ export default class Application extends React.Component {
                 content = < AddDependent
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
-                    nextStep={this.handleSubmit}
+                    nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 8:

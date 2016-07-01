@@ -70,27 +70,27 @@ export default class SpecialNeeds extends React.Component {
                 <label className="form-header">Har du noen spessielle behov?</label>
                 <div className="form-container">
                     <Row className="form-row-special">
-                        <Col sm={4} md={4}>
-                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om </label>
+                        <Col sm={12} md={12}>
+                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
                         </Col>
-                        <Col sm={8} md={8}>
-                            <FormControl componentClass="textarea" ref="medicalNeeds" value={this.state.medicalNeeds} onChange={this.handleMedicalChange}/>
-                        </Col>
-                    </Row>
-                    <Row className="form-row-special">
-                        <Col sm={4} md={4}>
-                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått</label>
-                        </Col>
-                        <Col sm={8} md={8}>
-                            <FormControl componentClass="textarea" ref="conditionChanges" value={this.state.conditionChanges} onChange={this.handleConditionChange}/>
+                        <Col sm={12} md={12}>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"  ref="medicalNeeds" value={this.state.medicalNeeds} onChange={this.handleMedicalChange}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
-                        <Col sm={4} md={4}>
+                        <Col sm={12} md={12}>
+                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått?</label>
+                        </Col>
+                        <Col sm={12} md={12}>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"  ref="conditionChanges" value={this.state.conditionChanges} onChange={this.handleConditionChange}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-special">
+                        <Col sm={12} md={12}>
                             <label className="from-col-address">Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l </label>
                         </Col>
-                        <Col sm={8} md={8}>
-                            <FormControl componentClass="textarea" ref="otherNeeds" value={this.state.otherNeeds} onChange={this.handleOtherChange}/>
+                        <Col sm={12} md={12}>
+                            <FormControl componentClass="textarea" className="special-needs-textarea" ref="otherNeeds" value={this.state.otherNeeds} onChange={this.handleOtherChange}/>
                         </Col>
                     </Row>
                 </div>
@@ -98,6 +98,9 @@ export default class SpecialNeeds extends React.Component {
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
+                    isSubmit={true}
+                    fieldValues={this.props.fieldValues}
+                    saveFieldValues={this.saveFieldsValues}
                     disabled={!this.state.validForm}
                 />
             </div>

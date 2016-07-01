@@ -7,7 +7,7 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import DropdownList from './DropdownList.jsx';
 var FormControl = require('react-bootstrap/lib/FormControl');
-import dropdownContent from './dropdown-list-content.js';
+import dropdownContent from './static_data/dropdown-list-content.js';
 require('!style!css!less!./Application.less');
 
 

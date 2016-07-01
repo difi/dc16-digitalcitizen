@@ -20,7 +20,8 @@ export default class AddDependent extends React.Component {
             numDep: 1,
             showForm1: true,
             showForm2: HIDE_FORM,
-            showForm3: HIDE_FORM
+            showForm3: HIDE_FORM,
+            showAddButton: DISPLAY_FORM
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClickForm2 = this.handleClickForm2.bind(this);
@@ -43,6 +44,13 @@ export default class AddDependent extends React.Component {
     handleClick() {
 
         if (this.state.numDep < 3) {
+
+            if(this.state.numDep == 2){
+                this.setState({
+                    showAddButton: HIDE_FORM
+                });
+            }
+
             if (this.state.showForm2 == HIDE_FORM) {
                 console.log("vis form 2");
                 this.setState({
@@ -79,18 +87,20 @@ export default class AddDependent extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
-    
+
     handleClickForm2() {
         this.setState({
             showForm2: HIDE_FORM,
-            numDep: this.state.numDep -= 1
+            numDep: this.state.numDep -= 1,
+            showAddButton: DISPLAY_FORM
         });
     }
 
     handleClickForm3() {
         this.setState({
             showForm3: HIDE_FORM,
-            numDep: this.state.numDep -= 1
+            numDep: this.state.numDep -= 1,
+            showAddButton: DISPLAY_FORM
         });
     }
 
@@ -116,7 +126,7 @@ export default class AddDependent extends React.Component {
                     </div>
                 </div>
                 <Row className="addDepButton from-row">
-                        <Button onClick={this.handleClick} bsStyle="info">+ Legg til pårørende</Button>
+                        <Button onClick={this.handleClick} style={{display: this.state.showAddButton}} bsStyle="info">+ Legg til pårørende</Button>
                 </Row>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}

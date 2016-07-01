@@ -1,11 +1,13 @@
 import React from 'react';
 import $ from 'jquery'
 import DropdownList from './DropdownList.jsx';
-import dropdownContent from './dropdown-list-content.js';
+import dropdownContent from './static_data/dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var ReactDOM = require('react-dom');
+import RESTpaths from './static_data/RESTpaths.js';
+
 import {onlyDigitsInString} from './validation.js'
 import {alphaNumericInString} from './validation.js'
 var AddressField = React.createClass({
@@ -34,8 +36,7 @@ var AddressField = React.createClass({
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
             $.ajax({
-                url: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&country='
-                + this.state.country + '&pnr=' + zipcode,
+                url: RESTpaths.PATHS.BRING_BASE + 'country=' + this.state.country + '&pnr=' + zipcode,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
