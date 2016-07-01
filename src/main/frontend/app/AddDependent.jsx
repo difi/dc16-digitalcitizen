@@ -27,12 +27,19 @@ export default class AddDependent extends React.Component {
 
     handleClickBack() {
         this.saveFieldValues();
-        (this.props.previousStep(6));
+        if( this.props.fieldValues.applyingForSelf){
+        (this.props.previousStep(1));
     }
+        else if( this.props.fieldValues.gotPNRnumber){
+            (this.props.previousStep(5));
+        }
+       else {
+            (this.props.previousStep(3));
+        }}
 
     handleClickNext() {
         this.saveFieldValues();
-        this.props.nextStep(8);
+        this.props.nextStep(7);
     }
 
 

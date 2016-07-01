@@ -3,12 +3,12 @@ var RadioGroup = require('react-radio-group');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-
+import {reduxForm} from 'redux-form';
 
 export default class NeedsForm extends React.Component {
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+
 
         //None of the radio-buttons are chosen
         this.state = {
@@ -23,21 +23,11 @@ export default class NeedsForm extends React.Component {
     //Handle the click on the back-button
     handleClickBack() {
         //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
-        if( this.props.fieldValues.applyingForSelf){
-            this.props.previousStep(1);
-        }
-        //If no adress is possible to obtain, the previous step is step 3 - PersonWithNeedInfoForm
-        else if( this.props.fieldValues.person.address.zipcode==null){
-            this.props.previousStep(3);
-        }
-        //Else the previous step is step 5 - General Practitioner
-        else{
-            this.props.previousStep(5);
-        }
+        this.props.previousStep(6);
     }
     saveFieldValues() {
         var data = {
-            lengthOfStay: this.state.value
+            lengthOfStay: this.props.fields.need.value
         };
         this.props.saveValues(data);
         console.log(data);
@@ -48,31 +38,24 @@ export default class NeedsForm extends React.Component {
         this.saveFieldValues();
         console.log("State 7");
         //The next step is step 7 - SpecialNeeds
-        this.props.nextStep(7);
+        this.props.nextStep(8);
     }
 
     //Handle change in the radio-buttons
     //@param r - the radio button chosen
-    handleChange(r) {
-        //Set the state to the pushed radio-button
-        this.setState({
-            value: r
-        });
-    }
-    componentWillUpdate(nextProps, nextState) {
-        nextState.validForm = nextState.value;
-    }
 
     //RadioGroup: Showing radio-buttons. Call handleChange when a button is clicked, but
     // do not send an argument, because react already knows which argument to use.
     //@return The view of the NeedsForm.
     render() {
+        const {fields: {need}} = this.props;
+        var valid = need.value;
         return (
             <componentClass>
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
 
                 <div className="form-container">
-                    <RadioGroup className="needs" selectedValue={this.state.value} onChange={this.handleChange}>
+                    <RadioGroup className="needs" selectedValue={need.value} {...need}>
                         {Radio => (
                             <div>
                                 <Radio value="short"/> Kortidsopphold
@@ -85,12 +68,12 @@ export default class NeedsForm extends React.Component {
 
                 <Row className="back-forward-buttons">
                     <Col sx={2} sm={2} md={2}>
-                        <Button id="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
+                        <Button id="back" ref="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
                             Tilbake</Button>
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button id="next" onClick={this.handleClickNext} disabled={!this.state.validForm}className="button-next"
+                        <Button id="next" onClick={this.handleClickNext} disabled={!valid}className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>
@@ -98,3 +81,12 @@ export default class NeedsForm extends React.Component {
         )
     }
 }
+
+
+NeedsForm = reduxForm({
+    form: 'application',
+    fields: ["need"],
+    destroyOnUnmount: false,
+}, null, null)(NeedsForm);
+
+export default NeedsForm
