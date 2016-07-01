@@ -1,4 +1,6 @@
 import React from 'react';
+import NavigationButtons from './NavigationButtons.jsx';
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 require('!style!css!less!./Application.less');
@@ -6,7 +8,7 @@ import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
- class GeneralPractitioner extends React.Component {
+class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,12 +43,10 @@ import {reduxForm} from 'redux-form';
     }
 
 
-
-
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
         const {fields: {doctorName}} = this.props;
-        var valid = doctorName.value; 
+        var valid = doctorName.value;
 
         return (
             <componentClass>
@@ -57,22 +57,16 @@ import {reduxForm} from 'redux-form';
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
+                                       value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
                         </Col>
                     </Row>
                 </div>
-
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} disabled={!valid} className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
-                    </Col>
-                </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!valid}
+                />
             </componentClass>
         );
     }

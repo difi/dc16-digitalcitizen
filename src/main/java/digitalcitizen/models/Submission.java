@@ -27,7 +27,7 @@ public class Submission {
     private String conditionChanges;
     private String otherNeeds;
 
-    public Submission(){
+    public Submission() {
     }
 
     public String getConditionChanges() {
@@ -86,7 +86,6 @@ public class Submission {
         this.dependent = dependent;
     }
 
-
     public String getRelation() {
         return relation;
     }
@@ -102,7 +101,6 @@ public class Submission {
     public void setPerson(Person person) {
         this.person = person;
     }
-
 
     public Doctor getDoctor() {
         return doctor;
@@ -128,5 +126,22 @@ public class Submission {
         this.lengthOfStay = lengthOfStay;
     }
 
+    @Override
+    public String toString() {
+        return "Submission{" +
+                "applyingForSelf=" + applyingForSelf +
+                ", relation='" + relation + '\'' +
+                ", guardianName='" + guardianName + '\'' +
+                ", typeOfRelation='" + typeOfRelation + '\'' +
+                ", dependent=" + dependent +
+                ", person=" + person +
+                ", doctor=" + doctor +
+                ", dependents=" + dependents +
+                ", lengthOfStay='" + lengthOfStay + '\'' +
+                ", medicalNeeds='" + medicalNeeds + '\'' +
+                ", conditionChanges='" + conditionChanges + '\'' +
+                ", otherNeeds='" + otherNeeds + '\'' +
+                '}';
     }
+}
 
