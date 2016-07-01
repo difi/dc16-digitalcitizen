@@ -6,64 +6,46 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
 
-export default class SpecialNeeds extends React.Component {
+
+import {reduxForm} from 'redux-form';
+
+class SpecialNeeds extends React.Component {
+
 
     constructor(props) {
         super(props);
-        this.state = {
-            medicalNeeds: this.props.fieldValues.medicalNeeds,
-            conditionChanges: this.props.fieldValues.conditionChanges,
-            otherNeeds: this.props.fieldValues.otherNeeds
-        };
-
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.handleConditionChange = this.handleConditionChange.bind(this);
-        this.handleMedicalChange = this.handleMedicalChange.bind(this);
-        this.handleOtherChange = this.handleOtherChange.bind(this);
+
     }
 
     handleClickBack() {
         this.saveFieldsValues();
-        console.log("State 7");
+        console.log("State 6");
         (this.props.previousStep(7));
     }
 
     handleClickNext() {
         this.saveFieldsValues();
-        console.log("State 8");
+        console.log("State 7");
         this.props.nextStep(8);
     }
 
     saveFieldsValues() {
         // Get values via this.refs
+        const {fields: {medical, changes, other}} = this.props;
         var data = {
-            medicalNeeds: this.state.medicalNeeds,
-            conditionChanges: this.state.conditionChanges,
-            otherNeeds: this.state.otherNeeds
+            medicalNeeds: medical,
+            conditionChanges: changes,
+            otherNeeds: other
         };
         this.props.saveValues(data);
         console.log(data);
     }
-    handleMedicalChange(event){
-
-        this.setState({
-            medicalNeeds: event.target.value
-        })
-    }
-    handleConditionChange(event){
-        this.setState({
-            conditionChanges: event.target.value
-        })
-    }
-    handleOtherChange(event){
-        this.setState({
-            otherNeeds: event.target.value
-        })
-    }
 
     render() {
 
+        const {fields: {medical, changes, other}} = this.props;
 
         return (
             <div>
@@ -74,36 +56,51 @@ export default class SpecialNeeds extends React.Component {
                             <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"  ref="medicalNeeds" value={this.state.medicalNeeds} onChange={this.handleMedicalChange}/>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         ref="medicalNeeds" {...medical}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at ditt behov for assistanse har oppstått?</label>
+                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at
+                                ditt behov for assistanse har oppstått?</label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"  ref="conditionChanges" value={this.state.conditionChanges} onChange={this.handleConditionChange}/>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         ref="conditionChanges" {...changes}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address">Har du andre behov vi burde vite om? (Behov for tolk, hørselapparat e.l </label>
+                            <label className="from-col-address">Har du andre behov vi burde vite om? (Behov for tolk,
+                                hørselapparat e.l </label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea" ref="otherNeeds" value={this.state.otherNeeds} onChange={this.handleOtherChange}/>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         ref="otherNeeds" {...other}/>
                         </Col>
                     </Row>
                 </div>
-
+                
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
                     fieldValues={this.props.fieldValues}
                     saveFieldValues={this.saveFieldsValues}
-                    disabled={!this.state.validForm}
                 />
+
             </div>
         );
     }
 }
+
+
+SpecialNeeds = reduxForm({
+    form: 'application',
+    fields: ["medical", "changes", "other"],
+    destroyOnUnmount: false,
+
+}, null, null)(SpecialNeeds);
+
+export default SpecialNeeds

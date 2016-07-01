@@ -22,17 +22,9 @@ import {alphaNumericInString} from './validation.js'
 class PersonWithNeedInfo extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: this.props.fieldValues.person.name,
-            number: this.props.fieldValues.person.telephone,
-            validForm: false
-        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleNumberChange = this.handleNumberChange.bind(this);
-        this.handleKey=this.handleKey.bind(this);
     }
 
     handleClickBack() {
@@ -51,7 +43,13 @@ class PersonWithNeedInfo extends React.Component {
 
     saveFieldValues() {
         // Get values via this.refs
-        var address = this.refs.addressfield.getFieldValues();
+        const {fields: {name, number, street, zipcode, postal}} = this.props;
+        var address = {
+            street: street.value,
+            zipcode: zipcode.value,
+            postal: postal.value,
+            country: "NO"
+        };
         var data = {
             person: {
                 pnr: this.props.fieldValues.person.pnr,
@@ -64,33 +62,11 @@ class PersonWithNeedInfo extends React.Component {
         console.log(data);
     }
 
-    handleNameChange(event) {
-        var text = onlyLettersInString(event.target.value);
-        this.setState({
-            name: text
-        });
-    }
-    handleNumberChange(event){
-        var text = onlyDigitsInString(event.target.value);
-        this.setState({
-            number: text
-        })
-    }
-    handleKey(e){
-        const re = /[0-9]+/g;
-        if(!re.test(e.key)){
-            e.preventDefault();
-        }
-        this.setState({
-            number: e.target.value
-        })
-    }
-    componentWillUpdate(nextProps, nextState) {
-        nextState.validForm = (nextState.name && nextState.number );
-    }
 
     render() {
-        const {fields: {number}} = this.props;
+        const {fields: {name, number, street, zipcode}} = this.props;
+        var valid = name.value && number.value && street.value && zipcode.value && !number.error;
+        console.log(valid);
         return (
             <form>
                 <div>
@@ -105,8 +81,8 @@ class PersonWithNeedInfo extends React.Component {
                                     type="text"
                                     ref="name"
                                     placeholder="Navn"
-                                    value={this.state.name}
-                                    onChange={this.handleNameChange}/>
+
+                                    {...name}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -126,10 +102,7 @@ class PersonWithNeedInfo extends React.Component {
                                 <FormControl
                                     type="numeric"
                                     ref="phone"
-                                    value={this.state.number}
                                     placeholder="Telefonnr"
-                                    onKeyPress={this.handleKey}
-                                    onChange={this.handleNumberChange}
                                     {...number}
 
                                 />
@@ -138,11 +111,13 @@ class PersonWithNeedInfo extends React.Component {
                             </Col>
                         </Row>
                     </div>
+
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
-                        disabled={!this.state.validForm}
+                        disabled={!valid}
                     />
+
                 </div>
             </form>
         )
@@ -163,8 +138,9 @@ const validate = values => {
 
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeedInfo = reduxForm({
-    form: 'PersonWithNeedInfo',
-    fields: ["number"],
+    form: 'application',
+    fields: ["name", "number", "street", "zipcode", "postal"],
+    destroyOnUnmount: false,
     validate
 }, null, null)(PersonWithNeedInfo);
 
