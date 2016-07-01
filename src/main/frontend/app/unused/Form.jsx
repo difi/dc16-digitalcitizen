@@ -3,7 +3,7 @@ import TypeAhead from '../AutoComplete.jsx';
 import React from 'react';
 import DropdownList from '../DropdownList.jsx';
 import AddressField from '../AddressField.jsx';
-import dropdownContent from '../dropdown-list-content.js';
+import dropdownContent from '../static_data/dropdown-list-content.js';
 import TextArea from '../TextArea.jsx';
 
 var Row = require('react-bootstrap/lib/Row');

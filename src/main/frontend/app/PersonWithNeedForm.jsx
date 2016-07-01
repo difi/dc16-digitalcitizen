@@ -4,6 +4,8 @@
 import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import NavigationButtons from './NavigationButtons.jsx';
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -11,7 +13,7 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var checked = false;
 
-export const fields =  ["pnr", "name", "checked"];
+export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./validation.js';
 
@@ -22,30 +24,30 @@ class PersonWithNeed extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
-    handleClickBack(pnr, name, checked) {
-        this.saveFieldValues(pnr, name, checked);
+    handleClickBack() {
+        this.saveFieldValues();
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
-    handleClickNext(pnr, name, checked) {
-        this.saveFieldValues(pnr, name, checked);
+    handleClickNext() {
+        this.saveFieldValues();
 
-        if (checked == true) {
+        if (this.props.fields.checked.value) {
             console.log("State 4");
             (this.props.nextStep(4));
-        } else  {
+        } else {
             console.log("State 6");
             (this.props.nextStep(6));
         }
     }
 
-    saveFieldValues(pnr, name, checked) {
+    saveFieldValues() {
         var data = {
-            gotPNRnumber: checked,
+            gotPNRnumber: this.props.fields.checked.value,
             person: {
-                pnr: pnr,
-                name: name,
+                pnr: this.props.fields.pnr.value,
+                name: this.props.fields.name.value,
                 address: this.props.fieldValues.person.address,
                 telephone: this.props.fieldValues.person.telephone
             }
@@ -60,8 +62,8 @@ class PersonWithNeed extends React.Component {
 
         const {fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
-        if(checked.value){
-            return(
+        if (checked.value) {
+            return (
                 <form>
                     <componentClass>
                         <label className="form-header">Informasjon om person med behov</label>
@@ -79,7 +81,7 @@ class PersonWithNeed extends React.Component {
                                         //value={this.state.pnr}
                                         //onChange={this.handlePNRChange}
                                         //{...pnr} Removing this resets the text field
-                                    disabled/>
+                                        disabled/>
 
 
                                 </Col>
@@ -107,17 +109,13 @@ class PersonWithNeed extends React.Component {
                             </Row>
                         </div>
 
-                        <Row className="back-forward-buttons">
-                            <Col sx={2} sm={2} md={2}>
-                                <Button onClick={this.handleClickBack.bind(this, pnr.value, name.value, checked.value)} className="button-next" bsStyle="success">&larr;
-                                    Tilbake</Button>
-                            </Col>
-                            <Col sx={7} sm={8} md={8}></Col>
-                            <Col sx={2} sm={2} md={2}>
-                                <Button onClick={this.handleClickNext.bind(this, pnr.value, name.value, checked.value)} disabled={!valid} className="button-next"
-                                        bsStyle="success">Neste &rarr;</Button>
-                            </Col>
-                        </Row>
+
+                        <NavigationButtons
+                            handleClickBack={this.handleClickBack}
+                            handleClickNext={this.handleClickNext}
+                            disabled={!valid}
+                        />
+
                     </componentClass>
                 </form>
             )
@@ -147,7 +145,8 @@ class PersonWithNeed extends React.Component {
                         <Row className="form-row">
                             <Col sx={4} md={4}></Col>
                             <Col sx={8} md={8}>
-                                <input type="checkbox" name="noPno" defaultSelected={this.props.fieldValues.gotPNRnumber}{...checked}/> Jeg kan ikke
+                                <input type="checkbox" name="noPno"
+                                       defaultSelected={this.props.fieldValues.gotPNRnumber}{...checked}/> Jeg kan ikke
                                 fødselsnummeret
                             </Col>
                             <Col sm={0} md={5}></Col>
@@ -164,23 +163,17 @@ class PersonWithNeed extends React.Component {
                                     ref="name"
                                     defaultValue={this.props.fieldValues.person.name}
                                     {...name}
-                                    />
+                                />
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
                     </div>
 
-                    <Row className="back-forward-buttons">
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickBack.bind(this, pnr.value, name.value, checked.value)} className="button-next" bsStyle="success">&larr;
-                                Tilbake</Button>
-                        </Col>
-                        <Col sx={7} sm={8} md={8}></Col>
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext.bind(this, pnr.value, name.value, checked.value)} disabled={!valid} className="button-next"
-                                    bsStyle="success">Neste &rarr;</Button>
-                        </Col>
-                    </Row>
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        disabled={!valid}
+                    />
                 </componentClass>
             </form>
         )

@@ -1,4 +1,5 @@
 import React from 'react';
+import NavigationButtons from './NavigationButtons.jsx';
 var RadioGroup = require('react-radio-group');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -25,6 +26,7 @@ export default class NeedsForm extends React.Component {
         //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
         this.props.previousStep(6);
     }
+
     saveFieldValues() {
         var data = {
             lengthOfStay: this.props.fields.need.value
@@ -65,18 +67,11 @@ export default class NeedsForm extends React.Component {
                         )}
                     </RadioGroup>
                 </div>
-
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button id="back" ref="back" onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button id="next" onClick={this.handleClickNext} disabled={!valid}className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
-                    </Col>
-                </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!valid}
+                />
             </componentClass>
         )
     }
@@ -86,7 +81,7 @@ export default class NeedsForm extends React.Component {
 NeedsForm = reduxForm({
     form: 'application',
     fields: ["need"],
-    destroyOnUnmount: false,
+    destroyOnUnmount: false
 }, null, null)(NeedsForm);
 
 export default NeedsForm

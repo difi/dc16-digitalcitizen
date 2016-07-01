@@ -56,4 +56,14 @@ public class Dependent {
         this.telephone = telephone;
     }
 
+    @Override
+    public String toString() {
+        return "Dependent{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", relation='" + relation + '\'' +
+                '}';
+    }
 }

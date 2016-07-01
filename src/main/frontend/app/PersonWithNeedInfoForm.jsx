@@ -5,6 +5,7 @@
 import React from 'react';
 
 import AddressField from './AddressField.jsx';
+import NavigationButtons from './NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -26,23 +27,23 @@ class PersonWithNeedInfo extends React.Component {
         this.saveFieldValues = this.saveFieldValues.bind(this);
     }
 
-    handleClickBack(name, number) {
+    handleClickBack() {
         console.log("State 3");
-        this.saveFieldValues(name, number);
+        this.saveFieldValues();
         this.props.previousStep(3);
     }
 
-    handleClickNext(name, number) {
+    handleClickNext() {
 
         console.log("State 5");
-        this.saveFieldValues(name, number);
+        this.saveFieldValues();
         this.props.nextStep(5);
 
     }
 
-    saveFieldValues(name, number) {
+    saveFieldValues() {
         // Get values via this.refs
-        const {fields: {street, zipcode, postal}} = this.props;
+        const {fields: {name, number, street, zipcode, postal}} = this.props;
         var address = {
             street: street.value,
             zipcode: zipcode.value,
@@ -60,7 +61,6 @@ class PersonWithNeedInfo extends React.Component {
         this.props.saveValues(data);
         console.log(data);
     }
-
 
 
     render() {
@@ -81,7 +81,7 @@ class PersonWithNeedInfo extends React.Component {
                                     type="text"
                                     ref="name"
                                     placeholder="Navn"
-                                   
+
                                     {...name}/>
                             </Col>
                         </Row>
@@ -112,18 +112,11 @@ class PersonWithNeedInfo extends React.Component {
                         </Row>
                     </div>
 
-                    <Row className="back-forward-buttons">
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickBack.bind(this, name.value, number.value)} className="button-next" bsStyle="success">&larr;
-                                Tilbake</Button>
-                        </Col>
-                        <Col sx={7} sm={8} md={8}></Col>
-                        <Col sx={2} sm={2} md={2}>
-                            <Button onClick={this.handleClickNext.bind(this, name.value, number.value)} disabled={!valid}className="button-next"
-                                    bsStyle="success">Neste &rarr;</Button>
-
-                        </Col>
-                    </Row>
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        disabled={!valid}
+                    />
 
                 </div>
             </form>

@@ -18,5 +18,10 @@ public class Doctor {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
