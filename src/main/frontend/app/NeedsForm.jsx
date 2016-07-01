@@ -23,17 +23,7 @@ export default class NeedsForm extends React.Component {
     //Handle the click on the back-button
     handleClickBack() {
         //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
-        if( this.props.fieldValues.applyingForSelf){
-            this.props.previousStep(1);
-        }
-        //If no adress is possible to obtain, the previous step is step 3 - PersonWithNeedInfoForm
-        else if( this.props.fieldValues.person.address.zipcode==null){
-            this.props.previousStep(3);
-        }
-        //Else the previous step is step 5 - General Practitioner
-        else{
-            this.props.previousStep(5);
-        }
+        this.props.previousStep(6);
     }
     saveFieldValues() {
         var data = {
@@ -48,7 +38,7 @@ export default class NeedsForm extends React.Component {
         this.saveFieldValues();
         console.log("State 7");
         //The next step is step 7 - SpecialNeeds
-        this.props.nextStep(7);
+        this.props.nextStep(8);
     }
 
     //Handle change in the radio-buttons

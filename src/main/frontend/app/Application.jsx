@@ -18,6 +18,7 @@ import PersonWithNeedForm from './PersonWithNeedForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
+import AddDependent from './AddDependent';
 
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -63,7 +64,7 @@ export default class Application extends React.Component {
     constructor() {
         super();
         this.state = {
-            step: 6,
+            step: 1,
             prevStep: 1
         };
         this.nextStep = this.nextStep.bind(this);
@@ -161,21 +162,27 @@ export default class Application extends React.Component {
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
+                content = < AddDependent
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
+                    nextStep={this.handleSubmit}
+                    saveValues={this.saveValues}/>;
+                break;
+            case 7:
                 content = < NeedsForm
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
-            case 7:
+                
+            case 8:
                 content = < SpecialNeeds
-                    fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    nextStep={this.handleSubmit}
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
+                    nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
-
-
         }
 
         return (

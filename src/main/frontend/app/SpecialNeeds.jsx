@@ -18,14 +18,14 @@ class SpecialNeeds extends React.Component {
     handleClickBack(medical, changes, other) {
         this.saveFieldsValues(medical, changes, other);
         console.log("State 6");
-        (this.props.previousStep(6));
+        (this.props.previousStep(7));
     }
 
     handleClickNext(medical, changes, other) {
         this.saveFieldsValues(medical, changes, other);
         console.log("State 7");
-        this.props.nextStep(7);
-    }
+        this.props.nextStep(8);
+
 
     saveFieldsValues(medical, changes, other) {
         // Get values via this.refs

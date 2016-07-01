@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-
+import AddDependent from './AddDependent.jsx';
 import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './unused/buttons.jsx';
