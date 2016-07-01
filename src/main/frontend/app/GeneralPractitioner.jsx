@@ -5,7 +5,7 @@ require('!style!css!less!./Application.less');
 import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-
+import {reduxForm} from 'redux-form';
  class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
@@ -39,18 +39,14 @@ var ReactDOM = require('react-dom');
         this.props.saveValues(data);
         console.log(data);
     }
-    handleChange(event){
-        
-        this.setState({name: event.target.value,
-        validForm: event.target.value})
-    }
+
 
 
 
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
-        var name = this.state.name;
-        
+        const {fields: {doctorName}} = this.props;
+        var valid = doctorName.value; 
 
         return (
             <componentClass>
@@ -61,7 +57,7 @@ var ReactDOM = require('react-dom');
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={name} onChange={this.handleChange}/>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
                         </Col>
                     </Row>
                 </div>
@@ -73,7 +69,7 @@ var ReactDOM = require('react-dom');
                     </Col>
                     <Col sx={7} sm={8} md={8}></Col>
                     <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
+                        <Button onClick={this.handleClickNext} disabled={!valid} className="button-next"
                                 bsStyle="success">Neste &rarr;</Button>
                     </Col>
                 </Row>
