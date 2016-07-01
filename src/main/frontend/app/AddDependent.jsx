@@ -2,6 +2,7 @@ import React from 'react';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+var Collapse = require('react-bootstrap/lib/Collapse');
 var ReactDOM = require('react-dom');
 import DependentForm from './DependentForm.jsx';
 require('!style!css!less!./Application.less');
@@ -19,8 +20,8 @@ export default class AddDependent extends React.Component {
             clicked: false,
             numDep: 1,
             showForm1: true,
-            showForm2: HIDE_FORM,
-            showForm3: HIDE_FORM,
+            showForm2: false,
+            showForm3: false,
             showAddButton: DISPLAY_FORM
         };
         this.handleClick = this.handleClick.bind(this);
@@ -51,16 +52,16 @@ export default class AddDependent extends React.Component {
                 });
             }
 
-            if (this.state.showForm2 == HIDE_FORM) {
+            if (this.state.showForm2 == false) {
                 console.log("vis form 2");
                 this.setState({
-                    showForm2: DISPLAY_FORM,
+                    showForm2: true,
                     numDep: this.state.numDep += 1
                 });
             } else {
                 console.log("vis form 3");
                 this.setState({
-                    showForm3: DISPLAY_FORM,
+                    showForm3: true,
                     numDep: this.state.numDep += 1
                 });
             }
@@ -70,10 +71,10 @@ export default class AddDependent extends React.Component {
     saveFieldValues() {
         var form2Data = null;
         var form3Data = null;
-        if (this.state.showForm2 == DISPLAY_FORM) {
+        if (this.state.showForm2 == true) {
             form2Data = this.refs.form2.getFieldValues()
         }
-        if (this.state.showForm3 == DISPLAY_FORM) {
+        if (this.state.showForm3 == true) {
             form3Data = this.refs.form3.getFieldValues()
         }
         var data = {
@@ -90,7 +91,7 @@ export default class AddDependent extends React.Component {
 
     handleClickForm2() {
         this.setState({
-            showForm2: HIDE_FORM,
+            showForm2: false,
             numDep: this.state.numDep -= 1,
             showAddButton: DISPLAY_FORM
         });
@@ -98,7 +99,7 @@ export default class AddDependent extends React.Component {
 
     handleClickForm3() {
         this.setState({
-            showForm3: HIDE_FORM,
+            showForm3: false,
             numDep: this.state.numDep -= 1,
             showAddButton: DISPLAY_FORM
         });
@@ -114,15 +115,19 @@ export default class AddDependent extends React.Component {
                             <DependentForm ref="form1" showForm={this.state.showForm1} showDeleteButton={false}/>
                         </div>
                         <br/>
-                        <div id="dep2" style={{display: this.state.showForm2}} className="depedent-form-wrapper">
+                        <Collapse in={this.state.showForm2}>
+                        <div id="dep2" className="depedent-form-wrapper">
                             <DependentForm ref="form2" onClick={this.handleClickForm2}
                                            showDeleteButton={true}/>
                         </div>
+                        </Collapse>
                         <br/>
-                        <div id="dep3" style={{display: this.state.showForm3}} className="depedent-form-wrapper">
+                        <Collapse in={this.state.showForm3}>
+                        <div id="dep3" className="depedent-form-wrapper">
                             <DependentForm ref="form3" onClick={this.handleClickForm3}
                                            showDeleteButton={true}/>
                         </div>
+                        </Collapse>
                     </div>
                 </div>
                 <Row className="addDepButton from-row">
