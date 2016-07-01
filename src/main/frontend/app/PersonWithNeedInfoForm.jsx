@@ -48,7 +48,7 @@ class PersonWithNeedInfo extends React.Component {
             zipcode: zipcode.value,
             postal: postal.value,
             country: "NO"
-        }
+        };
         var data = {
             person: {
                 pnr: this.props.fieldValues.person.pnr,
@@ -65,7 +65,7 @@ class PersonWithNeedInfo extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode}} = this.props;
-        var valid = name.value && number.value && street.value && zipcode.value;
+        var valid = name.value && number.value && street.value && zipcode.value && !number.error;
         console.log(valid);
         return (
             <form>

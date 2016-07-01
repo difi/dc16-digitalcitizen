@@ -16,7 +16,6 @@ import {reduxForm} from 'redux-form';
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-        this.handleChange = this.handleChange.bind(this);
 
     }
 
@@ -33,6 +32,7 @@ import {reduxForm} from 'redux-form';
     }
 
     saveFieldValues() {
+        this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
         var data = {
             doctor: {name: this.refs.doctorSelect.getFieldValue()}
         };

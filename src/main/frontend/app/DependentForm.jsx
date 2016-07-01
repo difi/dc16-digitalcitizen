@@ -95,7 +95,7 @@ export default class DependentForm extends React.Component {
             return (
                 <div className="form-style-10">
                     {deleteButton}
-                    <div class="section"><h4>Pårørende</h4></div>
+                    <div className="section"><h4>Pårørende</h4></div>
                     <div className="inner-wrap">
                         {fieldsForm}
                         <Row className="form-row-special">

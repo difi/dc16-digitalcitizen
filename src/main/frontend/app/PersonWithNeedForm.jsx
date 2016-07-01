@@ -30,12 +30,13 @@ class PersonWithNeed extends React.Component {
 
     handleClickNext(pnr, name, checked) {
         this.saveFieldValues(pnr, name, checked);
-        if (checked == false) {
-            console.log("State 6");
-            (this.props.nextStep(6));
-        } else if (checked == true) {
+
+        if (checked == true) {
             console.log("State 4");
             (this.props.nextStep(4));
+        } else  {
+            console.log("State 6");
+            (this.props.nextStep(6));
         }
     }
 
@@ -58,7 +59,7 @@ class PersonWithNeed extends React.Component {
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value) || (name.value && checked.value);
+        var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
         if(checked.value){
             return(
                 <form>

@@ -30,11 +30,11 @@ export default class AddDependent extends React.Component {
         if( this.props.fieldValues.applyingForSelf){
         (this.props.previousStep(1));
     }
-        else if( this.props.fieldValues.person.address==null){
-            (this.props.previousStep(3));
+        else if( this.props.fieldValues.gotPNRnumber){
+            (this.props.previousStep(5));
         }
        else {
-            (this.props.previousStep(5));
+            (this.props.previousStep(3));
         }}
 
     handleClickNext() {

@@ -15,6 +15,8 @@ const reducers = combineReducers({
             name: value=> onlyLettersInString(value),
             number: value=>onlyDigitsInString(value),
             zipcode: value=>onlyDigitsInString(value),
+            street: value=>alphaNumericInString(value),
+            doctorName: value=>onlyLettersInString(value)
           
 
 
