@@ -19,6 +19,7 @@ import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
 import AddDependent from './AddDependent';
+import SubmitSuccess from './SubmitPage';
 
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -177,6 +178,14 @@ export default class Application extends React.Component {
                 
             case 8:
                 content = < SpecialNeeds
+                    fieldValues = {fieldValues}
+                    previousStep = {this.previousStep}
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    submitRegistration={this.handleSubmit}/>;
+                break;
+            case 9:
+                content = < SubmitSuccess
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
