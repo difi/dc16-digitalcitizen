@@ -9,12 +9,12 @@ import DropdownList from './DropdownList.jsx';
 var FormControl = require('react-bootstrap/lib/FormControl');
 import dropdownContent from './static_data/dropdown-list-content.js';
 require('!style!css!less!./Application.less');
-
+import {reduxForm} from 'redux-form';
 
 export default class DependentForm extends React.Component {
     constructor(props) {
         super(props);
-        console.log("adfasdf");
+
         this.handleClickRemove = this.handleClickRemove.bind(this);
     }
 
@@ -53,7 +53,8 @@ export default class DependentForm extends React.Component {
         var deleteButton = this.props.showDeleteButton ?
             <Button className="close" aria-label="Close" onClick={this.handleClickRemove}><span
                 aria-hidden="true">&times;</span></Button> : '';
-
+        const {firstName, lastName, phone, mail, relation} = this.props;
+        var reduxFields = [firstName, lastName, phone, mail, relation];
         var fields = ["Fornavn", "Etternavn", "Telefon", "E-post"];
         var fieldsForm = fields.map(function (field, i) {
             var textFieldRef;
@@ -78,7 +79,7 @@ export default class DependentForm extends React.Component {
                         <label>{field}</label>
                     </Col>
                     <Col sm={8} md={8}>
-                        <FormControl ref={textFieldRef} type="text" placeholder={field}/>
+                        <FormControl ref={textFieldRef} type="text" placeholder={field} {...reduxFields[i]} />
                     </Col>
                 </Row>
             )
@@ -95,7 +96,7 @@ export default class DependentForm extends React.Component {
                         </Col>
                         <Col sm={8} md={8}>
                             <DropdownList ref='relation' options={dropdownContent.RELATIONS} id="test"
-                                          valueField="value" labelField="relation"/>
+                                          valueField="value" labelField="relation" {...relation} onChange={change => relation.onChange(change.newValue)}/>
                         </Col>
                     </Row>
                 </div>
@@ -108,10 +109,17 @@ export default class DependentForm extends React.Component {
 
 
 
+/*
+DependentForm = reduxForm({
+    form: 'application',
+    
+    destroyOnUnmount: false
+})(DependentForm);
+
+export default DependentForm
 
 
-
-
+*/
 
 
 
