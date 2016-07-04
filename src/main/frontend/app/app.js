@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-
+import AddDependent from './AddDependent.jsx';
 import Application from './Application.jsx';
 import SynchronousValidationForm from './ReduxForm.jsx';
 import Buttons from './unused/buttons.jsx';
@@ -16,9 +16,7 @@ import GeneralPractitioner from './GeneralPractitioner.jsx';
 import PersonWithNeedForm from './PersonWithNeedForm.jsx';
 
 
-
-const reducer = combineReducers(reducers);
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 

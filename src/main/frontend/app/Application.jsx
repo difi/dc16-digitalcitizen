@@ -3,7 +3,7 @@
 import React from 'react';
 import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
-require('!style!css!less!./Application.less');
+//require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
 import WhosSearching from './WhosSearchingForm.jsx';
@@ -18,8 +18,7 @@ import PersonWithNeedForm from './PersonWithNeedForm';
 import GeneralPractitioner from './GeneralPractitioner';
 import SpecialNeeds from './SpecialNeeds';
 import NeedsForm from'./NeedsForm';
-
-
+import AddDependent from './AddDependent';
 
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -58,7 +57,6 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-
 
 export default class Application extends React.Component {
 
@@ -119,7 +117,7 @@ export default class Application extends React.Component {
     }
 
     render() {
-
+      
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
 
@@ -131,80 +129,71 @@ export default class Application extends React.Component {
                 break;
             case 2:
                 content = <RelationForm
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    name = {fieldValues.person.name}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    name = {fieldValues.person.name}/>
+
                 break;
             case 5:
                 content = <GeneralPractitioner
-                    fieldValues = {fieldValues}
-                    previousStep = {this.previousStep}
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 6:
-                content = < NeedsForm
+                content = < AddDependent
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 7:
+                content = < NeedsForm
+                    fieldValues={fieldValues}
+                    previousStep={this.previousStep}
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}/>;
+                break;
+                
+            case 8:
                 content = < SpecialNeeds
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
-                    nextStep={this.handleSubmit}
+                    nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     submitRegistration={this.handleSubmit}/>;
-
-
         }
 
         return (
             <div>
                 {header}
+                <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
+                    <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
                 {content}
-
+                    </Col>
+            </Col>
             </div>
         )
     }
 }
 
-
-/*<RadioButtonClick callBackParent={this.onChildChange} />
- {this.props.data.map(function(forms, i){
- if(!(writesOthers) && forms.formname=="Om deg som søker" || firstRender){
- }
- else{
- return (
- <compontentClass>
- <Form key={i} name={forms.formname} data={forms.data}/>
- </compontentClass>
- )}
- })}
- <Row className="form-row">
- <Col sm={7} md={7}>
- </Col>
- <Col sm={2} md={2}>
- {button}
- </Col>
- <Col sm={3} md={3}>
- </Col>
- </Row>*/

@@ -8,12 +8,12 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-//import {sinon} from 'sinon';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
+var ReactTestUtils = require('react-addons-test-utils');
 //Import the file we want to test.
-import Application from '../app/Application.jsx';
-import NeedsForm from '../app/NeedsForm.jsx'
+import NeedsForm from '../app/NeedsForm.jsx';
+
 
 var fieldValues = {
     // First form

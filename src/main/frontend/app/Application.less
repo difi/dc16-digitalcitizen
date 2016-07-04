@@ -2,10 +2,48 @@ html {
   margin: 40px 200px 0 200px;
 }
 
+.dependent-wrapper { /* Wraps all the dependent-forms in AddDependent */
+  width:700px;
+  background: #FFF;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Start DependentForm style */
+
+.close { /* X button to delete a dependent */
+  color:red;
+  opacity:70;
+  margin-top: -15px;
+}
+
+.form-style-10 .inner-wrap{
+  padding: 30px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+.depedent-form-wrapper {
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+.addDepButton {
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+/* End DependentForm style */
+
+/*
 .form-container {
   height: 250px;
   width: 700px;
 }
+*/
 
 .form-center {
   text-align: center;
@@ -39,23 +77,32 @@ html {
 .form-row-address {
   padding-bottom: 5px;
 }
-
+/*
 .button {
   margin: auto;
 }
+*/
 
 .button-search {
   margin-bottom: 15px;
   margin-left: 15px;
 }
 
+/*
+
 .back-forward-buttons {
   width: 700px;
   margin-left: 15px;
 }
 
+*/
+
 .form-radio-group {
   margin-bottom: 40px;
+}
+
+.special-needs-textarea {
+  margin-left: 15px;
 }
 
 input[type=radio] {
@@ -74,21 +121,46 @@ select option[disabled]:first-child {
     margin: 40px 40px 0 40px;
   }
 
+  /*
   .form-container {
     height: 400px;
     width: 400px;
   }
 
-  .back-forward-buttons {
+*/
+
+ .back-forward-buttons {
     width: 400px;
-    margin-left: 15px;
   }
+
+}
+
+.back-btn {
+  margin-left: 15px;
+}
+
+.next-btn {
+  float: right;
+}
+
+.application-wrapper {
+  max-width: 450px;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #AAA;
+  margin: 1em 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 770px) {
   html {
     margin: 40px 20px 0 20px;
   }
+  /*
 
   .form-container {
     height: 450px;
@@ -99,4 +171,5 @@ select option[disabled]:first-child {
     width: 200px;
     margin-left: 15px;
   }
+  */
 }

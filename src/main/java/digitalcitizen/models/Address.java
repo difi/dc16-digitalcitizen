@@ -45,4 +45,14 @@ public class Address {
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "postal='" + postal + '\'' +
+                ", country='" + country + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                '}';
+    }
 }

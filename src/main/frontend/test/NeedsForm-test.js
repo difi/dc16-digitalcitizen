@@ -75,4 +75,16 @@ describe("NeedsForm", function() {
         //Expect to find a button with ID back.
         expect(wrapper.find('#back')).to.have.length(1);
     });
+
+
+    //TODO: Sjekk at de gjør det de skal
+    /*it('back button should go to the previous page when pushed', function () {
+        const wrapper = shallow(<NeedsForm/>);
+        const backbutton = wrapper.find('.button-next');
+        wrapper.setState({adress: null});
+        backbutton.simulate('click');
+        expect(this.props.previousStep).to.equal('1');
+    });
+*/
+
 });
