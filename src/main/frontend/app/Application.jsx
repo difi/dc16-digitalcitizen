@@ -38,6 +38,7 @@ var fieldValues = {
         name: null,                 // String
         address: {                  // Address Object
             country: "NO",              // String
+            municipality: null,
             streetAddress: null,        // String
             zipcode: null,              // String
             postal: null                // String

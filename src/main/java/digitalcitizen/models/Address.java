@@ -7,6 +7,7 @@ public class Address {
 
     private String postal;
     private String country;
+    private String municipality;
     private String streetAddress;
     private String zipcode;
 
@@ -14,9 +15,10 @@ public class Address {
     public Address(){
     }
 
-    public Address(String postal, String country, String streetAddress, String zipcode) {
+    public Address(String postal, String country, String municipality, String streetAddress, String zipcode) {
         this.postal = postal;
         this.country = country;
+        this.municipality = municipality;
         this.streetAddress = streetAddress;
         this.zipcode = zipcode;
     }
@@ -39,6 +41,14 @@ public class Address {
 
     public String getCountry() {
         return country;
+    }
+
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 
     public void setCountry(String country) {
