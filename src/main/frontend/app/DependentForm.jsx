@@ -11,7 +11,7 @@ import dropdownContent from './static_data/dropdown-list-content.js';
 require('!style!css!less!./Application.less');
 import {reduxForm} from 'redux-form';
 
-class DependentForm extends React.Component {
+export default class DependentForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -53,8 +53,8 @@ class DependentForm extends React.Component {
         var deleteButton = this.props.showDeleteButton ?
             <Button className="close" aria-label="Close" onClick={this.handleClickRemove}><span
                 aria-hidden="true">&times;</span></Button> : '';
-        const {fields: {firstName, lastName, phone, mail, relation}} = this.props;
-        var reduxFields = this.props.fields;
+        const {firstName, lastName, phone, mail, relation} = this.props;
+        var reduxFields = [firstName, lastName, phone, mail, relation];
         var fields = ["Fornavn", "Etternavn", "Telefon", "E-post"];
         var fieldsForm = fields.map(function (field, i) {
             var textFieldRef;
@@ -79,7 +79,7 @@ class DependentForm extends React.Component {
                         <label>{field}</label>
                     </Col>
                     <Col sm={8} md={8}>
-                        <FormControl ref={textFieldRef} type="text" placeholder={field} {...reduxFields[i]}/>
+                        <FormControl ref={textFieldRef} type="text" placeholder={field} {...reduxFields[i]} />
                     </Col>
                 </Row>
             )
@@ -109,17 +109,17 @@ class DependentForm extends React.Component {
 
 
 
-
+/*
 DependentForm = reduxForm({
     form: 'application',
-    fields: ["firstName", "lastName", "phone", "mail", "relation"],
+    
     destroyOnUnmount: false
 })(DependentForm);
 
 export default DependentForm
 
 
-
+*/
 
 
 

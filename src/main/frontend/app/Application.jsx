@@ -63,7 +63,7 @@ export default class Application extends React.Component {
     constructor() {
         super();
         this.state = {
-            step: 6,
+            step: 1,
             prevStep: 1
         };
         this.nextStep = this.nextStep.bind(this);
