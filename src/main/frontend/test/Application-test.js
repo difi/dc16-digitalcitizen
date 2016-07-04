@@ -1,7 +1,7 @@
 /**
  * Created by camp-vha on 30.06.2016.
  */
-
+/*
 import React from "react";
 import {shallow, mount} from "enzyme";
 import {expect} from "chai";
@@ -94,5 +94,5 @@ describe("Application", function() {
     }); */
 
 
-})
+//})
 

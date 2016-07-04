@@ -67,7 +67,7 @@ describe("RelationForm", function() {
     });*/
 
     //Next and previous buttons
-    it('should have two buttons - for next and previous', function () {
+    /*it('should have two buttons - for next and previous', function () {
         //Render the RelationForm with fieldValues it is dependent on from Application - so we do not
         // have to also render Application
         const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
