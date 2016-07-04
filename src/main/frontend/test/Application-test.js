@@ -49,6 +49,7 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
+
 describe("Application", function() {
 
     //TODO: test functionality of next and back buttons.
@@ -73,19 +74,21 @@ describe("Application", function() {
        //backButtonInNeeds.simulate('click');
 
 
+
+   it('when next page is pushed, render next page', function () {
         //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        //const wrapper = shallow(<NeedsForm fieldValues = {fieldValues} saveValues = {saveValues} nextStep = {nextStep}/>);
-        //Look for the button that has id = "next", and assign it to backbutton if it exists
-        //const backbutton = wrapper.find('#next');
+         //have to also render Application
+        const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/>);
+       // Look for the button that has id = "next", and assign it to backbutton if it exists
+        const backbutton = wrapper.find('#back');
         //Expect the backbutton to exist
-        //expect(backbutton).to.have.length(1);
-        //Simulate a click on the backbutton
-        //backbutton.simulate('click');
+        expect(backbutton).to.have.length(1);
+       // Simulate a click on the backbutton
+        ReactTestUtils.Simulate.click(backbutton);
 
     });
 
-/*
+
     it('back button should go to the previous page when pushed', function () {
         //const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/>);
         //const backbutton = wrapper.find('#back');
@@ -93,11 +96,8 @@ describe("Application", function() {
         //expect(backbutton).to.have.length(1);
 
         //expect
-    });
-*/
-
-});
+    }); */
 
 
-
+})
 
