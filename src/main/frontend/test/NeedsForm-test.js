@@ -11,7 +11,7 @@ import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 import TestUtils from 'react-addons-test-utils';
 //Import the file we want to test.
-import {NeedsForm} from '../app/NeedsForm.jsx';
+import {NeedsFormClass} from '../app/NeedsForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -49,14 +49,19 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-
+var defaultProps = {
+    fields: {
+        need: false
+    },
+    fieldValues
+};
 
 describe("NeedsForm", function() {
     //Radio-buttons
     it('should have a HTML-element with className = needs', function () {
         //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
         // have to also render Application
-        const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/> );
+        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
 
         //Expect to find one element with the class name "needs"
         expect(wrapper.find('.needs')).to.have.length(1);

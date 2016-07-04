@@ -1,9 +1,7 @@
 /**
  * Created by camp-vha on 01.07.2016.
  */
-/**
- * Created by camp-vha on 01.07.2016.
- */
+
 import React from 'react';
 
 //Shallow renders only our component without touching the DOM.
@@ -13,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import RelationForm from '../app/RelationForm.jsx';
+import {RelationFormClass} from '../app/RelationForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -52,9 +50,20 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
+var defaultProps = {
+    fields: {
+        relation: "guardian",
+        typeOfRelation: null,
+        nameOfChild: null,
+        isDependent: null,
+        otherRelation: null
+    },
+    fieldValues
+};
+
 describe("RelationForm", function() {
     it('A HTML-element, with className = relation, exists', function () {
-        const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('.relation')).to.have.length(1);
     });
 
@@ -102,7 +111,7 @@ describe("RelationForm", function() {
 
 
     it('If none of the radio buttons are pressed, only the radiobuttons and the header is going to be shown', function () {
-        const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('label#guardian')).to.have.length(0);
         expect(wrapper.find('label#family')).to.have.length(0);
         expect(wrapper.find('label#other')).to.have.length(0);

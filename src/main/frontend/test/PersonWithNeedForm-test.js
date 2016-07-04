@@ -49,29 +49,15 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
+var defaultProps = {
+    fields: {
+        need: false
+    },
+    fieldValues
+};
+
 describe("PersonWithNeedForm", function() {
 
-    //Radio-buttons
-    /*it('should have a HTML-element with className = needs', function () {
-        //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const  wrapper = shallow(<PersonWithNeedForm fieldValues = {fieldValues}/> );
-        //Expect to find one element with the class name "needs"
-        expect(wrapper.find('.needs')).to.have.length(1);
-    });
-
-
-    //Next and previous buttons
-    /*it('should have two HTML-elements with the tag name "Button" - both next and previous', function () {
-        //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const wrapper = shallow(<PersonWithNeedForm fieldValues = {fieldValues}/>);
-        //Expect to find to button-elements in the page
-        expect(wrapper.find('Button')).to.have.length(2);
-        //Expect to find a button with ID next.
-        expect(wrapper.find('#next')).to.have.length(1);
-        //Expect to find a button with ID back.
-        expect(wrapper.find('#back')).to.have.length(1);
-    });*/
+    
 
 });
