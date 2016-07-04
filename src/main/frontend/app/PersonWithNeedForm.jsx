@@ -17,7 +17,7 @@ export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./validation.js';
 
-class PersonWithNeed extends React.Component {
+export class PersonWithNeed extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
