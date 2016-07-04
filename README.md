@@ -23,9 +23,7 @@ Kjør Application på vanlig måte.
 I terminalen naviger til src/main/frontend
 
 Første ganng må en del ekstra tillegg installeres:(
-npm install webpack-merge
-npm install webpack-dev-server
-npm install babel-preset-stage-1
+npm install
 )
 
 For å starte opp dev server - kjør
