@@ -1,14 +1,17 @@
 import React from 'react';
 import DropdownList from './DropdownList.jsx';
+import NavigationButtons from './NavigationButtons.jsx';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var RadioGroup = require('react-radio-group');
-import dropdownContent from './dropdown-list-content.js';
+import dropdownContent from './static_data/dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
+
+
 var ReactDOM = require('react-dom');
 import {onlyLettersInString} from "./validation.js";
 
@@ -161,13 +164,12 @@ export default class RelationForm extends React.Component {
                 content =
                     <componentClass>
                         <Row className="form-row">
-                            <Col sm={6} md={6}>
+                            <Col>
                                 <label>Hvem ønsker sykehjemsplass?</label>
                             </Col>
-                            <Col sm={6} md={6}></Col>
                         </Row>
                         <Row className="form-row">
-                            <Col sm={6} md={6}>
+                            <Col>
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               options={[{name: "Velg..."},{name: "Ola"}, {name: "Kari"}]}
@@ -177,21 +179,19 @@ export default class RelationForm extends React.Component {
                                               value={this.state.guardianRelation}
                                               defaultValue='Velg person'/>
                             </Col>
-                            <Col sm={6} md={6}></Col>
                         </Row>
-                    </componentClass >
+                    </componentClass>
                 break;
             case "family":
                 content =
                     <componentClass>
                         <Row className="form-row">
-                            <Col sm={6} md={6}>
+                            <Col>
                                 <label>Hva er din relasjon til personen med behov?</label>
                             </Col>
-                            <Col sm={6} md={6}></Col>
                         </Row>
                         <Row className="form-row">
-                            <Col sm={6} md={6}>
+                            <Col>
                                 <DropdownList id="1"
                                               ref="familyRelation"
                                               options={dropdownContent.RELATIONS}
@@ -201,28 +201,25 @@ export default class RelationForm extends React.Component {
                                               onChange={this.handleFamilyRelationChange}
                                               defaultValue='Velg relasjon'/>
                             </Col>
-                            <Col sm={6} md={6}></Col>
                         </Row>
                         <Row className="form-row">
-                            <Col sm={3} md={5}>
+                            <Col>
                                 <Checkbox ref="setDependent" onClick={this.handleDependentChange}
                                           checked={this.state.isDependent}> Registrer meg som
                                     pårørende</Checkbox>
                             </Col>
-                            <Col sm={9} md={7}></Col>
                         </Row>
                     </componentClass>
                 break;
             case "other":
                 content = <componentClass>
                     <Row className="form-row">
-                        <Col sm={6} md={6}>
+                        <Col>
                             <label>Hva er din relasjon til personen med behov?</label>
                         </Col>
-                        <Col sm={6} md={6}></Col>
                     </Row>
                     <Row className="form-row">
-                        <Col sm={6} md={6}>
+                        <Col>
                             <FormControl
                                 type="text"
                                 ref="otherRelation"
@@ -231,15 +228,13 @@ export default class RelationForm extends React.Component {
                                 value={this.state.otherRelation}
                                 onChange={this.handleTextChange}/>
                         </Col>
-                        <Col sm={6} md={6}></Col>
                     </Row>
                     <Row className="form-row">
-                        <Col sm={3} md={5}>
+                        <Col>
                             <Checkbox ref="setDependent" onClick={this.handleDependentChange}
                                       checked={this.state.isDependent}> Registrer meg som
                                 pårørende</Checkbox>
                         </Col>
-                        <Col sm={9} md={7}></Col>
                     </Row>
                 </componentClass>
 
@@ -264,21 +259,13 @@ export default class RelationForm extends React.Component {
                     </RadioGroup>
                     {content}
                 </div>
-
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
-                    </Col>
-                </Row>
-
-            </div>
-        )
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!this.state.validForm}
+                />
+    </div>
+    )
     }
 }
 

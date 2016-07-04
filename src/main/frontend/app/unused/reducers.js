@@ -3,16 +3,28 @@
  */
 
 import {onlyDigitsInString} from '../validation.js';
+import {onlyLettersInString} from '../validation.js';
+import {alphaNumericInString} from '../validation.js';
 import {combineReducers} from 'redux';
 import {reducer as form} from 'redux-form';
-const reducers = {
+const reducers = combineReducers({
     // ... your other reducers here ...
     form: form.normalize({
-        normalizing: {
+        application: {
             pnr: value => onlyDigitsInString(value),
-            number: value => onlyDigitsInString(value)
-        }})     // <---- Mounted at 'form'. See note below.
-};
+            name: value=> onlyLettersInString(value),
+            number: value=>onlyDigitsInString(value),
+            zipcode: value=>onlyDigitsInString(value),
+            street: value=>alphaNumericInString(value),
+            doctorName: value=>onlyLettersInString(value)
+          
+
+
+        }
+    })
+});
 
 
 export default reducers ;
+
+

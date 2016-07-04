@@ -27,8 +27,8 @@ public class SubmitController {
     }
 
     private void printSubmissionRequest(Submission submission, HttpServletRequest request){
-
-        String s = "Submission received from: " + request.getRemoteAddr();
+        String s = "Submission received from: " + request.getRemoteAddr() + '\n' +
+                submission;
         System.out.println(s);
     }
 }
