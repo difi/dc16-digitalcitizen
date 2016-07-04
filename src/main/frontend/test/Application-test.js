@@ -14,7 +14,6 @@ var ReactTestUtils = require('react-addons-test-utils');
 //Import the file we want to test.
 import NeedsForm from '../app/NeedsForm.jsx';
 
-
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
