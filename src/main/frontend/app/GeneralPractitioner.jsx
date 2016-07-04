@@ -1,23 +1,30 @@
 import React from 'react';
 import NavigationButtons from './NavigationButtons.jsx';
+import $ from 'jquery'
+import TypeAhead from './AutoComplete';
+import {reduxForm} from 'redux-form';
+import RESTpaths from './static_data/RESTpaths.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 require('!style!css!less!./Application.less');
-import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-import {reduxForm} from 'redux-form';
+
+
+
 class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: this.props.fieldValues.doctor.name,
-            validForm: this.props.fieldValues.doctor.name
+            validForm: this.props.fieldValues.doctor.name,
         };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
+        this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
 
     }
 
@@ -42,10 +49,24 @@ class GeneralPractitioner extends React.Component {
         console.log(data);
     }
 
+    getPractitionersByMunicipality(municipality){
+        $.ajax({
+            url: RESTpaths.PATHS.DOCTORS_BASE + '?loc=' + municipality,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                console.log(data);
+                this.props.fields.doctors.onChange(data.map(function(a) {return a.name;}));
+                this.forceUpdate();
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
 
     render() {
-        var fastleger = ["Ola Nordmann", "Kari Nordmann"];
-        const {fields: {doctorName}} = this.props;
+        const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
 
         return (
@@ -57,7 +78,7 @@ class GeneralPractitioner extends React.Component {
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
+                            <TypeAhead array={doctors.value} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
                                        value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
                         </Col>
                     </Row>
@@ -74,7 +95,7 @@ class GeneralPractitioner extends React.Component {
 
 GeneralPractitioner = reduxForm({
     form: 'application',
-    fields: ["doctorName"],
+    fields: ["doctorName", "doctors"],
     destroyOnUnmount: false,
 }, null, null)(GeneralPractitioner);
 

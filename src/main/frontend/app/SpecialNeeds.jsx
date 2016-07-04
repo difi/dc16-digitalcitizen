@@ -16,6 +16,7 @@ class SpecialNeeds extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
+        this.saveFieldsValues = this.saveFieldsValues.bind(this);
 
     }
 
@@ -27,8 +28,8 @@ class SpecialNeeds extends React.Component {
 
     handleClickNext() {
         this.saveFieldsValues();
-        console.log("State 7");
-        this.props.nextStep(8);
+        console.log("State 9");
+        this.props.nextStep(9);
     }
 
     saveFieldsValues() {
