@@ -243,7 +243,7 @@ export default class RelationForm extends React.Component {
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
-                    <RadioGroup name="relation" selectedValue={this.state.value} onChange={this.handleChange}>
+                    <RadioGroup className="relation" selectedValue={this.state.value} onChange={this.handleChange}>
                         {Radio => (
                             <div className="form-radio-group">
                                 <Radio className="radio-button" value="guardian"/>Jeg er verge for den jeg søker på
@@ -287,27 +287,13 @@ export default class RelationForm extends React.Component {
  */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Updated Radio-buttons, but does not work completely
+/*<div className="relation">
+ <Radio id="guardian-radio" className="radio-button" value="guardian" checked={this.state.value === 'guardian'} onChange={this.handleChange}/>Jeg er verge for den jeg søker på
+ vegne av
+ <Radio id="family-radio" className="radio-button" value="family" checked={this.state.value === 'family'} onChange={this.handleChange}/>Jeg er i familie med den jeg søker på
+ vegne
+ av
+ <Radio id="other-radio" className="radio-button" value="other" checked={this.state.value === 'other'} onChange={this.handleChange}/>Annet
+ </div>
+ */
