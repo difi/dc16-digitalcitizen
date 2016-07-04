@@ -17,7 +17,6 @@ const reducers = combineReducers({
             zipcode: value=>onlyDigitsInString(value),
             street: value=>alphaNumericInString(value),
             doctorName: value=>onlyLettersInString(value)
-            
           
 
 

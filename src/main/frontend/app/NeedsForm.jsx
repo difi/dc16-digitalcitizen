@@ -6,9 +6,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import {reduxForm} from 'redux-form';
 
-
-
-export class NeedsForm extends React.Component {
+export default class NeedsForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -56,7 +54,7 @@ export class NeedsForm extends React.Component {
         var valid = need.value;
         return (
             <componentClass>
-                <label name='label' className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
+                <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
 
                 <div className="form-container">
                     <RadioGroup className="needs" selectedValue={need.value} {...need}>
@@ -77,16 +75,13 @@ export class NeedsForm extends React.Component {
             </componentClass>
         )
     }
-};
+}
 
 
-NeedsForm =  reduxForm({
+NeedsForm = reduxForm({
     form: 'application',
     fields: ["need"],
-    destroyOnUnmount: false,
+    destroyOnUnmount: false
 }, null, null)(NeedsForm);
 
 export default NeedsForm
-
-
-
