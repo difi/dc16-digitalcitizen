@@ -1,19 +1,16 @@
 /**
  * Created by camp-vha on 28.06.2016.
  */
-
 import React from 'react';
-import jsxChai from "jsx-chai";
+
 //Shallow renders only our component without touching the DOM.
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
-var RadioGroup = require('react-radio-group');
-import { shallow, mount, render } from 'enzyme';
-import chai from 'chai';
-//Import the file we want to test.
-var {NeedsForm} = require('../app/NeedsForm.jsx');
 
-chai.use(jsxChai);
+import { shallow, mount, render } from 'enzyme';
+import {expect} from 'chai';
+//Import the file we want to test.
+import NeedsForm from '../app/NeedsForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -52,17 +49,15 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-
 describe("NeedsForm", function() {
 
     //Radio-buttons
     it('should have RadioGroup', function () {
         //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
         // have to also render Application
-        const  wrapper = shallow(<NeedsForm/> );
-
+        const  wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/> );
         //Expect to find one element with the class name "needs"
-        expect(wrapper).to.have.length(1);
+        expect(wrapper.find('.needs')).to.have.length(1);
     });
 
     //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
@@ -74,9 +69,12 @@ describe("NeedsForm", function() {
         // have to also render Application
         const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/>);
         //Expect to find to button-elements in the page
+        expect(wrapper.find('Button')).to.have.length(2);
         //Expect to find a button with ID next.
-       
-    })
+        expect(wrapper.find('#next')).to.have.length(1);
+        //Expect to find a button with ID back.
+        expect(wrapper.find('#back')).to.have.length(1);
+    });
 
 
     //TODO: Sjekk at de gjør det de skal
@@ -87,6 +85,6 @@ describe("NeedsForm", function() {
         backbutton.simulate('click');
         expect(this.props.previousStep).to.equal('1');
     });
-
+*/
 
 });
