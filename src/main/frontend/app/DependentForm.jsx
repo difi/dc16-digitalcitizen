@@ -14,7 +14,6 @@ require('!style!css!less!./Application.less');
 export default class DependentForm extends React.Component {
     constructor(props) {
         super(props);
-        console.log("adfasdf");
         this.handleClickRemove = this.handleClickRemove.bind(this);
     }
 

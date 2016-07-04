@@ -10,8 +10,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-
-
 var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
@@ -19,55 +17,6 @@ import {getValues} from 'redux-form';
 export default class RelationForm extends React.Component {
     constructor(props) {
         super(props);
-        //this.handleChange = this.handleChange.bind(this);
-        switch (this.props.fieldValues.relation) {
-            case "guardian":
-                this.state = {
-                    guardianRelation: this.props.fieldValues.nameOfChild,
-                    value: this.props.fieldValues.relation,
-
-                    typeOfRelation: this.props.fieldValues.typeOfRelation,
-                    verger: null,
-                    isDependent: this.props.fieldValues.dependent,
-                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.guardianRelation)
-                };
-                break;
-
-
-            case "family":
-                this.state = {
-                    familyRelation: this.props.fieldValues.typeOfRelation,
-                    value: this.props.fieldValues.relation,
-
-                    typeOfRelation: this.props.fieldValues.typeOfRelation,
-                    verger: null,
-                    isDependent: this.props.fieldValues.dependent,
-                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.typeOfRelation)
-                };
-                break;
-            case "other":
-                this.state = {
-                    otherRelation: this.props.fieldValues.typeOfRelation,
-                    value: this.props.fieldValues.relation,
-
-                    typeOfRelation: this.props.fieldValues.typeOfRelation,
-                    verger: null,
-                    isDependent: this.props.fieldValues.dependent,
-                    validForm: (this.props.fieldValues.relation && this.props.fieldValues.typeOfRelation)
-                };
-                break;
-            default:
-                this.state = {
-                    value: this.props.fieldValues.relation,
-
-                    typeOfRelation: this.props.fieldValues.typeOfRelation,
-                    verger: null,
-                    isDependent: this.props.fieldValues.dependent,
-                    validForm: false
-                }
-        }
-
-
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
@@ -94,18 +43,45 @@ export default class RelationForm extends React.Component {
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
-
         if (relation.value == "guardian") {
             isDependent.onChange(true);
+            var data = {
+                relation: relation.value,
+                nameOfChild: nameOfChild.value,
+                dependent: isDependent.value,
 
+            };
+
+        }
+        if (relation.value == "family") {
+            var data = {
+                relation: relation.value,
+                typeOfRelation: typeOfRelation.value,
+                dependent: isDependent.value,
+            };
+
+        }
+        if (relation.value == "other") {
+            var data = {
+                relation: relation.value,
+                otherRelation: otherRelation.value,
+                dependent: isDependent.value,
+            };
+
+        }
+
+        /*
+        if (relation.value == "guardian") {
+            isDependent.onChange(true);
         }
         var data = {
             relation: relation.value,
             typeOfRelation: typeOfRelation.value,
-            dependent: isDependent.value,
             nameOfChild: nameOfChild.value,
-            otherRelation: otherRelation.value
-        };
+            otherRelation: otherRelation.value,
+            dependent: isDependent.value,
+        }*/
+
         this.props.saveValues(data);
         console.log(data);
     }
@@ -133,7 +109,7 @@ export default class RelationForm extends React.Component {
                                               defaultValue=""
                                               {...nameOfChild}
                                               //value={nameOfChild.value}
-                                              onChange={change => nameOfChild.change(change.newValue)}
+                                              onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
                             </Col>
                         </Row>
@@ -156,7 +132,7 @@ export default class RelationForm extends React.Component {
                                               valueField="value"
                                               {...typeOfRelation}
                                               //value={typeOfRelation.value}
-                                              onChange={change => typeOfRelation.change(change.newValue)}/>
+                                              onChange={change => typeOfRelation.onChange(change.newValue)}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -216,7 +192,7 @@ export default class RelationForm extends React.Component {
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={!this.state.validForm}
+                    //disabled={!this.state.validForm}
                 />
     </div>
     )
