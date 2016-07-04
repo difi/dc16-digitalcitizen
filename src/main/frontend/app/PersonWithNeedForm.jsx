@@ -82,11 +82,6 @@ class PersonWithNeed extends React.Component {
                                         //onChange={this.handlePNRChange}
                                         //{...pnr} Removing this resets the text field
                                         disabled/>
-<<<<<<< HEAD
-                                    {pnr.touched && pnr.error && <div>{pnr.error}</div>}
-=======
-
->>>>>>> refs/remotes/origin/master
 
                                 </Col>
                             </Row>
@@ -165,12 +160,6 @@ class PersonWithNeed extends React.Component {
                                     type="text"
                                     placeholder="Navn"
                                     ref="name"
-<<<<<<< HEAD
-                                    value={this.state.name}
-                                    onChange={this.handleNameChange}
-=======
-                                    defaultValue={this.props.fieldValues.person.name}
->>>>>>> refs/remotes/origin/master
                                     {...name}
                                 />
                             </Col>
