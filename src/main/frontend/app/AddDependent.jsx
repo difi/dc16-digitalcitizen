@@ -7,11 +7,18 @@ var ReactDOM = require('react-dom');
 import DependentForm from './DependentForm.jsx';
 require('!style!css!less!./Application.less');
 import NavigationButtons from './NavigationButtons.jsx';
-
+import {reduxForm} from 'redux-form';
 // TODO: Remove "Add Dependent"-button when 3 forms are displayed
 
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
+
+var dependentForms = [
+    {key: 1},
+    {key: 2},
+    {key: 3}
+];
+
 
 export default class AddDependent extends React.Component {
     constructor() {
@@ -34,15 +41,16 @@ export default class AddDependent extends React.Component {
 
     handleClickBack() {
         this.saveFieldValues();
-        if( this.props.fieldValues.applyingForSelf){
-        (this.props.previousStep(1));
-    }
-        else if( this.props.fieldValues.gotPNRnumber){
+        if (this.props.fieldValues.applyingForSelf) {
+            (this.props.previousStep(1));
+        }
+        else if (this.props.fieldValues.gotPNRnumber) {
             (this.props.previousStep(5));
         }
-       else {
+        else {
             (this.props.previousStep(3));
-        }}
+        }
+    }
 
     handleClickNext() {
         this.saveFieldValues();
@@ -53,7 +61,7 @@ export default class AddDependent extends React.Component {
 
         if (this.state.numDep < 3) {
 
-            if(this.state.numDep == 2){
+            if (this.state.numDep == 2) {
                 this.setState({
                     showAddButton: HIDE_FORM
                 });
@@ -76,6 +84,7 @@ export default class AddDependent extends React.Component {
     }
 
     saveFieldValues() {
+        console.log(this.refs.form1);
         var form2Data = null;
         var form3Data = null;
         if (this.state.showForm2 == true) {
@@ -119,39 +128,39 @@ export default class AddDependent extends React.Component {
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
-                            <DependentForm ref="form1" showForm={this.state.showForm1} showDeleteButton={false}/>
+                            <DependentForm ref="form1" showForm={this.state.showForm1} formKey="1" showDeleteButton={false}/>
                         </div>
                         <br/>
                         <Collapse in={this.state.showForm2}>
-                        <div id="dep2" className="depedent-form-wrapper">
-                            <DependentForm ref="form2" onClick={this.handleClickForm2}
-                                           showDeleteButton={true}/>
-                        </div>
+                            <div id="dep2" className="depedent-form-wrapper">
+                                <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
+                                               showDeleteButton={true}/>
+                            </div>
                         </Collapse>
                         <br/>
                         <Collapse in={this.state.showForm3}>
-                        <div id="dep3" className="depedent-form-wrapper">
-                            <DependentForm ref="form3" onClick={this.handleClickForm3}
-                                           showDeleteButton={true}/>
-                        </div>
+                            <div id="dep3" className="depedent-form-wrapper">
+                                <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
+                                               showDeleteButton={true}/>
+                            </div>
                         </Collapse>
                     </div>
                 </div>
                 <Row className="addDepButton from-row">
-                        <Button onClick={this.handleClick} style={{display: this.state.showAddButton}} bsStyle="info">+ Legg til pårørende</Button>
+                    <Button onClick={this.handleClick} style={{display: this.state.showAddButton}} bsStyle="info">+ Legg
+                        til pårørende</Button>
                 </Row>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={false} // TODO update to !this.state.validform
+                    disabled={false} // TODO: update to !this.state.validform
                 />
             </div>
+        
         );
     }
-};
-
-
-
+}
+;
 
 
 
