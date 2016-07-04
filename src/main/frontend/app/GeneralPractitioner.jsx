@@ -1,12 +1,14 @@
 import React from 'react';
+import NavigationButtons from './NavigationButtons.jsx';
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 require('!style!css!less!./Application.less');
 import TypeAhead from './AutoComplete';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-
-export default class GeneralPractitioner extends React.Component {
+import {reduxForm} from 'redux-form';
+class GeneralPractitioner extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +18,6 @@ export default class GeneralPractitioner extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-        this.handleChange = this.handleChange.bind(this);
 
     }
 
@@ -33,24 +34,19 @@ export default class GeneralPractitioner extends React.Component {
     }
 
     saveFieldValues() {
+        this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
         var data = {
             doctor: {name: this.refs.doctorSelect.getFieldValue()}
         };
         this.props.saveValues(data);
         console.log(data);
     }
-    handleChange(event){
-        
-        this.setState({name: event.target.value,
-        validForm: event.target.value})
-    }
-
 
 
     render() {
         var fastleger = ["Ola Nordmann", "Kari Nordmann"];
-        var name = this.state.name;
-        
+        const {fields: {doctorName}} = this.props;
+        var valid = doctorName.value;
 
         return (
             <componentClass>
@@ -61,23 +57,25 @@ export default class GeneralPractitioner extends React.Component {
                             <label>Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege" value={name} onChange={this.handleChange}/>
+                            <TypeAhead array={fastleger} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
+                                       value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
                         </Col>
                     </Row>
                 </div>
-
-                <Row className="back-forward-buttons">
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickBack} className="button-next" bsStyle="success">&larr;
-                            Tilbake</Button>
-                    </Col>
-                    <Col sx={7} sm={8} md={8}></Col>
-                    <Col sx={2} sm={2} md={2}>
-                        <Button onClick={this.handleClickNext} disabled={!this.state.validForm} className="button-next"
-                                bsStyle="success">Neste &rarr;</Button>
-                    </Col>
-                </Row>
+                <NavigationButtons
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    disabled={!valid}
+                />
             </componentClass>
         );
     }
 }
+
+GeneralPractitioner = reduxForm({
+    form: 'application',
+    fields: ["doctorName"],
+    destroyOnUnmount: false,
+}, null, null)(GeneralPractitioner);
+
+export default GeneralPractitioner
