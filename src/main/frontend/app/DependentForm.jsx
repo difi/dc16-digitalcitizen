@@ -14,7 +14,6 @@ import {reduxForm} from 'redux-form';
 export default class DependentForm extends React.Component {
     constructor(props) {
         super(props);
-
         this.handleClickRemove = this.handleClickRemove.bind(this);
     }
 
