@@ -50,7 +50,7 @@ var fieldValues = {
 };
 var defaultProps = {
     fields: {
-        medical: null,
+        medical: "sd",
         changes: null,
         other: null
     },

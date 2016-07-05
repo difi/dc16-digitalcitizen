@@ -4,7 +4,6 @@ import NavigationButtons from './NavigationButtons.jsx';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
-var RadioGroup = require('react-radio-group');
 import dropdownContent from './static_data/dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -90,14 +89,14 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
-
+        console.log(relation.value);
         switch (relation.value) {
             case "guardian":
                 content =
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label>Hvem ønsker sykehjemsplass?</label>
+                                <label id="guardian">Hvem ønsker sykehjemsplass?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -171,23 +170,18 @@ export class RelationFormClass extends React.Component {
                 </componentClass>
         }
         return (
+
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
-                    <RadioGroup className="relation" selectedValue={relation.value} {...relation}>
-                        {Radio => (
-                            <div className="form-radio-group">
-                                <Radio className="radio-button" value="guardian"/>Jeg er verge for den jeg søker på
-                                vegne av
-                                <br/>
-                                <Radio className="radio-button" value="family"/>Jeg er i familie med den jeg søker på
-                                vegne
-                                av
-                                <br/>
-                                <Radio className="radio-button" value="other"/>Annet
-                            </div>
-                        )}
-                    </RadioGroup>
+                    <form className="relation">
+                        <input type="radio" id="guardian-radio" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
+                        <br/>
+                        <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
+                        <br/>
+                        <input type="radio" id="other-radio" name="radio-buttons" {...relation} value="other"  checked={relation.value=="other"}/>Annet
+                    </form>
+
                     {content}
                 </div>
                 <NavigationButtons
@@ -196,8 +190,8 @@ export class RelationFormClass extends React.Component {
                     disabled={!valid}
                     //disabled={!this.state.validForm}
                 />
-    </div>
-    )
+            </div>
+        )
     }
 }
 
@@ -209,15 +203,3 @@ const RelationForm = reduxForm({
 }, null, null)(RelationFormClass);
 
 export default RelationForm
-
-
-//Updated Radio-buttons, but does not work properly
-/*<div className="relation">
- <Radio id="guardian-radio" className="radio-button" value="guardian" checked={this.state.value === 'guardian'} onChange={this.handleChange}/>Jeg er verge for den jeg søker på
- vegne av
- <Radio id="family-radio" className="radio-button" value="family" checked={this.state.value === 'family'} onChange={this.handleChange}/>Jeg er i familie med den jeg søker på
- vegne
- av
- <Radio id="other-radio" className="radio-button" value="other" checked={this.state.value === 'other'} onChange={this.handleChange}/>Annet
- </div>
- */

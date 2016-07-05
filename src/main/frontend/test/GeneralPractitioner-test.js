@@ -1,5 +1,5 @@
 /**
- * Created by camp-vha on 28.06.2016.
+ * Created by camp-vha on 05.07.2016.
  */
 import React from 'react';
 
@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {NeedsFormClass} from '../app/NeedsForm.jsx';
+import {GeneralPractitionerClass} from '../app/GeneralPractitioner.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -48,31 +48,27 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
+
 var defaultProps = {
     fields: {
-        need: false
+        doctorName: "sd",
+        doctors: ['as', 'asd']
     },
     fieldValues
 };
 
-describe("NeedsForm", function() {
+describe("GeneralPractitionerClass", function() {
+    //Radio-buttons
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
+        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
-    it('should have a HTML-element with className = needs', function () {
-        //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
-
-        //Expect to find one element with the class name "needs"
-        expect(wrapper.find('.needs')).to.have.length(1);
+    it('should have two HTML-elements with className=genPract', function () {
+        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/>);
+        expect(wrapper.find('.genPract')).to.have.length(2);
     });
 
-    it('two radio-buttons exists', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/>);
-        expect(wrapper.find('input[type="radio"]')).to.have.length(2);
-    });
 });

@@ -61,8 +61,6 @@ var defaultProps = {
     fieldValues
 };
 
-
-
 describe("RelationForm", function() {
     it('should have header and container classnames for HTML-elements', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
@@ -75,38 +73,31 @@ describe("RelationForm", function() {
         expect(wrapper.find('.relation')).to.have.length(1);
     });
 
-    //TODO: Needs to be finished after applying redux
-    /*it('correct radio-button exists', function () {
-        const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
+    it('three radio-buttons exists', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper.find('input[type="radio"]')).to.have.length(3);
+    });
+
+    it('correct radio-button exists', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('#guardian-radio')).to.have.length(1);
         expect(wrapper.find('#family-radio')).to.have.length(1);
         expect(wrapper.find('#other-radio')).to.have.length(1);
-    });*/
-
-    //Next and previous buttons
-    /*it('should have two buttons - for next and previous', function () {
-        //Render the RelationForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
-        //Expect to find to button-elements in the page
-        expect(wrapper.find('Button')).to.have.length(2);
-        //Expect to find a button with ID next.
-        expect(wrapper.find('#next')).to.have.length(1);
-        //Expect to find a button with ID back.
-        expect(wrapper.find('#back')).to.have.length(1);
     });
 
     //TODO: Needs to be finished after applying redux
     /*it('in case guardian-button is pressed, show label and dropdown-list', function () {
-        const wrapper = mount(<RelationForm fieldValues = {fieldValues}/>);
-        wrapper.find('#guardian-radio').simulate('click');
+        const wrapper = mount(<RelationFormClass {...defaultProps}/>);
+        wrapper.node.relation = 'guardian';
 
-        // const guardianButton = wrapper.find('.relation').children[0];
-        //expect(guardianButton).to.have.length(1);
+        //wrapper.setProps(relation=="guardian");
+        //wrapper.find('#guardian-radio').simulate('change');
+
+        //wrapper.find('#guardian-radio').simulate('change', {target: {relation: 'guardian'}})
 
         expect(wrapper.find('label#guardian')).to.have.length(1);
-        expect(wrapper.find('DropdownList#1')).to.have.length(1);
-    });*/
+        //expect(wrapper.find('DropdownList')).to.have.length(1);
+    });
 
     /*it('in case family-button is pressed, show label and dropdown-list, and checkbox', function () {
 

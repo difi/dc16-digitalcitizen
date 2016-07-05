@@ -105,3 +105,10 @@ export function alphaNumericInString(str){
     if(str){
     return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?@]+/g, '');}
 }
+
+export function fieldIsEmpty(value) {
+    if(isEmpty(value)){
+        return true;
+    }
+    return false;
+}
