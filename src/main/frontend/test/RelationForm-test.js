@@ -73,30 +73,31 @@ describe("RelationForm", function() {
         expect(wrapper.find('.relation')).to.have.length(1);
     });
 
-    //TODO: Needs to be finished after applying redux
-    /*it('correct radio-button exists', function () {
-        const wrapper = shallow(<RelationForm fieldValues = {fieldValues}/>);
-        expect(wrapper.find('#guardian-radio')).to.have.length(1);
-        expect(wrapper.find('#family-radio')).to.have.length(1);
-        expect(wrapper.find('#other-radio')).to.have.length(1);
-    });*/
-
     it('three radio-buttons exists', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('input[type="radio"]')).to.have.length(3);
     });
 
+    it('correct radio-button exists', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper.find('#guardian-radio')).to.have.length(1);
+        expect(wrapper.find('#family-radio')).to.have.length(1);
+        expect(wrapper.find('#other-radio')).to.have.length(1);
+    });
+
     //TODO: Needs to be finished after applying redux
     /*it('in case guardian-button is pressed, show label and dropdown-list', function () {
-        const wrapper = mount(<RelationForm fieldValues = {fieldValues}/>);
-        wrapper.find('#guardian-radio').simulate('click');
+        const wrapper = mount(<RelationFormClass {...defaultProps}/>);
+        wrapper.node.relation = 'guardian';
 
-        // const guardianButton = wrapper.find('.relation').children[0];
-        //expect(guardianButton).to.have.length(1);
+        //wrapper.setProps(relation=="guardian");
+        //wrapper.find('#guardian-radio').simulate('change');
+
+        //wrapper.find('#guardian-radio').simulate('change', {target: {relation: 'guardian'}})
 
         expect(wrapper.find('label#guardian')).to.have.length(1);
-        expect(wrapper.find('DropdownList#1')).to.have.length(1);
-    });*/
+        //expect(wrapper.find('DropdownList')).to.have.length(1);
+    });
 
     /*it('in case family-button is pressed, show label and dropdown-list, and checkbox', function () {
 
