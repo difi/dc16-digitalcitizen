@@ -83,6 +83,11 @@ describe("RelationForm", function() {
         expect(wrapper.find('#other-radio')).to.have.length(1);
     });*/
 
+    /*it('three radio-buttons exists', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper.find('.radio-button')).to.have.length(3);
+    });
+
     //Next and previous buttons
     /*it('should have two buttons - for next and previous', function () {
         //Render the RelationForm with fieldValues it is dependent on from Application - so we do not
