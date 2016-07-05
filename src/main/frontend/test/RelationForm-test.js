@@ -64,6 +64,12 @@ var defaultProps = {
 
 
 describe("RelationForm", function() {
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
+
     it('A HTML-element, with className = relation, exists', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('.relation')).to.have.length(1);

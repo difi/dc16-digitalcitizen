@@ -9,7 +9,6 @@ import React from 'react';
 
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
-import TestUtils from 'react-addons-test-utils';
 //Import the file we want to test.
 import {NeedsFormClass} from '../app/NeedsForm.jsx';
 
@@ -58,6 +57,13 @@ var defaultProps = {
 
 describe("NeedsForm", function() {
     //Radio-buttons
+
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
+
     it('should have a HTML-element with className = needs', function () {
         //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
         // have to also render Application

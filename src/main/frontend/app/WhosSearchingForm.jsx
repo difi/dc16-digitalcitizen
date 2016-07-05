@@ -56,7 +56,6 @@ export default class WhosSearching extends React.Component {
                                     bsSize="large">Nei, for noen andre</Button>
                         </Col>
                     </Row>
-                       
                 </div>
             </componentClass>
         )
