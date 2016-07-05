@@ -19,7 +19,7 @@ import {onlyDigitsInString} from './validation.js'
 import {alphaNumericInString} from './validation.js'
 
 
-class PersonWithNeedInfo extends React.Component {
+export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -75,11 +75,12 @@ class PersonWithNeedInfo extends React.Component {
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label>Navn</label>
+                                <label className="name">Navn</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormControl
                                     type="text"
+                                    className="name"
                                     ref="name"
                                     placeholder="Navn"
 
@@ -88,20 +89,21 @@ class PersonWithNeedInfo extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label>Folkeregistrert adresse</label>
+                                <label className="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <AddressField ref='addressfield' address={this.props.fieldValues.person.address}
+                                <AddressField className="adr" ref='addressfield' address={this.props.fieldValues.person.address}
                                               includeCountry={false}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label>Telefon</label>
+                                <label className="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormControl
                                     type="numeric"
+                                    className="tlf"
                                     ref="phone"
                                     placeholder="Telefonnr"
                                     {...number}
@@ -138,11 +140,11 @@ const validate = values => {
 }
 
 //Sets up reduxForm - needs fields and validation functions
-PersonWithNeedInfo = reduxForm({
+const PersonWithNeedInfo = reduxForm({
     form: 'application',
     fields: ["name", "number", "street", "zipcode", "postal", "municipality"],
     destroyOnUnmount: false,
     validate
-}, null, null)(PersonWithNeedInfo);
+}, null, null)(PersonWithNeedInfoClass);
 
 export default PersonWithNeedInfo

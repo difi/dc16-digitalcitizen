@@ -202,13 +202,13 @@ export class RelationFormClass extends React.Component {
 }
 
 //Sets up reduxForm - needs fields and validation functions
-const RelationFormDefault = reduxForm({
+const RelationForm = reduxForm({
     form: 'application',
     fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation"],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 
-export default RelationFormDefault
+export default RelationForm
 
 
 //Updated Radio-buttons, but does not work properly

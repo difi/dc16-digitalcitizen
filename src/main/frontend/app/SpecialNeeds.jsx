@@ -9,7 +9,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 
 import {reduxForm} from 'redux-form';
 
-class SpecialNeeds extends React.Component {
+export class SpecialNeedsClass extends React.Component {
 
 
     constructor(props) {
@@ -97,11 +97,11 @@ class SpecialNeeds extends React.Component {
 }
 
 
-SpecialNeeds = reduxForm({
+const SpecialNeeds = reduxForm({
     form: 'application',
     fields: ["medical", "changes", "other"],
     destroyOnUnmount: false,
 
-}, null, null)(SpecialNeeds);
+}, null, null)(SpecialNeedsClass);
 
 export default SpecialNeeds
