@@ -198,8 +198,3 @@ const PersonWithNeedDef = reduxForm({
     validate
 })(PersonWithNeedClass);
 
-<<<<<<< HEAD
-export default PersonWithNeed
-=======
-export default PersonWithNeedDef
->>>>>>> refs/remotes/origin/master
