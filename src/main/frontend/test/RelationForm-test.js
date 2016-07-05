@@ -61,6 +61,8 @@ var defaultProps = {
     fieldValues
 };
 
+
+
 describe("RelationForm", function() {
     it('should have header and container classnames for HTML-elements', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
