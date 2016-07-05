@@ -50,6 +50,12 @@ var fieldValues = {
 };
 
 describe("WhosSearchingForm", function() {
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<WhosSearchingForm fieldValues = {fieldValues}/>);
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
+
     it('two buttons exists', function () {
         const wrapper = shallow(<WhosSearchingForm fieldValues = {fieldValues}/>);
         expect(wrapper.find('Button')).to.have.length(2);
