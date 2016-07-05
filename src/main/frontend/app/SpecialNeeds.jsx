@@ -5,8 +5,6 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
-
-
 import {reduxForm} from 'redux-form';
 
 class SpecialNeeds extends React.Component {
@@ -47,6 +45,7 @@ class SpecialNeeds extends React.Component {
     render() {
 
         const {fields: {medical, changes, other}} = this.props;
+        var valid = medical.value
 
         return (
             <div>
@@ -54,7 +53,7 @@ class SpecialNeeds extends React.Component {
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
+                            <label className="from-col-address"> Hva er grunnen til at du søker plass på sykehjem? </label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -63,8 +62,7 @@ class SpecialNeeds extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at
-                                ditt behov for assistanse har oppstått?</label>
+                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -84,6 +82,7 @@ class SpecialNeeds extends React.Component {
                 </div>
                 
                 <NavigationButtons
+                    disabled={!valid}
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
@@ -96,12 +95,11 @@ class SpecialNeeds extends React.Component {
     }
 }
 
-
 SpecialNeeds = reduxForm({
     form: 'application',
     fields: ["medical", "changes", "other"],
     destroyOnUnmount: false,
-
+    
 }, null, null)(SpecialNeeds);
 
 export default SpecialNeeds
