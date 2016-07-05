@@ -56,6 +56,7 @@ export default class AddDependent extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.validation = this.validation.bind(this);
 
     }
 
@@ -102,6 +103,26 @@ export default class AddDependent extends React.Component {
                     numDep: this.state.numDep += 1
                 });
             }
+        }
+    }
+
+    validation(value) {
+        const {
+            fields: {form1, form2, form3}
+        } = this.props;
+
+        if (value == "3") {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value)
+                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value);
+            return valid;
+        } else if (value == "2") {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value);
+            return valid;
+        } else {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value);
+            return valid;
         }
     }
 
@@ -170,15 +191,10 @@ export default class AddDependent extends React.Component {
         const {
             fields: {form1, form2, form3}
         } = this.props;
-        if (form1) {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value);
-        } else if (form2) {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value);
-        } else {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value)
-                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value);
+        this.validation(1);
+        var valid=true;
+        for(var i=1; i<=this.state.numDep; i++){
+            valid = this.validation(i) && valid
         }
         return (
             <div>
