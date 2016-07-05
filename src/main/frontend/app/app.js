@@ -31,8 +31,7 @@ var dataMe = [
     {name: "Nasjonalitet", type: "Dropdown"},
     {name: "Sivilstatus", type: "Dropdown"},
     {name: "Fastlege", type: "AutoComplete", data: fastleger},
-    {name: "Bor du alene?", type: "RadioButton"}
-];
+    {name: "Bor du alene?", type: "RadioButton"}];
 
 var dataApplicant = [
     {name: "Fornavn", type: "TextField"},
@@ -47,17 +46,7 @@ var dataDep = [
     {name: "Telefon", type: "TextField"},
     {name: "Adresse", type: "AddressField", includeCountry: true},
     {name: "Relasjon", type: "Dropdown"},
-    {name: "Flere pårørende?", type: "RadioButton"}
-];
-/*
-//Further relations
-var dataDep2=[
-    {name: "Fornavn", type: "TextField"},
-    {name: "Etternavn", type: "TextField"},
-    {name: "Telefon", type: "TextField"},
-    {name: "Adresse", type: "AddressField", includeCountry: true},
-    {name: "Relasjon", type: "Dropdown"}];
-*/
+    {name: "Flere pårørende?", type: "RadioButton"}];
 
 var dataWhy = [
     {name: "Hvorfor søker du plass?", type:"TextArea"},
@@ -66,12 +55,7 @@ var dataWhy = [
 var data = [
     {formname: "Om den som ønsker plass", data: dataMe},
     {formname: "Om deg som søker", data: dataApplicant},
-    {formname: "Om pårørende", data: dataDep},
-    
-    //{formname: "Andre pårørende", data: dataDep2},
-    
-    {formname: "Hvorfor du søker", data: dataWhy}
-];
+    {formname: "Om pårørende", data: dataDep},{formname: "Hvorfor du søker", data: dataWhy}];
 
 
 

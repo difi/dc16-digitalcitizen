@@ -134,7 +134,7 @@ const validate = values => {
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
     return errors;
-}
+};
 
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeedInfo = reduxForm({
