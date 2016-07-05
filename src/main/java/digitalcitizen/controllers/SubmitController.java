@@ -1,7 +1,7 @@
 package digitalcitizen.controllers;
 
 import digitalcitizen.models.Submission;
-import digitalcitizen.pdf.PDFManager;
+import digitalcitizen.utilities.PDFManager;
 import digitalcitizen.utilities.SubmissionValidator;
 
 import org.springframework.http.HttpHeaders;
@@ -45,8 +45,8 @@ public class SubmitController {
 
     /**
      *
-     * @param id The id of the submission we want to generate a pdf-file from.
-     * @return HTTP containing the generated pdf-file
+     * @param id The id of the submission we want to generate a PDF-file from.
+     * @return HTTP containing the generated PDF-file
      * @throws IOException
      */
     @RequestMapping(value="/getpdf", params = "id", method=RequestMethod.GET)
@@ -59,10 +59,11 @@ public class SubmitController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
-        String filename = "søknad.pdf";
+        String filename = "Søknad.pdf";
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
+        // TODO: Authenticate the user before sending the PDF-file
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
 }
