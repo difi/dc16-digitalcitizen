@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import PersonWithNeedForm from '../app/PersonWithNeedForm.jsx';
+import {PersonWithNeedClass} from '../app/PersonWithNeedForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -48,16 +48,35 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-
 var defaultProps = {
     fields: {
-        need: false
+        pnr: 46561231546,
+        checked: false,
+        name: "skjhakl"
     },
     fieldValues
 };
 
-describe("PersonWithNeedForm", function() {
+describe("PersonWithNeedClass", function() {
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<PersonWithNeedClass {...defaultProps}/>);
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
 
-    
+    it('should have two HTML-elements with the classname=fnr', function () {
+        const wrapper = shallow(<PersonWithNeedClass {...defaultProps}/>);
+        expect (wrapper.find('.fnr')).to.have.length(2);
+    });
+
+    it('should have one checkbox', function () {
+        const wrapper = shallow(<PersonWithNeedClass {...defaultProps}/>);
+        expect (wrapper.find('input[type="checkbox"]')).to.have.length(1);
+    });
+
+    it('should have two HTML-elements with the classname=name', function () {
+        const wrapper = shallow(<PersonWithNeedClass {...defaultProps}/>);
+        expect (wrapper.find('.name')).to.have.length(2);
+    });
 
 });
