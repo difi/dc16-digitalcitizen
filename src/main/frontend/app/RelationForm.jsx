@@ -90,14 +90,13 @@ export class RelationFormClass extends React.Component {
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
         console.log(relation.value);
-
         switch (relation.value) {
             case "guardian":
                 content =
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label>Hvem ønsker sykehjemsplass?</label>
+                                <label id="guardian">Hvem ønsker sykehjemsplass?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -171,15 +170,16 @@ export class RelationFormClass extends React.Component {
                 </componentClass>
         }
         return (
+
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
                     <form className="relation">
-                        <input type="radio" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
+                        <input type="radio" id="guardian-radio" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
                         <br/>
-                        <input type="radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
+                        <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
                         <br/>
-                        <input type="radio" name="radio-buttons" {...relation} value="other"  checked={relation.value=="other"}/>Annet
+                        <input type="radio" id="other-radio" name="radio-buttons" {...relation} value="other"  checked={relation.value=="other"}/>Annet
                     </form>
 
                     {content}
