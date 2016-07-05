@@ -3,8 +3,9 @@ const isEmpty = value => value === undefined || value === null || value === '';
 export function CheckEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
     if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-        return 'Invalid email address';
+        return false;
     }
+    return true;
 }
 
 export function CheckInteger(value) {
@@ -102,5 +103,5 @@ export function onlyDigitsInString(str){
 
 export function alphaNumericInString(str){
     if(str){
-    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');}
+    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?@]+/g, '');}
 }

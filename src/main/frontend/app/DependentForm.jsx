@@ -50,8 +50,9 @@ export default class DependentForm extends React.Component {
 
     render() {
         var deleteButton = this.props.showDeleteButton ?
-            <Button className="close" aria-label="Close" onClick={this.handleClickRemove}><span
-                aria-hidden="true">&times;</span></Button> : '';
+            <Button className="close" aria-label="Close" onClick={this.handleClickRemove}>
+                <span aria-hidden="true">&times;</span>
+            </Button> : '';
         const {firstName, lastName, phone, mail, relation} = this.props;
         var reduxFields = [firstName, lastName, phone, mail, relation];
         var fields = ["Fornavn", "Etternavn", "Telefon", "E-post"];
@@ -84,6 +85,7 @@ export default class DependentForm extends React.Component {
             )
         });
         return (
+
             <div>
                 {deleteButton}
                 <div><h4>Pårørende</h4></div>
@@ -95,7 +97,8 @@ export default class DependentForm extends React.Component {
                         </Col>
                         <Col sm={8} md={8}>
                             <DropdownList ref='relation' options={dropdownContent.RELATIONS} id="test"
-                                          valueField="value" labelField="relation" {...relation} onChange={change => relation.onChange(change.newValue)}/>
+                                          valueField="value" labelField="relation" {...relation}
+                                          onChange={change => relation.onChange(change.newValue)}/>
                         </Col>
                     </Row>
                 </div>
@@ -106,19 +109,17 @@ export default class DependentForm extends React.Component {
 }
 
 
-
-
 /*
-DependentForm = reduxForm({
-    form: 'application',
-    
-    destroyOnUnmount: false
-})(DependentForm);
+ DependentForm = reduxForm({
+ form: 'application',
 
-export default DependentForm
+ destroyOnUnmount: false
+ })(DependentForm);
+
+ export default DependentForm
 
 
-*/
+ */
 
 
 
