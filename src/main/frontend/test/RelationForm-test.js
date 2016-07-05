@@ -61,6 +61,8 @@ var defaultProps = {
     fieldValues
 };
 
+
+
 describe("RelationForm", function() {
     it('A HTML-element, with className = relation, exists', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
