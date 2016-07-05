@@ -1,10 +1,16 @@
+/**
+ * Created by camp-vha on 05.07.2016.
+ */
+import React from 'react';
+
+//Shallow renders only our component without touching the DOM.
+//Mount gives full DOM rendering.
+//Render renders react components to static HTML and analyze the resulting HTML structure.
+
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import NeedsForm from '../app/NeedsForm.jsx';import { shallow, mount, render } from 'enzyme';
-import {expect} from 'chai';
-//Import the file we want to test.
-import PersonWithNeedForm from '../app/PersonWithNeedForm.jsx';
+import {GeneralPractitionerClass} from '../app/GeneralPractitioner.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -43,6 +49,26 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-describe("PersonWithNeedForm", function () {
-    
-})
+var defaultProps = {
+    fields: {
+        doctorName: "sd",
+        doctors: ['as', 'asd']
+    },
+    fieldValues
+};
+
+describe("GeneralPractitionerClass", function() {
+    //Radio-buttons
+
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/> );
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
+
+    it('should have two HTML-elements with className=genPract', function () {
+        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/>);
+        expect(wrapper.find('.genPract')).to.have.length(2);
+    });
+
+});

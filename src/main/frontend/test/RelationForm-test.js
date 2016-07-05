@@ -53,10 +53,10 @@ var fieldValues = {
 var defaultProps = {
     fields: {
         relation: "guardian",
-        typeOfRelation: null,
-        nameOfChild: null,
-        isDependent: null,
-        otherRelation: null
+        typeOfRelation: "sibling",
+        nameOfChild: "ss",
+        isDependent: false,
+        otherRelation: "sd"
     },
     fieldValues
 };
@@ -82,6 +82,11 @@ describe("RelationForm", function() {
         expect(wrapper.find('#family-radio')).to.have.length(1);
         expect(wrapper.find('#other-radio')).to.have.length(1);
     });*/
+
+    /*it('three radio-buttons exists', function () {
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper.find('.radio-button')).to.have.length(3);
+    });
 
     //Next and previous buttons
     /*it('should have two buttons - for next and previous', function () {

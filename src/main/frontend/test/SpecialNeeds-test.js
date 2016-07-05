@@ -1,10 +1,16 @@
+/**
+ * Created by camp-vha on 05.07.2016.
+ */
+import React from 'react';
+
+//Shallow renders only our component without touching the DOM.
+//Mount gives full DOM rendering.
+//Render renders react components to static HTML and analyze the resulting HTML structure.
+
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import NeedsForm from '../app/NeedsForm.jsx';import { shallow, mount, render } from 'enzyme';
-import {expect} from 'chai';
-//Import the file we want to test.
-import PersonWithNeedForm from '../app/PersonWithNeedForm.jsx';
+import {SpecialNeedsClass} from '../app/SpecialNeeds.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -42,7 +48,30 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
+var defaultProps = {
+    fields: {
+        medical: null,
+        changes: null,
+        other: null
+    },
+    fieldValues
+};
 
-describe("PersonWithNeedForm", function () {
-    
-})
+describe("SpecialNeedsClass", function() {
+    it('should have header and container classnames for HTML-elements', function () {
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
+    });
+
+    it('should have three labels with classname= from-col-address', function () {
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect (wrapper.find('label.from-col-address')).to.have.length(3);
+    });
+
+    it('should have three HTML-elements with classname= from-col-address', function () {
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect (wrapper.find('.special-needs-textarea')).to.have.length(3);
+    });
+
+});

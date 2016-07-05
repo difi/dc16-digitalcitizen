@@ -191,10 +191,14 @@ const validate = values => {
 };
 
 //Sets up reduxForm - needs fields and validation functions
-const PersonWithNeedDef = reduxForm({
+const PersonWithNeed = reduxForm({
     form: 'application',
     fields,
     destroyOnUnmount: false,
     validate
 })(PersonWithNeedClass);
 
+<<<<<<< HEAD
+=======
+export default PersonWithNeed
+>>>>>>> refs/remotes/origin/master
