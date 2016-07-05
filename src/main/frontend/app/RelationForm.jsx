@@ -89,6 +89,7 @@ export class RelationFormClass extends React.Component {
     render() {
         const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation}} = this.props;
         var content = <p/>;
+        var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
 
         switch (relation.value) {
             case "guardian":
@@ -192,6 +193,7 @@ export class RelationFormClass extends React.Component {
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
+                    disabled={!valid}
                     //disabled={!this.state.validForm}
                 />
     </div>
