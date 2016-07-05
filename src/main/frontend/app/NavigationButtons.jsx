@@ -40,7 +40,7 @@ export default class NavigationButtons extends React.Component {
             },
             method: 'POST',
             data: JSON.stringify(this.props.fieldValues),
-            dataType: 'json',
+            dataType: 'text',
             success: function (data) {
                 console.log(data);
                 // TODO: Remove setTimeout. (Only used for testing)
@@ -48,6 +48,8 @@ export default class NavigationButtons extends React.Component {
                     this.setState({isLoading: false});
                     this.props.handleClickNext();
                 }, 1000);
+                // Downloads pdf
+                window.location.replace(RESTpaths.PATHS.GETPDF_BASE + "?id=" + data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
