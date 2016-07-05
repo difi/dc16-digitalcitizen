@@ -56,8 +56,6 @@ var defaultProps = {
 };
 
 describe("NeedsForm", function() {
-    //Radio-buttons
-
     it('should have header and container classnames for HTML-elements', function () {
         const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);
@@ -73,31 +71,8 @@ describe("NeedsForm", function() {
         expect(wrapper.find('.needs')).to.have.length(1);
     });
 
-    //Cannot test if there exists two radio-buttons, nor what happens when one of them are pushed, because
-    //they are "react-radio-group" elements, and Enzyme wont find them.
-
-    //Next and previous buttons
-    /*it('should have two HTML-elements with the tag name "Button" - both next and previous', function () {
-     //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-     // have to also render Application
-     const wrapper = shallow(<NeedsForm fieldValues = {fieldValues}/>);
-     //Expect to find to button-elements in the page
-     expect(wrapper.find('Button')).to.have.length(2);
-     //Expect to find a button with ID next.
-     expect(wrapper.find('#next')).to.have.length(1);
-     //Expect to find a button with ID back.
-     expect(wrapper.find('#back')).to.have.length(1);
-     });*/
-
-
-    //TODO: Sjekk at de gjør det de skal
-    /*it('back button should go to the previous page when pushed', function () {
-     const wrapper = shallow(<NeedsForm/>);
-     const backbutton = wrapper.find('.button-next');
-     wrapper.setState({adress: null});
-     backbutton.simulate('click');
-     expect(this.props.previousStep).to.equal('1');
-     });
-     */
-
+    it('two radio-buttons exists', function () {
+        const wrapper = shallow(<NeedsFormClass {...defaultProps}/>);
+        expect(wrapper.find('input[type="radio"]')).to.have.length(2);
+    });
 });

@@ -89,6 +89,7 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
+        console.log(relation.value);
 
         switch (relation.value) {
             case "guardian":
@@ -173,12 +174,12 @@ export class RelationFormClass extends React.Component {
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
-                    <form className="relation" selectedValue={relation.value} {...relation}>
-                        <input type="radio" name="radio-buttons" value="guardian"/>Jeg er verge for den jeg søker på vegne av
+                    <form className="relation">
+                        <input type="radio" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
                         <br/>
-                        <input type="radio" name="radio-buttons" value="family"/>Jeg er i familie med den jeg søker på vegne av
+                        <input type="radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
                         <br/>
-                        <input type="radio" name="radio-buttons" value="other"/>Annet
+                        <input type="radio" name="radio-buttons" {...relation} value="other"  checked={relation.value=="other"}/>Annet
                     </form>
 
                     {content}
