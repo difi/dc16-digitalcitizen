@@ -28,7 +28,12 @@ public class SubmissionValidator {
     }
 
     private boolean validatePerson(Person person) {
-        // TODO: Compare the fields of person to entry in Folkeregisteret
+        // TODO: Implement more efficient search
+        for(Person p : TestData.PERSONS){
+            if(p.pnrAndNameEquals(person)){
+                return true;
+            }
+        }
         return false;
     }
 

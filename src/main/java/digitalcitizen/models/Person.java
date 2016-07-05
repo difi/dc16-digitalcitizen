@@ -1,5 +1,7 @@
 package digitalcitizen.models;
 
+import digitalcitizen.utilities.TestData;
+
 /**
  * Created by camp-shj on 24.06.2016.
  */
@@ -10,7 +12,14 @@ public class Person {
     private Address address;
     private String telephone;
 
-    public Person(){
+    public Person() {
+    }
+
+    public Person(String pnr, String name, Address address, String telephone) {
+        this.pnr = pnr;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
     }
 
     public String getPnr() {
@@ -43,6 +52,37 @@ public class Person {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (!pnr.equals(person.pnr)) return false;
+        if (!name.equals(person.name)) return false;
+        if (address != null ? !address.equals(person.address) : person.address != null) return false;
+        return telephone != null ? telephone.equals(person.telephone) : person.telephone == null;
+    }
+
+    public boolean pnrAndNameEquals(Person person) {
+        return pnr.equals(person.pnr) && name.equals(person.name);
+    }
+
+    public boolean updateValuesByPnr() {
+        // TODO: Implement more efficient search
+        for (Person p : TestData.PERSONS) {
+            if (pnr.equals(p.pnr)) {
+                // TODO: Find a better way to update values
+                setAddress(p.getAddress());
+                setName(p.getName());
+                setTelephone(p.getTelephone());
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -43,11 +43,12 @@ class PersonWithNeedInfo extends React.Component {
 
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {name, number, street, zipcode, postal}} = this.props;
+        const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
         var address = {
             street: street.value,
             zipcode: zipcode.value,
             postal: postal.value,
+            municipality: municipality.value,
             country: "NO"
         };
         var data = {
@@ -139,7 +140,7 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 PersonWithNeedInfo = reduxForm({
     form: 'application',
-    fields: ["name", "number", "street", "zipcode", "postal"],
+    fields: ["name", "number", "street", "zipcode", "postal", "municipality"],
     destroyOnUnmount: false,
     validate
 }, null, null)(PersonWithNeedInfo);

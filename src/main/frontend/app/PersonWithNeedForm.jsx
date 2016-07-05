@@ -17,7 +17,7 @@ export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./validation.js';
 
-class PersonWithNeed extends React.Component {
+export class PersonWithNeedClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -126,11 +126,12 @@ class PersonWithNeed extends React.Component {
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sx={4} md={4}>
-                                <label>Fødselsnummer</label>
+                                <label className="fnr">Fødselsnummer</label>
                             </Col>
                             <Col sx={8} md={8}>
                                 <FormControl
                                     type="text"
+                                    className="fnr"
                                     placeholder="Fødselsnummer"
                                     ref="pno"
 
@@ -153,11 +154,12 @@ class PersonWithNeed extends React.Component {
 
                         <Row className="form-row-name">
                             <Col sx={4} md={4}>
-                                <label>Navn</label>
+                                <label className="name">Navn</label>
                             </Col>
                             <Col sx={8} md={8}>
                                 <FormControl
                                     type="text"
+                                    className="name"
                                     placeholder="Navn"
                                     ref="name"
                                     {...name}
@@ -189,11 +191,15 @@ const validate = values => {
 };
 
 //Sets up reduxForm - needs fields and validation functions
-PersonWithNeed = reduxForm({
+const PersonWithNeedDef = reduxForm({
     form: 'application',
     fields,
     destroyOnUnmount: false,
     validate
-})(PersonWithNeed);
+})(PersonWithNeedClass);
 
+<<<<<<< HEAD
 export default PersonWithNeed
+=======
+export default PersonWithNeedDef
+>>>>>>> refs/remotes/origin/master

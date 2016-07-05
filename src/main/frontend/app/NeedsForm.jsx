@@ -6,7 +6,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import {reduxForm} from 'redux-form';
 
-export default class NeedsForm extends React.Component {
+export class NeedsFormClass extends React.Component {
     constructor(props) {
         super(props);
 
@@ -78,10 +78,11 @@ export default class NeedsForm extends React.Component {
 }
 
 
-NeedsForm = reduxForm({
+const NeedsFormDefault = reduxForm({
     form: 'application',
     fields: ["need"],
     destroyOnUnmount: false
-}, null, null)(NeedsForm);
+}, null, null)(NeedsFormClass);
 
-export default NeedsForm
+
+export default NeedsFormDefault

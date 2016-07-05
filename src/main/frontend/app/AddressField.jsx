@@ -22,11 +22,11 @@ var AddressField = React.createClass({
     },
 
     getInitialState: function () {
-        return { country: this.props.address.country};
+        return {country: this.props.address.country};
     },
 
-    /**Makes a call to the Bring API with the postal code given by the user
-     * in order to retrieve the corresponding municipality
+    /**Makes a call to the GeoNames API with the postal code given by the user
+     * in order to retrieve the corresponding postal
      *
      * @param event
      */
@@ -48,13 +48,17 @@ var AddressField = React.createClass({
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
             $.ajax({
-                url: RESTpaths.PATHS.BRING_BASE + 'country=' + this.state.country + '&pnr=' + zipcode,
+                url: RESTpaths.PATHS.GEONAMES_BASE + 'postalcode=' + zipcode + '&country=' + this.state.country + '&username=Sondrehj',
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
-                    // Set the municipality state equal to the retrieved data
-                    this.props.fields.postal.onChange(data['result']);
-                    console.log(data['result]'])
+                    // Set the postal state equal to the retrieved data
+                    if(data['postalcodes'][0] != null)   {
+                        this.props.fields.postal.onChange(data['postalcodes'][0]['placeName']);
+                        this.props.fields.municipality.onChange(data['postalcodes'][0]['adminName2']);
+                    } else {
+                        this.props.fields.postal.onChange('Ugyldig postnr');
+                    }
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -73,8 +77,9 @@ var AddressField = React.createClass({
      */
     handleDropdownChange: function (event) {
         this.setState({country: event['newValue']});
-        this.setState({municipality: ''});
+        this.setState({postal: ''});
         this.setState({value: ''});
+        this.setState({municipality: ''});
         this.setState({street: ''})
     },
 
@@ -90,6 +95,7 @@ var AddressField = React.createClass({
         }
         return {
             country: country,
+            municipality: this.state.municipality,
             streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
             zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
             postal: ReactDOM.findDOMNode(this.refs.postal).value
@@ -171,8 +177,6 @@ var AddressField = React.createClass({
                                 ref="postal"
                                 {...postal}
                                 disabled
-
-
                                 />
                         </Col>
                     </Row>
@@ -184,7 +188,7 @@ var AddressField = React.createClass({
 
 AddressField = reduxForm({
     form: 'application',
-    fields: ["street", "zipcode", "postal"],
+    fields: ["street", "zipcode", "postal", "municipality"],
     destroyOnUnmount: false,
 }, null, null)(AddressField);
 

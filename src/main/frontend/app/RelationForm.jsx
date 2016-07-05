@@ -14,7 +14,7 @@ var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 
-export default class RelationForm extends React.Component {
+export class RelationFormClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -173,7 +173,7 @@ export default class RelationForm extends React.Component {
             <div>
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
-                    <RadioGroup name="relation" selectedValue={relation.value} {...relation}>
+                    <RadioGroup className="relation" selectedValue={relation.value} {...relation}>
                         {Radio => (
                             <div className="form-radio-group">
                                 <Radio className="radio-button" value="guardian"/>Jeg er verge for den jeg søker på
@@ -200,36 +200,22 @@ export default class RelationForm extends React.Component {
 }
 
 //Sets up reduxForm - needs fields and validation functions
-RelationForm = reduxForm({
-    form: 'RelationForm',
+const RelationFormDefault = reduxForm({
+    form: 'application',
     fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation"],
-    destroyOnUnmount: false,
-}, null, null)(RelationForm);
+    destroyOnUnmount: false
+}, null, null)(RelationFormClass);
 
-export default RelationForm
-
-
+export default RelationFormDefault
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Updated Radio-buttons, but does not work properly
+/*<div className="relation">
+ <Radio id="guardian-radio" className="radio-button" value="guardian" checked={this.state.value === 'guardian'} onChange={this.handleChange}/>Jeg er verge for den jeg søker på
+ vegne av
+ <Radio id="family-radio" className="radio-button" value="family" checked={this.state.value === 'family'} onChange={this.handleChange}/>Jeg er i familie med den jeg søker på
+ vegne
+ av
+ <Radio id="other-radio" className="radio-button" value="other" checked={this.state.value === 'other'} onChange={this.handleChange}/>Annet
+ </div>
+ */
