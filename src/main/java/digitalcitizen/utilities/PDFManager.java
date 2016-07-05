@@ -18,7 +18,7 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 public class PDFManager {
 
     // TODO: Add more templates?
-    public File template = new File("src\\main\\resources\\formTemplate3.pdf");
+    public File template = new File("src\\main\\resources\\formTemplate4.pdf");
 
     public String generatePDFofSubmission(Submission submission) throws IOException {
 
