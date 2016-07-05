@@ -78,11 +78,11 @@ export class NeedsFormClass extends React.Component {
 }
 
 
-const NeedsFormDefault = reduxForm({
+const NeedsForm = reduxForm({
     form: 'application',
     fields: ["need"],
     destroyOnUnmount: false
 }, null, null)(NeedsFormClass);
 
 
-export default NeedsFormDefault
+export default NeedsForm
