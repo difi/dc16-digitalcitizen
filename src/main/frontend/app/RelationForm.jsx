@@ -196,8 +196,8 @@ export class RelationFormClass extends React.Component {
                     disabled={!valid}
                     //disabled={!this.state.validForm}
                 />
-    </div>
-    )
+            </div>
+        )
     }
 }
 
