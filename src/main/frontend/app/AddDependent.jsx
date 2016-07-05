@@ -56,6 +56,7 @@ export default class AddDependent extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.validation = this.validation.bind(this);
 
     }
 
@@ -105,30 +106,56 @@ export default class AddDependent extends React.Component {
         }
     }
 
+    validation(value) {
+        const {
+            fields: {form1, form2, form3}
+        } = this.props;
+
+        if (value == "3") {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value)
+                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value);
+            return valid;
+        } else if (value == "2") {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value);
+            return valid;
+        } else {
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value);
+            return valid;
+        }
+    }
+
     saveFieldValues() {
 
         const {fields: {form1, form2, form3}} = this.props;
 
         var form2Data = null;
         var form3Data = null;
-        var form1Data = {  firstName: form1.firstName.value,
+        var form1Data = {
+            firstName: form1.firstName.value,
             lastName: form1.lastName.value,
             telephone: form1.phone.value,
             email: form1.mail.value,
-            relation: form1.relation.value};
+            relation: form1.relation.value
+        };
         if (this.state.showForm2 == true) {
-            form2Data =  {  firstName: form2.firstName.value,
+            form2Data = {
+                firstName: form2.firstName.value,
                 lastName: form2.lastName.value,
                 telephone: form2.phone.value,
                 email: form2.mail.value,
-                relation: form2.relation.value}
+                relation: form2.relation.value
+            }
         }
         if (this.state.showForm3 == true) {
-            form3Data =  {  firstName: form3.firstName.value,
+            form3Data = {
+                firstName: form3.firstName.value,
                 lastName: form3.lastName.value,
                 telephone: form3.phone.value,
                 email: form3.mail.value,
-                relation: form3.relation.value}
+                relation: form3.relation.value
+            }
         }
         var data = {
             dependents: [
@@ -147,7 +174,7 @@ export default class AddDependent extends React.Component {
         this.setState({
             showForm2: false,
             numDep: this.state.numDep -= 1,
-            showAddButton: DISPLAY_FORM
+            showAddButton: DISPLAY_FORM,
         });
     }
 
@@ -156,7 +183,7 @@ export default class AddDependent extends React.Component {
         this.setState({
             showForm3: false,
             numDep: this.state.numDep -= 1,
-            showAddButton: DISPLAY_FORM
+            showAddButton: DISPLAY_FORM,
         });
     }
 
@@ -164,13 +191,19 @@ export default class AddDependent extends React.Component {
         const {
             fields: {form1, form2, form3}
         } = this.props;
+        this.validation(1);
+        var valid=true;
+        for(var i=1; i<=this.state.numDep; i++){
+            valid = this.validation(i) && valid
+        }
         return (
             <div>
                 <div>
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
-                            <DependentForm ref="form1" showForm={this.state.showForm1}  formKey="1" showDeleteButton={false} {...form1}/>
+                            <DependentForm ref="form1" showForm={this.state.showForm1} formKey="1"
+                                           showDeleteButton={false} {...form1}/>
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -195,16 +228,15 @@ export default class AddDependent extends React.Component {
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={false} // TODO: update to !this.state.validform
+                    disabled={!valid}
+                     // TODO: update to !this.state.validform
                 />
             </div>
-        
+
         );
     }
 }
 ;
-
-
 
 
 AddDependent = reduxForm({
