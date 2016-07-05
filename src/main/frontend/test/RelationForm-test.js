@@ -53,10 +53,10 @@ var fieldValues = {
 var defaultProps = {
     fields: {
         relation: "guardian",
-        typeOfRelation: null,
-        nameOfChild: null,
-        isDependent: null,
-        otherRelation: null
+        typeOfRelation: "sibling",
+        nameOfChild: "ss",
+        isDependent: false,
+        otherRelation: "sd"
     },
     fieldValues
 };
