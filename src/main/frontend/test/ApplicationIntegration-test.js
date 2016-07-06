@@ -1,3 +1,4 @@
+@@ -1,207 +0,0 @@
 /**
  * Created by camp-vhe on 05.07.2016.
  */
@@ -101,10 +102,10 @@ describe("Application", () => {
         thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
         console.log(thirdPage.props());
         thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
-         thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
-         nextButton = subject.find(NavigationButtons).find('.next-btn');
-         nextButton.simulate('click');
-         expect(subject.state().step).to.equal(4);
+        thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
+        nextButton = subject.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        expect(subject.state().step).to.equal(4);
 
 
     });
@@ -153,7 +154,7 @@ describe("Application", () => {
         nextButton.simulate('click');
         //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(6);
-    
+
         var firstAdd = sixthPage.find(DependentForm).first();
         expect(firstAdd).to.have.length(1);
         firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Nordmann'}});
@@ -200,8 +201,9 @@ describe("Application", () => {
 
         nextButton.simulate('click');
         //THIS ONLY WORKS when this.props.next() is called at the start of submit function in Navigation Buttons. Sondre - what to do?
-        
+
         //expect(subject.state().step).to.equal(9);
 
     });
 });
+\ No newline at end of file
