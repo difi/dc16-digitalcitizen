@@ -2,7 +2,6 @@ import React from 'react';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
-import TextField from './TextField.jsx';
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import DropdownList from './DropdownList.jsx';
@@ -10,26 +9,18 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 import dropdownContent from './static_data/dropdown-list-content.js';
 require('!style!css!less!./Application.less');
 import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
 
-export default class DependentForm extends React.Component {
+import { Component, PropTypes } from 'react'
+
+
+export const fields = ["firstName", "lastName", "phone", "mail", "relation"];
+
+class DependentForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickRemove = this.handleClickRemove.bind(this);
     }
-
-    /*
-     saveFieldsValues() {
-     // Get values via this.refs
-     var data = {
-     firstName: ReactDOM.findDOMNode(this.refs.firstName).children[0].value,
-     lastName: ReactDOM.findDOMNode(this.refs.lastName).children[0].value,
-     telephone: ReactDOM.findDOMNode(this.refs.telephone).children[0].value,
-     email: ReactDOM.findDOMNode(this.refs.email).children[0].value
-     };
-     this.props.saveValues(data);
-     console.log(data);
-     }
-     */
 
     handleClickRemove() {
         this.setState({
@@ -38,59 +29,52 @@ export default class DependentForm extends React.Component {
         this.props.onClick();
     }
 
-    getFieldValues() {
-        return {
-            firstName: ReactDOM.findDOMNode(this.refs.firstName).value,
-            lastName: ReactDOM.findDOMNode(this.refs.lastName).value,
-            telephone: ReactDOM.findDOMNode(this.refs.telephone).value,
-            email: ReactDOM.findDOMNode(this.refs.email).value,
-            relation: this.refs.relation.getDropdownValue()
-        };
-    }
-
     render() {
         var deleteButton = this.props.showDeleteButton ?
             <Button className="close" aria-label="Close" onClick={this.handleClickRemove}>
                 <span aria-hidden="true">&times;</span>
             </Button> : '';
-        const {firstName, lastName, phone, mail, relation} = this.props;
-        var reduxFields = [firstName, lastName, phone, mail, relation];
-        var fields = ["Fornavn", "Etternavn", "Telefon", "E-post"];
-        var fieldsForm = fields.map(function (field, i) {
-            var textFieldRef;
-            switch (i) {
-                case 0:
-                    textFieldRef = "firstName";
-                    break;
-                case 1:
-                    textFieldRef = "lastName";
-                    break;
-                case 2:
-                    textFieldRef = "telephone";
-                    break;
-                case 3:
-                    textFieldRef = "email";
-                    break;
-            }
 
-            return (
-                <Row className="form-row">
-                    <Col sm={4} md={4}>
-                        <label>{field}</label>
-                    </Col>
-                    <Col sm={8} md={8}>
-                        <FormControl ref={textFieldRef} type="text" placeholder={field} {...reduxFields[i]} />
-                    </Col>
-                </Row>
-            )
-        });
+        const {firstName, lastName, phone, mail, relation}= this.props;
         return (
-
             <div>
                 {deleteButton}
                 <div><h4>Pårørende</h4></div>
                 <div>
-                    {fieldsForm}
+                    <Row className="form-row">
+                        <Col sm={4} md={4}>
+                            <label>Fornavn</label>
+                        </Col>
+                        <Col sm={8} md={8}>
+                            <FormControl ref="firstName" type="text" placeholder="Fornavn" {...firstName}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sm={4} md={4}>
+                            <label>Fornavn</label>
+                        </Col>
+                        <Col sm={8} md={8}>
+                            <FormControl ref="lastName" type="text" placeholder="Etternavn" {...lastName}/>
+                        </Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sm={4} md={4}>
+                            <label>Telefon</label>
+                        </Col>
+                        <Col sm={8} md={8}>
+                            <FormControl ref="telephone" type="text" placeholder="Telefonnr" {...phone}/>
+                            {phone.touched && phone.error && <div>{phone.error}</div>}
+                        </Col>
+                    </Row>
+                    <Row className="form-row">
+                        <Col sm={4} md={4}>
+                            <label>E-post</label>
+                        </Col>
+                        <Col sm={8} md={8}>
+                            <FormControl ref="mail" type="text" placeholder="E-post" {...mail}/>
+                            {mail.touched && mail.error && <div>{mail.error}</div>}
+                        </Col>
+                    </Row>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
                             <label>Relasjon</label>
@@ -108,21 +92,7 @@ export default class DependentForm extends React.Component {
     }
 }
 
-
-/*
- DependentForm = reduxForm({
- form: 'application',
-
- destroyOnUnmount: false
- })(DependentForm);
-
- export default DependentForm
-
-
- */
-
-
-
+export default DependentForm
 
 
 

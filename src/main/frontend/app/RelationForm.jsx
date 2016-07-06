@@ -104,9 +104,9 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
-                                              options={[{name: "Velg..."},{name: "Ola"}, {name: "Kari"}]}
+                                              options={[{value: 0,name: "Velg..."},{value: "ola", name: "Ola"}, {value: "kari",name: "Kari"}]}
                                               labelField="name"
-                                              valueField="name"
+                                              valueField="value"
                                               defaultValue=""
                                               {...nameOfChild}
                                               //value={nameOfChild.value}
