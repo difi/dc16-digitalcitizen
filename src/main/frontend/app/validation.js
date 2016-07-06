@@ -1,6 +1,6 @@
 const isEmpty = value => value === undefined || value === null || value === '';
 
-export function CheckEmail(value) {
+export function checkEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
     if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
         return false;
@@ -8,7 +8,7 @@ export function CheckEmail(value) {
     return true;
 }
 
-export function CheckInteger(value) {
+export function checkInteger(value) {
     if (!Number.isInteger(Number(value))) {
         return false;
     }
@@ -93,6 +93,7 @@ export function CheckPostCode(postCode) {
 
 export function onlyLettersInString(str){
     if(str){
+        str = str.toString();
     return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
 }
 
@@ -103,7 +104,12 @@ export function onlyDigitsInString(str){
 
 export function alphaNumericInString(str){
     if(str){
-    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?@]+/g, '');}
+    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');}
+}
+
+export function email(str){
+    if(str){
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s@_-]+/g, '');}
 }
 
 export function fieldIsEmpty(value) {
