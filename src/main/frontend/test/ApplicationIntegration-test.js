@@ -22,6 +22,7 @@ import SubmitSuccess from '../app/SubmitPage';
 import NavigationButtons from '../app/NavigationButtons.jsx';
 import AddressField from '../app/AddressField.jsx';
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
+
 import DependentForm from '../app/DependentForm.jsx';
 import DropdownList from '../app/DropdownList.jsx';
 // In this file we're doing an integration test. Thus we need to hook up our
@@ -140,6 +141,7 @@ describe("Application", () => {
 
         expect(subject.state().step).to.equal(6);
 
+
     });
     it("sixth page forwards you to correct step", () => {
         subject.setState({
@@ -201,4 +203,5 @@ describe("Application", () => {
         //expect(subject.state().step).to.equal(9);
 
     });
-});
+
+    });
