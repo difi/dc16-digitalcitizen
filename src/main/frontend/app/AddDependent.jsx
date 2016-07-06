@@ -68,6 +68,9 @@ export default class AddDependent extends React.Component {
         else if (this.props.fieldValues.gotPNRnumber) {
             (this.props.previousStep(5));
         }
+            else if(this.props.fieldValues.guardianName != null){
+            this.props.previousStep(2);
+        }
         else {
             (this.props.previousStep(3));
         }
