@@ -46,11 +46,13 @@ export default class NavigationButtons extends React.Component {
                 console.log(data);
                 // TODO: Remove setTimeout. (Only used for testing)
                 setTimeout(() => {
-                    this.setState({isLoading: false});
+                    var userData = {
+                        submissionId: data
+                    };
+                    this.props.saveUserData(userData);
                     this.props.handleClickNext();
+                    this.setState({isLoading: false});
                 }, 1000);
-                // Downloads pdf
-                window.location.replace(RESTpaths.PATHS.GETPDF_BASE + "?id=" + data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
