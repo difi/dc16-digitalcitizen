@@ -8,18 +8,18 @@ public class Address {
     private String postal;
     private String country;
     private String municipality;
-    private String streetAddress;
+    private String street;
     private String zipcode;
 
 
     public Address(){
     }
 
-    public Address(String postal, String country, String municipality, String streetAddress, String zipcode) {
+    public Address(String postal, String country, String municipality, String street, String zipcode) {
         this.postal = postal;
         this.country = country;
         this.municipality = municipality;
-        this.streetAddress = streetAddress;
+        this.street = street;
         this.zipcode = zipcode;
     }
 
@@ -55,12 +55,12 @@ public class Address {
         this.country = country;
     }
 
-    public String getStreetAddress() {
-        return streetAddress;
+    public String getStreet() {
+        return street;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     @Override
@@ -68,7 +68,8 @@ public class Address {
         return "Address{" +
                 "postal='" + postal + '\'' +
                 ", country='" + country + '\'' +
-                ", streetAddress='" + streetAddress + '\'' +
+                ", municipality='" + municipality + '\'' +
+                ", street='" + street + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 '}';
     }

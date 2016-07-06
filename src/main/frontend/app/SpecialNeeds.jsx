@@ -15,23 +15,23 @@ export class SpecialNeedsClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldsValues = this.saveFieldsValues.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
 
     }
 
     handleClickBack() {
-        this.saveFieldsValues();
+        this.saveFieldValues();
         console.log("State 6");
         (this.props.previousStep(7));
     }
 
     handleClickNext() {
-        this.saveFieldsValues();
+        this.saveFieldValues();
         console.log("State 9");
         this.props.nextStep(9);
     }
 
-    saveFieldsValues() {
+    saveFieldValues() {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
 
@@ -40,8 +40,7 @@ export class SpecialNeedsClass extends React.Component {
             conditionChanges: changes.value,
             otherNeeds: other.value
         };
-        this.props.saveValues(data);
-        console.log(data);
+        return this.props.saveValues(data);
     }
 
     render() {
@@ -89,8 +88,9 @@ export class SpecialNeedsClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
+                    saveUserData={this.props.saveUserData}
                     fieldValues={this.props.fieldValues}
-                    saveFieldValues={this.saveFieldsValues}
+                    saveFieldValues={this.saveFieldValues}
                 />
 
             </div>

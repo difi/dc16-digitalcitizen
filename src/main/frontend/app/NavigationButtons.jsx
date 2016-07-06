@@ -31,7 +31,9 @@ export default class NavigationButtons extends React.Component {
 
     handleSubmitClick() {
         this.props.saveFieldValues();
-        this.props.handleClickNext();
+
+        var fieldValues = this.props.saveFieldValues();
+        console.log(fieldValues);
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,
@@ -40,14 +42,22 @@ export default class NavigationButtons extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(this.props.fieldValues),
-            dataType: 'json',
+            data: JSON.stringify(fieldValues),
+            dataType: 'text',
             success: function (data) {
                 console.log(data);
                 // TODO: Remove setTimeout. (Only used for testing)
                 setTimeout(() => {
+
                     this.setState({isLoading: false});
 
+                    var userData = {
+                        submissionId: data
+                    };
+                    this.props.saveUserData(userData);
+
+                    this.setState({isLoading: false});
+                    this.props.handleClickNext();
                 }, 1000);
             }.bind(this),
             error: function (xhr, status, err) {
