@@ -120,18 +120,20 @@ export default class Application extends React.Component {
     }
 
     render() {
-      
+
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
 
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
+                    store={this.props.store}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
             case 2:
                 content = <RelationForm
+                    store={this.props.store}
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
@@ -158,6 +160,7 @@ export default class Application extends React.Component {
                 break;
             case 5:
                 content = <GeneralPractitioner
+                    store={this.props.store}
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
@@ -165,6 +168,7 @@ export default class Application extends React.Component {
                 break;
             case 6:
                 content = < AddDependent
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
@@ -172,14 +176,16 @@ export default class Application extends React.Component {
                 break;
             case 7:
                 content = < NeedsForm
+                    store={this.props.store}
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
                 break;
-                
+
             case 8:
                 content = < SpecialNeeds
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
@@ -188,6 +194,7 @@ export default class Application extends React.Component {
                 break;
             case 9:
                 content = < SubmitSuccess
+                    store={this.props.store}
                     fieldValues = {fieldValues}
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
