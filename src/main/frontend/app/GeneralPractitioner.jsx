@@ -39,7 +39,7 @@ export class GeneralPractitionerClass extends React.Component {
     saveFieldValues() {
         //this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
         var data = {
-            doctor: {name: this.props.fields.doctorName.value()}
+            doctor: {name: this.props.fields.doctorName.value}
         };
         this.props.saveValues(data);
         console.log(data);
@@ -64,7 +64,7 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-
+        console.log(doctorName.value);
         if(doctors.value==undefined){
             return null;
         }

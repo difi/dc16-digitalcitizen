@@ -24,7 +24,7 @@ import AddDependent from '../app/AddDependent';
 import SubmitSuccess from '../app/SubmitPage';
 import NavigationButtons from '../app/NavigationButtons.jsx';
 import AddressField from '../app/AddressField.jsx';
-import TypeAhead from '../app/AutoComplete.jsx';
+import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
@@ -122,11 +122,29 @@ describe("Application", () => {
         nextButton.simulate('click');
         //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(5);
-        fifthPage.find(TypeAhead).simulate('change', {target: {value: 'O'}});
+        //Finds the first basic input element - that is the component that has to change and callbacks upwards.
+        fifthPage.find(TypeAhead).find('input').first().simulate('change', {target: {value: 'Ola'}});
 
         nextButton.simulate('click');
 
         expect(subject.state().step).to.equal(6);
+
+    });
+
+    it("eight page forwards you to correct step", () => {
+        subject.setState({
+            step: 8
+        });
+        var eightPage = subject.find(SpecialNeeds);
+        var nextButton = eightPage.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
+        expect(subject.state().step).to.equal(8);
+        eightPage.find(FormControl).first().simulate('change', {target: {value: 'Fordi jeg er gammel'}});
+
+        nextButton.simulate('click');
+
+        expect(subject.state().step).to.equal(9);
 
     });
 });

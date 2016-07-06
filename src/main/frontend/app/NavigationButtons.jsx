@@ -31,6 +31,7 @@ export default class NavigationButtons extends React.Component {
 
     handleSubmitClick() {
         this.props.saveFieldValues();
+        this.props.handleClickNext();
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,
@@ -46,7 +47,7 @@ export default class NavigationButtons extends React.Component {
                 // TODO: Remove setTimeout. (Only used for testing)
                 setTimeout(() => {
                     this.setState({isLoading: false});
-                    this.props.handleClickNext();
+
                 }, 1000);
             }.bind(this),
             error: function (xhr, status, err) {

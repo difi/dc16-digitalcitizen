@@ -34,10 +34,11 @@ export class SpecialNeedsClass extends React.Component {
     saveFieldsValues() {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
+
         var data = {
-            medicalNeeds: medical,
-            conditionChanges: changes,
-            otherNeeds: other
+            medicalNeeds: medical.value,
+            conditionChanges: changes.value,
+            otherNeeds: other.value
         };
         this.props.saveValues(data);
         console.log(data);
@@ -46,7 +47,7 @@ export class SpecialNeedsClass extends React.Component {
     render() {
 
         const {fields: {medical, changes, other}} = this.props;
-        var valid = medical.value
+        var valid = medical.value;
 
         return (
             <div>
