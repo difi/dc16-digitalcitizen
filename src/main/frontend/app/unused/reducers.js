@@ -5,7 +5,8 @@
 import {onlyDigitsInString} from '../validation.js';
 import {onlyLettersInString} from '../validation.js';
 import {alphaNumericInString} from '../validation.js';
-import {combineReducers} from 'redux';
+import {normalizePhone} from '../validation.js';
+import {createStore, combineReducers} from 'redux';
 import {reducer as form} from 'redux-form';
 const reducers = combineReducers({
     // ... your other reducers here ...
@@ -13,7 +14,8 @@ const reducers = combineReducers({
         application: {
             'form1.firstName': (firstName) => onlyLettersInString(firstName),
             'form1.lastName': (name) => onlyLettersInString(name),
-            'form1.phone': (phone) => onlyDigitsInString(phone),
+            'form1.phone': (phone) => normalizePhone(phone),
+            //'form1.phone': normalizePhone,
             'form2.firstName': (firstName) => onlyLettersInString(firstName),
             'form2.lastName': (name) => onlyLettersInString(name),
             'form2.phone': (phone) => onlyDigitsInString(phone),
