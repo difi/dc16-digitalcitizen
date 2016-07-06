@@ -70,7 +70,7 @@ class AddDependent extends React.Component {
         else if (this.props.fieldValues.gotPNRnumber) {
             (this.props.previousStep(5));
         }
-            else if(this.props.fieldValues.guardianName != null){
+            else if(this.props.fieldValues.relation == "guardian"){
             this.props.previousStep(2);
         }
         else {
