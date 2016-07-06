@@ -1,5 +1,5 @@
-import TextField from '../TextField.jsx';
-import TypeAhead from '../AutoComplete.jsx';
+import TextField from './TextField.jsx';
+import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
 import DropdownList from '../DropdownList.jsx';
 import AddressField from '../AddressField.jsx';
