@@ -2,6 +2,7 @@
  * Created by camp-shj on 01.07.2016.
  */
 
+//var BASE_URL = 'http://c16-citizen.demo.difi.no/';
 var BASE_URL = 'http://localhost:9090/';
 
 exports.PATHS = {
