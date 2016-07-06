@@ -1,7 +1,3 @@
-@@ -1,207 +0,0 @@
-/**
- * Created by camp-vhe on 05.07.2016.
- */
 
 
 import Application from '../app/Application.jsx';
@@ -206,4 +202,3 @@ describe("Application", () => {
 
     });
 });
-\ No newline at end of file
