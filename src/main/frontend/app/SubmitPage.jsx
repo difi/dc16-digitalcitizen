@@ -2,6 +2,7 @@ import React from 'react';
 import {reduxForm} from 'redux-form';
 var ReactDOM = require('react-dom');
 import {getValues} from 'redux-form';
+import NavigationButtons from './NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -14,6 +15,7 @@ class SubmitSuccess extends React.Component {
     constructor() {
         super();
         this.getValues = this.getValues.bind(this);
+        this.handleClickOk = this.handleClickOk.bind(this);
     }
 
 
@@ -26,11 +28,15 @@ class SubmitSuccess extends React.Component {
         console.log(data);
     }
 
+    handleClickOk() {
+        window.location.reload();
+    }
+
 
     render() {
         if (!this.props.fieldValues.nameOfChild) {
             return (
-                <componentClass>
+                <div>
                     <label className="form-header">Du har nå søkt på sykehjemsplass for</label>
                     <div className="form-container">
                         <Row>
@@ -39,11 +45,19 @@ class SubmitSuccess extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                </componentClass>
+                    <Row style={{marginTop: '15px'}}>
+                        <hr/>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                        </Col>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                            <Button bsStyle="success" className="next-btn" onClick={this.handleClickOk}>Ok</Button>
+                        </Col>
+                    </Row>
+                </div>
             )
         } else {
             return (
-                <componentClass>
+                <div>
                     <label className="form-header">Du har nå søkt på sykehjemsplass for:</label>
                     <div className="form-container">
                         <Row>
@@ -52,7 +66,15 @@ class SubmitSuccess extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                </componentClass>
+                    <Row style={{marginTop: '15px'}}>
+                        <hr/>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                        </Col>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                            <Button bsStyle="success" className="next-btn" onClick={this.handleClickOk}>Ok</Button>
+                        </Col>
+                    </Row>
+                </div>
             )
         }
     }

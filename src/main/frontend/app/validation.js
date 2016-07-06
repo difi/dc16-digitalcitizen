@@ -1,6 +1,6 @@
 const isEmpty = value => value === undefined || value === null || value === '';
 
-export function CheckEmail(value) {
+export function checkEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
     if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
         return false;
@@ -8,7 +8,7 @@ export function CheckEmail(value) {
     return true;
 }
 
-export function CheckInteger(value) {
+export function checkInteger(value) {
     if (!Number.isInteger(Number(value))) {
         return false;
     }
