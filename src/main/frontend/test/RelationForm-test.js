@@ -52,7 +52,7 @@ var fieldValues = {
 
 var defaultProps = {
     fields: {
-        relation: "guardian",
+        relation: {value: "undefined"},
         typeOfRelation: "sibling",
         nameOfChild: "ss",
         isDependent: false,
@@ -85,27 +85,60 @@ describe("RelationForm", function() {
         expect(wrapper.find('#other-radio')).to.have.length(1);
     });
 
-    //TODO: Needs to be finished after applying redux
-    /*it('in case guardian-button is pressed, show label and dropdown-list', function () {
-        const wrapper = mount(<RelationFormClass {...defaultProps}/>);
-        wrapper.node.relation = 'guardian';
+    it('in case guardian-button is pressed, show label and dropdown-list', function () {
+        //Need to redifine defaultProps because we need the relation value to be guardian, for this test only
+        var defaultProps = {
+            fields: {
+                relation: {value: "guardian"},
+                typeOfRelation: "sibling",
+                nameOfChild: "ss",
+                isDependent: false,
+                otherRelation: "sd"
+            },
+            fieldValues
+        };
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
 
-        //wrapper.setProps(relation=="guardian");
-        //wrapper.find('#guardian-radio').simulate('change');
-
-        //wrapper.find('#guardian-radio').simulate('change', {target: {relation: 'guardian'}})
-
-        expect(wrapper.find('label#guardian')).to.have.length(1);
-        //expect(wrapper.find('DropdownList')).to.have.length(1);
+        expect(wrapper.find('.guardian-rel')).to.have.length(2);
+        expect(wrapper.find('label.guardian-rel')).to.have.length(1);
+        expect(wrapper.find('DropdownList.guardian-rel')).to.have.length(1);
     });
 
-    /*it('in case family-button is pressed, show label and dropdown-list, and checkbox', function () {
+    it('in case family-button is pressed, show label and dropdown-list, and checkbox', function () {
+        //Need to redifine defaultProps because we need the relation value to be family, for this test only
+        var defaultProps = {
+            fields: {
+                relation: {value: "family"},
+                typeOfRelation: "sibling",
+                nameOfChild: "ss",
+                isDependent: false,
+                otherRelation: "sd"
+            },
+            fieldValues
+        };
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
 
-     });*/
+        expect(wrapper.find('.family-rel')).to.have.length(2);
+        expect(wrapper.find('label.family-rel')).to.have.length(1);
+        expect(wrapper.find('DropdownList.family-rel')).to.have.length(1);
+     });
 
-    /*it('in case other-button is pressed, show label, text-fieds and checkbox', function () {
-
-     });*/
+    it('in case other-button is pressed, show label, text-fieds and checkbox', function () {
+        var defaultProps = {
+            fields: {
+                relation: {value: "other"},
+                typeOfRelation: "sibling",
+                nameOfChild: "ss",
+                isDependent: false,
+                otherRelation: "sd"
+            },
+            fieldValues
+        };
+        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper.find('.other-rel')).to.have.length(2);
+        expect(wrapper.find('label.other-rel')).to.have.length(1);
+        expect(wrapper.find('FormControl.other-rel')).to.have.length(1);
+     });
 
 
 
