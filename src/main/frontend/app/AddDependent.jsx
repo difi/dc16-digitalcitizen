@@ -7,10 +7,12 @@ var ReactDOM = require('react-dom');
 import DependentForm from './DependentForm.jsx';
 require('!style!css!less!./Application.less');
 import NavigationButtons from './NavigationButtons.jsx';
+import validate from './DependentValidation';
 
 import {reduxForm} from 'redux-form';
 
 const fields = [
+
     'form1.firstName',
     'form1.lastName',
     'form1.mail',
@@ -39,7 +41,7 @@ var dependentForms = [
 ];
 
 
-export default class AddDependent extends React.Component {
+class AddDependent extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -112,16 +114,16 @@ export default class AddDependent extends React.Component {
         } = this.props;
 
         if (value == "3") {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value)
-                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value);
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value &&!form2.phone.error && !form2.mail.error)
+                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value &&!form3.phone.error && !form3.mail.error);
             return valid;
         } else if (value == "2") {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value);
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error)
+                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value &&!form2.phone.error && !form2.mail.error);
             return valid;
         } else {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value);
+            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error);
             return valid;
         }
     }
@@ -203,7 +205,7 @@ export default class AddDependent extends React.Component {
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" showForm={this.state.showForm1} formKey="1"
-                                           showDeleteButton={false} {...form1}/>
+                                           showDeleteButton={false} {...form1} />
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -237,13 +239,27 @@ export default class AddDependent extends React.Component {
     }
 }
 ;
+/*
+const validate = values => {
+    const errors = {};
+
+    if (!(checkPhoneNumber(values.form1.phone))) {
+        errors.phone = "Dette er ikke et gyldig telefonnummer";
+    }
+    if (!(checkEmail(values.form1.mail))) {
+        errors.mail = "Dette er ikke en gyldig epostadresse";
+    }
+    return errors;
+};*/
+
 
 
 AddDependent = reduxForm({
     form: 'application',
     fields: fields,
     initialValues: {"form2.show": false, "form3.show": false},
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    validate
 })(AddDependent);
 
 export default AddDependent
