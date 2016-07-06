@@ -61,6 +61,7 @@ export class PersonWithNeedClass extends React.Component {
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
+        console.log(checked.value);
         var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
         if (checked.value) {
             return (
@@ -89,7 +90,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Row className="form-row">
                                 <Col sx={4} md={4}></Col>
                                 <Col sx={8} md={8}>
-                                    <input type="checkbox" name="noPno" {...checked}/> Jeg kan ikke fødselsnummeret
+                                    <input type="checkbox" name="noPno" checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
                                 </Col>
                                 <Col sm={0} md={5}></Col>
                             </Row>
@@ -132,6 +133,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Col sx={8} md={8}>
                                 <FormControl
                                     type="text"
+                                    name="pno"
                                     className="fnr"
                                     placeholder="Fødselsnummer"
                                     ref="pno"
@@ -139,7 +141,7 @@ export class PersonWithNeedClass extends React.Component {
                                     //Connects field to redux form component//
                                     {...pnr}
                                 />
-                                {pnr.touched && pnr.error && <div>{pnr.error}</div>}
+                                {pnr.touched && pnr.error && <div className="error" >{pnr.error}</div>}
 
                             </Col>
                         </Row>
@@ -147,7 +149,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Col sx={4} md={4}></Col>
                             <Col sx={8} md={8}>
                                 <input type="checkbox" name="noPno"
-                                       defaultSelected={this.props.fieldValues.gotPNRnumber}{...checked}/> Jeg kan ikke
+                                      checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
                                 fødselsnummeret
                             </Col>
                             <Col sm={0} md={5}></Col>
@@ -163,7 +165,7 @@ export class PersonWithNeedClass extends React.Component {
                                     className="name"
                                     placeholder="Navn"
                                     ref="name"
-                                    defaultValue={this.props.fieldValues.person.name}
+
                                     {...name}
                                 />
                             </Col>
@@ -193,11 +195,11 @@ const validate = values => {
 };
 
 //Sets up reduxForm - needs fields and validation functions
-const PersonWithNeedDef = reduxForm({
+const PersonWithNeed = reduxForm({
     form: 'application',
     fields,
     destroyOnUnmount: false,
     validate
 })(PersonWithNeedClass);
 
-export default PersonWithNeedDef
+export default PersonWithNeed

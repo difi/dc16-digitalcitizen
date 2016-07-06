@@ -5,11 +5,10 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
-
-
 import {reduxForm} from 'redux-form';
+import {fieldIsEmpty} from './validation.js'
 
-class SpecialNeeds extends React.Component {
+export class SpecialNeedsClass extends React.Component {
 
 
     constructor(props) {
@@ -47,6 +46,7 @@ class SpecialNeeds extends React.Component {
     render() {
 
         const {fields: {medical, changes, other}} = this.props;
+        var valid = medical.value
 
         return (
             <div>
@@ -54,17 +54,17 @@ class SpecialNeeds extends React.Component {
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
+                            <label className="from-col-address"> Hva er grunnen til at du søker plass på sykehjem? </label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
                                          ref="medicalNeeds" {...medical}/>
+                            {medical.touched && medical.error && <div>{medical.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har det skjedd noen endringer i den siste tid for at
-                                ditt behov for assistanse har oppstått?</label>
+                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -84,6 +84,7 @@ class SpecialNeeds extends React.Component {
                 </div>
                 
                 <NavigationButtons
+                    disabled={!valid}
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
@@ -96,12 +97,22 @@ class SpecialNeeds extends React.Component {
     }
 }
 
+//Validation for form
+const validate = values => {
+    const errors = {};
 
-SpecialNeeds = reduxForm({
+    if (fieldIsEmpty(values.medical)) {
+        errors.medical = "Dette feltet må fylles ut. ";
+    }
+    return errors;
+}
+
+const SpecialNeeds = reduxForm({
     form: 'application',
     fields: ["medical", "changes", "other"],
     destroyOnUnmount: false,
+    validate
 
-}, null, null)(SpecialNeeds);
+}, null, null)(SpecialNeedsClass);
 
 export default SpecialNeeds

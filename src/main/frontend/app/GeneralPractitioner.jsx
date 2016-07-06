@@ -13,7 +13,7 @@ var ReactDOM = require('react-dom');
 
 
 
-class GeneralPractitioner extends React.Component {
+export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -75,10 +75,10 @@ class GeneralPractitioner extends React.Component {
                 <div className="form-container">
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Fastlege</label>
+                            <label className="genPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead array={doctors.value} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
+                            <TypeAhead className="genPract" array={doctors.value} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
                                        value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
                         </Col>
                     </Row>
@@ -93,10 +93,10 @@ class GeneralPractitioner extends React.Component {
     }
 }
 
-GeneralPractitioner = reduxForm({
+const GeneralPractitioner = reduxForm({
     form: 'application',
     fields: ["doctorName", "doctors"],
     destroyOnUnmount: false,
-}, null, null)(GeneralPractitioner);
+}, null, null)(GeneralPractitionerClass);
 
 export default GeneralPractitioner

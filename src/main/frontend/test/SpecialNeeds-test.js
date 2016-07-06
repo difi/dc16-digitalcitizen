@@ -1,5 +1,5 @@
 /**
- * Created by camp-vha on 28.06.2016.
+ * Created by camp-vha on 05.07.2016.
  */
 import React from 'react';
 
@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {NeedsFormClass} from '../app/NeedsForm.jsx';
+import {SpecialNeedsClass} from '../app/SpecialNeeds.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -50,29 +50,28 @@ var fieldValues = {
 };
 var defaultProps = {
     fields: {
-        need: false
+        medical: "sd",
+        changes: null,
+        other: null
     },
     fieldValues
 };
 
-describe("NeedsForm", function() {
+describe("SpecialNeedsClass", function() {
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
-    it('should have a HTML-element with className = needs', function () {
-        //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
-
-        //Expect to find one element with the class name "needs"
-        expect(wrapper.find('.needs')).to.have.length(1);
+    it('should have three labels with classname= from-col-address', function () {
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect (wrapper.find('label.from-col-address')).to.have.length(3);
     });
 
-    it('two radio-buttons exists', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/>);
-        expect(wrapper.find('input[type="radio"]')).to.have.length(2);
+    it('should have three HTML-elements with classname= from-col-address', function () {
+        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect (wrapper.find('.special-needs-textarea')).to.have.length(3);
     });
+
 });

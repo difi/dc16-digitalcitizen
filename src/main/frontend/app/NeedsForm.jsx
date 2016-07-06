@@ -1,6 +1,5 @@
 import React from 'react';
 import NavigationButtons from './NavigationButtons.jsx';
-var RadioGroup = require('react-radio-group');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
@@ -57,15 +56,11 @@ export class NeedsFormClass extends React.Component {
                 <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
 
                 <div className="form-container">
-                    <RadioGroup className="needs" selectedValue={need.value} {...need}>
-                        {Radio => (
-                            <div>
-                                <Radio value="short"/> Kortidsopphold
-                                <br/>
-                                <Radio value="long"/> Langtidsopphold
-                            </div>
-                        )}
-                    </RadioGroup>
+                    <form className="needs">
+                        <input type="radio" name="radio-buttons" {...need} value="short" checked={need.value=="short"}/> Kortidsopphold
+                        <br/>
+                        <input type="radio" name="radio-buttons" {...need} value="long" checked={need.value=="long"}/> Langtidsopphold
+                    </form>
                 </div>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
@@ -78,11 +73,11 @@ export class NeedsFormClass extends React.Component {
 }
 
 
-const NeedsFormDefault = reduxForm({
+const NeedsForm = reduxForm({
     form: 'application',
     fields: ["need"],
     destroyOnUnmount: false
 }, null, null)(NeedsFormClass);
 
 
-export default NeedsFormDefault
+export default NeedsForm

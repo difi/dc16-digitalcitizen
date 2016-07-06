@@ -70,7 +70,7 @@ export default class NavigationButtons extends React.Component {
                 className="next-btn"
                 ref="submitButton"
                 bsStyle="primary"
-                disabled={isLoading}
+                disabled={this.props.disabled}
                 onClick={!isLoading ? this.handleSubmitClick : null}>
                 {isLoading ? 'Sender...' : 'Send søknad'}
             </Button>;
