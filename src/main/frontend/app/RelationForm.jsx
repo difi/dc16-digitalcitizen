@@ -96,13 +96,14 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label id="guardian">Hvem ønsker sykehjemsplass?</label>
+                                <label className="guardian-rel">Hvem ønsker sykehjemsplass?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col>
                                 <DropdownList id="1"
                                               ref="nameOfChild"
+                                              className="guardian-rel"
                                               options={[{name: "Velg..."},{name: "Ola"}, {name: "Kari"}]}
                                               labelField="name"
                                               valueField="name"
@@ -120,13 +121,14 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label>Hva er din relasjon til personen med behov?</label>
+                                <label className="family-rel">Hva er din relasjon til personen med behov?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col>
                                 <DropdownList id="1"
                                               ref="familyRelation"
+                                              className="family-rel"
                                               options={dropdownContent.RELATIONS}
                                               labelField="relation"
                                               valueField="value"
@@ -146,7 +148,7 @@ export class RelationFormClass extends React.Component {
                 content = <componentClass>
                     <Row className="form-row">
                         <Col>
-                            <label>Hva er din relasjon til personen med behov?</label>
+                            <label className="other-rel">Hva er din relasjon til personen med behov?</label>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -154,6 +156,7 @@ export class RelationFormClass extends React.Component {
                             <FormControl
                                 type="text"
                                 ref="otherRelation"
+                                className="other-rel"
                                 pattern="[A-Za-zæøåÆØÅ]"
                                 placeholder="Relasjon"
                                 {...otherRelation}
