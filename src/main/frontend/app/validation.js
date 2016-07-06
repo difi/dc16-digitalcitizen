@@ -93,6 +93,7 @@ export function CheckPostCode(postCode) {
 
 export function onlyLettersInString(str){
     if(str){
+        str = str.toString();
     return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
 }
 
