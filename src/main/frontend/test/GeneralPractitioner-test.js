@@ -52,7 +52,7 @@ var fieldValues = {
 var defaultProps = {
     fields: {
         doctorName: "sd",
-        doctors: ['as', 'asd']
+        doctors: {value: [{name: "Berit"}]}
     },
     fieldValues
 };
