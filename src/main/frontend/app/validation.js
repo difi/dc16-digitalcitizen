@@ -93,6 +93,7 @@ export function CheckPostCode(postCode) {
 
 export function onlyLettersInString(str){
     if(str){
+        str = str.toString();
     return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
 }
 
@@ -103,7 +104,12 @@ export function onlyDigitsInString(str){
 
 export function alphaNumericInString(str){
     if(str){
-    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?@]+/g, '');}
+    return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');}
+}
+
+export function email(str){
+    if(str){
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s@_-]+/g, '');}
 }
 
 export function fieldIsEmpty(value) {

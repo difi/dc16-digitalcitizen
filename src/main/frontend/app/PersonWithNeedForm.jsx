@@ -61,7 +61,7 @@ export class PersonWithNeedClass extends React.Component {
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
-        console.log(checked.value);
+        
         var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
         if (checked.value) {
             return (
