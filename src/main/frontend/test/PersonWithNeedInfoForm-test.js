@@ -4,7 +4,7 @@
 import React from 'react';
 
 //Shallow renders only our component without touching the DOM.
-//Mount gives full DOM rendering.
+//Mount gives full DOM renderin g.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
 import { shallow, mount, render } from 'enzyme';
