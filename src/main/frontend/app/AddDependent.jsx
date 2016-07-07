@@ -31,7 +31,8 @@ const fields = [
     'form3.lastName',
     'form3.mail',
     'form3.phone',
-    'form3.relation'
+    'form3.relation',
+    'displayButton'
 ];
 
 var DISPLAY_FORM = 'block';
@@ -83,24 +84,24 @@ class AddDependent extends React.Component {
         if (this.state.numDep < 3) {
 
             if (this.state.numDep == 2) {
-                this.setState({
-                    showAddButton: HIDE_FORM
-                });
+                this.props.fields.displayButton.onChange(HIDE_FORM);
             }
 
             if (!this.props.fields.form2.show.value) {
                 this.props.fields.form2.show.onChange(true);
                 console.log("vis form 2");
+                if(this.props.fields.form3.show.value){
+                    this.props.fields.displayButton.onChange(HIDE_FORM);
+                }
                 this.setState({
-                    showForm2: true,
                     numDep: this.state.numDep += 1
                 });
             } else {
                 this.props.fields.form3.show.onChange(true);
                 console.log("vis form 3");
+                this.props.fields.displayButton.onChange(HIDE_FORM);
                 this.setState({
-                    showForm3: true,
-                    numDep: this.state.numDep += 1
+                    numDep: this.state.numDep += 1,
                 });
             }
         }
@@ -170,25 +171,24 @@ class AddDependent extends React.Component {
 
     handleClickForm2() {
         this.props.fields.form2.show.onChange(false);
+        this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.setState({
-            showForm2: false,
             numDep: this.state.numDep -= 1,
-            showAddButton: DISPLAY_FORM,
+
         });
     }
 
     handleClickForm3() {
         this.props.fields.form3.show.onChange(false);
+        this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.setState({
-            showForm3: false,
             numDep: this.state.numDep -= 1,
-            showAddButton: DISPLAY_FORM,
         });
     }
 
     render() {
         const {
-            fields: {form1, form2, form3}
+            fields: {form1, form2, form3, displayButton}
         } = this.props;
         this.validation(1);
         var valid=true;
@@ -221,7 +221,7 @@ class AddDependent extends React.Component {
                     </div>
                 </div>
                 <Row className="addDepButton from-row">
-                    <Button onClick={this.handleClick} style={{display: this.state.showAddButton}} bsStyle="info">+ Legg
+                    <Button onClick={this.handleClick} style={{display: displayButton.value}} bsStyle="info">+ Legg
                         til pårørende</Button>
                 </Row>
                 <NavigationButtons
