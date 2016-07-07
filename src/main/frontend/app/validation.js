@@ -78,12 +78,12 @@ export function checkPhoneNumber(phoneNo){
     if(!phoneNo){
         return false;
     }
-    var checkPhone = /^\d{8}$/;
+    var checkPhone = /^[\d ]{10}$/;
     return phoneNo.match(checkPhone);
 }
 
 export function CheckPostCode(postCode) {
-    var checkPost = /^[0-9 ]{4}$/;
+    var checkPost = /^[0-9]{4}$/;
     if (postCode == checkPost) {
         return true;
     } else {
@@ -113,13 +113,12 @@ export function fieldIsEmpty(value) {
     return false;
 }
 
-export function normalizePhone(value) {
+export function formatPhone(value) {
     if (!value) {
         return value
     }
     const onlyNums = value.replace(/[^\d]/g, '')
-
-    // if (!previousValue || value.length > previousValue.length) {
+    
     if (value) {
         if (onlyNums.length === 3) {
             return onlyNums
@@ -134,10 +133,5 @@ export function normalizePhone(value) {
     if (onlyNums.length <= 5) {
         return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3)
     }
-
-    var tempValue = value.replace(' ', '');
-    console.log(tempValue);
-    value = tempValue.replace(' ', '');
-    console.log(value);
     return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3, 5) + ' ' + onlyNums.slice(5, 8)
 }
