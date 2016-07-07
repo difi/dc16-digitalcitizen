@@ -23,6 +23,7 @@ public class SubmitController {
     // TODO: Replace with database
     public ArrayList<Submission> submissions = new ArrayList<>();
 
+    @CrossOrigin
     @RequestMapping(value="/send", method = RequestMethod.POST)
     public @ResponseBody
     String post(@RequestBody final Submission submission, HttpServletRequest request) throws IOException {
@@ -32,7 +33,7 @@ public class SubmitController {
         System.out.println("Submission is valid: " + submissionIsValid);
         // TODO: Add submission to database
         printSubmissionRequest(submission, request);
-        submissions.add(submission);
+        submissions.add(handleSubmissionFields(submission));
         // Return the id of the submission
         return Integer.toString(submissions.size() - 1);
     }
@@ -43,12 +44,21 @@ public class SubmitController {
         System.out.println(s);
     }
 
+
+    private Submission handleSubmissionFields(Submission submission) {
+        if(submission.getPerson().getPnr() != null && !submission.getPerson().getPnr().equals("")){
+            submission.getPerson().updateValuesByPnr();
+        }
+        return submission;
+    }
+
     /**
      *
      * @param id The id of the submission we want to generate a PDF-file from.
      * @return HTTP containing the generated PDF-file
      * @throws IOException
      */
+    @CrossOrigin
     @RequestMapping(value="/getpdf", params = "id", method=RequestMethod.GET)
     public ResponseEntity<byte[]> getPDF(@RequestParam("id") String id) throws IOException {
 

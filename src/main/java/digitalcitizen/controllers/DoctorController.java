@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @RestController
 public class DoctorController {
 
+    @CrossOrigin
     @RequestMapping(value = "/api/doctors", params = "loc", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ArrayList<Doctor> getDoctorsByLocation(@RequestParam("loc") String loc) {
