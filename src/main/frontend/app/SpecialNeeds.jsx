@@ -16,7 +16,6 @@ export class SpecialNeedsClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-
     }
 
     handleClickBack() {
