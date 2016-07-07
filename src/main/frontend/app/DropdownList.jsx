@@ -91,7 +91,7 @@ var DropdownList = React.createClass({
             var change = {
                 oldValue: this.state.selected,
                 newValue: e.target.value
-            }
+            };
             this.props.onChange(change);
         }
         this.setState({selected: e.target.value});
