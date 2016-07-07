@@ -75,6 +75,7 @@ export function checkPersonalnumberNo(pno)  {
 
 
 export function checkPhoneNumber(phoneNo){
+    
     if(!phoneNo){
         return false;
     }
