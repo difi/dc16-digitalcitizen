@@ -41,7 +41,7 @@ var dependentForms = [
 ];
 
 
-class AddDependent extends React.Component {
+export class AddDependentClass extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -257,24 +257,12 @@ const validate = values => {
 
 
 
-AddDependent = reduxForm({
+const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
     initialValues: {"form2.show": false, "form3.show": false},
     destroyOnUnmount: false,
     validate
-})(AddDependent);
+})(AddDependentClass);
 
 export default AddDependent
-
-
-
-
-
-
-
-
-
-
-
-
