@@ -75,10 +75,11 @@ export function checkPersonalnumberNo(pno)  {
 
 
 export function checkPhoneNumber(phoneNo){
+    
     if(!phoneNo){
         return false;
     }
-    var checkPhone = /^\d{8}$/;
+    var checkPhone = /^[\d ]{10}$/;
     return phoneNo.match(checkPhone);
 }
 
@@ -117,4 +118,27 @@ export function fieldIsEmpty(value) {
         return true;
     }
     return false;
+}
+
+export function formatPhone(value) {
+    if (!value) {
+        return value
+    }
+    const onlyNums = value.replace(/[^\d]/g, '')
+    
+    if (value) {
+        if (onlyNums.length === 3) {
+            return onlyNums
+        }
+        if (onlyNums.length === 5) {
+            return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3)
+        }
+    }
+    if (onlyNums.length <= 3) {
+        return onlyNums
+    }
+    if (onlyNums.length <= 5) {
+        return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3)
+    }
+    return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3, 5) + ' ' + onlyNums.slice(5, 8)
 }
