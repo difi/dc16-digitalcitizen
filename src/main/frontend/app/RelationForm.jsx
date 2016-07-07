@@ -46,8 +46,10 @@ export class RelationFormClass extends React.Component {
             isDependent.onChange(true);
             var data = {
                 relation: relation.value,
-                nameOfChild: nameOfChild.value,
                 dependent: isDependent.value,
+                person: {
+                    name: nameOfChild.value,
+                }
 
             };
 
@@ -56,7 +58,7 @@ export class RelationFormClass extends React.Component {
             var data = {
                 relation: relation.value,
                 typeOfRelation: typeOfRelation.value,
-                dependent: isDependent.value,
+                dependent: isDependent.value
             };
 
         }
@@ -64,7 +66,7 @@ export class RelationFormClass extends React.Component {
             var data = {
                 relation: relation.value,
                 otherRelation: otherRelation.value,
-                dependent: isDependent.value,
+                dependent: isDependent.value
             };
 
         }
@@ -104,7 +106,7 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
-                                              options={[{value: 0,name: "Velg..."},{value: "ola", name: "Ola"}, {value: "kari",name: "Kari"}]}
+                                              options={[{value: 0,name: "Velg..."},{value: "Ola", name: "Ola"}, {value: "Kari",name: "Kari"}]}
                                               labelField="name"
                                               valueField="value"
                                               defaultValue=""
