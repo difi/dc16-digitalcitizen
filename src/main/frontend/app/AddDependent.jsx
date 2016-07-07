@@ -169,6 +169,7 @@ class AddDependent extends React.Component {
     }
 
     handleClickForm2() {
+
         this.props.fields.form2.show.onChange(false);
         this.setState({
             showForm2: false,
@@ -234,7 +235,6 @@ class AddDependent extends React.Component {
         );
     }
 }
-
 AddDependent = reduxForm({
     form: 'application',
     fields: fields,
