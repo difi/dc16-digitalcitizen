@@ -42,14 +42,6 @@ var HIDE_FORM = 'none';
 export class AddDependentClass extends React.Component {
     constructor() {
         super();
-        this.state = {
-            clicked: false,
-            numDep: 1,
-            showForm1: true,
-            showForm2: false,
-            showForm3: false,
-            showAddButton: DISPLAY_FORM
-        };
         this.handleClick = this.handleClick.bind(this);
         this.handleClickForm2 = this.handleClickForm2.bind(this);
         this.handleClickForm3 = this.handleClickForm3.bind(this);
@@ -82,9 +74,10 @@ export class AddDependentClass extends React.Component {
 
     handleClick() {
 
-        if (this.state.numDep < 3) {
+        console.log(this.props.fields.numDep.value);
+        if (this.props.fields.numDep.value < 3) {
 
-            if (this.state.numDep == 2) {
+            if (this.props.fields.numDep.value == 2) {
                 this.props.fields.displayButton.onChange(HIDE_FORM);
             }
 
@@ -94,16 +87,12 @@ export class AddDependentClass extends React.Component {
                 if(this.props.fields.form3.show.value){
                     this.props.fields.displayButton.onChange(HIDE_FORM);
                 }
-                this.setState({
-                    numDep: this.state.numDep += 1
-                });
+                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
             } else {
                 this.props.fields.form3.show.onChange(true);
                 console.log("vis form 3");
                 this.props.fields.displayButton.onChange(HIDE_FORM);
-                this.setState({
-                    numDep: this.state.numDep += 1,
-                });
+                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
             }
         }
     }
@@ -141,7 +130,7 @@ export class AddDependentClass extends React.Component {
             email: form1.mail.value,
             relation: form1.relation.value
         };
-        if (this.state.showForm2 == true) {
+        if (this.props.fields.form2.show.value) {
             form2Data = {
                 firstName: form2.firstName.value,
                 lastName: form2.lastName.value,
@@ -150,7 +139,7 @@ export class AddDependentClass extends React.Component {
                 relation: form2.relation.value
             }
         }
-        if (this.state.showForm3 == true) {
+        if (this.props.fields.form3.show.value) {
             form3Data = {
                 firstName: form3.firstName.value,
                 lastName: form3.lastName.value,
@@ -173,25 +162,22 @@ export class AddDependentClass extends React.Component {
     handleClickForm2() {
         this.props.fields.form2.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
-        this.setState({
-            numDep: this.state.numDep -= 1,
-
-        });
+        this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
     handleClickForm3() {
         this.props.fields.form3.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
-        this.setState({
-            numDep: this.state.numDep -= 1,
-        });
+        this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
     render() {
         const {
+            fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
         this.validation(1);
         var valid=true;
+        for(var i=1; i<=numDep.value; i++){
             valid = this.validation(i) && valid
         }
         return (
@@ -200,6 +186,7 @@ export class AddDependentClass extends React.Component {
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
+                            <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1} />
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -235,6 +222,7 @@ export class AddDependentClass extends React.Component {
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
+    initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
