@@ -34,6 +34,7 @@ export class SpecialNeedsClass extends React.Component {
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
+
         var data = {
             medicalNeeds: medical.value,
             conditionChanges: changes.value,

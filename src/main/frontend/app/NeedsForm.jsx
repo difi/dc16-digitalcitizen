@@ -57,9 +57,9 @@ export class NeedsFormClass extends React.Component {
 
                 <div className="form-container">
                     <form className="needs">
-                        <input type="radio" name="radio-buttons" {...need} value="short" checked={need.value=="short"}/> Kortidsopphold
+                        <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short" checked={need.value=="short"}/> Kortidsopphold
                         <br/>
-                        <input type="radio" name="radio-buttons" {...need} value="long" checked={need.value=="long"}/> Langtidsopphold
+                        <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long" checked={need.value=="long"}/> Langtidsopphold
                     </form>
                 </div>
                 <NavigationButtons
