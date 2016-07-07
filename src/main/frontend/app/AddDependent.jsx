@@ -32,7 +32,8 @@ const fields = [
     'form3.mail',
     'form3.phone',
     'form3.relation',
-    'displayButton'
+    'displayButton',
+    'numDep'
 ];
 
 var DISPLAY_FORM = 'block';
@@ -188,11 +189,9 @@ export class AddDependentClass extends React.Component {
 
     render() {
         const {
-            fields: {form1, form2, form3, displayButton}
         } = this.props;
         this.validation(1);
         var valid=true;
-        for(var i=1; i<=this.state.numDep; i++){
             valid = this.validation(i) && valid
         }
         return (
@@ -201,8 +200,6 @@ export class AddDependentClass extends React.Component {
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
-                            <DependentForm ref="form1" showForm={this.state.showForm1} formKey="1"
-                                           showDeleteButton={false} {...form1} />
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -238,7 +235,6 @@ export class AddDependentClass extends React.Component {
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
-    initialValues: {"form2.show": false, "form3.show": false},
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
