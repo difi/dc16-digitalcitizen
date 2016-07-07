@@ -4,15 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import digitalcitizen.models.Address;
 import digitalcitizen.models.Submission;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.apache.pdfbox.pdmodel.interactive.form.PDRadioButton;
 
 /**
  * Created by camp-shj on 04.07.2016.
@@ -85,6 +82,56 @@ public class PDFManager {
                 case "dep1_email":
                     value = submission.getDependents().get(0).getEmail();
                     field.setValue(value);
+                    break;
+                // DEPENDENT 2
+                case "dep2_name":
+                    if(submission.getDependents().get(1) != null) {
+                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep2_telephone":
+                    if(submission.getDependents().get(1) != null) {
+                        value = submission.getDependents().get(1).getTelephone();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep2_rel":
+                    if(submission.getDependents().get(1) != null) {
+                        value = submission.getDependents().get(1).getRelation();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep2_email":
+                    if(submission.getDependents().get(1) != null) {
+                        value = submission.getDependents().get(1).getEmail();
+                        field.setValue(value);
+                    }
+                    break;
+                // DEPENDENT 3
+                case "dep3_name":
+                    if(submission.getDependents().get(2) != null) {
+                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep3_telephone":
+                    if(submission.getDependents().get(2) != null) {
+                        value = submission.getDependents().get(2).getTelephone();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep3_rel":
+                    if(submission.getDependents().get(2) != null) {
+                        value = submission.getDependents().get(2).getRelation();
+                        field.setValue(value);
+                    }
+                    break;
+                case "dep3_email":
+                    if(submission.getDependents().get(2) != null) {
+                        value = submission.getDependents().get(2).getEmail();
+                        field.setValue(value);
+                    }
                     break;
                 // Length of stay checkboxes
                 /*

@@ -112,7 +112,7 @@ describe("Application", () => {
         });
         var fourthPage = subject.find(PersonWithNeedInfoForm);
 
-        fourthPage.find(FormControl).first().simulate('change', {target: {value: 'Vegard'}});
+        fourthPage.find(FormControl).first().simulate('change', {target: {value: 'Erlend'}});
         var addressField = fourthPage.find(AddressField);
         addressField.find(FormControl).first().simulate('change', {target: {value: "Testveien 7"}});
         var nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
@@ -120,7 +120,7 @@ describe("Application", () => {
         //Button shouldnt be clickable before zipcode and phone number is entered.
         expect(subject.state().step).to.equal(4);
         addressField.find('.zipcode').simulate('change', {target: {value: "0678"}});
-        fourthPage.find(FormControl).last().simulate('change', {target: {value: '22222222'}});
+        fourthPage.find(FormControl).last().simulate('change', {target: {value: '222 22 222'}});
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(5);
     });*/
@@ -157,7 +157,7 @@ describe("Application", () => {
         expect(firstAdd).to.have.length(1);
         firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Nordmann'}});
         firstAdd.find(FormControl).at(1).simulate('change', {target: {value: 'Nordmann'}});
-        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: '22222222'}});
+        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: '222 22 222'}});
         firstAdd.find(FormControl).at(3).simulate('change', {target: {value: 'ola@nordmann.no'}});
         firstAdd.find(DropdownList).simulate('change', {target: {value: 'sibling'}});
 
