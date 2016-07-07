@@ -251,14 +251,14 @@ exports.NATIONAL = [
 
 exports.RELATIONS = [
     {value: 0, relation: "Velg..."},
-    {value: "parent", relation: "Forelder"},
-    {value: "child", relation: "Barn"},
-    {value: "spouse", relation: "Ektefelle"},
-    {value: "cohabitant", relation: "Samboer"},
-    {value: "sibling", relation: "Søsken"},
-    {value: "grandparent", relation: "Besteforelder"},
-    {value: "uncleaunt", relation: "Tante/Onkel"},
-    {value: "other", relation: "Annet"}
+    {value: "Forelder", relation: "Forelder"},
+    {value: "Barn", relation: "Barn"},
+    {value: "Ektefelle", relation: "Ektefelle"},
+    {value: "Samboer", relation: "Samboer"},
+    {value: "Søsksen", relation: "Søsken"},
+    {value: "Barnebarn", relation: "Barnebarn"},
+    {value: "Nephew/Niece", relation: "Nevø/Niese"},
+    {value: "Annet", relation: "Annet"}
 ];
 
 exports.CIVILSTATUS = [
