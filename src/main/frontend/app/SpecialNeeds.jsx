@@ -46,7 +46,7 @@ export class SpecialNeedsClass extends React.Component {
     render() {
 
         const {fields: {medical, changes, other}} = this.props;
-        var valid = medical.value;
+        var valid = changes.value;
 
         return (
             <div>
@@ -59,6 +59,7 @@ export class SpecialNeedsClass extends React.Component {
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
                                          ref="conditionChanges" {...changes}/>
+                            {changes.touched && changes.error && <div>{changes.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row-special">
@@ -68,7 +69,6 @@ export class SpecialNeedsClass extends React.Component {
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
                                          ref="medicalNeeds" {...medical}/>
-                            {medical.touched && medical.error && <div>{medical.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row-special">
@@ -102,8 +102,8 @@ export class SpecialNeedsClass extends React.Component {
 const validate = values => {
     const errors = {};
 
-    if (fieldIsEmpty(values.medical)) {
-        errors.medical = "Dette feltet må fylles ut. ";
+    if (fieldIsEmpty(values.changes)) {
+        errors.changes = "Dette feltet må fylles ut. ";
     }
     return errors;
 }
