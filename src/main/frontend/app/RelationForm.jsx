@@ -46,7 +46,6 @@ export class RelationFormClass extends React.Component {
             isDependent.onChange(true);
             var data = {
                 relation: relation.value,
-                //nameOfChild: nameOfChild.value,
                 dependent: isDependent.value,
                 person: {
                     name: nameOfChild.value,
