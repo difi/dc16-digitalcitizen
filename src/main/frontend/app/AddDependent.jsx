@@ -1,15 +1,17 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
+
+import DependentForm from './DependentForm.jsx';
+import NavigationButtons from './NavigationButtons.jsx';
+import validate from './DependentValidation';
+
+require('!style!css!less!./Application.less');
+
+var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
-var ReactDOM = require('react-dom');
-import DependentForm from './DependentForm.jsx';
-require('!style!css!less!./Application.less');
-import NavigationButtons from './NavigationButtons.jsx';
-import validate from './DependentValidation';
-
-import {reduxForm} from 'redux-form';
 
 const fields = [
 
@@ -31,17 +33,11 @@ const fields = [
     'form3.phone',
     'form3.relation'
 ];
+
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
 
-var dependentForms = [
-    {key: 1},
-    {key: 2},
-    {key: 3}
-];
-
-
-class AddDependent extends React.Component {
+export class AddDependentClass extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -59,7 +55,6 @@ class AddDependent extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
-
     }
 
     handleClickBack() {
@@ -168,7 +163,6 @@ class AddDependent extends React.Component {
                 form2Data,
                 form3Data
             ]
-
         };
         this.props.saveValues(data);
         console.log(data);
@@ -237,44 +231,16 @@ class AddDependent extends React.Component {
                      // TODO: update to !this.state.validform
                 />
             </div>
-
         );
     }
 }
-;
-/*
-const validate = values => {
-    const errors = {};
 
-    if (!(checkPhoneNumber(values.form1.phone))) {
-        errors.phone = "Dette er ikke et gyldig telefonnummer";
-    }
-    if (!(checkEmail(values.form1.mail))) {
-        errors.mail = "Dette er ikke en gyldig epostadresse";
-    }
-    return errors;
-};*/
-
-
-
-AddDependent = reduxForm({
+const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
     initialValues: {"form2.show": false, "form3.show": false},
     destroyOnUnmount: false,
     validate
-})(AddDependent);
+})(AddDependentClass);
 
 export default AddDependent
-
-
-
-
-
-
-
-
-
-
-
-

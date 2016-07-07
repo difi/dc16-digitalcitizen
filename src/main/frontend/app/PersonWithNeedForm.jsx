@@ -90,7 +90,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Row className="form-row">
                                 <Col sx={4} md={4}></Col>
                                 <Col sx={8} md={8}>
-                                    <input type="checkbox" name="noPno" checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
+                                    <input type="checkbox" className="pnrCheck" name="noPno" checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
                                 </Col>
                                 <Col sm={0} md={5}></Col>
                             </Row>
@@ -148,7 +148,7 @@ export class PersonWithNeedClass extends React.Component {
                         <Row className="form-row">
                             <Col sx={4} md={4}></Col>
                             <Col sx={8} md={8}>
-                                <input type="checkbox" name="noPno"
+                                <input type="checkbox" name="noPno" className="pnrCheck"
                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
                                 fødselsnummeret
                             </Col>

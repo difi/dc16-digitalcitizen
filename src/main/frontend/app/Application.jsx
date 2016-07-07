@@ -21,7 +21,11 @@ import NeedsForm from'./NeedsForm';
 import AddDependent from './AddDependent';
 import SubmitSuccess from './SubmitPage';
 
-
+// "Signed in" user. Used for testing
+var user = {
+    pnr: "01019011111",
+    submissionId: null
+};
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 var fieldValues = {
@@ -71,6 +75,7 @@ export default class Application extends React.Component {
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
         this.previousStep = this.previousStep.bind(this);
+        this.saveUserData = this.saveUserData.bind(this);
 
     }
 
@@ -84,6 +89,13 @@ export default class Application extends React.Component {
     saveValues(field_value) {
         fieldValues = assign({}, fieldValues, field_value);
         console.log(fieldValues);
+        return fieldValues;
+    }
+    
+    saveUserData(field_value){
+        user = assign({}, user, field_value);
+        console.log(user);
+        return user;
     }
 
     previousStep(step) {
@@ -189,6 +201,7 @@ export default class Application extends React.Component {
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
+                    saveUserData={this.saveUserData}
                     submitRegistration={this.handleSubmit}/>;
                 break;
             case 9:
@@ -198,6 +211,7 @@ export default class Application extends React.Component {
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
+                    userData={user}
                     submitRegistration={this.handleSubmit}/>;
         }
 
