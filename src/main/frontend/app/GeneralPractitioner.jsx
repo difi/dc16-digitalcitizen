@@ -64,7 +64,7 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-
+        console.log(doctorName.value);
         if(doctors.value==undefined){
             return null;
         }
