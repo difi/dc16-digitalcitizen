@@ -11,7 +11,7 @@ module.exports = function(config) {
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/app/*.js': [ 'coverage', 'webpack', 'sourcemap'],
+            '**/app/*.js': [ 'webpack', 'coverage','sourcemap'],
             '**/test/*.js': ['webpack', 'sourcemap']
         },
 

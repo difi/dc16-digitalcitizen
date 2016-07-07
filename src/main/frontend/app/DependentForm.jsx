@@ -1,18 +1,19 @@
 import React from 'react';
+import { Component, PropTypes } from 'react'
+import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
+
+import DropdownList from './DropdownList.jsx';
+import dropdownContent from './static_data/dropdown-list-content.js';
+
+require('!style!css!less!./Application.less');
+
+var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
-import DropdownList from './DropdownList.jsx';
 var FormControl = require('react-bootstrap/lib/FormControl');
-import dropdownContent from './static_data/dropdown-list-content.js';
-require('!style!css!less!./Application.less');
-import {reduxForm} from 'redux-form';
-import {getValues} from 'redux-form';
-
-import { Component, PropTypes } from 'react'
-
 
 export const fields = ["firstName", "lastName", "phone", "mail", "relation"];
 
@@ -34,6 +35,8 @@ class DependentForm extends React.Component {
             <Button className="close" aria-label="Close" onClick={this.handleClickRemove}>
                 <span aria-hidden="true">&times;</span>
             </Button> : '';
+
+
 
         const {firstName, lastName, phone, mail, relation}= this.props;
         return (
@@ -62,7 +65,7 @@ class DependentForm extends React.Component {
                             <label className="tlf">Telefon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="tlf" ref="telephone" type="text" placeholder="Telefonnr" {...phone}/>
+                            <FormControl className="tlf" ref="phone" type="text" placeholder="Telefonnr" {...phone}/>
                             {phone.touched && phone.error && <div>{phone.error}</div>}
                         </Col>
                     </Row>
@@ -88,7 +91,6 @@ class DependentForm extends React.Component {
                 </div>
             </div>
         );
-
     }
 }
 
