@@ -37,7 +37,7 @@ const fields = [
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
 
-class AddDependent extends React.Component {
+export class AddDependentClass extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -235,24 +235,12 @@ class AddDependent extends React.Component {
     }
 }
 
-AddDependent = reduxForm({
+const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
     initialValues: {"form2.show": false, "form3.show": false},
     destroyOnUnmount: false,
     validate
-})(AddDependent);
+})(AddDependentClass);
 
 export default AddDependent
-
-
-
-
-
-
-
-
-
-
-
-
