@@ -58,8 +58,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="medicalNeeds" {...medical}/>
-                            {medical.touched && medical.error && <div>{medical.error}</div>}
+                                         ref="conditionChanges" {...changes}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
@@ -68,7 +67,8 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="conditionChanges" {...changes}/>
+                                         ref="medicalNeeds" {...medical}/>
+                            {medical.touched && medical.error && <div>{medical.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row-special">

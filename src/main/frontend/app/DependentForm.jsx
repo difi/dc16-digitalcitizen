@@ -46,44 +46,44 @@ class DependentForm extends React.Component {
                 <div>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Fornavn</label>
+                            <label className="fName">Fornavn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl ref="firstName" type="text" placeholder="Fornavn" {...firstName}/>
+                            <FormControl className="fName" ref="firstName" type="text" placeholder="Fornavn" {...firstName}/>
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Fornavn</label>
+                            <label className="eName">Etternavn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl ref="lastName" type="text" placeholder="Etternavn" {...lastName}/>
+                            <FormControl className="eName" ref="lastName" type="text" placeholder="Etternavn" {...lastName}/>
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Telefon</label>
+                            <label className="tlf">Telefon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl ref="phone" type="text" placeholder="Telefonnr" {...phone}/>
+                            <FormControl className="tlf" ref="phone" type="text" placeholder="Telefonnr" {...phone}/>
                             {phone.touched && phone.error && <div>{phone.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>E-post</label>
+                            <label className="mail">E-post</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl ref="mail" type="text" placeholder="E-post" {...mail}/>
+                            <FormControl className="mail" ref="mail" type="text" placeholder="E-post" {...mail}/>
                             {mail.touched && mail.error && <div>{mail.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Relasjon</label>
+                            <label className="depRel">Relasjon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <DropdownList ref='relation' options={dropdownContent.RELATIONS} id="test"
+                            <DropdownList className="depRel" ref='relation' options={dropdownContent.RELATIONS} id="test"
                                           valueField="value" labelField="relation" {...relation}
                                           onChange={change => relation.onChange(change.newValue)}/>
                         </Col>
@@ -95,10 +95,3 @@ class DependentForm extends React.Component {
 }
 
 export default DependentForm
-
-
-
-
-
-
-

@@ -86,7 +86,7 @@ public class PDFManager {
                 // DEPENDENT 2
                 case "dep2_name":
                     if(submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(1).getLastName();
                         field.setValue(value);
                     }
                     break;
@@ -111,7 +111,7 @@ public class PDFManager {
                 // DEPENDENT 3
                 case "dep3_name":
                     if(submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(2).getLastName();
                         field.setValue(value);
                     }
                     break;
