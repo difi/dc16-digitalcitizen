@@ -255,7 +255,7 @@ exports.RELATIONS = [
     {value: "Barn", relation: "Barn"},
     {value: "Ektefelle", relation: "Ektefelle"},
     {value: "Samboer", relation: "Samboer"},
-    {value: "Søsksen", relation: "Søsken"},
+    {value: "Søsken", relation: "Søsken"},
     {value: "Barnebarn", relation: "Barnebarn"},
     {value: "Nephew/Niece", relation: "Nevø/Niese"},
     {value: "Annet", relation: "Annet"}
