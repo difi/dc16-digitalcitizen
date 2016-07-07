@@ -3,10 +3,12 @@ import {reduxForm} from 'redux-form';
 var ReactDOM = require('react-dom');
 import {getValues} from 'redux-form';
 import NavigationButtons from './NavigationButtons.jsx';
+import RESTpaths from './static_data/RESTpaths.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+
 
 export const fields = ["name"];
 
@@ -47,9 +49,16 @@ class SubmitSuccess extends React.Component {
                     </div>
                     <Row style={{marginTop: '15px'}}>
                         <hr/>
-                        <Col xs={6} sm={6} md={6} lg={6}>
+                        <Col xs={8} sm={8} md={8} lg={8}>
+                            <img src={require('./resources/images/pdfIcon.png')} />
+                            <a
+                                className="download-link"
+                                href={RESTpaths.PATHS.GETPDF_BASE + "?id=" + this.props.userData.submissionId}
+                                target="_blank">
+                                Last ned søknad som PDF
+                            </a>
                         </Col>
-                        <Col xs={6} sm={6} md={6} lg={6}>
+                        <Col xs={4} sm={4} md={4} lg={4}>
                             <Button bsStyle="success" className="next-btn" onClick={this.handleClickOk}>Ok</Button>
                         </Col>
                     </Row>
@@ -68,9 +77,16 @@ class SubmitSuccess extends React.Component {
                     </div>
                     <Row style={{marginTop: '15px'}}>
                         <hr/>
-                        <Col xs={6} sm={6} md={6} lg={6}>
+                        <Col xs={8} sm={8} md={8} lg={8}>
+                            <img src={require('./resources/images/pdfIcon.png')} />
+                            <a
+                                className="download-link"
+                                href={RESTpaths.PATHS.GETPDF_BASE + "?id=" + this.props.userData.submissionId}
+                                target="_blank">
+                                Last ned søknad som PDF
+                            </a>
                         </Col>
-                        <Col xs={6} sm={6} md={6} lg={6}>
+                        <Col xs={4} sm={4} md={4} lg={4}>
                             <Button bsStyle="success" className="next-btn" onClick={this.handleClickOk}>Ok</Button>
                         </Col>
                     </Row>

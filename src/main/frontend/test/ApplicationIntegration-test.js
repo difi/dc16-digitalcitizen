@@ -1,6 +1,3 @@
-/**
- * Created by camp-vhe on 05.07.2016.
- */
 
 
 import Application from '../app/Application.jsx';
@@ -26,6 +23,8 @@ import NavigationButtons from '../app/NavigationButtons.jsx';
 import AddressField from '../app/AddressField.jsx';
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
+import DependentForm from '../app/DependentForm.jsx';
+import DropdownList from '../app/DropdownList.jsx';
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
 // simplest redux store possible that will work with Redux-Form.
@@ -63,7 +62,20 @@ describe("Application", () => {
 
     });
     it("Second page forwards you to correct step", () => {
+        subject.setState({
+            step: 2
+        });
         var secondPage = subject.find(RelationForm);
+        var nextButton = secondPage.find(RelationForm).find('.next-btn');
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
+        expect(subject.state().step).to.equal(2);
+        //Finds the first basic input element - that is the component that has to change and callbacks upwards.
+        secondPage.find('.radio-other').simulate('change', {target: {value: true}});
+        secondPage.find(FormControl).simulate('change', {target: {value: "elskerinne"}});
+        nextButton.simulate('click');
+        //Other information should forward to step 3 ;
+        expect(subject.state().step).to.equal(3);
 
     });
     it("Third page forwards you to correct step", () => {
@@ -83,14 +95,14 @@ describe("Application", () => {
         //Checked for not knowing and name is filled - Does not yet work
 
         thirdPage = subject.find(PersonWithNeedForm);
-        expect(thirdPage.find('input[type="checkbox"]')).to.have.length(1);
-        //thirdPage.find('input[type="checkbox"]').simulate('change', {target: {value: true}});
+        expect(thirdPage.find('.pnrCheck')).to.have.length(1);
+        thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
         console.log(thirdPage.props());
-        /* thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
-         thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
-         nextButton = subject.find(NavigationButtons).find('.next-btn');
-         nextButton.simulate('click');
-         expect(subject.state().step).to.equal(4);*/
+        thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
+        thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
+        nextButton = subject.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        expect(subject.state().step).to.equal(4);
 
 
     });
@@ -113,7 +125,7 @@ describe("Application", () => {
         expect(subject.state().step).to.equal(5);
     });
 
-    /*it("fifth page forwards you to correct step", () => {
+    it("fifth page forwards you to correct step", () => {
         subject.setState({
             step: 5
         });
@@ -122,11 +134,74 @@ describe("Application", () => {
         nextButton.simulate('click');
         //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(5);
-        fifthPage.find(TypeAhead).simulate('change', {target: {value: 'O'}});
+        //Finds the first basic input element - that is the component that has to change and callbacks upwards.
+        fifthPage.find(TypeAhead).find('input').first().simulate('change', {target: {value: 'Ola'}});
 
         nextButton.simulate('click');
 
         expect(subject.state().step).to.equal(6);
 
-    });*/
-});
+
+    });
+    it("sixth page forwards you to correct step", () => {
+        subject.setState({
+            step: 6
+        });
+        var sixthPage = subject.find(AddDependent);
+        var nextButton = sixthPage.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
+        expect(subject.state().step).to.equal(6);
+
+        var firstAdd = sixthPage.find(DependentForm).first();
+        expect(firstAdd).to.have.length(1);
+        firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Nordmann'}});
+        firstAdd.find(FormControl).at(1).simulate('change', {target: {value: 'Nordmann'}});
+        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: '22222222'}});
+        firstAdd.find(FormControl).at(3).simulate('change', {target: {value: 'ola@nordmann.no'}});
+        firstAdd.find(DropdownList).simulate('change', {target: {value: 'sibling'}});
+
+        nextButton.simulate('click');
+        //Should now redirect to state 7
+        expect(subject.state().step).to.equal(7);
+
+    });
+
+
+    it("seventh page forwards you to correct step", () => {
+        subject.setState({
+            step: 7
+        });
+        var seventhPage = subject.find(NeedsForm);
+        var nextButton = seventhPage.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
+        expect(subject.state().step).to.equal(7);
+        //Finds the first basic input element - that is the component that has to change and callbacks upwards.
+        seventhPage.find('.radio-long').simulate('change', {target: {value: true}});
+
+        nextButton.simulate('click');
+
+        expect(subject.state().step).to.equal(8);
+
+    });
+
+    it("eight page forwards you to correct step", () => {
+        subject.setState({
+            step: 8
+        });
+        var eightPage = subject.find(SpecialNeeds);
+        var nextButton = eightPage.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
+        expect(subject.state().step).to.equal(8);
+        eightPage.find(FormControl).first().simulate('change', {target: {value: 'Fordi jeg er gammel'}});
+
+        nextButton.simulate('click');
+        //THIS ONLY WORKS when this.props.next() is called at the start of submit function in Navigation Buttons. Sondre - what to do?
+
+        //expect(subject.state().step).to.equal(9);
+
+    });
+
+    });
