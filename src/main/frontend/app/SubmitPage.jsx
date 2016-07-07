@@ -64,14 +64,14 @@ class SubmitSuccess extends React.Component {
                     </Row>
                 </div>
             )
-        } else {
+        } /*else {
             return (
                 <div>
-                    <label className="form-header">Du har nå søkt på sykehjemsplass for:</label>
+                    <label className="form-header">Du har nå søkt på sykehjemsplass for (VERGE?):</label>
                     <div className="form-container">
                         <Row>
                             <Col className="submit-name">
-                                <label>{this.props.fieldValues.nameOfChild}</label>
+                                <label>{this.props.fieldValues.person.name}</label>
                             </Col>
                         </Row>
                     </div>
@@ -92,7 +92,7 @@ class SubmitSuccess extends React.Component {
                     </Row>
                 </div>
             )
-        }
+        }*/
     }
 }
 
