@@ -23,6 +23,7 @@ public class SubmitController {
     // TODO: Replace with database
     public ArrayList<Submission> submissions = new ArrayList<>();
 
+    @CrossOrigin
     @RequestMapping(value="/send", method = RequestMethod.POST)
     public @ResponseBody
     String post(@RequestBody final Submission submission, HttpServletRequest request) throws IOException {
@@ -57,6 +58,7 @@ public class SubmitController {
      * @return HTTP containing the generated PDF-file
      * @throws IOException
      */
+    @CrossOrigin
     @RequestMapping(value="/getpdf", params = "id", method=RequestMethod.GET)
     public ResponseEntity<byte[]> getPDF(@RequestParam("id") String id) throws IOException {
 

@@ -29,5 +29,4 @@ public class TestData {
             new Person("06126620649", "TestPerson6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995"),
             new Person("27072118958", "TestPerson7", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996"),
     };
-
 }
