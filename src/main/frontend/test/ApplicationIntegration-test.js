@@ -71,7 +71,7 @@ describe("Application", () => {
         //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(2);
         //Finds the first basic input element - that is the component that has to change and callbacks upwards.
-        secondPage.find('.radio-other').simulate('change', {target: {value: true}});
+        secondPage.find('.radio-other').simulate('change', {target: {value: "other"}});
         secondPage.find(FormControl).simulate('change', {target: {value: "elskerinne"}});
         nextButton.simulate('click');
         //Other information should forward to step 3 ;
