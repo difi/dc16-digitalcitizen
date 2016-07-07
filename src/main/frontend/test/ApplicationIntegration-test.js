@@ -106,7 +106,7 @@ describe("Application", () => {
 
 
     });
-    it("fourth page forwards you to correct step", () => {
+    /*it("fourth page forwards you to correct step", () => {
         subject.setState({
             step: 4
         });
@@ -123,7 +123,7 @@ describe("Application", () => {
         fourthPage.find(FormControl).last().simulate('change', {target: {value: '22222222'}});
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(5);
-    });
+    });*/
 
     it("fifth page forwards you to correct step", () => {
         subject.setState({
@@ -143,7 +143,7 @@ describe("Application", () => {
 
 
     });
-    it("sixth page forwards you to correct step", () => {
+    /*it("sixth page forwards you to correct step", () => {
         subject.setState({
             step: 6
         });
@@ -165,7 +165,7 @@ describe("Application", () => {
         //Should now redirect to state 7
         expect(subject.state().step).to.equal(7);
 
-    });
+    });*/
 
 
     it("seventh page forwards you to correct step", () => {
