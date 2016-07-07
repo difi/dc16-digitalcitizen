@@ -96,16 +96,17 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label id="guardian">Hvem ønsker sykehjemsplass?</label>
+                                <label className="guardian-rel">Hvem ønsker sykehjemsplass?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col>
                                 <DropdownList id="1"
                                               ref="nameOfChild"
-                                              options={[{name: "Velg..."},{name: "Ola"}, {name: "Kari"}]}
+                                              className="guardian-rel"
+                                              options={[{value: 0,name: "Velg..."},{value: "ola", name: "Ola"}, {value: "kari",name: "Kari"}]}
                                               labelField="name"
-                                              valueField="name"
+                                              valueField="value"
                                               defaultValue=""
                                               {...nameOfChild}
                                               //value={nameOfChild.value}
@@ -120,13 +121,14 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label>Hva er din relasjon til personen med behov?</label>
+                                <label className="family-rel">Hva er din relasjon til personen med behov?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col>
                                 <DropdownList id="1"
                                               ref="familyRelation"
+                                              className="family-rel"
                                               options={dropdownContent.RELATIONS}
                                               labelField="relation"
                                               valueField="value"
@@ -146,7 +148,7 @@ export class RelationFormClass extends React.Component {
                 content = <componentClass>
                     <Row className="form-row">
                         <Col>
-                            <label>Hva er din relasjon til personen med behov?</label>
+                            <label className="other-rel">Hva er din relasjon til personen med behov?</label>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -154,6 +156,7 @@ export class RelationFormClass extends React.Component {
                             <FormControl
                                 type="text"
                                 ref="otherRelation"
+                                className="other-rel"
                                 pattern="[A-Za-zæøåÆØÅ]"
                                 placeholder="Relasjon"
                                 {...otherRelation}
@@ -175,11 +178,11 @@ export class RelationFormClass extends React.Component {
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
                     <form className="relation">
-                        <input type="radio" id="guardian-radio" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
+                        <input type="radio" id="guardian-radio" className="radio-Relation" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
                         <br/>
                         <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
                         <br/>
-                        <input type="radio" id="other-radio" name="radio-buttons" {...relation} value="other"  checked={relation.value=="other"}/>Annet
+                        <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation} value="other"  checked={relation.value=="other"}/>Annet
                     </form>
 
                     {content}

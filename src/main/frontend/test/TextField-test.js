@@ -7,7 +7,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import TextField from '../app/TextField.jsx';
+import TextField from '../app/unused/TextField.jsx';
 
 describe("Textfield", function() {
     it("should have a FormControl field", function() {

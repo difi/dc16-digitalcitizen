@@ -1,7 +1,6 @@
 import React from 'react';
 import NavigationButtons from './NavigationButtons.jsx';
 import $ from 'jquery'
-import TypeAhead from './AutoComplete';
 import {reduxForm} from 'redux-form';
 import RESTpaths from './static_data/RESTpaths.js';
 
@@ -10,16 +9,13 @@ var Col = require('react-bootstrap/lib/Col');
 require('!style!css!less!./Application.less');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
+import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 
 
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: this.props.fieldValues.doctor.name,
-            validForm: this.props.fieldValues.doctor.name,
-        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
@@ -41,9 +37,9 @@ export class GeneralPractitionerClass extends React.Component {
     }
 
     saveFieldValues() {
-        this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
+        //this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
         var data = {
-            doctor: {name: this.refs.doctorSelect.getFieldValue()}
+            doctor: {name: this.props.fields.doctorName.value}
         };
         this.props.saveValues(data);
         console.log(data);
@@ -56,7 +52,7 @@ export class GeneralPractitionerClass extends React.Component {
             cache: false,
             success: function (data) {
                 console.log(data);
-                this.props.fields.doctors.onChange(data.map(function(a) {return a.name;}));
+                this.props.fields.doctors.onChange(data);
                 this.forceUpdate();
             }.bind(this),
             error: function (xhr, status, err) {
@@ -68,7 +64,10 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-
+        console.log(doctorName.value);
+        if(doctors.value==undefined){
+            return null;
+        }
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
@@ -78,8 +77,8 @@ export class GeneralPractitionerClass extends React.Component {
                             <label className="genPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead className="genPract" array={doctors.value} ref="doctorSelect" placeholder="Skriv inn søkers fastlege"
-                                       value={doctorName.value} onChange={value=>doctorName.onChange(value)}/>
+                            <TypeAhead className="genPract" options={doctors.value} ref="doctorSelect" labelKey="name"
+                                {...doctorName} onInputChange={value=> doctorName.onChange(value)}/>
                         </Col>
                     </Row>
                 </div>
@@ -97,6 +96,13 @@ const GeneralPractitioner = reduxForm({
     form: 'application',
     fields: ["doctorName", "doctors"],
     destroyOnUnmount: false,
-}, null, null)(GeneralPractitionerClass);
+},  (state) => {
+    return {
+        initialValues: {
+            doctors: []
+
+        },
+    };
+})(GeneralPractitionerClass);
 
 export default GeneralPractitioner

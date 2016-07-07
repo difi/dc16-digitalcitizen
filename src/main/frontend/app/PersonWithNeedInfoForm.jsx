@@ -67,7 +67,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     render() {
         const {fields: {name, number, street, zipcode}} = this.props;
         var valid = name.value && number.value && street.value && zipcode.value && !number.error;
-        console.log(valid);
+        
         return (
             <form>
                 <div>
@@ -92,7 +92,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <AddressField className="adr" ref='addressfield' address={this.props.fieldValues.person.address}
+                                <AddressField store={this.props.store} className="adr" ref='addressfield' address={this.props.fieldValues.person.address}
                                               includeCountry={false}/>
                             </Col>
                         </Row>
