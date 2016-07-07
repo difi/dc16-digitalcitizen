@@ -50,11 +50,11 @@ export class SpecialNeedsClass extends React.Component {
 
         return (
             <div>
-                <label className="form-header">Har du noen spessielle behov?</label>
+                <label className="form-header">Utfyllende informasjon:  </label>
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Hva er grunnen til at du søker plass på sykehjem? </label>
+                            <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem? </label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -63,7 +63,7 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Har du noen medisinske behov vi burde vite om?</label>
+                            <label className="from-col-address"> Er det noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -73,8 +73,8 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address">Har du andre behov vi burde vite om? (Behov for tolk,
-                                hørselapparat e.l </label>
+                            <label className="from-col-address">Er det andre behov vi burde vite om? (Behov for tolk,
+                                hørselapparat e.l) </label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
