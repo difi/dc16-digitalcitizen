@@ -32,7 +32,7 @@ public class SubmitController {
         System.out.println("Submission is valid: " + submissionIsValid);
         // TODO: Add submission to database
         printSubmissionRequest(submission, request);
-        submissions.add(submission);
+        submissions.add(handleSubmissionFields(submission));
         // Return the id of the submission
         return Integer.toString(submissions.size() - 1);
     }
@@ -41,6 +41,14 @@ public class SubmitController {
         String s = "Submission received from: " + request.getRemoteAddr() + '\n' +
                 submission;
         System.out.println(s);
+    }
+
+
+    private Submission handleSubmissionFields(Submission submission) {
+        if(submission.getPerson().getPnr() != null && !submission.getPerson().getPnr().equals("")){
+            submission.getPerson().updateValuesByPnr();
+        }
+        return submission;
     }
 
     /**
