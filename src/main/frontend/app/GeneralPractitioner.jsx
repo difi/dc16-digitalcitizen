@@ -21,7 +21,6 @@ export class GeneralPractitionerClass extends React.Component {
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
         this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
-
     }
 
     handleClickBack() {
