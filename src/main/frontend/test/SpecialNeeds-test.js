@@ -22,7 +22,7 @@ var fieldValues = {
     guardianName: null,          //String
     typeOfRelation: null,        //String
     dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
+    dontGotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String

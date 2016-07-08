@@ -23,7 +23,7 @@ var fieldValues = {
     guardianName: null,          //String
     typeOfRelation: null,        //String
     dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
+    dontGotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String
@@ -94,6 +94,7 @@ describe("RelationForm", function() {
                 nameOfChild: "ss",
                 isDependent: false,
                 otherRelation: "sd"
+
             },
             fieldValues
         };
@@ -130,7 +131,11 @@ describe("RelationForm", function() {
                 typeOfRelation: "sibling",
                 nameOfChild: "ss",
                 isDependent: false,
-                otherRelation: "sd"
+                otherRelation: "sd",
+                guardianFor: {
+                    value: [{label: "", name: ""}],
+                    onChange: function onChange () {}
+                }
             },
             fieldValues
         };

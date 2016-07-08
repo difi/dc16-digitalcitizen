@@ -44,7 +44,7 @@ export class PersonWithNeedClass extends React.Component {
 
     saveFieldValues() {
         var data = {
-            gotPNRnumber: this.props.fields.checked.value,
+            dontGotPNRnumber: this.props.fields.checked.value,
             person: {
                 pnr: this.props.fields.pnr.value,
                 name: this.props.fields.name.value,

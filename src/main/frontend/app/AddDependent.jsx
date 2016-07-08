@@ -56,11 +56,12 @@ export class AddDependentClass extends React.Component {
         if (this.props.fieldValues.applyingForSelf) {
             (this.props.previousStep(1));
         }
-        else if (this.props.fieldValues.gotPNRnumber) {
-            (this.props.previousStep(5));
-        }
+
             else if(this.props.fieldValues.relation == "guardian"){
             this.props.previousStep(2);
+        }
+        else if (this.props.fieldValues.dontGotPNRnumber) {
+            (this.props.previousStep(5));
         }
         else {
             (this.props.previousStep(3));
