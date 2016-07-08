@@ -56,11 +56,12 @@ export class AddDependentClass extends React.Component {
         if (this.props.fieldValues.applyingForSelf) {
             (this.props.previousStep(1));
         }
-        else if (this.props.fieldValues.gotPNRnumber) {
-            (this.props.previousStep(5));
-        }
+
             else if(this.props.fieldValues.relation == "guardian"){
             this.props.previousStep(2);
+        }
+        else if (this.props.fieldValues.dontGotPNRnumber) {
+            (this.props.previousStep(5));
         }
         else {
             (this.props.previousStep(3));
@@ -174,7 +175,6 @@ export class AddDependentClass extends React.Component {
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
-      
         var valid=this.validation(1);
         for(var i=1; i<=numDep.value; i++){
             valid = this.validation(i) && valid
@@ -211,7 +211,7 @@ export class AddDependentClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     disabled={!valid}
-                    
+
                 />
             </div>
         );

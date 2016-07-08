@@ -28,41 +28,6 @@ var user = {
     submissionId: null
 };
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: user.pnr,                  // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            municipality: null,
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null            // String
-};
 
 
 export default class Application extends React.Component {
@@ -81,13 +46,7 @@ export default class Application extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
 
     }
-
-    onChildChange(others) {
-        this.setState({
-            prevStep: this.state.step,
-            step: this.state.step + step
-        })
-    }
+    
 
     saveValues(field_value) {
         this.setState({
