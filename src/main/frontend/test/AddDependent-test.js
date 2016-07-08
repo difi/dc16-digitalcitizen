@@ -1,7 +1,7 @@
 /**
  * Created by camp-vha on 06.07.2016.
  */
-/*
+
 import React from 'react';
 
 //Shallow renders only our component without touching the DOM.
@@ -71,4 +71,3 @@ describe("AddDependentClass", function() {
 
 
 });
-*/
