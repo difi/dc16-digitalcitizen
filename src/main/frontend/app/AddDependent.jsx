@@ -160,6 +160,7 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickForm2() {
+
         this.props.fields.form2.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
@@ -212,7 +213,7 @@ export class AddDependentClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     disabled={!valid}
-                     // TODO: update to !this.state.validform
+                    
                 />
             </div>
         );
