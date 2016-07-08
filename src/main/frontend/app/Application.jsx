@@ -28,7 +28,6 @@ var user = {
     submissionId: null
 };
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
-
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -65,13 +64,16 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
+
 export default class Application extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(props);
         this.state = {
             step: 1,
-            prevStep: 1
+            prevStep: 1,
+            fieldValues: props.fieldValues
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
@@ -88,9 +90,10 @@ export default class Application extends React.Component {
     }
 
     saveValues(field_value) {
-        fieldValues = assign({}, fieldValues, field_value);
-        console.log(fieldValues);
-        return fieldValues;
+        this.setState({
+            fieldValues: assign({}, this.state.fieldValues, field_value)})
+        console.log(this.props.fieldValues);
+        return this.state.fieldValues;
     }
     
     saveUserData(field_value){
@@ -120,7 +123,7 @@ export default class Application extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(fieldValues),
+            data: JSON.stringify(this.state.fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -133,9 +136,11 @@ export default class Application extends React.Component {
 
     render() {
 
+
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
-
+        var fieldValues=this.state.fieldValues;
+        console.log(fieldValues);
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
@@ -189,7 +194,7 @@ export default class Application extends React.Component {
             case 7:
                 content = < NeedsForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
+                    fieldValues={this.props.fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
