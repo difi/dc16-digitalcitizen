@@ -112,7 +112,7 @@ export function alphaNumericInString(str){
 
 export function email(str){
     if(str){
-        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s@_-]+/g, '');}
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.@_-]+/g, '');}
 }
 
 export function fieldIsEmpty(value) {
