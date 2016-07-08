@@ -51,23 +51,30 @@ var defaultProps = {
     fields: {
         form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
         form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-        form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'}
+        form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+        numDep: {value: 1},
+        displayButton: {value: 'block'}
+        //block: synes, none: ikke knapp
     },
     fieldValues
 };
 
-describe("AddDependentClass", function() {
+describe("AddDependent", function() {
     it('should have header classnames for HTML-elements', function () {
         const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);
     });
 
-    it('should have addDependent-button initially', function () {
+    it('should have div with ID=dep1', function () {
+        const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
+        expect (wrapper.find('#dep1')).to.have.length(1);
+    });
+
+    it('should have addDependent-button', function () {
         const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
         expect(wrapper.find('.addDepButton')).to.have.length(1);
     });
 
-    //TODO: Write a test for when the addDependent-button should not exist
-
+    //Enzyme does not support checking if the button is visible or not, so this will not be tested
 
 });
