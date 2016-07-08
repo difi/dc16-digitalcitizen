@@ -14,14 +14,14 @@ import java.util.Arrays;
 public class GuardianController {
 
     @CrossOrigin
-    @RequestMapping(value = "/api/Guardians", params = "loc", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/api/guardians", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ArrayList<String> getGuardiansByLocation(@RequestParam("loc") String loc) {
+    public ArrayList<String> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
         // TODO: Implement more efficient search
         ArrayList<String> retrievedGuardians = new ArrayList<>();
 
         for(Guardian guardian : TestData.GUARDIANS){
-            if(guardian.getPNR().equals(loc)){
+            if(guardian.getPNR().equals(pnr)){
                 retrievedGuardians = new ArrayList<>(Arrays.asList(guardian.getGuardianFor()));
             }
         }
