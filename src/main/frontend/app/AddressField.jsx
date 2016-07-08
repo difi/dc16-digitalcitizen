@@ -7,7 +7,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var ReactDOM = require('react-dom');
 import RESTpaths from './static_data/RESTpaths.js';
-
+import {checkPostCode} from './validation.js';
 import {onlyDigitsInString} from './validation.js'
 import {alphaNumericInString} from './validation.js'
 import {reduxForm} from 'redux-form';
@@ -38,7 +38,9 @@ var AddressField = React.createClass({
         }
     },
     handleChange: function (event) {
-        var zipcode = event.target.value;
+        console.log(event.target.value);
+
+        var zipcode = checkPostCode(event.target.value);
 
         if(!zipcode){
             return;
