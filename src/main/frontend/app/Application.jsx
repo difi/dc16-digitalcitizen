@@ -24,9 +24,45 @@ import SubmitSuccess from './SubmitPage';
 // "Signed in" user. Used for testing
 var user = {
     pnr: "01108019146",
+    name: "TestPerson1",
     submissionId: null
 };
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
+var fieldValues = {
+    // First form
+    applyingForSelf: null,    // Boolean
+    // Second form
+    relation: null,             // String
+    guardianName: null,          //String
+    typeOfRelation: null,        //String
+    dependent: null,          // Boolean
+    gotPNRnumber: false,        //Boolean
+    // Third form
+    person: {                   // Person object
+        pnr: user.pnr,                  // String
+        name: null,                 // String
+        address: {                  // Address Object
+            country: "NO",              // String
+            municipality: null,
+            streetAddress: null,        // String
+            zipcode: null,              // String
+            postal: null                // String
+        },
+        telephone: null             // String
+    },
+    // Fourth form
+    doctor: {                   // Doctor Object (add more fields?)
+        name: null                  // String
+    },
+    // Fifth form
+    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: null,         // String
+    // Seventh form
+    medicalNeeds: null,         // String
+    conditionChanges: null,     // String
+    otherNeeds: null            // String
+};
 
 
 export default class Application extends React.Component {
@@ -187,6 +223,7 @@ export default class Application extends React.Component {
 
         return (
             <div>
+                <p> Logget inn som: {user.name} </p>
                 {header}
                 <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
