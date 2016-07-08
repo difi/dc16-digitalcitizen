@@ -39,14 +39,19 @@ export class PersonWithNeedClass extends React.Component {
         } else {
             console.log("State 6");
             (this.props.nextStep(6));
+
         }
     }
 
     saveFieldValues() {
+
+        var pnr = this.props.fields.pnr.value;
+        if(this.props.fields.checked.value){pnr = null;}
+
         var data = {
             dontGotPNRnumber: this.props.fields.checked.value,
             person: {
-                pnr: this.props.fields.pnr.value,
+                pnr: pnr,
                 name: this.props.fields.name.value,
                 address: this.props.fieldValues.person.address,
                 telephone: this.props.fieldValues.person.telephone
