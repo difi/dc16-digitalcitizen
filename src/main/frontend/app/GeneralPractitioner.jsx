@@ -77,7 +77,7 @@ export class GeneralPractitionerClass extends React.Component {
                             <label className="genPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead className="genPract" options={doctors.value} ref="doctorSelect" labelKey="name"
+                            <TypeAhead options={doctors.value} ref="doctorSelect" labelKey="name"
                                 {...doctorName} onInputChange={value=> doctorName.onChange(value)}/>
                         </Col>
                     </Row>
