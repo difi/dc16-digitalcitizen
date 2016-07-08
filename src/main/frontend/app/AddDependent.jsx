@@ -176,8 +176,8 @@ export class AddDependentClass extends React.Component {
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
-        this.validation(1);
-        var valid=true;
+
+        var valid=this.validation(1);
         for(var i=1; i<=numDep.value; i++){
             valid = this.validation(i) && valid
         }
@@ -213,7 +213,7 @@ export class AddDependentClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     disabled={!valid}
-                    
+
                 />
             </div>
         );

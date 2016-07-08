@@ -12,13 +12,39 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
+import $ from 'jquery'
+import RESTpaths from './static_data/RESTpaths.js';
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
+        this.getGuardianFor = this.getGuardianFor.bind(this);
+        this.getGuardianFor();
     }
+
+
+    getGuardianFor() {
+        $.ajax({
+            url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + "01108019146",
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+
+                data = data.map(name => {
+                    return {value: name, name: name}
+                });
+                data.unshift({value: 0, name: "Velg..."});
+                this.props.fields.guardianFor.onChange(data);
+                this.forceUpdate();
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
 
     handleClickBack() {
         console.log("State 1");
@@ -72,23 +98,23 @@ export class RelationFormClass extends React.Component {
         }
 
         /*
-        if (relation.value == "guardian") {
-            isDependent.onChange(true);
-        }
-        var data = {
-            relation: relation.value,
-            typeOfRelation: typeOfRelation.value,
-            nameOfChild: nameOfChild.value,
-            otherRelation: otherRelation.value,
-            dependent: isDependent.value,
-        }*/
+         if (relation.value == "guardian") {
+         isDependent.onChange(true);
+         }
+         var data = {
+         relation: relation.value,
+         typeOfRelation: typeOfRelation.value,
+         nameOfChild: nameOfChild.value,
+         otherRelation: otherRelation.value,
+         dependent: isDependent.value,
+         }*/
 
         this.props.saveValues(data);
         console.log(data);
     }
 
     render() {
-        const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation}} = this.props;
+        const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
         console.log(relation.value);
@@ -106,12 +132,12 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
-                                              options={[{value: 0,name: "Velg..."},{value: "Ola", name: "Ola"}, {value: "Kari",name: "Kari"}]}
+                                              options={guardianFor.value}
                                               labelField="name"
                                               valueField="value"
                                               defaultValue=""
-                                              {...nameOfChild}
-                                              //value={nameOfChild.value}
+                                    {...nameOfChild}
+                                    //value={nameOfChild.value}
                                               onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
                             </Col>
@@ -134,8 +160,8 @@ export class RelationFormClass extends React.Component {
                                               options={dropdownContent.RELATIONS}
                                               labelField="relation"
                                               valueField="value"
-                                              {...typeOfRelation}
-                                              //value={typeOfRelation.value}
+                                    {...typeOfRelation}
+                                    //value={typeOfRelation.value}
                                               onChange={change => typeOfRelation.onChange(change.newValue)}/>
                             </Col>
                         </Row>
@@ -180,11 +206,15 @@ export class RelationFormClass extends React.Component {
                 <label className="form-header">Hva er din relasjon til den som søker?</label>
                 <div className="form-container">
                     <form className="relation">
-                        <input type="radio" id="guardian-radio" className="radio-Relation" name="radio-buttons" {...relation} value="guardian" checked={relation.value=="guardian"} />Jeg er verge for den jeg søker på vegne av
+                        <input type="radio" id="guardian-radio" className="radio-Relation"
+                               name="radio-buttons" {...relation} value="guardian"
+                               checked={relation.value=="guardian"}/>Jeg er verge for den jeg søker på vegne av
                         <br/>
-                        <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"  checked={relation.value=="family"} />Jeg er i familie med den jeg søker på vegne av
+                        <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"
+                               checked={relation.value=="family"}/>Jeg er i familie med den jeg søker på vegne av
                         <br/>
-                        <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation} value="other"  checked={relation.value=="other"}/>Annet
+                        <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation}
+                               value="other" checked={relation.value=="other"}/>Annet
                     </form>
 
                     {content}
@@ -203,7 +233,7 @@ export class RelationFormClass extends React.Component {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation"],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation", "guardianFor"],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 
