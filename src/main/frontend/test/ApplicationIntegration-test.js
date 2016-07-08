@@ -31,7 +31,6 @@ import {createStore, combineReducers} from 'redux';
 var assign = require('object-assign');
 
 
-
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -135,7 +134,7 @@ describe("Application", () => {
         thirdPage = subject.find(PersonWithNeedForm);
         expect(thirdPage.find('.pnrCheck')).to.have.length(1);
         thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
-        console.log(thirdPage.props());
+        //console.log(thirdPage.props());
         thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
         thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
         nextButton = subject.find(NavigationButtons).find('.next-btn');
@@ -242,19 +241,19 @@ describe("Application", () => {
 
     });
 
-    it("Eight page sends you back to correct step", () => {
+    it("Eight page sends you back to step 7", () => {
         subject.setState({
             step: 8
         });
         var eightPage = subject.find(SpecialNeeds);
         var backButton = eightPage.find(NavigationButtons).find('.back-btn');
         backButton.simulate('click');
-        
+
         expect(subject.state().step).to.equal(7);
 
     });
 
-    it("Seventh page sends you back to correct step", () => {
+    it("Seventh page sends you back to step 6", () => {
         subject.setState({
             step: 7
         });
@@ -266,33 +265,154 @@ describe("Application", () => {
 
     });
 
-    it("Sixth page sends you back to correct step", () => {
+    it("Sixth page sends you back to step 1", () => {
         var store = createStore(combineReducers({form: formReducer}));
 
         const props = {
             store,
             fieldValues
-
         };
         const subject = mount(<Application {...props}/>);
 
         subject.setState({
-            step: 6,
-
+            step: 6
         });
         var sixthPage = subject.find(AddDependent);
         var backButton = sixthPage.find(NavigationButtons).find('.back-btn');
-        console.log(subject.props());
 
-        subject.setState({fieldValues:  assign({}, subject.state(fieldValues), {applyingForSelf: true})});
+        subject.setState({fieldValues: assign({}, subject.state(fieldValues), {applyingForSelf: true})});
         backButton.simulate('click');
         expect(subject.state().step).to.equal(1);
-
-        subject.setState({fieldValues:  assign({}, subject.state(fieldValues), {applyingForSelf: false})});
-        subject.setState({fieldValues:  assign({}, subject.state(fieldValues), {gotPNRnumber: true})});
-        backButton.simulate('click');
-        expect(subject.state().step).to.equal(5);
-
     });
 
+    it("Sixth page sends you back to step 2", () => {
+        var store = createStore(combineReducers({form: formReducer}));
+
+        const props = {
+            store,
+            fieldValues
+        };
+        const subject = mount(<Application {...props}/>);
+
+        subject.setState({
+            step: 6
+        });
+        var sixthPage = subject.find(AddDependent);
+        var backButton = sixthPage.find(NavigationButtons).find('.back-btn');
+
+        subject.setState({fieldValues: assign({}, subject.state(fieldValues), {relation: "guardian"})});
+        backButton.simulate('click');
+        expect(subject.state().step).to.equal(2);
+    });
+
+    it("Sixth page sends you back to step 5", () => {
+        var store = createStore(combineReducers({form: formReducer}));
+
+        const props = {
+            store,
+            fieldValues
+        };
+        const subject = mount(<Application {...props}/>);
+
+        subject.setState({
+            step: 6
+        });
+        var sixthPage = subject.find(AddDependent);
+        var backButton = sixthPage.find(NavigationButtons).find('.back-btn');
+        subject.setState({
+            fieldValues: assign({}, subject.state(fieldValues),
+                {
+                    person: {
+                        address: {
+                            streetAddress: "testveien 2"
+                        },
+                        name: "Erlend"
+                    },
+                    gotPNRnumber: true
+                }
+            )
+        });
+
+
+        backButton.simulate('click');
+        expect(subject.state().step).to.equal(5);
+    });
+
+    it("Sixth page sends you back to step 3", () => {
+        var store = createStore(combineReducers({form: formReducer}));
+
+        const props = {
+            store,
+            fieldValues
+        };
+        const subject = mount(<Application {...props}/>);
+
+        subject.setState({
+            step: 6
+        });
+        var sixthPage = subject.find(AddDependent);
+        var backButton = sixthPage.find(NavigationButtons).find('.back-btn');
+
+        subject.setState({
+            fieldValues: assign({}, subject.state(fieldValues),
+                {
+                    person: {
+                        address: {
+                            streetAddress: "testveien 2"
+                        },
+                        name: "Erlend"
+                    },
+                    gotPNRnumber: false,
+                    applyingForSelf: false,
+                    relation: "other"
+                }
+            )
+        });
+        backButton.simulate('click');
+        expect(subject.state().step).to.equal(3);
+    });
+
+    it("Fifth page sends you back to step 4", () => {
+        subject.setState({
+            step: 5
+        });
+        var fifthPage = subject.find(GeneralPractitioner);
+        var backButton = fifthPage.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
+
+        expect(subject.state().step).to.equal(4);
+    });
+
+    it("Fourth page sends you back to step 3", () => {
+        subject.setState({
+            step: 4
+        });
+        var fourthPage = subject.find(PersonWithNeedInfoForm);
+        var backButton = fourthPage.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
+
+        expect(subject.state().step).to.equal(3);
+    });
+
+    it("Third page sends you back to step 2", () => {
+        subject.setState({
+            step: 3
+        });
+        var fourthPage = subject.find(PersonWithNeedForm);
+        var backButton = fourthPage.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
+
+        expect(subject.state().step).to.equal(2);
+    });
+
+    it("Second page sends you back to step 1", () => {
+        subject.setState({
+            step: 2
+        });
+        var fourthPage = subject.find(RelationForm);
+        var backButton = fourthPage.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
+
+        expect(subject.state().step).to.equal(1);
+    });
 });
