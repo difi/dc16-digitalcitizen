@@ -213,7 +213,7 @@ export class AddDependentClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     disabled={!valid}
-                     // TODO: update to !this.state.validform
+                    
                 />
             </div>
         );
