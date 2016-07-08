@@ -1,18 +1,18 @@
 var path = require('path');
-var webpackConfig = require('./webpack.config.js');
+var webpackConfig = require('./webpack.test.config.es6');
 webpackConfig.entry = {};
 module.exports = function(config) {
     config.set({
         basePath: '', //The root path location that will be used to resolve all relative paths defined in files and exclude. What we have written here is the default value of basePath.
         frameworks: ['jasmine'], //use jasmine framework to test
         files: [ //List of files/patterns to load in the browser.
-            'test/*.js',
+            'test/tests.webpack.js',
         ],
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/app/*.js': [ 'webpack', 'coverage','sourcemap'],
-            '**/test/*.js': ['webpack', 'sourcemap']
+            '**/app/*.js': [ 'webpack', 'coverage','sourcemap', 'sourcemap-writer'],
+            '**/test/tests.webpack.js': ['webpack', 'sourcemap']
         },
 
         webpack: webpackConfig,
@@ -34,11 +34,19 @@ module.exports = function(config) {
         autoWatch: true,  //Enable watching files and executing the tests whenever one of these files changes.
         browsers: ['Chrome'], // A list of browsers to launch and capture. When Karma starts up, it will also start up each browser which is placed within this setting.
         singleRun: false,
-        coverageReporter: {
-            type: 'html',
-            dir: 'coverage/',
-            file : 'coverage.txt',
-
-        }
+        coverageReporter: { // important!
+            type: 'json',
+            subdir: '.',
+            file: 'coverage-final.json'
+        },
+        plugins: [
+            'karma-chrome-launcher',
+            'karma-webpack',
+            'karma-mocha',
+            'karma-jasmine',
+            'karma-sourcemap-loader',
+            'karma-sourcemap-writer', // important!
+            'karma-coverage'          // important!
+        ]
     })
 };
