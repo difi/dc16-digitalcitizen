@@ -56,7 +56,11 @@ var defaultProps = {
         typeOfRelation: "sibling",
         nameOfChild: "ss",
         isDependent: false,
-        otherRelation: "sd"
+        otherRelation: "sd",
+        guardianFor: {
+            value: [{label: "", name: ""}],
+            onChange: function onChange () {}
+        }
     },
     fieldValues
 };
@@ -93,7 +97,11 @@ describe("RelationForm", function() {
                 typeOfRelation: "sibling",
                 nameOfChild: "ss",
                 isDependent: false,
-                otherRelation: "sd"
+                otherRelation: "sd",
+                guardianFor: {
+                    value: [{label: "", name: ""}],
+                    onChange: function onChange () {}
+                }
 
             },
             fieldValues
@@ -113,7 +121,11 @@ describe("RelationForm", function() {
                 typeOfRelation: "sibling",
                 nameOfChild: "ss",
                 isDependent: false,
-                otherRelation: "sd"
+                otherRelation: "sd",
+                guardianFor: {
+                    value: [{label: "", name: ""}],
+                    onChange: function onChange () {}
+                }
             },
             fieldValues
         };
