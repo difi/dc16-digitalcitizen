@@ -24,10 +24,10 @@ import SubmitSuccess from './SubmitPage';
 // "Signed in" user. Used for testing
 var user = {
     pnr: "01108019146",
+    name: "TestPerson1",
     submissionId: null
 };
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
-
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -39,7 +39,7 @@ var fieldValues = {
     gotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
-        pnr: null,                  // String
+        pnr: user.pnr,                  // String
         name: null,                 // String
         address: {                  // Address Object
             country: "NO",              // String
@@ -64,13 +64,16 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
+
 export default class Application extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(props);
         this.state = {
             step: 1,
-            prevStep: 1
+            prevStep: 1,
+            fieldValues: props.fieldValues
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
@@ -87,9 +90,10 @@ export default class Application extends React.Component {
     }
 
     saveValues(field_value) {
-        fieldValues = assign({}, fieldValues, field_value);
-        console.log(fieldValues);
-        return fieldValues;
+        this.setState({
+            fieldValues: assign({}, this.state.fieldValues, field_value)})
+        console.log(this.props.fieldValues);
+        return this.state.fieldValues;
     }
     
     saveUserData(field_value){
@@ -119,7 +123,7 @@ export default class Application extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(fieldValues),
+            data: JSON.stringify(this.state.fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -132,9 +136,11 @@ export default class Application extends React.Component {
 
     render() {
 
+
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
-
+        var fieldValues=this.state.fieldValues;
+        console.log(fieldValues);
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
@@ -188,7 +194,7 @@ export default class Application extends React.Component {
             case 7:
                 content = < NeedsForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
+                    fieldValues={this.props.fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -217,6 +223,7 @@ export default class Application extends React.Component {
 
         return (
             <div>
+                <p> Logget inn som: {user.name} </p>
                 {header}
                 <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
