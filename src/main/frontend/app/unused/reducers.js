@@ -29,7 +29,9 @@ const reducers = combineReducers({
             number: value=>formatPhone(value),
             zipcode: value=>checkPostCode(value),
             street: value=>alphaNumericInString(value),
-            doctorName: value=>onlyLettersInString(value)
+            doctorName: value=>onlyLettersInString(value),
+            otherRelation: value=>alphaNumericInString(value)
+
         }
     })
 });
