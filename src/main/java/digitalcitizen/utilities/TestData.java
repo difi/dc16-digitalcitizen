@@ -3,6 +3,7 @@ package digitalcitizen.utilities;
 import digitalcitizen.models.Address;
 import digitalcitizen.models.Doctor;
 import digitalcitizen.models.Person;
+import digitalcitizen.models.Guardian;
 
 /**
  * Created by camp-shj on 01.07.2016.
@@ -28,5 +29,10 @@ public class TestData {
             new Person("29109632323", "TestPerson5", new Address("Oslo", "NO", "Oslo", "testveien 5", "0001"), "99999994"),
             new Person("06126620649", "TestPerson6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995"),
             new Person("27072118958", "TestPerson7", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996"),
+    };
+
+    public static final Guardian[] GUARDIANS = {
+            new Guardian("01108019146", new String[] {"Ola Nordmann", "Kari Nordmann"}),
+            new Guardian("15028047425", new String[] {"Kari Nordmann"})
     };
 }

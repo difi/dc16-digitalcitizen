@@ -49,7 +49,7 @@ export class PersonWithNeedClass extends React.Component {
         if(this.props.fields.checked.value){pnr = null;}
 
         var data = {
-            gotPNRnumber: this.props.fields.checked.value,
+            dontGotPNRnumber: this.props.fields.checked.value,
             person: {
                 pnr: pnr,
                 name: this.props.fields.name.value,

@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --hot --inline --content-base resources/static/",
     "eslint": "eslint app",
-    "test": "karma start --single-run --browsers Chrome",
+    "test": "karma start karma.conf.js --single-run --browsers Chrome",
     "test:watch": "./node_modules/karma/bin/karma start"
   },
   "devDependencies": {
