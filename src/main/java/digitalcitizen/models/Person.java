@@ -12,6 +12,15 @@ public class Person {
     private Address address;
     private String telephone;
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    private String mail ;
     public Person() {
     }
 
@@ -20,6 +29,13 @@ public class Person {
         this.name = name;
         this.address = address;
         this.telephone = telephone;
+    }
+    public Person(String pnr, String name, Address address, String telephone, String mail) {
+        this.pnr = pnr;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.mail=mail;
     }
 
     public String getPnr() {

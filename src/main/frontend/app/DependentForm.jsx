@@ -49,7 +49,7 @@ class DependentForm extends React.Component {
                             <label className="fName">Fornavn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="fName" ref="firstName" type="text" placeholder="Fornavn" {...firstName}/>
+                            <FormControl className="fName" ref="firstName" type="text" placeholder="Fornavn" disabled={this.props.autoFilled} {...firstName}/>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -57,7 +57,7 @@ class DependentForm extends React.Component {
                             <label className="eName">Etternavn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="eName" ref="lastName" type="text" placeholder="Etternavn" {...lastName}/>
+                            <FormControl className="eName" ref="lastName" type="text" placeholder="Etternavn" disabled={this.props.autoFilled} {...lastName}/>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -65,7 +65,7 @@ class DependentForm extends React.Component {
                             <label className="tlf">Telefon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="tlf" ref="phone" type="text" placeholder="Telefonnr" {...phone}/>
+                            <FormControl className="tlf" ref="phone" type="text" placeholder="Telefonnr" disabled={this.props.autoFilled} {...phone}/>
                             {phone.touched && phone.error && <div>{phone.error}</div>}
                         </Col>
                     </Row>
@@ -74,7 +74,7 @@ class DependentForm extends React.Component {
                             <label className="mail">E-post</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="mail" ref="mail" type="text" placeholder="E-post" {...mail}/>
+                            <FormControl className="mail" ref="mail" type="text" placeholder="E-post" disabled={this.props.autoFilled} {...mail}/>
                             {mail.touched && mail.error && <div>{mail.error}</div>}
                         </Col>
                     </Row>

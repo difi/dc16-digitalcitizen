@@ -6,13 +6,13 @@ import NavigationButtons from './NavigationButtons.jsx';
 import validate from './DependentValidation';
 
 require('!style!css!less!./Application.less');
-
+import $ from 'jquery'
 var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
-
+import RESTpaths from './static_data/RESTpaths.js';
 const fields = [
 
     'form1.firstName',
@@ -40,8 +40,8 @@ var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
 
 export class AddDependentClass extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleClick = this.handleClick.bind(this);
         this.handleClickForm2 = this.handleClickForm2.bind(this);
         this.handleClickForm3 = this.handleClickForm3.bind(this);
@@ -49,6 +49,38 @@ export class AddDependentClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
+        this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
+        if(this.props.fieldValues.dependent){
+        this.getPersonToBeDependent();}
+    }
+
+
+    getPersonToBeDependent(){
+
+        $.ajax({
+            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + '06126620649',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                console.log(data);
+                //TODO: FirstName and LastName may cause trouble. Should be split up at backend?
+                var name = data.name.split(' ');
+                console.log(name);
+                var firstName = name[0];
+                var lastName = name[1];
+                this.props.fields.form1.firstName.onChange(firstName);
+                this.props.fields.form1.lastName.onChange(lastName);
+                //TODO: This must be updated to "verge" or whatever relation the applicant has stated
+                // this.props.fields.form1.relation.onChange();
+                this.props.fields.form1.phone.onChange(data.telephone);
+                this.props.fields.form1.mail.onChange(data.mail);
+                
+                this.forceUpdate();
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
     }
 
     handleClickBack() {
@@ -174,6 +206,7 @@ export class AddDependentClass extends React.Component {
     }
 
     render() {
+
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
@@ -188,7 +221,7 @@ export class AddDependentClass extends React.Component {
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
-                            <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1} />
+                            <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}  autoFilled={this.props.fieldValues.dependent}/>
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
