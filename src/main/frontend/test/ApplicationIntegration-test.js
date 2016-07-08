@@ -103,7 +103,7 @@ describe("Application", () => {
             step: 2
         });
         var secondPage = subject.find(RelationForm);
-        var nextButton = secondPage.find(RelationForm).find('.next-btn');
+        var nextButton = secondPage.find('.next-btn');
         nextButton.simulate('click');
         //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(2);
