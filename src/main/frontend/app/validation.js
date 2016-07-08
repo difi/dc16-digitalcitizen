@@ -95,7 +95,7 @@ export function CheckPostCode(postCode) {
 export function onlyLettersInString(str){
     if(str){
         str = str.toString();
-    return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
+    return str.replace(/[^a-zA-ZæøåÆØÅ\-\\s]+/g, '');}
 }
 
 export function onlyDigitsInString(str){
