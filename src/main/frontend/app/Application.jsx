@@ -78,13 +78,7 @@ export default class Application extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
 
     }
-
-    onChildChange(others) {
-        this.setState({
-            prevStep: this.state.step,
-            step: this.state.step + step
-        })
-    }
+    
 
     saveValues(field_value) {
         fieldValues = assign({}, fieldValues, field_value);
