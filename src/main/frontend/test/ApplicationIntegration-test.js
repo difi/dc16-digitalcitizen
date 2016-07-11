@@ -163,10 +163,12 @@ describe("Application", () => {
     });
 
     it("fifth page forwards you to correct step", () => {
+    
         subject.setState({
             step: 5
         });
         var fifthPage = subject.find(GeneralPractitioner);
+        expect(fifthPage).to.have.length(1);
         var nextButton = fifthPage.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         //Button shouldnt be clickable before something is entered
