@@ -79,4 +79,8 @@ describe("PersonWithNeedClass", function() {
         expect (wrapper.find('.name')).to.have.length(2);
     });
 
+    it('in case checkbox for no pnr is checked, grey out pnr text field', function(){
+
+    });
+
 });

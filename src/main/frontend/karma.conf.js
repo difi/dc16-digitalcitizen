@@ -11,7 +11,7 @@ module.exports = function(config) {
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/app/*.js': [ 'webpack', 'coverage','sourcemap'],
+            '**/app/*.js': [ 'webpack', 'sourcemap'],
             '**/test/*.js': ['webpack', 'sourcemap']
         },
 
@@ -27,7 +27,7 @@ module.exports = function(config) {
                 presets: ['react']
             }
         },
-        reporters: ['coverage', 'progress' ], //Progress will show the number of tests executed, skipped and total.
+        reporters: [ 'progress' ], //Progress will show the number of tests executed, skipped and total.
         port: 9876, // The port where the web server will be listening.
         colors: true, //Enable colors in the output (reporters and logs).
         logLevel: config.LOG_INFO, //This is the default loglevel. Other possible values: config.LOG_DISABLE, config.LOG_ERROR, config.LOG_WARN, config.LOG_INFO, config.LOG_DEBUG
