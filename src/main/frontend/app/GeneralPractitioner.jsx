@@ -95,14 +95,7 @@ export class GeneralPractitionerClass extends React.Component {
 const GeneralPractitioner = reduxForm({
     form: 'application',
     fields: ["doctorName", "doctors"],
-    destroyOnUnmount: false,
-},  (state) => {
-    return {
-        initialValues: {
-            doctors: []
-
-        },
-    };
+    destroyOnUnmount: false
 })(GeneralPractitionerClass);
 
 export default GeneralPractitioner

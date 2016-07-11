@@ -74,8 +74,6 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClick() {
-
-        console.log(this.props.fields.numDep.value);
         if (this.props.fields.numDep.value < 3) {
 
             if (this.props.fields.numDep.value == 2) {
@@ -177,7 +175,6 @@ export class AddDependentClass extends React.Component {
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
-
         var valid=this.validation(1);
         for(var i=1; i<=numDep.value; i++){
             valid = this.validation(i) && valid
