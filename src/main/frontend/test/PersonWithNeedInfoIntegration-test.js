@@ -7,7 +7,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import PersonWithNeedInfo from '../app/PersonWithNeedInfoForm';
+import PersonWithNeedInfo from '../app/FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
