@@ -47,7 +47,7 @@ export default class Application extends React.Component {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)})
         console.log(this.props.fieldValues);
-        return this.state.fieldValues;
+        return assign({}, this.state.fieldValues, field_value)
     }
 
 
