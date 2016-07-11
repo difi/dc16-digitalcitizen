@@ -21,12 +21,6 @@ import NeedsForm from'./NeedsForm';
 import AddDependent from './AddDependent';
 import SubmitSuccess from './SubmitPage';
 
-// "Signed in" user. Used for testing
-var user = {
-    pnr: "01108019146",
-    name: "TestPerson1",
-    submissionId: null
-};
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 
@@ -38,7 +32,8 @@ export default class Application extends React.Component {
         this.state = {
             step: 1,
             prevStep: 1,
-            fieldValues: props.fieldValues
+            fieldValues: props.fieldValues,
+            userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
@@ -52,13 +47,14 @@ export default class Application extends React.Component {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)})
         console.log(this.props.fieldValues);
-        return this.state.fieldValues;
+        return assign({}, this.state.fieldValues, field_value)
     }
-    
-    saveUserData(field_value){
-        user = assign({}, user, field_value);
-        console.log(user);
-        return user;
+
+
+    saveUserData(field_value) {
+        this.setState({
+            userData: assign({}, this.state.userData, field_value)});
+        return this.state.userData;
     }
 
     previousStep(step) {
@@ -99,6 +95,7 @@ export default class Application extends React.Component {
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
         var fieldValues=this.state.fieldValues;
+        var userData = this.state.userData;
         console.log(fieldValues);
         switch (this.state.step) {
             case 1:
@@ -176,13 +173,13 @@ export default class Application extends React.Component {
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    userData={user}
+                    userData={userData}
                     submitRegistration={this.handleSubmit}/>;
         }
 
         return (
             <div>
-                <p> Logget inn som: {user.name} </p>
+                <p> Logget inn som: {userData.name} </p>
                 {header}
                 <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
