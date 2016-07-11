@@ -42,7 +42,7 @@ export default class WhosSearching extends React.Component {
     render() {
         return (
             <componentClass>
-                <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
+                <label className="form-header">Søker du sykehjemsplass for deg selv??</label>
                 <div className="form-container">
                     <Row>
                         <Col>

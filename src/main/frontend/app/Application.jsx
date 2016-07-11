@@ -21,56 +21,19 @@ import NeedsForm from'./NeedsForm';
 import AddDependent from './AddDependent';
 import SubmitSuccess from './SubmitPage';
 
-// "Signed in" user. Used for testing
-var user = {
-    pnr: "01019011111",
-    submissionId: null
-};
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: null,                  // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            municipality: null,
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null            // String
-};
 
 export default class Application extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(props);
         this.state = {
             step: 1,
-            prevStep: 1
+            prevStep: 1,
+            fieldValues: props.fieldValues,
+            userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
@@ -79,23 +42,19 @@ export default class Application extends React.Component {
 
     }
 
-    onChildChange(others) {
-        this.setState({
-            prevStep: this.state.step,
-            step: this.state.step + step
-        })
-    }
 
     saveValues(field_value) {
-        fieldValues = assign({}, fieldValues, field_value);
-        console.log(fieldValues);
-        return fieldValues;
+        this.setState({
+            fieldValues: assign({}, this.state.fieldValues, field_value)})
+        console.log(this.props.fieldValues);
+        return assign({}, this.state.fieldValues, field_value)
     }
-    
-    saveUserData(field_value){
-        user = assign({}, user, field_value);
-        console.log(user);
-        return user;
+
+
+    saveUserData(field_value) {
+        this.setState({
+            userData: assign({}, this.state.userData, field_value)});
+        return this.state.userData;
     }
 
     previousStep(step) {
@@ -119,7 +78,7 @@ export default class Application extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(fieldValues),
+            data: JSON.stringify(this.state.fieldValues),
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -132,9 +91,12 @@ export default class Application extends React.Component {
 
     render() {
 
+
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
-
+        var fieldValues=this.state.fieldValues;
+        var userData = this.state.userData;
+        console.log(userData);
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
@@ -188,7 +150,7 @@ export default class Application extends React.Component {
             case 7:
                 content = < NeedsForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
+                    fieldValues={this.props.fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -211,20 +173,20 @@ export default class Application extends React.Component {
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    userData={user}
+                    userData={userData}
                     submitRegistration={this.handleSubmit}/>;
         }
 
         return (
             <div>
+                <p> Logget inn som: {userData.name} </p>
                 {header}
                 <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
-                {content}
+                        {content}
                     </Col>
-            </Col>
+                </Col>
             </div>
         )
     }
 }
-
