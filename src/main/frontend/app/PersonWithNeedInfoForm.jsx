@@ -103,7 +103,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                             <Col sm={8} md={8}>
                                 <FormControl
                                     type="numeric"
-                                    className="tlf"
+                                    className="tlfFrom"
                                     ref="phone"
                                     placeholder="Telefonnr"
                                     {...number}
@@ -137,7 +137,7 @@ const validate = values => {
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
     return errors;
-}
+};
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({

@@ -59,7 +59,7 @@ var defaultProps = {
     fieldValues
 };
 
-describe("AddDependent", function() {
+describe("AddDependentClass", function() {
     it('should have header classnames for HTML-elements', function () {
         const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);

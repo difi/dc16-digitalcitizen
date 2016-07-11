@@ -19,7 +19,7 @@ var Button = require('react-bootstrap/lib/Button');
 import { reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 
-describe("PersonWithNeedForm", () => {
+describe("Integration of PersonWithNeedForm", () => {
     let store = null;
     let subject = null;
 
