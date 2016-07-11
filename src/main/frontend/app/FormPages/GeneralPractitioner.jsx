@@ -1,15 +1,15 @@
 import React from 'react';
-import NavigationButtons from './NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 import $ from 'jquery'
 import {reduxForm} from 'redux-form';
-import RESTpaths from './static_data/RESTpaths.js';
+import RESTpaths from '../static_data/RESTpaths.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-require('!style!css!less!./Application.less');
+require('!style!css!less!../Application.less');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
+import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {

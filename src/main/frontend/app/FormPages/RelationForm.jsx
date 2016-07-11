@@ -1,10 +1,10 @@
 import React from 'react';
-import DropdownList from './DropdownList.jsx';
-import NavigationButtons from './NavigationButtons.jsx';
+import DropdownList from './Components/DropdownList.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
-import dropdownContent from './static_data/dropdown-list-content.js';
+import dropdownContent from '../static_data/dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -13,7 +13,7 @@ var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 import $ from 'jquery'
-import RESTpaths from './static_data/RESTpaths.js';
+import RESTpaths from '../static_data/RESTpaths.js';
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
