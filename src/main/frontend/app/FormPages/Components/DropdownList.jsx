@@ -1,6 +1,6 @@
 import React from 'react';
 var ReactDOM = require('react-dom');
-require('!style!css!less!./Application.less');
+require('!style!css!less!../../Application.less');
 
 var DropdownList = React.createClass({
 
