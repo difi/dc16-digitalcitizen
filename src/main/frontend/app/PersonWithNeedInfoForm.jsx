@@ -18,7 +18,6 @@ import {onlyLettersInString} from "./validation.js";
 import {onlyDigitsInString} from './validation.js'
 import {alphaNumericInString} from './validation.js'
 
-
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
         super(props);
