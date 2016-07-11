@@ -67,7 +67,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr");
-       
+        console.log(this.props.fieldValues.person);
         return (
             <form>
                 <div>

@@ -16,13 +16,14 @@ public class DependentController {
     @RequestMapping(value = "/api/dependent", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Person getPersonasDependent(@RequestParam("pnr") String pnr) {
-        // TODO: Implement more efficient search
-        Person retrievedPerson = new Person();
+
+        return TestData.PERSONS.stream().filter(p->p.getPnr().equals(pnr)).findFirst().get();
+        /*Person retrievedPerson = new Person();
         for(Person p : TestData.PERSONS){
             if(p.getPnr().equals(pnr)){
                 retrievedPerson = p;
             }
         }
-        return retrievedPerson;
+        return retrievedPerson;*/
     }
 }

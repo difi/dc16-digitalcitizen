@@ -61,11 +61,8 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-        console.log(doctorName.value);
-      
-        if(doctors.value==undefined){
-            return null;
-        }
+        console.log(doctors.value);
+
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
@@ -75,7 +72,7 @@ export class GeneralPractitionerClass extends React.Component {
                             <label className="genPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead options={doctors.value} ref="doctorSelect" labelKey="name"
+                            <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect" labelKey="name"
                                 selected={doctorName.value? [{name: doctorName.value}]: []} onInputChange={value=> doctorName.onChange(value)}/>
                         </Col>
                     </Row>
