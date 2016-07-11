@@ -93,6 +93,9 @@ export class RelationFormClass extends React.Component {
                 dependent: true,
                 person: {
                     name: nameOfChild.value,
+                    address: this.props.fieldValues.person.address,
+                    telephone: this.props.fieldValues.person.telephone
+
                 }
 
             };

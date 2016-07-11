@@ -46,7 +46,7 @@ export default class Application extends React.Component {
     saveValues(field_value) {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)})
-        console.log(this.props.fieldValues);
+        console.log(this.state.fieldValues);
         return assign({}, this.state.fieldValues, field_value)
     }
 
@@ -96,7 +96,7 @@ export default class Application extends React.Component {
         var content;
         var fieldValues=this.state.fieldValues;
         var userData = this.state.userData;
-        console.log(userData);
+        console.log(fieldValues);
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
