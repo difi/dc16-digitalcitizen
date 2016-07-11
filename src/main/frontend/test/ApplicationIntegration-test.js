@@ -4,25 +4,25 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
-import WhosSearching from '../app/WhosSearchingForm.jsx';
-import PersonWithNeedInfoForm from '../app/PersonWithNeedInfoForm';
+import WhosSearching from '../app/FormPages/WhosSearchingForm.jsx';
+import PersonWithNeedInfoForm from '../app/FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-import RelationForm from '../app/RelationForm';
-import PersonWithNeedForm from '../app/PersonWithNeedForm';
-import GeneralPractitioner from '../app/GeneralPractitioner';
-import SpecialNeeds from '../app/SpecialNeeds';
-import NeedsForm from'../app/NeedsForm';
-import AddDependent from '../app/AddDependent';
-import SubmitSuccess from '../app/SubmitPage';
-import NavigationButtons from '../app/NavigationButtons.jsx';
-import AddressField from '../app/AddressField.jsx';
+import RelationForm from '../app/FormPages/RelationForm';
+import PersonWithNeedForm from '../app/FormPages/PersonWithNeedForm';
+import GeneralPractitioner from '../app/FormPages/GeneralPractitioner';
+import SpecialNeeds from '../app/FormPages/SpecialNeeds';
+import NeedsForm from'../app/FormPages/NeedsForm';
+import AddDependent from '../app/FormPages/AddDependent';
+import SubmitSuccess from '../app/FormPages/SubmitPage';
+import NavigationButtons from '../app/FormPages/Components/NavigationButtons.jsx';
+import AddressField from '../app/FormPages/Components/AddressField.jsx';
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-import DependentForm from '../app/DependentForm.jsx';
-import DropdownList from '../app/DropdownList.jsx';
+import DependentForm from '../app/FormPages/Components/DependentForm.jsx';
+import DropdownList from '../app/FormPages/Components/DropdownList.jsx';
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
 // simplest redux store possible that will work with Redux-Form.

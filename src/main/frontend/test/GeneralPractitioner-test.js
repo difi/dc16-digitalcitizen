@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {GeneralPractitionerClass} from '../app/GeneralPractitioner.jsx';
+import {GeneralPractitionerClass} from '../app/FormPages/GeneralPractitioner.jsx';
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,

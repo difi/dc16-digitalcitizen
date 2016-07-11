@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import DependentForm from '../app/DependentForm.jsx';
+import DependentForm from '../app/FormPages/Components/DependentForm.jsx';
 
 var fieldValues = {
     // First form

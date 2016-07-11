@@ -4,19 +4,17 @@
 
 import React from 'react';
 
-import AddressField from './AddressField.jsx';
-import NavigationButtons from './NavigationButtons.jsx';
+import AddressField from './Components/AddressField.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-import {checkPhoneNumber} from'./validation.js';
+import {checkPhoneNumber} from'./Utilities/validation.js';
 import {reduxForm} from 'redux-form';
-import {onlyLettersInString} from "./validation.js";
-import {onlyDigitsInString} from './validation.js'
-import {alphaNumericInString} from './validation.js'
+
 
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {

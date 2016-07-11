@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {RelationFormClass} from '../app/RelationForm.jsx';
+import {RelationFormClass} from '../app/FormPages/RelationForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values

@@ -6,20 +6,20 @@ import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
-import WhosSearching from './WhosSearchingForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
+import WhosSearching from './FormPages/WhosSearchingForm.jsx';
+import PersonWithNeed from './FormPages/PersonWithNeedForm';
+import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-import RelationForm from './RelationForm';
-import PersonWithNeedForm from './PersonWithNeedForm';
-import GeneralPractitioner from './GeneralPractitioner';
-import SpecialNeeds from './SpecialNeeds';
-import NeedsForm from'./NeedsForm';
-import AddDependent from './AddDependent';
-import SubmitSuccess from './SubmitPage';
+import RelationForm from './FormPages/RelationForm';
+import PersonWithNeedForm from './FormPages/PersonWithNeedForm';
+import GeneralPractitioner from './FormPages/GeneralPractitioner';
+import SpecialNeeds from './FormPages/SpecialNeeds';
+import NeedsForm from'./FormPages/NeedsForm';
+import AddDependent from './FormPages/AddDependent';
+import SubmitSuccess from './FormPages/SubmitPage';
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 

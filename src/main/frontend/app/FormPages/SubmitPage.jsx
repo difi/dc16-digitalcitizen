@@ -2,8 +2,7 @@ import React from 'react';
 import {reduxForm} from 'redux-form';
 var ReactDOM = require('react-dom');
 import {getValues} from 'redux-form';
-import NavigationButtons from './NavigationButtons.jsx';
-import RESTpaths from './static_data/RESTpaths.js';
+import RESTpaths from '../static_data/RESTpaths.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -50,7 +49,7 @@ class SubmitSuccess extends React.Component {
                     <Row style={{marginTop: '15px'}}>
                         <hr/>
                         <Col xs={8} sm={8} md={8} lg={8}>
-                            <img src={require('./resources/images/pdfIcon.png')} />
+                            <img src={require('../resources/images/pdfIcon.png')} />
                             <a
                                 className="download-link"
                                 href={RESTpaths.PATHS.GETPDF_BASE + "?id=" + this.props.userData.submissionId}

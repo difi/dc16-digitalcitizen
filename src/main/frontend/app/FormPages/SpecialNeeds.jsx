@@ -1,12 +1,12 @@
 import React from 'react';
-import NavigationButtons from './NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
 import {reduxForm} from 'redux-form';
-import {fieldIsEmpty} from './validation.js'
+import {fieldIsEmpty} from './Utilities/validation.js'
 
 export class SpecialNeedsClass extends React.Component {
 
