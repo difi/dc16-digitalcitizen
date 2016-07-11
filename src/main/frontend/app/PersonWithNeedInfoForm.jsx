@@ -109,7 +109,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
                                 />
 
-                                {number.touched && number.error && <div>{number.error}</div>}
+                                {number.touched && number.error && <div className="error">{number.error}</div>}
                             </Col>
                         </Row>
                     </div>

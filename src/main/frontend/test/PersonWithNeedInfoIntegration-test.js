@@ -68,12 +68,10 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         subject = mount(<PersonWithNeedInfo {...props}/>);
     });
 
-    /*it("Shows error message when field contains wrong input", () => {
+    it("Shows error message when field contains wrong input", () => {
         expect(subject).to.have.length(1);
 
         const input = subject.find('.tlfFrom');
-
-        //expect(input).to.have.length(1);
 
         // Our form component only shows error messages (help text) if the
         // field has been touched. To mimic touching the field, we simulate a
@@ -86,9 +84,25 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
+        expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
+    });
 
-    });*/
+    it("Do not show error message when field contains wrong input", () => {
+        expect(subject).to.have.length(1);
+
+        const input = subject.find('.tlfFrom');
+
+        // Our form component only shows error messages (help text) if the
+        // field has been touched. To mimic touching the field, we simulate a
+        // blur event, which means the input's onBlur method will run, which
+        // will call the onBlur method supplied by Redux-Form.
+        input.simulate('blur');
+        // We change the value to a new incorrect value and expect an errormessage
+        input.simulate('change', {target: {value: "123 45 678"}});
+
+        const errorMessage = subject.find('.error');
+        expect(errorMessage).to.have.length.of(0);
+    });
 
 });
 
