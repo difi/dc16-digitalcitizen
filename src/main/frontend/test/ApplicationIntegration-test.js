@@ -29,7 +29,11 @@ import DropdownList from '../app/DropdownList.jsx';
 import {reducer as formReducer} from 'redux-form';
 import {createStore, combineReducers} from 'redux';
 var assign = require('object-assign');
-
+var userData = {
+    pnr: "01108019146",
+    name: "TestPerson1",
+    submissionId: null
+};
 
 var fieldValues = {
     // First form
@@ -76,7 +80,8 @@ describe("Application", () => {
 
         const props = {
             store,
-            fieldValues
+            fieldValues,
+            userData
 
         };
         subject = mount(<Application {...props}/>);
@@ -270,7 +275,8 @@ describe("Application", () => {
 
         const props = {
             store,
-            fieldValues
+            fieldValues,
+            userData
         };
         const subject = mount(<Application {...props}/>);
 
@@ -290,7 +296,8 @@ describe("Application", () => {
 
         const props = {
             store,
-            fieldValues
+            fieldValues,
+            userData
         };
         const subject = mount(<Application {...props}/>);
 
@@ -310,7 +317,8 @@ describe("Application", () => {
 
         const props = {
             store,
-            fieldValues
+            fieldValues,
+            userData
         };
         const subject = mount(<Application {...props}/>);
 
@@ -343,7 +351,8 @@ describe("Application", () => {
 
         const props = {
             store,
-            fieldValues
+            fieldValues,
+            userData
         };
         const subject = mount(<Application {...props}/>);
 
