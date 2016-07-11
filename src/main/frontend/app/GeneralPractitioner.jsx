@@ -11,7 +11,6 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
