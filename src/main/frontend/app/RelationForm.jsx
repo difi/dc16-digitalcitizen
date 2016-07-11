@@ -90,7 +90,7 @@ export class RelationFormClass extends React.Component {
             isDependent.onChange(true);
             var data = {
                 relation: relation.value,
-                dependent: isDependent.value,
+                dependent: true,
                 person: {
                     name: nameOfChild.value,
                 }
