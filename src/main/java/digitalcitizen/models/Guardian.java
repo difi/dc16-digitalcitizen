@@ -1,14 +1,16 @@
 package digitalcitizen.models;
 
+import java.util.Collection;
+
 /**
  * Created by camp-vhe on 08.07.2016.
  */
 public class Guardian {
 
     private String pnr ;
-    private String[] guardianFor;
+    private Collection<Person> guardianFor;
 
-    public Guardian(String pnr, String[] guardianFor) {
+    public Guardian(String pnr, Collection<Person> guardianFor) {
         this.pnr = pnr;
         this.guardianFor = guardianFor;
     }
@@ -22,11 +24,11 @@ public class Guardian {
         this.pnr = pnr;
     }
 
-    public String[] getGuardianFor() {
+    public Collection<Person> getGuardianFor() {
         return guardianFor;
     }
 
-    public void setGuardianFor(String[] guardianFor) {
+    public void setGuardianFor(Collection<Person> guardianFor) {
         this.guardianFor = guardianFor;
     }
 }

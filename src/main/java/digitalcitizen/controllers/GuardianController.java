@@ -4,11 +4,15 @@ package digitalcitizen.controllers;
  * Created by camp-vhe on 08.07.2016.
  */
 import digitalcitizen.models.Guardian;
+import digitalcitizen.models.Person;
 import digitalcitizen.utilities.TestData;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class GuardianController {
@@ -16,13 +20,13 @@ public class GuardianController {
     @CrossOrigin
     @RequestMapping(value = "/api/guardians", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ArrayList<String> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
-        // TODO: Implement more efficient search
-        ArrayList<String> retrievedGuardians = new ArrayList<>();
+    public Collection<String> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
+        //Collection<> test = TestData.GUARDIANS.stream().filter(guardian->guardian.getPNR().equals(pnr)).findFirst().map(guardian-> guardian.getGuardianFor()).collect(Collectors.toList());
+        Collection<String> retrievedGuardians = new ArrayList<>();
 
         for(Guardian guardian : TestData.GUARDIANS){
             if(guardian.getPNR().equals(pnr)){
-                retrievedGuardians = new ArrayList<>(Arrays.asList(guardian.getGuardianFor()));
+                retrievedGuardians = guardian.getGuardianFor().stream().map(person->person.getName()).collect(Collectors.toList());
             }
         }
 
