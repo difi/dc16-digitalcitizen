@@ -73,7 +73,11 @@ var data = [
     {formname: "Hvorfor du søker", data: dataWhy}
 ];
 
-
+var user = {
+    pnr: "01108019146",
+    name: "TestPerson1",
+    submissionId: null
+};
 
 var fieldValues = {
     // First form
@@ -86,7 +90,7 @@ var fieldValues = {
     dontGotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
-        pnr: null,                  // String
+        pnr: user.pnr,              // String
         name: null,                 // String
         address: {                  // Address Object
             country: "NO",              // String
@@ -113,5 +117,6 @@ var fieldValues = {
 
 
 ReactDOM.render( <Provider store={store}>
-    <Application fieldValues={fieldValues} />
+    <Application fieldValues={fieldValues}
+    userData={user}/>
     </Provider>, document.getElementById('content'));

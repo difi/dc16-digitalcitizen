@@ -30,10 +30,8 @@ export default class NavigationButtons extends React.Component {
     }
 
     handleSubmitClick() {
-        this.props.saveFieldValues();
 
         var fieldValues = this.props.saveFieldValues();
-        console.log(fieldValues);
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,
