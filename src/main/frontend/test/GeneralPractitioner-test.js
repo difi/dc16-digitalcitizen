@@ -11,6 +11,7 @@ import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {GeneralPractitionerClass} from '../app/GeneralPractitioner.jsx';
+import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -22,7 +23,7 @@ var fieldValues = {
     guardianName: null,          //String
     typeOfRelation: null,        //String
     dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
+    dontGotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String
@@ -52,7 +53,7 @@ var fieldValues = {
 var defaultProps = {
     fields: {
         doctorName: "sd",
-        doctors: {value: [{name: "Berit"}]}
+        doctors: {value: [{name: "Berit"}], onChange: function onChange () {}}
     },
     fieldValues
 };
@@ -61,14 +62,15 @@ describe("GeneralPractitionerClass", function() {
     //Radio-buttons
 
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/> );
+        const wrapper = mount(<GeneralPractitionerClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('should have two HTML-elements with className=genPract', function () {
-        const wrapper = shallow(<GeneralPractitionerClass {...defaultProps}/>);
-        expect(wrapper.find('.genPract')).to.have.length(2);
+        const wrapper = mount(<GeneralPractitionerClass {...defaultProps}/>);
+        expect(wrapper.find('label.genPract')).to.have.length(1);
+        expect(wrapper.find(TypeAhead)).to.have.length(1);
     });
 
 });

@@ -11,8 +11,6 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-
-
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +19,6 @@ export class GeneralPractitionerClass extends React.Component {
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
         this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
-
     }
 
     handleClickBack() {
@@ -64,10 +61,8 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-        console.log(doctorName.value);
-        if(doctors.value==undefined){
-            return null;
-        }
+        console.log(doctors.value);
+
         return (
             <componentClass>
                 <label className="form-header">Velg søkers fastlege</label>
@@ -77,8 +72,8 @@ export class GeneralPractitionerClass extends React.Component {
                             <label className="genPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead className="genPract" options={doctors.value} ref="doctorSelect" labelKey="name"
-                                {...doctorName} onInputChange={value=> doctorName.onChange(value)}/>
+                            <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect" labelKey="name"
+                                selected={doctorName.value? [{name: doctorName.value}]: []} onInputChange={value=> doctorName.onChange(value)}/>
                         </Col>
                     </Row>
                 </div>
@@ -95,14 +90,7 @@ export class GeneralPractitionerClass extends React.Component {
 const GeneralPractitioner = reduxForm({
     form: 'application',
     fields: ["doctorName", "doctors"],
-    destroyOnUnmount: false,
-},  (state) => {
-    return {
-        initialValues: {
-            doctors: []
-
-        },
-    };
+    destroyOnUnmount: false
 })(GeneralPractitionerClass);
 
 export default GeneralPractitioner

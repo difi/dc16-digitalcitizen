@@ -1,7 +1,6 @@
 package digitalcitizen.utilities;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import digitalcitizen.models.Submission;
@@ -16,8 +15,9 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDField;
  */
 public class PDFManager {
 
+
     // TODO: Add more templates?
-    public File template = new File("src\\main\\resources\\formTemplate.pdf");
+    public File template = getResourceAsFile("formTemplate.pdf");
 
     public String generatePDFofSubmission(Submission submission) throws IOException {
 
@@ -85,50 +85,50 @@ public class PDFManager {
                     break;
                 // DEPENDENT 2
                 case "dep2_name":
-                    if(submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                    if (submission.getDependents().get(1) != null) {
+                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(1).getLastName();
                         field.setValue(value);
                     }
                     break;
                 case "dep2_telephone":
-                    if(submission.getDependents().get(1) != null) {
+                    if (submission.getDependents().get(1) != null) {
                         value = submission.getDependents().get(1).getTelephone();
                         field.setValue(value);
                     }
                     break;
                 case "dep2_rel":
-                    if(submission.getDependents().get(1) != null) {
+                    if (submission.getDependents().get(1) != null) {
                         value = submission.getDependents().get(1).getRelation();
                         field.setValue(value);
                     }
                     break;
                 case "dep2_email":
-                    if(submission.getDependents().get(1) != null) {
+                    if (submission.getDependents().get(1) != null) {
                         value = submission.getDependents().get(1).getEmail();
                         field.setValue(value);
                     }
                     break;
                 // DEPENDENT 3
                 case "dep3_name":
-                    if(submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                    if (submission.getDependents().get(2) != null) {
+                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(2).getLastName();
                         field.setValue(value);
                     }
                     break;
                 case "dep3_telephone":
-                    if(submission.getDependents().get(2) != null) {
+                    if (submission.getDependents().get(2) != null) {
                         value = submission.getDependents().get(2).getTelephone();
                         field.setValue(value);
                     }
                     break;
                 case "dep3_rel":
-                    if(submission.getDependents().get(2) != null) {
+                    if (submission.getDependents().get(2) != null) {
                         value = submission.getDependents().get(2).getRelation();
                         field.setValue(value);
                     }
                     break;
                 case "dep3_email":
-                    if(submission.getDependents().get(2) != null) {
+                    if (submission.getDependents().get(2) != null) {
                         value = submission.getDependents().get(2).getEmail();
                         field.setValue(value);
                     }
@@ -163,11 +163,38 @@ public class PDFManager {
         }
 
         // TODO: Auto-generate name and change location of server stored PDF-files
-        String path = "src\\main\\resources\\static\\testPDF1.pdf";
-        File output = new File(path);
+        String path = "testPDF1.pdf";
+        File output = new File("testPDF1.pdf");
 
         pdfTemplate.save(output);
         pdfTemplate.close();
         return path;
     }
+
+    public static File getResourceAsFile(String resourcePath) {
+        try {
+            InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
+            if (in == null) {
+                return null;
+            }
+
+            File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
+            tempFile.deleteOnExit();
+
+            try (FileOutputStream out = new FileOutputStream(tempFile)) {
+                //copy stream
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+            }
+            return tempFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

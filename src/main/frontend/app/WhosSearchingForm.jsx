@@ -30,12 +30,12 @@ export default class WhosSearching extends React.Component {
     }
     
     handleClickMe() {
-        console.log("State 6")
+        console.log("State 6");
         this.nextStep(true, 6)
     }
 
     handleClickOther() {
-        console.log("State 2")
+        console.log("State 2");
         this.nextStep(false, 2);
     }
 

@@ -22,7 +22,7 @@ var fieldValues = {
     guardianName: null,          //String
     typeOfRelation: null,        //String
     dependent: null,          // Boolean
-    gotPNRnumber: false,        //Boolean
+    dontGotPNRnumber: false,        //Boolean
     // Third form
     person: {                   // Person object
         pnr: null,                  // String
@@ -50,8 +50,8 @@ var fieldValues = {
 };
 var defaultProps = {
     fields: {
-        medical: "sd",
-        changes: null,
+        medical: null,
+        changes: "sd",
         other: null
     },
     fieldValues

@@ -3,6 +3,8 @@ import {onlyLettersInString} from '../validation.js';
 import {alphaNumericInString} from '../validation.js';
 import {formatPhone} from '../validation.js';
 import {email} from '../validation.js';
+import {checkPostCode} from '../validation.js';
+import {checkPNR} from '../validation.js';
 import {combineReducers} from 'redux';
 import {reducer as form} from 'redux-form';
 const reducers = combineReducers({
@@ -22,14 +24,13 @@ const reducers = combineReducers({
             'form2.mail': (mail) => email(mail),
             'form1.mail': (mail) => email(mail),
 
-            pnr: value => onlyDigitsInString(value),
+            pnr: value => checkPNR(value),
             name: value=> onlyLettersInString(value),
             number: value=>formatPhone(value),
-            zipcode: value=>onlyDigitsInString(value),
+            zipcode: value=>checkPostCode(value),
             street: value=>alphaNumericInString(value),
-            doctorName: value=>onlyLettersInString(value)
-          
-
+            doctorName: value=>onlyLettersInString(value),
+            otherRelation: value=>alphaNumericInString(value)
 
         }
     })

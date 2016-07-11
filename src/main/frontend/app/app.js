@@ -118,5 +118,10 @@ var fieldValues = {
 
 ReactDOM.render( <Provider store={store}>
     <Application fieldValues={fieldValues}
+<<<<<<< HEAD
 userData={user}/>
     </Provider>, document.getElementById('content'));
+=======
+    userData={user}/>
+    </Provider>, document.getElementById('content'));
+>>>>>>> refs/remotes/origin/master

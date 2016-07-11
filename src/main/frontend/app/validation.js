@@ -75,7 +75,6 @@ export function checkPersonalnumberNo(pno)  {
 
 
 export function checkPhoneNumber(phoneNo){
-    
     if(!phoneNo){
         return false;
     }
@@ -83,24 +82,27 @@ export function checkPhoneNumber(phoneNo){
     return phoneNo.match(checkPhone);
 }
 
-export function CheckPostCode(postCode) {
-    var checkPost = /^[0-9]{4}$/;
-    if (postCode == checkPost) {
-        return true;
-    } else {
-        return "Ugyldig postnummer";
+export function checkPostCode(str) {
+    if(str) {
+        return str.replace(/[^0-9]+/g, '').substring(0, 4)
     }
 }
 
 export function onlyLettersInString(str){
     if(str){
         str = str.toString();
-    return str.replace(/[^a-zA-ZæøåÆØÅ\s]+/g, '');}
+    return str.replace(/[^a-zA-ZæøåÆØÅ \-\\s]+/g, '');}
+}
+
+export function checkPNR(str){
+    if(str){
+        return str.replace(/[^0-9]+/g, '').substring(0, 11);
+    }
 }
 
 export function onlyDigitsInString(str){
     if(str){
-    return str.replace(/[^0-9\s]+/g, '');}
+        return str.replace(/[^0-9\s]+/g, '');}
 }
 
 export function alphaNumericInString(str){
@@ -110,7 +112,7 @@ export function alphaNumericInString(str){
 
 export function email(str){
     if(str){
-        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s@_-]+/g, '');}
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.@_-]+/g, '');}
 }
 
 export function fieldIsEmpty(value) {

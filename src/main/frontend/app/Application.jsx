@@ -41,7 +41,9 @@ export default class Application extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
 
     }
+    
 
+<<<<<<< HEAD
 
     saveValues(field_value) {
         this.setState({
@@ -50,6 +52,15 @@ export default class Application extends React.Component {
         return assign({}, this.state.fieldValues, field_value)
     }
 
+=======
+    saveValues(field_value) {
+        this.setState({
+            fieldValues: assign({}, this.state.fieldValues, field_value)})
+        console.log(this.state.fieldValues);
+        return assign({}, this.state.fieldValues, field_value)
+    }
+
+>>>>>>> refs/remotes/origin/master
 
     saveUserData(field_value) {
         this.setState({
@@ -96,7 +107,11 @@ export default class Application extends React.Component {
         var content;
         var fieldValues=this.state.fieldValues;
         var userData = this.state.userData;
+<<<<<<< HEAD
         console.log(userData);
+=======
+        console.log(fieldValues);
+>>>>>>> refs/remotes/origin/master
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching
