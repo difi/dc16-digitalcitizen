@@ -79,7 +79,7 @@ export class AddDependentClass extends React.Component {
                 console.log("relation: " + this.props.fieldValues.relation);
                 switch (this.props.fieldValues.relation) {
                     case "guardian":
-                        this.props.fields.form1.relation.onChange(this.props.fieldValues.relation);
+                        this.props.fields.form1.relation.onChange("Verge");
                         break;
                     case "family":
                         this.props.fields.form1.relation.onChange(this.props.fieldValues.typeOfRelation);
