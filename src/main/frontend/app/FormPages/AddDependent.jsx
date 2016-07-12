@@ -33,6 +33,9 @@ const fields = [
     'form3.phone',
     'form3.relation',
     'displayButton',
+    'form1.depOtherRelation',
+    'form2.depOtherRelation',
+    'form3.depOtherRelation',
     'numDep'
 ];
 
@@ -70,11 +73,21 @@ export class AddDependentClass extends React.Component {
                 var lastName = name[1];
                 this.props.fields.form1.firstName.onChange(firstName);
                 this.props.fields.form1.lastName.onChange(lastName);
-                //TODO: This must be updated to "verge" or whatever relation the applicant has stated
-                // this.props.fields.form1.relation.onChange();
                 this.props.fields.form1.phone.onChange(data.telephone);
                 this.props.fields.form1.mail.onChange(data.mail);
-                
+                console.log("relation: " + this.props.fieldValues.relation);
+                switch (this.props.fieldValues.relation){
+                    case "guardian":
+                        this.props.fields.form1.relation.onChange(this.props.fieldValues.relation);
+                        break;
+                    case "family":
+                        this.props.fields.form1.relation.onChange(this.props.fieldValues.typeOfRelation);
+                        break;
+                    case "other":
+                        this.props.fields.form1.relation.onChange('Annet');
+                        this.props.fields.form1.depOtherRelation.onChange(this.props.fieldValues.otherRelation);
+                        break;
+                }
                 this.forceUpdate();
             }.bind(this),
             error: function (xhr, status, err) {
@@ -133,6 +146,7 @@ export class AddDependentClass extends React.Component {
             fields: {form1, form2, form3}
         } = this.props;
 
+        //TODO: validate textfield (depOtherRelation). Should be filled out if user choose 'Annet' in the dropdown
         if (value == "3") {
             var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error)
                 && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value &&!form2.phone.error && !form2.mail.error)
@@ -149,9 +163,8 @@ export class AddDependentClass extends React.Component {
     }
 
     saveFieldValues() {
-
         const {fields: {form1, form2, form3}} = this.props;
-
+        console.log("depRelation:" + form1.depOtherRelation.value);
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
@@ -159,7 +172,8 @@ export class AddDependentClass extends React.Component {
             lastName: form1.lastName.value,
             telephone: form1.phone.value,
             email: form1.mail.value,
-            relation: form1.relation.value
+            relation: form1.relation.value,
+            depOtherRelation: form1.depOtherRelation.value
         };
         if (this.props.fields.form2.show.value) {
             form2Data = {
@@ -167,7 +181,8 @@ export class AddDependentClass extends React.Component {
                 lastName: form2.lastName.value,
                 telephone: form2.phone.value,
                 email: form2.mail.value,
-                relation: form2.relation.value
+                relation: form2.relation.value,
+                depOtherRelation: form2.depOtherRelation.value
             }
         }
         if (this.props.fields.form3.show.value) {
@@ -176,7 +191,8 @@ export class AddDependentClass extends React.Component {
                 lastName: form3.lastName.value,
                 telephone: form3.phone.value,
                 email: form3.mail.value,
-                relation: form3.relation.value
+                relation: form3.relation.value,
+                depOtherRelation: form3.depOtherRelation.value
             }
         }
         var data = {
