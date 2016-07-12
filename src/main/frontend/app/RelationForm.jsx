@@ -175,7 +175,7 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="familyRelation"
                                               className="family-rel"
-                                              options={dropdownContent.RELATIONS}
+                                              options={dropdownContent.FAMILYRELATIONS}
                                               labelField="relation"
                                               valueField="value"
                                     {...typeOfRelation}
