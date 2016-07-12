@@ -63,8 +63,8 @@ class DependentForm extends React.Component {
                             <label className="tlf">Telefon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="tlf" ref="phone" type="text" placeholder="Telefonnr" disabled={this.props.autoFilled} {...phone}/>
-                            {phone.touched && phone.error && <div>{phone.error}</div>}
+                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr" disabled={this.props.autoFilled} {...phone}/>
+                            {phone.touched && phone.error && <div className="error">{phone.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -72,8 +72,8 @@ class DependentForm extends React.Component {
                             <label className="mail">E-post</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="mail" ref="mail" type="text" placeholder="E-post" disabled={this.props.autoFilled} {...mail}/>
-                            {mail.touched && mail.error && <div>{mail.error}</div>}
+                            <FormControl className="mailForm" ref="mail" type="text" placeholder="E-post" disabled={this.props.autoFilled} {...mail}/>
+                            {mail.touched && mail.error && <div className="error">{mail.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row">
