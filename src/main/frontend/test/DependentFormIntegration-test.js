@@ -128,6 +128,7 @@ describe("Integration of DependentForm", () => {
         expect(errorMessage).to.have.length.of(1);
         expect(errorMessage.text()).to.equal("Dette er ikke en gyldig epostadresse");
 
+
     });
 
     it("Do not show error message when email field has correct value", () => {
