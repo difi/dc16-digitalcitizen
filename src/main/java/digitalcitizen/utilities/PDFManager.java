@@ -25,6 +25,7 @@ public class PDFManager {
         PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
+        System.out.println("Creating pdf");
         // Get field names
         List<PDField> fieldList = acroForm.getFields();
 
@@ -133,14 +134,17 @@ public class PDFManager {
                         field.setValue(value);
                     }
                     break;
-                // Length of stay checkboxes
-                /*
+                // LENGTH OF STAY RADIOBUTTONS
                 case "lengthOfStay":
-                    System.out.println(field.getWidgets());
-                    for (Object s : field.getWidgets()){
-                        ((PDCheckBox) s).check();
+                    switch (submission.getLengthOfStay()){
+                        case "long":
+                            field.setValue("1");
+                            break;
+                        case "short":
+                            field.setValue("0");
+                            break;
                     }
-                    break; */
+                    break;
                 // DIV
                 case "doctor":
                     value = submission.getDoctor().getName();

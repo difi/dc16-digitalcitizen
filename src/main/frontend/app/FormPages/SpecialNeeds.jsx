@@ -101,7 +101,7 @@ const validate = values => {
         errors.changes = "Dette feltet må fylles ut. ";
     }
     return errors;
-}
+};
 
 const SpecialNeeds = reduxForm({
     form: 'application',

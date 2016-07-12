@@ -76,16 +76,14 @@ describe("DependentForm", function() {
 
     it('should have two elements with classname=tlf', function () {
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect (wrapper.find('.tlf')).to.have.length(2);
         expect(wrapper.find('label.tlf')).to.have.length(1);
-        expect(wrapper.find('FormControl.tlf')).to.have.length(1);
+        expect(wrapper.find('FormControl.tlfForm')).to.have.length(1);
     });
 
     it('should have two elements with classname=mail', function () {
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect (wrapper.find('.mail')).to.have.length(2);
         expect(wrapper.find('label.mail')).to.have.length(1);
-        expect(wrapper.find('FormControl.mail')).to.have.length(1);
+        expect(wrapper.find('FormControl.mailForm')).to.have.length(1);
     });
 
     it('should have two elements with classname=depRel', function () {
@@ -107,6 +105,20 @@ describe("DependentForm", function() {
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
         expect(wrapper.find('.close')).to.have.length(1);
+    });
+
+    it('if showDeleteButton=false, hide delete button', function () {
+        var defaultProps = {
+            firstName: 'ds',
+            lastName: 'sdf',
+            mail: {value: 'df@df.no', error: " ", touched: false},
+            phone: {value: '12345678', error: " ", touched: false},
+            relation: {value: 'sibling'},
+            fieldValues: {fieldValues},
+            showDeleteButton: false
+        };
+        const wrapper = shallow(<DependentForm {...defaultProps}/> );
+        expect(wrapper.find('.close')).to.have.length(0);
     });
 
 });

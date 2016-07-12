@@ -35,9 +35,12 @@ export class RelationFormClass extends React.Component {
             cache: false,
             success: function (data) {
 
-                data = data.map(name => {
-                    return {value: name, name: name}
+                console.log(data);
+
+                data = data.map(data => {
+                    return  {value: data.pnr + ":" + data.name, name: data.name}
                 });
+                
                 data.unshift({value: 0, name: "Velg..."});
                 this.props.fields.guardianFor.onChange(data);
                 this.forceUpdate();
@@ -92,7 +95,8 @@ export class RelationFormClass extends React.Component {
                 relation: relation.value,
                 dependent: true,
                 person: {
-                    name: nameOfChild.value,
+                    name: nameOfChild.value.split(":")[1],
+                    pnr: nameOfChild.value.split(":")[0],
                     address: this.props.fieldValues.person.address,
                     telephone: this.props.fieldValues.person.telephone
 
@@ -178,7 +182,7 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="familyRelation"
                                               className="family-rel"
-                                              options={dropdownContent.RELATIONS}
+                                              options={dropdownContent.FAMILYRELATIONS}
                                               labelField="relation"
                                               valueField="value"
                                     {...typeOfRelation}

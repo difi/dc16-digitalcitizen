@@ -75,9 +75,10 @@ describe("PersonWithNeedClass", function() {
         expect(wrapper.find('.adr')).to.have.length(2);
     });
 
-    it('should have two HTML-elements with classname=tlf',function () {
+    it('should have one HTML-elements with classname=tlf, and one with classname=tlfFrom',function () {
         const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
-        expect(wrapper.find('.tlf')).to.have.length(2);
+        expect(wrapper.find('.tlf')).to.have.length(1);
+        expect(wrapper.find('.tlfFrom')).to.have.length(1);
     });
 
 });

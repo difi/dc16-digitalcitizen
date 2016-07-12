@@ -249,7 +249,7 @@ exports.NATIONAL = [
     {code: "ZW", country: "Zimbabwe"}
 ];
 
-exports.RELATIONS = [
+exports.FAMILYRELATIONS = [
     {value: 0, relation: "Velg..."},
     {value: "Forelder", relation: "Forelder"},
     {value: "Barn", relation: "Barn"},
@@ -258,6 +258,19 @@ exports.RELATIONS = [
     {value: "Søsken", relation: "Søsken"},
     {value: "Barnebarn", relation: "Barnebarn"},
     {value: "Nephew/Niece", relation: "Nevø/Niese"},
+    {value: "Annet", relation: "Annet"}
+];
+
+exports.DEPENDENTRELATIONS = [
+    {value: 0, relation: "Velg..."},
+    {value: "Forelder", relation: "Forelder"},
+    {value: "Barn", relation: "Barn"},
+    {value: "Ektefelle", relation: "Ektefelle"},
+    {value: "Samboer", relation: "Samboer"},
+    {value: "Søsken", relation: "Søsken"},
+    {value: "Barnebarn", relation: "Barnebarn"},
+    {value: "Nephew/Niece", relation: "Nevø/Niese"},
+    {value: "guardian", relation: "Verge"},
     {value: "Annet", relation: "Annet"}
 ];
 
