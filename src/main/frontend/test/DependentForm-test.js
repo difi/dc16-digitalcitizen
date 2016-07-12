@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import DependentForm from '../app/DependentForm.jsx';
+import DependentForm from '../app/FormPages/Components/DependentForm.jsx';
 
 var fieldValues = {
     // First form
@@ -107,6 +107,20 @@ describe("DependentForm", function() {
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
         expect(wrapper.find('.close')).to.have.length(1);
+    });
+
+    it('if showDeleteButton=false, hide delete button', function () {
+        var defaultProps = {
+            firstName: 'ds',
+            lastName: 'sdf',
+            mail: {value: 'df@df.no', error: " ", touched: false},
+            phone: {value: '12345678', error: " ", touched: false},
+            relation: {value: 'sibling'},
+            fieldValues: {fieldValues},
+            showDeleteButton: false
+        };
+        const wrapper = shallow(<DependentForm {...defaultProps}/> );
+        expect(wrapper.find('.close')).to.have.length(0);
     });
 
 });

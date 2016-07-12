@@ -1,18 +1,18 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 
-import DependentForm from './DependentForm.jsx';
-import NavigationButtons from './NavigationButtons.jsx';
-import validate from './DependentValidation';
+import DependentForm from './Components/DependentForm.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
+import validate from './Components/DependentValidation';
 
-require('!style!css!less!./Application.less');
+require('!style!css!less!../Application.less');
 import $ from 'jquery'
 var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
-import RESTpaths from './static_data/RESTpaths.js';
+import RESTpaths from '../static_data/RESTpaths.js';
 const fields = [
 
     'form1.firstName',

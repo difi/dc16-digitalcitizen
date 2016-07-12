@@ -4,7 +4,7 @@
 import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
-import NavigationButtons from './NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -15,7 +15,7 @@ var checked = false;
 
 export const fields = ["pnr", "name", "checked"];
 
-import {checkPersonalnumberNo} from'./validation.js';
+import {checkPersonalnumberNo} from'./Utilities/validation.js';
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {

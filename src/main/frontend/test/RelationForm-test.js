@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {RelationFormClass} from '../app/RelationForm.jsx';
+import {RelationFormClass} from '../app/FormPages/RelationForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -65,7 +65,7 @@ var defaultProps = {
     fieldValues
 };
 
-describe("RelationForm", function() {
+describe("RelationFormClass", function() {
     it('should have header and container classnames for HTML-elements', function () {
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect (wrapper.find('.form-header')).to.have.length(1);

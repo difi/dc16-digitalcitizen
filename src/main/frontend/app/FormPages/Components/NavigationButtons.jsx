@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import RESTpaths from './static_data/RESTpaths.js';
-import Application from './Application';
+import RESTpaths from '../../static_data/RESTpaths.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -30,10 +29,8 @@ export default class NavigationButtons extends React.Component {
     }
 
     handleSubmitClick() {
-        this.props.saveFieldValues();
 
         var fieldValues = this.props.saveFieldValues();
-        console.log(fieldValues);
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,

@@ -4,11 +4,9 @@ import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 
 import DropdownList from './DropdownList.jsx';
-import dropdownContent from './static_data/dropdown-list-content.js';
+import dropdownContent from '../../static_data/dropdown-list-content.js';
 
-require('!style!css!less!./Application.less');
-
-var ReactDOM = require('react-dom');
+require('!style!css!less!../../Application.less');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Checkbox = require('react-bootstrap/lib/Checkbox');

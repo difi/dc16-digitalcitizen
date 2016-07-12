@@ -1,5 +1,5 @@
-import {checkPhoneNumber} from './validation';
-import {checkEmail} from './validation';
+import {checkPhoneNumber} from '../Utilities/validation';
+import {checkEmail} from '../Utilities/validation';
 
 function feedback(data) {
     var errors = {};

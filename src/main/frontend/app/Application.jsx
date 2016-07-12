@@ -6,27 +6,21 @@ import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
-import WhosSearching from './WhosSearchingForm.jsx';
-import PersonWithNeed from './PersonWithNeedForm';
-import PersonWithNeedInfoForm from './PersonWithNeedInfoForm';
+import WhosSearching from './FormPages/WhosSearchingForm.jsx';
+import PersonWithNeed from './FormPages/PersonWithNeedForm';
+import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-import RelationForm from './RelationForm';
-import PersonWithNeedForm from './PersonWithNeedForm';
-import GeneralPractitioner from './GeneralPractitioner';
-import SpecialNeeds from './SpecialNeeds';
-import NeedsForm from'./NeedsForm';
-import AddDependent from './AddDependent';
-import SubmitSuccess from './SubmitPage';
+import RelationForm from './FormPages/RelationForm';
+import PersonWithNeedForm from './FormPages/PersonWithNeedForm';
+import GeneralPractitioner from './FormPages/GeneralPractitioner';
+import SpecialNeeds from './FormPages/SpecialNeeds';
+import NeedsForm from'./FormPages/NeedsForm';
+import AddDependent from './FormPages/AddDependent';
+import SubmitSuccess from './FormPages/SubmitPage';
 
-// "Signed in" user. Used for testing
-var user = {
-    pnr: "01108019146",
-    name: "TestPerson1",
-    submissionId: null
-};
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 
@@ -38,7 +32,8 @@ export default class Application extends React.Component {
         this.state = {
             step: 1,
             prevStep: 1,
-            fieldValues: props.fieldValues
+            fieldValues: props.fieldValues,
+            userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
         this.saveValues = this.saveValues.bind(this);
@@ -51,14 +46,15 @@ export default class Application extends React.Component {
     saveValues(field_value) {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)})
-        console.log(this.props.fieldValues);
-        return this.state.fieldValues;
+        console.log(this.state.fieldValues);
+        return assign({}, this.state.fieldValues, field_value)
     }
-    
-    saveUserData(field_value){
-        user = assign({}, user, field_value);
-        console.log(user);
-        return user;
+
+
+    saveUserData(field_value) {
+        this.setState({
+            userData: assign({}, this.state.userData, field_value)});
+        return this.state.userData;
     }
 
     previousStep(step) {
@@ -99,6 +95,7 @@ export default class Application extends React.Component {
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
         var fieldValues=this.state.fieldValues;
+        var userData = this.state.userData;
         console.log(fieldValues);
         switch (this.state.step) {
             case 1:
@@ -176,13 +173,13 @@ export default class Application extends React.Component {
                     previousStep = {this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    userData={user}
+                    userData={userData}
                     submitRegistration={this.handleSubmit}/>;
         }
 
         return (
             <div>
-                <p> Logget inn som: {user.name} </p>
+                <p> Logget inn som: {userData.name} </p>
                 {header}
                 <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8} xs={10} sm={8} lg={8}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>

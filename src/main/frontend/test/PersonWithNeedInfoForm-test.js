@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {PersonWithNeedInfoClass} from '../app/PersonWithNeedInfoForm.jsx';
+import {PersonWithNeedInfoClass} from '../app/FormPages/PersonWithNeedInfoForm.jsx';
 
 //Added these values from Application to simulate that NeedsForm have received these values from Application,
 // because NeedsForm is dependent on these Application values
@@ -75,9 +75,10 @@ describe("PersonWithNeedClass", function() {
         expect(wrapper.find('.adr')).to.have.length(2);
     });
 
-    it('should have two HTML-elements with classname=tlf',function () {
+    it('should have one HTML-elements with classname=tlf, and one with classname=tlfFrom',function () {
         const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
-        expect(wrapper.find('.tlf')).to.have.length(2);
+        expect(wrapper.find('.tlf')).to.have.length(1);
+        expect(wrapper.find('.tlfFrom')).to.have.length(1);
     });
 
 });

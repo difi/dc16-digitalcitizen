@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {AddDependentClass} from '../app/AddDependent.jsx';
+import {AddDependentClass} from '../app/FormPages/AddDependent.jsx';
 
 var fieldValues = {
     // First form
@@ -59,7 +59,7 @@ var defaultProps = {
     fieldValues
 };
 
-describe("AddDependent", function() {
+describe("AddDependentClass", function() {
     it('should have header classnames for HTML-elements', function () {
         const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
         expect (wrapper.find('.form-header')).to.have.length(1);

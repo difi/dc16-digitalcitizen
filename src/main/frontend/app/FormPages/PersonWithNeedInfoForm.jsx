@@ -4,19 +4,16 @@
 
 import React from 'react';
 
-import AddressField from './AddressField.jsx';
-import NavigationButtons from './NavigationButtons.jsx';
+import AddressField from './Components/AddressField.jsx';
+import NavigationButtons from './Components/NavigationButtons.jsx';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
-import {checkPhoneNumber} from'./validation.js';
+import {checkPhoneNumber} from'./Utilities/validation.js';
 import {reduxForm} from 'redux-form';
-import {onlyLettersInString} from "./validation.js";
-import {onlyDigitsInString} from './validation.js'
-import {alphaNumericInString} from './validation.js'
 
 
 export class PersonWithNeedInfoClass extends React.Component {
@@ -67,7 +64,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr");
-       
+        console.log(this.props.fieldValues.person);
         return (
             <form>
                 <div>
@@ -103,14 +100,14 @@ export class PersonWithNeedInfoClass extends React.Component {
                             <Col sm={8} md={8}>
                                 <FormControl
                                     type="numeric"
-                                    className="tlf"
+                                    className="tlfFrom"
                                     ref="phone"
                                     placeholder="Telefonnr"
                                     {...number}
 
                                 />
 
-                                {number.touched && number.error && <div>{number.error}</div>}
+                                {number.touched && number.error && <div className="error">{number.error}</div>}
                             </Col>
                         </Row>
                     </div>
@@ -137,7 +134,7 @@ const validate = values => {
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
     return errors;
-}
+};
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({
