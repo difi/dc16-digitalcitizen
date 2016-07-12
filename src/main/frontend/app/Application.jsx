@@ -31,7 +31,7 @@ export default class Application extends React.Component {
         super(props);
         console.log(props);
         this.state = {
-            step: 9,
+            step: 1,
             prevStep: 1,
             fieldValues: props.fieldValues,
             userData: props.userData
@@ -47,7 +47,7 @@ export default class Application extends React.Component {
     saveValues(field_value) {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)
-        })
+        });
         console.log(this.state.fieldValues);
         return assign({}, this.state.fieldValues, field_value)
     }

@@ -20,6 +20,7 @@ export class LocationPageClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
         this.findMunicipality(this.props.fieldValues.person.address.municipality);
 
     }
@@ -37,7 +38,10 @@ export class LocationPageClass extends React.Component {
 
     saveFieldValues() {
         var data = {
-
+            application: {
+                municipality: this.props.fields.municipalityApp.value.name,
+                home: this.props.fields.homeApp.value
+            }
         };
         this.props.saveValues(data);
         console.log(data);
