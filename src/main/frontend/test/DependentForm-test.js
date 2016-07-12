@@ -8,11 +8,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import DependentForm from '../app/FormPages/Components/DependentForm.jsx';
 
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -45,56 +47,17 @@ var fieldValues = {
     // Seventh form
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
-    otherNeeds: null,            // String
+    otherNeeds: null            // String
 
-};
-
-var defaultProps = {
-
-    firstName: 'ds',
-    lastName: 'sdf',
-    mail: {value: 'df@df.no', error: " ", touched: false},
-    phone: {value: '12345678', error: " ", touched: false},
-    relation: {value: 'sibling'},
-    fieldValues: {fieldValues}
 };
 
 describe("DependentForm", function() {
-    it('should have two elements with classname=fname', function () {
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect (wrapper.find('.fName')).to.have.length(2);
-        expect(wrapper.find('label.fName')).to.have.length(1);
-        expect(wrapper.find('FormControl.fName')).to.have.length(1);
-    });
+    let wrapper = null;
 
-    it('should have two elements with classname=eName', function () {
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect (wrapper.find('.eName')).to.have.length(2);
-        expect(wrapper.find('label.eName')).to.have.length(1);
-        expect(wrapper.find('FormControl.eName')).to.have.length(1);
-    });
-
-    it('should have two elements with classname=tlf', function () {
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect(wrapper.find('label.tlf')).to.have.length(1);
-        expect(wrapper.find('FormControl.tlfForm')).to.have.length(1);
-    });
-
-    it('should have two elements with classname=mail', function () {
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect(wrapper.find('label.mail')).to.have.length(1);
-        expect(wrapper.find('FormControl.mailForm')).to.have.length(1);
-    });
-
-    it('should have two elements with classname=depRel', function () {
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
-        expect (wrapper.find('.depRel')).to.have.length(2);
-        expect(wrapper.find('label.depRel')).to.have.length(1);
-        expect(wrapper.find('DropdownList.depRel')).to.have.length(1);
-    });
-
-    it('if showDeleteButton=true, show delete button', function () {
-        var defaultProps = {
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
             firstName: 'ds',
             lastName: 'sdf',
             mail: {value: 'df@df.no', error: " ", touched: false},
@@ -103,11 +66,54 @@ describe("DependentForm", function() {
             fieldValues: {fieldValues},
             showDeleteButton: true
         };
-        const wrapper = shallow(<DependentForm {...defaultProps}/> );
+
+        //Renders the DependentForm with props
+        wrapper = shallow(<DependentForm {...props}/>);
+    });
+
+    it('should have two elements with classname=fname', function () {
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find two elements with the class name "fName"
+        expect (wrapper.find('.fName')).to.have.length(2);
+        //Expect to find one label-element with the class name "fName"
+        expect(wrapper.find('label.fName')).to.have.length(1);
+        expect(wrapper.find('FormControl.fName')).to.have.length(1);
+    });
+
+    it('should have two elements with classname=eName', function () {
+        expect(wrapper).to.have.length(1);
+        expect (wrapper.find('.eName')).to.have.length(2);
+        expect(wrapper.find('label.eName')).to.have.length(1);
+        expect(wrapper.find('FormControl.eName')).to.have.length(1);
+    });
+
+    it('should have two elements with classname=tlf', function () {
+        expect(wrapper).to.have.length(1);
+        expect(wrapper.find('label.tlf')).to.have.length(1);
+        expect(wrapper.find('FormControl.tlfForm')).to.have.length(1);
+    });
+
+    it('should have two elements with classname=mail', function () {
+        expect(wrapper).to.have.length(1);
+        expect(wrapper.find('label.mail')).to.have.length(1);
+        expect(wrapper.find('FormControl.mailForm')).to.have.length(1);
+    });
+
+    it('should have two elements with classname=depRel', function () {
+        expect(wrapper).to.have.length(1);
+        expect (wrapper.find('.depRel')).to.have.length(2);
+        expect(wrapper.find('label.depRel')).to.have.length(1);
+        expect(wrapper.find('DropdownList.depRel')).to.have.length(1);
+    });
+
+    it('if showDeleteButton=true, show delete button', function () {
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.close')).to.have.length(1);
     });
 
     it('if showDeleteButton=false, hide delete button', function () {
+        // Because we need to redefine the value of showDeleteButton, we need to define all props again
         var defaultProps = {
             firstName: 'ds',
             lastName: 'sdf',
@@ -118,6 +124,7 @@ describe("DependentForm", function() {
             showDeleteButton: false
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
+        //Expect to not find one element with the class name "close"
         expect(wrapper.find('.close')).to.have.length(0);
     });
 
@@ -128,27 +135,15 @@ describe("DependentForm", function() {
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Annet'},
-            fieldValues: {fieldValues},
-            showDeleteButton: true
+            fieldValues: {fieldValues}
         };
 
         const wrapper = shallow(<DependentForm {...defaultProps}/>);
-
         expect(wrapper.find('.dep-other-rel')).to.have.length(1);
     });
 
     it('if you choose sibling, do not show textfield', function () {
-        var defaultProps = {
-            firstName: 'ds',
-            lastName: 'sdf',
-            mail: {value: 'df@df.no', error: " ", touched: false},
-            phone: {value: '12345678', error: " ", touched: false},
-            relation: {value: 'Søsken'},
-            fieldValues: {fieldValues},
-            showDeleteButton: true
-        };
-
-        const wrapper = shallow(<DependentForm {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
 
         expect(wrapper.find('.dep-other-rel')).to.have.length(0);
     });

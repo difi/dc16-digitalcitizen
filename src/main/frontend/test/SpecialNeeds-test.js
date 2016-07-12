@@ -7,13 +7,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {SpecialNeedsClass} from '../app/FormPages/SpecialNeeds.jsx';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -48,29 +48,41 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-var defaultProps = {
-    fields: {
-        medical: null,
-        changes: "sd",
-        other: null
-    },
-    fieldValues
-};
 
 describe("SpecialNeedsClass", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                medical: null,
+                changes: "sd",
+                other: null
+            },
+            fieldValues
+        };
+
+        //Renders the NeedsForm with props
+        wrapper = shallow(<SpecialNeedsClass {...props}/>);
+    });
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('should have three labels with classname= from-col-address', function () {
-        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect (wrapper.find('label.from-col-address')).to.have.length(3);
     });
 
     it('should have three HTML-elements with classname= from-col-address', function () {
-        const wrapper = shallow(<SpecialNeedsClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect (wrapper.find('.special-needs-textarea')).to.have.length(3);
     });
 

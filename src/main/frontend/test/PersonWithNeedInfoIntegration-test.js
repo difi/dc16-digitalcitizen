@@ -3,15 +3,11 @@
  */
 
 import React from 'react'
-var FormControl = require('react-bootstrap/lib/FormControl');
+
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import PersonWithNeedInfo from '../app/FormPages/PersonWithNeedInfoForm';
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
@@ -19,6 +15,14 @@ var Button = require('react-bootstrap/lib/Button');
 import { reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 
+var FormControl = require('react-bootstrap/lib/FormControl');
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -58,17 +62,21 @@ describe("Integration of PersonWithNeedInfoForm", () => {
     let store = null;
     let subject = null;
 
+    // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
+        // the fields that are individual for each page
         store = createStore(combineReducers({ form: formReducer }));
 
         const props = {
             store,
             fieldValues
         };
+        //Renders the PersonWithNeedInfo with props
         subject = mount(<PersonWithNeedInfo {...props}/>);
     });
 
     it("Shows error message when field contains wrong input", () => {
+        //expect wrapper to exist
         expect(subject).to.have.length(1);
 
         const input = subject.find('.tlfFrom');
