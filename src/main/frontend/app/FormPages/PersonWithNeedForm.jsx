@@ -13,9 +13,15 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var checked = false;
 
+import $ from 'jquery'
+import RESTpaths from '../static_data/RESTpaths.js';
+
 export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
+import {validatePnoName} from './Utilities/validation';
+
+var personP = {};
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
@@ -31,7 +37,7 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickNext() {
-        this.saveFieldValues();
+        this.savePerson();
 
         if (this.props.fields.checked.value) {
             console.log("State 4");
@@ -61,13 +67,49 @@ export class PersonWithNeedClass extends React.Component {
         console.log(data);
     }
 
+
+    savePerson() {
+        var pnr = this.props.fields.pnr.value;
+        //var personP;
+    //console.log("Pno:" + pno);
+    //console.log("Name: " + name);
+        $.ajax({
+            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                    personP = {
+                        person: {
+                            pnr: data.pnr,
+                            name: data.name,
+                            address: {
+                                country: data.address.country,
+                                municipality: data.address.municipality,
+                                streetAddress: data.address.street,
+                                zipcode: data.address.zipcode,
+                                postal: data.address.postal
+                            },
+                            telephone: data.telephone
+                        }
+                    };
+                return personP;
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+        console.log("PersonP: " + personP);
+        this.props.saveValues(personP);
+}
+    
+
     render() {
 
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
-        
-        var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
+        console.log("Error: " + name.error)
+        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         if (checked.value) {
             return (
                 <form>
@@ -173,6 +215,7 @@ export class PersonWithNeedClass extends React.Component {
 
                                     {...name}
                                 />
+                                {name.touched && name.error && <div className="error" >{name.error}</div>}
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
@@ -195,6 +238,9 @@ const validate = values => {
 
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "Dette er ikke et gyldig fødselsnummer";
+    }
+    if (!(validatePnoName(values.pnr, values.name))) {
+        errors.name = "Fødselsnummer og navn matcher ikke."
     }
     return errors;
 };
