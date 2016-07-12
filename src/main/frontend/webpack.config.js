@@ -17,6 +17,14 @@ const common = {
         filename: 'bundle.js'
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: [/node_modules/, /\.test\.js/],
+                loader: 'isparta-instrumenter-loader'
+
+            }
+        ]
         loaders: [{
             exclude: /node_modules/,
             loader: 'babel',

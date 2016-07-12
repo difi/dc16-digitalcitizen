@@ -1,10 +1,10 @@
 var path = require('path');
-var webpackConfig = require('./webpack.config.js');
+var webpackConfig = require('./webpack.test.config.js');
 webpackConfig.entry = {};
 module.exports = function(config) {
     config.set({
         basePath: '', //The root path location that will be used to resolve all relative paths defined in files and exclude. What we have written here is the default value of basePath.
-        frameworks: ['jasmine'], //use jasmine framework to test
+        frameworks: ['jasmine', 'chai'], //use jasmine framework to test
         files: [ //List of files/patterns to load in the browser.
             'test/*.js',
         ],
@@ -16,10 +16,6 @@ module.exports = function(config) {
         },
 
         webpack: webpackConfig,
-        webpackMiddleWare: {
-            noInfo: true
-        },
-        
 
 
         babelPreprocessor: {
