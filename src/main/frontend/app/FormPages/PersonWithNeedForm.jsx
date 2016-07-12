@@ -24,6 +24,7 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
+    
     handleClickBack() {
         this.saveFieldValues();
         console.log("State 2");
@@ -72,7 +73,7 @@ export class PersonWithNeedClass extends React.Component {
             return (
                 <form>
                     <componentClass>
-                        <label className="form-header">Informasjon om person med behov</label>
+                        <label className="form-header">Informasjon om søker</label>
                         <div className="form-container">
                             <Row className="form-row">
                                 <Col sx={4} md={4}>
@@ -129,7 +130,7 @@ export class PersonWithNeedClass extends React.Component {
         return (
             <form>
                 <componentClass>
-                    <label className="form-header">Informasjon om person med behov</label>
+                    <label className="form-header">Informasjon om søker</label>
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sx={4} md={4}>
@@ -188,6 +189,12 @@ export class PersonWithNeedClass extends React.Component {
         )
     }
 }
+PersonWithNeedClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 //Validation for form
 const validate = values => {

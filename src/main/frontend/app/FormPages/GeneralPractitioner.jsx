@@ -86,6 +86,12 @@ export class GeneralPractitionerClass extends React.Component {
         );
     }
 }
+GeneralPractitionerClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 const GeneralPractitioner = reduxForm({
     form: 'application',

@@ -49,6 +49,11 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
+var userData = {
+    pnr: "01108019146",
+    name: "TestPerson1",
+    submissionId: null
+};
 
 var defaultProps = {
     fields: {
@@ -62,7 +67,8 @@ var defaultProps = {
             onChange: function onChange () {}
         }
     },
-    fieldValues
+    fieldValues,
+    userData
 };
 
 describe("RelationFormClass", function() {
@@ -104,7 +110,8 @@ describe("RelationFormClass", function() {
                 }
 
             },
-            fieldValues
+            fieldValues,
+            userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
 
@@ -127,7 +134,8 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues
+            fieldValues,
+            userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
 
@@ -149,7 +157,8 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues
+            fieldValues,
+            userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
         expect(wrapper.find('.other-rel')).to.have.length(2);
