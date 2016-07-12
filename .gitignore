@@ -3,6 +3,7 @@ target
 *.iml
 /workspace
 /validator.properties
+testPDF1.pdf
 
 # Logs
 logs

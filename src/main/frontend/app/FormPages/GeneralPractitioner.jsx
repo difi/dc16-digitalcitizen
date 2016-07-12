@@ -36,7 +36,13 @@ export class GeneralPractitionerClass extends React.Component {
     saveFieldValues() {
         //this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
         var data = {
-            doctor: {name: this.props.fields.doctorName.value}
+            person: {
+                pnr: this.props.fieldValues.person.pnr,
+                name: this.props.fieldValues.person.name,
+                address: this.props.fieldValues.person.address,
+                telephone: this.props.fieldValues.person.telephone,
+                doctor: {name: this.props.fields.doctorName.value}
+            }
         };
         this.props.saveValues(data);
         console.log(data);

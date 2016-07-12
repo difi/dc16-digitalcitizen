@@ -1,7 +1,7 @@
 "use strict";
 
 
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 import reducers from './FormPages/Utilities/reducers.js';
 import React from 'react';
@@ -46,11 +46,10 @@ var fieldValues = {
             zipcode: null,              // String
             postal: null                // String
         },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
+        telephone: null,             // String
+        doctor: {                   // Doctor Object (add more fields?)
+            name: null                  // String
+        }
     },
     // Fifth form
     dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
@@ -67,7 +66,7 @@ var fieldValues = {
 };
 
 
-ReactDOM.render( <Provider store={store}>
+ReactDOM.render(<Provider store={store}>
     <Application fieldValues={fieldValues}
-    userData={user}/>
-    </Provider>, document.getElementById('content'));
+                 userData={user}/>
+</Provider>, document.getElementById('content'));
