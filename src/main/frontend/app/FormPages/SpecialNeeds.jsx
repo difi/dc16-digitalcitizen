@@ -48,7 +48,7 @@ export class SpecialNeedsClass extends React.Component {
 
         return (
             <div>
-                <label className="form-header">Utfyllende informasjon:  </label>
+                <label className="form-header">Utfyllende informasjon  </label>
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
