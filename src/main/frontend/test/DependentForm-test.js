@@ -109,4 +109,18 @@ describe("DependentForm", function() {
         expect(wrapper.find('.close')).to.have.length(1);
     });
 
+    it('if showDeleteButton=false, hide delete button', function () {
+        var defaultProps = {
+            firstName: 'ds',
+            lastName: 'sdf',
+            mail: {value: 'df@df.no', error: " ", touched: false},
+            phone: {value: '12345678', error: " ", touched: false},
+            relation: {value: 'sibling'},
+            fieldValues: {fieldValues},
+            showDeleteButton: false
+        };
+        const wrapper = shallow(<DependentForm {...defaultProps}/> );
+        expect(wrapper.find('.close')).to.have.length(0);
+    });
+
 });
