@@ -11,16 +11,9 @@ public class Person {
     private String name;
     private Address address;
     private String telephone;
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     private String mail ;
+    private Doctor doctor;
+
     public Person() {
     }
 
@@ -30,12 +23,21 @@ public class Person {
         this.address = address;
         this.telephone = telephone;
     }
-    public Person(String pnr, String name, Address address, String telephone, String mail) {
+    public Person(String pnr, String name, Address address, String telephone, String mail, Doctor doctor) {
         this.pnr = pnr;
         this.name = name;
         this.address = address;
         this.telephone = telephone;
-        this.mail=mail;
+        this.mail = mail;
+        this.doctor = doctor;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public String getPnr() {
@@ -64,6 +66,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public void setAddress(Address address) {
@@ -95,6 +105,7 @@ public class Person {
                 setAddress(p.getAddress());
                 setName(p.getName());
                 setTelephone(p.getTelephone());
+                setDoctor(p.getDoctor());
                 return true;
             }
         }
