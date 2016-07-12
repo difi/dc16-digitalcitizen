@@ -9,8 +9,7 @@ import {reduxForm} from 'redux-form';
 import {fieldIsEmpty} from './Utilities/validation.js'
 
 export class SpecialNeedsClass extends React.Component {
-
-
+    
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
