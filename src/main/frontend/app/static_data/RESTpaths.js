@@ -12,6 +12,7 @@ exports.PATHS = {
     BRING_BASE: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&',
     GEONAMES_BASE: 'http://api.geonames.org/postalCodeLookupJSON?',
     GUARDIAN_BASE: BASE_URL + 'api/guardians',
-    DEPENDENT_BASE: BASE_URL + 'api/dependent'
+    DEPENDENT_BASE: BASE_URL + 'api/dependent',
+    HOME_BASE: BASE_URL + 'api/homes'
 };
  
