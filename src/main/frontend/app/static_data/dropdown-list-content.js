@@ -270,7 +270,7 @@ exports.DEPENDENTRELATIONS = [
     {value: "Søsken", relation: "Søsken"},
     {value: "Barnebarn", relation: "Barnebarn"},
     {value: "Nephew/Niece", relation: "Nevø/Niese"},
-    {value: "guardian", relation: "Verge"},
+    {value: "Verge", relation: "Verge"},
     {value: "Annet", relation: "Annet"}
 ];
 

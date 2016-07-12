@@ -30,7 +30,7 @@ export class RelationFormClass extends React.Component {
 
     getGuardianFor() {
         $.ajax({
-            url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + "01108019146",
+            url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {

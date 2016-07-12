@@ -43,8 +43,8 @@ export class LocationPageClass extends React.Component {
                 home: this.props.fields.homeApp.value
             }
         };
-        this.props.saveValues(data);
-        console.log(data);
+        return this.props.saveValues(data);
+   
     }
 
     //Handle the click on the next-button
