@@ -99,7 +99,7 @@ describe("DependentForm", function() {
             lastName: 'sdf',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
-            relation: {value: 'sibling'},
+            relation: {value: 'Søsken'},
             fieldValues: {fieldValues},
             showDeleteButton: true
         };
@@ -113,12 +113,44 @@ describe("DependentForm", function() {
             lastName: 'sdf',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
-            relation: {value: 'sibling'},
+            relation: {value: 'Søsken'},
             fieldValues: {fieldValues},
             showDeleteButton: false
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
         expect(wrapper.find('.close')).to.have.length(0);
+    });
+
+    it('if you choose other, show textfield', function () {
+        var defaultProps = {
+            firstName: 'ds',
+            lastName: 'sdf',
+            mail: {value: 'df@df.no', error: " ", touched: false},
+            phone: {value: '12345678', error: " ", touched: false},
+            relation: {value: 'Annet'},
+            fieldValues: {fieldValues},
+            showDeleteButton: true
+        };
+
+        const wrapper = shallow(<DependentForm {...defaultProps}/>);
+
+        expect(wrapper.find('.dep-other-rel')).to.have.length(1);
+    });
+
+    it('if you choose sibling, do not show textfield', function () {
+        var defaultProps = {
+            firstName: 'ds',
+            lastName: 'sdf',
+            mail: {value: 'df@df.no', error: " ", touched: false},
+            phone: {value: '12345678', error: " ", touched: false},
+            relation: {value: 'Søsken'},
+            fieldValues: {fieldValues},
+            showDeleteButton: true
+        };
+
+        const wrapper = shallow(<DependentForm {...defaultProps}/>);
+
+        expect(wrapper.find('.dep-other-rel')).to.have.length(0);
     });
 
 });
