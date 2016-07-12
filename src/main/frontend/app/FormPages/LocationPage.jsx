@@ -7,7 +7,8 @@ import {reduxForm} from 'redux-form';
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 import DropdownList from './Components/DropdownList.jsx';
 import dropdownContent from '../static_data/dropdown-list-content.js';
-
+import $ from 'jquery'
+import RESTpaths from '../static_data/RESTpaths.js';
 
 export class LocationPageClass extends React.Component {
     constructor(props) {
@@ -50,10 +51,11 @@ export class LocationPageClass extends React.Component {
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
     }
-    municipalityChange(event){
-        this.props.fields.municipalityApp.onChange(event.target.value);
+    municipalityChange(value){
+
+        this.props.fields.municipalityApp.onChange(value);
         $.ajax({
-            url: RESTpaths.PATHS.DOCTORS_BASE + '?mun=' + event.target.value,
+            url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
             dataType: 'json',
             cache: false,
             success: function (data) {
@@ -74,27 +76,43 @@ export class LocationPageClass extends React.Component {
 
     render() {
         const {fields: {municipalityApp, homeApp}} = this.props;
+        var valid=true;
         var homes = null;
-        if(municipalityApp.value){
-             homes =   <DropdownList
+        if(this.state.homeOptions){
+             homes =   <Row className="form-row">
+             <Col sm={6} md={6}>
+                 <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+             </Col>
+             <Col sm={6} md={6}>
+             <DropdownList
                     id='homes'
                     options={this.state.homeOptions}
                     labelField='name'
                     valueField='name'
-                    {...homeApp}/>;
+                    {...homeApp}
+                    onChange={change=>homeApp.onChange(change.newValue)}/>
+                 </Col>
+                 </Row>;
         }
-        var valid ;
         return (
             <componentClass>
-                <label className="form-header">Hvilken kommune ønsker du å søke deg deg til? </label>
+                <label className="form-header">Hvor  ønsker du å søke deg deg til? </label>
 
                 <div className="form-container">
                     <form className="location">
+                        <Row className="form-row">
+                            <Col sm={6} md={6}>
+                                <label className="municipality">Hvilken kommune ønsker du å søke deg til</label>
+                            </Col>
+                            <Col sm={6} md={6}>
                         <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                    ref="munSelect"
                                    labelKey="name"
-                                   selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                   onInputChange={this.municipalityChange}/>
+                                   selected={municipalityApp.value? [{name: municipalityApp.value.name}]: []}
+                                   onChange={value=>this.municipalityChange(value[0])}/>
+                                </Col>
+                            </Row>
+
                         {homes}
 
                     </form>
