@@ -72,7 +72,7 @@ export class PersonWithNeedClass extends React.Component {
             return (
                 <form>
                     <componentClass>
-                        <label className="form-header">Informasjon om person med behov</label>
+                        <label className="form-header">Informasjon om søker</label>
                         <div className="form-container">
                             <Row className="form-row">
                                 <Col sx={4} md={4}>
@@ -129,7 +129,7 @@ export class PersonWithNeedClass extends React.Component {
         return (
             <form>
                 <componentClass>
-                    <label className="form-header">Informasjon om person med behov</label>
+                    <label className="form-header">Informasjon om søker</label>
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sx={4} md={4}>

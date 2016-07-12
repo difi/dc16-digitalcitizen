@@ -68,7 +68,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         return (
             <form>
                 <div>
-                    <label className="form-header">Informasjon om person med behov</label>
+                    <label className="form-header">Informasjon om søker</label>
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sm={4} md={4}>

@@ -149,7 +149,7 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label className="guardian-rel">Hvem ønsker sykehjemsplass?</label>
+                                <label className="guardian-rel">Jeg fyller ut på vegne av</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -174,7 +174,7 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label className="family-rel">Hva er din relasjon til personen med behov?</label>
+                                <label className="family-rel">Hva er din relasjon til søker?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -201,7 +201,7 @@ export class RelationFormClass extends React.Component {
                 content = <componentClass>
                     <Row className="form-row">
                         <Col>
-                            <label className="other-rel">Hva er din relasjon til personen med behov?</label>
+                            <label className="other-rel">Hva er din relasjon til søker?</label>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -228,15 +228,15 @@ export class RelationFormClass extends React.Component {
         return (
 
             <div>
-                <label className="form-header">Hva er din relasjon til den som søker?</label>
+                <label className="form-header">Hva er din relasjon til søkeren?</label>
                 <div className="form-container">
                     <form className="relation">
                         <input type="radio" id="guardian-radio" className="radio-Relation"
                                name="radio-buttons" {...relation} value="guardian"
-                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton} />Jeg er verge for den jeg søker på vegne av
+                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton} />Jeg er verge for søkeren
                         <br/>
                         <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"
-                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>Jeg er i familie med den jeg søker på vegne av
+                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>Jeg er i familie med søkeren
                         <br/>
                         <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation}
                                value="other" checked={relation.value=="other"} onClick={this.handleOtherRadioButton}/>Annet
