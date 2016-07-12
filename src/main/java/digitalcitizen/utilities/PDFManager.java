@@ -19,6 +19,14 @@ public class PDFManager {
     // TODO: Add more templates?
     public File template = getResourceAsFile("formTemplate.pdf");
 
+    /**
+     * A method that utilizes the PDFBox library in order to fill a PDF template with data
+     * from a {@link Submission}. The generated PDF-file is saved on the server.
+     *
+     * @param submission A {@link Submission} containing the data needed to fill the template.
+     * @return The method returns the location (path) of the file on the server.
+     * @throws IOException
+     */
     public String generatePDFofSubmission(Submission submission) throws IOException {
 
         PDDocument pdfTemplate = PDDocument.load(template);
