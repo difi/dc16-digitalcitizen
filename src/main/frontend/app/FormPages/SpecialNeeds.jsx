@@ -9,7 +9,7 @@ import {reduxForm} from 'redux-form';
 import {fieldIsEmpty} from './Utilities/validation.js'
 
 export class SpecialNeedsClass extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
@@ -55,9 +55,9 @@ export class SpecialNeedsClass extends React.Component {
                             <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem? </label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                            <FormControl componentClass="textarea" className="special-needs-textarea" id="mandatoryField"
                                          ref="conditionChanges" {...changes}/>
-                            {changes.touched && changes.error && <div>{changes.error}</div>}
+                            {changes.touched && changes.error && <div className="error">{changes.error}</div>}
                         </Col>
                     </Row>
                     <Row className="form-row-special">
