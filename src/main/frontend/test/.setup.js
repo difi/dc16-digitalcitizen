@@ -1,4 +1,4 @@
-/*require('babel-register')();
+require('babel-register')();
 
 var jsdom = require('jsdom').jsdom;
 
@@ -17,4 +17,4 @@ global.navigator = {
     userAgent: 'node.js'
 };
 
-documentRef = document;*/
+documentRef = document;
