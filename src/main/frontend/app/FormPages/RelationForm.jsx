@@ -30,7 +30,7 @@ export class RelationFormClass extends React.Component {
 
     getGuardianFor() {
         $.ajax({
-            url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + "01108019146",
+            url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {
@@ -254,6 +254,12 @@ export class RelationFormClass extends React.Component {
         )
     }
 }
+RelationFormClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({

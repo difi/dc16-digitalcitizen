@@ -43,8 +43,8 @@ export class LocationPageClass extends React.Component {
                 home: this.props.fields.homeApp.value
             }
         };
-        this.props.saveValues(data);
-        console.log(data);
+        return this.props.saveValues(data);
+   
     }
 
     //Handle the click on the next-button
@@ -133,7 +133,12 @@ export class LocationPageClass extends React.Component {
         )
     }
 }
-
+LocationPageClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 const LocationPage = reduxForm({
     form: 'application',
