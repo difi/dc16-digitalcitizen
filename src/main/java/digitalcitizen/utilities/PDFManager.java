@@ -155,7 +155,7 @@ public class PDFManager {
                     break;
                 // DIV
                 case "doctor":
-                    value = submission.getDoctor().getName();
+                    value = submission.getPerson().getDoctor().getName();
                     field.setValue(value);
                     break;
                 // NEEDS
