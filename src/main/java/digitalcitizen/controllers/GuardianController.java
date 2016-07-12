@@ -20,13 +20,13 @@ public class GuardianController {
     @CrossOrigin
     @RequestMapping(value = "/api/guardians", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Collection<String> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
+    public Collection<Person> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
         //Collection<> test = TestData.GUARDIANS.stream().filter(guardian->guardian.getPNR().equals(pnr)).findFirst().map(guardian-> guardian.getGuardianFor()).collect(Collectors.toList());
-        Collection<String> retrievedGuardians = new ArrayList<>();
+        Collection<Person> retrievedGuardians = new ArrayList<>();
 
         for(Guardian guardian : TestData.GUARDIANS){
             if(guardian.getPNR().equals(pnr)){
-                retrievedGuardians = guardian.getGuardianFor().stream().map(person->person.getName()).collect(Collectors.toList());
+                retrievedGuardians = guardian.getGuardianFor();
             }
         }
 
