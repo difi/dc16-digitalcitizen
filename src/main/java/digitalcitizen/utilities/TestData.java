@@ -4,6 +4,7 @@ import digitalcitizen.models.Address;
 import digitalcitizen.models.Doctor;
 import digitalcitizen.models.Person;
 import digitalcitizen.models.Guardian;
+import digitalcitizen.models.Nursing_Home;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,5 +39,13 @@ public class TestData {
             new Guardian("01108019146", Arrays.asList(new Person("15028047425", "Test Person2", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no"),
                     new Person("13019870019", "Test Person3", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org"))),
             new Guardian("15028047425", Arrays.asList(new Person("06126620649", "Test Person6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com")))
+    );
+    public static final Collection<Nursing_Home> HOMES = Arrays.asList(
+       new Nursing_Home("Frogner sykehjem", "Oslo"),
+       new Nursing_Home("Abildsø sykehjem", "Oslo") ,
+       new Nursing_Home("Ryen sykehjem", "Oslo") ,
+       new Nursing_Home("Sentrum sykehjem", "Trondheim") ,
+       new Nursing_Home("Byåsen sykehjem", "Trondheim") ,
+       new Nursing_Home("Sogndal sykehjem", "Sogndal")
     );
 }
