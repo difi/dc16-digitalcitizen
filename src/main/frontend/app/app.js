@@ -58,7 +58,11 @@ var fieldValues = {
     // Seventh form
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
-    otherNeeds: null            // String
+    otherNeeds: null,            // String
+    application: {
+        municipality: null,
+        home: null
+    }
 };
 
 
