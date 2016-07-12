@@ -25,7 +25,7 @@ import SubmitSuccess from './FormPages/SubmitPage';
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 
-export default class Application extends React.Component {
+class Application extends React.Component {
 
     constructor(props) {
         super(props);
@@ -42,6 +42,7 @@ export default class Application extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
 
     }
+
 
 
     saveValues(field_value) {
@@ -209,3 +210,9 @@ export default class Application extends React.Component {
             }
             }
 
+Application.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    userData: React.PropTypes.object.isRequired
+}
+
+export default Application

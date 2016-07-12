@@ -124,6 +124,12 @@ export class PersonWithNeedInfoClass extends React.Component {
     }
 }
 ;
+PersonWithNeedInfoClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 
 //Validation for form
