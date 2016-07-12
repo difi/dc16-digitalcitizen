@@ -147,19 +147,55 @@ export class AddDependentClass extends React.Component {
             fields: {form1, form2, form3}
         } = this.props;
 
-        //TODO: validate textfield (depOtherRelation). Should be filled out if user choose 'Annet' in the dropdown
+        // value for the combination of validation of each form included in the view
+        var valid = true;
+
+        // values to make the form unvalid if "Annet" is chosen, and no description is given
+        var other1 = true;
+        var other2 = true;
+        var other3 = true;
+
+        // values for the validation of each form
+        var form1validate = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error);
+        var form2validate = (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value &&!form2.phone.error && !form2.mail.error);
+        var form3validate = (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value &&!form3.phone.error && !form3.mail.error);
+
         if (value == "3") {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error)
-                && (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
-            return valid;
+            // All three forms has to be valid if you want to continue
+            valid = form1validate && form2validate && form3validate;
+
+            //If "Annet" is chosen in one or more of the forms, the associated textfield would also need to be valid
+            if(form1.relation.value == "Annet"){
+                other1 = (valid && form1.depOtherRelation.value);
+            }
+            if(form2.relation.value == "Annet"){
+                other2 = (valid && form2.depOtherRelation.value);
+            }
+            if(form3.relation.value == "Annet"){
+                other3 = (valid && form3.depOtherRelation.value);
+            }
+
+            //All four values need to be true to show the next button
+            return valid && other1 && other2 && other3;
+
         } else if (value == "2") {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error)
-                && (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
-            return valid;
+            valid = form1validate && form2validate;
+
+            if(form1.relation.value == "Annet"){
+                other1 = (valid && form1.depOtherRelation.value);
+            }
+            if(form2.relation.value == "Annet"){
+                other2 = (valid && form2.depOtherRelation.value);
+            }
+            return valid && other1 && other2;
+
         } else {
-            var valid = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
-            return valid;
+            valid = form1validate;
+
+            if(form1.relation.value == "Annet"){
+                other1 = (valid && form1.depOtherRelation.value);
+            }
+            return valid && other1;
         }
     }
 
