@@ -83,7 +83,7 @@ class DependentForm extends React.Component {
                         <Col sm={8} md={8}>
                             <DropdownList className="depRel" ref='relation' options={dropdownContent.DEPENDENTRELATIONS}
                                           id="test"
-                                          valueField="value" labelField="relation" {...relation}
+                                          valueField="value" labelField="relation" disabled={this.props.autoFilled} {...relation}
                                           onChange={change => relation.onChange(change.newValue)}/>
                         </Col>
                     </Row>
@@ -98,6 +98,7 @@ class DependentForm extends React.Component {
                                     className="dep-other-rel"
                                     pattern="[A-Za-zæøåÆØÅ]"
                                     placeholder="Skriv inn deres relasjon"
+                                    disabled={this.props.autoFilled}
                                     {...depOtherRelation}
                                 />
                             </Col>
