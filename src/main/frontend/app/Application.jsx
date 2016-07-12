@@ -114,7 +114,9 @@ class Application extends React.Component {
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    userData={userData}/>;
+
                 break;
             case 3:
                 content = <PersonWithNeedForm
@@ -149,7 +151,8 @@ class Application extends React.Component {
                     fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                    userData={userData}/>;
                 break;
             case 7:
                 content = < NeedsForm

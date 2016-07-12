@@ -62,7 +62,7 @@ export class AddDependentClass extends React.Component {
     getPersonToBeDependent() {
 
         $.ajax({
-            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + '06126620649',
+            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {
