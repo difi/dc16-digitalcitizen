@@ -85,10 +85,6 @@ export class SpecialNeedsClass extends React.Component {
                     disabled={!valid}
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    isSubmit={true}
-                    saveUserData={this.props.saveUserData}
-                    fieldValues={this.props.fieldValues}
-                    saveFieldValues={this.saveFieldValues}
                 />
 
             </div>
