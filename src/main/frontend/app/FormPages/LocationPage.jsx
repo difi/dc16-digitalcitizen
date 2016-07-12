@@ -133,7 +133,12 @@ export class LocationPageClass extends React.Component {
         )
     }
 }
-
+LocationPageClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 const LocationPage = reduxForm({
     form: 'application',

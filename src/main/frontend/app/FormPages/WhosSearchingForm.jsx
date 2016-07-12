@@ -61,3 +61,8 @@ export default class WhosSearching extends React.Component {
         )
     }
 };
+
+WhosSearching.propTypes = {
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
