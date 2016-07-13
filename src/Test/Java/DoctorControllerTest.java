@@ -8,13 +8,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * Created by camp-vhe on 13.07.2016.
  */
 
 
-public class DependentControllerSpringTest extends AbstractControllerTest {
+public class DoctorControllerTest extends AbstractControllerTest {
 
 
 
@@ -25,9 +28,9 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testGetPerson() throws Exception {
-        Person testPerson = new Person("01108019146", "Test Person1", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
-        String uri = "http://localhost:9090/api/dependent?pnr=01108019146";
+    public void testGetDoctors() throws Exception {
+        List<Doctor> testData = Arrays.asList(new Doctor("Henrik", "Oslo"), new Doctor("Trine", "Oslo"));
+        String uri = "http://localhost:9090/api/doctors?loc=Oslo";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
 
         String content = result.getResponse().getContentAsString();
@@ -36,6 +39,6 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
 
         Assert.assertEquals("failure - expected HTTP status 200", 200, status );
         Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
-        Assert.assertEquals("Failure - expected Person to be the correct Person", mapToJson(testPerson), content);
+       Assert.assertEquals("Failure - expected List of Doctors to be the correct data", mapToJson(testData), content);
     }
 }
