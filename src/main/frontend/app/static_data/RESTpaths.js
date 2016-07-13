@@ -4,8 +4,8 @@
  * before making a pull request.
  */
 
-var BASE_URL = 'http://dc16-citizen.demo.difi.no/';
-//var BASE_URL = 'http://localhost:9090/';
+//var BASE_URL = 'http://dc16-citizen.demo.difi.no/';
+var BASE_URL = 'http://localhost:9090/';
 
 exports.PATHS = {
     SUBMIT: BASE_URL + 'send',
