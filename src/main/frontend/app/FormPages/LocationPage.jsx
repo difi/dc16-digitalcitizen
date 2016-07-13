@@ -23,7 +23,9 @@ export class LocationPageClass extends React.Component {
     }
 
     findMunicipality(mun){
-        this.props.fields.municipalityApp.onChange(mun);
+        //If you have not yet chosen a value here - have your own municipality as default
+        if(!this.props.fields.municipalityApp.value){
+        this.props.fields.municipalityApp.onChange(mun);}
     }
 
     //Handle the click on the back-button
@@ -34,9 +36,11 @@ export class LocationPageClass extends React.Component {
     }
 
     saveFieldValues() {
+        //Checks if value exists - otherwise null to avoid null error
+        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null
         var data = {
             application: {
-                municipality: this.props.fields.municipalityApp.value.name,
+                municipality: mun,
                 home: this.props.fields.homeApp.value
             }
         };
@@ -54,7 +58,7 @@ export class LocationPageClass extends React.Component {
     }
 
     municipalityChange(value){
-        this.props.fields.municipalityApp.onChange(value);
+        this.props.fields.municipalityApp.onChange(value.name);
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
             dataType: 'json',
@@ -68,33 +72,28 @@ export class LocationPageClass extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
-
-
     }
 
     render() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid=true;
-        console.log("kommune:" + municipalityApp);
         var homes = null;
         console.log("homeOpt:" + homeOptions.value);
-        if(homeOptions.value){
-             homes =   <Row className="form-row">
-             <Col sm={6} md={6}>
-                 <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
-             </Col>
-             <Col sm={6} md={6}>
-             <DropdownList
-                    id='homes'
-                    options={homeOptions.value}
-                    labelField='name'
-                    valueField='name'
-                    {...homeApp}
-                    onChange={change=>homeApp.onChange(change.newValue)}/>
-                 </Col>
-                 </Row>;
-        }
+        {homeOptions.value?
+            homes =   <Row className="form-row">
+                <Col sm={6} md={6}>
+                    <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+                </Col>
+                <Col sm={6} md={6}>
+                    <DropdownList
+                        id='homes'
+                        options={homeOptions.value}
+                        labelField='name'
+                        valueField='name'
+                        {...homeApp}
+                        onChange={change=>homeApp.onChange(change.newValue)}/>
+                </Col>
+            </Row>: ''}
         return (
             <componentClass>
                 <label className="form-header">Hvor  ønsker du å søke deg deg til? </label>
@@ -109,7 +108,7 @@ export class LocationPageClass extends React.Component {
                         <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                    ref="munSelect"
                                    labelKey="name"
-                                   selected={municipalityApp.value? [{name: municipalityApp.value.name}]: []}
+                                   selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
                                    onChange={value=>this.municipalityChange(value[0])}/>
                                 </Col>
                             </Row>
