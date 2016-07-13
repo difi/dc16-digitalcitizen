@@ -29,12 +29,14 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
         Person testPerson = new Person("01108019146", "Test Person1", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
         String uri = "http://localhost:9090/api/dependent?pnr=01108019146";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
+
         String content = result.getResponse().getContentAsString();
+        System.out.println(mapToJson(testPerson));
         System.out.println(content);
         int status = result.getResponse().getStatus();
 
         Assert.assertEquals("failure - expected HTTP status 200", 200, status );
         Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
-        Assert.assertEquals("Failure - expected Person to be the correct Person", content, testPerson)
+        Assert.assertEquals("Failure - expected Person to be the correct Person", mapToJson(testPerson), content);
     }
 }
