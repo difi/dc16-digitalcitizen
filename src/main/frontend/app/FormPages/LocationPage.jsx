@@ -13,9 +13,6 @@ import RESTpaths from '../static_data/RESTpaths.js';
 export class LocationPageClass extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-          homeOptions:  null
-        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.findMunicipality = this.findMunicipality.bind(this);
@@ -55,8 +52,8 @@ export class LocationPageClass extends React.Component {
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
     }
-    municipalityChange(value){
 
+    municipalityChange(value){
         this.props.fields.municipalityApp.onChange(value);
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
@@ -64,9 +61,7 @@ export class LocationPageClass extends React.Component {
             cache: false,
             success: function (data) {
                 console.log(data);
-                this.setState({
-                    homeOptions: data
-                });
+                this.props.fields.homeOptions.onChange(data);
                 this.forceUpdate();
             }.bind(this),
             error: function (xhr, status, err) {
@@ -79,10 +74,12 @@ export class LocationPageClass extends React.Component {
     }
 
     render() {
-        const {fields: {municipalityApp, homeApp}} = this.props;
+        const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid=true;
+        console.log("kommune:" + municipalityApp);
         var homes = null;
-        if(this.state.homeOptions){
+        console.log("homeOpt:" + homeOptions.value);
+        if(homeOptions.value){
              homes =   <Row className="form-row">
              <Col sm={6} md={6}>
                  <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
@@ -90,7 +87,7 @@ export class LocationPageClass extends React.Component {
              <Col sm={6} md={6}>
              <DropdownList
                     id='homes'
-                    options={this.state.homeOptions}
+                    options={homeOptions.value}
                     labelField='name'
                     valueField='name'
                     {...homeApp}
@@ -116,9 +113,7 @@ export class LocationPageClass extends React.Component {
                                    onChange={value=>this.municipalityChange(value[0])}/>
                                 </Col>
                             </Row>
-
                         {homes}
-
                     </form>
                 </div>
                 <NavigationButtons
@@ -142,7 +137,7 @@ LocationPageClass.propTypes = {
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp"],
+    fields: ["municipalityApp", "homeApp", "homeOptions"],
     destroyOnUnmount: false
 })(LocationPageClass);
 
