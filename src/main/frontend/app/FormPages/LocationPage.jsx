@@ -75,9 +75,6 @@ export class LocationPageClass extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
-
-
     }
 
     render() {
