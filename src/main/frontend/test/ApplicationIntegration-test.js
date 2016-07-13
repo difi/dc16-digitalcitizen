@@ -32,8 +32,8 @@ var Button = require('react-bootstrap/lib/Button');
 
 var assign = require('object-assign');
 var userData = {
-    pnr: "01108019146",
-    name: "TestPerson1",
+    pnr: "15028047425",
+    name: "Elias Eliassen",
     submissionId: null
 };
 
@@ -128,9 +128,10 @@ describe("Application", () => {
             step: 3
         });
         var thirdPage = subject.find(PersonWithNeedForm);
+        expect(thirdPage).to.have.length(1);
         //With PNR it should forward you to page 6
-        thirdPage.find(FormControl).first().simulate('change', {target: {value: '26024003298'}});
-        thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
+        thirdPage.find(FormControl).first().simulate('change', {target: {value: '15028047425'}});
+        thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Elias Eliassen'}});
         var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(6);

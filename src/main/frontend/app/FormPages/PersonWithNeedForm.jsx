@@ -32,13 +32,18 @@ export class PersonWithNeedClass extends React.Component {
 
     
     handleClickBack() {
-        this.saveFieldValues();
+        this.savePerson();
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
     handleClickNext() {
-        this.savePerson();
+        if (this.props.fields.checked.value) {
+            this.saveFieldValues();
+        } else {
+            this.savePerson();
+        }
+
 
         if (this.props.fields.checked.value) {
             console.log("State 4");
@@ -52,11 +57,11 @@ export class PersonWithNeedClass extends React.Component {
 
     saveFieldValues() {
 
-        var pnr = this.props.fields.pnr.value;
+        /*var pnr = this.props.fields.pnr.value;
         if (this.props.fields.checked.value) {
             pnr = null;
-        }
-
+        }*/
+        var pnr = null;
         var data = {
             dontGotPNRnumber: this.props.fields.checked.value,
             person: {
@@ -73,6 +78,7 @@ export class PersonWithNeedClass extends React.Component {
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
+
         var personP = {};
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
@@ -80,8 +86,9 @@ export class PersonWithNeedClass extends React.Component {
             cache: false,
             success: function (data) {
                 personP = {
+                    dontGotPNRnumber: this.props.fields.checked.value,
                     person: {
-                        pnr: data.pnr,
+                        pnr: pnr,
                         name: data.name,
                         address: {
                             country: data.address.country,
@@ -107,7 +114,6 @@ export class PersonWithNeedClass extends React.Component {
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
-        console.log("Error: " + name.error)
         var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         if (checked.value) {
             return (
@@ -235,7 +241,7 @@ PersonWithNeedClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired
 };
 
 //Validation for form
