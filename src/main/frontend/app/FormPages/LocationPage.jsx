@@ -26,7 +26,9 @@ export class LocationPageClass extends React.Component {
     }
 
     findMunicipality(mun){
-        this.props.fields.municipalityApp.onChange(mun);
+        //If you have not yet chosen a value here - have your own municipality as default
+        if(!this.props.fields.municipalityApp.value){
+        this.props.fields.municipalityApp.onChange(mun);}
     }
 
     //Handle the click on the back-button
@@ -38,7 +40,7 @@ export class LocationPageClass extends React.Component {
 
     saveFieldValues() {
         //Checks if value exists - otherwise null to avoid null error
-        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value.name : null
+        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null
         var data = {
             application: {
                 municipality: mun,
@@ -59,7 +61,7 @@ export class LocationPageClass extends React.Component {
     }
     municipalityChange(value){
 
-        this.props.fields.municipalityApp.onChange(value);
+        this.props.fields.municipalityApp.onChange(value.name);
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
             dataType: 'json',
@@ -112,7 +114,7 @@ export class LocationPageClass extends React.Component {
                                    ref="munSelect"
                                    className="municipTypeAhead"
                                    labelKey="name"
-                                   selected={municipalityApp.value? [{name: municipalityApp.value.name}]: []}
+                                   selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
                                    onChange={value=>this.municipalityChange(value[0])}/>
                                 </Col>
                             </Row>
