@@ -18,7 +18,7 @@ public class PersonControllerSpringTest extends AbstractControllerTest {
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
 
@@ -32,9 +32,9 @@ public class PersonControllerSpringTest extends AbstractControllerTest {
         System.out.println(content);
         int status = result.getResponse().getStatus();
 
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status );
-        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
-       Assert.assertTrue("Failure - expected Person to be the correct Person", Boolean.valueOf(content));
+        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
+        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
+        Assert.assertTrue("Failure - expected Person to be the correct Person", Boolean.valueOf(content));
     }
 
     @Test
@@ -47,8 +47,8 @@ public class PersonControllerSpringTest extends AbstractControllerTest {
         System.out.println(content);
         int status = result.getResponse().getStatus();
 
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status );
-        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
-       Assert.assertFalse("Failure - expected Person to be the correct Person", Boolean.valueOf(content));
+        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
+        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
+        Assert.assertFalse("Failure - expected Person to be the correct Person", Boolean.valueOf(content));
     }
 }

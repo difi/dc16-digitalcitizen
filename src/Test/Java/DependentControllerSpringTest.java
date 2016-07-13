@@ -17,10 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 public class DependentControllerSpringTest extends AbstractControllerTest {
 
 
-
-
     @Before
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
 
@@ -34,8 +32,8 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
 
         int status = result.getResponse().getStatus();
 
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status );
-        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
+        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
+        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
         Assert.assertEquals("Failure - expected Person to be the correct Person", mapToJson(testPerson), content);
     }
 }

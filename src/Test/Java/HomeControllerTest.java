@@ -22,14 +22,14 @@ public class HomeControllerTest extends AbstractControllerTest {
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
 
     @Test
     public void testGetHomes() throws Exception {
-        List<Nursing_Home> testData =   Arrays.asList(new Nursing_Home("Frogner sykehjem", "Oslo"),
-        new Nursing_Home("Manglerud sykehjem", "Oslo") ,
+        List<Nursing_Home> testData = Arrays.asList(new Nursing_Home("Frogner sykehjem", "Oslo"),
+                new Nursing_Home("Manglerud sykehjem", "Oslo"),
                 new Nursing_Home("Ryen sykehjem", "Oslo"));
 
         String uri = "http://localhost:9090/api/homes?mun=Oslo";
@@ -39,8 +39,8 @@ public class HomeControllerTest extends AbstractControllerTest {
 
         int status = result.getResponse().getStatus();
 
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status );
-        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
+        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
+        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
         Assert.assertEquals("Failure - expected Person to be the correct Person", mapToJson(testData), content);
     }
 }

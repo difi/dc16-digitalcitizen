@@ -26,6 +26,7 @@ public class AbstractControllerTest extends AbstractSpringTest {
         return mapper.writeValueAsString(obj);
 
     }
+
     protected <T> T mapFromJson(String json, Class<T> clazz) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(json, clazz);

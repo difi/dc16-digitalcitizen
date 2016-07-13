@@ -20,10 +20,8 @@ import java.util.List;
 public class DoctorControllerTest extends AbstractControllerTest {
 
 
-
-
     @Before
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
 
@@ -37,8 +35,8 @@ public class DoctorControllerTest extends AbstractControllerTest {
 
         int status = result.getResponse().getStatus();
 
-        Assert.assertEquals("failure - expected HTTP status 200", 200, status );
-        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length()>0);
-       Assert.assertEquals("Failure - expected List of Doctors to be the correct data", mapToJson(testData), content);
+        Assert.assertEquals("failure - expected HTTP status 200", 200, status);
+        Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
+        Assert.assertEquals("Failure - expected List of Doctors to be the correct data", mapToJson(testData), content);
     }
 }
