@@ -15,6 +15,7 @@ exports.PATHS = {
     GEONAMES_BASE: 'http://api.geonames.org/postalCodeLookupJSON?',
     GUARDIAN_BASE: BASE_URL + 'api/guardians',
     DEPENDENT_BASE: BASE_URL + 'api/dependent',
-    HOME_BASE: BASE_URL + 'api/homes'
+    HOME_BASE: BASE_URL + 'api/homes',
+    PERSON_BASE: BASE_URL + 'api/person'
 };
  
