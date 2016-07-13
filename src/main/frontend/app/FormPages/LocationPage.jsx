@@ -37,9 +37,11 @@ export class LocationPageClass extends React.Component {
     }
 
     saveFieldValues() {
+        //Checks if value exists - otherwise null to avoid null error
+        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value.name : null
         var data = {
             application: {
-                municipality: this.props.fields.municipalityApp.value.name,
+                municipality: mun,
                 home: this.props.fields.homeApp.value
             }
         };
