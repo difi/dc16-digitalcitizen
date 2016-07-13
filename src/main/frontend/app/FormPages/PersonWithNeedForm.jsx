@@ -28,11 +28,16 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
     }
 
     
     handleClickBack() {
-        this.savePerson();
+        if (this.props.fields.checked.value) {
+            this.saveFieldValues();
+        } else {
+            this.savePerson();
+        }
         console.log("State 2");
         (this.props.previousStep(2));
     }
