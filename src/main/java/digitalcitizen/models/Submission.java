@@ -16,8 +16,6 @@ public class Submission {
     private boolean dependent;
     // Third form
     private Person person;
-    // Fourth form
-    private Doctor doctor; // {}, // Object
     // Fifth form
     private ArrayList<Dependent> dependents; // List of objects
     // Sixth form
@@ -102,14 +100,6 @@ public class Submission {
         this.person = person;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public ArrayList<Dependent> getDependents() {
         return dependents;
     }
@@ -135,7 +125,6 @@ public class Submission {
                 ", typeOfRelation='" + typeOfRelation + '\'' +
                 ", dependent=" + dependent +
                 ", person=" + person +
-                ", doctor=" + doctor +
                 ", dependents=" + dependents +
                 ", lengthOfStay='" + lengthOfStay + '\'' +
                 ", medicalNeeds='" + medicalNeeds + '\'' +
