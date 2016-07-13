@@ -155,38 +155,17 @@ export function formatPhone(value) {
 
 var checkNameVal;
 export function validatePnoName(pno, name) {
-    var nameP;
-    //console.log("Pno:" + pno);
-    //console.log("Name: " + name);
-    if (pno != undefined) {
+    if (pno != undefined && name != undefined) {
         $.ajax({
-            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pno,
+            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
             dataType: 'json',
+            async: false,
             cache: false,
             success: function (data) {
-                nameP = data.name;
-                if ((isEmpty(name)) || (name !== nameP)) {
-                    console.log("feil");
-                    return checkNameVal = false;
+                if (data == true) {
+                    checkNameVal = true;
                 } else {
-                    console.log("likt");
-                    var personP = {
-                        person: {
-                            pnr: data.pnr,
-                            name: nameP,
-                            address: {
-                                country: data.address.country,
-                                municipality: data.address.municipality,
-                                streetAddress: data.address.street,
-                                zipcode: data.address.zipcode,
-                                postal: data.address.postal
-                            },
-                            telephone: data.telephone
-                        }
-                    };
-                    console.log(personP);
-
-                    return checkNameVal = true;
+                    checkNameVal = false;
                 }
             }.bind(this),
             error: function (xhr, status, err) {
@@ -194,6 +173,5 @@ export function validatePnoName(pno, name) {
             }.bind(this)
         });
     }
-    console.log("Eller hit?" + checkNameVal);
     return checkNameVal;
 }

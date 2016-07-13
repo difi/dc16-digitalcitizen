@@ -32,7 +32,8 @@ public class TestData {
             new Person("13118208018", "Mia Miasen", new Address("Oslo", "NO", "Oslo", "testveien 4", "0001"), "99999993", "test@test.sexy"),
             new Person("29109632323", "Mildrid Mildridsen", new Address("Oslo", "NO", "Oslo", "testveien 5", "0001"), "99999994", "test@test.net"),
             new Person("06126620649", "Solfrid Solfridsen", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com"),
-            new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no")
+            new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no"),
+            new Person("10115914931", "Line", new Address("Sogndal", "NO", "Sogndal", "testveien 8", "6856"), "99999908", "test@test.no")
     );
 
     public static final Collection<Guardian> GUARDIANS = Arrays.asList(
