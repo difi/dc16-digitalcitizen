@@ -24,7 +24,7 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
 
     @Test
     public void testGetPerson() throws Exception {
-        Person testPerson = new Person("01108019146", "Test Person1", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
+        Person testPerson = new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
         String uri = "http://localhost:9090/api/dependent?pnr=01108019146";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
 

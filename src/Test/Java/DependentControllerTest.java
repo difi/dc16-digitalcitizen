@@ -20,7 +20,7 @@ public class DependentControllerTest extends TestCase {
 
 
     public void testGetPersonByPnrShouldReturnPerson() {
-        Person test = new Person("01108019146", "Test Person1", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
+        Person test = new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim"));
         Person p = controller.getPersonasDependent("01108019146");
         assertTrue(p.equals(test));
 
