@@ -3,15 +3,11 @@
  */
 
 import React from 'react'
-var FormControl = require('react-bootstrap/lib/FormControl');
+
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import SpecialNeeds from '../app/FormPages/SpecialNeeds';
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
@@ -19,6 +15,14 @@ var Button = require('react-bootstrap/lib/Button');
 import { reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 
+var FormControl = require('react-bootstrap/lib/FormControl');
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -52,23 +56,25 @@ var fieldValues = {
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
     otherNeeds: null            // String
-
 };
 
 describe("Integration of DependentForm", () => {
     let store = null;
     let subject = null;
 
+    // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         store = createStore(combineReducers({ form: formReducer }));
-
+        // the fields that are individual for each page
         const props = {
             store,
             fieldValues
         };
+        //Renders the SpecialNeeds with props
         subject = mount(<SpecialNeeds {...props}/>);
     });
     it("Shows error message when first field is touched", () => {
+        //expect wrapper to exist
         expect(subject).to.have.length(1);
 
         const input = subject.find('#mandatoryField');

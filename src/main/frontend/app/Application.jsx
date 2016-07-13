@@ -100,7 +100,7 @@ class Application extends React.Component {
         var content;
         var fieldValues = this.state.fieldValues;
         var userData = this.state.userData;
-        console.log(fieldValues);
+
         switch (this.state.step) {
             case 1:
                 content = <WhosSearching

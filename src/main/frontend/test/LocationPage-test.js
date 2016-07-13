@@ -1,6 +1,7 @@
 /**
- * Created by camp-vha on 05.07.2016.
+ * Created by camp-vha on 13.07.2016.
  */
+
 import React from 'react';
 
 //Shallow renders only our component without touching the DOM.
@@ -10,7 +11,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {PersonWithNeedInfoClass} from '../app/FormPages/PersonWithNeedInfoForm.jsx';
+import {LocationPageClass} from '../app/FormPages/LocationPage.jsx';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
@@ -49,7 +50,7 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-describe("PersonWithNeedInfoClass", function() {
+describe("LocationPageClass", function() {
     let wrapper = null;
 
     // this is run before each test (it ('...', function (){}))
@@ -57,16 +58,21 @@ describe("PersonWithNeedInfoClass", function() {
         // the fields that are individual for each page
         const props = {
             fields: {
-                name: "skjhakl",
-                number: 12345678,
-                street: "gyt",
-                zipcode: 7020
+                municipalityApp: {
+                    value: {
+                        name: "Oslo"
+                    },
+                    onChange: function onChange () {}
+                },
+                homeApp: {
+                    value: "Ryen sykehjem",
+                    onChange: function onChange () {}
+                }
             },
             fieldValues
         };
-
-        //Renders the PersonWithNeedInfoClass with props
-        wrapper = shallow(<PersonWithNeedInfoClass {...props}/>);
+        //Renders the NeedsForm with props
+        wrapper = shallow(<LocationPageClass {...props}/>);
     });
 
     it('should have header and container classnames for HTML-elements', function () {
@@ -77,20 +83,19 @@ describe("PersonWithNeedInfoClass", function() {
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
-    it('should have two HTML-elements with classname=name', function () {
+    it('should have label with classname municipality', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.name')).to.have.length(2);
+        expect(wrapper.find('.municipality')).to.have.length(1);
     });
 
-    it('should have two HTML-elements with classname=adr', function () {
+    it('should have one TypeAhead-field', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.adr')).to.have.length(2);
+        expect(wrapper.find('.municipTypeAhead')).to.have.length(1);
     });
 
-    it('should have one HTML-elements with classname=tlf, and one with classname=tlfFrom',function () {
+    /*it('if homeOptions are available, show label with classname=home', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.tlf')).to.have.length(1);
-        expect(wrapper.find('.tlfFrom')).to.have.length(1);
-    });
+
+    });*/
 
 });
