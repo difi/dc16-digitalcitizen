@@ -7,14 +7,15 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {GeneralPractitionerClass} from '../app/FormPages/GeneralPractitioner.jsx';
+//Import TypeAhead to be able to find the fields where it is used
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -50,25 +51,34 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-var defaultProps = {
-    fields: {
-        doctorName: "sd",
-        doctors: {value: [{name: "Berit"}], onChange: function onChange () {}}
-    },
-    fieldValues
-};
-
 describe("GeneralPractitionerClass", function() {
-    //Radio-buttons
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                doctorName: "sd",
+                doctors: {value: [{name: "Berit"}], onChange: function onChange () {}}
+            },
+            fieldValues
+        };
+
+        //Renders the GeneralPractitionerClass with props
+        wrapper = shallow(<GeneralPractitionerClass {...props}/>);
+    });
 
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = mount(<GeneralPractitionerClass {...defaultProps}/> );
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('should have two HTML-elements with className=genPract', function () {
-        const wrapper = mount(<GeneralPractitionerClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('label.genPract')).to.have.length(1);
         expect(wrapper.find(TypeAhead)).to.have.length(1);
     });

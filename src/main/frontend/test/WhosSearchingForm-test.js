@@ -7,13 +7,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import WhosSearchingForm from '../app/FormPages/WhosSearchingForm.jsx';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -50,14 +50,28 @@ var fieldValues = {
 };
 
 describe("WhosSearchingForm", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fieldValues
+        };
+        //Renders the WhosSearchingForm with props
+        wrapper = shallow(<WhosSearchingForm {...props}/>);
+    });
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<WhosSearchingForm fieldValues = {fieldValues}/>);
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('two buttons exists', function () {
-        const wrapper = shallow(<WhosSearchingForm fieldValues = {fieldValues}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('Button')).to.have.length(2);
     });
 });

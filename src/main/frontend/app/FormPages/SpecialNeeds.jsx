@@ -48,7 +48,7 @@ export class SpecialNeedsClass extends React.Component {
 
         return (
             <div>
-                <label className="form-header">Utfyllende informasjon:  </label>
+                <label className="form-header">Utfyllende informasjon  </label>
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
@@ -91,6 +91,13 @@ export class SpecialNeedsClass extends React.Component {
         );
     }
 }
+SpecialNeedsClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
+
 
 //Validation for form
 const validate = values => {

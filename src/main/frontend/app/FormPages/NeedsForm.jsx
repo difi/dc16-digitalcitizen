@@ -53,7 +53,7 @@ export class NeedsFormClass extends React.Component {
         var valid = need.value;
         return (
             <componentClass>
-                <label className="form-header">Søker du om kortidsopphold eller langtidsopphold?</label>
+                <label className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
 
                 <div className="form-container">
                     <form className="needs">
@@ -71,7 +71,12 @@ export class NeedsFormClass extends React.Component {
         )
     }
 }
-
+NeedsFormClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 const NeedsForm = reduxForm({
     form: 'application',

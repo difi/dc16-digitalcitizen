@@ -8,11 +8,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {AddDependentClass} from '../app/FormPages/AddDependent.jsx';
 
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -47,31 +49,42 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-var defaultProps = {
-    fields: {
-        form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-        form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-        form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-        numDep: {value: 1},
-        displayButton: {value: 'block'}
-        //block: synes, none: ikke knapp
-    },
-    fieldValues
-};
 
 describe("AddDependentClass", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                numDep: {value: 1},
+                displayButton: {value: 'block'}
+                //block: the button is visible, none: the button is hidden
+            },
+            fieldValues
+        };
+        //Renders the AddDependentClass with props
+        wrapper = shallow(<AddDependentClass {...props}/>);
+    });
+
     it('should have header classnames for HTML-elements', function () {
-        const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
     });
 
     it('should have div with ID=dep1', function () {
-        const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
+        expect(wrapper).to.have.length(1);
         expect (wrapper.find('#dep1')).to.have.length(1);
     });
 
     it('should have addDependent-button', function () {
-        const wrapper = shallow(<AddDependentClass {...defaultProps}/> );
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.addDepButton')).to.have.length(1);
     });
 

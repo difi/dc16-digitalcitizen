@@ -22,14 +22,16 @@ var DropdownList = React.createClass({
         return {
             valueField: 'value',
             labelField: 'label',
-            onChange: null
+            onChange: null,
+            disabled: false
         };
     },
 
     getInitialState: function () {
         var selected = this.getSelectedFromProps(this.props);
         return {
-            selected: selected
+            selected: selected,
+            disabled: this.props.disabled
         }
     },
 
@@ -80,6 +82,7 @@ var DropdownList = React.createClass({
                     className='form-control'
                     ref="selectlist"
                     value={this.state.selected}
+                    disabled={this.state.disabled}
                     onChange={this.handleChange}>
                 {options}
             </select>

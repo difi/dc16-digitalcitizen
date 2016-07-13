@@ -3,15 +3,11 @@
  */
 
 import React from 'react'
-var FormControl = require('react-bootstrap/lib/FormControl');
+
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import PersonWithNeed from '../app/FormPages/PersonWithNeedForm';
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
@@ -19,16 +15,24 @@ var Button = require('react-bootstrap/lib/Button');
 import { reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 
+var FormControl = require('react-bootstrap/lib/FormControl');
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+
 describe("Integration of PersonWithNeedForm", () => {
     let store = null;
     let subject = null;
 
+    // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         store = createStore(combineReducers({ form: formReducer }));
-
+        // the fields that are individual for each page
         const props = {
             store
         };
+        //Renders the PersonWithNeed with props
         subject = mount(<PersonWithNeed {...props}/>);
     });
     it("Shows error message when field is touched", () => {

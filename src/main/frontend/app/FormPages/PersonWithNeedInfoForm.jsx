@@ -68,7 +68,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         return (
             <form>
                 <div>
-                    <label className="form-header">Informasjon om person med behov</label>
+                    <label className="form-header">Informasjon om søker</label>
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sm={4} md={4}>
@@ -124,6 +124,12 @@ export class PersonWithNeedInfoClass extends React.Component {
     }
 }
 ;
+PersonWithNeedInfoClass.propTypes = {
+    fieldValues: React.PropTypes.object.isRequired,
+    previousStep: React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired,
+};
 
 
 //Validation for form
