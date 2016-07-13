@@ -19,8 +19,6 @@ module.exports = function(config) {
         webpackMiddleWare: {
             noInfo: true
         },
-        
-
 
         babelPreprocessor: {
             options: {
