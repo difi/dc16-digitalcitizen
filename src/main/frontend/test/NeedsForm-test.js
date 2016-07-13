@@ -7,13 +7,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {NeedsFormClass} from '../app/FormPages/NeedsForm.jsx';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -48,31 +48,40 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-var defaultProps = {
-    fields: {
-        need: false
-    },
-    fieldValues
-};
 
 describe("NeedsFormClass", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                need: false
+            },
+            fieldValues
+        };
+        //Renders the NeedsForm with props
+        wrapper = shallow(<NeedsFormClass {...props}/>);
+    });
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('should have a HTML-element with className = needs', function () {
-        //Render the NeedsForm with fieldValues it is dependent on from Application - so we do not
-        // have to also render Application
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/> );
-
+        expect(wrapper).to.have.length(1);
         //Expect to find one element with the class name "needs"
         expect(wrapper.find('.needs')).to.have.length(1);
     });
 
     it('two radio-buttons exists', function () {
-        const wrapper = shallow(<NeedsFormClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
+        //Expect to find two elements with the tag input of type radio.
         expect(wrapper.find('input[type="radio"]')).to.have.length(2);
     });
 });

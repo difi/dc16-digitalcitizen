@@ -7,13 +7,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {PersonWithNeedInfoClass} from '../app/FormPages/PersonWithNeedInfoForm.jsx';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -48,35 +48,47 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
-var defaultProps = {
-    fields: {
-        name: "skjhakl",
-        number: 12345678,
-        street: "gyt",
-        zipcode: 7020
-    },
-    fieldValues
-};
 
-describe("PersonWithNeedClass", function() {
+describe("PersonWithNeedInfoClass", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                name: "skjhakl",
+                number: 12345678,
+                street: "gyt",
+                zipcode: 7020
+            },
+            fieldValues
+        };
+
+        //Renders the PersonWithNeedInfoClass with props
+        wrapper = shallow(<PersonWithNeedInfoClass {...props}/>);
+    });
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('should have two HTML-elements with classname=name', function () {
-        const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.name')).to.have.length(2);
     });
 
     it('should have two HTML-elements with classname=adr', function () {
-        const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.adr')).to.have.length(2);
     });
 
     it('should have one HTML-elements with classname=tlf, and one with classname=tlfFrom',function () {
-        const wrapper = shallow(<PersonWithNeedInfoClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.tlf')).to.have.length(1);
         expect(wrapper.find('.tlfFrom')).to.have.length(1);
     });
