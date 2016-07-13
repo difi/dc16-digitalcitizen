@@ -8,13 +8,13 @@ import React from 'react';
 //Mount gives full DOM rendering.
 //Render renders react components to static HTML and analyze the resulting HTML structure.
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import {RelationFormClass} from '../app/FormPages/RelationForm.jsx';
 
-//Added these values from Application to simulate that NeedsForm have received these values from Application,
-// because NeedsForm is dependent on these Application values
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -49,47 +49,59 @@ var fieldValues = {
     conditionChanges: null,     // String
     otherNeeds: null            // String
 };
+
 var userData = {
     pnr: "01108019146",
     name: "TestPerson1",
     submissionId: null
 };
 
-var defaultProps = {
-    fields: {
-        relation: {value: "undefined"},
-        typeOfRelation: "sibling",
-        nameOfChild: "ss",
-        isDependent: false,
-        otherRelation: "sd",
-        guardianFor: {
-            value: [{label: "", name: ""}],
-            onChange: function onChange () {}
-        }
-    },
-    fieldValues,
-    userData
-};
-
 describe("RelationFormClass", function() {
+    let wrapper = null;
+
+    // this is run before each test (it ('...', function (){}))
+    beforeEach(() => {
+        // the fields that are individual for each page
+        const props = {
+            fields: {
+                relation: {value: "undefined"},
+                typeOfRelation: "sibling",
+                nameOfChild: "ss",
+                isDependent: false,
+                otherRelation: "sd",
+                guardianFor: {
+                    value: [{label: "", name: ""}],
+                    onChange: function onChange () {}
+                }
+            },
+            fieldValues,
+            userData
+        };
+
+        //Renders the RelationFormClass with props
+        wrapper = shallow(<RelationFormClass {...props}/>);
+    });
+
     it('should have header and container classnames for HTML-elements', function () {
-        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        //expect wrapper to exist
+        expect(wrapper).to.have.length(1);
+        //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
     it('A HTML-element, with className = relation, exists', function () {
-        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('.relation')).to.have.length(1);
     });
 
     it('three radio-buttons exists', function () {
-        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('input[type="radio"]')).to.have.length(3);
     });
 
     it('correct radio-button exists', function () {
-        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('#guardian-radio')).to.have.length(1);
         expect(wrapper.find('#family-radio')).to.have.length(1);
         expect(wrapper.find('#other-radio')).to.have.length(1);
@@ -108,7 +120,6 @@ describe("RelationFormClass", function() {
                     value: [{label: "", name: ""}],
                     onChange: function onChange () {}
                 }
-
             },
             fieldValues,
             userData
@@ -120,7 +131,7 @@ describe("RelationFormClass", function() {
         expect(wrapper.find('DropdownList.guardian-rel')).to.have.length(1);
     });
 
-    it('in case family-button is pressed, show label and dropdown-list, and checkbox', function () {
+    it('in case family-button is pressed, show label, dropdown-list, and checkbox', function () {
         //Need to redifine defaultProps because we need the relation value to be family, for this test only
         var defaultProps = {
             fields: {
@@ -169,7 +180,7 @@ describe("RelationFormClass", function() {
 
 
     it('If none of the radio buttons are pressed, only the radiobuttons and the header is going to be shown', function () {
-        const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
+        expect(wrapper).to.have.length(1);
         expect(wrapper.find('label#guardian')).to.have.length(0);
         expect(wrapper.find('label#family')).to.have.length(0);
         expect(wrapper.find('label#other')).to.have.length(0);

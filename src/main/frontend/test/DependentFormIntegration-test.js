@@ -3,16 +3,12 @@
  */
 
 import React from 'react'
-var FormControl = require('react-bootstrap/lib/FormControl');
+
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import AddDependent from '../app/FormPages/AddDependent';
 import DependentForm from '../app/FormPages/Components/DependentForm'
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
@@ -20,6 +16,14 @@ var Button = require('react-bootstrap/lib/Button');
 import { reducer as formReducer } from 'redux-form';
 import { createStore, combineReducers } from 'redux';
 
+var FormControl = require('react-bootstrap/lib/FormControl');
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -52,14 +56,16 @@ var fieldValues = {
     // Seventh form
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
-    otherNeeds: null,            // String
+    otherNeeds: null            // String
 
 };
 
 describe("Integration of DependentForm", () => {
     let store = null;
     let subject = null;
+    let wrapper = null;
 
+    // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         store = createStore(combineReducers({ form: formReducer }));
 
@@ -68,11 +74,14 @@ describe("Integration of DependentForm", () => {
             fieldValues
         };
         subject = mount(<AddDependent {...props}/>);
+        // Find the first element of DependentForm in AddDependent.
+        wrapper = subject.find(DependentForm).first();
     });
     it("Shows error message when telephone field is touched", () => {
-        const wrapper = subject.find(DependentForm).first();
+        //expect wrapper to exist
         expect(wrapper).to.have.length(1);
 
+        // Find the element with classname "tlfForm
         const input = wrapper.find('.tlfForm');
         expect(input).to.have.length(1);
 
@@ -80,7 +89,6 @@ describe("Integration of DependentForm", () => {
         // field has been touched. To mimic touching the field, we simulate a
         // blur event, which means the input's onBlur method will run, which
         // will call the onBlur method supplied by Redux-Form.
-
         input.simulate('blur');
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
@@ -90,16 +98,10 @@ describe("Integration of DependentForm", () => {
     });
 
     it("Do not show error message when telephone field has correct value", () => {
-        const wrapper = subject.find(DependentForm).first();
         expect(wrapper).to.have.length(1);
 
         const input = wrapper.find('.tlfForm');
         expect(input).to.have.length(1);
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
 
         input.simulate('blur');
         input.simulate('change', {target: {value: "123 45 678"}});
@@ -110,16 +112,10 @@ describe("Integration of DependentForm", () => {
     });
 
     it("Shows error message when email field is touched", () => {
-        const wrapper = subject.find(DependentForm).first();
         expect(wrapper).to.have.length(1);
 
         const input = wrapper.find('.mailForm');
         expect(input).to.have.length(1);
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
 
         input.simulate('blur');
         input.simulate('change', {target: {value: "email"}});
@@ -132,16 +128,10 @@ describe("Integration of DependentForm", () => {
     });
 
     it("Do not show error message when email field has correct value", () => {
-        const wrapper = subject.find(DependentForm).first();
         expect(wrapper).to.have.length(1);
 
         const input = wrapper.find('.mailForm');
         expect(input).to.have.length(1);
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
 
         input.simulate('blur');
         input.simulate('change', {target: {value: "vh@f.no"}});

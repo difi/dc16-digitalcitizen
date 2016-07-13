@@ -1,15 +1,10 @@
 import Application from '../app/Application.jsx';
 import React from 'react'
-var FormControl = require('react-bootstrap/lib/FormControl');
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
 import WhosSearching from '../app/FormPages/WhosSearchingForm.jsx';
 import PersonWithNeedInfoForm from '../app/FormPages/PersonWithNeedInfoForm';
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 import RelationForm from '../app/FormPages/RelationForm';
 import PersonWithNeedForm from '../app/FormPages/PersonWithNeedForm';
 import GeneralPractitioner from '../app/FormPages/GeneralPractitioner';
@@ -28,6 +23,13 @@ import DropdownList from '../app/FormPages/Components/DropdownList.jsx';
 // simplest redux store possible that will work with Redux-Form.
 import {reducer as formReducer} from 'redux-form';
 import {createStore, combineReducers} from 'redux';
+
+var FormControl = require('react-bootstrap/lib/FormControl');
+var PageHeader = require('react-bootstrap/lib/PageHeader');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+
 var assign = require('object-assign');
 var userData = {
     pnr: "01108019146",
@@ -35,6 +37,8 @@ var userData = {
     submissionId: null
 };
 
+//Added these values from Application to simulate that this file have received these values from Application,
+// because it is dependent on these Application values
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -70,19 +74,19 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-
 describe("Application", () => {
     let store = null;
     let subject = null;
 
+    // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         store = createStore(combineReducers({form: formReducer}));
 
+        // the fields that are individual for each page
         const props = {
             store,
             fieldValues,
             userData
-
         };
         subject = mount(<Application {...props}/>);
     });
@@ -90,7 +94,6 @@ describe("Application", () => {
         expect(subject).to.have.length(1);
 
         var firstPage = subject.find(WhosSearching);
-
 
         firstPage.find(Button).first().simulate('click');
         expect(subject.state().step).to.equal(6);
@@ -168,7 +171,6 @@ describe("Application", () => {
     });
 
     it("fifth page forwards you to correct step", () => {
-    
         subject.setState({
             step: 5
         });
@@ -184,8 +186,6 @@ describe("Application", () => {
         nextButton.simulate('click');
 
         expect(subject.state().step).to.equal(6);
-
-
     });
     it("sixth page forwards you to correct step", () => {
         subject.setState({
@@ -208,9 +208,7 @@ describe("Application", () => {
         nextButton.simulate('click');
         //Should now redirect to state 7
         expect(subject.state().step).to.equal(7);
-
     });
-
 
     it("seventh page forwards you to correct step", () => {
         subject.setState({
@@ -227,7 +225,6 @@ describe("Application", () => {
         nextButton.simulate('click');
 
         expect(subject.state().step).to.equal(8);
-
     });
 
     it("eight page forwards you to correct step", () => {
@@ -245,7 +242,6 @@ describe("Application", () => {
         //THIS ONLY WORKS when this.props.next() is called at the start of submit function in Navigation Buttons. Sondre - what to do?
 
         //expect(subject.state().step).to.equal(9);
-
     });
 
     it("Eight page sends you back to step 7", () => {
@@ -257,7 +253,6 @@ describe("Application", () => {
         backButton.simulate('click');
 
         expect(subject.state().step).to.equal(7);
-
     });
 
     it("Seventh page sends you back to step 6", () => {
@@ -269,7 +264,6 @@ describe("Application", () => {
         backButton.simulate('click');
 
         expect(subject.state().step).to.equal(6);
-
     });
 
     it("Sixth page sends you back to step 1", () => {
@@ -342,7 +336,6 @@ describe("Application", () => {
                 }
             )
         });
-
 
         backButton.simulate('click');
         expect(subject.state().step).to.equal(5);
