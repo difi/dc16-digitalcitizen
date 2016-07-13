@@ -47,10 +47,10 @@ public class TestData {
     );
     public static final Collection<Nursing_Home> HOMES = Arrays.asList(
        new Nursing_Home("Frogner sykehjem", "Oslo"),
-       new Nursing_Home("Abildsø sykehjem", "Oslo") ,
+       new Nursing_Home("Manglerud sykehjem", "Oslo") ,
        new Nursing_Home("Ryen sykehjem", "Oslo") ,
        new Nursing_Home("Sentrum sykehjem", "Trondheim") ,
-       new Nursing_Home("Byåsen sykehjem", "Trondheim") ,
+       new Nursing_Home("Moholt sykehjem", "Trondheim") ,
        new Nursing_Home("Sogndal sykehjem", "Sogndal")
     );
 }
