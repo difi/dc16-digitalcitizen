@@ -16,6 +16,14 @@ public class Dependent {
     public Dependent(){
     }
 
+    public Dependent(String firstName, String lastName, String telephone, String email, String relation) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephone = telephone;
+        this.email = email;
+        this.relation = relation;
+    }
+
     public String getFirstName() {
         return firstName;
     }
