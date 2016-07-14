@@ -33,7 +33,7 @@ public class PDFManager {
         PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
-        System.out.println("Creating pdf");
+        System.out.println("Creating pdf of " + submission);
         // Get field names
         List<PDField> fieldList = acroForm.getFields();
 
@@ -180,6 +180,7 @@ public class PDFManager {
 
         pdfTemplate.save(output);
         pdfTemplate.close();
+        System.out.println("PDF was created successfully");
         return path;
     }
 
