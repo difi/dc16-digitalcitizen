@@ -110,7 +110,7 @@ export class LocationPageClass extends React.Component {
                                            className="municipTypeAhead"
                                            labelKey="name"
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           onChange={value=>this.municipalityChange(value[0])}/>
+                                           onChange={value=>this.municipalityChange(value[0].name)}/>
                             </Col>
                         </Row>
                         {homes}
