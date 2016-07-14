@@ -3,6 +3,19 @@ import RESTpaths from '../../static_data/RESTpaths.js';
 
 const isEmpty = value => value === undefined || value === null || value === '';
 
+export function fieldIsEmpty(value) {
+    if (isEmpty(value)) {
+        return true;
+    }
+    return false;
+}
+
+export function email(str) {
+    if (str) {
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.@_-]+/g, '');
+    }
+}
+
 export function checkEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
     if (!isEmpty(value) && !/^[ÆØÅæøåA-Z0-9._%+-]+@[ÆØÅæøåA-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
@@ -16,6 +29,13 @@ export function checkInteger(value) {
         return false;
     }
 }
+
+export function checkPNR(str) {
+    if (str) {
+        return str.replace(/[^0-9]+/g, '').substring(0, 11);
+    }
+}
+
 export function checkPersonalnumberNo(pno) {
 
     if (!pno) {
@@ -77,57 +97,12 @@ export function checkPersonalnumberNo(pno) {
     return true;
 }
 
-
 export function checkPhoneNumber(phoneNo) {
     if (!phoneNo) {
         return false;
     }
     var checkPhone = /^[\d ]{10}$/;
     return phoneNo.match(checkPhone);
-}
-
-export function checkPostCode(str) {
-    if (str) {
-        return str.replace(/[^0-9]+/g, '').substring(0, 4)
-    }
-}
-
-export function onlyLettersInString(str) {
-    if (str) {
-        str = str.toString();
-        return str.replace(/[^a-zA-ZæøåÆØÅ \-\\s]+/g, '');
-    }
-}
-
-export function checkPNR(str) {
-    if (str) {
-        return str.replace(/[^0-9]+/g, '').substring(0, 11);
-    }
-}
-
-export function onlyDigitsInString(str) {
-    if (str) {
-        return str.replace(/[^0-9\s]+/g, '');
-    }
-}
-
-export function alphaNumericInString(str) {
-    if (str) {
-        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');
-    }
-}
-
-export function email(str) {
-    if (str) {
-        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.@_-]+/g, '');
-    }
-}
-
-export function fieldIsEmpty(value) {
-    if (isEmpty(value)) {
-        return true;
-    }
-    return false;
 }
 
 export function formatPhone(value) {
@@ -152,6 +127,40 @@ export function formatPhone(value) {
     }
     return onlyNums.slice(0, 3) + ' ' + onlyNums.slice(3, 5) + ' ' + onlyNums.slice(5, 8)
 }
+
+export function validPostCode(postCode) {
+    if (!postCode) {
+        return false;
+    }
+    var checkPostCode = /^[\d ]{4}$/;
+    return postCode.match(checkPostCode);
+}
+
+export function checkPostCode(str) {
+    if (str) {
+        return str.replace(/[^0-9]+/g, '').substring(0, 4)
+    }
+}
+
+export function onlyLettersInString(str) {
+    if (str) {
+        str = str.toString();
+        return str.replace(/[^a-zA-ZæøåÆØÅ \-\\s]+/g, '');
+    }
+}
+
+export function onlyDigitsInString(str) {
+    if (str) {
+        return str.replace(/[^0-9\s]+/g, '');
+    }
+}
+
+export function alphaNumericInString(str) {
+    if (str) {
+        return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');
+    }
+}
+
 
 var checkNameVal;
 export function validatePnoName(pno, name) {
