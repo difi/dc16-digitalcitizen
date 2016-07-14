@@ -13,6 +13,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import {checkPhoneNumber} from'./Utilities/validation.js';
+import {validPostCode} from'./Utilities/validation.js';
 import {reduxForm} from 'redux-form';
 
 
@@ -63,7 +64,8 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr");
+        console.log(postal.placeholder);
+        var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
         console.log(this.props.fieldValues.person);
         return (
             <form>

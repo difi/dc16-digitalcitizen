@@ -64,6 +64,22 @@ public class Address {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Address address = (Address) o;
+
+        if (postal != null ? !postal.equals(address.postal) : address.postal != null) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null) return false;
+        if (municipality != null ? !municipality.equals(address.municipality) : address.municipality != null)
+            return false;
+        if (street != null ? !street.equals(address.street) : address.street != null) return false;
+        return zipcode != null ? zipcode.equals(address.zipcode) : address.zipcode == null;
+
+    }
+
+    @Override
     public String toString() {
         return "Address{" +
                 "postal='" + postal + '\'' +

@@ -33,6 +33,18 @@ public class Doctor {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Doctor doctor = (Doctor) o;
+
+        if (!name.equals(doctor.name)) return false;
+        return location.equals(doctor.location);
+
+    }
+
+    @Override
     public String toString() {
         return "Doctor{" +
                 "name='" + name + '\'' +

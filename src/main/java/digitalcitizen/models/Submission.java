@@ -3,6 +3,7 @@ package digitalcitizen.models;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by camp-vhe on 23.06.2016.
@@ -21,7 +22,7 @@ public class Submission {
     // Third form
     private Person person;
     // Fifth form
-    private ArrayList<Dependent> dependents; // List of objects
+    private List<Dependent> dependents; // List of objects
     // Sixth form
     private String lengthOfStay;
     // Seventh form
@@ -30,6 +31,16 @@ public class Submission {
     private String otherNeeds;
 
     public Submission() {
+    }
+
+    public Submission(boolean applyingForSelf, Person person, List<Dependent> dependents, String lengthOfStay, String medicalNeeds, String conditionChanges, String otherNeeds) {
+        this.applyingForSelf = applyingForSelf;
+        this.person = person;
+        this.dependents = dependents;
+        this.lengthOfStay = lengthOfStay;
+        this.medicalNeeds = medicalNeeds;
+        this.conditionChanges = conditionChanges;
+        this.otherNeeds = otherNeeds;
     }
 
     public String getId() {
@@ -112,11 +123,11 @@ public class Submission {
         this.person = person;
     }
 
-    public ArrayList<Dependent> getDependents() {
+    public List<Dependent> getDependents() {
         return dependents;
     }
 
-    public void setDependents(ArrayList<Dependent> dependents) {
+    public void setDependents(List<Dependent> dependents) {
         this.dependents = dependents;
     }
 
