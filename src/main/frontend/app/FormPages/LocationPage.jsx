@@ -60,7 +60,6 @@ export class LocationPageClass extends React.Component {
         this.props.nextStep(10);
     }
     municipalityChange(value){
-
         this.props.fields.municipalityApp.onChange(value.name);
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
