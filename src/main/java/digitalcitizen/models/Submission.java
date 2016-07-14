@@ -1,5 +1,7 @@
 package digitalcitizen.models;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import java.util.List;
  */
 public class Submission {
 
+    @Id
+    private String id;
     // First form
     private boolean applyingForSelf;
     // Second form
@@ -31,13 +35,20 @@ public class Submission {
 
     public Submission(boolean applyingForSelf, Person person, List<Dependent> dependents, String lengthOfStay, String medicalNeeds, String conditionChanges, String otherNeeds) {
         this.applyingForSelf = applyingForSelf;
-
         this.person = person;
         this.dependents = dependents;
         this.lengthOfStay = lengthOfStay;
         this.medicalNeeds = medicalNeeds;
         this.conditionChanges = conditionChanges;
         this.otherNeeds = otherNeeds;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getConditionChanges() {
@@ -131,7 +142,8 @@ public class Submission {
     @Override
     public String toString() {
         return "Submission{" +
-                "applyingForSelf=" + applyingForSelf +
+                "id='" + id + '\'' +
+                ", applyingForSelf=" + applyingForSelf +
                 ", relation='" + relation + '\'' +
                 ", guardianName='" + guardianName + '\'' +
                 ", typeOfRelation='" + typeOfRelation + '\'' +

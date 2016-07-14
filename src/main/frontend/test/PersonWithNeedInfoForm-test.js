@@ -60,7 +60,8 @@ describe("PersonWithNeedInfoClass", function() {
                 name: "skjhakl",
                 number: 12345678,
                 street: "gyt",
-                zipcode: 7020
+                zipcode: 7020,
+                postal: "Trondheim"
             },
             fieldValues
         };
