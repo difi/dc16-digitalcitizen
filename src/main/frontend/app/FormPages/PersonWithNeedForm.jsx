@@ -19,7 +19,7 @@ import RESTpaths from '../static_data/RESTpaths.js';
 export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
-import {validatePnoName} from './Utilities/validation';
+import {validatePnoName} from './Utilities/validation.js';
 
 
 export class PersonWithNeedClass extends React.Component {
