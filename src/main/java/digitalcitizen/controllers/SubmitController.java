@@ -1,9 +1,14 @@
 package digitalcitizen.controllers;
 
+import com.mongodb.BasicDBObject;
+import digitalcitizen.Application;
 import digitalcitizen.models.Submission;
+import digitalcitizen.repositories.SubmissionRepository;
 import digitalcitizen.utilities.PDFManager;
 import digitalcitizen.utilities.SubmissionValidator;
 
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,33 +26,47 @@ import java.util.ArrayList;
 @RestController
 public class SubmitController {
 
-    // TODO: Replace with database
-    public ArrayList<Submission> submissions = new ArrayList<>();
+    private ArrayList<Submission> submissions = new ArrayList<>();
+
+    @Autowired
+    private SubmissionRepository submissionRepository;
 
     /**
      * This method receives and handles applications submitted on the route "/send".
      *
      * @param submission An application in JSON format. Converted to {@link Submission} by Spring.
-     * @param request HTTP request sent by the user. Containing client information.
+     * @param request    HTTP request sent by the user. Containing client information.
      * @return A submission identification used in {@link #getPDF(String)} to generate a PDF.
      * @throws IOException
      */
     @CrossOrigin
-    @RequestMapping(value="/send", method = RequestMethod.POST)
-    public @ResponseBody
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public
+    @ResponseBody
     String post(@RequestBody final Submission submission, HttpServletRequest request) throws IOException {
 
-        // TODO: Validate form
+        // Validate form
+        // TODO: Add logic for handling disapproved submissions
         boolean submissionIsValid = new SubmissionValidator().validateAllFields(submission);
-        System.out.println("Submission is valid: " + submissionIsValid);
-        // TODO: Add submission to database
         printSubmissionRequest(submission, request);
+        System.out.println("Submission is valid: " + submissionIsValid);
+
+        if (Application.USE_MONGODB) {
+            // Add submission to database
+            System.out.println("Saving submission to database..");
+            String submissionId = submissionRepository.insert(handleSubmissionFields(submission)).getId();
+            System.out.println("Submission (" + submissionId + ") was successfully added to the database");
+
+            // Return the id of the submission
+            return submissionId;
+        }
+
         submissions.add(handleSubmissionFields(submission));
         // Return the id of the submission
         return Integer.toString(submissions.size() - 1);
     }
 
-    private void printSubmissionRequest(Submission submission, HttpServletRequest request){
+    private void printSubmissionRequest(Submission submission, HttpServletRequest request) {
         String s = "Submission received from: " + request.getRemoteAddr() + '\n' +
                 submission;
         System.out.println(s);
@@ -61,7 +81,7 @@ public class SubmitController {
      * @return The updated {@link Submission}
      */
     private Submission handleSubmissionFields(Submission submission) {
-        if(submission.getPerson().getPnr() != null && !submission.getPerson().getPnr().equals("")){
+        if (submission.getPerson().getPnr() != null && !submission.getPerson().getPnr().equals("")) {
             submission.getPerson().updateValuesByPnr();
         }
         return submission;
@@ -76,14 +96,23 @@ public class SubmitController {
      * @throws IOException
      */
     @CrossOrigin
-    @RequestMapping(value="/getpdf", params = "id", method=RequestMethod.GET)
+    @RequestMapping(value = "/getpdf", params = "id", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getPDF(@RequestParam("id") String id) throws IOException {
 
-        // TODO: Get Submission from database by id
+        Submission submission;
+        if (Application.USE_MONGODB) {
+            // Get Submission from database by the provided id
+            submission = submissionRepository.findById(id);
+        } else {
+            submission = submissions.get(Integer.parseInt(id));
+        }
+
+        // Generate PDF of the submission
         PDFManager pdfManager = new PDFManager();
-        Path path = Paths.get(pdfManager.generatePDFofSubmission(submissions.get(Integer.parseInt(id))));
+        Path path = Paths.get(pdfManager.generatePDFofSubmission(submission));
         byte[] contents = Files.readAllBytes(path);
 
+        // Add required headers and metadata
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         String filename = "Søknad.pdf";
