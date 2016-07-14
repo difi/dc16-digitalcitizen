@@ -79,7 +79,7 @@ export class LocationPageClass extends React.Component {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid = true;
         var homes = null;
-        if (homeOptions.value) {
+        if (municipalityApp.value && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
                     <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
