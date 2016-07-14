@@ -97,20 +97,20 @@ export class LocationPageClass extends React.Component {
         }
         return (
             <componentClass>
-                <label className="form-header">Hvor ønsker du å søke deg deg til? </label>
-
+                <label className="form-header">Hvor ønskes det plass? </label>
                 <div className="form-container">
                     <form className="location">
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label className="municipality">Hvilken kommune ønsker du å søke deg til</label>
+                                <label className="municipality">I hvilken kommune ønskes plassen? </label>
                             </Col>
                             <Col sm={6} md={6}>
                                 <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                            ref="munSelect"
+                                           className="municipTypeAhead"
                                            labelKey="name"
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           onChange={value=>this.municipalityChange(value[0].name)}/>
+                                           onChange={value=>this.municipalityChange(value[0])}/>
                             </Col>
                         </Row>
                         {homes}
@@ -132,7 +132,7 @@ LocationPageClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired
 };
 
 const LocationPage = reduxForm({

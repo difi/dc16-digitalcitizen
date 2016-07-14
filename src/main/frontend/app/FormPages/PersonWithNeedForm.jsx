@@ -13,26 +13,42 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 var checked = false;
 
+import $ from 'jquery'
+import RESTpaths from '../static_data/RESTpaths.js';
+
 export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
+import {validatePnoName} from './Utilities/validation';
+
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
+        this.savePerson = this.savePerson.bind(this);
+        this.saveFieldValues = this.saveFieldValues.bind(this);
     }
 
     
     handleClickBack() {
-        this.saveFieldValues();
+        if (this.props.fields.checked.value) {
+            this.saveFieldValues();
+        } else {
+            this.savePerson();
+        }
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
     handleClickNext() {
-        this.saveFieldValues();
+        if (this.props.fields.checked.value) {
+            this.saveFieldValues();
+        } else {
+            this.savePerson();
+        }
+
 
         if (this.props.fields.checked.value) {
             console.log("State 4");
@@ -46,9 +62,11 @@ export class PersonWithNeedClass extends React.Component {
 
     saveFieldValues() {
 
-        var pnr = this.props.fields.pnr.value;
-        if(this.props.fields.checked.value){pnr = null;}
-
+        /*var pnr = this.props.fields.pnr.value;
+        if (this.props.fields.checked.value) {
+            pnr = null;
+        }*/
+        var pnr = null;
         var data = {
             dontGotPNRnumber: this.props.fields.checked.value,
             person: {
@@ -62,13 +80,46 @@ export class PersonWithNeedClass extends React.Component {
         console.log(data);
     }
 
+
+    savePerson() {
+        var pnr = this.props.fields.pnr.value;
+
+        var personP = {};
+        $.ajax({
+            url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                personP = {
+                    dontGotPNRnumber: this.props.fields.checked.value,
+                    person: {
+                        pnr: pnr,
+                        name: data.name,
+                        address: {
+                            country: data.address.country,
+                            municipality: data.address.municipality,
+                            streetAddress: data.address.street,
+                            zipcode: data.address.zipcode,
+                            postal: data.address.postal
+                        },
+                        telephone: data.telephone
+                    }
+                };
+                this.props.saveValues(personP);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
+
     render() {
 
         //Add fields from redux form to component so they can be connected
 
         const {fields: {pnr, checked, name}} = this.props;
-        
-        var valid = (name.value && pnr.value && !pnr.error) || (name.value && checked.value);
+        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         if (checked.value) {
             return (
                 <form>
@@ -96,7 +147,8 @@ export class PersonWithNeedClass extends React.Component {
                             <Row className="form-row">
                                 <Col sx={4} md={4}></Col>
                                 <Col sx={8} md={8}>
-                                    <input type="checkbox" className="pnrCheck" name="noPno" checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
+                                    <input type="checkbox" className="pnrCheck" name="noPno" checked={checked.value}
+                                           onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
                                 </Col>
                                 <Col sm={0} md={5}></Col>
                             </Row>
@@ -147,7 +199,7 @@ export class PersonWithNeedClass extends React.Component {
                                     //Connects field to redux form component//
                                     {...pnr}
                                 />
-                                {pnr.touched && pnr.error && <div className="error" >{pnr.error}</div>}
+                                {pnr.touched && pnr.error && <div className="error">{pnr.error}</div>}
 
                             </Col>
                         </Row>
@@ -155,7 +207,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Col sx={4} md={4}></Col>
                             <Col sx={8} md={8}>
                                 <input type="checkbox" name="noPno" className="pnrCheck"
-                                      checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
                                 fødselsnummeret
                             </Col>
                             <Col sm={0} md={5}></Col>
@@ -174,6 +226,7 @@ export class PersonWithNeedClass extends React.Component {
 
                                     {...name}
                                 />
+                                {name.touched && name.error && <div className="error">{name.error}</div>}
                             </Col>
                             <Col sm={0} md={5}></Col>
                         </Row>
@@ -193,7 +246,7 @@ PersonWithNeedClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
+    saveValues:  React.PropTypes.func.isRequired
 };
 
 //Validation for form
@@ -202,6 +255,9 @@ const validate = values => {
 
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "Dette er ikke et gyldig fødselsnummer";
+    }
+    if (!(validatePnoName(values.pnr, values.name))) {
+        errors.name = "Fødselsnummer og navn matcher ikke."
     }
     return errors;
 };
