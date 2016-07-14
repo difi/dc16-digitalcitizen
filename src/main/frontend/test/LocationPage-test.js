@@ -67,6 +67,9 @@ describe("LocationPageClass", function() {
                 homeApp: {
                     value: "Ryen sykehjem",
                     onChange: function onChange () {}
+                },
+                homeOptions: {
+                    value: null
                 }
             },
             fieldValues
