@@ -54,6 +54,7 @@ export class AddDependentClass extends React.Component {
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
         if (this.props.fieldValues.dependent) {
+       
             this.getPersonToBeDependent();
         }
     }

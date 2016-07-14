@@ -29,7 +29,7 @@ class Application extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.state = {
             step: 1,
             prevStep: 1,
@@ -68,6 +68,7 @@ class Application extends React.Component {
     }
 
     nextStep(step) {
+
         this.setState({
             prevStep: this.state.step,
             step: step
