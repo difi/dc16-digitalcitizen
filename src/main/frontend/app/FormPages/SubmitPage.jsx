@@ -11,7 +11,7 @@ var Button = require('react-bootstrap/lib/Button');
 
 export const fields = ["name"];
 
-class SubmitSuccess extends React.Component {
+export class SubmitSuccessClass extends React.Component {
 
     constructor() {
         super();
@@ -42,7 +42,7 @@ class SubmitSuccess extends React.Component {
                     <div className="form-container">
                         <Row>
                             <Col className="submit-name">
-                                <label>{this.props.fieldValues.person.name}</label>
+                                <label className="submittedName">{this.props.fieldValues.person.name}</label>
                             </Col>
                         </Row>
                     </div>
@@ -95,10 +95,10 @@ class SubmitSuccess extends React.Component {
     }
 }
 
-SubmitSuccess = reduxForm({
+const SubmitSuccess = reduxForm({
     form: 'application',
     fields,
     destroyOnUnmount: false,
-}, null, null)(SubmitSuccess);
+}, null, null)(SubmitSuccessClass);
 
 export default SubmitSuccess
