@@ -7,6 +7,9 @@ import React from 'react';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
+import $ from 'jquery'
+import RESTpaths from '../static_data/RESTpaths.js';
+
 
 export default class WhosSearching extends React.Component {
 
@@ -17,10 +20,43 @@ export default class WhosSearching extends React.Component {
     }
 
     saveFieldValues(status){
+        if(status){
+            $.ajax({
+                url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
+                dataType: 'json',
+                cache: false,
+                async: false,
+                success: function (data) {
+                    var data = {
+                        dependent: false,
+                        applyingForSelf: true,
+                        person: {
+                            pnr: data.pnr,
+                            name: data.name,
+                            address: {
+                                country: data.address.country,
+                                municipality: data.address.municipality,
+                                streetAddress: data.address.street,
+                                zipcode: data.address.zipcode,
+                                postal: data.address.postal
+                            },
+                            telephone: data.telephone
+                        }
+                    }
+                this.props.saveValues(data);
+                }.bind(this),
+                error: function (xhr, status, err) {
+                console.error("dependent error", status, err.toString());
+            }.bind(this)
+        })}
+
+
+        else{
         var data = {
-            applyingForSelf: status
-        };
-        this.props.saveValues(data);
+            applyingForSelf: status};
+            this.props.saveValues(data);
+        }
+
         console.log(data);
     }
 

@@ -107,7 +107,8 @@ class Application extends React.Component {
                 content = <WhosSearching
                     store={this.props.store}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                userData={userData}/>;
                 break;
             case 2:
                 content = <RelationForm
