@@ -57,9 +57,10 @@ export class LocationPageClass extends React.Component {
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
     }
-
+    
     municipalityChange(value) {
         this.props.fields.municipalityApp.onChange(value);
+
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',

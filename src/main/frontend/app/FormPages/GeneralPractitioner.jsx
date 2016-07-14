@@ -10,7 +10,7 @@ require('!style!css!less!../Application.less');
 var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
-
+import {onlyLettersInString} from './utilities/validation.js';
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
@@ -67,7 +67,7 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-        console.log(doctors.value);
+        console.log(doctorName.value);
 
         return (
             <componentClass>
@@ -79,7 +79,8 @@ export class GeneralPractitionerClass extends React.Component {
                         </Col>
                         <Col sm={8} md={8}>
                             <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect" labelKey="name"
-                                selected={doctorName.value? [{name: doctorName.value}]: []} onInputChange={value=> doctorName.onChange(value)}/>
+                                selected={doctorName.value? [{name: doctorName.value}]: []} textValue={onlyLettersInString} onInputChange={value=> doctorName.onChange(value)}
+                                      />
                         </Col>
                     </Row>
                 </div>
