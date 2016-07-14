@@ -51,6 +51,13 @@ public class TestData {
        new Nursing_Home("Ryen sykehjem", "Oslo") ,
        new Nursing_Home("Sentrum sykehjem", "Trondheim") ,
        new Nursing_Home("Moholt sykehjem", "Trondheim") ,
-       new Nursing_Home("Sogndal sykehjem", "Sogndal")
+       new Nursing_Home("Sogndal sykehjem", "Sogndal"),
+       new Nursing_Home("Lund sykehjem", "Kristiansand"),
+       new Nursing_Home("Kvadraturen sykehjem", "Kristiansand"),
+       new Nursing_Home("Stokka sykehjem", "Stavanger"),
+       new Nursing_Home("Aasane sykehjem", "Bergen"),
+       new Nursing_Home("Fjellet sykehjem", "Bergen"),
+       new Nursing_Home("Bamble sykehjem", "Bamble"),
+       new Nursing_Home("Molde sykehjem", "Molde")
     );
 }

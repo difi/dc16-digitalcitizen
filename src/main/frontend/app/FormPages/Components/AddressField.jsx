@@ -14,7 +14,8 @@ import {reduxForm} from 'redux-form';
 var AddressField = React.createClass({
 
     propTypes: {
-        includeCountry: React.PropTypes.bool
+        includeCountry: React.PropTypes.bool,
+        address: React.PropTypes.object
     },
 
     getDefaultProps: function () {
@@ -189,6 +190,8 @@ var AddressField = React.createClass({
         }
     }
 });
+
+
 
 AddressField = reduxForm({
     form: 'application',

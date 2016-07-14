@@ -178,7 +178,7 @@ export function validatePnoName(pno, name) {
                 }
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error("url", status, err.toString());
             }.bind(this)
         });
     }
