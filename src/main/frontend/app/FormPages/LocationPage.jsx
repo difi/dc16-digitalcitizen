@@ -22,10 +22,11 @@ export class LocationPageClass extends React.Component {
 
     }
 
-    findMunicipality(mun){
+    findMunicipality(mun) {
         //If you have not yet chosen a value here - have your own municipality as default
-        if(!this.props.fields.municipalityApp.value){
-        this.props.fields.municipalityApp.onChange(mun);}
+        if (!this.props.fields.municipalityApp.value) {
+            this.municipalityChange(mun);
+        }
     }
 
     //Handle the click on the back-button
@@ -45,7 +46,7 @@ export class LocationPageClass extends React.Component {
             }
         };
         return this.props.saveValues(data);
-   
+
     }
 
     //Handle the click on the next-button
@@ -57,10 +58,10 @@ export class LocationPageClass extends React.Component {
         this.props.nextStep(10);
     }
 
-    municipalityChange(value){
-        this.props.fields.municipalityApp.onChange(value.name);
+    municipalityChange(value) {
+        this.props.fields.municipalityApp.onChange(value);
         $.ajax({
-            url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
+            url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
             cache: false,
             success: function (data) {
@@ -76,11 +77,10 @@ export class LocationPageClass extends React.Component {
 
     render() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
-        var valid=true;
+        var valid = true;
         var homes = null;
-        console.log("homeOpt:" + homeOptions.value);
-        {homeOptions.value?
-            homes =   <Row className="form-row">
+        if (homeOptions.value) {
+            homes = <Row className="form-row">
                 <Col sm={6} md={6}>
                     <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
                 </Col>
@@ -93,10 +93,11 @@ export class LocationPageClass extends React.Component {
                         {...homeApp}
                         onChange={change=>homeApp.onChange(change.newValue)}/>
                 </Col>
-            </Row>: ''}
+            </Row>;
+        }
         return (
             <componentClass>
-                <label className="form-header">Hvor  ønsker du å søke deg deg til? </label>
+                <label className="form-header">Hvor ønsker du å søke deg deg til? </label>
 
                 <div className="form-container">
                     <form className="location">
@@ -105,13 +106,13 @@ export class LocationPageClass extends React.Component {
                                 <label className="municipality">Hvilken kommune ønsker du å søke deg til</label>
                             </Col>
                             <Col sm={6} md={6}>
-                        <TypeAhead options={dropdownContent.MUNICIPALITIES}
-                                   ref="munSelect"
-                                   labelKey="name"
-                                   selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                   onChange={value=>this.municipalityChange(value[0])}/>
-                                </Col>
-                            </Row>
+                                <TypeAhead options={dropdownContent.MUNICIPALITIES}
+                                           ref="munSelect"
+                                           labelKey="name"
+                                           selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                           onChange={value=>this.municipalityChange(value[0].name)}/>
+                            </Col>
+                        </Row>
                         {homes}
                     </form>
                 </div>
@@ -130,8 +131,8 @@ export class LocationPageClass extends React.Component {
 LocationPageClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired,
 };
 
 const LocationPage = reduxForm({
