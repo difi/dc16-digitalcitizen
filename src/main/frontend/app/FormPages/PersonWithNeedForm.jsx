@@ -89,7 +89,6 @@ export class PersonWithNeedClass extends React.Component {
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
             cache: false,
-            async: false,
             success: function (data) {
                 personP = {
                     dontGotPNRnumber: this.props.fields.checked.value,
