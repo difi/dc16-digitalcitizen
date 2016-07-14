@@ -13,9 +13,6 @@ import RESTpaths from '../static_data/RESTpaths.js';
 export class LocationPageClass extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-          homeOptions:  null
-        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.findMunicipality = this.findMunicipality.bind(this);
@@ -25,10 +22,11 @@ export class LocationPageClass extends React.Component {
 
     }
 
-    findMunicipality(mun){
+    findMunicipality(mun) {
         //If you have not yet chosen a value here - have your own municipality as default
-        if(!this.props.fields.municipalityApp.value){
-        this.props.fields.municipalityApp.onChange(mun);}
+        if (!this.props.fields.municipalityApp.value) {
+            this.municipalityChange(mun);
+        }
     }
 
     //Handle the click on the back-button
@@ -48,7 +46,7 @@ export class LocationPageClass extends React.Component {
             }
         };
         return this.props.saveValues(data);
-   
+
     }
 
     //Handle the click on the next-button
@@ -59,18 +57,16 @@ export class LocationPageClass extends React.Component {
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
     }
-    municipalityChange(value){
 
-        this.props.fields.municipalityApp.onChange(value.name);
+    municipalityChange(value) {
+        this.props.fields.municipalityApp.onChange(value);
         $.ajax({
-            url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value.name,
+            url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
             cache: false,
             success: function (data) {
                 console.log(data);
-                this.setState({
-                    homeOptions: data
-                });
+                this.props.fields.homeOptions.onChange(data);
                 this.forceUpdate();
             }.bind(this),
             error: function (xhr, status, err) {
@@ -80,29 +76,28 @@ export class LocationPageClass extends React.Component {
     }
 
     render() {
-        const {fields: {municipalityApp, homeApp}} = this.props;
-        var valid=true;
+        const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
+        var valid = true;
         var homes = null;
-        if(this.state.homeOptions){
-             homes =   <Row className="form-row">
-             <Col sm={6} md={6}>
-                 <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
-             </Col>
-             <Col sm={6} md={6}>
-             <DropdownList
-                    id='homes'
-                    options={this.state.homeOptions}
-                    labelField='name'
-                    valueField='name'
-                    {...homeApp}
-                    onChange={change=>homeApp.onChange(change.newValue)}/>
-                 </Col>
-                 </Row>;
+        if (municipalityApp.value && homeOptions.value) {
+            homes = <Row className="form-row">
+                <Col sm={6} md={6}>
+                    <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+                </Col>
+                <Col sm={6} md={6}>
+                    <DropdownList
+                        id='homes'
+                        options={homeOptions.value}
+                        labelField='name'
+                        valueField='name'
+                        {...homeApp}
+                        onChange={change=>homeApp.onChange(change.newValue)}/>
+                </Col>
+            </Row>;
         }
         return (
             <componentClass>
-                <label className="form-header">Hvor  ønskes det plass? </label>
-
+                <label className="form-header">Hvor ønskes det plass? </label>
                 <div className="form-container">
                     <form className="location">
                         <Row className="form-row">
@@ -110,17 +105,15 @@ export class LocationPageClass extends React.Component {
                                 <label className="municipality">I hvilken kommune ønskes plassen? </label>
                             </Col>
                             <Col sm={6} md={6}>
-                        <TypeAhead options={dropdownContent.MUNICIPALITIES}
-                                   ref="munSelect"
-                                   className="municipTypeAhead"
-                                   labelKey="name"
-                                   selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                   onChange={value=>this.municipalityChange(value[0])}/>
-                                </Col>
-                            </Row>
-
+                                <TypeAhead options={dropdownContent.MUNICIPALITIES}
+                                           ref="munSelect"
+                                           className="municipTypeAhead"
+                                           labelKey="name"
+                                           selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                           onChange={value=>this.municipalityChange(value[0].name)}/>
+                            </Col>
+                        </Row>
                         {homes}
-
                     </form>
                 </div>
                 <NavigationButtons
@@ -138,13 +131,13 @@ export class LocationPageClass extends React.Component {
 LocationPageClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired
+    nextStep: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired
 };
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp"],
+    fields: ["municipalityApp", "homeApp", "homeOptions"],
     destroyOnUnmount: false
 })(LocationPageClass);
 
