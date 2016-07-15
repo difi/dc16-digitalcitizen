@@ -3,7 +3,6 @@ import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
 import {reduxForm} from 'redux-form';
 import {fieldIsEmpty} from './Utilities/validation.js'
