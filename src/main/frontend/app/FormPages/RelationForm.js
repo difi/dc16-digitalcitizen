@@ -9,7 +9,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 import $ from 'jquery'

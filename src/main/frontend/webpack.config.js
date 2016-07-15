@@ -54,7 +54,7 @@ const common = {
             test: /\.css$/,
             loader: 'style!css'
         },
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000'},
             {
                 test: /\.json$/,
                 loader: 'json'
@@ -72,7 +72,11 @@ const common = {
     }
 };
 
-if (TARGET === 'start' || !TARGET) {
+
+if (TARGET === 'build') {
+    module.exports = merge(common, {});
+}
+else {
     module.exports = merge(common, {
         devServer: {
             port: 9090,
@@ -88,9 +92,5 @@ if (TARGET === 'start' || !TARGET) {
         },
         devtool: 'source-map'
     });
-}
 
-if (TARGET === 'build') {
-    module.exports = merge(common, {});
 }
-
