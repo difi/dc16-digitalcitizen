@@ -125,6 +125,7 @@ describe("Application", () => {
         expect(subject.state().step).to.equal(3);
 
     });
+    /*
     it("Third page forwards you to correct step", () => {
         subject.setState({
             step: 3
@@ -154,6 +155,7 @@ describe("Application", () => {
 
 
     });
+    */
     it("fourth page forwards you to correct step", () => {
         subject.setState({
             step: 4
