@@ -8,6 +8,7 @@ const PATHS = {
 };
 
 const common = {
+    devtool: 'inline-source-map',
     entry: [
         PATHS.source
     ],

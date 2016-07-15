@@ -1,5 +1,6 @@
 import Application from '../app/Application.js';
 import React from 'react'
+
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
@@ -36,6 +37,7 @@ var userData = {
     name: "Elias Eliassen",
     submissionId: null
 };
+
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
