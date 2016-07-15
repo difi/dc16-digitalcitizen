@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 import $ from 'jquery'
 import {reduxForm} from 'redux-form';
 import RESTpaths from '../static_data/RESTpaths.js';
@@ -11,6 +11,7 @@ var Button = require('react-bootstrap/lib/Button');
 var ReactDOM = require('react-dom');
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 import {onlyLettersInString} from './Utilities/validation.js';
+
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);

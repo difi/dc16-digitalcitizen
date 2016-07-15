@@ -11,7 +11,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {AddDependentClass} from '../app/FormPages/AddDependent.jsx';
+import {AddDependentClass} from '../app/FormPages/AddDependent.js';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values

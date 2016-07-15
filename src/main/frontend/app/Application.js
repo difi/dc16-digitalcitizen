@@ -6,7 +6,7 @@ import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
-import WhosSearching from './FormPages/WhosSearchingForm.jsx';
+import WhosSearching from './FormPages/WhosSearchingForm.js';
 
 import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
