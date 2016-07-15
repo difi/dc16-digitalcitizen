@@ -3,7 +3,19 @@ package digitalcitizen.models;
 /**
  * Created by camp-vhe on 12.07.2016.
  */
-public class Nursing_Home {
+public class NursingHome {
+
+    private String name;
+    private String municipality;
+
+    public NursingHome() {
+    }
+
+    public NursingHome(String name, String municipality) {
+
+        this.name = name;
+        this.municipality = municipality;
+    }
 
     public String getName() {
         return name;
@@ -21,12 +33,4 @@ public class Nursing_Home {
         this.municipality = municipality;
     }
 
-    public Nursing_Home(String name, String municipality) {
-
-        this.name = name;
-        this.municipality = municipality;
-    }
-
-    private String name;
-    private String municipality;
 }

@@ -33,11 +33,8 @@ export class PersonWithNeedClass extends React.Component {
 
     
     handleClickBack() {
-        if (this.props.fields.checked.value) {
-            this.saveFieldValues();
-        } else {
-            this.savePerson();
-        }
+        this.saveFieldValues();
+
         console.log("State 2");
         (this.props.previousStep(2));
     }
@@ -62,11 +59,10 @@ export class PersonWithNeedClass extends React.Component {
 
     saveFieldValues() {
 
-        /*var pnr = this.props.fields.pnr.value;
+        var pnr = this.props.fields.pnr.value;
         if (this.props.fields.checked.value) {
             pnr = null;
-        }*/
-        var pnr = null;
+        }
         var data = {
             dontGotPNRnumber: this.props.fields.checked.value,
             person: {
@@ -89,13 +85,12 @@ export class PersonWithNeedClass extends React.Component {
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
             cache: false,
-            async: false,
             success: function (data) {
                 personP = {
                     dontGotPNRnumber: this.props.fields.checked.value,
                     person: {
                         pnr: pnr,
-                        name: data.name,
+                        name: this.props.fields.name.value,
                         address: {
                             country: data.address.country,
                             municipality: data.address.municipality,
@@ -119,8 +114,8 @@ export class PersonWithNeedClass extends React.Component {
 
         //Add fields from redux form to component so they can be connected
 
-        const {fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
+        const { asyncValidating, fields: { pnr, checked, name } } = this.props;
+        var valid = (name.value && pnr.value && !pnr.error && !name.error && asyncValidating != 'name') || (name.value && checked.value);
         if (checked.value) {
             return (
                 <form>
@@ -226,7 +221,9 @@ export class PersonWithNeedClass extends React.Component {
                                     ref="name"
 
                                     {...name}
+                                    onChange={name.onBlur}
                                 />
+                                {asyncValidating === 'name'}
                                 {name.touched && name.error && <div className="error">{name.error}</div>}
                             </Col>
                             <Col sm={0} md={5}></Col>
@@ -243,7 +240,9 @@ export class PersonWithNeedClass extends React.Component {
         )
     }
 }
+
 PersonWithNeedClass.propTypes = {
+    asyncValidating: React.PropTypes.string.isRequired,
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
@@ -257,16 +256,107 @@ const validate = values => {
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "Dette er ikke et gyldig fødselsnummer";
     }
-    if (!(validatePnoName(values.pnr, values.name))) {
-        errors.name = "Fødselsnummer og navn matcher ikke."
-    }
+    //if (!(validatePnoName(values.pnr, values.name))) {
+    //    errors.name = "Fødselsnummer og navn matcher ikke."
+    //}
     return errors;
 };
+
+const asyncValidate = (values) => {
+    return new Promise((resolve, reject) =>{
+        //console.log("RES: " + (pnoName(values.pnr, values.name)));
+        console.log("NAAAVN: " + values.name);
+
+        $.ajax({
+            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
+            dataType: 'json',
+            cache: false,
+            //async: false,
+            success: function (data) {
+                console.log(data)
+                if (data == true) {
+                    resolve()
+                } else {
+                    reject({name: "Fødselsnummer og navn matcher ikke."});
+                }
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error("url", status, err.toString());
+            }.bind(this)
+        });
+       /* var request = new XMLHttpRequest();
+        request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name);
+        request.send(null);
+
+        if (request.status === 200) {
+            console.log(request.responseText);
+            checkNameVal = values.name;
+        } else {
+            checkNameVal = "feil";
+            //console.log("Data er " + checkNameVal);
+        }
+        console.log(request.status);
+
+        if (request.status === 200) {
+            if ((request.responseText) == true) {
+                console.log("Fødselsnr og navn er riktig");
+                console.log(request.responseText);
+                resolve()
+            } else {
+                console.log("Fødselsnummer og navn er feil");
+                console.log(request.responseText);
+                reject({name: "Fødselsnummer og navn matcher ikke."});
+            }
+        }*/
+    })
+};
+
+var checkNameVal;
+function pnoName(pno, name) {
+    console.log("pno: " + pno);
+    console.log("name: " + name);
+    var request = new XMLHttpRequest();
+    request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name);
+    request.send(null);
+
+    if (request.status === 200) {
+        //console.log(request.responseText);
+        checkNameVal = name;
+    } else {
+        checkNameVal = "feil";
+        //console.log("Data er " + checkNameVal);
+    }
+        /*$.ajax({
+            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
+            dataType: 'json',
+            cache: false,
+            //async: false,
+            success: function (data) {
+                console.log(data)
+                if (data == true) {
+                    checkNameVal = name;
+                    console.log("Data er " + checkNameVal);
+                } else {
+                    checkNameVal = "feil";
+                    console.log("Data er " + checkNameVal);
+                }
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error("url", status, err.toString());
+            }.bind(this)
+        });*/
+    //console.log("Resultat: " + checkNameVal);
+    return checkNameVal;
+}
+
+
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
     fields,
+    asyncValidate,
+    asyncBlurFields: [ 'name', 'pnr' ],
     destroyOnUnmount: false,
     validate
 })(PersonWithNeedClass);
