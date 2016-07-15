@@ -40,5 +40,12 @@ public class NursingHome {
         this.municipality = municipality;
     }
 
-
+    @Override
+    public String toString() {
+        return "NursingHome{" +
+                "name='" + name + '\'' +
+                ", municipality='" + municipality + '\'' +
+                ", num=" + num +
+                '}';
+    }
 }

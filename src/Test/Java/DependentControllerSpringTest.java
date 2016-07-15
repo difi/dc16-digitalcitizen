@@ -35,5 +35,5 @@ public class DependentControllerSpringTest extends AbstractControllerTest {
         Assert.assertEquals("failure - expected HTTP status 200", 200, status);
         Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
         Assert.assertTrue("Failure - expected Person to be the correct Person", mapFromJson(content, Person.class).equals(testPerson));
-    }
+}
 }

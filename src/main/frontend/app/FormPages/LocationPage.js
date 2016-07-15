@@ -67,7 +67,7 @@ export class LocationPageClass extends React.Component {
             cache: false,
             success: function (data) {
                 data = data.map(data => {
-                    return {muni: data.num + data.municipality, name: data.name}
+                    return {muni: data.num + ":" + data.municipality, name: data.name}
                 });
                 data.unshift({muni: 0, name: "Velg..."});
                 this.props.fields.homeOptions.onChange(data);
@@ -93,7 +93,7 @@ export class LocationPageClass extends React.Component {
                         id='homes'
                         options={homeOptions.value}
                         labelField='name'
-                        valueField='muni'
+                        valueField='name'
                         {...homeApp}
                         onChange={change=>homeApp.onChange(change.newValue)}/>
                 </Col>
