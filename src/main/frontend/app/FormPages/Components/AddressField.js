@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery'
-import DropdownList from './DropdownList.jsx';
+import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');

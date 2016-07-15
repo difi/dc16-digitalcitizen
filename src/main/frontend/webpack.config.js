@@ -39,6 +39,7 @@ const common = {
             {
                 test: /\.js$/,
                 include: path.resolve('./app/'),
+                exclude: './index.js',
                 loader: 'isparta'
             }
         ],

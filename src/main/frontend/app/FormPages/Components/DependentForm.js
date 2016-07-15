@@ -3,7 +3,7 @@ import {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 
-import DropdownList from './DropdownList.jsx';
+import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
 
 require('!style!css!less!../../Application.less');

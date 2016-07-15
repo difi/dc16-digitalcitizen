@@ -8,12 +8,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-import AddDependent from './FormPages/AddDependent.jsx';
-import Application from './Application.jsx';
+import AddDependent from './FormPages/AddDependent.js';
+import Application from './Application.js';
 import SynchronousValidationForm from './unused/ReduxForm.jsx';
 import Buttons from './unused/buttons.jsx';
-import GeneralPractitioner from './FormPages/GeneralPractitioner.jsx';
-import PersonWithNeedForm from './FormPages/PersonWithNeedForm.jsx';
+import GeneralPractitioner from './FormPages/GeneralPractitioner.js';
+import PersonWithNeedForm from './FormPages/PersonWithNeedForm.js';
 
 
 const store = createStore(reducers);
