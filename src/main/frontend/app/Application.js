@@ -6,7 +6,7 @@ import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
 var assign = require('object-assign');
-import WhosSearching from './FormPages/WhosSearchingForm.jsx';
+import WhosSearching from './FormPages/WhosSearchingForm.js';
 
 import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
@@ -29,7 +29,7 @@ class Application extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
+
         this.state = {
             step: 1,
             prevStep: 1,
@@ -68,6 +68,7 @@ class Application extends React.Component {
     }
 
     nextStep(step) {
+
         this.setState({
             prevStep: this.state.step,
             step: step
@@ -106,7 +107,8 @@ class Application extends React.Component {
                 content = <WhosSearching
                     store={this.props.store}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}/>;
+                    saveValues={this.saveValues}
+                userData={userData}/>;
                 break;
             case 2:
                 content = <RelationForm

@@ -1,11 +1,11 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import {reduxForm} from 'redux-form';
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
-import DropdownList from './Components/DropdownList.jsx';
+import DropdownList from './Components/DropdownList.js';
 import dropdownContent from '../static_data/dropdown-list-content.js';
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
@@ -38,11 +38,11 @@ export class LocationPageClass extends React.Component {
 
     saveFieldValues() {
         //Checks if value exists - otherwise null to avoid null error
-        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null
+        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null;
         var data = {
-            application: {
+            nursingHome: {
                 municipality: mun,
-                home: this.props.fields.homeApp.value
+                name: this.props.fields.homeApp.value
             }
         };
         return this.props.saveValues(data);
@@ -60,27 +60,14 @@ export class LocationPageClass extends React.Component {
 
     municipalityChange(value) {
         this.props.fields.municipalityApp.onChange(value);
+
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                console.log(data);
-                console.log(data.length);
-                //for(var object=1; object<data.length; object++){
-                //    var temp = 0;
-                //    var counter = 1;
-                //    if(data[object].municipality == data[temp].municipality){
-                //        data[temp].municipality += counter.toString();
-                //        counter++;
-                //        temp++;
-                //    }
-                //    console.log("temp: " + temp);
-                //    console.log("counter: " + counter);
-                //}
                 data = data.map(data => {
                     return {muni: data.num + data.municipality, name: data.name}
-
                 });
                 data.unshift({muni: 0, name: "Velg..."});
                 this.props.fields.homeOptions.onChange(data);
@@ -99,7 +86,7 @@ export class LocationPageClass extends React.Component {
         if (municipalityApp.value && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
-                    <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+                    <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
                     <DropdownList

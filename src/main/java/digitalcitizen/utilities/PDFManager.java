@@ -154,6 +154,13 @@ public class PDFManager {
                         field.setValue(value);
                     }
                     break;
+                // NURSING HOME
+                case "nursing_mun":
+                    field.setValue(submission.getNursingHome().getMunicipality());
+                    break;
+                case "nursing_name":
+                    field.setValue(submission.getNursingHome().getName());
+                    break;
                 // LENGTH OF STAY RADIOBUTTONS
                 case "lengthOfStay":
                     switch (submission.getLengthOfStay()){

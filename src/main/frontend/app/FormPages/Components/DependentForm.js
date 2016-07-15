@@ -3,7 +3,7 @@ import {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 
-import DropdownList from './DropdownList.jsx';
+import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
 
 require('!style!css!less!../../Application.less');
@@ -108,5 +108,17 @@ class DependentForm extends React.Component {
         );
     }
 }
+
+DependentForm.propTypes = {
+    showDeleteButton: React.PropTypes.bool.isRequired,
+    autoFilled: React.PropTypes.bool,
+    firstName: React.PropTypes.object.isRequired,
+    lastName: React.PropTypes.object.isRequired,
+    phone: React.PropTypes.object.isRequired,
+    mail: React.PropTypes.object.isRequired,
+    relation: React.PropTypes.object.isRequired,
+    depOtherRelation: React.PropTypes.object.isRequired
+
+};
 
 export default DependentForm

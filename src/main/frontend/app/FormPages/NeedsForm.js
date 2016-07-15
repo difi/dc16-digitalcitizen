@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');

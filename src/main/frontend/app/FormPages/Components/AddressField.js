@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery'
-import DropdownList from './DropdownList.jsx';
+import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
@@ -14,7 +14,8 @@ import {reduxForm} from 'redux-form';
 var AddressField = React.createClass({
 
     propTypes: {
-        includeCountry: React.PropTypes.bool
+        includeCountry: React.PropTypes.bool,
+        address: React.PropTypes.object
     },
 
     getDefaultProps: function () {
@@ -189,6 +190,8 @@ var AddressField = React.createClass({
         }
     }
 });
+
+
 
 AddressField = reduxForm({
     form: 'application',

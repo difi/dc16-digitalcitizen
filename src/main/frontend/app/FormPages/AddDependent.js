@@ -1,8 +1,8 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 
-import DependentForm from './Components/DependentForm.jsx';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import DependentForm from './Components/DependentForm.js';
+import NavigationButtons from './Components/NavigationButtons.js';
 import validate from './Components/DependentValidation';
 
 require('!style!css!less!../Application.less');
@@ -54,6 +54,7 @@ export class AddDependentClass extends React.Component {
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
         if (this.props.fieldValues.dependent) {
+       
             this.getPersonToBeDependent();
         }
     }
