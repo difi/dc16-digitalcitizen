@@ -57,7 +57,7 @@ export class LocationPageClass extends React.Component {
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
     }
-    
+
     municipalityChange(value) {
         this.props.fields.municipalityApp.onChange(value);
 
@@ -83,7 +83,7 @@ export class LocationPageClass extends React.Component {
         if (municipalityApp.value && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
-                    <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+                    <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
                     <DropdownList
