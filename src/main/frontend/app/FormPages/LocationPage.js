@@ -1,11 +1,11 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 import {reduxForm} from 'redux-form';
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
-import DropdownList from './Components/DropdownList.jsx';
+import DropdownList from './Components/DropdownList.js';
 import dropdownContent from '../static_data/dropdown-list-content.js';
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
@@ -83,7 +83,7 @@ export class LocationPageClass extends React.Component {
         if (municipalityApp.value && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
-                    <label className="home">Hvilket sykehjem ønsker du å ha som 1. prioritet?</label>
+                    <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
                     <DropdownList

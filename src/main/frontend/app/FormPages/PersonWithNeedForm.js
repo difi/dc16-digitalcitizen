@@ -4,7 +4,7 @@
 import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');

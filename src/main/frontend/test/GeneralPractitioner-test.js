@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {GeneralPractitionerClass} from '../app/FormPages/GeneralPractitioner.jsx';
+import {GeneralPractitionerClass} from '../app/FormPages/GeneralPractitioner.js';
 //Import TypeAhead to be able to find the fields where it is used
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
