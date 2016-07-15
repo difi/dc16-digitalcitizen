@@ -96,9 +96,40 @@ describe("LocationPageClass", function() {
         expect(wrapper.find('.municipTypeAhead')).to.have.length(1);
     });
 
-    /*it('if homeOptions are available, show label with classname=home', function () {
+    it('if homeOptions are available, show label with classname=home', function () {
+        //Need to redefine the props-values, because homeOptions.value now have a new value
+        const props = {
+            fields: {
+                municipalityApp: {
+                    value: {
+                        name: "Oslo"
+                    },
+                    onChange: function onChange () {}
+                },
+                homeApp: {
+                    value: "Ryen sykehjem",
+                    onChange: function onChange () {}
+                },
+                homeOptions: {
+                    value: "Frogner"
+                }
+            },
+            fieldValues
+        };
+        //Renders the NeedsForm with props
+        wrapper = shallow(<LocationPageClass {...props}/>);
+
         expect(wrapper).to.have.length(1);
 
-    });*/
+        expect(wrapper.find('label.home')).to.have.length(1);
+        expect(wrapper.find('DropdownList')).to.have.length(1);
+    });
+
+    it('if homeOptions are not available, do not show label with classname=home', function () {
+        expect(wrapper).to.have.length(1);
+
+        expect(wrapper.find('label.home')).to.have.length(0);
+        expect(wrapper.find('DropdownList')).to.have.length(0);
+    });
 
 });
