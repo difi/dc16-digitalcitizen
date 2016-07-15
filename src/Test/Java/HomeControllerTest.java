@@ -28,9 +28,9 @@ public class HomeControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetHomes() throws Exception {
-        List<Nursing_Home> testData = Arrays.asList(new Nursing_Home("Frogner sykehjem", "Oslo"),
-                new Nursing_Home("Manglerud sykehjem", "Oslo"),
-                new Nursing_Home("Ryen sykehjem", "Oslo"));
+        List<Nursing_Home> testData = Arrays.asList(new Nursing_Home(1,"Frogner sykehjem", "Oslo"),
+                new Nursing_Home(2,"Manglerud sykehjem", "Oslo"),
+                new Nursing_Home(3,"Ryen sykehjem", "Oslo"));
 
         String uri = "http://localhost:9090/api/homes?mun=Oslo";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();

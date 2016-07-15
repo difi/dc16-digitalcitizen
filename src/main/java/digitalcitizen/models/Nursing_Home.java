@@ -17,16 +17,24 @@ public class Nursing_Home {
         return municipality;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) { this.num=num; }
+
     public void setMunicipality(String municipality) {
         this.municipality = municipality;
     }
 
-    public Nursing_Home(String name, String municipality) {
-
+    public Nursing_Home(int num,String name, String municipality) {
+        this.num = num;
         this.name = name;
         this.municipality = municipality;
     }
 
+
+    private int num;
     private String name;
     private String municipality;
 }
