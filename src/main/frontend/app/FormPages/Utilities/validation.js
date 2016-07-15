@@ -168,13 +168,12 @@ export function validatePnoName(pno, name) {
         $.ajax({
             url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
             dataType: 'json',
-            async: false,
             cache: false,
             success: function (data) {
                 if (data == true) {
-                    checkNameVal = true;
+                    checkNameVal = "riktig";
                 } else {
-                    checkNameVal = false;
+                    checkNameVal = "feil";
                 }
             }.bind(this),
             error: function (xhr, status, err) {
