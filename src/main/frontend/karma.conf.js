@@ -6,13 +6,16 @@ module.exports = function(config) {
         basePath: '', //The root path location that will be used to resolve all relative paths defined in files and exclude. What we have written here is the default value of basePath.
         frameworks: ['jasmine'], //use jasmine framework to test
         files: [ //List of files/patterns to load in the browser.
-            'test/*.js',
+            'node_modules/babel-polyfill/dist/polyfill.js',
+            './node_modules/phantomjs-polyfill/bind-polyfill.js',
+            './index.js'
         ],
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/app/*.js': [ 'webpack', 'coverage','sourcemap'],
-            '**/test/*.js': ['webpack', 'sourcemap']
+
+            './index.js': [ 'webpack','sourcemap'],
+
         },
 
         webpack: webpackConfig,

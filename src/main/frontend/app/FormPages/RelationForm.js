@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownList from './Components/DropdownList.jsx';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import DropdownList from './Components/DropdownList.js';
+import NavigationButtons from './Components/NavigationButtons.js';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
@@ -92,11 +92,14 @@ export class RelationFormClass extends React.Component {
 
 
         if (relation.value == "guardian") {
+            var dataDep = {
+                dependent: true
+            };
+            this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + nameOfChild.value.split(":")[0],
                 dataType: 'json',
                 cache: false,
-                async: false,
                 success: function (data) {
                     var dataVal = {
                         relation: relation.value,

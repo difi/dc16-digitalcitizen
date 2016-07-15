@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {SubmitSuccessClass} from '../app/FormPages/SubmitPage.jsx';
+import {SubmitSuccessClass} from '../app/FormPages/SubmitPage.js';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values

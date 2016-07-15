@@ -4,8 +4,8 @@
 
 import React from 'react';
 
-import AddressField from './Components/AddressField.jsx';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import AddressField from './Components/AddressField.js';
+import NavigationButtons from './Components/NavigationButtons.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');

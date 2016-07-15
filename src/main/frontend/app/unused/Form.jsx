@@ -1,8 +1,8 @@
 import TextField from './TextField.jsx';
 import TypeAhead from './AutoComplete.jsx';
 import React from 'react';
-import DropdownList from '../FormPages/Components/DropdownList.jsx';
-import AddressField from '../FormPages/Components/AddressField.jsx';
+import DropdownList from '../FormPages/Components/DropdownList.js';
+import AddressField from '../FormPages/Components/AddressField.js';
 import dropdownContent from '../static_data/dropdown-list-content.js';
 import TextArea from './TextArea.jsx';
 
