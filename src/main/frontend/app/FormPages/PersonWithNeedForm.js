@@ -19,7 +19,6 @@ import RESTpaths from '../static_data/RESTpaths.js';
 export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
-import {validatePnoName} from './Utilities/validation.js';
 
 
 export class PersonWithNeedClass extends React.Component {
@@ -256,24 +255,19 @@ const validate = values => {
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "Dette er ikke et gyldig fødselsnummer";
     }
-    //if (!(validatePnoName(values.pnr, values.name))) {
-    //    errors.name = "Fødselsnummer og navn matcher ikke."
-    //}
     return errors;
 };
 
 const asyncValidate = (values) => {
     return new Promise((resolve, reject) =>{
-        //console.log("RES: " + (pnoName(values.pnr, values.name)));
-        console.log("NAAAVN: " + values.name);
+        //console.log("NAVN: " + values.name);
 
         $.ajax({
             url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
             dataType: 'json',
             cache: false,
-            //async: false,
             success: function (data) {
-                console.log(data)
+                //console.log(data);
                 if (data == true) {
                     resolve()
                 } else {
@@ -284,71 +278,8 @@ const asyncValidate = (values) => {
                 console.error("url", status, err.toString());
             }.bind(this)
         });
-       /* var request = new XMLHttpRequest();
-        request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name);
-        request.send(null);
-
-        if (request.status === 200) {
-            console.log(request.responseText);
-            checkNameVal = values.name;
-        } else {
-            checkNameVal = "feil";
-            //console.log("Data er " + checkNameVal);
-        }
-        console.log(request.status);
-
-        if (request.status === 200) {
-            if ((request.responseText) == true) {
-                console.log("Fødselsnr og navn er riktig");
-                console.log(request.responseText);
-                resolve()
-            } else {
-                console.log("Fødselsnummer og navn er feil");
-                console.log(request.responseText);
-                reject({name: "Fødselsnummer og navn matcher ikke."});
-            }
-        }*/
     })
 };
-
-var checkNameVal;
-function pnoName(pno, name) {
-    console.log("pno: " + pno);
-    console.log("name: " + name);
-    var request = new XMLHttpRequest();
-    request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name);
-    request.send(null);
-
-    if (request.status === 200) {
-        //console.log(request.responseText);
-        checkNameVal = name;
-    } else {
-        checkNameVal = "feil";
-        //console.log("Data er " + checkNameVal);
-    }
-        /*$.ajax({
-            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
-            dataType: 'json',
-            cache: false,
-            //async: false,
-            success: function (data) {
-                console.log(data)
-                if (data == true) {
-                    checkNameVal = name;
-                    console.log("Data er " + checkNameVal);
-                } else {
-                    checkNameVal = "feil";
-                    console.log("Data er " + checkNameVal);
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error("url", status, err.toString());
-            }.bind(this)
-        });*/
-    //console.log("Resultat: " + checkNameVal);
-    return checkNameVal;
-}
-
 
 
 //Sets up reduxForm - needs fields and validation functions
