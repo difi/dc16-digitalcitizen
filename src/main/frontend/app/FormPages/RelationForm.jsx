@@ -92,11 +92,14 @@ export class RelationFormClass extends React.Component {
 
 
         if (relation.value == "guardian") {
+            var dataDep = {
+                dependent: true
+            };
+            this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + nameOfChild.value.split(":")[0],
                 dataType: 'json',
                 cache: false,
-                async: false,
                 success: function (data) {
                     var dataVal = {
                         relation: relation.value,
