@@ -65,6 +65,9 @@ var fieldValues = {
     }
 };
 
+if ($('#content').length <= 0) {
+    $('body').prepend('<div id="content"></div>');
+}
 
 ReactDOM.render(<Provider store={store}>
     <Application fieldValues={fieldValues}

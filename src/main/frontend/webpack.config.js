@@ -16,7 +16,32 @@ const common = {
         publicPath: '',
         filename: 'bundle.js'
     },
+    isparta: {
+        embedSource: true,
+        noAutoWrap: true,
+        // these babel options will be passed only to isparta and not to babel-loader
+        babel: {
+            presets: ['es2015', 'stage-0', 'react']
+        }
+    },
     module: {
+        preLoaders: [
+            // transpile all files except testing sources with babel as usual
+            {
+                test: /\.js$/,
+                exclude: [
+                    path.resolve('./app/'),
+                    path.resolve('node_modules/')
+                ],
+                loader: 'babel'
+            },
+            // transpile and instrument only testing sources with isparta
+            {
+                test: /\.js$/,
+                include: path.resolve('./app/'),
+                loader: 'isparta'
+            }
+        ],
         loaders: [{
             exclude: /node_modules/,
             loader: 'babel',
