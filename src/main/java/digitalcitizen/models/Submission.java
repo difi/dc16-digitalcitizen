@@ -2,7 +2,6 @@ package digitalcitizen.models;
 
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,11 +28,12 @@ public class Submission {
     private String medicalNeeds;
     private String conditionChanges;
     private String otherNeeds;
+    private NursingHome nursingHome;
 
     public Submission() {
     }
 
-    public Submission(boolean applyingForSelf, Person person, List<Dependent> dependents, String lengthOfStay, String medicalNeeds, String conditionChanges, String otherNeeds) {
+    public Submission(boolean applyingForSelf, Person person, List<Dependent> dependents, String lengthOfStay, String medicalNeeds, String conditionChanges, String otherNeeds, NursingHome nursingHome) {
         this.applyingForSelf = applyingForSelf;
         this.person = person;
         this.dependents = dependents;
@@ -41,6 +41,7 @@ public class Submission {
         this.medicalNeeds = medicalNeeds;
         this.conditionChanges = conditionChanges;
         this.otherNeeds = otherNeeds;
+        this.nursingHome = nursingHome;
     }
 
     public String getId() {
@@ -137,6 +138,14 @@ public class Submission {
 
     public void setLengthOfStay(String lengthOfStay) {
         this.lengthOfStay = lengthOfStay;
+    }
+
+    public NursingHome getNursingHome() {
+        return nursingHome;
+    }
+
+    public void setNursingHome(NursingHome nursingHome) {
+        this.nursingHome = nursingHome;
     }
 
     @Override

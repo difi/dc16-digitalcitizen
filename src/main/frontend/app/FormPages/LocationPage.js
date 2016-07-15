@@ -40,9 +40,9 @@ export class LocationPageClass extends React.Component {
         //Checks if value exists - otherwise null to avoid null error
         var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null;
         var data = {
-            application: {
+            nursingHome: {
                 municipality: mun,
-                home: this.props.fields.homeApp.value
+                name: this.props.fields.homeApp.value
             }
         };
         return this.props.saveValues(data);

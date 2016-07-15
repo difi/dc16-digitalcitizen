@@ -1,7 +1,4 @@
-import digitalcitizen.models.Address;
-import digitalcitizen.models.Doctor;
-import digitalcitizen.models.Nursing_Home;
-import digitalcitizen.models.Person;
+import digitalcitizen.models.NursingHome;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +25,9 @@ public class HomeControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetHomes() throws Exception {
-        List<Nursing_Home> testData = Arrays.asList(new Nursing_Home("Frogner sykehjem", "Oslo"),
-                new Nursing_Home("Manglerud sykehjem", "Oslo"),
-                new Nursing_Home("Ryen sykehjem", "Oslo"));
+        List<NursingHome> testData = Arrays.asList(new NursingHome("Frogner sykehjem", "Oslo"),
+                new NursingHome("Manglerud sykehjem", "Oslo"),
+                new NursingHome("Ryen sykehjem", "Oslo"));
 
         String uri = "http://localhost:9090/api/homes?mun=Oslo";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
