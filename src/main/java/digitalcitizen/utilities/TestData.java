@@ -4,7 +4,7 @@ import digitalcitizen.models.Address;
 import digitalcitizen.models.Doctor;
 import digitalcitizen.models.Person;
 import digitalcitizen.models.Guardian;
-import digitalcitizen.models.Nursing_Home;
+import digitalcitizen.models.NursingHome;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,19 +45,19 @@ public class TestData {
                     Arrays.asList(
                             new Person("06126620649", "Test Person6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal"))))
     );
-    public static final Collection<Nursing_Home> HOMES = Arrays.asList(
-       new Nursing_Home("Frogner sykehjem", "Oslo"),
-       new Nursing_Home("Manglerud sykehjem", "Oslo") ,
-       new Nursing_Home("Ryen sykehjem", "Oslo") ,
-       new Nursing_Home("Sentrum sykehjem", "Trondheim") ,
-       new Nursing_Home("Moholt sykehjem", "Trondheim") ,
-       new Nursing_Home("Sogndal sykehjem", "Sogndal"),
-       new Nursing_Home("Lund sykehjem", "Kristiansand"),
-       new Nursing_Home("Kvadraturen sykehjem", "Kristiansand"),
-       new Nursing_Home("Stokka sykehjem", "Stavanger"),
-       new Nursing_Home("Aasane sykehjem", "Bergen"),
-       new Nursing_Home("Fjellet sykehjem", "Bergen"),
-       new Nursing_Home("Bamble sykehjem", "Bamble"),
-       new Nursing_Home("Molde sykehjem", "Molde")
+    public static final Collection<NursingHome> HOMES = Arrays.asList(
+       new NursingHome("Frogner sykehjem", "Oslo"),
+       new NursingHome("Manglerud sykehjem", "Oslo") ,
+       new NursingHome("Ryen sykehjem", "Oslo") ,
+       new NursingHome("Sentrum sykehjem", "Trondheim") ,
+       new NursingHome("Moholt sykehjem", "Trondheim") ,
+       new NursingHome("Sogndal sykehjem", "Sogndal"),
+       new NursingHome("Lund sykehjem", "Kristiansand"),
+       new NursingHome("Kvadraturen sykehjem", "Kristiansand"),
+       new NursingHome("Stokka sykehjem", "Stavanger"),
+       new NursingHome("Aasane sykehjem", "Bergen"),
+       new NursingHome("Fjellet sykehjem", "Bergen"),
+       new NursingHome("Bamble sykehjem", "Bamble"),
+       new NursingHome("Molde sykehjem", "Molde")
     );
 }
