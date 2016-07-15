@@ -1,9 +1,10 @@
-import Application from '../app/Application.jsx';
+import Application from '../app/Application.js';
 import React from 'react'
+
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
-import WhosSearching from '../app/FormPages/WhosSearchingForm.jsx';
+import WhosSearching from '../app/FormPages/WhosSearchingForm.js';
 import PersonWithNeedInfoForm from '../app/FormPages/PersonWithNeedInfoForm';
 import RelationForm from '../app/FormPages/RelationForm';
 import PersonWithNeedForm from '../app/FormPages/PersonWithNeedForm';
@@ -12,12 +13,12 @@ import SpecialNeeds from '../app/FormPages/SpecialNeeds';
 import NeedsForm from'../app/FormPages/NeedsForm';
 import AddDependent from '../app/FormPages/AddDependent';
 import SubmitSuccess from '../app/FormPages/SubmitPage';
-import NavigationButtons from '../app/FormPages/Components/NavigationButtons.jsx';
-import AddressField from '../app/FormPages/Components/AddressField.jsx';
+import NavigationButtons from '../app/FormPages/Components/NavigationButtons.js';
+import AddressField from '../app/FormPages/Components/AddressField.js';
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-import DependentForm from '../app/FormPages/Components/DependentForm.jsx';
-import DropdownList from '../app/FormPages/Components/DropdownList.jsx';
+import DependentForm from '../app/FormPages/Components/DependentForm.js';
+import DropdownList from '../app/FormPages/Components/DropdownList.js';
 // In this file we're doing an integration test. Thus we need to hook up our
 // form component to Redux and Redux-Form. To do that, we need to create the
 // simplest redux store possible that will work with Redux-Form.
@@ -36,6 +37,7 @@ var userData = {
     name: "Elias Eliassen",
     submissionId: null
 };
+
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values

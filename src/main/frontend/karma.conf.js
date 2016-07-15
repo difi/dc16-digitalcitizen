@@ -6,33 +6,22 @@ module.exports = function(config) {
         basePath: '', //The root path location that will be used to resolve all relative paths defined in files and exclude. What we have written here is the default value of basePath.
         frameworks: ['jasmine'], //use jasmine framework to test
         files: [ //List of files/patterns to load in the browser.
-            'test/*.js',
-            'app/*.js',
-            //'app/Application.jsx',
-            //'app/static_data/*.js',
-            //'app/FormPages/*.jsx',
-            //'app/FormPages/**/*.jsx'
+            'node_modules/babel-polyfill/dist/polyfill.js',
+            './node_modules/phantomjs-polyfill/bind-polyfill.js',
+            './index.js'
         ],
 
         preprocessors: {
             // add webpack as preprocessor
-            '**/app/*.js': [ 'webpack', 'babel', 'coverage','sourcemap'],
-            //'**/app/**/*.jsx': ['webpack', 'babel', 'coverage','sourcemap'],
-            '**/test/*.js': ['webpack', 'sourcemap']
+
+            './index.js': [ 'webpack','sourcemap'],
+
         },
 
         webpack: webpackConfig,
         webpackMiddleWare: {
             noInfo: true
         },
-
-        plugins: [
-            require("karma-webpack"), 'karma-jasmine',
-            'karma-chrome-launcher',
-            require("karma-coverage"),
-            require("karma-sourcemap-loader"),
-            require("karma-phantomjs-launcher")
-        ],
 
         babelPreprocessor: {
             options: {
