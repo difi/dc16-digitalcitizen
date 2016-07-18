@@ -18,7 +18,7 @@ public class PDFManagerTest {
     public void runBeforeTests() {
          manager = new PDFManager();
         List<Dependent> dependents = Arrays.asList(new Dependent("Kong", "Harald", "99999992", "test@test.org", "Kongen din"), null, null);
-         submission = new Submission(true, new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")), dependents, "lenge", "ingen", "Ingen", "ingen");
+         submission = new Submission(true, new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")), dependents, "lenge", "ingen", "Ingen", "ingen", new NursingHome("Frogner sykehjem", "Oslo"));
     }
 
     @Test

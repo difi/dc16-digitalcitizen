@@ -12,6 +12,8 @@ var Col = require('react-bootstrap/lib/Col');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
+var HelpBlock = require('react-bootstrap/lib/HelpBlock');
 
 export const fields = ["firstName", "lastName", "phone", "mail", "relation", "depOtherRelation"];
 
@@ -61,9 +63,12 @@ class DependentForm extends React.Component {
                             <label className="tlf">Telefon</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr"
-                                         disabled={this.props.autoFilled} {...phone}/>
-                            {phone.touched && phone.error && <div className="error">{phone.error}</div>}
+                            <FormGroup validationState={phone.touched && phone.error ? "error" : null}>
+                                <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr"
+                                             disabled={this.props.autoFilled} {...phone}/>
+                                <FormControl.Feedback />
+                                {phone.touched && phone.error && <HelpBlock className="error">{phone.error}</HelpBlock>}
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -71,9 +76,12 @@ class DependentForm extends React.Component {
                             <label className="mail">E-post</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="mailForm" ref="mail" type="text" placeholder="E-post"
-                                         disabled={this.props.autoFilled} {...mail}/>
-                            {mail.touched && mail.error && <div className="error">{mail.error}</div>}
+                            <FormGroup validationState={mail.touched && mail.error ? "error" : null}>
+                                <FormControl className="mailForm" ref="mail" type="text" placeholder="E-post"
+                                             disabled={this.props.autoFilled} {...mail}/>
+                                <FormControl.Feedback />
+                                {mail.touched && mail.error && <HelpBlock className="error">{mail.error}</HelpBlock>}
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row">
@@ -83,7 +91,8 @@ class DependentForm extends React.Component {
                         <Col sm={8} md={8}>
                             <DropdownList className="depRel" ref='relation' options={dropdownContent.DEPENDENTRELATIONS}
                                           id="test"
-                                          valueField="value" labelField="relation" disabled={this.props.autoFilled} {...relation}
+                                          valueField="value" labelField="relation"
+                                          disabled={this.props.autoFilled} {...relation}
                                           onChange={change => relation.onChange(change.newValue)}/>
                         </Col>
                     </Row>
