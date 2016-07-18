@@ -22,31 +22,26 @@ export default class WhosSearching extends React.Component {
     saveFieldValues(status){
         if(status){
             $.ajax({
-                url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
-                dataType: 'json',
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+                dataType: 'text',
                 cache: false,
-                async: false,
                 success: function (data) {
-                    var data = {
+                
+                    var dataVal = {
+
                         dependent: false,
                         applyingForSelf: true,
                         person: {
-                            pnr: data.pnr,
-                            name: data.name,
                             address: {
-                                country: data.address.country,
-                                municipality: data.address.municipality,
-                                streetAddress: data.address.street,
-                                zipcode: data.address.zipcode,
-                                postal: data.address.postal
-                            },
-                            telephone: data.telephone
+                                municipality: data,
+
+                            }
                         }
                     }
-                this.props.saveValues(data);
+                this.props.saveValues(dataVal);
                 }.bind(this),
                 error: function (xhr, status, err) {
-                console.error("dependent error", status, err.toString());
+                console.error("municipality error", status, err.toString());
             }.bind(this)
         })}
 

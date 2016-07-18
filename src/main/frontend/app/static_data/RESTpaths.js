@@ -16,6 +16,7 @@ exports.PATHS = {
     GUARDIAN_BASE: BASE_URL + 'api/guardians',
     DEPENDENT_BASE: BASE_URL + 'api/dependent',
     HOME_BASE: BASE_URL + 'api/homes',
-    PERSON_BASE: BASE_URL + 'api/person'
+    PERSON_BASE: BASE_URL + 'api/person',
+    MUNICIPALITY_BASE: BASE_URL+'api/municipality'
 };
  
