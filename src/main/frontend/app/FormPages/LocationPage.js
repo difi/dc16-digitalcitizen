@@ -17,6 +17,7 @@ export class LocationPageClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.findMunicipality(this.props.fieldValues.person.address.municipality);
 
@@ -25,7 +26,7 @@ export class LocationPageClass extends React.Component {
     findMunicipality(mun) {
         //If you have not yet chosen a value here - have your own municipality as default
         if (!this.props.fields.municipalityApp.value) {
-            this.municipalityChange(mun);
+            this.changeHandler(mun);
         }
     }
 
@@ -59,8 +60,6 @@ export class LocationPageClass extends React.Component {
     }
 
     municipalityChange(value) {
-        this.props.fields.municipalityApp.onChange(value);
-
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
@@ -79,11 +78,27 @@ export class LocationPageClass extends React.Component {
         });
     }
 
+    changeHandler(event){
+        console.log(event);
+        this.props.fields.municipalityApp.onChange(event);
+        this.municipalityChange(event);
+    }
+
+    validateMun(val){
+        for (var i = 0; i < dropdownContent.MUNICIPALITIES.length; ++i) {
+            var mun = dropdownContent.MUNICIPALITIES[i];
+            if(mun.name == val){
+                return true;
+            }
+        }
+        return false;
+    }
+
     render() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
-        var valid = true;
+        var valid = this.validateMun(municipalityApp.value);
         var homes = null;
-        if (municipalityApp.value && homeOptions.value) {
+        if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
                     <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
@@ -114,7 +129,9 @@ export class LocationPageClass extends React.Component {
                                            className="municipTypeAhead"
                                            labelKey="name"
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           onChange={value=>this.municipalityChange(value[0].name)}/>
+                                           onInputChange={this.changeHandler}
+
+                                           />
                             </Col>
                         </Row>
                         {homes}
@@ -147,3 +164,5 @@ const LocationPage = reduxForm({
 
 
 export default LocationPage
+
+//onChange={value=>this.municipalityChange(value[0].name)}

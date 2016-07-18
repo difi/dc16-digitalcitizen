@@ -136,7 +136,7 @@ class Application extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>
+                    name={fieldValues.person.name}/>;
 
                 break;
             case 5:
@@ -172,48 +172,46 @@ class Application extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    saveUserData={this.saveUserData}/>
+                    saveUserData={this.saveUserData}/>;
 
-                    break;
+                break;
             case 9:
-            content =
-                < LocationPage
-                    store={this.props.store}
-                    fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    saveUserData={this.saveUserData}
-                    submitRegistration={this.handleSubmit}/>
-            ;
-            break;
+                content =
+                    < LocationPage
+                        store={this.props.store}
+                        fieldValues={fieldValues}
+                        previousStep={this.previousStep}
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        saveUserData={this.saveUserData}
+                        submitRegistration={this.handleSubmit}/>;
+                break;
             case 10:
-            content =
-                < SubmitSuccess
-                    store={this.props.store}
-                    fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    userData={userData}
-                    submitRegistration={this.handleSubmit}/>
-            ;
-            }
+                content =
+                    < SubmitSuccess
+                        store={this.props.store}
+                        fieldValues={fieldValues}
+                        previousStep={this.previousStep}
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        userData={userData}
+                        submitRegistration={this.handleSubmit}/>;
+        }
 
-            return (
-                <div>
-                    <p> Logget inn som: {userData.name} </p>
-                    {header}
-                    <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8}
-                         xs={10} sm={8} lg={8}>
-                        <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
-                            {content}
-                        </Col>
+        return (
+            <div>
+                <p> Logget inn som: {userData.name} </p>
+                {header}
+                <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8}
+                     xs={10} sm={8} lg={8}>
+                    <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
+                        {content}
                     </Col>
-                </div>
-            )
-            }
-            }
+                </Col>
+            </div>
+        )
+    }
+}
 
 Application.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
