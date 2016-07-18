@@ -76,6 +76,7 @@ const common = {
 if (TARGET === 'build') {
     module.exports = merge(common, {});
 }
+
 else {
     module.exports = merge(common, {
         devServer: {
