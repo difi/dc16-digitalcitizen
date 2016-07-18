@@ -27,7 +27,7 @@ public class TestData {
 
     public static final Collection<Person> PERSONS = Arrays.asList(
             new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")),
-            new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no",  new Doctor("Tore", "Trondheim")),
+            new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("13019870019", "Melissa Melissasen", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Pelle", "Trondheim")),
             new Person("13118208018", "Mia Miasen", new Address("Oslo", "NO", "Oslo", "testveien 4", "0001"), "99999993", "test@test.sexy", new Doctor("Henrik", "Oslo")),
             new Person("29109632323", "Mildrid Mildridsen", new Address("Oslo", "NO", "Oslo", "testveien 5", "0001"), "99999994", "test@test.net", new Doctor("Trine", "Oslo")),
@@ -45,19 +45,20 @@ public class TestData {
                     Arrays.asList(
                             new Person("06126620649", "Test Person6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal"))))
     );
+
     public static final Collection<NursingHome> HOMES = Arrays.asList(
-       new NursingHome("Frogner sykehjem", "Oslo"),
-       new NursingHome("Manglerud sykehjem", "Oslo") ,
-       new NursingHome("Ryen sykehjem", "Oslo") ,
-       new NursingHome("Sentrum sykehjem", "Trondheim") ,
-       new NursingHome("Moholt sykehjem", "Trondheim") ,
-       new NursingHome("Sogndal sykehjem", "Sogndal"),
-       new NursingHome("Lund sykehjem", "Kristiansand"),
-       new NursingHome("Kvadraturen sykehjem", "Kristiansand"),
-       new NursingHome("Stokka sykehjem", "Stavanger"),
-       new NursingHome("Aasane sykehjem", "Bergen"),
-       new NursingHome("Fjellet sykehjem", "Bergen"),
-       new NursingHome("Bamble sykehjem", "Bamble"),
-       new NursingHome("Molde sykehjem", "Molde")
+       new NursingHome(1,"Frogner sykehjem", "Oslo"),
+       new NursingHome(2,"Manglerud sykehjem", "Oslo") ,
+       new NursingHome(3,"Ryen sykehjem", "Oslo") ,
+       new NursingHome(4,"Sentrum sykehjem", "Trondheim") ,
+       new NursingHome(5,"Moholt sykehjem", "Trondheim") ,
+       new NursingHome(6,"Sogndal sykehjem", "Sogndal"),
+       new NursingHome(7,"Lund sykehjem", "Kristiansand"),
+       new NursingHome(8,"Kvadraturen sykehjem", "Kristiansand"),
+       new NursingHome(9,"Stokka sykehjem", "Stavanger"),
+       new NursingHome(10,"Aasane sykehjem", "Bergen"),
+       new NursingHome(11,"Fjellet sykehjem", "Bergen"),
+       new NursingHome(12,"Bamble sykehjem", "Bamble"),
+       new NursingHome(13,"Molde sykehjem", "Molde")
     );
 }

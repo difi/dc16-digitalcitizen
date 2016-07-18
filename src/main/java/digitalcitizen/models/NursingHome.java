@@ -7,12 +7,13 @@ public class NursingHome {
 
     private String name;
     private String municipality;
+    private int num;
 
     public NursingHome() {
     }
 
-    public NursingHome(String name, String municipality) {
-
+    public NursingHome(int num,String name, String municipality) {
+        this.num = num;
         this.name = name;
         this.municipality = municipality;
     }
@@ -29,8 +30,22 @@ public class NursingHome {
         return municipality;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) { this.num=num; }
+
     public void setMunicipality(String municipality) {
         this.municipality = municipality;
     }
 
+    @Override
+    public String toString() {
+        return "NursingHome{" +
+                "name='" + name + '\'' +
+                ", municipality='" + municipality + '\'' +
+                ", num=" + num +
+                '}';
+    }
 }
