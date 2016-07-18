@@ -93,8 +93,10 @@ export class RelationFormClass extends React.Component {
         if (relation.value == "guardian") {
             var dataDep = {
                 relation: relation.value,
-                dependent: true
+                dependent: true,
+                applyingForSelf: false,
             };
+            
             this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
@@ -102,11 +104,11 @@ export class RelationFormClass extends React.Component {
                 cache: false,
                 success: function (data) {
                     var dataVal = {
-                        dependent: false,
-                        applyingForSelf: true,
+
                         person: {
                             address: {
                                 municipality: data,
+                                country: "NO"
                             }
                         }
 
