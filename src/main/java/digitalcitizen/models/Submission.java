@@ -163,6 +163,7 @@ public class Submission {
                 ", medicalNeeds='" + medicalNeeds + '\'' +
                 ", conditionChanges='" + conditionChanges + '\'' +
                 ", otherNeeds='" + otherNeeds + '\'' +
+                ", nursingHome=" + nursingHome +
                 '}';
     }
 }
