@@ -92,6 +92,7 @@ export class RelationFormClass extends React.Component {
 
         if (relation.value == "guardian") {
             var dataDep = {
+                relation: relation.value,
                 dependent: true
             };
             this.props.saveValues(dataDep);
