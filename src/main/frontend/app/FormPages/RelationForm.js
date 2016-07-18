@@ -9,7 +9,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 import $ from 'jquery'
@@ -97,25 +96,19 @@ export class RelationFormClass extends React.Component {
             };
             this.props.saveValues(dataDep);
             $.ajax({
-                url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + nameOfChild.value.split(":")[0],
-                dataType: 'json',
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+                dataType: 'text',
                 cache: false,
                 success: function (data) {
                     var dataVal = {
-                        relation: relation.value,
-                        dependent: true,
+                        dependent: false,
+                        applyingForSelf: true,
                         person: {
-                            pnr: data.pnr,
-                            name: data.name,
                             address: {
-                                country: data.address.country,
-                                municipality: data.address.municipality,
-                                streetAddress: data.address.street,
-                                zipcode: data.address.zipcode,
-                                postal: data.address.postal
-                            },
-                            telephone: data.telephone
+                                municipality: data,
+                            }
                         }
+
                     };
                     this.props.saveValues(dataVal);
                 }.bind(this),
