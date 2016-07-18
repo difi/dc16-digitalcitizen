@@ -32,7 +32,7 @@ public class SubmitControllerTest extends AbstractControllerTest {
                 new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"),
                         "99999990", "test@test.no", new Doctor("Tore", "Trondheim")),
                 dependents, "lenge", "ingen", "Ingen", "ingen",
-                new NursingHome("Frogner sykehjem", "Oslo")
+                new NursingHome(1,"Frogner sykehjem", "Oslo")
         );
         String uri = "http://localhost:9090/send";
         String inputJSON = mapToJson(submission);
