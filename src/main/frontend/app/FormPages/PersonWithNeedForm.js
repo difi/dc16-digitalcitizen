@@ -1,20 +1,22 @@
 /**
  * Created by camp-cha on 24.06.2016.
  */
-import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
+import $ from 'jquery'
+
+import RESTpaths from '../static_data/RESTpaths.js';
 import NavigationButtons from './Components/NavigationButtons.js';
 
+var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 var checked = false;
 
-import $ from 'jquery'
-import RESTpaths from '../static_data/RESTpaths.js';
+
 
 export const fields = ["pnr", "name", "checked"];
 

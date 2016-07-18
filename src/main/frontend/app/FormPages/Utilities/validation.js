@@ -1,6 +1,3 @@
-import $ from 'jquery'
-import RESTpaths from '../../static_data/RESTpaths.js';
-
 const isEmpty = value => value === undefined || value === null || value === '';
 
 export function fieldIsEmpty(value) {

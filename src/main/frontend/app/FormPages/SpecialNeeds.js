@@ -1,21 +1,28 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
+import $ from 'jquery'
+
 import NavigationButtons from './Components/NavigationButtons.js';
+
+var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
-import {reduxForm} from 'redux-form';
+
 import {fieldIsEmpty} from './Utilities/validation.js'
 
-export class SpecialNeedsClass extends React.Component {
 
+export class SpecialNeedsClass extends React.Component {
+    //const {fields: {medical, changes, other}} = this.props;
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.limitTextFields = this.limitTextFields.bind(this);
     }
+
 
     handleClickBack() {
         this.saveFieldValues();
@@ -29,6 +36,7 @@ export class SpecialNeedsClass extends React.Component {
         this.props.nextStep(9);
     }
 
+
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
@@ -41,8 +49,38 @@ export class SpecialNeedsClass extends React.Component {
         return this.props.saveValues(data);
     }
 
-    render() {
+    limitTextFields(e, field) {
+        var changes =(e.target.value);
+        var limitLines = 5;
+        var newLines = changes.split("\n").length;
+        var limitLength = 325;
+        var totalLength = e.target.value.length
+        console.log(totalLength);
 
+        if (totalLength == 65) {
+            changes += "\n"
+        } else if (totalLength == 130) {
+            changes += "\n"
+        } else if (totalLength == 195) {
+            changes += "\n"
+        } else if (totalLength == 260) {
+            changes += "\n"
+        }
+        console.log(changes);
+
+        if ((newLines <= limitLines) && (totalLength <= limitLength)){
+            field.onChange(changes.substring(0, 325));
+        } else {
+            if (newLines > limitLines) {
+                var last = changes.lastIndexOf("\n");
+                field.onChange(changes.substring(0, last));
+            } else {
+                field.onChange(changes.substring(0, 325));
+            }
+        }
+    }
+
+    render() {
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value;
 
@@ -56,7 +94,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea" id="mandatoryField"
-                                         ref="conditionChanges" {...changes}/>
+                                         ref="conditionChanges" {...changes} onChange={event => this.limitTextFields(event, changes)}/>
                             {changes.touched && changes.error && <div className="error">{changes.error}</div>}
                         </Col>
                     </Row>
@@ -66,7 +104,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="medicalNeeds" {...medical}/>
+                                         ref="medicalNeeds" {...medical} onChange={event => this.limitTextFields(event, medical)}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
@@ -76,7 +114,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="otherNeeds" {...other}/>
+                                         ref="otherNeeds" {...other} onChange={event => this.limitTextFields(event, other)}/>
                         </Col>
                     </Row>
                 </div>
