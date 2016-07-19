@@ -1,6 +1,3 @@
-import $ from 'jquery'
-import RESTpaths from '../../static_data/RESTpaths.js';
-
 const isEmpty = value => value === undefined || value === null || value === '';
 
 export function fieldIsEmpty(value) {
@@ -153,27 +150,4 @@ export function alphaNumericInString(str) {
     if (str) {
         return str.replace(/[^a-zA-ZæøåÆØÅ0-9.\s!?]+/g, '');
     }
-}
-
-
-var checkNameVal;
-export function validatePnoName(pno, name) {
-    if (pno != undefined && name != undefined) {
-        $.ajax({
-            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                if (data == true) {
-                    checkNameVal = "riktig";
-                } else {
-                    checkNameVal = "feil";
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error("url", status, err.toString());
-            }.bind(this)
-        });
-    }
-    return checkNameVal;
 }
