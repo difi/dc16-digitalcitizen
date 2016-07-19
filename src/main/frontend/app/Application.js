@@ -12,6 +12,9 @@ import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
+var Navbar = require('react-bootstrap/lib/Navbar');
+var Nav = require('react-bootstrap/lib/Nav');
+var NavItem = require('react-bootstrap/lib/NavItem');
 var Button = require('react-bootstrap/lib/Button');
 import RelationForm from './FormPages/RelationForm';
 import PersonWithNeedForm from './FormPages/PersonWithNeedForm';
@@ -42,7 +45,6 @@ class Application extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
 
     }
-
 
 
     saveValues(field_value) {
@@ -96,7 +98,7 @@ class Application extends React.Component {
     render() {
 
 
-        var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
+        var header = <PageHeader md={8}>Søk sykehjemsplass</PageHeader>;
         var content;
         var fieldValues = this.state.fieldValues;
         var userData = this.state.userData;
@@ -107,7 +109,7 @@ class Application extends React.Component {
                     store={this.props.store}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                userData={userData}/>;
+                    userData={userData}/>;
                 break;
             case 2:
                 content = <RelationForm
@@ -173,46 +175,58 @@ class Application extends React.Component {
                     saveValues={this.saveValues}
                     saveUserData={this.saveUserData}/>
 
-                    break;
+                break;
             case 9:
-            content =
-                < LocationPage
-                    store={this.props.store}
-                    fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    saveUserData={this.saveUserData}
-                    submitRegistration={this.handleSubmit}/>
-            ;
-            break;
+                content =
+                    < LocationPage
+                        store={this.props.store}
+                        fieldValues={fieldValues}
+                        previousStep={this.previousStep}
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        saveUserData={this.saveUserData}
+                        submitRegistration={this.handleSubmit}/>
+                ;
+                break;
             case 10:
-            content =
-                < SubmitSuccess
-                    store={this.props.store}
-                    fieldValues={fieldValues}
-                    previousStep={this.previousStep}
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    userData={userData}
-                    submitRegistration={this.handleSubmit}/>
-            ;
-            }
+                content =
+                    < SubmitSuccess
+                        store={this.props.store}
+                        fieldValues={fieldValues}
+                        previousStep={this.previousStep}
+                        nextStep={this.nextStep}
+                        saveValues={this.saveValues}
+                        userData={userData}
+                        submitRegistration={this.handleSubmit}/>
+                ;
+        }
 
-            return (
-                <div>
-                    <p> Logget inn som: {userData.name} </p>
-                    {header}
-                    <Col className="well application-wrapper" mdOffset={2} lgOffset={2} smOffset={2} xsOffset={1} md={8}
-                         xs={10} sm={8} lg={8}>
-                        <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
-                            {content}
-                        </Col>
+        return (
+            <div className="container">
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href=".">Digitalcitizen</a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Navbar.Text>
+                            Logget inn som: <Navbar.Link href="#">{userData.name}</Navbar.Link>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
+                </Navbar>
+                {header}
+                <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={3} xsOffset={2} md={6}
+                     xs={8} sm={6} lg={6}>
+                    <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
+                        {content}
                     </Col>
-                </div>
-            )
-            }
-            }
+                </Col>
+            </div>
+        )
+    }
+}
 
 Application.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
