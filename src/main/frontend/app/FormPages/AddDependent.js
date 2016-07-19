@@ -54,7 +54,7 @@ export class AddDependentClass extends React.Component {
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
         if (this.props.fieldValues.dependent) {
-       
+
             this.getPersonToBeDependent();
         }
     }
@@ -157,22 +157,22 @@ export class AddDependentClass extends React.Component {
         var other3 = true;
 
         // values for the validation of each form
-        var form1validate = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value &&!form1.phone.error && !form1.mail.error);
-        var form2validate = (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value &&!form2.phone.error && !form2.mail.error);
-        var form3validate = (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value &&!form3.phone.error && !form3.mail.error);
+        var form1validate = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
+        var form2validate = (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
+        var form3validate = (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
 
         if (value == "3") {
             // All three forms has to be valid if you want to continue
             valid = form1validate && form2validate && form3validate;
 
             //If "Annet" is chosen in one or more of the forms, the associated textfield would also need to be valid
-            if(form1.relation.value == "Annet"){
+            if (form1.relation.value == "Annet") {
                 other1 = (valid && form1.depOtherRelation.value);
             }
-            if(form2.relation.value == "Annet"){
+            if (form2.relation.value == "Annet") {
                 other2 = (valid && form2.depOtherRelation.value);
             }
-            if(form3.relation.value == "Annet"){
+            if (form3.relation.value == "Annet") {
                 other3 = (valid && form3.depOtherRelation.value);
             }
 
@@ -182,10 +182,10 @@ export class AddDependentClass extends React.Component {
         } else if (value == "2") {
             valid = form1validate && form2validate;
 
-            if(form1.relation.value == "Annet"){
+            if (form1.relation.value == "Annet") {
                 other1 = (valid && form1.depOtherRelation.value);
             }
-            if(form2.relation.value == "Annet"){
+            if (form2.relation.value == "Annet") {
                 other2 = (valid && form2.depOtherRelation.value);
             }
             return valid && other1 && other2;
@@ -193,7 +193,7 @@ export class AddDependentClass extends React.Component {
         } else {
             valid = form1validate;
 
-            if(form1.relation.value == "Annet"){
+            if (form1.relation.value == "Annet") {
                 other1 = (valid && form1.depOtherRelation.value);
             }
             return valid && other1;
@@ -276,16 +276,20 @@ export class AddDependentClass extends React.Component {
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
-                            <div id="dep2" className="depedent-form-wrapper">
-                                <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
-                                               showDeleteButton={true} {...form2}/>
+                            <div>
+                                <div id="dep2" className="depedent-form-wrapper">
+                                    <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
+                                                   showDeleteButton={true} {...form2}/>
+                                </div>
                             </div>
                         </Collapse>
                         <br/>
                         <Collapse in={this.props.fields.form3.show.value}>
-                            <div id="dep3" className="depedent-form-wrapper">
-                                <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
-                                               showDeleteButton={true} {...form3}/>
+                            <div>
+                                <div id="dep3" className="depedent-form-wrapper">
+                                    <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
+                                                   showDeleteButton={true} {...form3}/>
+                                </div>
                             </div>
                         </Collapse>
                     </div>
@@ -303,15 +307,15 @@ export class AddDependentClass extends React.Component {
             </div>
         );
     }
-};
+}
+;
 
 AddDependentClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired
+    nextStep: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired
 }
-
 
 
 const AddDependent = reduxForm({
