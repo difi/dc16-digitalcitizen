@@ -98,7 +98,8 @@ class Application extends React.Component {
     render() {
 
 
-        var header = <PageHeader md={8}>Søk sykehjemsplass</PageHeader>;
+        var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
+
         var content;
         var fieldValues = this.state.fieldValues;
         var userData = this.state.userData;
@@ -137,8 +138,7 @@ class Application extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>
-
+                    name={fieldValues.person.name}/>;
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -173,7 +173,7 @@ class Application extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    saveUserData={this.saveUserData}/>
+                    saveUserData={this.saveUserData}/>;
 
                 break;
             case 9:
@@ -185,8 +185,7 @@ class Application extends React.Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         saveUserData={this.saveUserData}
-                        submitRegistration={this.handleSubmit}/>
-                ;
+                        submitRegistration={this.handleSubmit}/>;
                 break;
             case 10:
                 content =
@@ -198,7 +197,7 @@ class Application extends React.Component {
                         saveValues={this.saveValues}
                         userData={userData}
                         submitRegistration={this.handleSubmit}/>
-                ;
+                break;
         }
 
         return (
@@ -231,6 +230,6 @@ class Application extends React.Component {
 Application.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
-}
+};
 
 export default Application

@@ -76,7 +76,7 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-describe("Application", () => {
+describe("ApplicationIntegration", () => {
     let store = null;
     let subject = null;
 
