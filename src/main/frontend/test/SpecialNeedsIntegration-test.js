@@ -58,7 +58,7 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-describe("Integration of DependentForm", () => {
+describe("SpecialNeeds-Integration", () => {
     let store = null;
     let subject = null;
 
@@ -73,6 +73,27 @@ describe("Integration of DependentForm", () => {
         //Renders the SpecialNeeds with props
         subject = mount(<SpecialNeeds {...props}/>);
     });
+
+    it('Does not show error-message when field has valid value', function () {
+        //expect wrapper to exist
+        expect(subject).to.have.length(1);
+
+        const input = subject.find('#mandatoryField');
+        expect(input).to.have.length(1);
+
+        // Our form component only shows error messages (help text) if the
+        // field has been touched. To mimic touching the field, we simulate a
+        // blur event, which means the input's onBlur method will run, which
+        // will call the onBlur method supplied by Redux-Form.
+
+        input.simulate('blur');
+        input.simulate('change', {target: {value: "bein"}});
+        const errorMessage = subject.find('.error');
+        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
+        expect(errorMessage).to.have.length.of(0);
+        //expect(errorMessage.text()).to.equal("Dette feltet må fylles ut. ");
+    });
+
     it("Shows error message when first field is touched", () => {
         //expect wrapper to exist
         expect(subject).to.have.length(1);
@@ -86,30 +107,11 @@ describe("Integration of DependentForm", () => {
         // will call the onBlur method supplied by Redux-Form.
 
         input.simulate('blur');
+        input.simulate('change', {target: {value: ""}});
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Dette feltet må fylles ut. ");
+        //expect(errorMessage.text()).to.equal("Dette feltet må fylles ut. ");
 
     });
-
-    it("Do not show error message when telephone field has correct value", () => {
-        expect(subject).to.have.length(1);
-
-        const input = subject.find('#mandatoryField');
-        expect(input).to.have.length(1);
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-
-        input.simulate('blur');
-        input.simulate('change', {target: {value: "123 45 678"}});
-        const errorMessage = subject.find('.error');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(0);
-        //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
-    });
-
 });
