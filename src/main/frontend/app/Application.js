@@ -44,7 +44,6 @@ class Application extends React.Component {
     }
 
 
-
     saveValues(field_value) {
         this.setState({
             fieldValues: assign({}, this.state.fieldValues, field_value)
@@ -96,7 +95,6 @@ class Application extends React.Component {
 
     render() {
 
-
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
         var content;
         var fieldValues = this.state.fieldValues;
@@ -108,7 +106,7 @@ class Application extends React.Component {
                     store={this.props.store}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                userData={userData}/>;
+                    userData={userData}/>;
                 break;
             case 2:
                 content = <RelationForm
@@ -137,7 +135,6 @@ class Application extends React.Component {
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
                     name={fieldValues.person.name}/>;
-
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -216,6 +213,6 @@ class Application extends React.Component {
 Application.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
-}
+};
 
 export default Application
