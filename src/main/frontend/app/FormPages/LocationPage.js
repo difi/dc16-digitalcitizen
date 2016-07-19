@@ -10,6 +10,8 @@ import dropdownContent from '../static_data/dropdown-list-content.js';
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
+var inputChangeRun = 0;
+
 export class LocationPageClass extends React.Component {
     constructor(props) {
         super(props);
@@ -17,8 +19,9 @@ export class LocationPageClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
-        this.changeHandler = this.changeHandler.bind(this);
+        this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fieldValues.person.address.municipality);
 
     }
@@ -26,7 +29,7 @@ export class LocationPageClass extends React.Component {
     findMunicipality(mun) {
         //If you have not yet chosen a value here - have your own municipality as default
         if (!this.props.fields.municipalityApp.value) {
-            this.changeHandler(mun);
+            this.onInputChangeHandler(mun);
         }
     }
 
@@ -47,7 +50,6 @@ export class LocationPageClass extends React.Component {
             }
         };
         return this.props.saveValues(data);
-
     }
 
     //Handle the click on the next-button
@@ -69,6 +71,7 @@ export class LocationPageClass extends React.Component {
                     return {muni: data.num + ":" + data.municipality, name: data.name}
                 });
                 data.unshift({muni: 0, name: "Velg..."});
+                this.props.fields.municipalityApp.onChange(value);
                 this.props.fields.homeOptions.onChange(data);
                 this.forceUpdate();
             }.bind(this),
@@ -78,10 +81,18 @@ export class LocationPageClass extends React.Component {
         });
     }
 
-    changeHandler(event){
-        console.log(event);
-        this.props.fields.municipalityApp.onChange(event);
-        this.municipalityChange(event);
+    onInputChangeHandler(event){
+        inputChangeRun+=1;
+        this.props.fields.municipalityApp.onChange("" + event);
+        if(this.validateMun(event)){
+            this.municipalityChange(event);
+        }
+    }
+
+    onChangeHandler(event){
+        if (inputChangeRun == 1){
+            this.props.fields.municipalityApp.onChange("" + event);
+        }
     }
 
     validateMun(val){
@@ -129,9 +140,8 @@ export class LocationPageClass extends React.Component {
                                            className="municipTypeAhead"
                                            labelKey="name"
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           onInputChange={this.changeHandler}
-
-                                           />
+                                           onInputChange={this.onInputChangeHandler}
+                                           onChange={this.onChangeHandler}/>
                             </Col>
                         </Row>
                         {homes}
