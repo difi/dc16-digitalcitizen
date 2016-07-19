@@ -41,10 +41,14 @@ export class SpecialNeedsClass extends React.Component {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
 
+        var med = medical.value.replace(/[\n]/g, '. ');
+        var cha = changes.value.replace(/[\n]/g, '. ');
+        var oth = other.value.replace(/[\n]/g, '. ');
+
         var data = {
-            medicalNeeds: medical.value,
-            conditionChanges: changes.value,
-            otherNeeds: other.value
+            medicalNeeds: med,
+            conditionChanges: cha,
+            otherNeeds: oth
         };
         return this.props.saveValues(data);
     }
@@ -53,29 +57,17 @@ export class SpecialNeedsClass extends React.Component {
         var changes =(e.target.value);
         var limitLines = 5;
         var newLines = changes.split("\n").length;
-        var limitLength = 325;
-        var totalLength = e.target.value.length
-        console.log(totalLength);
+        var limitLength = 300;
+        var totalLength = changes.length;
+        var last = changes.lastIndexOf("\n");
 
-        if (totalLength == 65) {
-            changes += "\n"
-        } else if (totalLength == 130) {
-            changes += "\n"
-        } else if (totalLength == 195) {
-            changes += "\n"
-        } else if (totalLength == 260) {
-            changes += "\n"
-        }
-        console.log(changes);
-
-        if ((newLines <= limitLines) && (totalLength <= limitLength)){
-            field.onChange(changes.substring(0, 325));
-        } else {
-            if (newLines > limitLines) {
-                var last = changes.lastIndexOf("\n");
-                field.onChange(changes.substring(0, last));
-            } else {
-                field.onChange(changes.substring(0, 325));
+        if ((totalLength <= limitLength)) {
+            if (newLines <= limitLength) {
+                if (newLines > limitLines) {
+                    field.onChange(changes.substring(0, last));
+                } else {
+                    field.onChange(changes.substring(0, limitLength));
+                }
             }
         }
     }
