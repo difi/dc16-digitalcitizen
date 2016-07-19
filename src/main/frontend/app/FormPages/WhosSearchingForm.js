@@ -76,15 +76,15 @@ export default class WhosSearching extends React.Component {
                 <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
                 <div className="form-container">
                     <Row>
-                        <Col>
+                        <Col md={8} mdOffset={2}>
                             <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
-                                    bsSize="large">Ja, for meg selv</Button>
+                                    bsSize="large" block>Ja, for meg selv</Button>
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col md={8} mdOffset={2}>
                             <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
-                                    bsSize="large">Nei, for noen andre</Button>
+                                    bsSize="large" block>Nei, for noen andre</Button>
                         </Col>
                     </Row>
                 </div>

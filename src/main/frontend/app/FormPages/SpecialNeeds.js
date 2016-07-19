@@ -8,6 +8,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var HelpBlock = require('react-bootstrap/lib/HelpBlock');
 var Overlay = require('react-bootstrap/lib/Overlay');
 var Popover = require('react-bootstrap/lib/Popover');
+var ReactDOM = require('react-dom');
 
 
 import {reduxForm} from 'redux-form';
@@ -50,7 +51,7 @@ export class SpecialNeedsClass extends React.Component {
 
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value;
-        const invalidChangesTooltip = <Popover>{changes.error}</Popover>;
+        const invalidChangesTooltip = <Popover id="invalidChangesPopover">{changes.error}</Popover>;
         const invalidChangesProps = {
             show: changes.touched && changes.error != undefined,
             container: this,
@@ -70,7 +71,7 @@ export class SpecialNeedsClass extends React.Component {
                             <FormControl componentClass="textarea" className="special-needs-textarea" id="mandatoryField"
                                          ref="conditionChanges" {...changes}/>
                                 <FormControl.Feedback />
-                                <Overlay {...invalidChangesProps} placement="bottom">
+                                <Overlay id="invalidChangesOverlay" {...invalidChangesProps} placement="bottom">
                                     { invalidChangesTooltip }
                                 </Overlay>
                         </FormGroup>

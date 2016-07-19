@@ -68,7 +68,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
 
-        const invalidNumberTooltip = <Popover>{number.error}</Popover>;
+        const invalidNumberTooltip = <Popover id="invalidNumberPopover">{number.error}</Popover>;
         const invalidNumberProps = {
             show: number.touched && number.error,
             container: this,
@@ -121,7 +121,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         {...number}
                                     />
                                     <FormControl.Feedback />
-                                    <Overlay {...invalidNumberProps} placement="bottom">
+                                    <Overlay id="invalidNumberOverlay" {...invalidNumberProps} placement="bottom">
                                         { invalidNumberTooltip }
                                     </Overlay>
                                 </FormGroup>

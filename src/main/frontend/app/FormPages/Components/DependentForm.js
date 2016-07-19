@@ -14,6 +14,9 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var HelpBlock = require('react-bootstrap/lib/HelpBlock');
+var Overlay = require('react-bootstrap/lib/Overlay');
+var Popover = require('react-bootstrap/lib/Popover');
+var ReactDOM = require('react-dom');
 
 export const fields = ["firstName", "lastName", "phone", "mail", "relation", "depOtherRelation"];
 
@@ -33,13 +36,12 @@ class DependentForm extends React.Component {
                 <span aria-hidden="true">&times;</span>
             </Button> : '';
 
-
         const {firstName, lastName, phone, mail, relation, depOtherRelation}= this.props;
+        
         return (
             <div>
                 {deleteButton}
-                <div><h4>Pårørende</h4></div>
-                <div>
+                <h4>Pårørende</h4>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
                             <label className="fName">Fornavn</label>
@@ -58,7 +60,7 @@ class DependentForm extends React.Component {
                                          disabled={this.props.autoFilled} {...lastName}/>
                         </Col>
                     </Row>
-                    <Row className="form-row">
+                    <Row className="formgroup-row">
                         <Col sm={4} md={4}>
                             <label className="tlf">Telefon</label>
                         </Col>
@@ -71,7 +73,7 @@ class DependentForm extends React.Component {
                             </FormGroup>
                         </Col>
                     </Row>
-                    <Row className="form-row">
+                    <Row className="formgroup-row">
                         <Col sm={4} md={4}>
                             <label className="mail">E-post</label>
                         </Col>
@@ -113,7 +115,6 @@ class DependentForm extends React.Component {
                             </Col>
                         </Row> : ''}
                 </div>
-            </div>
         );
     }
 }

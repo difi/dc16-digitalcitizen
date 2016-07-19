@@ -15,6 +15,8 @@ var Button = require('react-bootstrap/lib/Button');
 var ControlLabel = require('react-bootstrap/lib/ControlLabel');
 var Overlay = require('react-bootstrap/lib/Overlay');
 var Popover = require('react-bootstrap/lib/Popover');
+var Collapse = require('react-bootstrap/lib/Collapse');
+var Alert = require('react-bootstrap/lib/Alert');
 var ReactDOM = require('react-dom');
 
 var checked = false;
@@ -122,18 +124,11 @@ export class PersonWithNeedClass extends React.Component {
 
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
 
-        const invalidPnrTooltip = <Popover>{pnr.error}</Popover>;
+        const invalidPnrTooltip = <Popover id="invalidPnrPopover" >{pnr.error}</Popover>;
         const invalidPnrProps = {
             show: pnr.touched && pnr.error != undefined,
             container: this,
             target: () => ReactDOM.findDOMNode(this.refs.pno)
-        };
-
-        const invalidNameTooltip = <Popover>{name.error}</Popover>;
-        const invalidNameProps = {
-            show: name.touched && name.error != undefined,
-            container: this,
-            target: () => ReactDOM.findDOMNode(this.refs.name)
         };
 
         var valid = (name.value && pnr.value && !pnr.error && !name.error && asyncValidating != 'name') || (name.value && checked.value);
@@ -143,7 +138,29 @@ export class PersonWithNeedClass extends React.Component {
                     <componentClass>
                         <label className="form-header">Informasjon om søker</label>
                         <div className="form-container">
+                            <Row className="formgroup-row">
+                                <Col sx={4} md={4}>
+                                    <label>Navn</label>
+                                </Col>
+                                <Col sx={8} md={8}>
+                                    <FormGroup>
+                                        <FormControl
+                                            type="text"
+                                            placeholder="Navn"
+                                            ref="name"
+                                            {...name}/>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm={0} md={5}></Col>
+                            </Row>
                             <Row className="form-row">
+                                <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
+                                    <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
+                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                    fødselsnummeret
+                                </Col>
+                            </Row>
+                            <Row className="formgroup-row">
                                 <Col sx={4} md={4}>
                                     <label>Fødselsnummer</label>
                                 </Col>
@@ -158,35 +175,10 @@ export class PersonWithNeedClass extends React.Component {
                                             //onChange={this.handlePNRChange}
                                             //{...pnr} Removing this resets the text field
                                             disabled/>
-                                        </FormGroup>
+                                    </FormGroup>
                                 </Col>
-                            </Row>
-                            <Row className="form-row">
-                                <Col sx={4} md={4}></Col>
-                                <Col sx={8} md={8}>
-                                    <input type="checkbox" className="pnrCheck" name="noPno" checked={checked.value}
-                                           onChange={value=>checked.onChange(value)}/> Jeg kan ikke fødselsnummeret
-                                </Col>
-                                <Col sm={0} md={5}></Col>
-                            </Row>
-
-                            <Row className="form-row-name">
-                                <Col sx={4} md={4}>
-                                    <label>Navn</label>
-                                </Col>
-                                <Col sx={8} md={8}>
-                                    <FormGroup>
-                                        <FormControl
-                                            type="text"
-                                            placeholder="Navn"
-                                            ref="name"
-                                            {...name}/>
-                                        </FormGroup>
-                                </Col>
-                                <Col sm={0} md={5}></Col>
                             </Row>
                         </div>
-
 
                         <NavigationButtons
                             handleClickBack={this.handleClickBack}
@@ -203,7 +195,35 @@ export class PersonWithNeedClass extends React.Component {
                 <componentClass>
                     <label className="form-header">Informasjon om søker</label>
                     <div className="form-container">
+                        <Row className="formgroup-row">
+                            <Col sx={4} md={4}>
+                                <label className="name">Navn</label>
+                            </Col>
+                            <Col sx={8} md={8}>
+                                <FormGroup>
+                                    <FormControl
+                                        type="text"
+                                        className="name"
+                                        placeholder="Navn"
+                                        ref="name"
+
+                                        {...name}
+                                        onChange={name.onBlur}
+                                    />
+                                    {asyncValidating === 'name'}
+                                </FormGroup>
+                            </Col>
+                            <Col sm={0} md={5}></Col>
+                        </Row>
                         <Row className="form-row">
+                            <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
+                                <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
+                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                fødselsnummeret
+                            </Col>
+                        </Row>
+
+                        <Row className="formgroup-row">
                             <Col sx={4} md={4}>
                                 <label className="fnr">Fødselsnummer</label>
                             </Col>
@@ -218,6 +238,7 @@ export class PersonWithNeedClass extends React.Component {
                                         //Connects field to redux form component//
                                         {...pnr}
                                     />
+                                    {asyncValidating === 'pnr'}
                                     <FormControl.Feedback />
                                     <Overlay {...invalidPnrProps} placement="top">
                                         { invalidPnrTooltip }
@@ -225,41 +246,14 @@ export class PersonWithNeedClass extends React.Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Row className="form-row">
-                            <Col sx={4} md={4}></Col>
-                            <Col sx={8} md={8}>
-                                <input type="checkbox" name="noPno" className="pnrCheck"
-                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
-                                fødselsnummeret
-                            </Col>
-                            <Col sm={0} md={5}></Col>
-                        </Row>
-
-                        <Row className="form-row-name">
-                            <Col sx={4} md={4}>
-                                <label className="name">Navn</label>
-                            </Col>
-                            <Col sx={8} md={8}>
-                                <FormGroup validationState={name.touched && name.error ? "error" : null}>
-                                    <FormControl
-                                        type="text"
-                                        className="name"
-                                        placeholder="Navn"
-                                        ref="name"
-
-                                        {...name}
-                                        onChange={name.onBlur}
-                                    />
-                                    {asyncValidating === 'name'}
-                                    <FormControl.Feedback />
-                                    <Overlay {...invalidNameProps} placement="bottom">
-                                        { invalidNameTooltip }
-                                    </Overlay>
-                                </FormGroup>
-                            </Col>
-                            <Col sm={0} md={5}></Col>
-                        </Row>
                     </div>
+                    <Collapse in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
+                        <div>
+                            <Alert bsStyle="danger">
+                                Fødselsnummer og navn matcher ikke.
+                            </Alert>
+                        </div>
+                    </Collapse>
 
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
@@ -298,23 +292,28 @@ const asyncValidate = (values) => {
         //console.log("RES: " + (pnoName(values.pnr, values.name)));
         console.log("NAAAVN: " + values.name);
 
-        $.ajax({
-            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
-            dataType: 'json',
-            cache: false,
-            //async: false,
-            success: function (data) {
-                console.log(data)
-                if (data == true) {
-                    resolve()
-                } else {
-                    reject({name: "Fødselsnummer og navn matcher ikke."});
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error("url", status, err.toString());
-            }.bind(this)
-        });
+        // Checks if pnr and name match if a full-length pnr is typed
+        if(values.pnr.length > 10) {
+            $.ajax({
+                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
+                dataType: 'json',
+                cache: false,
+                //async: false,
+                success: function (data) {
+                    console.log(data)
+                    if (data == true) {
+                        resolve()
+                    } else {
+                        reject({name: "Fødselsnummer og navn matcher ikke."});
+                    }
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error("url", status, err.toString());
+                }.bind(this)
+            });
+        } else {
+            reject({name: "Fødselsnummer og navn matcher ikke."});
+        }
         /* var request = new XMLHttpRequest();
          request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name);
          request.send(null);
