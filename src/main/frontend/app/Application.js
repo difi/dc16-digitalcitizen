@@ -68,7 +68,6 @@ class Application extends React.Component {
     }
 
     nextStep(step) {
-
         this.setState({
             prevStep: this.state.step,
             step: step
