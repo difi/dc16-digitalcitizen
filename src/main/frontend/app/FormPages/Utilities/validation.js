@@ -21,12 +21,6 @@ export function checkEmail(value) {
     return true;
 }
 
-export function checkInteger(value) {
-    if (!Number.isInteger(Number(value))) {
-        return false;
-    }
-}
-
 export function checkPNR(str) {
     if (str) {
         return str.replace(/[^0-9]+/g, '').substring(0, 11);

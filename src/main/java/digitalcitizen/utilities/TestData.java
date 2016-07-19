@@ -4,7 +4,7 @@ import digitalcitizen.models.Address;
 import digitalcitizen.models.Doctor;
 import digitalcitizen.models.Person;
 import digitalcitizen.models.Guardian;
-import digitalcitizen.models.Nursing_Home;
+import digitalcitizen.models.NursingHome;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class TestData {
 
     public static final Collection<Person> PERSONS = Arrays.asList(
             new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")),
-            new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no",  new Doctor("Tore", "Trondheim")),
+            new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("13019870019", "Melissa Melissasen", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Pelle", "Trondheim")),
             new Person("13118208018", "Mia Miasen", new Address("Oslo", "NO", "Oslo", "testveien 4", "0001"), "99999993", "test@test.sexy", new Doctor("Henrik", "Oslo")),
             new Person("29109632323", "Mildrid Mildridsen", new Address("Oslo", "NO", "Oslo", "testveien 5", "0001"), "99999994", "test@test.net", new Doctor("Trine", "Oslo")),
@@ -45,19 +45,20 @@ public class TestData {
                     Arrays.asList(
                             new Person("06126620649", "Test Person6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal"))))
     );
-    public static final Collection<Nursing_Home> HOMES = Arrays.asList(
-       new Nursing_Home("Frogner sykehjem", "Oslo"),
-       new Nursing_Home("Manglerud sykehjem", "Oslo") ,
-       new Nursing_Home("Ryen sykehjem", "Oslo") ,
-       new Nursing_Home("Sentrum sykehjem", "Trondheim") ,
-       new Nursing_Home("Moholt sykehjem", "Trondheim") ,
-       new Nursing_Home("Sogndal sykehjem", "Sogndal"),
-       new Nursing_Home("Lund sykehjem", "Kristiansand"),
-       new Nursing_Home("Kvadraturen sykehjem", "Kristiansand"),
-       new Nursing_Home("Stokka sykehjem", "Stavanger"),
-       new Nursing_Home("Aasane sykehjem", "Bergen"),
-       new Nursing_Home("Fjellet sykehjem", "Bergen"),
-       new Nursing_Home("Bamble sykehjem", "Bamble"),
-       new Nursing_Home("Molde sykehjem", "Molde")
+
+    public static final Collection<NursingHome> HOMES = Arrays.asList(
+       new NursingHome(1,"Frogner sykehjem", "Oslo"),
+       new NursingHome(2,"Manglerud sykehjem", "Oslo") ,
+       new NursingHome(3,"Ryen sykehjem", "Oslo") ,
+       new NursingHome(4,"Sentrum sykehjem", "Trondheim") ,
+       new NursingHome(5,"Moholt sykehjem", "Trondheim") ,
+       new NursingHome(6,"Sogndal sykehjem", "Sogndal"),
+       new NursingHome(7,"Lund sykehjem", "Kristiansand"),
+       new NursingHome(8,"Kvadraturen sykehjem", "Kristiansand"),
+       new NursingHome(9,"Stokka sykehjem", "Stavanger"),
+       new NursingHome(10,"Aasane sykehjem", "Bergen"),
+       new NursingHome(11,"Fjellet sykehjem", "Bergen"),
+       new NursingHome(12,"Bamble sykehjem", "Bamble"),
+       new NursingHome(13,"Molde sykehjem", "Molde")
     );
 }

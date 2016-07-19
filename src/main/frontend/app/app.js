@@ -59,9 +59,9 @@ var fieldValues = {
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
     otherNeeds: null,            // String
-    application: {
+    nursingHome: {
         municipality: null,
-        home: null
+        name: null
     }
 };
 
