@@ -258,7 +258,6 @@ export class AddDependentClass extends React.Component {
     }
 
     render() {
-
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;

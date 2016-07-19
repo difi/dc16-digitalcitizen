@@ -34,6 +34,7 @@ export default class WhosSearching extends React.Component {
                         person: {
                             address: {
                                 municipality: data,
+                                country: "NO"
 
                             }
                         }
