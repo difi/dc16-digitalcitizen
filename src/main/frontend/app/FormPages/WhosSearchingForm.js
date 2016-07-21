@@ -21,6 +21,11 @@ export default class WhosSearching extends React.Component {
 
     saveFieldValues(status){
         if(status){
+            //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
+            var dataFirst = {
+                dependent: false,
+            }
+            this.props.saveValues(dataFirst);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
                 dataType: 'text',
@@ -29,7 +34,7 @@ export default class WhosSearching extends React.Component {
                 
                     var dataVal = {
 
-                        dependent: false,
+                        
                         applyingForSelf: true,
                         person: {
                             address: {

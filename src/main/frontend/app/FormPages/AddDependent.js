@@ -53,7 +53,7 @@ export class AddDependentClass extends React.Component {
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
-        if (this.props.fieldValues.dependent) {
+        if (props.fieldValues.dependent) {
 
             this.getPersonToBeDependent();
         }
@@ -258,6 +258,7 @@ export class AddDependentClass extends React.Component {
     }
 
     render() {
+        
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
