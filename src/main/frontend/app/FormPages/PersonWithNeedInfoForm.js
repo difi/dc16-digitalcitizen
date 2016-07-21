@@ -29,6 +29,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+     
     }
 
     handleClickBack() {
@@ -58,9 +59,9 @@ export class PersonWithNeedInfoClass extends React.Component {
         var data = {
             person: {
                 pnr: this.props.fieldValues.person.pnr,
-                name: ReactDOM.findDOMNode(this.refs.name).value,
+                name: name.value,
                 address: address,
-                telephone: ReactDOM.findDOMNode(this.refs.phone).value
+                telephone: number.value
             }
         };
         this.props.saveValues(data);
@@ -72,7 +73,6 @@ export class PersonWithNeedInfoClass extends React.Component {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         console.log(postal.placeholder);
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
-        console.log(this.props.fieldValues.person);
         return (
             <form>
                 <div>
@@ -143,7 +143,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 }
 ;
 PersonWithNeedInfoClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired,

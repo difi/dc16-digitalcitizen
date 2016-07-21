@@ -36,7 +36,15 @@ const fields = [
     'form1.depOtherRelation',
     'form2.depOtherRelation',
     'form3.depOtherRelation',
-    'numDep'
+    'numDep',
+    'relation',
+    'dependent',
+    'applyingForSelf',
+    'checked',
+    'otherRelation',
+    'typeOfRelation'
+
+
 ];
 
 var DISPLAY_FORM = 'block';
@@ -53,7 +61,8 @@ export class AddDependentClass extends React.Component {
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
-        if (props.fieldValues.dependent) {
+        console.log(props.fields);
+        if (props.fields.dependent.value) {
 
             this.getPersonToBeDependent();
         }
@@ -77,17 +86,17 @@ export class AddDependentClass extends React.Component {
                 this.props.fields.form1.lastName.onChange(lastName);
                 this.props.fields.form1.phone.onChange(data.telephone);
                 this.props.fields.form1.mail.onChange(data.mail);
-                console.log("relation: " + this.props.fieldValues.relation);
-                switch (this.props.fieldValues.relation) {
+
+                switch (this.props.fields.relation.value) {
                     case "guardian":
                         this.props.fields.form1.relation.onChange("Verge");
                         break;
                     case "family":
-                        this.props.fields.form1.relation.onChange(this.props.fieldValues.typeOfRelation);
+                        this.props.fields.form1.relation.onChange(this.props.fields.typeOfRelation.value);
                         break;
                     case "other":
                         this.props.fields.form1.relation.onChange('Annet');
-                        this.props.fields.form1.depOtherRelation.onChange(this.props.fieldValues.otherRelation);
+                        this.props.fields.form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
                         break;
                 }
                 this.forceUpdate();
@@ -100,14 +109,15 @@ export class AddDependentClass extends React.Component {
 
     handleClickBack() {
         this.saveFieldValues();
-        if (this.props.fieldValues.applyingForSelf) {
+        console.log(this.props.fields);
+        if (this.props.fields.applyingForSelf.value) {
             (this.props.previousStep(1));
         }
 
-        else if (this.props.fieldValues.relation == "guardian") {
+        else if (this.props.fields.relation.value == "guardian") {
             this.props.previousStep(2);
         }
-        else if (this.props.fieldValues.dontGotPNRnumber) {
+        else if (this.props.fields.checked.value) {
             (this.props.previousStep(5));
         }
         else {
@@ -121,7 +131,11 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClick() {
-        if (this.props.fields.numDep.value < 3) {
+        if(!this.props.fields.numDep.value){
+            this.props.fields.numDep.onChange(2);
+            this.props.fields.form2.show.onChange(true);
+        }
+        else if (this.props.fields.numDep.value < 3) {
 
             if (this.props.fields.numDep.value == 2) {
                 this.props.fields.displayButton.onChange(HIDE_FORM);
@@ -273,7 +287,7 @@ export class AddDependentClass extends React.Component {
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
-                                           autoFilled={this.props.fieldValues.dependent}/>
+                                           autoFilled={this.props.fields.dependent.value}/>
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -312,7 +326,7 @@ export class AddDependentClass extends React.Component {
 ;
 
 AddDependentClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
+
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired
@@ -322,10 +336,13 @@ AddDependentClass.propTypes = {
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
-    initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},
+
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
 
 
 export default AddDependent
+
+//Cant have initial values after refactor away from using fieldValues, but does it even matter? undefined equals to false when  evaluating. NumDep has been fixed with an if statement for first click
+//initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},

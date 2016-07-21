@@ -92,25 +92,6 @@ var AddressField = React.createClass({
         this.setState({street: ''})
     },
 
-
-    getFieldValues(){
-
-        var country;
-        if (this.props.includeCountry) {
-            country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
-        }
-        else {
-            country = "NO";
-        }
-        return {
-            country: country,
-            municipality: this.state.municipality,
-            streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
-            zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
-            postal: ReactDOM.findDOMNode(this.refs.postal).value
-        }
-    },
-
     render: function () {
         const {fields: {street, zipcode, postal}} = this.props;
         if (this.props.includeCountry) {

@@ -77,7 +77,6 @@ export class PersonWithNeedClass extends React.Component {
                 pnr: pnr,
                 name: this.props.fields.name.value,
                 address: this.props.fieldValues.person.address,
-                telephone: this.props.fieldValues.person.telephone
             }
         };
         this.props.saveValues(data);
@@ -268,7 +267,6 @@ export class PersonWithNeedClass extends React.Component {
 
 PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired

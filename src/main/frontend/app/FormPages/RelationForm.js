@@ -87,11 +87,12 @@ export class RelationFormClass extends React.Component {
 
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
+        const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, dependent}} = this.props;
 
 
         if (relation.value == "guardian") {
             var pnr = nameOfChild.value.split(":")[0];
+            this.props.fields.dependent.onChange(true);
             var dataDep = {
 
                 relation: relation.value,
@@ -127,7 +128,7 @@ export class RelationFormClass extends React.Component {
             var data = {
                 relation: relation.value,
                 typeOfRelation: typeOfRelation.value,
-                dependent: isDependent.value
+                dependent: dependent.value
             };
             this.props.saveValues(data);
 
@@ -136,7 +137,7 @@ export class RelationFormClass extends React.Component {
             var data = {
                 relation: relation.value,
                 otherRelation: otherRelation.value,
-                dependent: isDependent.value
+                dependent: dependent.value
             };
             this.props.saveValues(data);
 
@@ -146,7 +147,7 @@ export class RelationFormClass extends React.Component {
     }
 
     render() {
-        const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation, guardianFor}} = this.props;
+        const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
        
@@ -199,7 +200,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...isDependent}> Registrer meg som pårørende</Checkbox>
+                                <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende</Checkbox>
                             </Col>
                         </Row>
                     </componentClass>
@@ -227,7 +228,7 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...isDependent}> Registrer meg som pårørende </Checkbox>
+                            <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende </Checkbox>
                         </Col>
                     </Row>
                 </componentClass>
@@ -262,7 +263,6 @@ export class RelationFormClass extends React.Component {
     }
 }
 RelationFormClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
     saveValues:  React.PropTypes.func.isRequired,
@@ -271,7 +271,7 @@ RelationFormClass.propTypes = {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation", "guardianFor"],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor"],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 
