@@ -8,7 +8,8 @@ var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var FormControl = require('react-bootstrap/lib/FormControl');;
+var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
 var HelpBlock = require('react-bootstrap/lib/HelpBlock');
 var Overlay = require('react-bootstrap/lib/Overlay');
 var Popover = require('react-bootstrap/lib/Popover');
@@ -44,9 +45,17 @@ export class SpecialNeedsClass extends React.Component {
         // Get values via this.refs
         const {fields: {medical, changes, other}} = this.props;
 
-        var med = medical.value.replace(/[\n]/g, '. ');
-        var cha = changes.value.replace(/[\n]/g, '. ');
-        var oth = other.value.replace(/[\n]/g, '. ');
+        var med = medical.value;
+        var cha = changes.value;
+        var oth = other.value;
+
+        if (medical.value) {
+            med = med.replace(/[\n]/g, '. ');
+        } if (changes.value) {
+            cha = cha.replace(/[\n]/g, '. ');
+        } if (other.value) {
+            oth = oth.replace(/[\n]/g, '. ');
+        }
 
         var data = {
             medicalNeeds: med,
