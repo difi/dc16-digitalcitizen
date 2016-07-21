@@ -99,7 +99,7 @@ export class RelationFormClass extends React.Component {
                 dependent: true,
                 applyingForSelf: false,
             };
-            
+
             this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
