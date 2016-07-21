@@ -88,10 +88,11 @@ export class RelationFormClass extends React.Component {
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
-
-
+        console.log(nameOfChild.value);
+        var pnr = nameOfChild.value.split(":")[0];
         if (relation.value == "guardian") {
             var dataDep = {
+                pnr: pnr,
                 relation: relation.value,
                 dependent: true,
                 applyingForSelf: false,
@@ -99,7 +100,7 @@ export class RelationFormClass extends React.Component {
 
             this.props.saveValues(dataDep);
             $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
