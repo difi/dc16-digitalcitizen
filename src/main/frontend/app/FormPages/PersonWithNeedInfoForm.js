@@ -70,9 +70,23 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        console.log(postal.placeholder);
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
-        console.log(this.props.fieldValues.person);
+        console.log("HER: " + name.error);
+
+        var alert = name.error || street.error || zipcode.error || number.error;
+        var content = null;
+
+        if (alert) {
+            content =
+                <componentClass>
+                    <div className="alertClass_Fdfs">
+                        <Alert bsStyle="danger">
+                            Du må fylle inn markerte felt, før du kan gå videre.
+                        </Alert>
+                    </div>
+                </componentClass>
+        }
+
         return (
             <form>
                 <div>
@@ -86,7 +100,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <FormGroup validationState={name.error ? "error" : ""}>
                                     <FormControl
                                         type="text"
-                                        className="name"
+                                        className="nameField"
                                         ref="name"
                                         placeholder="Navn"
 
@@ -120,13 +134,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Collapse in={ name.error || street.error || zipcode.error || number.error}>
-                            <div>
-                                <Alert bsStyle="danger">
-                                    Du må fylle inn markerte felt, før du kan gå videre.
-                                </Alert>
-                            </div>
-                        </Collapse>
+                        {content}
 
                     </div>
 
@@ -154,19 +162,19 @@ PersonWithNeedInfoClass.propTypes = {
 const validate = values => {
     const errors = {};
 
-    if(fieldIsEmpty(values.name)){
+    if (fieldIsEmpty(values.name)) {
         console.log(values.name);
         errors.name = "Ugyldig navn.";
     }
 
-    if(fieldIsEmpty(values.street)){
+    if (fieldIsEmpty(values.street)) {
         errors.street = "Ugyldig adresse";
     }
 
-    if(values.postal == "Ugyldig postnr."){
+    if (values.postal == "Ugyldig postnr.") {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
-    if(!validPostCode(values.zipcode)){
+    if (!validPostCode(values.zipcode)) {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
 
@@ -191,7 +199,7 @@ export default PersonWithNeedInfo
 
 /*number.touched && number.error ||
  zipcode.touched && zipcode.error
-* || name.touched && fieldIsEmpty(name.value)
-*
-*
-* || (values.postal != "Ugyldig postnr.")*/
+ * || name.touched && fieldIsEmpty(name.value)
+ *
+ *
+ * || (values.postal != "Ugyldig postnr.")*/

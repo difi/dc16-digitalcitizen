@@ -166,6 +166,7 @@ var AddressField = React.createClass({
                                 <FormControl
                                     type="text"
                                     placeholder='Adresse'
+                                    className='adressField'
                                     ref="streetAddress"
                                     {...street}/>
                             </FormGroup>
