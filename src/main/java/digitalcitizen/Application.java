@@ -27,9 +27,12 @@ public class Application {
             add(new StorageModule());
             add(new ProxyModule());
         }});
+        System.out.println("HEISANN: " );
 
         SpringApplication.run(Application.class, args);
         injector.getInstance(NettyHttpListener.class).run();
 
     }
+
+
 }
