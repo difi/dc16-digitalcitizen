@@ -10,7 +10,10 @@ import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
+var Overlay = require('react-bootstrap/lib/Overlay');
+var Popover = require('react-bootstrap/lib/Popover');
 var ReactDOM = require('react-dom');
 import {checkPhoneNumber} from'./Utilities/validation.js';
 import {validPostCode} from'./Utilities/validation.js';
@@ -64,6 +67,14 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
+
+        const invalidNumberTooltip = <Popover id="invalidNumberPopover">{number.error}</Popover>;
+        const invalidNumberProps = {
+            show: number.touched && number.error,
+            container: this,
+            target: () => ReactDOM.findDOMNode(this.refs.phone)
+        };
+
         console.log(postal.placeholder);
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
         console.log(this.props.fieldValues.person);
@@ -91,7 +102,8 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <AddressField store={this.props.store} className="adr" ref='addressfield' address={this.props.fieldValues.person.address}
+                                <AddressField store={this.props.store} className="adr" ref='addressfield'
+                                              address={this.props.fieldValues.person.address}
                                               includeCountry={false}/>
                             </Col>
                         </Row>
@@ -100,16 +112,19 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <FormControl
-                                    type="numeric"
-                                    className="tlfFrom"
-                                    ref="phone"
-                                    placeholder="Telefonnr"
-                                    {...number}
-
-                                />
-
-                                {number.touched && number.error && <div className="error">{number.error}</div>}
+                                <FormGroup validationState={number.touched && number.error ? "error" : ""}>
+                                    <FormControl
+                                        type="numeric"
+                                        className="tlfFrom"
+                                        ref="phone"
+                                        placeholder="Telefonnr"
+                                        {...number}
+                                    />
+                                    <FormControl.Feedback />
+                                    <Overlay id="invalidNumberOverlay" {...invalidNumberProps} placement="bottom">
+                                        { invalidNumberTooltip }
+                                    </Overlay>
+                                </FormGroup>
                             </Col>
                         </Row>
                     </div>
@@ -129,8 +144,8 @@ export class PersonWithNeedInfoClass extends React.Component {
 PersonWithNeedInfoClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired,
 };
 
 

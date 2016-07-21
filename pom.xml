@@ -42,6 +42,19 @@
             <version>2.9.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.difi.dc16-oidc-proxy</groupId>
+            <artifactId>proxy-proxy</artifactId>
+            <version>-0.5.0-g9eeb5f8-35</version>
+        </dependency>
+
+        <!-- Guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
 
 
 
@@ -119,6 +132,8 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+
 
 
     </dependencies>
@@ -208,5 +223,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
 </project>
