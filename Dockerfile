@@ -8,7 +8,7 @@ RUN cd $MAVEN_HOME \
   && cp $targetfile /digitalcitizen.jar \
   && rm -r $MAVEN_HOME /root/.npm
 
-EXPOSE 8080
+EXPOSE 8090
 
 CMD ["java", "-jar", "/digitalcitizen.jar"]
 
