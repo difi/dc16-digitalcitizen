@@ -89,8 +89,9 @@ export class RelationFormClass extends React.Component {
         // Get values via this.refs
         const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
 
-        var pnr = nameOfChild.value.split(":")[0];
+
         if (relation.value == "guardian") {
+            var pnr = nameOfChild.value.split(":")[0];
             var dataDep = {
 
                 relation: relation.value,

@@ -26,6 +26,7 @@ public class TestData {
     );
 
     public static final Collection<Person> PERSONS = Arrays.asList(
+            new Person("08023549930", "Ola Nordmann", new Address("Oslo", "NO", "Oslo", "Karl Johans Gate 1", "0555"), "99887766", "ola@nordmann.no", new Doctor("Henrik", "Oslo")),
             new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("13019870019", "Melissa Melissasen", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Pelle", "Trondheim")),
@@ -39,11 +40,14 @@ public class TestData {
     public static final Collection<Guardian> GUARDIANS = Arrays.asList(
             new Guardian("01108019146",
                     Arrays.asList(
-                            new Person("15028047425", "Test Person2", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
-                            new Person("13019870019", "Test Person3", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Tore", "Trondheim")))),
-            new Guardian("15028047425",
+                            new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
+                            new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Vegard", "Sogndal")))
+
+                    ),
+            new Guardian("08023549930",
                     Arrays.asList(
-                            new Person("06126620649", "Test Person6", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal"))))
+                            new Person("06126620649", "Solfrid Solfridsen", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal")),
+                            new Person("13019870019", "Melissa Melissasen", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Tore", "Trondheim"))))
     );
 
     public static final Collection<NursingHome> HOMES = Arrays.asList(
