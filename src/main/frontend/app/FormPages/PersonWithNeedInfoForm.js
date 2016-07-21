@@ -12,12 +12,15 @@ var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
-var Overlay = require('react-bootstrap/lib/Overlay');
-var Popover = require('react-bootstrap/lib/Popover');
 var ReactDOM = require('react-dom');
 import {checkPhoneNumber} from'./Utilities/validation.js';
 import {validPostCode} from'./Utilities/validation.js';
+import {fieldIsEmpty} from './Utilities/validation.js';
+
 import {reduxForm} from 'redux-form';
+
+var Collapse = require('react-bootstrap/lib/Collapse');
+var Alert = require('react-bootstrap/lib/Alert');
 
 
 export class PersonWithNeedInfoClass extends React.Component {
@@ -67,14 +70,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-
-        const invalidNumberTooltip = <Popover id="invalidNumberPopover">{number.error}</Popover>;
-        const invalidNumberProps = {
-            show: number.touched && number.error,
-            container: this,
-            target: () => ReactDOM.findDOMNode(this.refs.phone)
-        };
-
         console.log(postal.placeholder);
         var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
         console.log(this.props.fieldValues.person);
@@ -88,13 +83,15 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="name">Navn</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <FormControl
-                                    type="text"
-                                    className="name"
-                                    ref="name"
-                                    placeholder="Navn"
+                                <FormGroup validationState={name.error ? "error" : ""}>
+                                    <FormControl
+                                        type="text"
+                                        className="name"
+                                        ref="name"
+                                        placeholder="Navn"
 
-                                    {...name}/>
+                                        {...name}/>
+                                </FormGroup>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -112,7 +109,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <FormGroup validationState={number.touched && number.error ? "error" : ""}>
+                                <FormGroup validationState={number.error ? "error" : ""}>
                                     <FormControl
                                         type="numeric"
                                         className="tlfFrom"
@@ -120,13 +117,17 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         placeholder="Telefonnr"
                                         {...number}
                                     />
-                                    <FormControl.Feedback />
-                                    <Overlay id="invalidNumberOverlay" {...invalidNumberProps} placement="bottom">
-                                        { invalidNumberTooltip }
-                                    </Overlay>
                                 </FormGroup>
                             </Col>
                         </Row>
+                        <Collapse in={ name.error || street.error || zipcode.error || number.error}>
+                            <div>
+                                <Alert bsStyle="danger">
+                                    Du må fylle inn markerte felt, før du kan gå videre.
+                                </Alert>
+                            </div>
+                        </Collapse>
+
                     </div>
 
                     <NavigationButtons
@@ -153,9 +154,27 @@ PersonWithNeedInfoClass.propTypes = {
 const validate = values => {
     const errors = {};
 
+    if(fieldIsEmpty(values.name)){
+        console.log(values.name);
+        errors.name = "Ugyldig navn.";
+    }
+
+    if(fieldIsEmpty(values.street)){
+        errors.street = "Ugyldig adresse";
+    }
+
+    if(values.postal == "Ugyldig postnr."){
+        errors.zipcode = "Dette er ikke et gyldig postnummer";
+    }
+    if(!validPostCode(values.zipcode)){
+        errors.zipcode = "Dette er ikke et gyldig postnummer";
+    }
+
     if (!(checkPhoneNumber(values.number))) {
+        console.log(values.number);
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
+
     return errors;
 };
 
@@ -168,3 +187,11 @@ const PersonWithNeedInfo = reduxForm({
 }, null, null)(PersonWithNeedInfoClass);
 
 export default PersonWithNeedInfo
+
+
+/*number.touched && number.error ||
+ zipcode.touched && zipcode.error
+* || name.touched && fieldIsEmpty(name.value)
+*
+*
+* || (values.postal != "Ugyldig postnr.")*/

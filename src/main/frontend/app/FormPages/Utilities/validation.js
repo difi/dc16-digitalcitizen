@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import RESTpaths from '../../static_data/RESTpaths.js';
 
-const isEmpty = value => value === undefined || value === null || value === '';
+const isEmpty = value => value === undefined || value === null || value === '' || value ===" ";
 
 export function fieldIsEmpty(value) {
     if (isEmpty(value)) {
@@ -18,7 +18,7 @@ export function email(str) {
 
 export function checkEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
-    if (!isEmpty(value) && !/^[ÆØÅæøåA-Z0-9._%+-]+@[ÆØÅæøåA-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    if ((!isEmpty(value) && !/^[ÆØÅæøåA-Z0-9._%+-]+@[ÆØÅæøåA-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) || isEmpty(value)) {
         return false;
     }
     return true;
