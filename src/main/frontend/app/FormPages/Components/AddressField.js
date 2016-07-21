@@ -7,8 +7,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var ReactDOM = require('react-dom');
-var Overlay = require('react-bootstrap/lib/Overlay');
-var Popover = require('react-bootstrap/lib/Popover');
 import RESTpaths from '../../static_data/RESTpaths.js';
 import {checkPostCode} from '../Utilities/validation.js';
 import {onlyDigitsInString} from '../Utilities/validation.js'
@@ -115,14 +113,6 @@ var AddressField = React.createClass({
 
     render: function () {
         const {fields: {street, zipcode, postal}} = this.props;
-        const invalidZipTooltip = <Popover>{zipcodeError}</Popover>;
-        const invalidZipProps = {
-            container: this,
-            show: zipcode.touched && zipcodeError != undefined,
-            target: () => ReactDOM.findDOMNode(this.refs.zipcode)
-        };
-
-
         if (this.props.includeCountry) {
             return (
                 <Col sm={7.5} md={8}>
@@ -172,16 +162,18 @@ var AddressField = React.createClass({
                 <div>
                     <Row className="form-row-address">
                         <Col sm={12} md={12} className="from-col-address">
-                            <FormControl
-                                type="text"
-                                placeholder='Adresse'
-                                ref="streetAddress"
-                                {...street}/>
+                            <FormGroup validationState={(!street.value) ? "error" : ""}>
+                                <FormControl
+                                    type="text"
+                                    placeholder='Adresse'
+                                    ref="streetAddress"
+                                    {...street}/>
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row-address">
                         <Col sm={6} md={6} className="from-col-address">
-                            <FormGroup validationState={zipcode.touched && zipcodeError ? "error" : ""}>
+                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) ? "error" : ""}>
                                 <FormControl
                                     type="text"
                                     placeholder="Postnr."
@@ -190,10 +182,6 @@ var AddressField = React.createClass({
                                     {...zipcode}
                                     onChange={this.changeHandler(zipcode)}
                                 />
-                                <FormControl.Feedback />
-                                <Overlay {...invalidZipProps} placement="bottom">
-                                    { invalidZipTooltip }
-                                </Overlay>
                             </FormGroup>
 
                         </Col>
