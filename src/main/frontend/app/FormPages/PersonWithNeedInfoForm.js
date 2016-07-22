@@ -85,6 +85,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         console.log("Name.error: " + valid);
 
         if (clickNextButton && (valid == undefined || !valid)) {
+
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
@@ -102,7 +103,6 @@ export class PersonWithNeedInfoClass extends React.Component {
             }
         }
 
-
         return (
             <form>
                 <div>
@@ -116,7 +116,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                                     <FormControl
                                         type="text"
-                                        className="name"
+                                        className="nameField"
                                         ref="name"
                                         placeholder="Navn"
 
@@ -166,8 +166,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 }
 ;
 
-// disabled={!valid}
-// name.error && name.touched || street.error && street.touched|| zipcode.error && zipcode.touched|| number.error && number.touched
 PersonWithNeedInfoClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
@@ -180,22 +178,18 @@ PersonWithNeedInfoClass.propTypes = {
 const validate = values => {
     const errors = {};
 
-    console.log("Name: " + fieldIsEmpty(values.name));
-
-
-    if(fieldIsEmpty(values.name)){
-        console.log("Nasdafme: " + values.name);
+    if (fieldIsEmpty(values.name)) {
         errors.name = "Ugyldig navn.";
     }
 
-    if(fieldIsEmpty(values.street)){
+    if (fieldIsEmpty(values.street)) {
         errors.street = "Ugyldig adresse";
     }
 
-    if(values.postal == "Ugyldig postnr."){
+    if (values.postal == "Ugyldig postnr.") {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
-    if(!validPostCode(values.zipcode)){
+    if (!validPostCode(values.zipcode)) {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
 
@@ -216,11 +210,3 @@ const PersonWithNeedInfo = reduxForm({
 }, null, null)(PersonWithNeedInfoClass);
 
 export default PersonWithNeedInfo
-
-
-/*number.touched && number.error ||
- zipcode.touched && zipcode.error
-* || name.touched && fieldIsEmpty(name.value)
-*
-*
-* || (values.postal != "Ugyldig postnr.")*/
