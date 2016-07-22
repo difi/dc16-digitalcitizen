@@ -38,5 +38,4 @@ public class HttpRequestController {
         String pnr = pnrNumbers.get(pnrNumbers.size() - 1);
         return TestData.PERSONS.stream().filter(p -> p.getPnr().equals(pnr)).findFirst().get();
     }
-
 }
