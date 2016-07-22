@@ -6,7 +6,6 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
-var ReactDOM = require('react-dom');
 import RESTpaths from '../../static_data/RESTpaths.js';
 import {checkPostCode} from '../Utilities/validation.js';
 import {onlyDigitsInString} from '../Utilities/validation.js'

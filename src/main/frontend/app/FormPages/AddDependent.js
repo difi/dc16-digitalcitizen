@@ -131,13 +131,16 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClick() {
-        if(!this.props.fields.numDep.value){
-            this.props.fields.numDep.onChange(2);
+        const {
+            fields: {numDep}
+        } = this.props;
+        if(!numDep.value){
+            numDep.onChange(2);
             this.props.fields.form2.show.onChange(true);
         }
-        else if (this.props.fields.numDep.value < 3) {
+        else if (numDep.value < 3) {
 
-            if (this.props.fields.numDep.value == 2) {
+            if (numDep.value == 2) {
                 this.props.fields.displayButton.onChange(HIDE_FORM);
             }
 
@@ -147,12 +150,12 @@ export class AddDependentClass extends React.Component {
                 if (this.props.fields.form3.show.value) {
                     this.props.fields.displayButton.onChange(HIDE_FORM);
                 }
-                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
+                numDep.onChange(numDep.value + 1);
             } else {
                 this.props.fields.form3.show.onChange(true);
                 console.log("vis form 3");
                 this.props.fields.displayButton.onChange(HIDE_FORM);
-                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
+                numDep.onChange(numDep.value + 1);
             }
         }
     }
