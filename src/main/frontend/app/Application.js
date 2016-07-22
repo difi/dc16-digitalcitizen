@@ -1,7 +1,6 @@
 "use strict";
 
 import React from 'react';
-import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
@@ -24,6 +23,8 @@ import SpecialNeeds from './FormPages/SpecialNeeds';
 import NeedsForm from'./FormPages/NeedsForm';
 import AddDependent from './FormPages/AddDependent';
 import SubmitSuccess from './FormPages/SubmitPage';
+import $ from 'jquery';
+import RESTpaths from './static_data/RESTpaths.js';
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
@@ -44,8 +45,30 @@ class Application extends React.Component {
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
 
+        this.getUserData = this.getUserData.bind(this);
+        this.getUserData();
     }
 
+
+    getUserData(){
+        $.ajax({
+            url: RESTpaths.PATHS.USER_BASE,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var user = {
+                    pnr: data.pnr,
+                    name: data.name
+
+                };
+
+                this.saveUserData(user);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
 
     saveValues(field_value) {
         this.setState({
@@ -97,7 +120,6 @@ class Application extends React.Component {
     }
 
     render() {
-
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
 

@@ -5,7 +5,7 @@
  */
 
 //var BASE_URL = 'http://dc16-citizen.demo.difi.no/';
-var BASE_URL = 'http://localhost:9090/';
+var BASE_URL = 'http://localhost:8090/';
 
 exports.PATHS = {
     SUBMIT: BASE_URL + 'send',
@@ -17,6 +17,7 @@ exports.PATHS = {
     DEPENDENT_BASE: BASE_URL + 'api/dependent',
     HOME_BASE: BASE_URL + 'api/homes',
     PERSON_BASE: BASE_URL + 'api/person',
-    MUNICIPALITY_BASE: BASE_URL+'api/municipality'
+    MUNICIPALITY_BASE: BASE_URL+'api/municipality',
+    USER_BASE: BASE_URL+'api/getPNR'
 };
  
