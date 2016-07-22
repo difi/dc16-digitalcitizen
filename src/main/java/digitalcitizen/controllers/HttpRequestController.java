@@ -13,7 +13,7 @@ public class HttpRequestController {
     @RequestMapping("/")
     public String getRequest(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("HEST: " + request.getHeader("X-DifiProxy-pid"));
-        return "";
+        return request.getHeader("X-DifiProxy-pid");
     }
 
 

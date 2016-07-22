@@ -21,13 +21,11 @@ public class Application {
     public static boolean USE_MONGODB = false;
 
     public static void main(String[] args) {
-
         Injector injector = Guice.createInjector(new ArrayList<Module>() {{
             add(new ConfigModule());
             add(new StorageModule());
             add(new ProxyModule());
         }});
-        System.out.println("HEISANN: " );
 
         SpringApplication.run(Application.class, args);
         injector.getInstance(NettyHttpListener.class).run();
