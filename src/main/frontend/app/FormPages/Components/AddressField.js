@@ -19,7 +19,7 @@ var AddressField = React.createClass({
         includeCountry: React.PropTypes.bool,
         address: React.PropTypes.object
     },
-
+/*
     getDefaultProps: function () {
         return {includeCountry: true};
     },
@@ -27,7 +27,7 @@ var AddressField = React.createClass({
     getInitialState: function () {
         return {country: this.props.address.country};
     },
-
+*/
     /**Makes a call to the GeoNames API with the postal code given by the user
      * in order to retrieve the corresponding postal
      *
@@ -53,7 +53,7 @@ var AddressField = React.createClass({
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
             $.ajax({
-                url: RESTpaths.PATHS.GEONAMES_BASE + 'postalcode=' + zipcode + '&country=' + this.state.country + '&username=Sondrehj',
+                url: RESTpaths.PATHS.GEONAMES_BASE + 'postalcode=' + zipcode + '&country=' + "NO" + '&username=Sondrehj',
                 dataType: 'json',
                 cache: false,
                 success: function (data) {

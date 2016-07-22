@@ -103,3 +103,4 @@ WhosSearching.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
     saveValues:  React.PropTypes.func.isRequired,
 };
+

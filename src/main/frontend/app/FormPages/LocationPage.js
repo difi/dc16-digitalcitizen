@@ -22,7 +22,7 @@ export class LocationPageClass extends React.Component {
         this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.findMunicipality(this.props.fieldValues.person.address.municipality);
+        this.findMunicipality(this.props.fields.municipality.value);
 
     }
 
@@ -153,7 +153,7 @@ export class LocationPageClass extends React.Component {
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
                     saveUserData={this.props.saveUserData}
-                    fieldValues={this.props.fieldValues}
+                    
                     saveFieldValues={this.saveFieldValues}/>
             </componentClass>
         )
@@ -168,7 +168,7 @@ LocationPageClass.propTypes = {
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp", "homeOptions"],
+    fields: ["municipalityApp", "homeApp", "homeOptions", "municipality"],
     destroyOnUnmount: false
 })(LocationPageClass);
 

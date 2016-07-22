@@ -100,7 +100,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                             </Col>
                             <Col sm={8} md={8}>
                                 <AddressField store={this.props.store} className="adr" ref='addressfield'
-                                              address={this.props.fieldValues.person.address}
+                                              
                                               includeCountry={false}/>
                             </Col>
                         </Row>

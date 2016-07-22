@@ -48,6 +48,7 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickNext() {
+        //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values. 
         if (this.props.fields.checked.value) {
             this.saveFieldValues();
         } else {
@@ -123,7 +124,7 @@ export class PersonWithNeedClass extends React.Component {
 
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
 
-        const invalidPnrTooltip = <Popover id="invalidPnrPopover" >{pnr.error}</Popover>;
+        const invalidPnrTooltip = <Popover id="invalidPnrPopover">{pnr.error}</Popover>;
         const invalidPnrProps = {
             show: pnr.touched && pnr.error != undefined,
             container: this,
@@ -154,8 +155,10 @@ export class PersonWithNeedClass extends React.Component {
                             </Row>
                             <Row className="form-row">
                                 <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
-                                    <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
-                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                    <input type="checkbox" name="noPno" className="pnrCheck"
+                                           style={{marginBottom: '15px'}}
+                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan
+                                    ikke
                                     fødselsnummeret
                                 </Col>
                             </Row>
@@ -246,7 +249,8 @@ export class PersonWithNeedClass extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Collapse in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
+                    <Collapse
+                        in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
                         <div>
                             <Alert bsStyle="danger">
                                 Fødselsnummer og navn matcher ikke.
@@ -291,7 +295,7 @@ const asyncValidate = (values) => {
         console.log("NAAAVN: " + values.name);
 
         // Checks if pnr and name match if a full-length pnr is typed
-        if(values.pnr.length > 10) {
+        if (values.pnr.length > 10) {
             $.ajax({
                 url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
                 dataType: 'json',
