@@ -1,7 +1,6 @@
 /**
- * Created by camp-vha on 06.07.2016.
+ * Created by camp-vha on 14.07.2016.
  */
-
 import React from 'react';
 
 //Shallow renders only our component without touching the DOM.
@@ -11,7 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {AddDependentClass} from '../app/FormPages/AddDependent.js';
+import {SubmitSuccessClass} from '../app/FormPages/SubmitPage.js';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
@@ -47,47 +46,50 @@ var fieldValues = {
     // Seventh form
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
-    otherNeeds: null            // String
+    otherNeeds: null,           // String
+
+    //nameOfChild: "Elias Eliassen"
 };
 
-describe("AddDependentClass", function() {
+var userData = {
+    pnr: "15028047425",
+    name: "Elias Eliassen",
+    submissionId: 35,
+
+};
+
+describe("SubmitSuccessClass", function() {
     let wrapper = null;
 
     // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         // the fields that are individual for each page
         const props = {
-            fields: {
-                form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                numDep: {value: 1},
-                displayButton: {value: 'block'}
-                //block: the button is visible, none: the button is hidden
-            },
-            fieldValues
+            userData: userData,
+            fieldValues: fieldValues
+
         };
-        //Renders the AddDependentClass with props
-        wrapper = shallow(<AddDependentClass {...props}/>);
+        //Renders the NeedsForm with props
+        wrapper = shallow(<SubmitSuccessClass {...props}/>);
     });
 
-    it('should have header classnames for HTML-elements', function () {
+    it('should have header and container classnames for HTML-elements', function () {
         //expect wrapper to exist
         expect(wrapper).to.have.length(1);
         //Expect to find one element with the class name "form-header"
         expect (wrapper.find('.form-header')).to.have.length(1);
+        expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
-    it('should have div with ID=dep1', function () {
+    it('should have a column with classname=submit-name, and a label', function () {
         expect(wrapper).to.have.length(1);
-        expect (wrapper.find('#dep1')).to.have.length(1);
+        expect(wrapper.find('.submit-name')).to.have.length(1);
+        expect(wrapper.find('label.submittedName')).to.have.length(1);
     });
 
-    it('should have addDependent-button', function () {
+    it('should have a next-button', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.addDepButton')).to.have.length(1);
+        expect(wrapper.find('.next-btn')).to.have.length(1);
     });
-
-    //Enzyme does not support checking if the button is visible or not, so this will not be tested
 
 });

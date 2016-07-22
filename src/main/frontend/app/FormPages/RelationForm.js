@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownList from './Components/DropdownList.jsx';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import DropdownList from './Components/DropdownList.js';
+import NavigationButtons from './Components/NavigationButtons.js';
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
@@ -9,7 +9,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
 import $ from 'jquery'
@@ -38,7 +37,7 @@ export class RelationFormClass extends React.Component {
                 console.log(data);
 
                 data = data.map(data => {
-                    return  {value: data.pnr + ":" + data.name, name: data.name}
+                    return  {value: data.pnr + ":" + data.name + ":" + data.address + ":" + data.telephone, name: data.name}
                 });
                 
                 data.unshift({value: 0, name: "Velg..."});
@@ -89,21 +88,40 @@ export class RelationFormClass extends React.Component {
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
+
+
         if (relation.value == "guardian") {
-            isDependent.onChange(true);
-            var data = {
+            var pnr = nameOfChild.value.split(":")[0];
+            var dataDep = {
+
                 relation: relation.value,
                 dependent: true,
-                person: {
-                    name: nameOfChild.value.split(":")[1],
-                    pnr: nameOfChild.value.split(":")[0],
-                    address: this.props.fieldValues.person.address,
-                    telephone: this.props.fieldValues.person.telephone
-
-                }
-
+                applyingForSelf: false,
             };
 
+            this.props.saveValues(dataDep);
+            $.ajax({
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
+                dataType: 'text',
+                cache: false,
+                success: function (data) {
+                    var dataVal = {
+
+                        person: {
+                            pnr: pnr,
+                            address: {
+                                municipality: data,
+                                country: "NO"
+                            }
+                        }
+
+                    };
+                    this.props.saveValues(dataVal);
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
         }
         if (relation.value == "family") {
             var data = {
@@ -111,6 +129,7 @@ export class RelationFormClass extends React.Component {
                 typeOfRelation: typeOfRelation.value,
                 dependent: isDependent.value
             };
+            this.props.saveValues(data);
 
         }
         if (relation.value == "other") {
@@ -119,22 +138,10 @@ export class RelationFormClass extends React.Component {
                 otherRelation: otherRelation.value,
                 dependent: isDependent.value
             };
+            this.props.saveValues(data);
 
         }
 
-        /*
-         if (relation.value == "guardian") {
-         isDependent.onChange(true);
-         }
-         var data = {
-         relation: relation.value,
-         typeOfRelation: typeOfRelation.value,
-         nameOfChild: nameOfChild.value,
-         otherRelation: otherRelation.value,
-         dependent: isDependent.value,
-         }*/
-
-        this.props.saveValues(data);
         console.log(data);
     }
 
@@ -142,7 +149,7 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
-        console.log(relation.value);
+       
         switch (relation.value) {
             case "guardian":
                 content =

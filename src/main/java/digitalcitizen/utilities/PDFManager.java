@@ -17,7 +17,9 @@ public class PDFManager {
 
 
     // TODO: Add more templates?
-    public File template = getResourceAsFile("formTemplate.pdf");
+    private File dep1_template = getResourceAsFile("formTemplate_dep1.pdf");
+    private File dep2_template = getResourceAsFile("formTemplate_dep2.pdf");
+    private File dep3_template = getResourceAsFile("formTemplate_dep3.pdf");
 
     /**
      * A method that utilizes the PDFBox library in order to fill a PDF template with data
@@ -29,11 +31,21 @@ public class PDFManager {
      */
     public String generatePDFofSubmission(Submission submission) throws IOException {
 
-        PDDocument pdfTemplate = PDDocument.load(template);
+        PDDocument pdfTemplate = new PDDocument();
+
+
+        if(submission.getDependents().get(0) != null && submission.getDependents().get(1) == null && submission.getDependents().get(2) == null){
+            pdfTemplate = PDDocument.load(dep1_template);
+        } else if(submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) == null) {
+            pdfTemplate = PDDocument.load(dep2_template);
+        } else if(submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) != null){
+            pdfTemplate = PDDocument.load(dep3_template);
+        }
+
         PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
-        System.out.println("Creating pdf");
+        System.out.println("Creating pdf of " + submission);
         // Get field names
         List<PDField> fieldList = acroForm.getFields();
 
@@ -142,6 +154,13 @@ public class PDFManager {
                         field.setValue(value);
                     }
                     break;
+                // NURSING HOME
+                case "nursing_mun":
+                    field.setValue(submission.getNursingHome().getMunicipality());
+                    break;
+                case "nursing_name":
+                    field.setValue(submission.getNursingHome().getName());
+                    break;
                 // LENGTH OF STAY RADIOBUTTONS
                 case "lengthOfStay":
                     switch (submission.getLengthOfStay()){
@@ -180,6 +199,7 @@ public class PDFManager {
 
         pdfTemplate.save(output);
         pdfTemplate.close();
+        System.out.println("PDF was created successfully");
         return path;
     }
 

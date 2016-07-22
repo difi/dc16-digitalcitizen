@@ -1,10 +1,16 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.jsx';
+import NavigationButtons from './Components/NavigationButtons.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
+var HelpBlock = require('react-bootstrap/lib/HelpBlock');
+var Overlay = require('react-bootstrap/lib/Overlay');
+var Popover = require('react-bootstrap/lib/Popover');
+var ReactDOM = require('react-dom');
+
+
 import {reduxForm} from 'redux-form';
 import {fieldIsEmpty} from './Utilities/validation.js'
 
@@ -45,6 +51,12 @@ export class SpecialNeedsClass extends React.Component {
 
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value;
+        const invalidChangesTooltip = <Popover id="invalidChangesPopover">{changes.error}</Popover>;
+        const invalidChangesProps = {
+            show: changes.touched && changes.error != undefined,
+            container: this,
+            target: () => ReactDOM.findDOMNode(this.refs.conditionChanges)
+        };
 
         return (
             <div>
@@ -55,9 +67,14 @@ export class SpecialNeedsClass extends React.Component {
                             <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem? </label>
                         </Col>
                         <Col sm={12} md={12}>
+                            <FormGroup validationState={changes.touched && changes.error ? "error" : null}>
                             <FormControl componentClass="textarea" className="special-needs-textarea" id="mandatoryField"
                                          ref="conditionChanges" {...changes}/>
-                            {changes.touched && changes.error && <div className="error">{changes.error}</div>}
+                                <FormControl.Feedback />
+                                <Overlay id="invalidChangesOverlay" {...invalidChangesProps} placement="bottom">
+                                    { invalidChangesTooltip }
+                                </Overlay>
+                        </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row-special">

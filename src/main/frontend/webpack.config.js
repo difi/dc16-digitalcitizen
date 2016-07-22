@@ -8,6 +8,7 @@ const PATHS = {
 };
 
 const common = {
+    devtool: 'inline-source-map',
     entry: [
         PATHS.source
     ],
@@ -16,7 +17,33 @@ const common = {
         publicPath: '',
         filename: 'bundle.js'
     },
+    isparta: {
+        embedSource: true,
+        noAutoWrap: true,
+        // these babel options will be passed only to isparta and not to babel-loader
+        babel: {
+            presets: ['es2015', 'react']
+        }
+    },
     module: {
+        preLoaders: [
+            // transpile all files except testing sources with babel as usual
+            {
+                test: /\.js$/,
+                exclude: [
+                    path.resolve('./app/'),
+                    path.resolve('node_modules/')
+                ],
+                loader: 'babel'
+            },
+            // transpile and instrument only testing sources with isparta
+            {
+                test: /\.js$/,
+                include: path.resolve('./app/'),
+                exclude: './index.js',
+                loader: 'isparta'
+            }
+        ],
         loaders: [{
             exclude: /node_modules/,
             loader: 'babel',
@@ -27,7 +54,7 @@ const common = {
             test: /\.css$/,
             loader: 'style!css'
         },
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000'},
             {
                 test: /\.json$/,
                 loader: 'json'
@@ -45,13 +72,18 @@ const common = {
     }
 };
 
-if (TARGET === 'start' || !TARGET) {
+
+if (TARGET === 'build') {
+    module.exports = merge(common, {});
+}
+
+else {
     module.exports = merge(common, {
         devServer: {
             port: 9090,
             proxy: {
                 '/*': {
-                    target: 'http://localhost:8080',
+                    target: 'http://localhost:8090',
                     secure: false,
                     prependPath: false
                 }
@@ -61,9 +93,5 @@ if (TARGET === 'start' || !TARGET) {
         },
         devtool: 'source-map'
     });
-}
 
-if (TARGET === 'build') {
-    module.exports = merge(common, {});
 }
-

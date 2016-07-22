@@ -1,12 +1,16 @@
 package digitalcitizen.models;
 
-import java.util.ArrayList;
+import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 /**
  * Created by camp-vhe on 23.06.2016.
  */
 public class Submission {
 
+    @Id
+    private String id;
     // First form
     private boolean applyingForSelf;
     // Second form
@@ -17,15 +21,35 @@ public class Submission {
     // Third form
     private Person person;
     // Fifth form
-    private ArrayList<Dependent> dependents; // List of objects
+    private List<Dependent> dependents; // List of objects
     // Sixth form
     private String lengthOfStay;
     // Seventh form
     private String medicalNeeds;
     private String conditionChanges;
     private String otherNeeds;
+    private NursingHome nursingHome;
 
     public Submission() {
+    }
+
+    public Submission(boolean applyingForSelf, Person person, List<Dependent> dependents, String lengthOfStay, String medicalNeeds, String conditionChanges, String otherNeeds, NursingHome nursingHome) {
+        this.applyingForSelf = applyingForSelf;
+        this.person = person;
+        this.dependents = dependents;
+        this.lengthOfStay = lengthOfStay;
+        this.medicalNeeds = medicalNeeds;
+        this.conditionChanges = conditionChanges;
+        this.otherNeeds = otherNeeds;
+        this.nursingHome = nursingHome;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getConditionChanges() {
@@ -100,11 +124,11 @@ public class Submission {
         this.person = person;
     }
 
-    public ArrayList<Dependent> getDependents() {
+    public List<Dependent> getDependents() {
         return dependents;
     }
 
-    public void setDependents(ArrayList<Dependent> dependents) {
+    public void setDependents(List<Dependent> dependents) {
         this.dependents = dependents;
     }
 
@@ -116,10 +140,19 @@ public class Submission {
         this.lengthOfStay = lengthOfStay;
     }
 
+    public NursingHome getNursingHome() {
+        return nursingHome;
+    }
+
+    public void setNursingHome(NursingHome nursingHome) {
+        this.nursingHome = nursingHome;
+    }
+
     @Override
     public String toString() {
         return "Submission{" +
-                "applyingForSelf=" + applyingForSelf +
+                "id='" + id + '\'' +
+                ", applyingForSelf=" + applyingForSelf +
                 ", relation='" + relation + '\'' +
                 ", guardianName='" + guardianName + '\'' +
                 ", typeOfRelation='" + typeOfRelation + '\'' +
@@ -130,6 +163,7 @@ public class Submission {
                 ", medicalNeeds='" + medicalNeeds + '\'' +
                 ", conditionChanges='" + conditionChanges + '\'' +
                 ", otherNeeds='" + otherNeeds + '\'' +
+                ", nursingHome=" + nursingHome +
                 '}';
     }
 }

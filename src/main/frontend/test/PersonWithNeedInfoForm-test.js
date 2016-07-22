@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import {PersonWithNeedInfoClass} from '../app/FormPages/PersonWithNeedInfoForm.jsx';
+import {PersonWithNeedInfoClass} from '../app/FormPages/PersonWithNeedInfoForm.js';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
@@ -60,7 +60,8 @@ describe("PersonWithNeedInfoClass", function() {
                 name: "skjhakl",
                 number: 12345678,
                 street: "gyt",
-                zipcode: 7020
+                zipcode: 7020,
+                postal: "Trondheim"
             },
             fieldValues
         };
@@ -79,7 +80,8 @@ describe("PersonWithNeedInfoClass", function() {
 
     it('should have two HTML-elements with classname=name', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.name')).to.have.length(2);
+        expect(wrapper.find('.name')).to.have.length(1);
+        expect(wrapper.find('.nameField')).to.have.length(1);
     });
 
     it('should have two HTML-elements with classname=adr', function () {

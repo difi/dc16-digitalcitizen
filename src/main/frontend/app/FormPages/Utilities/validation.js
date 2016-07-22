@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import RESTpaths from '../../static_data/RESTpaths.js';
 
-const isEmpty = value => value === undefined || value === null || value === '';
+const isEmpty = value => value === undefined || value === null || value === '' || value ===" ";
 
 export function fieldIsEmpty(value) {
     if (isEmpty(value)) {
@@ -18,16 +18,10 @@ export function email(str) {
 
 export function checkEmail(value) {
     // Let's not start a debate on email regex. This is just for an example app!
-    if (!isEmpty(value) && !/^[ÆØÅæøåA-Z0-9._%+-]+@[ÆØÅæøåA-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    if ((!isEmpty(value) && !/^[ÆØÅæøåA-Z0-9._%+-]+@[ÆØÅæøåA-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) || isEmpty(value)) {
         return false;
     }
     return true;
-}
-
-export function checkInteger(value) {
-    if (!Number.isInteger(Number(value))) {
-        return false;
-    }
 }
 
 export function checkPNR(str) {
@@ -168,17 +162,16 @@ export function validatePnoName(pno, name) {
         $.ajax({
             url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
             dataType: 'json',
-            async: false,
             cache: false,
             success: function (data) {
                 if (data == true) {
-                    checkNameVal = true;
+                    checkNameVal = "riktig";
                 } else {
-                    checkNameVal = false;
+                    checkNameVal = "feil";
                 }
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error("url", status, err.toString());
             }.bind(this)
         });
     }
