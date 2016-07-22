@@ -21,7 +21,10 @@ import {reduxForm} from 'redux-form';
 
 var Collapse = require('react-bootstrap/lib/Collapse');
 var Alert = require('react-bootstrap/lib/Alert');
-
+var valid = null;
+var content = null;
+var clickNextButton = false;
+export var alertMessage = false;
 
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
@@ -38,11 +41,18 @@ export class PersonWithNeedInfoClass extends React.Component {
     }
 
     handleClickNext() {
+        const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
+        valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        console.log("Valid: " + valid);
+        if ((valid == undefined || !valid)) {
+            clickNextButton = true;
+            this.forceUpdate();
 
-        console.log("State 5");
-        this.saveFieldValues();
-        this.props.nextStep(5);
-
+        } else {
+            console.log("State 5");
+            this.saveFieldValues();
+            this.props.nextStep(5);
+        }
     }
 
     saveFieldValues() {
@@ -70,9 +80,29 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        console.log(postal.placeholder);
-        var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
-        console.log(this.props.fieldValues.person);
+        //console.log(postal.placeholder);
+        valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        console.log("Name.error: " + valid);
+
+        if (clickNextButton && (valid == undefined || !valid)) {
+            content =
+                <componentClass>
+                    <div className="alertClass_Fdfs">
+                        <Alert bsStyle="danger">
+                            Du må fylle inn korrekte verdier i markerte felt, før du kan gå videre.
+                        </Alert>
+                    </div>
+                </componentClass>;
+            clickNextButton = false;
+            alertMessage = true;
+        } else {
+            if (valid) {
+                content = null;
+                alertMessage = false;
+            }
+        }
+
+
         return (
             <form>
                 <div>
@@ -83,7 +113,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="name">Navn</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <FormGroup validationState={name.error ? "error" : ""}>
+                                <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                                     <FormControl
                                         type="text"
                                         className="name"
@@ -109,7 +139,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <FormGroup validationState={number.error ? "error" : ""}>
+                                <FormGroup validationState={number.error && (number.touched || alertMessage) ? "error" : ""}>
                                     <FormControl
                                         type="numeric"
                                         className="tlfFrom"
@@ -120,20 +150,13 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Collapse in={ name.error || street.error || zipcode.error || number.error}>
-                            <div>
-                                <Alert bsStyle="danger">
-                                    Du må fylle inn markerte felt, før du kan gå videre.
-                                </Alert>
-                            </div>
-                        </Collapse>
+                        {content}
 
                     </div>
 
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
-                        disabled={!valid}
                     />
 
                 </div>
@@ -142,11 +165,14 @@ export class PersonWithNeedInfoClass extends React.Component {
     }
 }
 ;
+
+// disabled={!valid}
+// name.error && name.touched || street.error && street.touched|| zipcode.error && zipcode.touched|| number.error && number.touched
 PersonWithNeedInfoClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired
 };
 
 
@@ -154,8 +180,11 @@ PersonWithNeedInfoClass.propTypes = {
 const validate = values => {
     const errors = {};
 
+    console.log("Name: " + fieldIsEmpty(values.name));
+
+
     if(fieldIsEmpty(values.name)){
-        console.log(values.name);
+        console.log("Nasdafme: " + values.name);
         errors.name = "Ugyldig navn.";
     }
 

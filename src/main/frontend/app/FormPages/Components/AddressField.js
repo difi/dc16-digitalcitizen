@@ -11,6 +11,7 @@ import RESTpaths from '../../static_data/RESTpaths.js';
 import {checkPostCode} from '../Utilities/validation.js';
 import {onlyDigitsInString} from '../Utilities/validation.js'
 import {alphaNumericInString} from '../Utilities/validation.js'
+import {alertMessage} from '../PersonWithNeedInfoForm.js';
 import {reduxForm} from 'redux-form';
 
 var zipcodeError;
@@ -162,7 +163,7 @@ var AddressField = React.createClass({
                 <div>
                     <Row className="form-row-address">
                         <Col sm={12} md={12} className="from-col-address">
-                            <FormGroup validationState={(!street.value) ? "error" : ""}>
+                            <FormGroup validationState={(!street.value && (street.touched || alertMessage)) ? "error" : ""}>
                                 <FormControl
                                     type="text"
                                     placeholder='Adresse'
@@ -173,7 +174,7 @@ var AddressField = React.createClass({
                     </Row>
                     <Row className="form-row-address">
                         <Col sm={6} md={6} className="from-col-address">
-                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) ? "error" : ""}>
+                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
                                 <FormControl
                                     type="text"
                                     placeholder="Postnr."

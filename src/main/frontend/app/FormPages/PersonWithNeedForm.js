@@ -25,7 +25,6 @@ var Alert = require('react-bootstrap/lib/Alert');
 var checked = false;
 
 
-
 export const fields = ["pnr", "name", "checked"];
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
@@ -125,7 +124,7 @@ export class PersonWithNeedClass extends React.Component {
 
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
 
-        const invalidPnrTooltip = <Popover id="invalidPnrPopover" >{pnr.error}</Popover>;
+        const invalidPnrTooltip = <Popover id="invalidPnrPopover">{pnr.error}</Popover>;
         const invalidPnrProps = {
             show: pnr.touched && pnr.error != undefined,
             container: this,
@@ -156,8 +155,10 @@ export class PersonWithNeedClass extends React.Component {
                             </Row>
                             <Row className="form-row">
                                 <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
-                                    <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
-                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                    <input type="checkbox" name="noPno" className="pnrCheck"
+                                           style={{marginBottom: '15px'}}
+                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan
+                                    ikke
                                     fødselsnummeret
                                 </Col>
                             </Row>
@@ -248,7 +249,8 @@ export class PersonWithNeedClass extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Collapse in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
+                    <Collapse
+                        in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
                         <div>
                             <Alert bsStyle="danger">
                                 Fødselsnummer og navn matcher ikke.
@@ -286,24 +288,28 @@ const validate = values => {
 };
 
 const asyncValidate = (values) => {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
 
-        $.ajax({
-            url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                //console.log(data);
-                if (data == true) {
-                    resolve()
-                } else {
-                    reject({name: "Fødselsnummer og navn matcher ikke."});
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error("url", status, err.toString());
-            }.bind(this)
-        });
+        if (values.pnr.length > 10) {
+            $.ajax({
+                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    //console.log(data);
+                    if (data == true) {
+                        resolve()
+                    } else {
+                        reject({name: "Fødselsnummer og navn matcher ikke."});
+                    }
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error("url", status, err.toString());
+                }.bind(this)
+            });
+        } else {
+            reject({name: "Fødselsnummer og navn matcher ikke."});
+        }
     })
 };
 
