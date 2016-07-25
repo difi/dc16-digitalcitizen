@@ -193,7 +193,6 @@ export class ApplicationClass extends React.Component {
             case 2:
                 content = <RelationForm
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -203,16 +202,14 @@ export class ApplicationClass extends React.Component {
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>;
+                 />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -221,7 +218,6 @@ export class ApplicationClass extends React.Component {
             case 5:
                 content = <GeneralPractitioner
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
