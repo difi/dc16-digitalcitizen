@@ -53,7 +53,7 @@ export class ApplicationClass extends React.Component {
     }
 
 
-    getUserData(){
+    getUserData() {
         $.ajax({
             url: RESTpaths.PATHS.USER_BASE,
             dataType: 'json',
@@ -86,26 +86,26 @@ export class ApplicationClass extends React.Component {
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
-            firstName: form1.firstName.value,
-            lastName: form1.lastName.value,
+            name: form1.name.value,
+
             telephone: form1.phone.value,
             email: form1.mail.value,
             relation: form1.relation.value,
             depOtherRelation: form1.depOtherRelation.value
         };
-        if (numDep.value>= 2) {
+        if (numDep.value >= 2) {
             form2Data = {
-                firstName: form2.firstName.value,
-                lastName: form2.lastName.value,
+                name: form2.name.value,
+
                 telephone: form2.phone.value,
                 email: form2.mail.value,
                 relation: form2.relation.value,
                 depOtherRelation: form2.depOtherRelation.value
             }
         }
-        if (numDep.value>=3) {
+        if (numDep.value >= 3) {
             form3Data = {
-                firstName: form3.firstName.value,
+                name: form3.name.value,
                 lastName: form3.lastName.value,
                 telephone: form3.phone.value,
                 email: form3.mail.value,
@@ -115,9 +115,9 @@ export class ApplicationClass extends React.Component {
         }
         return [form1Data, form2Data, form3Data];
     }
-    
+
     saveValuesFromRedux() {
-        const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp }} = this.props;
+        const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
         var dependents = this.saveDependents();
         var fields = {
             // First form
@@ -291,8 +291,8 @@ export class ApplicationClass extends React.Component {
                         saveValues={this.saveValues}
                         saveUserData={this.saveUserData}
                         submitRegistration={this.handleSubmit}
-                        newFieldValues = {this.saveValuesFromRedux}/>
-                      ;
+                        newFieldValues={this.saveValuesFromRedux}/>
+                ;
                 break;
             case 10:
                 content =
@@ -342,7 +342,7 @@ ApplicationClass.propTypes = {
 
 const Application = reduxForm({
     form: 'application',
-    fields: ["applyingForSelf", "pnr", "name", "checked" , "number", "street", "zipcode", "postal", "municipality",
+    fields: ["applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
         "doctorName",
         'form1.firstName',
         'form1.lastName',

@@ -22,28 +22,14 @@ export class WhosSearchingClass extends React.Component {
     saveFieldValues(status){
         if(status){
             //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
-            var dataFirst = {
-                dependent: false,
-            }
-            this.props.saveValues(dataFirst);
+            this.props.fields.pnr.onChange(this.props.userData.pnr);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
                 
-                    var dataVal = {
-
-                        
-                        applyingForSelf: true,
-                        person: {
-                            address: {
-                                municipality: data,
-                                country: "NO"
-
-                            }
-                        }
-                    }
+                    this.props.fields.municipality.onChange(data);
                     
                 this.props.saveValues(dataVal);
                 }.bind(this),
@@ -109,7 +95,7 @@ WhosSearchingClass.propTypes = {
 
 const WhosSearching = reduxForm({
     form: 'application',
-    fields: ['municipality', 'applyingForSelf'],
+    fields: ['municipality', 'applyingForSelf', 'pnr'],
         destroyOnUnmount: false,
 })(WhosSearchingClass)
 
