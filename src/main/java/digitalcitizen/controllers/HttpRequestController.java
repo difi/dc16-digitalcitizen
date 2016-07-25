@@ -25,8 +25,9 @@ public class HttpRequestController {
     public String getRequest(HttpServletRequest request) {
 
         String pnr = request.getHeader("X-DifiProxy-pid");
+        // TODO: Add SessionId and Pnr to HashMap
+        //pnrNumbers.add(request.getSession().getId(), pnr);
         pnrNumbers.add(pnr);
-
         return "index.html";
     }
 
@@ -34,7 +35,9 @@ public class HttpRequestController {
     @RequestMapping(value = "/api/getPNR", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Person getPNRbyCode(HttpServletRequest request) {
+
         //TODO: Get pnr by SessionId
+        //String pnr = pnrNumbers.get(request.getSession().getId());
         String pnr = pnrNumbers.get(pnrNumbers.size() - 1);
         return TestData.PERSONS.stream().filter(p -> p.getPnr().equals(pnr)).findFirst().get();
     }
