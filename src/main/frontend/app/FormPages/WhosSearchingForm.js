@@ -21,32 +21,33 @@ export default class WhosSearching extends React.Component {
 
     saveFieldValues(status){
         if(status){
+            //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
+            var dataFirst = {
+                dependent: false,
+            }
+            this.props.saveValues(dataFirst);
             $.ajax({
-                url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
-                dataType: 'json',
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+                dataType: 'text',
                 cache: false,
-                async: false,
                 success: function (data) {
-                    var data = {
-                        dependent: false,
+                
+                    var dataVal = {
+
+                        
                         applyingForSelf: true,
                         person: {
-                            pnr: data.pnr,
-                            name: data.name,
                             address: {
-                                country: data.address.country,
-                                municipality: data.address.municipality,
-                                streetAddress: data.address.street,
-                                zipcode: data.address.zipcode,
-                                postal: data.address.postal
-                            },
-                            telephone: data.telephone
+                                municipality: data,
+                                country: "NO"
+
+                            }
                         }
                     }
-                this.props.saveValues(data);
+                this.props.saveValues(dataVal);
                 }.bind(this),
                 error: function (xhr, status, err) {
-                console.error("dependent error", status, err.toString());
+                console.error("municipality error", status, err.toString());
             }.bind(this)
         })}
 
@@ -81,15 +82,15 @@ export default class WhosSearching extends React.Component {
                 <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
                 <div className="form-container">
                     <Row>
-                        <Col>
+                        <Col md={8} mdOffset={2}>
                             <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
-                                    bsSize="large">Ja, for meg selv</Button>
+                                    bsSize="large" block>Ja, for meg selv</Button>
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col md={8} mdOffset={2}>
                             <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
-                                    bsSize="large">Nei, for noen andre</Button>
+                                    bsSize="large" block>Nei, for noen andre</Button>
                         </Col>
                     </Row>
                 </div>

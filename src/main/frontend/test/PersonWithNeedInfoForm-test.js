@@ -80,7 +80,8 @@ describe("PersonWithNeedInfoClass", function() {
 
     it('should have two HTML-elements with classname=name', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.name')).to.have.length(2);
+        expect(wrapper.find('.name')).to.have.length(1);
+        expect(wrapper.find('.nameField')).to.have.length(1);
     });
 
     it('should have two HTML-elements with classname=adr', function () {

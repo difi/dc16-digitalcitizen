@@ -21,8 +21,8 @@ public class GuardianController {
     @RequestMapping(value = "/api/guardians", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Collection<Person> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
-        //Collection<> test = TestData.GUARDIANS.stream().filter(guardian->guardian.getPNR().equals(pnr)).findFirst().map(guardian-> guardian.getGuardianFor()).collect(Collectors.toList());
-        Collection<Person> retrievedGuardians = new ArrayList<>();
+        return TestData.GUARDIANS.stream().filter(guardian->guardian.getPNR().equals(pnr)).map(guardian-> guardian.getGuardianFor()).findFirst().get();
+        /*Collection<Person> retrievedGuardians = new ArrayList<>();
 
         for(Guardian guardian : TestData.GUARDIANS){
             if(guardian.getPNR().equals(pnr)){
@@ -30,6 +30,6 @@ public class GuardianController {
             }
         }
 
-        return retrievedGuardians;
+        return retrievedGuardians;*/
     }
 }

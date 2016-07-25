@@ -76,13 +76,14 @@ const common = {
 if (TARGET === 'build') {
     module.exports = merge(common, {});
 }
+
 else {
     module.exports = merge(common, {
         devServer: {
             port: 9090,
             proxy: {
                 '/*': {
-                    target: 'http://localhost:8080',
+                    target: 'http://localhost:8090',
                     secure: false,
                     prependPath: false
                 }

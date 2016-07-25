@@ -1,5 +1,15 @@
 html {
-  margin: 40px 200px 0 200px;
+  margin-top: 10px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 970px;
+  }
+}
+
+label {
+  margin-top: 5px;
 }
 
 .dependent-wrapper { /* Wraps all the dependent-forms in AddDependent */
@@ -74,6 +84,10 @@ html {
   margin-left: 5px;
 }
 
+.formgroup-row {
+  margin-left: 5px;
+}
+
 .form-row-name {
   margin-top: 10px;
   padding-bottom: 7px;
@@ -128,10 +142,6 @@ select option[disabled]:first-child {
 
 
 
-@media screen and (max-width: 1000px) and (min-width: 770px) {
-  html {
-    margin: 40px 40px 0 40px;
-  }
 
   /*
   .form-container {
@@ -145,7 +155,6 @@ select option[disabled]:first-child {
     width: 400px;
   }
 
-}
 
 .back-btn {
   margin-left: 15px;
@@ -156,7 +165,7 @@ select option[disabled]:first-child {
 }
 
 .application-wrapper {
-  max-width: 450px;
+  margin-top: 40px;
 }
 
 hr {
@@ -168,10 +177,7 @@ hr {
   padding: 0;
 }
 
-@media screen and (max-width: 770px) {
-  html {
-    margin: 40px 20px 0 20px;
-  }
+
   /*
 
   .form-container {
@@ -184,4 +190,4 @@ hr {
     margin-left: 15px;
   }
   */
-}
+

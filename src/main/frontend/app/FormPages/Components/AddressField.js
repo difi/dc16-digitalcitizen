@@ -5,12 +5,16 @@ import dropdownContent from '../../static_data/dropdown-list-content.js';
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
 var ReactDOM = require('react-dom');
 import RESTpaths from '../../static_data/RESTpaths.js';
 import {checkPostCode} from '../Utilities/validation.js';
 import {onlyDigitsInString} from '../Utilities/validation.js'
 import {alphaNumericInString} from '../Utilities/validation.js'
+import {alertMessage} from '../PersonWithNeedInfoForm.js';
 import {reduxForm} from 'redux-form';
+
+var zipcodeError;
 var AddressField = React.createClass({
 
     propTypes: {
@@ -43,7 +47,7 @@ var AddressField = React.createClass({
 
         var zipcode = checkPostCode(event.target.value);
 
-        if(!zipcode){
+        if (!zipcode) {
             return;
         }
         console.log(zipcode);
@@ -56,11 +60,13 @@ var AddressField = React.createClass({
                 cache: false,
                 success: function (data) {
                     // Set the postal state equal to the retrieved data
-                    if(data['postalcodes'][0] != null)   {
+                    if (data['postalcodes'][0] != null) {
+                        zipcodeError = undefined;
                         this.props.fields.postal.onChange(data['postalcodes'][0]['placeName']);
                         this.props.fields.municipality.onChange(data['postalcodes'][0]['adminName2']);
                     } else {
-                        this.props.fields.postal.onChange('Ugyldig postnr');
+                        zipcodeError = "Postnummeret er ikke gyldig";
+                        this.props.fields.postal.onChange('Ugyldig postnr.');
                     }
                 }.bind(this),
                 error: function (xhr, status, err) {
@@ -68,10 +74,11 @@ var AddressField = React.createClass({
                 }.bind(this)
             });
         } else {
-            this.props.fields.postal.onChange('');
+            zipcodeError = "Postnummeret er ikke gyldig";
+            this.props.fields.postal.onChange('Ugyldig postnr.');
         }
     },
-    
+
 
     /**Updates the country state when the user selects a new option in
      * the {@link DropdownList}. Clears previous retrieved data.
@@ -107,7 +114,6 @@ var AddressField = React.createClass({
 
     render: function () {
         const {fields: {street, zipcode, postal}} = this.props;
-
         if (this.props.includeCountry) {
             return (
                 <Col sm={7.5} md={8}>
@@ -128,7 +134,7 @@ var AddressField = React.createClass({
                                 labelField='country'
                                 ref="country"
                                 value={this.state.country}
-                                defaultValue = {this.props.address.country}
+                                defaultValue={this.props.address.country}
                                 valueField='code'
                                 onChange={this.handleDropdownChange}/>
                         </Col>
@@ -157,32 +163,38 @@ var AddressField = React.createClass({
                 <div>
                     <Row className="form-row-address">
                         <Col sm={12} md={12} className="from-col-address">
-                            <FormControl
-                                type="text"
-                                placeholder='Adresse'
-                                ref="streetAddress"
-                                {...street}/>
+                            <FormGroup validationState={(!street.value && (street.touched || alertMessage)) ? "error" : ""}>
+                                <FormControl
+                                    type="text"
+                                    placeholder='Adresse'
+                                    className='adressField'
+                                    ref="streetAddress"
+                                    {...street}/>
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row-address">
-                        <Col sm={5} md={5} className="from-col-address">
-                            <FormControl
-                                type="text"
-                                placeholder='Postnummer'
-                                className='zipcode'
-                                ref="zipcode"
-                                {...zipcode}
-                                onChange={this.changeHandler(zipcode)}
+                        <Col sm={6} md={6} className="from-col-address">
+                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
+                                <FormControl
+                                    type="text"
+                                    placeholder="Postnr."
+                                    className='zipcode'
+                                    ref="zipcode"
+                                    {...zipcode}
+                                    onChange={this.changeHandler(zipcode)}
                                 />
+                            </FormGroup>
+
                         </Col>
-                        <Col sm={7} md={7} className="from-col-address">
+                        <Col sm={6} md={6} className="from-col-address">
                             <FormControl
                                 type="text"
                                 placeholder='Sted'
                                 ref="postal"
                                 {...postal}
                                 disabled
-                                />
+                            />
                         </Col>
                     </Row>
                 </div>
@@ -190,8 +202,6 @@ var AddressField = React.createClass({
         }
     }
 });
-
-
 
 AddressField = reduxForm({
     form: 'application',

@@ -1,18 +1,23 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
+import $ from 'jquery'
+
+import RESTpaths from '../static_data/RESTpaths.js';
 import DropdownList from './Components/DropdownList.js';
 import NavigationButtons from './Components/NavigationButtons.js';
+
+import dropdownContent from '../static_data/dropdown-list-content.js';
+
+var ReactDOM = require('react-dom');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
-import dropdownContent from '../static_data/dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-import {reduxForm} from 'redux-form';
-import {getValues} from 'redux-form';
-import $ from 'jquery'
-import RESTpaths from '../static_data/RESTpaths.js';
+
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
@@ -33,9 +38,7 @@ export class RelationFormClass extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-
                 console.log(data);
-
                 data = data.map(data => {
                     return  {value: data.pnr + ":" + data.name + ":" + data.address + ":" + data.telephone, name: data.name}
                 });
@@ -65,10 +68,10 @@ export class RelationFormClass extends React.Component {
             this.props.nextStep(6);
         }
         else {
-
             this.props.nextStep(3);
         }
     }
+
 
     handleGuardianRadioButton() {
         this.props.fields.otherRelation.onChange(null);
@@ -85,36 +88,36 @@ export class RelationFormClass extends React.Component {
         this.props.fields.typeOfRelation.onChange(null);
     }
 
+
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
 
-
         if (relation.value == "guardian") {
+            var pnr = nameOfChild.value.split(":")[0];
             var dataDep = {
-                dependent: true
+
+                relation: relation.value,
+                dependent: true,
+                applyingForSelf: false,
             };
+
             this.props.saveValues(dataDep);
             $.ajax({
-                url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + nameOfChild.value.split(":")[0],
-                dataType: 'json',
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
+                dataType: 'text',
                 cache: false,
                 success: function (data) {
                     var dataVal = {
-                        relation: relation.value,
-                        dependent: true,
+
                         person: {
-                            pnr: data.pnr,
-                            name: data.name,
+                            pnr: pnr,
                             address: {
-                                country: data.address.country,
-                                municipality: data.address.municipality,
-                                streetAddress: data.address.street,
-                                zipcode: data.address.zipcode,
-                                postal: data.address.postal
-                            },
-                            telephone: data.telephone
+                                municipality: data,
+                                country: "NO"
+                            }
                         }
+
                     };
                     this.props.saveValues(dataVal);
                 }.bind(this),
@@ -130,7 +133,6 @@ export class RelationFormClass extends React.Component {
                 dependent: isDependent.value
             };
             this.props.saveValues(data);
-
         }
         if (relation.value == "other") {
             var data = {
@@ -139,9 +141,7 @@ export class RelationFormClass extends React.Component {
                 dependent: isDependent.value
             };
             this.props.saveValues(data);
-
         }
-
         console.log(data);
     }
 
