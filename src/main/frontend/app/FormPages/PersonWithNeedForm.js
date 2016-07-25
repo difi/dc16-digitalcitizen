@@ -39,7 +39,6 @@ export class PersonWithNeedClass extends React.Component {
 
 
     handleClickBack() {
-        this.saveFieldValues();
 
         console.log("State 2");
         (this.props.previousStep(2));
@@ -66,8 +65,7 @@ export class PersonWithNeedClass extends React.Component {
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
-
-        var personP = {};
+        
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
