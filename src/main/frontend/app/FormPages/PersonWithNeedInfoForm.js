@@ -125,6 +125,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         placeholder="Navn"
 
                                         {...name}/>
+                                    <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -151,6 +152,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         placeholder="Telefonnr"
                                         {...number}
                                     />
+                                    <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                         </Row>
