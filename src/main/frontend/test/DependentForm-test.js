@@ -71,22 +71,28 @@ describe("DependentForm", function() {
         wrapper = shallow(<DependentForm {...props}/>);
     });
 
-    it('should have two elements with classname=fname', function () {
-        //expect wrapper to exist
+    //it('should have two elements with classname=fname', function () {
+    //    //expect wrapper to exist
+    //    expect(wrapper).to.have.length(1);
+    //    //Expect to find two elements with the class name "fName"
+    //    expect (wrapper.find('.fName')).to.have.length(2);
+    //    //Expect to find one label-element with the class name "fName"
+    //    expect(wrapper.find('label.fName')).to.have.length(1);
+    //    expect(wrapper.find('FormControl.fName')).to.have.length(1);
+    //});
+
+    it('should have two HTML-elements with classname=name', function () {
         expect(wrapper).to.have.length(1);
-        //Expect to find two elements with the class name "fName"
-        expect (wrapper.find('.fName')).to.have.length(2);
-        //Expect to find one label-element with the class name "fName"
-        expect(wrapper.find('label.fName')).to.have.length(1);
-        expect(wrapper.find('FormControl.fName')).to.have.length(1);
+        expect(wrapper.find('.name')).to.have.length(1);
+        expect(wrapper.find('.nameField')).to.have.length(1);
     });
 
-    it('should have two elements with classname=eName', function () {
-        expect(wrapper).to.have.length(1);
-        expect (wrapper.find('.eName')).to.have.length(2);
-        expect(wrapper.find('label.eName')).to.have.length(1);
-        expect(wrapper.find('FormControl.eName')).to.have.length(1);
-    });
+    //it('should have two elements with classname=eName', function () {
+    //    expect(wrapper).to.have.length(1);
+    //    expect (wrapper.find('.eName')).to.have.length(2);
+    //    expect(wrapper.find('label.eName')).to.have.length(1);
+    //    expect(wrapper.find('FormControl.eName')).to.have.length(1);
+    //});
 
     it('should have two elements with classname=tlf', function () {
         expect(wrapper).to.have.length(1);

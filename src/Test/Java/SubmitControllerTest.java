@@ -26,7 +26,7 @@ public class SubmitControllerTest extends AbstractControllerTest {
     @Test
     public void testSubmit() throws Exception {
 
-        List<Dependent> dependents = Arrays.asList(new Dependent("Kong", "Harald", "99999992", "test@test.org", "Kongen din"));
+        List<Dependent> dependents = Arrays.asList(new Dependent("Kong Harald", "99999992", "test@test.org", "Kongen din"));
         Submission submission = new Submission(
                 true,
                 new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"),
