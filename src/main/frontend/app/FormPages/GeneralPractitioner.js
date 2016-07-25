@@ -23,31 +23,17 @@ export class GeneralPractitionerClass extends React.Component {
     }
 
     handleClickBack() {
-        this.saveFieldValues();
         console.log("State 4");
         this.props.previousStep(4);
     }
 
     handleClickNext() {
-        this.saveFieldValues();
+
         console.log("State 6");
         this.props.nextStep(6);
     }
 
-    saveFieldValues() {
-        //this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
-        var data = {
-            person: {
-                pnr: this.props.fieldValues.person.pnr,
-                name: this.props.fieldValues.person.name,
-                address: this.props.fieldValues.person.address,
-                telephone: this.props.fieldValues.person.telephone,
-                doctor: {name: this.props.fields.doctorName.value}
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
+
 
     getPractitionersByMunicipality(municipality){
         $.ajax({

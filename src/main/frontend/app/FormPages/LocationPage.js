@@ -36,26 +36,14 @@ export class LocationPageClass extends React.Component {
     //Handle the click on the back-button
     handleClickBack() {
         //If you are applying for yourself, the previous step is step 8 - Special Needs Page
-        this.saveFieldValues();
+
         this.props.previousStep(8);
     }
 
-    saveFieldValues() {
-        //Checks if value exists - otherwise null to avoid null error
-        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null;
-        var data = {
-            nursingHome: {
-                municipality: mun,
-                name: this.props.fields.homeApp.value
-            }
-        };
-        return this.props.saveValues(data);
-    }
 
     //Handle the click on the next-button
     handleClickNext() {
         //Submit here?
-        this.saveFieldValues();
         console.log("State 10");
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);

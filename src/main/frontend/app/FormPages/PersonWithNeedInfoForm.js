@@ -38,7 +38,6 @@ export class PersonWithNeedInfoClass extends React.Component {
     
     handleClickBack() {
         console.log("State 3");
-        this.saveFieldValues();
         this.props.previousStep(3);
     }
 
@@ -52,32 +51,11 @@ export class PersonWithNeedInfoClass extends React.Component {
 
         } else {
             console.log("State 5");
-            this.saveFieldValues();
             this.props.nextStep(5);
         }
     }
 
-    saveFieldValues() {
-        // Get values via this.refs
-        const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
-        var address = {
-            street: street.value,
-            zipcode: zipcode.value,
-            postal: postal.value,
-            municipality: municipality.value,
-            country: "NO"
-        };
-        var data = {
-            person: {
-                pnr: this.props.fieldValues.person.pnr,
-                name: name.value,
-                address: address,
-                telephone: number.value
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
+
 
 
     render() {

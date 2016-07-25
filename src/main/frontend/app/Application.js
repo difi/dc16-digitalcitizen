@@ -73,21 +73,12 @@ export class ApplicationClass extends React.Component {
         });
     }
 
-    saveValues(field_value) {
-        this.setState({
-            fieldValues: assign({}, this.state.fieldValues, field_value)
-        });
-        console.log(this.state.fieldValues);
-        return assign({}, this.state.fieldValues, field_value)
-    }
-
     saveDependents() {
         const {fields: {form1, form2, form3, numDep}} = this.props
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
             name: form1.name.value,
-
             telephone: form1.phone.value,
             email: form1.mail.value,
             relation: form1.relation.value,
@@ -344,20 +335,17 @@ const Application = reduxForm({
     form: 'application',
     fields: ["applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
         "doctorName",
-        'form1.firstName',
-        'form1.lastName',
+        'form1.name',
         'form1.mail',
         'form1.phone',
         'form1.relation',
         'form2.show',
-        'form2.firstName',
-        'form2.lastName',
+        'form2.name',
         'form2.mail',
         'form2.phone',
         'form2.relation',
         'form3.show',
-        'form3.firstName',
-        'form3.lastName',
+        'form3.name',
         'form3.mail',
         'form3.phone',
         'form3.relation',

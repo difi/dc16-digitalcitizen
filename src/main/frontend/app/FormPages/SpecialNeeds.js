@@ -62,7 +62,7 @@ export class SpecialNeedsClass extends React.Component {
             conditionChanges: cha,
             otherNeeds: oth
         };
-        return this.props.saveValues(data);
+     
     }
 
     limitTextFields(e, field) {

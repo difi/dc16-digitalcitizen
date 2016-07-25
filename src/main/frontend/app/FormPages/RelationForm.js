@@ -91,7 +91,7 @@ export class RelationFormClass extends React.Component {
 
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, dependent}} = this.props;
+        const {fields: {relation, nameOfChild}} = this.props;
 
         if (relation.value == "guardian") {
             var pnr = nameOfChild.value.split(":")[0];
@@ -103,42 +103,16 @@ export class RelationFormClass extends React.Component {
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                    var dataVal = {
-
-                        person: {
-                            pnr: pnr,
-                            address: {
-                                municipality: data,
-                                country: "NO"
-                            }
-                        }};
                         this.props.fields.municipality.onChange(data);
 
-                    
-                    this.props.saveValues(dataVal);
+
+
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
         }
-        if (relation.value == "family") {
-            var data = {
-                relation: relation.value,
-                typeOfRelation: typeOfRelation.value,
-                dependent: dependent.value
-            };
-            this.props.saveValues(data);
-        }
-        if (relation.value == "other") {
-            var data = {
-                relation: relation.value,
-                otherRelation: otherRelation.value,
-                dependent: dependent.value
-            };
-            this.props.saveValues(data);
-        }
-        console.log(data);
     }
 
     render() {

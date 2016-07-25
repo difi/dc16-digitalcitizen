@@ -19,8 +19,8 @@ export class WhosSearchingClass extends React.Component {
         this.handleClickOther = this.handleClickOther.bind(this);
     }
 
-    saveFieldValues(status){
-        if(status){
+    saveFieldValues(){
+
             //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
             this.props.fields.pnr.onChange(this.props.userData.pnr);
             $.ajax({
@@ -28,41 +28,29 @@ export class WhosSearchingClass extends React.Component {
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                
+
                     this.props.fields.municipality.onChange(data);
-                    
-                this.props.saveValues(dataVal);
+
                 }.bind(this),
                 error: function (xhr, status, err) {
-                console.error("municipality error", status, err.toString());
-            }.bind(this)
-        })}
-
-
-        else{
-        var data = {
-            applyingForSelf: status};
-            this.props.saveValues(data);
-        }
-
-        console.log(data);
+                    console.error("municipality error", status, err.toString());
+                }.bind(this)
+            })
     }
 
-    nextStep(status, step) {
-        this.saveFieldValues(status);
-        this.props.nextStep(step);
-    }
+
     
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
-        this.nextStep(true, 6)
+        this.saveFieldValues();
+        this.props.nextStep(6)
     }
 
     handleClickOther() {
         console.log("State 2");
         this.props.fields.applyingForSelf.onChange(false);
-        this.nextStep(false, 2);
+        this.props.nextStep(2);
     }
 
     render() {

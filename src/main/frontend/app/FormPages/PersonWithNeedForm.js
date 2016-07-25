@@ -47,11 +47,9 @@ export class PersonWithNeedClass extends React.Component {
 
     handleClickNext() {
         //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values. 
-        if (this.props.fields.checked.value) {
-            this.saveFieldValues();
-        } else {
-            this.savePerson();
-        }
+        if (!this.props.fields.checked.value) {
+            this.savePerson()
+        } 
 
 
         if (this.props.fields.checked.value) {
@@ -64,23 +62,6 @@ export class PersonWithNeedClass extends React.Component {
         }
     }
 
-    saveFieldValues() {
-
-        var pnr = this.props.fields.pnr.value;
-        if (this.props.fields.checked.value) {
-            pnr = null;
-        }
-        var data = {
-            dontGotPNRnumber: this.props.fields.checked.value,
-            person: {
-                pnr: pnr,
-                name: this.props.fields.name.value,
-                address: this.props.fieldValues.person.address,
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
 
 
     savePerson() {
@@ -92,24 +73,9 @@ export class PersonWithNeedClass extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                personP = {
-                    dontGotPNRnumber: this.props.fields.checked.value,
-                    person: {
-                        pnr: pnr,
-                        name: this.props.fields.name.value,
-                        address: {
-                            country: data.address.country,
-                            municipality: data.address.municipality,
-                            streetAddress: data.address.street,
-                            zipcode: data.address.zipcode,
-                            postal: data.address.postal
-                        },
-                        telephone: data.telephone
-                    }
-                };
                 this.props.fields.municipality.onChange(data.address.municipality);
 
-                this.props.saveValues(personP);
+
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
