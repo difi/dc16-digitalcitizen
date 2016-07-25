@@ -44,10 +44,10 @@ class DependentForm extends React.Component {
                 <h4>Pårørende</h4>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label>Navn</label>
+                            <label className="name">Navn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="name" ref="name" type="text" placeholder="Navn"
+                            <FormControl className="nameField" ref="name" type="text" placeholder="Navn"
                                          disabled={this.props.autoFilled} {...name}/>
                         </Col>
                     </Row>
