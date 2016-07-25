@@ -38,7 +38,7 @@ export class ApplicationClass extends React.Component {
         this.state = {
             step: 1,
             prevStep: 1,
-            fieldValues: props.fieldValues,
+
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
@@ -140,9 +140,9 @@ export class ApplicationClass extends React.Component {
             // Sixth form
             lengthOfStay: need.value,         // String
             // Seventh form
-            medicalNeeds: medical.value,         // String
-            conditionChanges: changes.value,     // String
-            otherNeeds: other.value,            // String
+            medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
+            conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
+            otherNeeds: other.value.replace(/[\n]/g, '. '),            // String
             nursingHome: {
                 municipality: municipalityApp.value,
                 name: homeApp.value
@@ -174,31 +174,12 @@ export class ApplicationClass extends React.Component {
         })
     }
 
-    handleSubmit() {
-        $.ajax({
-            url: './send',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            data: JSON.stringify(this.state.fieldValues),
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-
     render() {
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
 
         var content;
-        var fieldValues = this.state.fieldValues;
+
         var userData = this.state.userData;
 
         switch (this.state.step) {
@@ -212,7 +193,6 @@ export class ApplicationClass extends React.Component {
             case 2:
                 content = <RelationForm
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -222,25 +202,22 @@ export class ApplicationClass extends React.Component {
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>;
+                 />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>;
+                   />;
                 break;
             case 5:
                 content = <GeneralPractitioner
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -257,7 +234,6 @@ export class ApplicationClass extends React.Component {
             case 7:
                 content = < NeedsForm
                     store={this.props.store}
-                    fieldValues={this.props.fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -276,7 +252,7 @@ export class ApplicationClass extends React.Component {
                 content =
                     < LocationPage
                         store={this.props.store}
-                        fieldValues={fieldValues}
+
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
