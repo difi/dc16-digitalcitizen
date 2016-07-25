@@ -144,7 +144,7 @@ class Application extends React.Component {
             case 5:
                 content = <GeneralPractitioner
                     store={this.props.store}
-
+                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
