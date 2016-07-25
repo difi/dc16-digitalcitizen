@@ -9,6 +9,8 @@ import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 import NavigationButtons from './Components/NavigationButtons.js';
 
+import {checkPersonalnumberNo} from'./Utilities/validation.js';
+
 var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -23,11 +25,7 @@ var Collapse = require('react-bootstrap/lib/Collapse');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var checked = false;
-
-
 export const fields = ["pnr", "name", "checked"];
-
-import {checkPersonalnumberNo} from'./Utilities/validation.js';
 
 
 export class PersonWithNeedClass extends React.Component {
