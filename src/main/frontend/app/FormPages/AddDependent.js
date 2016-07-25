@@ -15,20 +15,17 @@ var Collapse = require('react-bootstrap/lib/Collapse');
 import RESTpaths from '../static_data/RESTpaths.js';
 const fields = [
 
-    'form1.firstName',
-    'form1.lastName',
+    'form1.name',
     'form1.mail',
     'form1.phone',
     'form1.relation',
     'form2.show',
-    'form2.firstName',
-    'form2.lastName',
+    'form2.name',
     'form2.mail',
     'form2.phone',
     'form2.relation',
     'form3.show',
-    'form3.firstName',
-    'form3.lastName',
+    'form3.name',
     'form3.mail',
     'form3.phone',
     'form3.relation',
@@ -77,13 +74,8 @@ export class AddDependentClass extends React.Component {
             cache: false,
             success: function (data) {
                 console.log(data);
-                //TODO: FirstName and LastName may cause trouble. Should be split up at backend?
-                var name = data.name.split(' ');
                 console.log(name);
-                var firstName = name[0];
-                var lastName = name[1];
-                this.props.fields.form1.firstName.onChange(firstName);
-                this.props.fields.form1.lastName.onChange(lastName);
+                this.props.fields.form1.name.onChange(data.name);
                 this.props.fields.form1.phone.onChange(data.telephone);
                 this.props.fields.form1.mail.onChange(data.mail);
 
@@ -174,9 +166,9 @@ export class AddDependentClass extends React.Component {
         var other3 = true;
 
         // values for the validation of each form
-        var form1validate = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
-        var form2validate = (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
-        var form3validate = (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
+        var form1validate = (form1.name.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
+        var form2validate = (form2.name.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
+        var form3validate = (form3.name.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
 
         if (value == "3") {
             // All three forms has to be valid if you want to continue
@@ -223,8 +215,7 @@ export class AddDependentClass extends React.Component {
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
-            firstName: form1.firstName.value,
-            lastName: form1.lastName.value,
+            name: form1.name.value,
             telephone: form1.phone.value,
             email: form1.mail.value,
             relation: form1.relation.value,
@@ -232,8 +223,7 @@ export class AddDependentClass extends React.Component {
         };
         if (this.props.fields.form2.show.value) {
             form2Data = {
-                firstName: form2.firstName.value,
-                lastName: form2.lastName.value,
+                name: form2.name.value,
                 telephone: form2.phone.value,
                 email: form2.mail.value,
                 relation: form2.relation.value,
@@ -242,8 +232,7 @@ export class AddDependentClass extends React.Component {
         }
         if (this.props.fields.form3.show.value) {
             form3Data = {
-                firstName: form3.firstName.value,
-                lastName: form3.lastName.value,
+                name: form3.name.value,
                 telephone: form3.phone.value,
                 email: form3.mail.value,
                 relation: form3.relation.value,

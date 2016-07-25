@@ -206,10 +206,9 @@ describe("ApplicationIntegration", () => {
 
         var firstAdd = sixthPage.find(DependentForm).first();
         expect(firstAdd).to.have.length(1);
-        firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Nordmann'}});
-        firstAdd.find(FormControl).at(1).simulate('change', {target: {value: 'Nordmann'}});
-        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: '222 22 222'}});
-        firstAdd.find(FormControl).at(3).simulate('change', {target: {value: 'ola@nordmann.no'}});
+        firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Ola Nordmann'}});
+        firstAdd.find(FormControl).at(1).simulate('change', {target: {value: '222 22 222'}});
+        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: 'ola@nordmann.no'}});
         firstAdd.find(DropdownList).simulate('change', {target: {value: 'sibling'}});
 
         nextButton.simulate('click');
