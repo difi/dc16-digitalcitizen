@@ -28,8 +28,8 @@ public class GuardianControllerTest extends AbstractControllerTest {
     @Test
     public void testGetGuardians() throws Exception {
         List<Person> testData = Arrays.asList(
-                new Person("15028047425", "Test Person2", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
-                new Person("13019870019", "Test Person3", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Tore", "Trondheim")));
+                new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
+                new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Vegard", "Sogndal")));
         String uri = "http://localhost:9090/api/guardians?pnr=01108019146";
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
 
