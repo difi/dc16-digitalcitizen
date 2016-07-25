@@ -60,7 +60,7 @@ describe("GeneralPractitionerClass", function() {
         const props = {
             fields: {
                 doctorName: "sd",
-                doctors: {value: [{name: "Berit"}], onChange: function onChange () {}}
+                doctors: {value: [{name: "Berit"}], onChange: function onChange () {}},
                 municipality: {
                     value: "Oslo"
                 }

@@ -326,7 +326,6 @@ export class ApplicationClass extends React.Component {
 }
 
 ApplicationClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
 };
 
