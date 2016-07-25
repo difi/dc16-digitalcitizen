@@ -21,7 +21,6 @@ public class Application {
     public static boolean USE_MONGODB = false;
 
     public static void main(String[] args) {
-
         Injector injector = Guice.createInjector(new ArrayList<Module>() {{
             add(new ConfigModule());
             add(new StorageModule());
@@ -32,4 +31,6 @@ public class Application {
         injector.getInstance(NettyHttpListener.class).run();
 
     }
+
+
 }
