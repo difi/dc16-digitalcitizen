@@ -204,6 +204,7 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({
     form: 'application',
+    fields: ["name", "number", "street", "zipcode", "postal", "municipality" ],
     destroyOnUnmount: false,
     validate
 }, null, null)(PersonWithNeedInfoClass);
