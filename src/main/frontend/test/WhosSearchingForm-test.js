@@ -10,7 +10,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
-import WhosSearchingForm from '../app/FormPages/WhosSearchingForm.js';
+import {WhosSearchingClass} from '../app/FormPages/WhosSearchingForm.js';
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
@@ -55,11 +55,9 @@ describe("WhosSearchingForm", function() {
     // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
         // the fields that are individual for each page
-        const props = {
-            fieldValues
-        };
+
         //Renders the WhosSearchingForm with props
-        wrapper = shallow(<WhosSearchingForm {...props}/>);
+        wrapper = shallow(<WhosSearchingClass />);
     });
 
     it('should have header and container classnames for HTML-elements', function () {

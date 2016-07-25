@@ -1,6 +1,8 @@
-import Application from '../app/Application.js';
-import React from 'react'
 
+
+import {ApplicationClass} from '../app/Application.js';
+import Application from'../app/Application.js'
+import React from 'react';
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
@@ -90,7 +92,7 @@ describe("ApplicationIntegration", () => {
             fieldValues,
             userData
         };
-        subject = mount(<Application {...props}/>);
+        subject = mount(<ApplicationClass {...props}/>);
     });
     it("First page forwards you to correct step", () => {
         expect(subject).to.have.length(1);
@@ -214,10 +216,9 @@ describe("ApplicationIntegration", () => {
 
         var firstAdd = sixthPage.find(DependentForm).first();
         expect(firstAdd).to.have.length(1);
-        firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Nordmann'}});
-        firstAdd.find(FormControl).at(1).simulate('change', {target: {value: 'Nordmann'}});
-        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: '222 22 222'}});
-        firstAdd.find(FormControl).at(3).simulate('change', {target: {value: 'ola@nordmann.no'}});
+        firstAdd.find(FormControl).at(0).simulate('change', {target: {value: 'Ola Nordmann'}});
+        firstAdd.find(FormControl).at(1).simulate('change', {target: {value: '222 22 222'}});
+        firstAdd.find(FormControl).at(2).simulate('change', {target: {value: 'ola@nordmann.no'}});
         firstAdd.find(DropdownList).simulate('change', {target: {value: 'sibling'}});
 
         nextButton.simulate('click');
@@ -287,7 +288,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+                applyingForSelf: {
+                    value: true
+                },
+                relation: {
+                    value: ""
+                },
+                checked: {
+                    value: false
+                }
+            }
         };
         const subject = mount(<Application {...props}/>);
 
@@ -308,7 +320,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+            applyingForSelf: {
+                value: false
+            },
+            relation: {
+                value: "guardian"
+            },
+            checked: {
+                value: false
+            }
+        }
         };
         const subject = mount(<Application {...props}/>);
 
@@ -329,7 +352,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+            applyingForSelf: {
+                value: false
+            },
+                relation: {
+                value: "other"
+            },
+                checked: {
+                value: true
+            }
+        }
         };
         const subject = mount(<Application {...props}/>);
 

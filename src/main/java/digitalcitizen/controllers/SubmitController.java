@@ -1,13 +1,10 @@
 package digitalcitizen.controllers;
 
-import com.mongodb.BasicDBObject;
 import digitalcitizen.Application;
 import digitalcitizen.models.Submission;
 import digitalcitizen.repositories.SubmissionRepository;
 import digitalcitizen.utilities.PDFManager;
 import digitalcitizen.utilities.SubmissionValidator;
-
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

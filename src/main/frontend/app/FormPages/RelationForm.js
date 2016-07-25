@@ -91,59 +91,28 @@ export class RelationFormClass extends React.Component {
 
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, dependent}} = this.props;
+        const {fields: {relation, nameOfChild}} = this.props;
 
         if (relation.value == "guardian") {
             var pnr = nameOfChild.value.split(":")[0];
             this.props.fields.dependent.onChange(true);
-            var dataDep = {
+            this.props.fields.pnr.onChange(pnr);
 
-                relation: relation.value,
-                dependent: true,
-                applyingForSelf: false,
-            };
-
-            this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                    var dataVal = {
+                        this.props.fields.municipality.onChange(data);
 
-                        person: {
-                            pnr: pnr,
-                            address: {
-                                municipality: data,
-                                country: "NO"
-                            }
-                        }
 
-                    };
-                    this.props.saveValues(dataVal);
+
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
         }
-        if (relation.value == "family") {
-            var data = {
-                relation: relation.value,
-                typeOfRelation: typeOfRelation.value,
-                dependent: dependent.value
-            };
-            this.props.saveValues(data);
-        }
-        if (relation.value == "other") {
-            var data = {
-                relation: relation.value,
-                otherRelation: otherRelation.value,
-                dependent: dependent.value
-            };
-            this.props.saveValues(data);
-        }
-        console.log(data);
     }
 
     render() {
@@ -265,13 +234,12 @@ export class RelationFormClass extends React.Component {
 RelationFormClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor"],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr'],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 

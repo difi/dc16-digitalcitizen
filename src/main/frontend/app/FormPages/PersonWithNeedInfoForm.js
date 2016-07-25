@@ -1,4 +1,6 @@
-/*Created by camp-cha on 24.06.2016.*/
+/**
+ * Created by camp-cha on 24.06.2016.
+ */
 
 import React from 'react';
 import {reduxForm} from 'redux-form';
@@ -26,13 +28,12 @@ export class PersonWithNeedInfoClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+      
      
     }
     
     handleClickBack() {
         console.log("State 3");
-        this.saveFieldValues();
         this.props.previousStep(3);
     }
     
@@ -45,33 +46,12 @@ export class PersonWithNeedInfoClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            this.saveFieldValues();
             console.log("State 5");
             this.props.nextStep(5);
         }
     }
 
-    saveFieldValues() {
-        // Get values via this.refs
-        const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
-        var address = {
-            street: street.value,
-            zipcode: zipcode.value,
-            postal: postal.value,
-            municipality: municipality.value,
-            country: "NO"
-        };
-        var data = {
-            person: {
-                pnr: this.props.fieldValues.person.pnr,
-                name: name.value,
-                address: address,
-                telephone: number.value
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
+
 
 
     render() {
@@ -162,7 +142,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 //Validation for form
@@ -191,7 +170,7 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({
     form: 'application',
-    fields: ["name", "number", "street", "zipcode", "postal", "municipality"],
+    fields: ["name", "number", "street", "zipcode", "postal", "municipality" ],
     destroyOnUnmount: false,
     validate
 }, null, null)(PersonWithNeedInfoClass);
