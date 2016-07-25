@@ -1,21 +1,21 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
-import $ from 'jquery'
 
 import NavigationButtons from './Components/NavigationButtons.js';
 
-var ReactDOM = require('react-dom');
+import {fieldIsEmpty} from './Utilities/validation.js'
+
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
-var HelpBlock = require('react-bootstrap/lib/HelpBlock');
-var Overlay = require('react-bootstrap/lib/Overlay');
-var Popover = require('react-bootstrap/lib/Popover');
+var Alert = require('react-bootstrap/lib/Alert');
 
-import {fieldIsEmpty} from './Utilities/validation.js'
-
+var valid = null;
+var content = null;
+var clickNextButton = false;
+export var alertMessage = false;
 
 export class SpecialNeedsClass extends React.Component {
     //const {fields: {medical, changes, other}} = this.props;
@@ -35,9 +35,19 @@ export class SpecialNeedsClass extends React.Component {
     }
 
     handleClickNext() {
-        this.saveFieldValues();
-        console.log("State 9");
-        this.props.nextStep(9);
+        const {fields: {medical, changes, other}} = this.props;
+        valid = changes.value && !changes.error;
+        
+        if ((valid == undefined || !valid)) {
+            clickNextButton = true;
+            this.forceUpdate();
+
+        } else {
+            this.saveFieldValues();
+            console.log("State 9");
+            this.props.nextStep(9);
+        }
+
     }
 
 
@@ -51,9 +61,11 @@ export class SpecialNeedsClass extends React.Component {
 
         if (medical.value) {
             med = med.replace(/[\n]/g, '. ');
-        } if (changes.value) {
+        }
+        if (changes.value) {
             cha = cha.replace(/[\n]/g, '. ');
-        } if (other.value) {
+        }
+        if (other.value) {
             oth = oth.replace(/[\n]/g, '. ');
         }
 
@@ -66,7 +78,7 @@ export class SpecialNeedsClass extends React.Component {
     }
 
     limitTextFields(e, field) {
-        var changes =(e.target.value);
+        var changes = (e.target.value);
         var limitLines = 5;
         var newLines = changes.split("\n").length;
         var limitLength = 300;
@@ -86,40 +98,56 @@ export class SpecialNeedsClass extends React.Component {
 
     render() {
         const {fields: {medical, changes, other}} = this.props;
-        var valid = changes.value;
-        const invalidChangesTooltip = <Popover id="invalidChangesPopover">{changes.error}</Popover>;
-        const invalidChangesProps = {
-            show: changes.touched && changes.error != undefined,
-            container: this,
-            target: () => ReactDOM.findDOMNode(this.refs.conditionChanges)
-        };
+        valid = changes.value && !changes.error;
+
+       
+
+        if (clickNextButton && (valid == undefined || !valid)) {
+            content =
+                <componentClass>
+                    <div className="alertClass_Fdfs">
+                        <Alert bsStyle="danger">
+                            Du må fylle inn korrekte verdier i markerte felt, før du kan gå videre.
+                        </Alert>
+                    </div>
+                </componentClass>;
+            clickNextButton = false;
+            alertMessage = true;
+        } else {
+            if (valid) {
+                content = null;
+                alertMessage = false;
+            }
+        }
 
         return (
             <div>
-                <label className="form-header">Utfyllende informasjon  </label>
+                <label className="form-header">Utfyllende informasjon </label>
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem? (maks 300 tegn) </label>
+                            <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem?
+                                (maks 300 tegn) </label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormGroup validationState={changes.touched && changes.error ? "error" : null}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea" id="mandatoryField"
-                                         ref="conditionChanges" {...changes} onChange={event => this.limitTextFields(event, changes)}/>
+                            <FormGroup validationState={changes.error && (changes.touched || alertMessage)  ? "error" : ""}>
+                                <FormControl componentClass="textarea" className="special-needs-textarea"
+                                             id="mandatoryField"
+                                             ref="conditionChanges" {...changes}
+                                             onChange={event => this.limitTextFields(event, changes)}/>
                                 <FormControl.Feedback />
-                                <Overlay id="invalidChangesOverlay" {...invalidChangesProps} placement="bottom">
-                                    { invalidChangesTooltip }
-                                </Overlay>
-                        </FormGroup>
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Er det noen medisinske behov vi burde vite om? (maks 300 tegn) </label>
+                            <label className="from-col-address"> Er det noen medisinske behov vi burde vite om? (maks
+                                300 tegn) </label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="medicalNeeds" {...medical} onChange={event => this.limitTextFields(event, medical)}/>
+                                <FormControl componentClass="textarea" className="special-needs-textarea"
+                                             ref="medicalNeeds" {...medical}
+                                             onChange={event => this.limitTextFields(event, medical)}/>
                         </Col>
                     </Row>
                     <Row className="form-row-special">
@@ -128,16 +156,18 @@ export class SpecialNeedsClass extends React.Component {
                                 hørselapparat e.l. (maks 300 tegn) </label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"
-                                         ref="otherNeeds" {...other} onChange={event => this.limitTextFields(event, other)}/>
+                                <FormControl componentClass="textarea" className="special-needs-textarea"
+                                             ref="otherNeeds" {...other}
+                                             onChange={event => this.limitTextFields(event, other)}/>
                         </Col>
                     </Row>
+                    {content}
                 </div>
 
                 <NavigationButtons
-                    disabled={!valid}
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
+                    buttonDisabled={!valid}
                 />
 
             </div>
@@ -146,8 +176,8 @@ export class SpecialNeedsClass extends React.Component {
 }
 SpecialNeedsClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired
+    nextStep: React.PropTypes.func.isRequired,
+    saveValues: React.PropTypes.func.isRequired
 };
 
 
