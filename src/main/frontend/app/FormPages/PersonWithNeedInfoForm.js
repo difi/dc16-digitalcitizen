@@ -28,7 +28,6 @@ export class PersonWithNeedInfoClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
-     
     }
     
     handleClickBack() {
@@ -78,7 +77,6 @@ export class PersonWithNeedInfoClass extends React.Component {
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
-        
 
         if (clickNextButton && (valid == undefined || !valid)) {
             content =
@@ -148,7 +146,6 @@ export class PersonWithNeedInfoClass extends React.Component {
                             </Col>
                         </Row>
                         {content}
-
                     </div>
 
                     <NavigationButtons
