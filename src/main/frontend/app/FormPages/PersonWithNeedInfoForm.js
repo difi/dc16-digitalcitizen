@@ -24,6 +24,7 @@ var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export var buttonDisabled;
 
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
@@ -34,6 +35,7 @@ export class PersonWithNeedInfoClass extends React.Component {
      
     }
 
+    
     handleClickBack() {
         console.log("State 3");
         this.saveFieldValues();
@@ -86,6 +88,8 @@ export class PersonWithNeedInfoClass extends React.Component {
         valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
         console.log("Name.error: " + valid);
 
+
+
         if (clickNextButton && (valid == undefined || !valid)) {
 
             content =
@@ -122,6 +126,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         placeholder="Navn"
 
                                         {...name}/>
+                                    <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -148,6 +153,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         placeholder="Telefonnr"
                                         {...number}
                                     />
+                                    <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -158,6 +164,8 @@ export class PersonWithNeedInfoClass extends React.Component {
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
+                        buttonDisabled={!valid}
+
                     />
 
                 </div>
