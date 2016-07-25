@@ -26,7 +26,6 @@ public class TestData {
     );
 
     public static final Collection<Person> PERSONS = Arrays.asList(
-            new Person("08023549930", "Ola Nordmann", new Address("Oslo", "NO", "Oslo", "Karl Johans Gate 1", "0555"), "99887766", "ola@nordmann.no", new Doctor("Henrik", "Oslo")),
             new Person("01108019146", "Eldar Eldarsen", new Address("Trondheim", "NO", "Trondheim", "testveien 1", "7030"), "99999990", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
             new Person("13019870019", "Melissa Melissasen", new Address("Trondheim", "NO", "Trondheim", "testveien 3", "7030"), "99999992", "test@test.org", new Doctor("Pelle", "Trondheim")),
@@ -34,7 +33,8 @@ public class TestData {
             new Person("29109632323", "Mildrid Mildridsen", new Address("Oslo", "NO", "Oslo", "testveien 5", "0001"), "99999994", "test@test.net", new Doctor("Trine", "Oslo")),
             new Person("06126620649", "Solfrid Solfridsen", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Ola", "Sogndal")),
             new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Vegard", "Sogndal")),
-            new Person("10115914931", "Line", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Nils", "Sogndal"))
+            new Person("10115914931", "Line", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Nils", "Sogndal")),
+            new Person("08023549930", "Vegard den tøffe gutten", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Nils", "Sogndal"))
     );
 
     public static final Collection<Guardian> GUARDIANS = Arrays.asList(
