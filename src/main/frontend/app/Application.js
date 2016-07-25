@@ -126,7 +126,7 @@ class Application extends React.Component {
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-
+                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -135,7 +135,7 @@ class Application extends React.Component {
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-
+                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}

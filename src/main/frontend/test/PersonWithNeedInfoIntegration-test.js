@@ -20,8 +20,9 @@ var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var Overlay = require('react-bootstrap/lib/Overlay');
-var Popover = require('react-bootstrap/lib/Popover');
+
+var Collapse = require('react-bootstrap/lib/Collapse');
+var Alert = require('react-bootstrap/lib/Alert');
 
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
@@ -77,41 +78,52 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         subject = mount(<PersonWithNeedInfo {...props}/>);
     });
 
-    it("Shows error message when field contains wrong input", () => {
+    it("Do not show error message before next-button is pused", () => {
         //expect wrapper to exist
         expect(subject).to.have.length(1);
 
-        const input = subject.find('.tlfFrom');
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
-        // We change the value to a new incorrect value and expect an errormessage
-        input.simulate('change', {target: {value: "123 45"}});
-
-        const errorMessage = subject.find('Popover');
+        const errorMessage = subject.find('.alertClass_Fdfs');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
+        expect(errorMessage).to.have.length.of(0);
         //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
     });
 
-    it("Do not show error message when field contains wrong input", () => {
+    it("Do not show error message when all fields contains correct input", () => {
         expect(subject).to.have.length(1);
 
-        const input = subject.find('.tlfFrom');
+        const nameField = subject.find('.nameField');
+        expect(nameField).to.have.length(1);
+        // We change the value to a correct value and expect no errormessage
+        nameField.simulate('change', {target: {value: "name"}});
 
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
-        // We change the value to a new incorrect value and expect an errormessage
-        input.simulate('change', {target: {value: "123 45"}});
+        const adrField = subject.find('.adressField');
+        expect(adrField).to.have.length(1);
+        adrField.simulate('change', {target: {value: "adr"}});
 
-        const errorMessage = subject.find('Popover');
+        const zipcode = subject.find('.zipcode');
+        expect(zipcode).to.have.length(1);
+        zipcode.simulate('change', {target: {value: "6055"}});
+
+        const tlfFrom = subject.find('.tlfFrom');
+        expect(tlfFrom).to.have.length(1);
+        tlfFrom.simulate('change', {target: {value: "152 34 564"}});
+
+        const errorMessage = subject.find('.alertClass_Fdfs');
         expect(errorMessage).to.have.length.of(0);
+    });
+
+    it("Shows error message when fields contain no input and next-button is pressed", () => {
+        //expect wrapper to exist
+        expect(subject).to.have.length(1);
+
+        const nextButton = subject.find('.next-btn');
+        expect (nextButton).to.have.length.of(1);
+
+        nextButton.simulate('click');
+
+        const errorMessage = subject.find('.alertClass_Fdfs');
+        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
+        expect(errorMessage).to.have.length.of(1);
     });
 
 });
