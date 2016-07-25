@@ -140,9 +140,9 @@ export class ApplicationClass extends React.Component {
             // Sixth form
             lengthOfStay: need.value,         // String
             // Seventh form
-            medicalNeeds: medical.value,         // String
-            conditionChanges: changes.value,     // String
-            otherNeeds: other.value,            // String
+            medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
+            conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
+            otherNeeds: other.value.replace(/[\n]/g, '. '),            // String
             nursingHome: {
                 municipality: municipalityApp.value,
                 name: homeApp.value
