@@ -1,16 +1,24 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.js';
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Button = require('react-bootstrap/lib/Button');
 import {reduxForm} from 'redux-form';
+import $ from 'jquery'
+
+import RESTpaths from '../static_data/RESTpaths.js';
+import NavigationButtons from './Components/NavigationButtons.js';
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 import DropdownList from './Components/DropdownList.js';
 import dropdownContent from '../static_data/dropdown-list-content.js';
-import $ from 'jquery'
-import RESTpaths from '../static_data/RESTpaths.js';
+
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Button = require('react-bootstrap/lib/Button');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
+var Alert = require('react-bootstrap/lib/Alert');
 
 var inputChangeRun = 0;
+var valid = null;
+var content = null;
+var clickNextButton = false;
+export var alertMessage = false;
 
 export class LocationPageClass extends React.Component {
     constructor(props) {
@@ -43,10 +51,19 @@ export class LocationPageClass extends React.Component {
 
     //Handle the click on the next-button
     handleClickNext() {
-        //Submit here?
-        console.log("State 10");
-        //The next step is step 7 - SpecialNeeds
-        this.props.nextStep(10);
+        const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
+        var valid = this.validateMun(municipalityApp.value);
+
+        if ((valid == undefined || !valid)) {
+            clickNextButton = true;
+            this.forceUpdate();
+
+        } else {
+            //Submit here?
+            console.log("State 10");
+            //The next step is step 7 - SpecialNeeds
+            this.props.nextStep(10);
+        }
     }
 
     municipalityChange(value) {
@@ -97,12 +114,36 @@ export class LocationPageClass extends React.Component {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid = this.validateMun(municipalityApp.value);
         var homes = null;
+
+        if (clickNextButton && (valid == undefined || !valid)) {
+
+            var errorMessage = document.getElementById('home').innerHTML;
+            console.log(errorMessage);
+
+            content =
+                <componentClass>
+                    <div className="alertClass_Fdfs">
+                        <Alert bsStyle="danger">
+                            Vennligst fyll inn {errorMessage}, før du kan gå videre.
+                        </Alert>
+                    </div>
+                </componentClass>;
+            clickNextButton = false;
+            alertMessage = true;
+        } else {
+            if (valid) {
+                content = null;
+                alertMessage = false;
+            }
+        }
+
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
                     <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
+                    <FormGroup validationState={(homeApp.touched || alertMessage) ? "error" : ""}>
                     <DropdownList
                         id='homes'
                         options={homeOptions.value}
@@ -110,6 +151,7 @@ export class LocationPageClass extends React.Component {
                         valueField='name'
                         {...homeApp}
                         onChange={change=>homeApp.onChange(change.newValue)}/>
+                    </FormGroup>
                 </Col>
             </Row>;
         }
@@ -123,6 +165,7 @@ export class LocationPageClass extends React.Component {
                                 <label className="municipality">I hvilken kommune ønskes plassen? </label>
                             </Col>
                             <Col sm={6} md={6}>
+                                <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
                                 <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                            ref="munSelect"
                                            className="municipTypeAhead"
@@ -130,13 +173,15 @@ export class LocationPageClass extends React.Component {
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
                                            onInputChange={this.onInputChangeHandler}
                                            onChange={this.onChangeHandler}/>
+                                    </FormGroup>
                             </Col>
                         </Row>
                         {homes}
                     </form>
+                    {content}
                 </div>
                 <NavigationButtons
-                    disabled={!valid}
+                    buttonDisabled={!valid}
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}

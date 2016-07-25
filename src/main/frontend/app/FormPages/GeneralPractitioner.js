@@ -47,7 +47,7 @@ export class GeneralPractitionerClass extends React.Component {
             console.log("State 6");
             this.props.nextStep(6);
         }
-        }
+    }
 
 
 
@@ -72,11 +72,14 @@ export class GeneralPractitionerClass extends React.Component {
         valid = doctorName.value;
 
         if (clickNextButton && (valid == undefined || !valid)) {
+
+            var errorMessage = document.getElementById('genPract').innerHTML;
+
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll in fastlege, før du kan gå videre.
+                            Vennligst fyll inn {errorMessage}, før du kan gå videre.
                         </Alert>
                     </div>
                 </componentClass>;

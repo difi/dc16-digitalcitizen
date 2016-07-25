@@ -1,6 +1,5 @@
-/**
- * Created by camp-cha on 24.06.2016.
- */
+/* Created by camp-cha on 24.06.2016. */
+
 import React from 'react';
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
@@ -37,8 +36,6 @@ export class PersonWithNeedClass extends React.Component {
 
 
     handleClickBack() {
-        this.saveFieldValues();
-
         console.log("State 2");
         (this.props.previousStep(2));
     }

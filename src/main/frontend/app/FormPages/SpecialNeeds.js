@@ -93,7 +93,6 @@ export class SpecialNeedsClass extends React.Component {
         if (clickNextButton && (valid == undefined || !valid)) {
 
             var errorMessage = document.getElementById('changesLabel').innerHTML;
-            console.log(errorMessage);
 
             content =
                 <componentClass>
