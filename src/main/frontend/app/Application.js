@@ -42,7 +42,7 @@ export class ApplicationClass extends React.Component {
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
-        this.saveValues = this.saveValues.bind(this);
+    
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
         this.saveDependents = this.saveDependents.bind(this);

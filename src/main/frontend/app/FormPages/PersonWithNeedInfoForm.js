@@ -31,7 +31,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+      
      
     }
 

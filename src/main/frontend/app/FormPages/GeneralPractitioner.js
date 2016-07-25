@@ -17,7 +17,7 @@ export class GeneralPractitionerClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+    
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
         this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
     }

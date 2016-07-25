@@ -55,7 +55,6 @@ export class AddDependentClass extends React.Component {
         this.handleClickForm3 = this.handleClickForm3.bind(this);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
         props.fields.numDep.onChange(1);

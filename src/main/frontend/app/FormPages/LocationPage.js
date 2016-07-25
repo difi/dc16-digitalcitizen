@@ -20,7 +20,7 @@ export class LocationPageClass extends React.Component {
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
         this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+  
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fields.municipality.value);
 
