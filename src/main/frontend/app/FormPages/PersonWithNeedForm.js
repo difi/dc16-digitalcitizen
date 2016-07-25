@@ -25,8 +25,6 @@ var Alert = require('react-bootstrap/lib/Alert');
 var checked = false;
 
 
-export const fields = ["pnr", "name", "checked"];
-
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
 
 
@@ -109,6 +107,8 @@ export class PersonWithNeedClass extends React.Component {
                         telephone: data.telephone
                     }
                 };
+                this.props.fields.municipality.onChange(data.address.municipality);
+
                 this.props.saveValues(personP);
             }.bind(this),
             error: function (xhr, status, err) {
@@ -317,7 +317,7 @@ const asyncValidate = (values) => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
-    fields,
+    fields: ["pnr", "name", "checked", "municipality"],
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,

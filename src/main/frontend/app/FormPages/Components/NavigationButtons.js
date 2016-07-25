@@ -31,6 +31,9 @@ export default class NavigationButtons extends React.Component {
     handleSubmitClick() {
 
         var fieldValues = this.props.saveFieldValues();
+        var field2 = this.props.newFieldValues();
+        console.log("Logging new fieldValues");
+        console.log(field2);
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,
@@ -39,7 +42,7 @@ export default class NavigationButtons extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(fieldValues),
+            data: JSON.stringify(field2),
             dataType: 'text',
             success: function (data) {
                 console.log(data);

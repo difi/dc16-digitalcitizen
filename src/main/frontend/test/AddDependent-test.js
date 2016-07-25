@@ -64,7 +64,8 @@ describe("AddDependentClass", function() {
                 dependent: {
                     value: false
                 },
-                numDep: {value: 1},
+                numDep: {value: 1,
+                onChange: function onChange(){} } ,
                 displayButton: {value: 'block'}
                 //block: the button is visible, none: the button is hidden
             },

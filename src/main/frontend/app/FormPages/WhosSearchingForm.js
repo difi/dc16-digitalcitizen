@@ -10,8 +10,8 @@ var Button = require('react-bootstrap/lib/Button');
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
-
-export default class WhosSearching extends React.Component {
+import {reduxForm} from 'redux-form';
+export class WhosSearchingClass extends React.Component {
 
     constructor() {
         super();
@@ -44,6 +44,7 @@ export default class WhosSearching extends React.Component {
                             }
                         }
                     }
+                    
                 this.props.saveValues(dataVal);
                 }.bind(this),
                 error: function (xhr, status, err) {
@@ -68,11 +69,13 @@ export default class WhosSearching extends React.Component {
     
     handleClickMe() {
         console.log("State 6");
+        this.props.fields.applyingForSelf.onChange(true);
         this.nextStep(true, 6)
     }
 
     handleClickOther() {
         console.log("State 2");
+        this.props.fields.applyingForSelf.onChange(false);
         this.nextStep(false, 2);
     }
 
@@ -99,8 +102,15 @@ export default class WhosSearching extends React.Component {
     }
 };
 
-WhosSearching.propTypes = {
+WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
     saveValues:  React.PropTypes.func.isRequired,
 };
 
+const WhosSearching = reduxForm({
+    form: 'application',
+    fields: ['municipality', 'applyingForSelf'],
+        destroyOnUnmount: false,
+})(WhosSearchingClass)
+
+export default WhosSearching

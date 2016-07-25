@@ -96,14 +96,8 @@ export class RelationFormClass extends React.Component {
         if (relation.value == "guardian") {
             var pnr = nameOfChild.value.split(":")[0];
             this.props.fields.dependent.onChange(true);
-            var dataDep = {
+            this.props.fields.pnr.onChange(pnr);
 
-                relation: relation.value,
-                dependent: true,
-                applyingForSelf: false,
-            };
-
-            this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
                 dataType: 'text',
@@ -117,9 +111,10 @@ export class RelationFormClass extends React.Component {
                                 municipality: data,
                                 country: "NO"
                             }
-                        }
+                        }};
+                        this.props.fields.municipality.onChange(data);
 
-                    };
+                    
                     this.props.saveValues(dataVal);
                 }.bind(this),
                 error: function (xhr, status, err) {
@@ -271,7 +266,7 @@ RelationFormClass.propTypes = {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor"],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr'],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 
