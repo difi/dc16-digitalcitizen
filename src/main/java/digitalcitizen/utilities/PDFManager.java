@@ -89,7 +89,7 @@ public class PDFManager {
                     break;
                 // DEPENDENT 1
                 case "dep1_name":
-                    value = submission.getDependents().get(0).getFirstName() + " " + submission.getDependents().get(0).getLastName();
+                    value = submission.getDependents().get(0).getName();
                     field.setValue(value);
                     break;
                 case "dep1_telephone":
@@ -107,7 +107,7 @@ public class PDFManager {
                 // DEPENDENT 2
                 case "dep2_name":
                     if (submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getFirstName() + " " + submission.getDependents().get(1).getLastName();
+                        value = submission.getDependents().get(1).getName();
                         field.setValue(value);
                     }
                     break;
@@ -132,7 +132,7 @@ public class PDFManager {
                 // DEPENDENT 3
                 case "dep3_name":
                     if (submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getFirstName() + " " + submission.getDependents().get(2).getLastName();
+                        value = submission.getDependents().get(2).getName();
                         field.setValue(value);
                     }
                     break;

@@ -18,7 +18,7 @@ var Overlay = require('react-bootstrap/lib/Overlay');
 var Popover = require('react-bootstrap/lib/Popover');
 var ReactDOM = require('react-dom');
 
-export const fields = ["firstName", "lastName", "phone", "mail", "relation", "depOtherRelation"];
+export const fields = ["name", "phone", "mail", "relation", "depOtherRelation"];
 
 class DependentForm extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class DependentForm extends React.Component {
                 <span aria-hidden="true">&times;</span>
             </Button> : '';
 
-        const {firstName, lastName, phone, mail, relation, depOtherRelation}= this.props;
+        const {name, phone, mail, relation, depOtherRelation}= this.props;
         
         return (
             <div>
@@ -44,20 +44,11 @@ class DependentForm extends React.Component {
                 <h4>Pårørende</h4>
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label className="fName">Fornavn</label>
+                            <label>Navn</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <FormControl className="fName" ref="firstName" type="text" placeholder="Fornavn"
-                                         disabled={this.props.autoFilled} {...firstName}/>
-                        </Col>
-                    </Row>
-                    <Row className="form-row">
-                        <Col sm={4} md={4}>
-                            <label className="eName">Etternavn</label>
-                        </Col>
-                        <Col sm={8} md={8}>
-                            <FormControl className="eName" ref="lastName" type="text" placeholder="Etternavn"
-                                         disabled={this.props.autoFilled} {...lastName}/>
+                            <FormControl className="name" ref="name" type="text" placeholder="Navn"
+                                         disabled={this.props.autoFilled} {...name}/>
                         </Col>
                     </Row>
                     <Row className="formgroup-row">
@@ -122,8 +113,7 @@ class DependentForm extends React.Component {
 DependentForm.propTypes = {
     showDeleteButton: React.PropTypes.bool.isRequired,
     autoFilled: React.PropTypes.bool,
-    firstName: React.PropTypes.object.isRequired,
-    lastName: React.PropTypes.object.isRequired,
+    name: React.PropTypes.object.isRequired,
     phone: React.PropTypes.object.isRequired,
     mail: React.PropTypes.object.isRequired,
     relation: React.PropTypes.object.isRequired,
