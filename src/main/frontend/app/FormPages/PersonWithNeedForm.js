@@ -4,7 +4,7 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
-import $ from 'jquery'
+import $ from 'jquery';
 
 import RESTpaths from '../static_data/RESTpaths.js';
 import NavigationButtons from './Components/NavigationButtons.js';
@@ -30,10 +30,6 @@ var pnrContent = null;
 
 var checked = false;
 
-
-import {checkPersonalnumberNo} from'./Utilities/validation.js';
-
-
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
         super(props);
@@ -44,8 +40,6 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickBack() {
-        this.saveFieldValues();
-
         console.log("State 2");
         (this.props.previousStep(2));
     }
@@ -73,13 +67,11 @@ export class PersonWithNeedClass extends React.Component {
 
             }
         }
-
-
+    }
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
 
-        var personP = {};
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
