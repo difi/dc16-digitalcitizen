@@ -30,8 +30,6 @@ export default class NavigationButtons extends React.Component {
     }
 
     handleSubmitClick() {
-
-        var fieldValues = this.props.saveFieldValues();
         var field2 = this.props.newFieldValues();
         console.log("Logging new fieldValues");
         console.log(field2);

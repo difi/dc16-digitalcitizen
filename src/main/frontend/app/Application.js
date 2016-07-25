@@ -42,7 +42,7 @@ export class ApplicationClass extends React.Component {
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
-    
+
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
         this.saveDependents = this.saveDependents.bind(this);
@@ -289,7 +289,7 @@ export class ApplicationClass extends React.Component {
                 content =
                     < SubmitSuccess
                         store={this.props.store}
-                        fieldValues={fieldValues}
+                        name={this.props.fields.name.value}
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}

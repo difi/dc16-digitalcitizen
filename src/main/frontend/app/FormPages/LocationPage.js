@@ -141,8 +141,7 @@ export class LocationPageClass extends React.Component {
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
                     saveUserData={this.props.saveUserData}
-                    newFieldValues = {this.props.newFieldValues}
-                    saveFieldValues={this.saveFieldValues}/>
+                    newFieldValues = {this.props.newFieldValues}/>
             </componentClass>
         )
     }

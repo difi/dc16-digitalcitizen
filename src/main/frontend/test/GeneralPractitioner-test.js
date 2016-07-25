@@ -61,6 +61,9 @@ describe("GeneralPractitionerClass", function() {
             fields: {
                 doctorName: "sd",
                 doctors: {value: [{name: "Berit"}], onChange: function onChange () {}}
+                municipality: {
+                    value: "Oslo"
+                }
             },
             fieldValues
         };

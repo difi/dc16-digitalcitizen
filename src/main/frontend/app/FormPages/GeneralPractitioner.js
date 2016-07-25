@@ -19,7 +19,7 @@ export class GeneralPractitionerClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
     
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
-        this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
+        this.getPractitionersByMunicipality(this.props.fields.municipality.value);
     }
 
     handleClickBack() {
@@ -88,7 +88,7 @@ GeneralPractitionerClass.propTypes = {
 
 const GeneralPractitioner = reduxForm({
     form: 'application',
-    fields: ["doctorName", "doctors"],
+    fields: ["doctorName", "doctors", "municipality"],
     destroyOnUnmount: false
 })(GeneralPractitionerClass);
 
