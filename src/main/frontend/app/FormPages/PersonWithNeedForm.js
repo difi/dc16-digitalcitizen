@@ -179,13 +179,11 @@ export class PersonWithNeedClass extends React.Component {
                                 </Col>
                             </Row>
                         </div>
-
                         <NavigationButtons
                             handleClickBack={this.handleClickBack}
                             handleClickNext={this.handleClickNext}
                             disabled={!valid}
                         />
-
                     </componentClass>
                 </form>
             )
@@ -382,12 +380,12 @@ function pnoName(pno, name) {
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
-    form: 'application',
-    fields,
+    form: 'application',    //name of the form and the key to where the form's state will be mounted
+    fields,                 //a list of the the fields in the form
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,
-    validate
+    validate                //a synchronous validation function
 })(PersonWithNeedClass);
 
 export default PersonWithNeed

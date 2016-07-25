@@ -309,14 +309,13 @@ export class AddDependentClass extends React.Component {
         );
     }
 }
-;
 
 AddDependentClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired
-}
+};
 
 
 const AddDependent = reduxForm({
@@ -326,6 +325,5 @@ const AddDependent = reduxForm({
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
-
 
 export default AddDependent

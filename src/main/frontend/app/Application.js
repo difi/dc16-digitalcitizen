@@ -5,6 +5,8 @@ import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
+import {reduxForm} from 'redux-form';
+
 var assign = require('object-assign');
 import WhosSearching from './FormPages/WhosSearchingForm.js';
 
@@ -25,11 +27,57 @@ import NeedsForm from'./FormPages/NeedsForm';
 import AddDependent from './FormPages/AddDependent';
 import SubmitSuccess from './FormPages/SubmitPage';
 
+const fields=[
+        "pnr",
+        "name",
+        "checked" ,
+        "number",
+        "street",
+        "zipcode",
+        "postal",
+        "municipality",
+        'form1.firstName',
+        'form1.lastName',
+        'form1.mail',
+        'form1.phone',
+        'form1.relation',
+        'form2.show',
+        'form2.firstName',
+        'form2.lastName',
+        'form2.mail',
+        'form2.phone',
+        'form2.relation',
+        'form3.show',
+        'form3.firstName',
+        'form3.lastName',
+        'form3.mail',
+        'form3.phone',
+        'form3.relation',
+        'displayButton',
+        'form1.depOtherRelation',
+        'form2.depOtherRelation',
+        'form3.depOtherRelation',
+        'numDep',
+        "relation",
+        "typeOfRelation",
+        "nameOfChild",
+        "dependent",
+        "otherRelation",
+        "guardianFor",
+        "need",
+        "medical",
+        "changes",
+        "other",
+        "municipalityApp",
+        "homeApp"
+];
+
+
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 
 class Application extends React.Component {
-
+// add test values somewhere in here
     constructor(props) {
         super(props);
 
@@ -233,4 +281,12 @@ Application.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
 
-export default Application
+const ApplicationAutofill = reduxForm({
+ form: 'application',
+    fields: fields,
+    //initialValues: ,
+    destroyOnUnmount: false,
+ })(Application);
+
+
+export default ApplicationAutofill

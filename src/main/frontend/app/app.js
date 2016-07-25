@@ -65,6 +65,45 @@ var fieldValues = {
     }
 };
 
+var fieldValuesTest = {
+    // First form
+    applyingForSelf: null,    // Boolean
+    // Second form
+    relation: 'barn',             // String
+    guardianName: 'gunnar',          //String
+    typeOfRelation: 'venn',        //String
+    dependent: true,          // Boolean
+    dontGotPNRnumber: false,        //Boolean
+    // Third form
+    person: {                   // Person object
+        pnr: '04119149261',              // String
+        name: 'ole',                 // String
+        address: {                  // Address Object
+            country: "NO",              // String
+            municipality: 'trondheim',
+            streetAddress: 'testveien 123',        // String
+            zipcode: '7030',              // String
+            postal: null                // String
+        },
+        telephone: '81549300',             // String
+        doctor: {                   // Doctor Object (add more fields?)
+            name: 'dr. love'                  // String
+        }
+    },
+    // Fifth form
+    dependents: ['bertil', 'testveien 120', '12345678'],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+    // Sixth form
+    lengthOfStay: 'long',         // String
+    // Seventh form
+    medicalNeeds: 'nei',         // String
+    conditionChanges: 'nei',     // String
+    otherNeeds: 'nei',            // String
+    nursingHome: {
+        municipality: 'trondheim',
+        name: 'trondheim sykehjem'
+    }
+};
+
 if ($('#content').length <= 0) {
     $('body').prepend('<div id="content"></div>');
 }
