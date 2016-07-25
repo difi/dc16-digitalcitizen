@@ -1,6 +1,8 @@
-import Application from '../app/Application.js';
-import React from 'react'
 
+
+import {ApplicationClass} from '../app/Application.js';
+import Application from'../app/Application.js'
+import React from 'react';
 // See README for discussion of chai, enzyme, and sinon
 import {expect} from 'chai';
 import {mount} from 'enzyme';
@@ -90,7 +92,7 @@ describe("ApplicationIntegration", () => {
             fieldValues,
             userData
         };
-        subject = mount(<Application {...props}/>);
+        subject = mount(<ApplicationClass {...props}/>);
     });
     it("First page forwards you to correct step", () => {
         expect(subject).to.have.length(1);
@@ -276,7 +278,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+                applyingForSelf: {
+                    value: true
+                },
+                relation: {
+                    value: ""
+                },
+                checked: {
+                    value: false
+                }
+            }
         };
         const subject = mount(<Application {...props}/>);
 
@@ -297,7 +310,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+            applyingForSelf: {
+                value: false
+            },
+            relation: {
+                value: "guardian"
+            },
+            checked: {
+                value: false
+            }
+        }
         };
         const subject = mount(<Application {...props}/>);
 
@@ -318,7 +342,18 @@ describe("ApplicationIntegration", () => {
         const props = {
             store,
             fieldValues,
-            userData
+            userData,
+            fields: {
+            applyingForSelf: {
+                value: false
+            },
+                relation: {
+                value: "other"
+            },
+                checked: {
+                value: true
+            }
+        }
         };
         const subject = mount(<Application {...props}/>);
 

@@ -23,7 +23,7 @@ export class SubmitSuccessClass extends React.Component {
     getValues() {
         var data = {
             person: {
-                name: this.props.fieldValues.person.name
+                name: this.props.name
             }
         };
         console.log(data);
@@ -35,14 +35,14 @@ export class SubmitSuccessClass extends React.Component {
 
 
     render() {
-        if (!this.props.fieldValues.nameOfChild) {
+
             return (
                 <div>
                     <label className="form-header">Du har nå søkt på sykehjemsplass for</label>
                     <div className="form-container">
                         <Row>
                             <Col className="submit-name">
-                                <label className="submittedName">{this.props.fieldValues.person.name}</label>
+                                <label className="submittedName">{this.props.name}</label>
                             </Col>
                         </Row>
                     </div>
@@ -63,7 +63,7 @@ export class SubmitSuccessClass extends React.Component {
                     </Row>
                 </div>
             )
-        } /*else {
+         /*else {
             return (
                 <div>
                     <label className="form-header">Du har nå søkt på sykehjemsplass for (VERGE?):</label>

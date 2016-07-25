@@ -25,8 +25,6 @@ var Alert = require('react-bootstrap/lib/Alert');
 var checked = false;
 
 
-export const fields = ["pnr", "name", "checked"];
-
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
 
 
@@ -36,7 +34,7 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+  
     }
 
 
@@ -49,11 +47,9 @@ export class PersonWithNeedClass extends React.Component {
 
     handleClickNext() {
         //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values. 
-        if (this.props.fields.checked.value) {
-            this.saveFieldValues();
-        } else {
-            this.savePerson();
-        }
+        if (!this.props.fields.checked.value) {
+            this.savePerson()
+        } 
 
 
         if (this.props.fields.checked.value) {
@@ -66,23 +62,6 @@ export class PersonWithNeedClass extends React.Component {
         }
     }
 
-    saveFieldValues() {
-
-        var pnr = this.props.fields.pnr.value;
-        if (this.props.fields.checked.value) {
-            pnr = null;
-        }
-        var data = {
-            dontGotPNRnumber: this.props.fields.checked.value,
-            person: {
-                pnr: pnr,
-                name: this.props.fields.name.value,
-                address: this.props.fieldValues.person.address,
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
 
 
     savePerson() {
@@ -94,22 +73,9 @@ export class PersonWithNeedClass extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                personP = {
-                    dontGotPNRnumber: this.props.fields.checked.value,
-                    person: {
-                        pnr: pnr,
-                        name: this.props.fields.name.value,
-                        address: {
-                            country: data.address.country,
-                            municipality: data.address.municipality,
-                            streetAddress: data.address.street,
-                            zipcode: data.address.zipcode,
-                            postal: data.address.postal
-                        },
-                        telephone: data.telephone
-                    }
-                };
-                this.props.saveValues(personP);
+                this.props.fields.municipality.onChange(data.address.municipality);
+
+
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -273,7 +239,6 @@ PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 //Validation for form
@@ -317,7 +282,7 @@ const asyncValidate = (values) => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
-    fields,
+    fields: ["pnr", "name", "checked", "municipality"],
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,
