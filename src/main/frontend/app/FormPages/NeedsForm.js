@@ -59,7 +59,6 @@ export class NeedsFormClass extends React.Component {
 NeedsFormClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 const NeedsForm = reduxForm({

@@ -78,7 +78,6 @@ export class WhosSearchingClass extends React.Component {
 
 WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 const WhosSearching = reduxForm({

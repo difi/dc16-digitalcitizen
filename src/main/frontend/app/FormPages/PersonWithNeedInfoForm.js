@@ -156,7 +156,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 

@@ -239,7 +239,6 @@ PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 //Validation for form

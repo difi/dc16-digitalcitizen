@@ -234,7 +234,6 @@ export class RelationFormClass extends React.Component {
 RelationFormClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 //Sets up reduxForm - needs fields and validation functions
