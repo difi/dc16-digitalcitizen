@@ -1,7 +1,8 @@
-const isEmpty = value => value === undefined || value === null || value === '' || value ===" ";
+const isEmpty = value => value === undefined || value === null || value === '' || value == value.match(/[^\s]/g);
 
 export function fieldIsEmpty(value) {
     if (isEmpty(value)) {
+        console.log("Val: " + value);
         return true;
     }
     return false;

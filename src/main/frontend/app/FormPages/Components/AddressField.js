@@ -6,7 +6,6 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
-var ReactDOM = require('react-dom');
 import RESTpaths from '../../static_data/RESTpaths.js';
 import {checkPostCode} from '../Utilities/validation.js';
 import {onlyDigitsInString} from '../Utilities/validation.js'
@@ -21,7 +20,7 @@ var AddressField = React.createClass({
         includeCountry: React.PropTypes.bool,
         address: React.PropTypes.object
     },
-
+/*
     getDefaultProps: function () {
         return {includeCountry: true};
     },
@@ -29,7 +28,7 @@ var AddressField = React.createClass({
     getInitialState: function () {
         return {country: this.props.address.country};
     },
-
+*/
     /**Makes a call to the GeoNames API with the postal code given by the user
      * in order to retrieve the corresponding postal
      *
@@ -55,7 +54,7 @@ var AddressField = React.createClass({
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
             $.ajax({
-                url: RESTpaths.PATHS.GEONAMES_BASE + 'postalcode=' + zipcode + '&country=' + this.state.country + '&username=Sondrehj',
+                url: RESTpaths.PATHS.GEONAMES_BASE + 'postalcode=' + zipcode + '&country=' + "NO" + '&username=Sondrehj',
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
@@ -91,25 +90,6 @@ var AddressField = React.createClass({
         this.setState({value: ''});
         this.setState({municipality: ''});
         this.setState({street: ''})
-    },
-
-
-    getFieldValues(){
-
-        var country;
-        if (this.props.includeCountry) {
-            country = ReactDOM.findDOMNode(this.refs.country).getDropdownValue();
-        }
-        else {
-            country = "NO";
-        }
-        return {
-            country: country,
-            municipality: this.state.municipality,
-            streetAddress: ReactDOM.findDOMNode(this.refs.streetAddress).value,
-            zipcode: ReactDOM.findDOMNode(this.refs.zipcode).value,
-            postal: ReactDOM.findDOMNode(this.refs.postal).value
-        }
     },
 
     render: function () {
@@ -170,6 +150,7 @@ var AddressField = React.createClass({
                                     className='adressField'
                                     ref="streetAddress"
                                     {...street}/>
+                                <FormControl.Feedback />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -184,6 +165,7 @@ var AddressField = React.createClass({
                                     {...zipcode}
                                     onChange={this.changeHandler(zipcode)}
                                 />
+                                <FormControl.Feedback />
                             </FormGroup>
 
                         </Col>

@@ -9,13 +9,6 @@ export class NeedsFormClass extends React.Component {
     constructor(props) {
         super(props);
 
-
-        //None of the radio-buttons are chosen
-        this.state = {
-            value: this.props.fieldValues.lengthOfStay,
-            validForm: this.props.fieldValues.lengthOfStay
-        };
-
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
@@ -72,7 +65,6 @@ export class NeedsFormClass extends React.Component {
     }
 }
 NeedsFormClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
     saveValues:  React.PropTypes.func.isRequired,

@@ -133,7 +133,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                     </Row>
                 </div>
-                
+
                 <NavigationButtons
                     disabled={!valid}
                     handleClickBack={this.handleClickBack}
@@ -145,7 +145,6 @@ export class SpecialNeedsClass extends React.Component {
     }
 }
 SpecialNeedsClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
     saveValues:  React.PropTypes.func.isRequired
