@@ -150,6 +150,7 @@ var AddressField = React.createClass({
                                     className='adressField'
                                     ref="streetAddress"
                                     {...street}/>
+                                <FormControl.Feedback />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -164,6 +165,7 @@ var AddressField = React.createClass({
                                     {...zipcode}
                                     onChange={this.changeHandler(zipcode)}
                                 />
+                                <FormControl.Feedback />
                             </FormGroup>
 
                         </Col>
