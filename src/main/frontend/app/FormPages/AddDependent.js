@@ -13,6 +13,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
 import RESTpaths from '../static_data/RESTpaths.js';
+
 const fields = [
 
     'form1.firstName',

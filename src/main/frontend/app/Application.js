@@ -1,6 +1,7 @@
 "use strict";
 
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
+
 import $ from 'jquery';
 import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
@@ -27,7 +28,8 @@ import NeedsForm from'./FormPages/NeedsForm';
 import AddDependent from './FormPages/AddDependent';
 import SubmitSuccess from './FormPages/SubmitPage';
 
-const fields=[
+
+export const fields=[
         "pnr",
         "name",
         "checked" ,
@@ -72,6 +74,52 @@ const fields=[
         "homeApp"
 ];
 
+/*
+const data = {
+    "pnr":"04119149261",
+    "name":"Kari",
+    "checked":true,
+    "number":"81549300",
+    "street":"Kjuttavika 1",
+    "zipcode":"7030",
+    "postal",
+    "municipality":"Trondheim",
+    'form1.firstName',
+    'form1.lastName',
+    'form1.mail',
+    'form1.phone',
+    'form1.relation',
+    'form2.show',
+    'form2.firstName',
+    'form2.lastName',
+    'form2.mail',
+    'form2.phone',
+    'form2.relation',
+    'form3.show',
+    'form3.firstName',
+    'form3.lastName',
+    'form3.mail',
+    'form3.phone',
+    'form3.relation',
+    'displayButton',
+    'form1.depOtherRelation',
+    'form2.depOtherRelation',
+    'form3.depOtherRelation',
+    'numDep',
+    "relation",
+    "typeOfRelation",
+    "nameOfChild",
+    "dependent",
+    "otherRelation",
+    "guardianFor",
+    "need",
+    "medical",
+    "changes",
+    "other",
+    "municipalityApp",
+    "homeApp"
+};
+*/
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
@@ -91,6 +139,7 @@ class Application extends React.Component {
         this.saveValues = this.saveValues.bind(this);
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
+        this.props.fields.name.onChange("test");
 
     }
 
@@ -276,10 +325,27 @@ class Application extends React.Component {
     }
 }
 
+/*
 Application.propTypes = {
+    fields: PropTypes.object.isRequired,
     fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
 };
+
+export default reduxForm({
+    form:'application',
+    fields
+},
+    state => ({initialValues: state.app.data
+    }),
+    {load:}
+)(Application)
+*/
+
+ Application.propTypes = {
+ fieldValues: React.PropTypes.object.isRequired,
+ userData: React.PropTypes.object.isRequired
+ };
 
 const ApplicationAutofill = reduxForm({
  form: 'application',
@@ -288,5 +354,7 @@ const ApplicationAutofill = reduxForm({
     destroyOnUnmount: false,
  })(Application);
 
+
+//export default ApplicationAutofill
 
 export default ApplicationAutofill

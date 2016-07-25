@@ -26,6 +26,16 @@ var user = {
     submissionId: null
 };
 
+const reducer = (state = {}, action) => {
+    switch(action.type){
+        case LOAD:
+            return{
+            data: action.data
+        }
+        default: return state
+    }
+}
+
 var fieldValues = {
     // First form
     applyingForSelf: null,    // Boolean
@@ -109,6 +119,6 @@ if ($('#content').length <= 0) {
 }
 
 ReactDOM.render(<Provider store={store}>
-    <Application fieldValues={fieldValues}
+    <Application fieldValues={fieldValuesTest}
                  userData={user}/>
 </Provider>, document.getElementById('content'));

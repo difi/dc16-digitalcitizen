@@ -24,7 +24,9 @@ var checked = false;
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
-export const fields = ["pnr", "name", "checked"];
+//export const fields = ["pnr", "name", "checked"];
+
+export const fields = {"pnr":"04119149261", "name":"kari", "checked":true};
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
 import {validatePnoName} from './Utilities/validation.js';
