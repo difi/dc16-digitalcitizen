@@ -26,50 +26,10 @@ var user = {
     submissionId: null
 };
 
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    dontGotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: user.pnr,              // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            municipality: null,
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null,             // String
-        doctor: {                   // Doctor Object (add more fields?)
-            name: null                  // String
-        }
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null,            // String
-    nursingHome: {
-        municipality: null,
-        name: null
-    }
-};
-
 if ($('#content').length <= 0) {
     $('body').prepend('<div id="content"></div>');
 }
 
 ReactDOM.render(<Provider store={store}>
-    <Application fieldValues={fieldValues}
-                 userData={user}/>
+    <Application userData={user}/>
 </Provider>, document.getElementById('content'));

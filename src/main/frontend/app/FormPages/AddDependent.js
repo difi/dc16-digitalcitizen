@@ -55,10 +55,9 @@ export class AddDependentClass extends React.Component {
         this.handleClickForm3 = this.handleClickForm3.bind(this);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
-        console.log(props.fields);
+        props.fields.numDep.onChange(1);
         if (props.fields.dependent.value) {
 
             this.getPersonToBeDependent();
@@ -100,7 +99,6 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickBack() {
-        this.saveFieldValues();
         console.log(this.props.fields);
         if (this.props.fields.applyingForSelf.value) {
             (this.props.previousStep(1));
@@ -118,7 +116,6 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickNext() {
-        this.saveFieldValues();
         this.props.nextStep(7);
     }
 
@@ -209,47 +206,6 @@ export class AddDependentClass extends React.Component {
         }
     }
 
-    saveFieldValues() {
-        const {fields: {form1, form2, form3}} = this.props;
-        console.log("depRelation:" + form1.depOtherRelation.value);
-        var form2Data = null;
-        var form3Data = null;
-        var form1Data = {
-            name: form1.name.value,
-            telephone: form1.phone.value,
-            email: form1.mail.value,
-            relation: form1.relation.value,
-            depOtherRelation: form1.depOtherRelation.value
-        };
-        if (this.props.fields.form2.show.value) {
-            form2Data = {
-                name: form2.name.value,
-                telephone: form2.phone.value,
-                email: form2.mail.value,
-                relation: form2.relation.value,
-                depOtherRelation: form2.depOtherRelation.value
-            }
-        }
-        if (this.props.fields.form3.show.value) {
-            form3Data = {
-                name: form3.name.value,
-                telephone: form3.phone.value,
-                email: form3.mail.value,
-                relation: form3.relation.value,
-                depOtherRelation: form3.depOtherRelation.value
-            }
-        }
-        var data = {
-            dependents: [
-                form1Data,
-                form2Data,
-                form3Data
-            ]
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
-
     handleClickForm2() {
 
         this.props.fields.form2.show.onChange(false);
@@ -321,7 +277,6 @@ AddDependentClass.propTypes = {
 
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 }
 
 

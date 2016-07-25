@@ -10,8 +10,8 @@ var Button = require('react-bootstrap/lib/Button');
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
-
-export default class WhosSearching extends React.Component {
+import {reduxForm} from 'redux-form';
+export class WhosSearchingClass extends React.Component {
 
     constructor() {
         super();
@@ -19,61 +19,38 @@ export default class WhosSearching extends React.Component {
         this.handleClickOther = this.handleClickOther.bind(this);
     }
 
-    saveFieldValues(status){
-        if(status){
+    saveFieldValues(){
+
             //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
-            var dataFirst = {
-                dependent: false,
-            }
-            this.props.saveValues(dataFirst);
+            this.props.fields.pnr.onChange(this.props.userData.pnr);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                
-                    var dataVal = {
 
-                        
-                        applyingForSelf: true,
-                        person: {
-                            address: {
-                                municipality: data,
-                                country: "NO"
+                    this.props.fields.municipality.onChange(data);
 
-                            }
-                        }
-                    }
-                this.props.saveValues(dataVal);
                 }.bind(this),
                 error: function (xhr, status, err) {
-                console.error("municipality error", status, err.toString());
-            }.bind(this)
-        })}
-
-
-        else{
-        var data = {
-            applyingForSelf: status};
-            this.props.saveValues(data);
-        }
-
-        console.log(data);
+                    console.error("municipality error", status, err.toString());
+                }.bind(this)
+            })
     }
 
-    nextStep(status, step) {
-        this.saveFieldValues(status);
-        this.props.nextStep(step);
-    }
+
     
     handleClickMe() {
         console.log("State 6");
-        this.nextStep(true, 6)
+        this.props.fields.applyingForSelf.onChange(true);
+        this.saveFieldValues();
+        this.props.nextStep(6)
     }
 
     handleClickOther() {
         console.log("State 2");
-        this.nextStep(false, 2);
+        this.props.fields.applyingForSelf.onChange(false);
+        this.props.nextStep(2);
     }
 
     render() {
@@ -99,8 +76,14 @@ export default class WhosSearching extends React.Component {
     }
 };
 
-WhosSearching.propTypes = {
+WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
+const WhosSearching = reduxForm({
+    form: 'application',
+    fields: ['municipality', 'applyingForSelf', 'pnr'],
+        destroyOnUnmount: false,
+})(WhosSearchingClass)
+
+export default WhosSearching
