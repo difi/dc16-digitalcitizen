@@ -48,6 +48,7 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickNext() {
+        //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values. 
         if (this.props.fields.checked.value) {
             this.saveFieldValues();
         } else {
@@ -77,7 +78,6 @@ export class PersonWithNeedClass extends React.Component {
                 pnr: pnr,
                 name: this.props.fields.name.value,
                 address: this.props.fieldValues.person.address,
-                telephone: this.props.fieldValues.person.telephone
             }
         };
         this.props.saveValues(data);
@@ -271,7 +271,6 @@ export class PersonWithNeedClass extends React.Component {
 
 PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired
@@ -290,6 +289,7 @@ const validate = values => {
 const asyncValidate = (values) => {
     return new Promise((resolve, reject) => {
 
+        // Checks if pnr and name match if a full-length pnr is typed
         if (values.pnr.length > 10) {
             $.ajax({
                 url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
