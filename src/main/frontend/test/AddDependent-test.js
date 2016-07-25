@@ -61,6 +61,9 @@ describe("AddDependentClass", function() {
                 form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
                 form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
                 form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                dependent: {
+                    value: false
+                },
                 numDep: {value: 1},
                 displayButton: {value: 'block'}
                 //block: the button is visible, none: the button is hidden
