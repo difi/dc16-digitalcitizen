@@ -93,7 +93,7 @@ class Application extends React.Component {
     }
 
     nextStep(step) {
-  
+
         this.setState({
             prevStep: this.state.step,
             step: step
@@ -138,7 +138,7 @@ class Application extends React.Component {
             case 2:
                 content = <RelationForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
+
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -174,7 +174,7 @@ class Application extends React.Component {
             case 6:
                 content = < AddDependent
                     store={this.props.store}
-                    fieldValues={fieldValues}
+
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -192,7 +192,6 @@ class Application extends React.Component {
             case 8:
                 content = < SpecialNeeds
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -254,5 +253,6 @@ Application.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
 };
+
 
 export default Application

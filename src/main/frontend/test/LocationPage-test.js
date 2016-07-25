@@ -68,6 +68,9 @@ describe("LocationPageClass", function() {
                 },
                 homeOptions: {
                     value: [{name: "Ryen sykehjem"}]
+                },
+                municipality: {
+                    value: "Oslo"
                 }
             },
             fieldValues
@@ -108,6 +111,9 @@ describe("LocationPageClass", function() {
                 },
                 homeOptions: {
                     value: [{name: "Ryen sykehjem"}]
+                },
+                municipality: {
+                    value: "Oslo"
                 }
             },
             fieldValues

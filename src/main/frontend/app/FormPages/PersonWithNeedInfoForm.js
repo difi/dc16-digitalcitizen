@@ -12,7 +12,6 @@ var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
 import {checkPhoneNumber} from'./Utilities/validation.js';
 import {validPostCode} from'./Utilities/validation.js';
 import {fieldIsEmpty} from './Utilities/validation.js';
@@ -32,6 +31,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.saveFieldValues = this.saveFieldValues.bind(this);
+     
     }
 
     handleClickBack() {
@@ -68,9 +68,9 @@ export class PersonWithNeedInfoClass extends React.Component {
         var data = {
             person: {
                 pnr: this.props.fieldValues.person.pnr,
-                name: ReactDOM.findDOMNode(this.refs.name).value,
+                name: name.value,
                 address: address,
-                telephone: ReactDOM.findDOMNode(this.refs.phone).value
+                telephone: number.value
             }
         };
         this.props.saveValues(data);
@@ -80,6 +80,8 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
+        console.log(postal.placeholder);
+        var valid = name.value && number.value && street.value && zipcode.value && !number.error && (postal.value != "Ugyldig postnr") && (validPostCode(zipcode.value));
         //console.log(postal.placeholder);
         valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
         console.log("Name.error: " + valid);
@@ -102,7 +104,6 @@ export class PersonWithNeedInfoClass extends React.Component {
                 alertMessage = false;
             }
         }
-
         return (
             <form>
                 <div>
@@ -130,7 +131,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                             </Col>
                             <Col sm={8} md={8}>
                                 <AddressField store={this.props.store} className="adr" ref='addressfield'
-                                              address={this.props.fieldValues.person.address}
+                                              
                                               includeCountry={false}/>
                             </Col>
                         </Row>
@@ -167,7 +168,6 @@ export class PersonWithNeedInfoClass extends React.Component {
 ;
 
 PersonWithNeedInfoClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
     saveValues: React.PropTypes.func.isRequired
