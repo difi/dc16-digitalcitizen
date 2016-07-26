@@ -97,7 +97,7 @@ export class PersonWithNeedClass extends React.Component {
 
         //Decide which errormessage is the correct one to show to the user
         if (name.error && pnr.error && !checked.value) {
-            errormessage = "Vennligst fyll inn navn og et fødselsnummer som inneholder 11 siffer, og ingenting annet."
+            errormessage = "Vennligst fyll inn et navn, og et fødselsnummer med 11 siffer."
         }
         else if (name.error) {
             errormessage = name.error;
@@ -237,7 +237,7 @@ const validate = values => {
     }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
-        errors.pnr = "Vennligst fyll inn et fødselsnummer som inneholder 11 siffer, og ingenting annet.";
+        errors.pnr = "Vennligst fyll inn et fødselsnummer med 11 siffer.";
     }
     return errors;
 };
