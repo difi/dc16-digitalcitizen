@@ -115,9 +115,11 @@ export class LocationPageClass extends React.Component {
         var valid = this.validateMun(municipalityApp.value);
         var homes = null;
 
+        console.log("Validd: " + valid);
+
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('home').innerHTML;
+            var errorMessage = document.getElementById('mun').innerHTML;
             console.log(errorMessage);
 
             content =
@@ -143,7 +145,6 @@ export class LocationPageClass extends React.Component {
                     <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
-                    <FormGroup validationState={(homeApp.touched || alertMessage) ? "error" : ""}>
                     <DropdownList
                         id='homes'
                         options={homeOptions.value}
@@ -151,7 +152,6 @@ export class LocationPageClass extends React.Component {
                         valueField='name'
                         {...homeApp}
                         onChange={change=>homeApp.onChange(change.newValue)}/>
-                    </FormGroup>
                 </Col>
             </Row>;
         }
@@ -162,7 +162,7 @@ export class LocationPageClass extends React.Component {
                     <form className="location">
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label className="municipality">I hvilken kommune ønskes plassen? </label>
+                                <label className="municipality" id="mun">I hvilken kommune ønskes plassen?</label>
                             </Col>
                             <Col sm={6} md={6}>
                                 <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>

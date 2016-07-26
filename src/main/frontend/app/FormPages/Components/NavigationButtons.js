@@ -70,10 +70,11 @@ export default class NavigationButtons extends React.Component {
         var rightButton;
 
         if (!this.state.isSubmit) {
+            console.log("button: " + this.props.buttonDisabled);
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
-                        className="disabledButton"
+                        className="disabledButton-nxt"
                         onClick={this.handleClickNext}
                         ref="nextBtn">
                         Neste &rarr;
@@ -91,15 +92,28 @@ export default class NavigationButtons extends React.Component {
             }
         }
         else {
-            rightButton =
-                <Button
-                    className="next-btn"
-                    ref="submitButton"
-                    bsStyle="primary"
-                    disabled={this.props.buttonDisabled}
-                    onClick={!isLoading ? this.handleSubmitClick : null}>
-                    {isLoading ? 'Sender...' : 'Send søknad'}
-                </Button>
+            console.log("button: " + this.props.buttonDisabled);
+            if (this.props.buttonDisabled) {
+                console.log("Buttons is disabled");
+                rightButton =
+                    <Button
+                        className="disabledButton-submit"
+                        ref="submitButton"
+                        bsStyle="primary"
+                        onClick={this.handleSubmitClick}>
+                        Send søknad
+                    </Button>
+            } else {
+                console.log("Buttons is enabled");
+                rightButton =
+                    <Button
+                        className="next-btn"
+                        ref="submitButton"
+                        bsStyle="primary"
+                        onClick={!isLoading ? this.handleSubmitClick : null}>
+                        {isLoading ? 'Sender...' : 'Send søknad'}
+                    </Button>
+            }
         }
 
 

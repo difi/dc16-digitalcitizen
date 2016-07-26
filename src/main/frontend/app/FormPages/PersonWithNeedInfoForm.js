@@ -165,7 +165,6 @@ const validate = values => {
     }
 
     if (!(checkPhoneNumber(values.number))) {
-        console.log(values.number);
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
 
