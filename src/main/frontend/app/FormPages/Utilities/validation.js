@@ -2,7 +2,6 @@ const isEmpty = value => value === undefined || value === null || value === '' |
 
 export function fieldIsEmpty(value) {
     if (isEmpty(value)) {
-        console.log("Val: " + value);
         return true;
     }
     return false;

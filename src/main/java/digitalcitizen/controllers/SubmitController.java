@@ -5,6 +5,7 @@ import digitalcitizen.models.Submission;
 import digitalcitizen.repositories.SubmissionRepository;
 import digitalcitizen.utilities.PDFManager;
 import digitalcitizen.utilities.SubmissionValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,10 +44,14 @@ public class SubmitController {
     String post(@RequestBody final Submission submission, HttpServletRequest request) throws IOException {
 
         // Validate form
-        // TODO: Add logic for handling disapproved submissions
-        boolean submissionIsValid = new SubmissionValidator().validateAllFields(submission);
         printSubmissionRequest(submission, request);
-        System.out.println("Submission is valid: " + submissionIsValid);
+        boolean submissionIsValid = new SubmissionValidator().validateAllFields(submission);
+
+        // TODO: Add logic for handling disapproved submissions
+        /*
+        if(!submissionIsValid) {
+            return "";
+        }*/
 
         if (Application.USE_MONGODB) {
             // Add submission to database
@@ -58,14 +64,9 @@ public class SubmitController {
         }
 
         submissions.add(handleSubmissionFields(submission));
+
         // Return the id of the submission
         return Integer.toString(submissions.size() - 1);
-    }
-
-    private void printSubmissionRequest(Submission submission, HttpServletRequest request) {
-        String s = "Submission received from: " + request.getRemoteAddr() + '\n' +
-                submission;
-        System.out.println(s);
     }
 
     /**
@@ -117,6 +118,12 @@ public class SubmitController {
 
         // TODO: Authenticate the user before sending the PDF-file
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
+    }
+
+    private void printSubmissionRequest(Submission submission, HttpServletRequest request) {
+        String s = "Submission received from: " + request.getRemoteAddr()
+                + '\n' + submission;
+        System.out.println(s);
     }
 }
 

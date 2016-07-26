@@ -111,44 +111,38 @@ export class ApplicationClass extends React.Component {
         const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
         var dependents = this.saveDependents();
         var fields = {
-            // First form
-            applyingForSelf: applyingForSelf.value,    // Boolean
-            // Second form
-            relation: relation.value,             // String
-            guardianName: nameOfChild.value,          //String
-            typeOfRelation: typeOfRelation.value,        //String
-            dependent: dependent.value,          // Boolean
-            dontGotPNRnumber: checked.value,        //Boolean
-            // Third form
-            person: {                   // Person object
-                pnr: pnr.value,              // String
-                name: name.value,                 // String
-                address: {                  // Address Object
-                    country: "NO",              // String
-                    municipality: municipality.value,
-                    streetAddress: street.value,        // String
-                    zipcode: zipcode.value,              // String
-                    postal: postal.value                // String
+            applyingForSelf: applyingForSelf.value,                     // Boolean
+            relation: relation.value,                                   // String
+            guardianName: nameOfChild.value,                            // String
+            typeOfRelation: typeOfRelation.value,                       // String
+            dependent: dependent.value,                                 // Boolean
+            dontGotPNRnumber: checked.value,                            // Boolean
+            person: {                                                   // Person object
+                pnr: pnr.value,                                             // String
+                name: name.value,                                           // String
+                address: {                                                  // Address Object
+                    country: "NO",                                              // String
+                    municipality: municipality.value,                           // String
+                    streetAddress: street.value,                                // String
+                    zipcode: zipcode.value,                                     // String
+                    postal: postal.value                                        // String
                 },
-                telephone: number.value,             // String
-                doctor: {                   // Doctor Object (add more fields?)
-                    name: doctorName.value                  // String
+                telephone: number.value,                                    // String
+                doctor: {                                                   // Doctor Object
+                    name: doctorName.value                                      // String
                 }
             },
-            // Fifth form
-            dependents: dependents,             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-            // Sixth form
-            lengthOfStay: need.value,         // String
-            // Seventh form
+            dependents: dependents,                                     // List of Dependent objects { name: '', address: '', telephone: ''}
+            lengthOfStay: need.value,                                   // String
             medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
             conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
-            otherNeeds: other.value.replace(/[\n]/g, '. '),            // String
-            nursingHome: {
-                municipality: municipalityApp.value,
-                name: homeApp.value
+            otherNeeds: other.value.replace(/[\n]/g, '. '),             // String
+            nursingHome: {                                              // NursingHome Object
+                municipality: municipalityApp.value,                        // String
+                name: homeApp.value                                         // String
             }
         };
-        console.log("Returning fields")
+        console.log("Returning fields");
         return fields
     }
 
@@ -329,7 +323,7 @@ const Application = reduxForm({
         'form2.depOtherRelation',
         'form3.depOtherRelation',
         'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"],
-    destroyOnUnmount: false,
+    destroyOnUnmount: false
 })(ApplicationClass);
 
 
