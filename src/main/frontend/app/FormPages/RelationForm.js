@@ -88,7 +88,12 @@ export class RelationFormClass extends React.Component {
         this.props.fields.typeOfRelation.onChange(null);
     }
 
-
+    resetDependent(event) {
+        this.props.fields.dependent.onChange(event.target.value);
+        if(!event.target.value){
+            this.props.resetDep();
+        }
+    }
     saveFieldValues() {
         // Get values via this.refs
         const {fields: {relation, nameOfChild}} = this.props;
@@ -169,7 +174,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende</Checkbox>
+                                <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende</Checkbox>
                             </Col>
                         </Row>
                     </componentClass>
@@ -197,7 +202,7 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende </Checkbox>
+                            <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende </Checkbox>
                         </Col>
                     </Row>
                 </componentClass>
