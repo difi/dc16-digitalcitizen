@@ -1,20 +1,16 @@
 package digitalcitizen.utilities;
 
+import digitalcitizen.models.Submission;
+
 import java.io.*;
 import java.util.List;
-
-import digitalcitizen.models.Submission;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
-/**
- * Created by camp-shj on 04.07.2016.
- */
 public class PDFManager {
-
 
     // TODO: Add more templates?
     private File dep1_template = getResourceAsFile("formTemplate_dep1.pdf");
@@ -33,12 +29,11 @@ public class PDFManager {
 
         PDDocument pdfTemplate = new PDDocument();
 
-
-        if(submission.getDependents().get(0) != null && submission.getDependents().get(1) == null && submission.getDependents().get(2) == null){
+        if (submission.getDependents().get(0) != null && submission.getDependents().get(1) == null && submission.getDependents().get(2) == null) {
             pdfTemplate = PDDocument.load(dep1_template);
-        } else if(submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) == null) {
+        } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) == null) {
             pdfTemplate = PDDocument.load(dep2_template);
-        } else if(submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) != null){
+        } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) != null) {
             pdfTemplate = PDDocument.load(dep3_template);
         }
 
@@ -163,7 +158,7 @@ public class PDFManager {
                     break;
                 // LENGTH OF STAY RADIOBUTTONS
                 case "lengthOfStay":
-                    switch (submission.getLengthOfStay()){
+                    switch (submission.getLengthOfStay()) {
                         case "long":
                             field.setValue("1");
                             break;
@@ -227,6 +222,5 @@ public class PDFManager {
             return null;
         }
     }
-
 
 }
