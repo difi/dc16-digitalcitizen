@@ -108,10 +108,17 @@ describe("SpecialNeeds-Integration", () => {
 
         input.simulate('blur');
         input.simulate('change', {target: {value: ""}});
+
+        const nextButton = subject.find('.disabledButton-nxt');
+        expect (nextButton).to.have.length.of(1);
+
+        nextButton.simulate('click');
+
+
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        //expect(errorMessage.text()).to.equal("Dette feltet må fylles ut. ");
+        //expect(errorMessage.text()).to.equal("Dette feltet må fylles ut. ");*/
 
     });
 });
