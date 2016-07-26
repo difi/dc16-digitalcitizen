@@ -29,7 +29,15 @@ import RESTpaths from './static_data/RESTpaths.js';
 
 
 export const fields=[
-    "applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
+    "applyingForSelf",
+    "pnr",
+    "name",
+    "checked",
+    "number",
+    "street",
+    "zipcode",
+    "postal",
+    "municipality",
     "doctorName",
     'form1.name',
     'form1.mail',
@@ -49,7 +57,20 @@ export const fields=[
     'form1.depOtherRelation',
     'form2.depOtherRelation',
     'form3.depOtherRelation',
-    'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"
+    'numDep',
+    "relation",
+    "typeOfRelation",
+    "nameOfChild",
+    "dependent",
+    "otherRelation",
+    "guardianFor",
+    "need",
+    "medical",
+    "changes",
+    "other",
+    "municipalityApp",
+    "homeApp",
+    "setDependent"
 ];
 
 
@@ -68,14 +89,21 @@ export class ApplicationClass extends React.Component {
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
-
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
         this.saveDependents = this.saveDependents.bind(this);
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
+        this.testScript = this.testScript.bind(this);
 
+        //add method for test data
+
+
+
+    }
+
+    testScript(){
         //person with need
         this.props.fields.applyingForSelf.onChange(true);
         this.props.fields.pnr.onChange("46561231546");
@@ -87,6 +115,14 @@ export class ApplicationClass extends React.Component {
         this.props.fields.postal.onChange("");
         this.props.fields.municipality.onChange("Trondheim");
         this.props.fields.doctorName.onChange("Berit");
+
+        //relations
+        this.props.fields.relation.onChange("undefined"); //guardian; family; other for choosing radio button
+        this.props.fields.typeOfRelation.onChange("sibling");
+        this.props.fields.nameOfChild.onChange("ss");
+        this.props.fields.dependent.onChange(false); //true for register as dependent
+        this.props.fields.otherRelation.onChange("sd");
+        this.props.fields.guardianFor.onChange();
 
         //add dependent
         this.props.fields.form1.name.onChange("sdf");
@@ -104,15 +140,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.mail.onChange("df@df.no");
         this.props.fields.form3.relation.onChange("Forelder");
 
-        //relations
-        this.props.fields.relation.onChange("undefined");
-        this.props.fields.typeOfRelation.onChange("sibling");
-        this.props.fields.nameOfChild.onChange("ss");
-        this.props.fields.dependent.onChange(false);
-        this.props.fields.otherRelation.onChange("sd");
-        this.props.fields.guardianFor.onChange();
-
-        //needs
+        //needs form
         this.props.fields.need.onChange("short");
         this.props.fields.medical.onChange("No");
         this.props.fields.changes.onChange("No");
@@ -381,27 +409,17 @@ export class ApplicationClass extends React.Component {
     }
 }
 /*
-// my work
 Application.propTypes = {
     fields: PropTypes.object.isRequired,
     fieldValues: React.PropTypes.object.isRequired,
     userData: React.PropTypes.object.isRequired
 };
 
-export default reduxForm({
-    form:'application',
-    fields
-},
-    state => ({initialValues: state.app.data
-    }),
-    {load:}
-)(Application)
 
 export default ApplicationAutofill
 */
 
 /*
-// from previous master
  Application.propTypes = {
  fieldValues: React.PropTypes.object.isRequired,
  userData: React.PropTypes.object.isRequired
@@ -417,7 +435,6 @@ const ApplicationAutofill = reduxForm({
  export default ApplicationAutofill
 */
 
-// from updated master
 
 ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
