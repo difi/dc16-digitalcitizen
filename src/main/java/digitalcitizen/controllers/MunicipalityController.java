@@ -16,7 +16,7 @@ public class MunicipalityController {
     public String getMunicipalityByPnr(@RequestParam("pnr") String pnr) {
 
         String s = (TestData.PERSONS).stream().filter(p -> p.getPnr().equals(pnr)).map(p -> p.getAddress().getMunicipality()).findFirst().get();
-        System.out.println(s);
+
         return s;
     }
 }
