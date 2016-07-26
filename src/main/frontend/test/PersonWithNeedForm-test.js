@@ -76,9 +76,10 @@ describe("PersonWithNeedClass", function() {
         expect(wrapper.find('.form-container')).to.have.length(1);
     });
 
-    it('should have two HTML-elements with the classname=fnr', function () {
+    it('should have one HTML-element with the classname=fnr, and one with formPnr', function () {
         expect(wrapper).to.have.length(1);
-        expect (wrapper.find('.fnr')).to.have.length(2);
+        expect (wrapper.find('.fnr')).to.have.length(1);
+        expect(wrapper.find('.formPnr')).to.have.length(1);
     });
 
     it('should have one checkbox', function () {
@@ -86,9 +87,10 @@ describe("PersonWithNeedClass", function() {
         expect (wrapper.find('input[type="checkbox"]')).to.have.length(1);
     });
 
-    it('should have two HTML-elements with the classname=name', function () {
+    it('should have one HTML-element with the classname=name, and one with formName', function () {
         expect(wrapper).to.have.length(1);
-        expect (wrapper.find('.name')).to.have.length(2);
+        expect (wrapper.find('.name')).to.have.length(1);
+        expect(wrapper.find('.formName')).to.have.length(1);
     });
 
 });

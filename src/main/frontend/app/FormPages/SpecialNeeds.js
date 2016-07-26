@@ -22,13 +22,12 @@ export class SpecialNeedsClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+
         this.limitTextFields = this.limitTextFields.bind(this);
     }
 
 
     handleClickBack() {
-        this.saveFieldValues();
         console.log("State 6");
         (this.props.previousStep(7));
     }
@@ -42,37 +41,10 @@ export class SpecialNeedsClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            this.saveFieldValues();
             console.log("State 9");
             this.props.nextStep(9);
         }
 
-    }
-
-    saveFieldValues() {
-        // Get values via this.refs
-        const {fields: {medical, changes, other}} = this.props;
-
-        var med = medical.value;
-        var cha = changes.value;
-        var oth = other.value;
-
-        if (medical.value) {
-            med = med.replace(/[\n]/g, '. ');
-        }
-        if (changes.value) {
-            cha = cha.replace(/[\n]/g, '. ');
-        }
-        if (other.value) {
-            oth = oth.replace(/[\n]/g, '. ');
-        }
-
-        var data = {
-            medicalNeeds: med,
-            conditionChanges: cha,
-            otherNeeds: oth
-        };
-     
     }
 
     limitTextFields(e, field) {
@@ -95,7 +67,7 @@ export class SpecialNeedsClass extends React.Component {
 
             content =
                 <componentClass>
-                    <div className="alertClass_Fdfs">
+                    <div className="error">
                         <Alert bsStyle="danger">
                             Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
                         </Alert>
