@@ -173,7 +173,7 @@ describe("ApplicationIntegration", () => {
         //Button with classname next-btn shouldnt exists before zipcode and phone number is entered.
         expect (nextButton).to.have.length(0);
         //button with classname disabledButton should exist
-        expect(fourthPage.find(".disabledButton")).to.have.length(1);
+        expect(fourthPage.find(".disabledButton-nxt")).to.have.length(1);
 
         expect(subject.state().step).to.equal(4);
         addressField.find('.zipcode').simulate('change', {target: {value: "0678"}});
