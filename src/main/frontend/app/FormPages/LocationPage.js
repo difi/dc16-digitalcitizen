@@ -20,9 +20,9 @@ export class LocationPageClass extends React.Component {
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
         this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+  
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.findMunicipality(this.props.fieldValues.person.address.municipality);
+        this.findMunicipality(this.props.fields.municipality.value);
 
     }
 
@@ -36,26 +36,14 @@ export class LocationPageClass extends React.Component {
     //Handle the click on the back-button
     handleClickBack() {
         //If you are applying for yourself, the previous step is step 8 - Special Needs Page
-        this.saveFieldValues();
+
         this.props.previousStep(8);
     }
 
-    saveFieldValues() {
-        //Checks if value exists - otherwise null to avoid null error
-        var mun = this.props.fields.municipalityApp.value ? this.props.fields.municipalityApp.value : null;
-        var data = {
-            nursingHome: {
-                municipality: mun,
-                name: this.props.fields.homeApp.value
-            }
-        };
-        return this.props.saveValues(data);
-    }
 
     //Handle the click on the next-button
     handleClickNext() {
         //Submit here?
-        this.saveFieldValues();
         console.log("State 10");
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(10);
@@ -153,22 +141,20 @@ export class LocationPageClass extends React.Component {
                     handleClickNext={this.handleClickNext}
                     isSubmit={true}
                     saveUserData={this.props.saveUserData}
-                    fieldValues={this.props.fieldValues}
-                    saveFieldValues={this.saveFieldValues}/>
+                    newFieldValues = {this.props.newFieldValues}/>
             </componentClass>
         )
     }
 }
 LocationPageClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
+
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp", "homeOptions"],
+    fields: ["municipalityApp", "homeApp", "homeOptions", "municipality"],
     destroyOnUnmount: false
 })(LocationPageClass);
 

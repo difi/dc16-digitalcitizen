@@ -17,37 +17,23 @@ export class GeneralPractitionerClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+    
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
-        this.getPractitionersByMunicipality(this.props.fieldValues.person.address.municipality);
+        this.getPractitionersByMunicipality(this.props.fields.municipality.value);
     }
 
     handleClickBack() {
-        this.saveFieldValues();
         console.log("State 4");
         this.props.previousStep(4);
     }
 
     handleClickNext() {
-        this.saveFieldValues();
+
         console.log("State 6");
         this.props.nextStep(6);
     }
 
-    saveFieldValues() {
-        //this.props.fields.doctorName.onChange(this.refs.doctorSelect.getFieldValue());
-        var data = {
-            person: {
-                pnr: this.props.fieldValues.person.pnr,
-                name: this.props.fieldValues.person.name,
-                address: this.props.fieldValues.person.address,
-                telephone: this.props.fieldValues.person.telephone,
-                doctor: {name: this.props.fields.doctorName.value}
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
+
 
     getPractitionersByMunicipality(municipality){
         $.ajax({
@@ -98,12 +84,11 @@ GeneralPractitionerClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 const GeneralPractitioner = reduxForm({
     form: 'application',
-    fields: ["doctorName", "doctors"],
+    fields: ["doctorName", "doctors", "municipality"],
     destroyOnUnmount: false
 })(GeneralPractitionerClass);
 

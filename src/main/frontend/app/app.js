@@ -26,6 +26,7 @@ var user = {
     submissionId: null
 };
 
+<<<<<<< HEAD
 const reducer = (state = {}, action) => {
     switch(action.type){
         case LOAD:
@@ -114,11 +115,17 @@ var fieldValuesTest = {
     }
 };
 
+=======
+>>>>>>> refs/remotes/origin/master
 if ($('#content').length <= 0) {
     $('body').prepend('<div id="content"></div>');
 }
 
 ReactDOM.render(<Provider store={store}>
+<<<<<<< HEAD
     <Application fieldValues={fieldValuesTest}
                  userData={user}/>
+=======
+    <Application userData={user}/>
+>>>>>>> refs/remotes/origin/master
 </Provider>, document.getElementById('content'));

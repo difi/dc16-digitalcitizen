@@ -9,34 +9,19 @@ export class NeedsFormClass extends React.Component {
     constructor(props) {
         super(props);
 
-
-        //None of the radio-buttons are chosen
-        this.state = {
-            value: this.props.fieldValues.lengthOfStay,
-            validForm: this.props.fieldValues.lengthOfStay
-        };
-
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
 
     //Handle the click on the back-button
     handleClickBack() {
-        //If you are applying for yourself, the previous step is step 1 - WhosSearchingForm
+
         this.props.previousStep(6);
     }
 
-    saveFieldValues() {
-        var data = {
-            lengthOfStay: this.props.fields.need.value
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
 
     //Handle the click on the next-button
     handleClickNext() {
-        this.saveFieldValues();
         console.log("State 7");
         //The next step is step 7 - SpecialNeeds
         this.props.nextStep(8);
@@ -72,10 +57,8 @@ export class NeedsFormClass extends React.Component {
     }
 }
 NeedsFormClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 const NeedsForm = reduxForm({

@@ -78,43 +78,13 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         subject = mount(<PersonWithNeedInfo {...props}/>);
     });
 
-    it("Shows error message when name-field contains no input", () => {
+    it("Do not show error message before next-button is pused", () => {
         //expect wrapper to exist
         expect(subject).to.have.length(1);
 
-        const input = subject.find('.nameField');
-
         const errorMessage = subject.find('.alertClass_Fdfs');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
-        //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
-    });
-
-    it("Shows error message when address-fields contains wrong input", () => {
-        //expect wrapper to exist
-        expect(subject).to.have.length(1);
-
-        const zipcode = subject.find('.zipcode');
-        // We change the value to a new incorrect value and expect an errormessage
-        zipcode.simulate('change', {target: {value: "5"}});
-
-        const errorMessage = subject.find('.alertClass_Fdfs');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
-        //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
-    });
-
-    it("Shows error message when tlf-field contains wrong input", () => {
-        //expect wrapper to exist
-        expect(subject).to.have.length(1);
-
-        const input = subject.find('.tlfFrom');
-        // We change the value to a new incorrect value and expect an errormessage
-        input.simulate('change', {target: {value: "123 45"}});
-
-        const errorMessage = subject.find('.alertClass_Fdfs');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
+        expect(errorMessage).to.have.length.of(0);
         //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
     });
 
@@ -140,6 +110,20 @@ describe("Integration of PersonWithNeedInfoForm", () => {
 
         const errorMessage = subject.find('.alertClass_Fdfs');
         expect(errorMessage).to.have.length.of(0);
+    });
+
+    it("Shows error message when fields contain no input and next-button is pressed", () => {
+        //expect wrapper to exist
+        expect(subject).to.have.length(1);
+
+        const nextButton = subject.find('.next-btn');
+        expect (nextButton).to.have.length.of(1);
+
+        nextButton.simulate('click');
+
+        const errorMessage = subject.find('.alertClass_Fdfs');
+        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
+        expect(errorMessage).to.have.length.of(1);
     });
 
 });

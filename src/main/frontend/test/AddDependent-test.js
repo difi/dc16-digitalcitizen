@@ -58,10 +58,14 @@ describe("AddDependentClass", function() {
         // the fields that are individual for each page
         const props = {
             fields: {
-                form1: {firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                form2: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                form3: {show: false, firstName: 'ds', lastName: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
-                numDep: {value: 1},
+                form1: {name: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                form2: {show: false, name: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                form3: {show: false, name: 'sdf', mail: 'df@df.no', phone: '12345678', relation: 'Forelder'},
+                dependent: {
+                    value: false
+                },
+                numDep: {value: 1,
+                onChange: function onChange(){} } ,
                 displayButton: {value: 'block'}
                 //block: the button is visible, none: the button is hidden
             },

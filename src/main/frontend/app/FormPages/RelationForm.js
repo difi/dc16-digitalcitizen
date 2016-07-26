@@ -1,18 +1,23 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
+import $ from 'jquery'
+
+import RESTpaths from '../static_data/RESTpaths.js';
 import DropdownList from './Components/DropdownList.js';
 import NavigationButtons from './Components/NavigationButtons.js';
+
+import dropdownContent from '../static_data/dropdown-list-content.js';
+
+var ReactDOM = require('react-dom');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
-import dropdownContent from '../static_data/dropdown-list-content.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
-import {reduxForm} from 'redux-form';
-import {getValues} from 'redux-form';
-import $ from 'jquery'
-import RESTpaths from '../static_data/RESTpaths.js';
+
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
@@ -33,9 +38,7 @@ export class RelationFormClass extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-
                 console.log(data);
-
                 data = data.map(data => {
                     return  {value: data.pnr + ":" + data.name + ":" + data.address + ":" + data.telephone, name: data.name}
                 });
@@ -65,10 +68,10 @@ export class RelationFormClass extends React.Component {
             this.props.nextStep(6);
         }
         else {
-
             this.props.nextStep(3);
         }
     }
+
 
     handleGuardianRadioButton() {
         this.props.fields.otherRelation.onChange(null);
@@ -85,68 +88,35 @@ export class RelationFormClass extends React.Component {
         this.props.fields.typeOfRelation.onChange(null);
     }
 
+
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, typeOfRelation, otherRelation, nameOfChild, isDependent}} = this.props;
-
+        const {fields: {relation, nameOfChild}} = this.props;
 
         if (relation.value == "guardian") {
             var pnr = nameOfChild.value.split(":")[0];
-            var dataDep = {
+            this.props.fields.dependent.onChange(true);
+            this.props.fields.pnr.onChange(pnr);
 
-                relation: relation.value,
-                dependent: true,
-                applyingForSelf: false,
-            };
-
-            this.props.saveValues(dataDep);
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                    var dataVal = {
+                        this.props.fields.municipality.onChange(data);
 
-                        person: {
-                            pnr: pnr,
-                            address: {
-                                municipality: data,
-                                country: "NO"
-                            }
-                        }
 
-                    };
-                    this.props.saveValues(dataVal);
+
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
         }
-        if (relation.value == "family") {
-            var data = {
-                relation: relation.value,
-                typeOfRelation: typeOfRelation.value,
-                dependent: isDependent.value
-            };
-            this.props.saveValues(data);
-
-        }
-        if (relation.value == "other") {
-            var data = {
-                relation: relation.value,
-                otherRelation: otherRelation.value,
-                dependent: isDependent.value
-            };
-            this.props.saveValues(data);
-
-        }
-
-        console.log(data);
     }
 
     render() {
-        const {fields: {relation, typeOfRelation, nameOfChild, isDependent, otherRelation, guardianFor}} = this.props;
+        const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
        
@@ -199,7 +169,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...isDependent}> Registrer meg som pårørende</Checkbox>
+                                <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende</Checkbox>
                             </Col>
                         </Row>
                     </componentClass>
@@ -227,7 +197,7 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...isDependent}> Registrer meg som pårørende </Checkbox>
+                            <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende </Checkbox>
                         </Col>
                     </Row>
                 </componentClass>
@@ -262,16 +232,14 @@ export class RelationFormClass extends React.Component {
     }
 }
 RelationFormClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep:  React.PropTypes.func.isRequired,
-    saveValues:  React.PropTypes.func.isRequired,
 };
 
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "isDependent", "otherRelation", "guardianFor"],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr'],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 

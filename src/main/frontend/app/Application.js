@@ -1,8 +1,12 @@
 "use strict";
 
+<<<<<<< HEAD
 import React, {Component, PropTypes} from 'react';
 
 import $ from 'jquery';
+=======
+import React from 'react';
+>>>>>>> refs/remotes/origin/master
 import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
 
@@ -27,6 +31,9 @@ import SpecialNeeds from './FormPages/SpecialNeeds';
 import NeedsForm from'./FormPages/NeedsForm';
 import AddDependent from './FormPages/AddDependent';
 import SubmitSuccess from './FormPages/SubmitPage';
+import {reduxForm} from 'redux-form';
+import $ from 'jquery';
+import RESTpaths from './static_data/RESTpaths.js';
 
 
 export const fields=[
@@ -124,32 +131,135 @@ const data = {
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 
+<<<<<<< HEAD
 class Application extends React.Component {
 // add test values somewhere in here
+=======
+export class ApplicationClass extends React.Component {
+
+>>>>>>> refs/remotes/origin/master
     constructor(props) {
         super(props);
 
         this.state = {
             step: 1,
             prevStep: 1,
-            fieldValues: props.fieldValues,
+
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
-        this.saveValues = this.saveValues.bind(this);
+
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
+<<<<<<< HEAD
         this.props.fields.name.onChange("test");
+=======
+        this.saveDependents = this.saveDependents.bind(this);
+        this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
+>>>>>>> refs/remotes/origin/master
 
+        this.getUserData = this.getUserData.bind(this);
+        this.getUserData();
     }
 
 
-    saveValues(field_value) {
-        this.setState({
-            fieldValues: assign({}, this.state.fieldValues, field_value)
+    getUserData() {
+        $.ajax({
+            url: RESTpaths.PATHS.USER_BASE,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var user = {
+                    pnr: data.pnr,
+                    name: data.name
+
+                };
+
+                this.saveUserData(user);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
         });
-        console.log(this.state.fieldValues);
-        return assign({}, this.state.fieldValues, field_value)
+    }
+
+    saveDependents() {
+        const {fields: {form1, form2, form3, numDep}} = this.props
+        var form2Data = null;
+        var form3Data = null;
+        var form1Data = {
+            name: form1.name.value,
+            telephone: form1.phone.value,
+            email: form1.mail.value,
+            relation: form1.relation.value,
+            depOtherRelation: form1.depOtherRelation.value
+        };
+        if (numDep.value >= 2) {
+            form2Data = {
+                name: form2.name.value,
+
+                telephone: form2.phone.value,
+                email: form2.mail.value,
+                relation: form2.relation.value,
+                depOtherRelation: form2.depOtherRelation.value
+            }
+        }
+        if (numDep.value >= 3) {
+            form3Data = {
+                name: form3.name.value,
+                lastName: form3.lastName.value,
+                telephone: form3.phone.value,
+                email: form3.mail.value,
+                relation: form3.relation.value,
+                depOtherRelation: form3.depOtherRelation.value
+            }
+        }
+        return [form1Data, form2Data, form3Data];
+    }
+
+    saveValuesFromRedux() {
+        const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
+        var dependents = this.saveDependents();
+        var fields = {
+            // First form
+            applyingForSelf: applyingForSelf.value,    // Boolean
+            // Second form
+            relation: relation.value,             // String
+            guardianName: nameOfChild.value,          //String
+            typeOfRelation: typeOfRelation.value,        //String
+            dependent: dependent.value,          // Boolean
+            dontGotPNRnumber: checked.value,        //Boolean
+            // Third form
+            person: {                   // Person object
+                pnr: pnr.value,              // String
+                name: name.value,                 // String
+                address: {                  // Address Object
+                    country: "NO",              // String
+                    municipality: municipality.value,
+                    streetAddress: street.value,        // String
+                    zipcode: zipcode.value,              // String
+                    postal: postal.value                // String
+                },
+                telephone: number.value,             // String
+                doctor: {                   // Doctor Object (add more fields?)
+                    name: doctorName.value                  // String
+                }
+            },
+            // Fifth form
+            dependents: dependents,             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
+            // Sixth form
+            lengthOfStay: need.value,         // String
+            // Seventh form
+            medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
+            conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
+            otherNeeds: other.value.replace(/[\n]/g, '. '),            // String
+            nursingHome: {
+                municipality: municipalityApp.value,
+                name: homeApp.value
+            }
+        };
+        console.log("Returning fields")
+        return fields
     }
 
 
@@ -167,39 +277,19 @@ class Application extends React.Component {
     }
 
     nextStep(step) {
-  
+
         this.setState({
             prevStep: this.state.step,
             step: step
         })
     }
 
-    handleSubmit() {
-        $.ajax({
-            url: './send',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            data: JSON.stringify(this.state.fieldValues),
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-
     render() {
-
 
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
 
         var content;
-        var fieldValues = this.state.fieldValues;
+
         var userData = this.state.userData;
 
         switch (this.state.step) {
@@ -213,7 +303,6 @@ class Application extends React.Component {
             case 2:
                 content = <RelationForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -223,25 +312,22 @@ class Application extends React.Component {
             case 3:
                 content = <PersonWithNeedForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>;
+                 />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    name={fieldValues.person.name}/>;
+                   />;
                 break;
             case 5:
                 content = <GeneralPractitioner
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -249,7 +335,7 @@ class Application extends React.Component {
             case 6:
                 content = < AddDependent
                     store={this.props.store}
-                    fieldValues={fieldValues}
+
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -258,7 +344,6 @@ class Application extends React.Component {
             case 7:
                 content = < NeedsForm
                     store={this.props.store}
-                    fieldValues={this.props.fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}/>;
@@ -267,7 +352,6 @@ class Application extends React.Component {
             case 8:
                 content = < SpecialNeeds
                     store={this.props.store}
-                    fieldValues={fieldValues}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -278,18 +362,20 @@ class Application extends React.Component {
                 content =
                     < LocationPage
                         store={this.props.store}
-                        fieldValues={fieldValues}
+
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         saveUserData={this.saveUserData}
-                        submitRegistration={this.handleSubmit}/>;
+                        submitRegistration={this.handleSubmit}
+                        newFieldValues={this.saveValuesFromRedux}/>
+                ;
                 break;
             case 10:
                 content =
                     < SubmitSuccess
                         store={this.props.store}
-                        fieldValues={fieldValues}
+                        name={this.props.fields.name.value}
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
@@ -325,6 +411,7 @@ class Application extends React.Component {
     }
 }
 
+<<<<<<< HEAD
 /*
 Application.propTypes = {
     fields: PropTypes.object.isRequired,
@@ -358,3 +445,38 @@ const ApplicationAutofill = reduxForm({
 //export default ApplicationAutofill
 
 export default ApplicationAutofill
+=======
+ApplicationClass.propTypes = {
+    userData: React.PropTypes.object.isRequired
+};
+
+
+const Application = reduxForm({
+    form: 'application',
+    fields: ["applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
+        "doctorName",
+        'form1.name',
+        'form1.mail',
+        'form1.phone',
+        'form1.relation',
+        'form2.show',
+        'form2.name',
+        'form2.mail',
+        'form2.phone',
+        'form2.relation',
+        'form3.show',
+        'form3.name',
+        'form3.mail',
+        'form3.phone',
+        'form3.relation',
+        'displayButton',
+        'form1.depOtherRelation',
+        'form2.depOtherRelation',
+        'form3.depOtherRelation',
+        'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"],
+    destroyOnUnmount: false,
+})(ApplicationClass);
+
+
+export default Application
+>>>>>>> refs/remotes/origin/master

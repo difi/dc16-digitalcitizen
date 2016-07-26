@@ -5,7 +5,8 @@ import RESTpaths from '../../static_data/RESTpaths.js';
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
+
+
 
 
 export default class NavigationButtons extends React.Component {
@@ -29,8 +30,9 @@ export default class NavigationButtons extends React.Component {
     }
 
     handleSubmitClick() {
-
-        var fieldValues = this.props.saveFieldValues();
+        var field2 = this.props.newFieldValues();
+        console.log("Logging new fieldValues");
+        console.log(field2);
         this.setState({isLoading: true});
         $.ajax({
             url: RESTpaths.PATHS.SUBMIT,
@@ -39,7 +41,7 @@ export default class NavigationButtons extends React.Component {
                 'Content-Type': 'application/json'
             },
             method: 'POST',
-            data: JSON.stringify(fieldValues),
+            data: JSON.stringify(field2),
             dataType: 'text',
             success: function (data) {
                 console.log(data);
@@ -65,23 +67,41 @@ export default class NavigationButtons extends React.Component {
 
     render() {
         var isLoading = this.state.isLoading;
-        var rightButton = !this.state.isSubmit ?
-            <Button
-                disabled={this.props.disabled}
-                className="next-btn"
-                onClick={this.handleClickNext}
-                bsStyle="success">
-                Neste &rarr;
-            </Button>
-            :
-            <Button
-                className="next-btn"
-                ref="submitButton"
-                bsStyle="primary"
-                disabled={this.props.disabled}
-                onClick={!isLoading ? this.handleSubmitClick : null}>
-                {isLoading ? 'Sender...' : 'Send søknad'}
-            </Button>;
+        var rightButton;
+
+        if (!this.state.isSubmit) {
+            if (this.props.buttonDisabled) {
+                rightButton =
+                    <Button
+                        className="disabledButton"
+                        onClick={this.handleClickNext}
+                        ref="nextBtn">
+                        Neste &rarr;
+                    </Button>
+            }
+            else {
+                rightButton =
+                    <Button
+                        className="next-btn"
+                        onClick={this.handleClickNext}
+                        bsStyle="success"
+                        ref="nextBtn">
+                        Neste &rarr;
+                    </Button>
+            }
+        }
+        else {
+            rightButton =
+                <Button
+                    className="next-btn"
+                    ref="submitButton"
+                    bsStyle="primary"
+                    disabled={this.props.disabled}
+                    onClick={!isLoading ? this.handleSubmitClick : null}>
+                    {isLoading ? 'Sender...' : 'Send søknad'}
+                </Button>
+        }
+
 
         return (
             <Row style={{marginTop: '15px'}}>
@@ -97,3 +117,4 @@ export default class NavigationButtons extends React.Component {
         )
     }
 }
+

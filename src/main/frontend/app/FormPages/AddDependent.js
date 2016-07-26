@@ -16,20 +16,17 @@ import RESTpaths from '../static_data/RESTpaths.js';
 
 const fields = [
 
-    'form1.firstName',
-    'form1.lastName',
+    'form1.name',
     'form1.mail',
     'form1.phone',
     'form1.relation',
     'form2.show',
-    'form2.firstName',
-    'form2.lastName',
+    'form2.name',
     'form2.mail',
     'form2.phone',
     'form2.relation',
     'form3.show',
-    'form3.firstName',
-    'form3.lastName',
+    'form3.name',
     'form3.mail',
     'form3.phone',
     'form3.relation',
@@ -37,7 +34,15 @@ const fields = [
     'form1.depOtherRelation',
     'form2.depOtherRelation',
     'form3.depOtherRelation',
-    'numDep'
+    'numDep',
+    'relation',
+    'dependent',
+    'applyingForSelf',
+    'checked',
+    'otherRelation',
+    'typeOfRelation'
+
+
 ];
 
 var DISPLAY_FORM = 'block';
@@ -51,10 +56,10 @@ export class AddDependentClass extends React.Component {
         this.handleClickForm3 = this.handleClickForm3.bind(this);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
-        if (props.fieldValues.dependent) {
+        props.fields.numDep.onChange(1);
+        if (props.fields.dependent.value) {
 
             this.getPersonToBeDependent();
         }
@@ -69,26 +74,21 @@ export class AddDependentClass extends React.Component {
             cache: false,
             success: function (data) {
                 console.log(data);
-                //TODO: FirstName and LastName may cause trouble. Should be split up at backend?
-                var name = data.name.split(' ');
                 console.log(name);
-                var firstName = name[0];
-                var lastName = name[1];
-                this.props.fields.form1.firstName.onChange(firstName);
-                this.props.fields.form1.lastName.onChange(lastName);
+                this.props.fields.form1.name.onChange(data.name);
                 this.props.fields.form1.phone.onChange(data.telephone);
                 this.props.fields.form1.mail.onChange(data.mail);
-                console.log("relation: " + this.props.fieldValues.relation);
-                switch (this.props.fieldValues.relation) {
+
+                switch (this.props.fields.relation.value) {
                     case "guardian":
                         this.props.fields.form1.relation.onChange("Verge");
                         break;
                     case "family":
-                        this.props.fields.form1.relation.onChange(this.props.fieldValues.typeOfRelation);
+                        this.props.fields.form1.relation.onChange(this.props.fields.typeOfRelation.value);
                         break;
                     case "other":
                         this.props.fields.form1.relation.onChange('Annet');
-                        this.props.fields.form1.depOtherRelation.onChange(this.props.fieldValues.otherRelation);
+                        this.props.fields.form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
                         break;
                 }
                 this.forceUpdate();
@@ -100,15 +100,15 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickBack() {
-        this.saveFieldValues();
-        if (this.props.fieldValues.applyingForSelf) {
+        console.log(this.props.fields);
+        if (this.props.fields.applyingForSelf.value) {
             (this.props.previousStep(1));
         }
 
-        else if (this.props.fieldValues.relation == "guardian") {
+        else if (this.props.fields.relation.value == "guardian") {
             this.props.previousStep(2);
         }
-        else if (this.props.fieldValues.dontGotPNRnumber) {
+        else if (this.props.fields.checked.value) {
             (this.props.previousStep(5));
         }
         else {
@@ -117,14 +117,20 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickNext() {
-        this.saveFieldValues();
         this.props.nextStep(7);
     }
 
     handleClick() {
-        if (this.props.fields.numDep.value < 3) {
+        const {
+            fields: {numDep}
+        } = this.props;
+        if(!numDep.value){
+            numDep.onChange(2);
+            this.props.fields.form2.show.onChange(true);
+        }
+        else if (numDep.value < 3) {
 
-            if (this.props.fields.numDep.value == 2) {
+            if (numDep.value == 2) {
                 this.props.fields.displayButton.onChange(HIDE_FORM);
             }
 
@@ -134,12 +140,12 @@ export class AddDependentClass extends React.Component {
                 if (this.props.fields.form3.show.value) {
                     this.props.fields.displayButton.onChange(HIDE_FORM);
                 }
-                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
+                numDep.onChange(numDep.value + 1);
             } else {
                 this.props.fields.form3.show.onChange(true);
                 console.log("vis form 3");
                 this.props.fields.displayButton.onChange(HIDE_FORM);
-                this.props.fields.numDep.onChange(this.props.fields.numDep.value + 1);
+                numDep.onChange(numDep.value + 1);
             }
         }
     }
@@ -158,9 +164,9 @@ export class AddDependentClass extends React.Component {
         var other3 = true;
 
         // values for the validation of each form
-        var form1validate = (form1.firstName.value && form1.lastName.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
-        var form2validate = (form2.firstName.value && form2.lastName.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
-        var form3validate = (form3.firstName.value && form3.lastName.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
+        var form1validate = (form1.name.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
+        var form2validate = (form2.name.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
+        var form3validate = (form3.name.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
 
         if (value == "3") {
             // All three forms has to be valid if you want to continue
@@ -201,50 +207,6 @@ export class AddDependentClass extends React.Component {
         }
     }
 
-    saveFieldValues() {
-        const {fields: {form1, form2, form3}} = this.props;
-        console.log("depRelation:" + form1.depOtherRelation.value);
-        var form2Data = null;
-        var form3Data = null;
-        var form1Data = {
-            firstName: form1.firstName.value,
-            lastName: form1.lastName.value,
-            telephone: form1.phone.value,
-            email: form1.mail.value,
-            relation: form1.relation.value,
-            depOtherRelation: form1.depOtherRelation.value
-        };
-        if (this.props.fields.form2.show.value) {
-            form2Data = {
-                firstName: form2.firstName.value,
-                lastName: form2.lastName.value,
-                telephone: form2.phone.value,
-                email: form2.mail.value,
-                relation: form2.relation.value,
-                depOtherRelation: form2.depOtherRelation.value
-            }
-        }
-        if (this.props.fields.form3.show.value) {
-            form3Data = {
-                firstName: form3.firstName.value,
-                lastName: form3.lastName.value,
-                telephone: form3.phone.value,
-                email: form3.mail.value,
-                relation: form3.relation.value,
-                depOtherRelation: form3.depOtherRelation.value
-            }
-        }
-        var data = {
-            dependents: [
-                form1Data,
-                form2Data,
-                form3Data
-            ]
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
-
     handleClickForm2() {
 
         this.props.fields.form2.show.onChange(false);
@@ -274,7 +236,7 @@ export class AddDependentClass extends React.Component {
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
-                                           autoFilled={this.props.fieldValues.dependent}/>
+                                           autoFilled={this.props.fields.dependent.value}/>
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
@@ -312,19 +274,26 @@ export class AddDependentClass extends React.Component {
 }
 
 AddDependentClass.propTypes = {
-    fieldValues: React.PropTypes.object.isRequired,
+
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
+<<<<<<< HEAD
     saveValues: React.PropTypes.func.isRequired
 };
+=======
+}
+>>>>>>> refs/remotes/origin/master
 
 
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
-    initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},
+
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
 
 export default AddDependent
+
+//Cant have initial values after refactor away from using fieldValues, but does it even matter? undefined equals to false when  evaluating. NumDep has been fixed with an if statement for first click
+//initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},

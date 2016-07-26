@@ -1,11 +1,15 @@
 /**
  * Created by camp-cha on 24.06.2016.
  */
-import {getValues} from 'redux-form';
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import {getValues} from 'redux-form';
+import $ from 'jquery'
+
+import RESTpaths from '../static_data/RESTpaths.js';
 import NavigationButtons from './Components/NavigationButtons.js';
 
+var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
@@ -17,19 +21,20 @@ var Overlay = require('react-bootstrap/lib/Overlay');
 var Popover = require('react-bootstrap/lib/Popover');
 var Collapse = require('react-bootstrap/lib/Collapse');
 var Alert = require('react-bootstrap/lib/Alert');
-var ReactDOM = require('react-dom');
 
 var checked = false;
 
+<<<<<<< HEAD
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
 //export const fields = ["pnr", "name", "checked"];
 
 export const fields = {"pnr":"04119149261", "name":"kari", "checked":true};
+=======
+>>>>>>> refs/remotes/origin/master
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
-import {validatePnoName} from './Utilities/validation.js';
 
 
 export class PersonWithNeedClass extends React.Component {
@@ -38,23 +43,21 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+  
     }
 
 
     handleClickBack() {
-        this.saveFieldValues();
 
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
     handleClickNext() {
-        if (this.props.fields.checked.value) {
-            this.saveFieldValues();
-        } else {
-            this.savePerson();
-        }
+        //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values. 
+        if (!this.props.fields.checked.value) {
+            this.savePerson()
+        } 
 
 
         if (this.props.fields.checked.value) {
@@ -67,51 +70,19 @@ export class PersonWithNeedClass extends React.Component {
         }
     }
 
-    saveFieldValues() {
-
-        var pnr = this.props.fields.pnr.value;
-        if (this.props.fields.checked.value) {
-            pnr = null;
-        }
-        var data = {
-            dontGotPNRnumber: this.props.fields.checked.value,
-            person: {
-                pnr: pnr,
-                name: this.props.fields.name.value,
-                address: this.props.fieldValues.person.address,
-                telephone: this.props.fieldValues.person.telephone
-            }
-        };
-        this.props.saveValues(data);
-        console.log(data);
-    }
 
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
-
-        var personP = {};
+        
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                personP = {
-                    dontGotPNRnumber: this.props.fields.checked.value,
-                    person: {
-                        pnr: pnr,
-                        name: this.props.fields.name.value,
-                        address: {
-                            country: data.address.country,
-                            municipality: data.address.municipality,
-                            streetAddress: data.address.street,
-                            zipcode: data.address.zipcode,
-                            postal: data.address.postal
-                        },
-                        telephone: data.telephone
-                    }
-                };
-                this.props.saveValues(personP);
+                this.props.fields.municipality.onChange(data.address.municipality);
+
+
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -126,7 +97,7 @@ export class PersonWithNeedClass extends React.Component {
 
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
 
-        const invalidPnrTooltip = <Popover id="invalidPnrPopover" >{pnr.error}</Popover>;
+        const invalidPnrTooltip = <Popover id="invalidPnrPopover">{pnr.error}</Popover>;
         const invalidPnrProps = {
             show: pnr.touched && pnr.error != undefined,
             container: this,
@@ -157,8 +128,10 @@ export class PersonWithNeedClass extends React.Component {
                             </Row>
                             <Row className="form-row">
                                 <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
-                                    <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
-                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                    <input type="checkbox" name="noPno" className="pnrCheck"
+                                           style={{marginBottom: '15px'}}
+                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan
+                                    ikke
                                     fødselsnummeret
                                 </Col>
                             </Row>
@@ -247,7 +220,8 @@ export class PersonWithNeedClass extends React.Component {
                             </Col>
                         </Row>
                     </div>
-                    <Collapse in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
+                    <Collapse
+                        in={name.touched && pnr.touched && name.error != undefined || pnr.touched && pnr.error != undefined}>
                         <div>
                             <Alert bsStyle="danger">
                                 Fødselsnummer og navn matcher ikke.
@@ -268,10 +242,8 @@ export class PersonWithNeedClass extends React.Component {
 
 PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
-    fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-    saveValues: React.PropTypes.func.isRequired
 };
 
 //Validation for form
@@ -281,26 +253,20 @@ const validate = values => {
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "Dette er ikke et gyldig fødselsnummer";
     }
-    //if (!(validatePnoName(values.pnr, values.name))) {
-    //    errors.name = "Fødselsnummer og navn matcher ikke."
-    //}
     return errors;
 };
 
 const asyncValidate = (values) => {
     return new Promise((resolve, reject) => {
-        //console.log("RES: " + (pnoName(values.pnr, values.name)));
-        console.log("NAAAVN: " + values.name);
 
         // Checks if pnr and name match if a full-length pnr is typed
-        if(values.pnr.length > 10) {
+        if (values.pnr.length > 10) {
             $.ajax({
                 url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
                 dataType: 'json',
                 cache: false,
-                //async: false,
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data);
                     if (data == true) {
                         resolve()
                     } else {
@@ -314,76 +280,19 @@ const asyncValidate = (values) => {
         } else {
             reject({name: "Fødselsnummer og navn matcher ikke."});
         }
-        /* var request = new XMLHttpRequest();
-         request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name);
-         request.send(null);
-
-         if (request.status === 200) {
-         console.log(request.responseText);
-         checkNameVal = values.name;
-         } else {
-         checkNameVal = "feil";
-         //console.log("Data er " + checkNameVal);
-         }
-         console.log(request.status);
-
-         if (request.status === 200) {
-         if ((request.responseText) == true) {
-         console.log("Fødselsnr og navn er riktig");
-         console.log(request.responseText);
-         resolve()
-         } else {
-         console.log("Fødselsnummer og navn er feil");
-         console.log(request.responseText);
-         reject({name: "Fødselsnummer og navn matcher ikke."});
-         }
-         }*/
     })
 };
-
-var checkNameVal;
-function pnoName(pno, name) {
-    console.log("pno: " + pno);
-    console.log("name: " + name);
-    var request = new XMLHttpRequest();
-    request.open('GET', RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name);
-    request.send(null);
-
-    if (request.status === 200) {
-        //console.log(request.responseText);
-        checkNameVal = name;
-    } else {
-        checkNameVal = "feil";
-        //console.log("Data er " + checkNameVal);
-    }
-    /*$.ajax({
-     url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pno + '&name=' + name,
-     dataType: 'json',
-     cache: false,
-     //async: false,
-     success: function (data) {
-     console.log(data)
-     if (data == true) {
-     checkNameVal = name;
-     console.log("Data er " + checkNameVal);
-     } else {
-     checkNameVal = "feil";
-     console.log("Data er " + checkNameVal);
-     }
-     }.bind(this),
-     error: function (xhr, status, err) {
-     console.error("url", status, err.toString());
-     }.bind(this)
-     });*/
-    //console.log("Resultat: " + checkNameVal);
-    return checkNameVal;
-}
 
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
+<<<<<<< HEAD
     form: 'application',    //name of the form and the key to where the form's state will be mounted
     fields,                 //a list of the the fields in the form
+=======
+    form: 'application',
+    fields: ["pnr", "name", "checked", "municipality"],
+>>>>>>> refs/remotes/origin/master
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,
