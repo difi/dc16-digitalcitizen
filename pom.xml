@@ -59,6 +59,12 @@
 
 
         <dependency>
+            <groupId>checkstyle</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>5.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
