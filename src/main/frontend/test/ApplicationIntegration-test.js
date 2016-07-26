@@ -165,14 +165,24 @@ describe("ApplicationIntegration", () => {
         var fourthPage = subject.find(PersonWithNeedInfoForm);
 
         fourthPage.find(FormControl).first().simulate('change', {target: {value: 'Erlend'}});
+        expect(fourthPage.find(FormControl).first()).to.have.length(1);
+
         var addressField = fourthPage.find(AddressField);
+        expect(addressField).to.have.length(1);
         addressField.find(FormControl).first().simulate('change', {target: {value: "Testveien 7"}});
         var nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before zipcode and phone number is entered.
+        //Button with classname next-btn shouldnt exists before zipcode and phone number is entered.
+        expect (nextButton).to.have.length(0);
+        //button with classname disabledButton should exist
+        expect(fourthPage.find(".disabledButton")).to.have.length(1);
+
         expect(subject.state().step).to.equal(4);
         addressField.find('.zipcode').simulate('change', {target: {value: "0678"}});
         fourthPage.find(FormControl).last().simulate('change', {target: {value: '222 22 222'}});
+        //have to find nextButton again, to check if it exists after we inserted new values
+        nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
+        expect (nextButton).to.have.length(1);
+
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(5);
     });
