@@ -139,7 +139,7 @@ export class ApplicationClass extends React.Component {
                 address: {                                                  // Address Object
                     country: "NO",                                              // String
                     municipality: municipality.value,                           // String
-                    streetAddress: street.value,                                // String
+                    street: street.value,                                       // String
                     zipcode: zipcode.value,                                     // String
                     postal: postal.value                                        // String
                 },
