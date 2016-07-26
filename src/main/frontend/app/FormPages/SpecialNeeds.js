@@ -12,7 +12,6 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
@@ -36,8 +35,8 @@ export class SpecialNeedsClass extends React.Component {
 
     handleClickNext() {
         const {fields: {medical, changes, other}} = this.props;
-        valid = changes.value && !changes.error;
-        
+        var valid = changes.value && !changes.error;
+
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
             this.forceUpdate();
@@ -49,7 +48,6 @@ export class SpecialNeedsClass extends React.Component {
         }
 
     }
-
 
     saveFieldValues() {
         // Get values via this.refs
@@ -79,35 +77,27 @@ export class SpecialNeedsClass extends React.Component {
 
     limitTextFields(e, field) {
         var changes = (e.target.value);
-        var limitLines = 5;
-        var newLines = changes.split("\n").length;
         var limitLength = 300;
         var totalLength = changes.length;
-        var last = changes.lastIndexOf("\n");
 
         if ((totalLength <= limitLength)) {
-            if (newLines <= limitLength) {
-                if (newLines > limitLines) {
-                    field.onChange(changes.substring(0, last));
-                } else {
-                    field.onChange(changes.substring(0, limitLength));
-                }
-            }
+            field.onChange(changes.substring(0, limitLength));
         }
     }
 
     render() {
         const {fields: {medical, changes, other}} = this.props;
-        valid = changes.value && !changes.error;
-
-       
+        var valid = changes.value && !changes.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
+
+            var errorMessage = document.getElementById('changesLabel').innerHTML;
+
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Du må fylle inn korrekte verdier i markerte felt, før du kan gå videre.
+                            Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
                         </Alert>
                     </div>
                 </componentClass>;
@@ -126,11 +116,12 @@ export class SpecialNeedsClass extends React.Component {
                 <div className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Hva er grunnen til at det søkes om plass på sykehjem?
-                                (maks 300 tegn) </label>
+                            <label className="from-col-address" id="changesLabel">Hva er grunnen til at det søkes om
+                                plass på sykehjem?</label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormGroup validationState={changes.error && (changes.touched || alertMessage)  ? "error" : ""}>
+                            <FormGroup
+                                validationState={changes.error && (changes.touched || alertMessage)  ? "error" : ""}>
                                 <FormControl componentClass="textarea" className="special-needs-textarea"
                                              id="mandatoryField"
                                              ref="conditionChanges" {...changes}
@@ -138,28 +129,34 @@ export class SpecialNeedsClass extends React.Component {
                                 <FormControl.Feedback />
                             </FormGroup>
                         </Col>
+                        <p className="info-label">{changes.value ? changes.value.length : 0}/300</p>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address"> Er det noen medisinske behov vi burde vite om? (maks
-                                300 tegn) </label>
+                            <label className="from-col-address">Er det noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
-                                <FormControl componentClass="textarea" className="special-needs-textarea"
-                                             ref="medicalNeeds" {...medical}
-                                             onChange={event => this.limitTextFields(event, medical)}/>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         ref="medicalNeeds" {...medical}
+                                         onChange={event => this.limitTextFields(event, medical)}/>
                         </Col>
+                    </Row>
+                    <Row className="form-row-special">
+                        <p className="info-label">{medical.value ? medical.value.length : 0}/300</p>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
                             <label className="from-col-address">Er det andre behov vi burde vite om? -Behov for tolk,
-                                hørselapparat e.l. (maks 300 tegn) </label>
+                                hørselapparat e.l.</label>
                         </Col>
                         <Col sm={12} md={12}>
-                                <FormControl componentClass="textarea" className="special-needs-textarea"
-                                             ref="otherNeeds" {...other}
-                                             onChange={event => this.limitTextFields(event, other)}/>
+                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         ref="otherNeeds" {...other}
+                                         onChange={event => this.limitTextFields(event, other)}/>
                         </Col>
+                    </Row>
+                    <Row className="form-row-special">
+                        <p className="info-label">{other.value ? other.value.length : 0}/300</p>
                     </Row>
                     {content}
                 </div>
@@ -176,7 +173,7 @@ export class SpecialNeedsClass extends React.Component {
 }
 SpecialNeedsClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired
 };
 
 
