@@ -61,8 +61,7 @@ export class PersonWithNeedClass extends React.Component {
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
-
-        var personP = {};
+        
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
