@@ -87,7 +87,7 @@ export class PersonWithNeedClass extends React.Component {
     render() {
         //Add fields from redux form to component so they can be connected
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error && asyncValidating != 'name') || (name.value && checked.value);
+        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         var errormessage = null;
         console.log(valid);
         console.log(name.value);
