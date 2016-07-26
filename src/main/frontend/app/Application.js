@@ -98,14 +98,15 @@ export class ApplicationClass extends React.Component {
         this.testScript = this.testScript.bind(this);
 
         //add method for test data
-
-
-
+        if(this.props.fields.applyingForSelf.onChange()){
+            this.testScript();
+        }
     }
 
     testScript(){
+
         //person with need
-        this.props.fields.applyingForSelf.onChange(true);
+        //this.props.fields.applyingForSelf.onChange();
         this.props.fields.pnr.onChange("46561231546");
         this.props.fields.name.onChange("skjhakl");
         this.props.fields.checked.onChange(false);
