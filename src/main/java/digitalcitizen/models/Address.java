@@ -1,8 +1,5 @@
 package digitalcitizen.models;
 
-/**
- * Created by camp-shj on 27.06.2016.
- */
 public class Address {
 
     private String postal;
@@ -10,7 +7,6 @@ public class Address {
     private String municipality;
     private String street;
     private String zipcode;
-
 
     public Address(){
     }

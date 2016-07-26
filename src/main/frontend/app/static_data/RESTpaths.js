@@ -5,19 +5,19 @@
  */
 
 //var BASE_URL = 'http://dc16-citizen.demo.difi.no/';
-var BASE_URL = 'http://localhost:9090/';
+var BASE_URL = 'http://localhost:8090/';
 
 exports.PATHS = {
-    SUBMIT: BASE_URL + 'send',
-    DOCTORS_BASE: BASE_URL + 'api/doctors',
-    GETPDF_BASE: BASE_URL + 'getpdf/',
     BRING_BASE: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&',
-    GEONAMES_BASE: 'http://api.geonames.org/postalCodeLookupJSON?',
-    GUARDIAN_BASE: BASE_URL + 'api/guardians',
     DEPENDENT_BASE: BASE_URL + 'api/dependent',
+    DOCTORS_BASE: BASE_URL + 'api/doctors',
+    GEONAMES_BASE: 'http://api.geonames.org/postalCodeLookupJSON?',
+    GETPDF_BASE: BASE_URL + 'getpdf/',
+    GUARDIAN_BASE: BASE_URL + 'api/guardians',
     HOME_BASE: BASE_URL + 'api/homes',
+    MUNICIPALITY_BASE: BASE_URL + 'api/municipality',
     PERSON_BASE: BASE_URL + 'api/person',
-    MUNICIPALITY_BASE: BASE_URL+'api/municipality',
-    USER_BASE: BASE_URL+'api/getPNR'
+    SUBMIT: BASE_URL + 'send',
+    USER_BASE: BASE_URL + 'api/getPNR'
 };
  
