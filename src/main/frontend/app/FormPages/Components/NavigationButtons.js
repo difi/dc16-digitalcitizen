@@ -75,6 +75,7 @@ export default class NavigationButtons extends React.Component {
                     <Button
                         className="disabledButton-nxt"
                         onClick={this.handleClickNext}
+                        bsStyle="success"
                         ref="nextBtn">
                         Neste &rarr;
                     </Button>

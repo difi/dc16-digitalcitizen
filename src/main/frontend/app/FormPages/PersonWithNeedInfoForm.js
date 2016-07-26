@@ -49,19 +49,19 @@ export class PersonWithNeedInfoClass extends React.Component {
         }
     }
 
-
-
-
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
+
+            var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du kan gå videre.</p>;
+
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Du må fylle inn korrekte verdier i markerte felt, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -81,7 +81,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                     <div className="form-container">
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="name">Navn</label>
+                                <label className="name" id="name">Navn</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
@@ -90,7 +90,6 @@ export class PersonWithNeedInfoClass extends React.Component {
                                         className="nameField"
                                         ref="name"
                                         placeholder="Navn"
-
                                         {...name}/>
                                     <FormControl.Feedback />
                                 </FormGroup>
@@ -98,7 +97,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="adr">Folkeregistrert adresse</label>
+                                <label className="adr" id="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <AddressField store={this.props.store} className="adr" ref='addressfield'
@@ -108,7 +107,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="tlf">Telefon</label>
+                                <label className="tlf" id="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormGroup validationState={number.error && (number.touched || alertMessage) ? "error" : ""}>
@@ -147,19 +146,19 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "Ugyldig navn.";
+        errors.name = "et navn, ";
     }
     if (fieldIsEmpty(values.street)) {
-        errors.street = "Ugyldig adresse";
+        errors.street = "en adresse, ";
     }
     if (values.postal == "Ugyldig postnr.") {
-        errors.zipcode = "Dette er ikke et gyldig postnummer";
+        errors.zipcode = "et fire siffret postnummer, ";
     }
     if (!validPostCode(values.zipcode)) {
-        errors.zipcode = "Dette er ikke et gyldig postnummer";
+        errors.zipcode = "et fire siffret postnummer, ";
     }
     if (!(checkPhoneNumber(values.number))) {
-        errors.number = "Dette er ikke et gyldig telefonnummer";
+        errors.number = "et åtte siffret telefonnummer, ";
     }
     return errors;
 };

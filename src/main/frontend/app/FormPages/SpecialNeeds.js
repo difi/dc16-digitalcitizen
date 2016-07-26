@@ -91,13 +91,13 @@ export class SpecialNeedsClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('changesLabel').innerHTML;
+            var errorMessage = <p>Vennligst svar på spørsmålet <b><i>{changes.error}</i></b>, før du kan gå videre.</p>
 
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -182,7 +182,7 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.changes)) {
-        errors.changes = "Dette feltet må fylles ut. ";
+        errors.changes = "hva er grunnen til at det søkes om plass på sykehjem?";
     }
     return errors;
 };
