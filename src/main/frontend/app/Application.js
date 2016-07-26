@@ -110,6 +110,22 @@ export class ApplicationClass extends React.Component {
     saveValuesFromRedux() {
         const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
         var dependents = this.saveDependents();
+
+        //fixes Special Needs Values so they will fit the pdf.
+        var med = medical.value;
+        var cha = changes.value;
+        var oth = other.value;
+
+        if (medical.value) {
+            med = med.replace(/[\n]/g, '. ');
+        }
+        if (changes.value) {
+            cha = cha.replace(/[\n]/g, '. ');
+        }
+        if (other.value) {
+            oth = oth.replace(/[\n]/g, '. ');
+        }
+
         var fields = {
             applyingForSelf: applyingForSelf.value,                     // Boolean
             relation: relation.value,                                   // String
@@ -134,9 +150,9 @@ export class ApplicationClass extends React.Component {
             },
             dependents: dependents,                                     // List of Dependent objects { name: '', address: '', telephone: ''}
             lengthOfStay: need.value,                                   // String
-            medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
-            conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
-            otherNeeds: other.value.replace(/[\n]/g, '. '),             // String
+            medicalNeeds: med,         // String
+            conditionChanges: cha,     // String
+            otherNeeds: oth,             // String
             nursingHome: {                                              // NursingHome Object
                 municipality: municipalityApp.value,                        // String
                 name: homeApp.value                                         // String
