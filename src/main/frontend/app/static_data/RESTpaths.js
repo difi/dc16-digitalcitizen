@@ -5,7 +5,7 @@
  */
 
 //var BASE_URL = 'http://dc16-citizen.demo.difi.no/';
-var BASE_URL = 'http://localhost:8090/';
+var BASE_URL = 'http://localhost:9090/';
 
 exports.PATHS = {
     BRING_BASE: 'https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=insertYourClientUrlHere&',
