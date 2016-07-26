@@ -238,11 +238,18 @@ describe("ApplicationIntegration", () => {
         });
         var seventhPage = subject.find(NeedsForm);
         var nextButton = seventhPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before something is entered
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-nxt should exist
+        expect(seventhPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
+
         expect(subject.state().step).to.equal(7);
+
         //Finds the first basic input element - that is the component that has to change and callbacks upwards.
         seventhPage.find('.radio-long').simulate('change', {target: {value: true}});
+
+        nextButton = seventhPage.find(NavigationButtons).find('.next-btn');
+        expect(nextButton).to.have.length(1);
 
         nextButton.simulate('click');
 
