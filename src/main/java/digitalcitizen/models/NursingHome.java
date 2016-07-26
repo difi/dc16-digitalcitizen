@@ -1,8 +1,5 @@
 package digitalcitizen.models;
 
-/**
- * Created by camp-vhe on 12.07.2016.
- */
 public class NursingHome {
 
     private String name;
@@ -12,7 +9,7 @@ public class NursingHome {
     public NursingHome() {
     }
 
-    public NursingHome(int num,String name, String municipality) {
+    public NursingHome(int num, String name, String municipality) {
         this.num = num;
         this.name = name;
         this.municipality = municipality;
@@ -34,7 +31,9 @@ public class NursingHome {
         return num;
     }
 
-    public void setNum(int num) { this.num=num; }
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public void setMunicipality(String municipality) {
         this.municipality = municipality;

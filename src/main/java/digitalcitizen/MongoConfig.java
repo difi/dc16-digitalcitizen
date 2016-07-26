@@ -2,12 +2,10 @@ package digitalcitizen;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
-/**
- * Created by camp-shj on 13.07.2016.
- */
 @Configuration
 public class MongoConfig extends AbstractMongoConfiguration {
 

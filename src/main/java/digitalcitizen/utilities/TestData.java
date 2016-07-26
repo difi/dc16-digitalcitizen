@@ -9,9 +9,6 @@ import digitalcitizen.models.NursingHome;
 import java.util.Arrays;
 import java.util.Collection;
 
-/**
- * Created by camp-shj on 01.07.2016.
- */
 public class TestData {
 
     public static final Collection<Doctor> DOCTORS = Arrays.asList(
@@ -43,7 +40,7 @@ public class TestData {
                             new Person("15028047425", "Elias Eliassen", new Address("Trondheim", "NO", "Trondheim", "testveien 2", "7030"), "99999991", "test@test.no", new Doctor("Tore", "Trondheim")),
                             new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Vegard", "Sogndal")))
 
-                    ),
+            ),
             new Guardian("08023549930",
                     Arrays.asList(
                             new Person("06126620649", "Solfrid Solfridsen", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Vegard", "Sogndal")),
@@ -51,18 +48,18 @@ public class TestData {
     );
 
     public static final Collection<NursingHome> HOMES = Arrays.asList(
-       new NursingHome(1,"Frogner sykehjem", "Oslo"),
-       new NursingHome(2,"Manglerud sykehjem", "Oslo") ,
-       new NursingHome(3,"Ryen sykehjem", "Oslo") ,
-       new NursingHome(4,"Sentrum sykehjem", "Trondheim") ,
-       new NursingHome(5,"Moholt sykehjem", "Trondheim") ,
-       new NursingHome(6,"Sogndal sykehjem", "Sogndal"),
-       new NursingHome(7,"Lund sykehjem", "Kristiansand"),
-       new NursingHome(8,"Kvadraturen sykehjem", "Kristiansand"),
-       new NursingHome(9,"Stokka sykehjem", "Stavanger"),
-       new NursingHome(10,"Aasane sykehjem", "Bergen"),
-       new NursingHome(11,"Fjellet sykehjem", "Bergen"),
-       new NursingHome(12,"Bamble sykehjem", "Bamble"),
-       new NursingHome(13,"Molde sykehjem", "Molde")
+            new NursingHome(1, "Frogner sykehjem", "Oslo"),
+            new NursingHome(2, "Manglerud sykehjem", "Oslo"),
+            new NursingHome(3, "Ryen sykehjem", "Oslo"),
+            new NursingHome(4, "Sentrum sykehjem", "Trondheim"),
+            new NursingHome(5, "Moholt sykehjem", "Trondheim"),
+            new NursingHome(6, "Sogndal sykehjem", "Sogndal"),
+            new NursingHome(7, "Lund sykehjem", "Kristiansand"),
+            new NursingHome(8, "Kvadraturen sykehjem", "Kristiansand"),
+            new NursingHome(9, "Stokka sykehjem", "Stavanger"),
+            new NursingHome(10, "Aasane sykehjem", "Bergen"),
+            new NursingHome(11, "Fjellet sykehjem", "Bergen"),
+            new NursingHome(12, "Bamble sykehjem", "Bamble"),
+            new NursingHome(13, "Molde sykehjem", "Molde")
     );
 }
