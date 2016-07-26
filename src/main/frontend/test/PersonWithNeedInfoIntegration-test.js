@@ -116,7 +116,7 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         //expect wrapper to exist
         expect(subject).to.have.length(1);
 
-        const nextButton = subject.find('.disabledButton');
+        const nextButton = subject.find('.disabledButton-nxt');
         expect (nextButton).to.have.length.of(1);
 
         nextButton.simulate('click');

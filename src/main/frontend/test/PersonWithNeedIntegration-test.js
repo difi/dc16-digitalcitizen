@@ -47,7 +47,7 @@ describe("Integration of PersonWithNeedForm", () => {
 
         // need to push button to be able to maybe see the error message. And the button is supposed to be of
         // the type disabledButton, and not next-btn
-        const nextButton = subject.find('.disabledButton');
+        const nextButton = subject.find('.disabledButton-nxt');
         expect (nextButton).to.have.length.of(1);
         nextButton.simulate('click');
 
@@ -68,7 +68,7 @@ describe("Integration of PersonWithNeedForm", () => {
 
         // need to push button to be able to maybe see the error message. And the button is supposed to be of
         // the type disabledButton, and not next-btn
-        const nextButton = subject.find('.disabledButton');
+        const nextButton = subject.find('.disabledButton-nxt');
         expect (nextButton).to.have.length.of(1);
         nextButton.simulate('click');
 
@@ -89,7 +89,7 @@ describe("Integration of PersonWithNeedForm", () => {
 
         // need to push button to be able to maybe see the error message. And the button is supposed to be of
         // the type disabledButton, and not next-btn
-        const nextButton = subject.find('.disabledButton');
+        const nextButton = subject.find('.disabledButton-nxt');
         expect (nextButton).to.have.length.of(1);
         nextButton.simulate('click');
 
