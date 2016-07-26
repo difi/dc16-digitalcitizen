@@ -6,7 +6,7 @@ import React from 'react'
 
 // See README for discussion of chai, enzyme, and sinon
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { mount , shallow } from 'enzyme';
 import PersonWithNeed from '../app/FormPages/PersonWithNeedForm';
 
 // In this file we're doing an integration test. Thus we need to hook up our
@@ -35,59 +35,84 @@ describe("Integration of PersonWithNeedForm", () => {
         //Renders the PersonWithNeed with props
         subject = mount(<PersonWithNeed {...props}/>);
     });
-    it("Shows error message when field is touched", () => {
+
+    it("Shows errormessage when only pnr have correct value, and checkbox is not checked", function () {
         expect(subject).to.have.length(1);
 
-        const input = subject.find(FormControl).first();
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
-        const errorMessage = subject.find('.error');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Dette er ikke et gyldig fødselsnummer");
-
-    });
-
-    it("Shows error message when field contains wrong input", () => {
-        expect(subject).to.have.length(1);
-
-        const input = subject.find(FormControl).first();
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
-        // We change the value to a new incorrect value and expect an errormessage
-        input.simulate('change', {target: {value: "12345678911"}});
-
-        const errorMessage = subject.find('.error');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Dette er ikke et gyldig fødselsnummer");
-
-    });
-
-    it("Does not show error message when field contains correct input", () => {
-        expect(subject).to.have.length(1);
-
-        const input = subject.find(FormControl).first();
-
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
+        const name = subject.find('.formName');
+        const pnr = subject.find('.formPnr');
         // We change the value to a correct value and expect no errormessage
-        input.simulate('change', {target: {value: '26024003298'}});
+        name.simulate('change', {target: {value: ''}});
+        pnr.simulate('change', {target: {value: '01108019146'}});
+
+        // need to push button to be able to maybe see the error message. And the button is supposed to be of
+        // the type disabledButton, and not next-btn
+        const nextButton = subject.find('.disabledButton');
+        expect (nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
 
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(0);
+        expect(errorMessage).to.have.length.of(1);
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn et navn.");
+    });
+
+    it("Shows errormessage when only name have correct value, and checkbox is not checked", function () {
+        expect(subject).to.have.length(1);
+
+        const name = subject.find('.formName');
+        const pnr = subject.find('.formPnr');
+        // We change the value to a correct value and expect no errormessage
+        name.simulate('change', {target: {value: 'Eldar'}});
+        pnr.simulate('change', {target: {value: ''}});
+
+        // need to push button to be able to maybe see the error message. And the button is supposed to be of
+        // the type disabledButton, and not next-btn
+        const nextButton = subject.find('.disabledButton');
+        expect (nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
+
+        const errorMessage = subject.find('.error');
+        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
+        expect(errorMessage).to.have.length.of(1);
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn et fødselsnummer med 11 siffer.");
+    });
+
+    it("Shows errormessage when name and pnr is not matching, and checkbox is not checked", function () {
+        expect(subject).to.have.length(1);
+
+        const name = subject.find('.formName');
+        const pnr = subject.find('.formPnr');
+        // We change the value to a correct value and expect no errormessage
+        name.simulate('change', {target: {value: 'Eldar'}});
+        pnr.simulate('change', {target: {value: '13019870019'}});
+
+        // need to push button to be able to maybe see the error message. And the button is supposed to be of
+        // the type disabledButton, and not next-btn
+        const nextButton = subject.find('.disabledButton');
+        expect (nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
+
+        const errorMessage = subject.find('.error');
+        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
+        expect(errorMessage).to.have.length.of(1);
+    });
+
+    it("Do not show error message when name has a valid value and checkbox is checked", function () {
+        expect(subject).to.have.length(1);
+
+        const name = subject.find('.formName');
+        // We change the value to a correct value and expect no errormessage
+        name.simulate('change', {target: {value: 'Eldar'}});
+
+        const checkBox = subject.find('input[type="checkbox"]');
+        expect (checkBox).to.have.length(1);
+        checkBox.simulate('change',{ target: { value: true } });
+
+        // need to push button to be able to maybe see the error message. And the button is supposed to be of
+        // the type next-btn, and not disabledButton. If there exists a next-btn, we are able to move forward.
+        const nextButton = subject.find('.next-btn');
+        expect (nextButton).to.have.length.of(1);
     });
 
 });

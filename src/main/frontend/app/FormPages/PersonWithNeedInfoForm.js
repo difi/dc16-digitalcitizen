@@ -61,7 +61,7 @@ export class PersonWithNeedInfoClass extends React.Component {
         if (clickNextButton && (valid == undefined || !valid)) {
             content =
                 <componentClass>
-                    <div className="alertClass_Fdfs">
+                    <div className="error">
                         <Alert bsStyle="danger">
                             Du må fylle inn korrekte verdier i markerte felt, før du kan gå videre.
                         </Alert>

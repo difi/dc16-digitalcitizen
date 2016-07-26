@@ -82,7 +82,7 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         //expect wrapper to exist
         expect(subject).to.have.length(1);
 
-        const errorMessage = subject.find('.alertClass_Fdfs');
+        const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(0);
         //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
@@ -108,7 +108,7 @@ describe("Integration of PersonWithNeedInfoForm", () => {
         expect(tlfFrom).to.have.length(1);
         tlfFrom.simulate('change', {target: {value: "152 34 564"}});
 
-        const errorMessage = subject.find('.alertClass_Fdfs');
+        const errorMessage = subject.find('.error');
         expect(errorMessage).to.have.length.of(0);
     });
 
@@ -121,7 +121,7 @@ describe("Integration of PersonWithNeedInfoForm", () => {
 
         nextButton.simulate('click');
 
-        const errorMessage = subject.find('.alertClass_Fdfs');
+        const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
     });

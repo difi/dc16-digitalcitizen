@@ -110,7 +110,7 @@ export class PersonWithNeedClass extends React.Component {
         if (clickNextButton && (valid == undefined || !valid)) {
             alertContent =
                 <componentClass>
-                    <div>
+                    <div className="error">
                         <Alert bsStyle="danger">
                             {errormessage}
                         </Alert>
@@ -131,6 +131,7 @@ export class PersonWithNeedClass extends React.Component {
                 validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                 <FormControl
                     type="text"
+                    className="formName"
                     placeholder="Navn"
                     ref="name"
                     {...name}/>
@@ -139,6 +140,7 @@ export class PersonWithNeedClass extends React.Component {
             pnrContent = <FormGroup>
                 <FormControl
                     type="text"
+                    className="formPnr"
                     placeholder="Fødselsnummer"
                     ref="pno"
                     //value={this.state.pnr}
@@ -152,7 +154,7 @@ export class PersonWithNeedClass extends React.Component {
                 validationState={(name.error || pnr.error == "Fødselsnummer og navn matcher ikke.") && (name.touched || alertMessage) ? "error" : ""}>
                 <FormControl
                     type="text"
-                    className="name"
+                    className="formName"
                     placeholder="Navn"
                     ref="name"
                     {...name}
@@ -167,7 +169,7 @@ export class PersonWithNeedClass extends React.Component {
                 <FormControl
                     type="text"
                     name="pno"
-                    className="fnr"
+                    className="formPnr"
                     placeholder="Fødselsnummer"
                     ref="pno"
                     //Connects field to redux form component//
