@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Controller
-public class HttpRequestController {
+public class ProxyController {
 
     private ArrayList<String> pnrNumbers = new ArrayList<>();
     // TODO: Map SessionId to pnr
