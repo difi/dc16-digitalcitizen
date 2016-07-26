@@ -2,9 +2,6 @@ package digitalcitizen.models;
 
 import digitalcitizen.utilities.TestData;
 
-/**
- * Created by camp-shj on 24.06.2016.
- */
 public class Person {
 
     private String pnr;
@@ -23,6 +20,7 @@ public class Person {
         this.address = address;
         this.telephone = telephone;
     }
+
     public Person(String pnr, String name, Address address, String telephone, String mail, Doctor doctor) {
         this.pnr = pnr;
         this.name = name;
@@ -36,24 +34,12 @@ public class Person {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public String getPnr() {
         return pnr;
     }
 
     public void setPnr(String pnr) {
         this.pnr = pnr;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 
     public String getName() {
@@ -68,6 +54,18 @@ public class Person {
         return address;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public String getMail() {
         return mail;
     }
@@ -76,8 +74,8 @@ public class Person {
         this.mail = mail;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     @Override

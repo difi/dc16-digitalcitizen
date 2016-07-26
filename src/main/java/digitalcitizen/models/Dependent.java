@@ -1,11 +1,6 @@
 package digitalcitizen.models;
 
-/**
- * Created by camp-shj on 24.06.2016.
- */
 public class Dependent {
-
-    // TODO: Superclass for Dependent and Person?
 
     private String name;
     private String telephone;

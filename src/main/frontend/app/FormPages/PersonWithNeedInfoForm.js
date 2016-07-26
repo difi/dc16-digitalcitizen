@@ -28,8 +28,6 @@ export class PersonWithNeedInfoClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-      
-     
     }
     
     handleClickBack() {
@@ -141,7 +139,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep: React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
 };
 
 //Validation for form
@@ -161,7 +159,6 @@ const validate = values => {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
     if (!(checkPhoneNumber(values.number))) {
-        console.log(values.number);
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
     return errors;

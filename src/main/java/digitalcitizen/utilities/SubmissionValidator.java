@@ -4,19 +4,9 @@ import digitalcitizen.models.Dependent;
 import digitalcitizen.models.Person;
 import digitalcitizen.models.Submission;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by camp-shj on 28.06.2016.
- */
 public class SubmissionValidator {
-
-    private Submission submission;
-
-    public SubmissionValidator(Submission submission) {
-        this.submission = submission;
-    }
 
     public SubmissionValidator() {
     }
@@ -30,8 +20,8 @@ public class SubmissionValidator {
 
     private boolean validatePerson(Person person) {
         // TODO: Implement more efficient search
-        for(Person p : TestData.PERSONS){
-            if(p.pnrAndNameEquals(person)){
+        for (Person p : TestData.PERSONS) {
+            if (p.pnrAndNameEquals(person)) {
                 return true;
             }
         }

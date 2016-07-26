@@ -1,6 +1,5 @@
-/**
- * Created by camp-cha on 24.06.2016.
- */
+/* Created by camp-cha on 24.06.2016. */
+
 import React from 'react';
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
@@ -12,22 +11,19 @@ import NavigationButtons from './Components/NavigationButtons.js';
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
 import {fieldIsEmpty} from './Utilities/validation.js';
 
-var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var HelpBlock = require('react-bootstrap/lib/HelpBlock');
 var Button = require('react-bootstrap/lib/Button');
-
 var Alert = require('react-bootstrap/lib/Alert');
+
 var alertContent = null;
 var clickNextButton = false;
 var alertMessage = false;
-
 var nameContent = null;
 var pnrContent = null;
-
 var checked = false;
 
 export class PersonWithNeedClass extends React.Component {
@@ -40,7 +36,6 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickBack() {
-
         console.log("State 2");
         (this.props.previousStep(2));
     }
@@ -227,7 +222,7 @@ export class PersonWithNeedClass extends React.Component {
 PersonWithNeedClass.propTypes = {
     asyncValidating: React.PropTypes.string.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep: React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
 };
 
 //Validation for form
