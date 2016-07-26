@@ -4,9 +4,7 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
-import $ from 'jquery'
 
-import RESTpaths from '../static_data/RESTpaths.js';
 import NavigationButtons from './Components/NavigationButtons.js';
 
 var ReactDOM = require('react-dom');
@@ -24,15 +22,12 @@ var Alert = require('react-bootstrap/lib/Alert');
 
 var checked = false;
 
-<<<<<<< HEAD
 import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
 //export const fields = ["pnr", "name", "checked"];
 
 export const fields = {"pnr":"04119149261", "name":"kari", "checked":true};
-=======
->>>>>>> refs/remotes/origin/master
 
 import {checkPersonalnumberNo} from'./Utilities/validation.js';
 
@@ -286,13 +281,8 @@ const asyncValidate = (values) => {
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
-<<<<<<< HEAD
     form: 'application',    //name of the form and the key to where the form's state will be mounted
-    fields,                 //a list of the the fields in the form
-=======
-    form: 'application',
-    fields: ["pnr", "name", "checked", "municipality"],
->>>>>>> refs/remotes/origin/master
+    fields: ["pnr", "name", "checked", "municipality"], //a list of the the fields in the form
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,

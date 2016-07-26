@@ -277,12 +277,7 @@ AddDependentClass.propTypes = {
 
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-<<<<<<< HEAD
-    saveValues: React.PropTypes.func.isRequired
-};
-=======
 }
->>>>>>> refs/remotes/origin/master
 
 
 const AddDependent = reduxForm({
@@ -292,6 +287,7 @@ const AddDependent = reduxForm({
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
+
 
 export default AddDependent
 

@@ -1,16 +1,8 @@
 "use strict";
 
-<<<<<<< HEAD
-import React, {Component, PropTypes} from 'react';
-
-import $ from 'jquery';
-=======
 import React from 'react';
->>>>>>> refs/remotes/origin/master
 import {Form} from './unused/Form.jsx';
 //require('!style!css!less!./Application.less');
-
-import {reduxForm} from 'redux-form';
 
 var assign = require('object-assign');
 import WhosSearching from './FormPages/WhosSearchingForm.js';
@@ -37,74 +29,19 @@ import RESTpaths from './static_data/RESTpaths.js';
 
 
 export const fields=[
-        "pnr",
-        "name",
-        "checked" ,
-        "number",
-        "street",
-        "zipcode",
-        "postal",
-        "municipality",
-        'form1.firstName',
-        'form1.lastName',
-        'form1.mail',
-        'form1.phone',
-        'form1.relation',
-        'form2.show',
-        'form2.firstName',
-        'form2.lastName',
-        'form2.mail',
-        'form2.phone',
-        'form2.relation',
-        'form3.show',
-        'form3.firstName',
-        'form3.lastName',
-        'form3.mail',
-        'form3.phone',
-        'form3.relation',
-        'displayButton',
-        'form1.depOtherRelation',
-        'form2.depOtherRelation',
-        'form3.depOtherRelation',
-        'numDep',
-        "relation",
-        "typeOfRelation",
-        "nameOfChild",
-        "dependent",
-        "otherRelation",
-        "guardianFor",
-        "need",
-        "medical",
-        "changes",
-        "other",
-        "municipalityApp",
-        "homeApp"
-];
-
-/*
-const data = {
-    "pnr":"04119149261",
-    "name":"Kari",
-    "checked":true,
-    "number":"81549300",
-    "street":"Kjuttavika 1",
-    "zipcode":"7030",
-    "postal",
-    "municipality":"Trondheim",
-    'form1.firstName',
-    'form1.lastName',
+    "applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
+    "doctorName",
+    'form1.name',
     'form1.mail',
     'form1.phone',
     'form1.relation',
     'form2.show',
-    'form2.firstName',
-    'form2.lastName',
+    'form2.name',
     'form2.mail',
     'form2.phone',
     'form2.relation',
     'form3.show',
-    'form3.firstName',
-    'form3.lastName',
+    'form3.name',
     'form3.mail',
     'form3.phone',
     'form3.relation',
@@ -112,32 +49,15 @@ const data = {
     'form1.depOtherRelation',
     'form2.depOtherRelation',
     'form3.depOtherRelation',
-    'numDep',
-    "relation",
-    "typeOfRelation",
-    "nameOfChild",
-    "dependent",
-    "otherRelation",
-    "guardianFor",
-    "need",
-    "medical",
-    "changes",
-    "other",
-    "municipalityApp",
-    "homeApp"
-};
-*/
+    'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"
+];
+
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
-
-<<<<<<< HEAD
-class Application extends React.Component {
 // add test values somewhere in here
-=======
 export class ApplicationClass extends React.Component {
 
->>>>>>> refs/remotes/origin/master
     constructor(props) {
         super(props);
 
@@ -151,15 +71,65 @@ export class ApplicationClass extends React.Component {
 
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
-<<<<<<< HEAD
-        this.props.fields.name.onChange("test");
-=======
         this.saveDependents = this.saveDependents.bind(this);
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
->>>>>>> refs/remotes/origin/master
-
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
+
+        //person with need
+        this.props.fields.applyingForSelf.onChange(true);
+        this.props.fields.pnr.onChange("46561231546");
+        this.props.fields.name.onChange("skjhakl");
+        this.props.fields.checked.onChange(false);
+        this.props.fields.number.onChange("12345678");
+        this.props.fields.street.onChange("gyt");
+        this.props.fields.zipcode.onChange("7020");
+        this.props.fields.postal.onChange("");
+        this.props.fields.municipality.onChange("Trondheim");
+        this.props.fields.doctorName.onChange("Berit");
+
+        //add dependent
+        this.props.fields.form1.name.onChange("sdf");
+        this.props.fields.form1.phone.onChange("12345678");
+        this.props.fields.form1.mail.onChange("df@df.no");
+        this.props.fields.form1.relation.onChange("Forelder");
+
+        this.props.fields.form2.name.onChange("sdf");
+        this.props.fields.form2.phone.onChange("12345678");
+        this.props.fields.form2.mail.onChange("df@df.no");
+        this.props.fields.form2.relation.onChange("Forelder");
+
+        this.props.fields.form3.name.onChange("sdf");
+        this.props.fields.form3.phone.onChange("12345678");
+        this.props.fields.form3.mail.onChange("df@df.no");
+        this.props.fields.form3.relation.onChange("Forelder");
+
+        //relations
+        this.props.fields.relation.onChange("undefined");
+        this.props.fields.typeOfRelation.onChange("sibling");
+        this.props.fields.nameOfChild.onChange("ss");
+        this.props.fields.dependent.onChange(false);
+        this.props.fields.otherRelation.onChange("sd");
+        this.props.fields.guardianFor.onChange();
+
+        //needs
+        this.props.fields.need.onChange("short");
+        this.props.fields.medical.onChange("No");
+        this.props.fields.changes.onChange("No");
+        this.props.fields.other.onChange("No");
+
+        //
+        this.props.fields.displayButton.onChange('block');
+
+        //
+        this.props.fields.form1.depOtherRelation.onChange();
+        this.props.fields.form2.depOtherRelation.onChange();
+        this.props.fields.form3.depOtherRelation.onChange();
+
+        //
+        this.props.fields.numDep.onChange(1);
+        this.props.fields.municipalityApp.onChange("sd");
+        this.props.fields.homeApp.onChange("Ryen sykehjem");
     }
 
 
@@ -410,9 +380,8 @@ export class ApplicationClass extends React.Component {
         )
     }
 }
-
-<<<<<<< HEAD
 /*
+// my work
 Application.propTypes = {
     fields: PropTypes.object.isRequired,
     fieldValues: React.PropTypes.object.isRequired,
@@ -427,8 +396,12 @@ export default reduxForm({
     }),
     {load:}
 )(Application)
+
+export default ApplicationAutofill
 */
 
+/*
+// from previous master
  Application.propTypes = {
  fieldValues: React.PropTypes.object.isRequired,
  userData: React.PropTypes.object.isRequired
@@ -441,11 +414,11 @@ const ApplicationAutofill = reduxForm({
     destroyOnUnmount: false,
  })(Application);
 
+ export default ApplicationAutofill
+*/
 
-//export default ApplicationAutofill
+// from updated master
 
-export default ApplicationAutofill
-=======
 ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
@@ -453,30 +426,9 @@ ApplicationClass.propTypes = {
 
 const Application = reduxForm({
     form: 'application',
-    fields: ["applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
-        "doctorName",
-        'form1.name',
-        'form1.mail',
-        'form1.phone',
-        'form1.relation',
-        'form2.show',
-        'form2.name',
-        'form2.mail',
-        'form2.phone',
-        'form2.relation',
-        'form3.show',
-        'form3.name',
-        'form3.mail',
-        'form3.phone',
-        'form3.relation',
-        'displayButton',
-        'form1.depOtherRelation',
-        'form2.depOtherRelation',
-        'form3.depOtherRelation',
-        'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"],
+    fields: fields,
     destroyOnUnmount: false,
 })(ApplicationClass);
 
 
 export default Application
->>>>>>> refs/remotes/origin/master
