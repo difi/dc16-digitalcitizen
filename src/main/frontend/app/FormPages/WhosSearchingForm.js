@@ -43,6 +43,8 @@ export class WhosSearchingClass extends React.Component {
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
+        this.props.resetDep();
+        this.props.fields.dependent.onChange(false);
         this.saveFieldValues();
         this.props.nextStep(6)
     }
@@ -82,7 +84,7 @@ WhosSearchingClass.propTypes = {
 
 const WhosSearching = reduxForm({
     form: 'application',
-    fields: ['municipality', 'applyingForSelf', 'pnr'],
+    fields: ['municipality', 'applyingForSelf', 'pnr', 'dependent'],
         destroyOnUnmount: false,
 })(WhosSearchingClass)
 
