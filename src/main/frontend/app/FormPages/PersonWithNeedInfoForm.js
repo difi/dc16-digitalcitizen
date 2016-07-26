@@ -1,4 +1,6 @@
-/*Created by camp-cha on 24.06.2016.*/
+/**
+ * Created by camp-cha on 24.06.2016.
+ */
 
 import React from 'react';
 import {reduxForm} from 'redux-form';
@@ -17,7 +19,6 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
@@ -36,7 +37,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     
     handleClickNext() {
         const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
-        valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -53,7 +54,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
             content =
@@ -129,21 +130,17 @@ export class PersonWithNeedInfoClass extends React.Component {
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
                         buttonDisabled={!valid}
-
                     />
-
                 </div>
             </form>
         )
     }
-}
-;
+};
 
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired
 };
-
 
 //Validation for form
 const validate = values => {
@@ -152,22 +149,18 @@ const validate = values => {
     if (fieldIsEmpty(values.name)) {
         errors.name = "Ugyldig navn.";
     }
-
     if (fieldIsEmpty(values.street)) {
         errors.street = "Ugyldig adresse";
     }
-
     if (values.postal == "Ugyldig postnr.") {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
     if (!validPostCode(values.zipcode)) {
         errors.zipcode = "Dette er ikke et gyldig postnummer";
     }
-
     if (!(checkPhoneNumber(values.number))) {
         errors.number = "Dette er ikke et gyldig telefonnummer";
     }
-
     return errors;
 };
 

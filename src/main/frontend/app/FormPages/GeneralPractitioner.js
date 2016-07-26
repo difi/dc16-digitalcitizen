@@ -15,7 +15,6 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
@@ -36,7 +35,7 @@ export class GeneralPractitionerClass extends React.Component {
 
     handleClickNext() {
         const {fields: {doctorName, doctors}} = this.props;
-        valid = doctorName.value;
+        var valid = doctorName.value;
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -68,7 +67,7 @@ export class GeneralPractitionerClass extends React.Component {
 
     render() {
         const {fields: {doctorName, doctors}} = this.props;
-        valid = doctorName.value;
+        var valid = doctorName.value;
 
         if (clickNextButton && (valid == undefined || !valid)) {
 

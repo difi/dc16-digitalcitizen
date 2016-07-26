@@ -15,7 +15,6 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var inputChangeRun = 0;
-var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;

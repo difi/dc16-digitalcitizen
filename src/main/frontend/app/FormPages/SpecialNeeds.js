@@ -12,7 +12,6 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var valid = null;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
@@ -36,7 +35,7 @@ export class SpecialNeedsClass extends React.Component {
 
     handleClickNext() {
         const {fields: {medical, changes, other}} = this.props;
-        valid = changes.value && !changes.error;
+        var valid = changes.value && !changes.error;
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -88,7 +87,7 @@ export class SpecialNeedsClass extends React.Component {
 
     render() {
         const {fields: {medical, changes, other}} = this.props;
-        valid = changes.value && !changes.error;
+        var valid = changes.value && !changes.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
 

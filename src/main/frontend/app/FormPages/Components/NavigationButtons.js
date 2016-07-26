@@ -70,7 +70,6 @@ export default class NavigationButtons extends React.Component {
         var rightButton;
 
         if (!this.state.isSubmit) {
-            console.log("button: " + this.props.buttonDisabled);
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
@@ -92,9 +91,7 @@ export default class NavigationButtons extends React.Component {
             }
         }
         else {
-            console.log("button: " + this.props.buttonDisabled);
             if (this.props.buttonDisabled) {
-                console.log("Buttons is disabled");
                 rightButton =
                     <Button
                         className="disabledButton-submit"
@@ -104,7 +101,6 @@ export default class NavigationButtons extends React.Component {
                         Send søknad
                     </Button>
             } else {
-                console.log("Buttons is enabled");
                 rightButton =
                     <Button
                         className="next-btn"
