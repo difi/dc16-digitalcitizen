@@ -43,7 +43,6 @@ export class GeneralPractitionerClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            this.saveFieldValues();
             console.log("State 6");
             this.props.nextStep(6);
         }
@@ -73,13 +72,13 @@ export class GeneralPractitionerClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('genPract').innerHTML;
+            var errorMessage = document.getElementById('generalPract').innerHTML;
 
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll inn {errorMessage}, før du kan gå videre.
+                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
                         </Alert>
                     </div>
                 </componentClass>;
@@ -98,7 +97,7 @@ export class GeneralPractitionerClass extends React.Component {
                 <div className="form-container">
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label className="genPract">Fastlege</label>
+                            <label className="genPract" id="generalPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
                             <FormGroup validationState={(doctorName.touched || alertMessage) ? "error" : ""}>

@@ -98,7 +98,7 @@ export class SpecialNeedsClass extends React.Component {
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Du må svare på spørsmålet <i>{errorMessage}</i>, før du kan gå videre.
+                            Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
                         </Alert>
                     </div>
                 </componentClass>;

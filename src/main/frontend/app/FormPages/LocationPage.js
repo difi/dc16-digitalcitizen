@@ -124,7 +124,7 @@ export class LocationPageClass extends React.Component {
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll inn {errorMessage}, før du kan gå videre.
+                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
                         </Alert>
                     </div>
                 </componentClass>;
