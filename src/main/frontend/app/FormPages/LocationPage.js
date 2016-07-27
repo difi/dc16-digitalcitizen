@@ -114,18 +114,15 @@ export class LocationPageClass extends React.Component {
         var valid = this.validateMun(municipalityApp.value);
         var homes = null;
 
-        console.log("Validd: " + valid);
-
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('mun').innerHTML;
-            console.log(errorMessage);
+            var errorMessage = <p>Vennligst svar på spørsmålet <b><i>i hvilken kommune ønskes plassen?</i></b>, før du kan gå videre.</p>
 
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -161,7 +158,7 @@ export class LocationPageClass extends React.Component {
                     <form className="location">
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label className="municipality" id="mun">I hvilken kommune ønskes plassen?</label>
+                                <label className="municipality">I hvilken kommune ønskes plassen?</label>
                             </Col>
                             <Col sm={6} md={6}>
                                 <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
@@ -191,9 +188,8 @@ export class LocationPageClass extends React.Component {
     }
 }
 LocationPageClass.propTypes = {
-
     previousStep: React.PropTypes.func.isRequired,
-    nextStep: React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
 };
 
 const LocationPage = reduxForm({
