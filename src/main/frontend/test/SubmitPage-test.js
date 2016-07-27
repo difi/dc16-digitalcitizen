@@ -65,6 +65,10 @@ describe("SubmitSuccessClass", function() {
     beforeEach(() => {
         // the fields that are individual for each page
         const props = {
+            fields: {
+                name: {value: null},
+                applyingForSelf: {value: null}
+            },
             userData: userData,
             fieldValues: fieldValues
 

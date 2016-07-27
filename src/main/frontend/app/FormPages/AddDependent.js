@@ -13,8 +13,8 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
 import RESTpaths from '../static_data/RESTpaths.js';
-const fields = [
 
+const fields = [
     'form1.name',
     'form1.mail',
     'form1.phone',
@@ -40,8 +40,6 @@ const fields = [
     'checked',
     'otherRelation',
     'typeOfRelation'
-
-
 ];
 
 var DISPLAY_FORM = 'block';
@@ -63,7 +61,6 @@ export class AddDependentClass extends React.Component {
             this.getPersonToBeDependent();
         }
     }
-
 
     getPersonToBeDependent() {
 
@@ -265,19 +262,17 @@ export class AddDependentClass extends React.Component {
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
                     disabled={!valid}
-
                 />
             </div>
         );
     }
 }
-;
 
 AddDependentClass.propTypes = {
 
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired,
-}
+};
 
 
 const AddDependent = reduxForm({
