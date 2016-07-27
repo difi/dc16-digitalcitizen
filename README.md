@@ -23,10 +23,10 @@ Clone the repository
 
 To run a complete install of all necessary node modules and launch the application localhost:8080:
 
-mvn clean package spring-boot:run
+`mvn clean package spring-boot:run`
 
 To run webpack with hot reload, for developing, run the application file, cd into src/main/frontend:
 
-npm start.
+`npm start`
 
 This will launch the application at localhost:9090.
