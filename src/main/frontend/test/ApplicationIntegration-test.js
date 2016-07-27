@@ -127,7 +127,7 @@ describe("ApplicationIntegration", () => {
         expect(subject.state().step).to.equal(3);
 
     });
-    /*
+
      it("Third page forwards you to correct step", () => {
      subject.setState({
      step: 3
@@ -135,8 +135,9 @@ describe("ApplicationIntegration", () => {
      var thirdPage = subject.find(PersonWithNeedForm);
      expect(thirdPage).to.have.length(1);
      //With PNR it should forward you to page 6
-     thirdPage.find(FormControl).first().simulate('change', {target: {value: '15028047425'}});
-     thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Elias Eliassen'}});
+     thirdPage.find('.formPnr').simulate('change', {target: {value: '15028047425'}});
+     thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
+     subject.update(); 
      var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
      nextButton.simulate('click');
      expect(subject.state().step).to.equal(6);
@@ -148,16 +149,15 @@ describe("ApplicationIntegration", () => {
      thirdPage = subject.find(PersonWithNeedForm);
      expect(thirdPage.find('.pnrCheck')).to.have.length(1);
      thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
-     //console.log(thirdPage.props());
-     thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
-     thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
+     
+     thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
+     thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
      nextButton = subject.find(NavigationButtons).find('.next-btn');
      nextButton.simulate('click');
      expect(subject.state().step).to.equal(4);
-
-
+         
      });
-     */
+
     it("fourth page forwards you to correct step", () => {
         subject.setState({
             step: 4

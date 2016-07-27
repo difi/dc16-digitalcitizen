@@ -119,10 +119,11 @@ export class RelationFormClass extends React.Component {
         if (relation.value == "guardian") {
             dependent.onChange(true);
             pnr.onChange(nameOfChild.value.split(":")[0]);
+            var pnrAjax = nameOfChild.value.split(":")[0];
             name.onChange(nameOfChild.value.split(":")[1]);
 
             $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnrAjax,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
