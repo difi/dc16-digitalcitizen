@@ -284,8 +284,8 @@ export class ApplicationClass extends React.Component {
                     </Navbar.Collapse>
                 </Navbar>
                 {header}
-                <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={3} xsOffset={2} md={6}
-                     xs={8} sm={6} lg={6}>
+                <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={0} xsOffset={0} md={6}
+                     xs={12} sm={12} lg={6}>
                     <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
                         {content}
                     </Col>
