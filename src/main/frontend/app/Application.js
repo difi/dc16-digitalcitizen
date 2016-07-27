@@ -47,8 +47,9 @@ export class ApplicationClass extends React.Component {
         this.saveUserData = this.saveUserData.bind(this);
         this.saveDependents = this.saveDependents.bind(this);
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
-
+        this.resetDependent = this.resetDependent.bind(this);
         this.getUserData = this.getUserData.bind(this);
+
         this.getUserData();
     }
 
@@ -71,6 +72,15 @@ export class ApplicationClass extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
+    }
+    //This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
+    resetDependent() {
+        const {fields: {form1}} = this.props;
+        form1.name.onChange(null);
+        form1.phone.onChange(null);
+        form1.mail.onChange(null);
+        form1.relation.onChange(null);
+        form1.depOtherRelation.onChange(null)
     }
 
     saveDependents() {
@@ -110,6 +120,22 @@ export class ApplicationClass extends React.Component {
     saveValuesFromRedux() {
         const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
         var dependents = this.saveDependents();
+
+        //fixes Special Needs Values so they will fit the pdf.
+        var med = medical.value;
+        var cha = changes.value;
+        var oth = other.value;
+
+        if (medical.value) {
+            med = med.replace(/[\n]/g, '. ');
+        }
+        if (changes.value) {
+            cha = cha.replace(/[\n]/g, '. ');
+        }
+        if (other.value) {
+            oth = oth.replace(/[\n]/g, '. ');
+        }
+
         var fields = {
             applyingForSelf: applyingForSelf.value,                     // Boolean
             relation: relation.value,                                   // String
@@ -134,9 +160,9 @@ export class ApplicationClass extends React.Component {
             },
             dependents: dependents,                                     // List of Dependent objects { name: '', address: '', telephone: ''}
             lengthOfStay: need.value,                                   // String
-            medicalNeeds: medical.value.replace(/[\n]/g, '. '),         // String
-            conditionChanges: changes.value.replace(/[\n]/g, '. '),     // String
-            otherNeeds: other.value.replace(/[\n]/g, '. '),             // String
+            medicalNeeds: med,         // String
+            conditionChanges: cha,     // String
+            otherNeeds: oth,             // String
             nursingHome: {                                              // NursingHome Object
                 municipality: municipalityApp.value,                        // String
                 name: homeApp.value                                         // String
@@ -182,7 +208,8 @@ export class ApplicationClass extends React.Component {
                     store={this.props.store}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    userData={userData}/>;
+                    userData={userData}
+                    resetDep={this.resetDependent}/>;
                 break;
             case 2:
                 content = <RelationForm
@@ -190,7 +217,8 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                    userData={userData}/>;
+                    userData={userData}
+                    resetDep={this.resetDependent}/>;
 
                 break;
             case 3:

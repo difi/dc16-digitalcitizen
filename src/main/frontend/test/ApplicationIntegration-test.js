@@ -5,13 +5,14 @@ import React from 'react';
 import {expect} from 'chai';
 import {mount} from 'enzyme';
 import WhosSearching from '../app/FormPages/WhosSearchingForm.js';
-import PersonWithNeedInfoForm from '../app/FormPages/PersonWithNeedInfoForm';
 import RelationForm from '../app/FormPages/RelationForm';
 import PersonWithNeedForm from '../app/FormPages/PersonWithNeedForm';
+import PersonWithNeedInfoForm from '../app/FormPages/PersonWithNeedInfoForm';
 import GeneralPractitioner from '../app/FormPages/GeneralPractitioner';
-import SpecialNeeds from '../app/FormPages/SpecialNeeds';
-import NeedsForm from'../app/FormPages/NeedsForm';
 import AddDependent from '../app/FormPages/AddDependent';
+import NeedsForm from'../app/FormPages/NeedsForm';
+import SpecialNeeds from '../app/FormPages/SpecialNeeds';
+import LocationPage from '../app/FormPages/LocationPage.js';
 import SubmitSuccess from '../app/FormPages/SubmitPage';
 import NavigationButtons from '../app/FormPages/Components/NavigationButtons.js';
 import AddressField from '../app/FormPages/Components/AddressField.js';
@@ -172,7 +173,7 @@ describe("ApplicationIntegration", () => {
         var nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
         //Button with classname next-btn shouldnt exists before zipcode and phone number is entered.
         expect (nextButton).to.have.length(0);
-        //button with classname disabledButton should exist
+        //button with classname disabledButton-nxt should exist
         expect(fourthPage.find(".disabledButton-nxt")).to.have.length(1);
 
         expect(subject.state().step).to.equal(4);
@@ -193,11 +194,16 @@ describe("ApplicationIntegration", () => {
         var fifthPage = subject.find(GeneralPractitioner);
         expect(fifthPage).to.have.length(1);
         var nextButton = fifthPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before something is entered
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-nxt should exist
+        expect(fifthPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
+
         expect(subject.state().step).to.equal(5);
         //Finds the first basic input element - that is the component that has to change and callbacks upwards.
         fifthPage.find(TypeAhead).find('input').first().simulate('change', {target: {value: 'Ola'}});
+
+        nextButton = fifthPage.find(NavigationButtons).find('.next-btn');
 
         nextButton.simulate('click');
 
@@ -232,11 +238,18 @@ describe("ApplicationIntegration", () => {
         });
         var seventhPage = subject.find(NeedsForm);
         var nextButton = seventhPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before something is entered
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-nxt should exist
+        expect(seventhPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
+
         expect(subject.state().step).to.equal(7);
+
         //Finds the first basic input element - that is the component that has to change and callbacks upwards.
         seventhPage.find('.radio-long').simulate('change', {target: {value: true}});
+
+        nextButton = seventhPage.find(NavigationButtons).find('.next-btn');
+        expect(nextButton).to.have.length(1);
 
         nextButton.simulate('click');
 
@@ -255,9 +268,46 @@ describe("ApplicationIntegration", () => {
         eightPage.find(FormControl).first().simulate('change', {target: {value: 'Fordi jeg er gammel'}});
 
         nextButton.simulate('click');
+
+        expect(subject.state().step).to.equal(9);
+    });
+
+    it("ninth page forwards you to correct step", () => {
+        subject.setState({
+            step: 9
+        });
+        var ninthPage = subject.find(LocationPage);
+
+        var nextButton = ninthPage.find(NavigationButtons).find('.next-btn');
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-submit should exist
+        expect(ninthPage.find('.disabledButton-submit')).to.have.length(1);
+
+        var inputField = ninthPage.find(TypeAhead).find('input').first();
+        expect(inputField).to.have.length(1);
+        inputField.simulate('change', {target: {value: 'Trondheim'}});
+
+
+        nextButton = ninthPage.find(NavigationButtons).find('.next-btn');
+        expect(nextButton).to.have.length(1);
+
+        // to click the next-button is only allowed if applyingForSelf is defined
+        //nextButton.simulate('click');
         //THIS ONLY WORKS when this.props.next() is called at the start of submit function in Navigation Buttons. Sondre - what to do?
 
-        //expect(subject.state().step).to.equal(9);
+        //expect(subject.state().step).to.equal(10);*/
+    });
+
+    it("ninth page sends you back to step 8", () => {
+        subject.setState({
+            step: 9
+        });
+        var ninthPage = subject.find(LocationPage);
+        var backButton = ninthPage.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
+
+        expect(subject.state().step).to.equal(8);
     });
 
     it("Eight page sends you back to step 7", () => {
