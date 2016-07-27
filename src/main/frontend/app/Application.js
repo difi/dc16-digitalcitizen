@@ -96,62 +96,53 @@ export class ApplicationClass extends React.Component {
         this.resetDependent = this.resetDependent.bind(this);
 
         this.getUserData = this.getUserData.bind(this);
-
         this.getUserData();
-        this.testScript = this.testScript.bind(this);
 
         //add method for test data
         if(this.props.fields.applyingForSelf.onChange()){
-            this.testScript();
+            this.testScriptPerson();
+        }
+
+        if(this.props.fields.relation.onChange()){
+            this.testScriptRelations();
+        }
+
+        //dependent form 1
+        if(this.props.fields.form1.name.onChange()){
+            this.testScriptAddDependent1();
+        }
+        //dependent form 2
+        if(this.props.fields.form2.name.onChange()){
+            this.testScriptAddDependent2();
+        }
+        //dependent form 3
+        if(this.props.fields.form3.name.onChange()){
+            this.testScriptAddDependent3();
         }
     }
 
-    testScript(){
+    testScriptPerson() {
 
         //person with need
-        //this.props.fields.applyingForSelf.onChange();
-        this.props.fields.pnr.onChange("46561231546");
-        this.props.fields.name.onChange("skjhakl");
+        this.props.fields.applyingForSelf.onChange();
+        this.props.fields.pnr.onChange("15028047425");
+        this.props.fields.name.onChange("Elias Eliassen");
         this.props.fields.checked.onChange(false);
-        this.props.fields.number.onChange("12345678");
-        this.props.fields.street.onChange("gyt");
-        this.props.fields.zipcode.onChange("7020");
+        this.props.fields.number.onChange("99999991");
+        this.props.fields.street.onChange("testveien 2");
+        this.props.fields.zipcode.onChange("7030");
         this.props.fields.postal.onChange("");
         this.props.fields.municipality.onChange("Trondheim");
-        this.props.fields.doctorName.onChange("Berit");
-
-        //relations
-        this.props.fields.relation.onChange("undefined"); //guardian; family; other for choosing radio button
-        this.props.fields.typeOfRelation.onChange("sibling");
-        this.props.fields.nameOfChild.onChange("ss");
-        this.props.fields.dependent.onChange(false); //true for register as dependent
-        this.props.fields.otherRelation.onChange("sd");
-        this.props.fields.guardianFor.onChange();
-
-        //add dependent
-        this.props.fields.form1.name.onChange("sdf");
-        this.props.fields.form1.phone.onChange("12345678");
-        this.props.fields.form1.mail.onChange("df@df.no");
-        this.props.fields.form1.relation.onChange("Forelder");
-
-        this.props.fields.form2.name.onChange("sdf");
-        this.props.fields.form2.phone.onChange("12345678");
-        this.props.fields.form2.mail.onChange("df@df.no");
-        this.props.fields.form2.relation.onChange("Forelder");
-
-        this.props.fields.form3.name.onChange("sdf");
-        this.props.fields.form3.phone.onChange("12345678");
-        this.props.fields.form3.mail.onChange("df@df.no");
-        this.props.fields.form3.relation.onChange("Forelder");
+        this.props.fields.doctorName.onChange("Tore");
 
         //needs form
-        this.props.fields.need.onChange("short");
+        this.props.fields.need.onChange("long");
         this.props.fields.medical.onChange("No");
         this.props.fields.changes.onChange("No");
         this.props.fields.other.onChange("No");
 
         //
-        this.props.fields.displayButton.onChange('block');
+        this.props.fields.displayButton.onChange();
 
         //
         this.props.fields.form1.depOtherRelation.onChange();
@@ -160,10 +151,41 @@ export class ApplicationClass extends React.Component {
 
         //
         this.props.fields.numDep.onChange(1);
-        this.props.fields.municipalityApp.onChange("sd");
-        this.props.fields.homeApp.onChange("Ryen sykehjem");
+        this.props.fields.municipalityApp.onChange();
+        this.props.fields.homeApp.onChange();
     }
 
+    testScriptRelations(){
+        //relations
+        this.props.fields.relation.onChange(); //guardian; family; other for choosing radio button
+        this.props.fields.typeOfRelation.onChange();
+        this.props.fields.nameOfChild.onChange();
+        this.props.fields.dependent.onChange(false); //true for register as dependent
+        this.props.fields.otherRelation.onChange();
+        this.props.fields.guardianFor.onChange();
+    }
+
+    testScriptAddDependent1(){
+        //add dependent
+        this.props.fields.form1.name.onChange("Solfrid Solfridsen");
+        this.props.fields.form1.phone.onChange("99999995");
+        this.props.fields.form1.mail.onChange("test@test.com");
+        this.props.fields.form1.relation.onChange("Søsken");
+    }
+
+    testScriptAddDependent2(){
+        this.props.fields.form2.name.onChange("Mia Miasen");
+        this.props.fields.form2.phone.onChange("99999993");
+        this.props.fields.form2.mail.onChange("test@test.sexy");
+        this.props.fields.form2.relation.onChange("Barn");
+    }
+
+    testScriptAddDependent3(){
+        this.props.fields.form3.name.onChange("Vegard den tøffe gutten");
+        this.props.fields.form3.phone.onChange("99999996");
+        this.props.fields.form3.mail.onChange("test@test.no");
+        this.props.fields.form3.relation.onChange("Barn");
+    }
 
     getUserData() {
         $.ajax({
@@ -282,7 +304,6 @@ export class ApplicationClass extends React.Component {
         console.log("Returning fields");
         return fields
     }
-
 
     saveUserData(field_value) {
         this.setState({
