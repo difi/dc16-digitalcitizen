@@ -57,9 +57,9 @@ describe("SpecialNeedsClass", function() {
         // the fields that are individual for each page
         const props = {
             fields: {
-                medical: null,
-                changes: "sd",
-                other: null
+                medical: {value: null},
+                changes: {value: "fsd"},
+                other: {value: null}
             },
             fieldValues
         };
