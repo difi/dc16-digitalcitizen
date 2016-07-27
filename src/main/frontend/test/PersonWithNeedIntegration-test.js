@@ -78,27 +78,8 @@ describe("Integration of PersonWithNeedForm", () => {
         expect(errorMessage.text()).to.equal("Vennligst fyll inn et ellevesifret fødselsnummer.");
     });
 
-    it("Shows errormessage when name and pnr is not matching, and checkbox is not checked", function () {
-        expect(subject).to.have.length(1);
-
-        const name = subject.find('.formName');
-        const pnr = subject.find('.formPnr');
-        // We change the value to a correct value and expect no errormessage
-        name.simulate('change', {target: {value: 'Kari'}});
-        pnr.simulate('change', {target: {value: '13019870019'}});
-
-        // need to push button to be able to maybe see the error message. And the button is supposed to be of
-        // the type disabledButton, and not next-btn
-        const nextButton = subject.find('.disabledButton-nxt');
-        expect (nextButton).to.have.length.of(1);
-        //expect(subject.find('.next-btn')).to.have.length(0);
-
-        nextButton.simulate('click');
-
-        const errorMessage = subject.find('.error');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(1);
-    });
+    // In this test we do not have access to a server, so we are not able to test if
+    // the application shows an errormessage when name and pnr is not matching, and checkbox is not checked
 
     it("Do not show error message when name has a valid value and checkbox is checked", function () {
         expect(subject).to.have.length(1);
