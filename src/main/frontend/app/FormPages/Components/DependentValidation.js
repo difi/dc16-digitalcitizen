@@ -1,5 +1,6 @@
 import {checkPhoneNumber} from '../Utilities/validation';
 import {checkEmail} from '../Utilities/validation';
+import {fieldIsEmpty} from '../Utilities/validation';
 
 function feedback(data) {
     var errors = {};
@@ -8,6 +9,9 @@ function feedback(data) {
     }
     if (!(checkEmail(data.mail))) {
         errors.mail = "Dette er ikke en gyldig epostadresse";
+    }
+    if ((fieldIsEmpty(data.name))) {
+        errors.name = "Dette er ikke et gyldig navn";
     }
     return errors
 }
