@@ -127,11 +127,11 @@ export class ApplicationClass extends React.Component {
         this.props.fields.applyingForSelf.onChange();
         this.props.fields.pnr.onChange("15028047425");
         this.props.fields.name.onChange("Elias Eliassen");
-        this.props.fields.checked.onChange(false);
+        this.props.fields.checked.onChange(true); //check box for pnr
         this.props.fields.number.onChange("99999991");
         this.props.fields.street.onChange("testveien 2");
         this.props.fields.zipcode.onChange("7030");
-        this.props.fields.postal.onChange("");
+        this.props.fields.postal.onChange("Trondheim");
         this.props.fields.municipality.onChange("Trondheim");
         this.props.fields.doctorName.onChange("Tore");
 
