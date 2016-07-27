@@ -116,21 +116,12 @@ describe("ApplicationIntegration", () => {
         });
         var secondPage = subject.find(RelationForm);
         var nextButton = secondPage.find('.next-btn');
-        //button with classname next-btn shouldnt exist before something is entered
-        expect(nextButton).to.have.length(0);
-        //button with classname disabledButton-nxt should exist
-        expect(secondPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
-
+        nextButton.simulate('click');
+        //Button shouldnt be clickable before something is entered
         expect(subject.state().step).to.equal(2);
         //Finds the first basic input element - that is the component that has to change and callbacks upwards.
-        var radioButton = secondPage.find('.radio-other');
-        expect(radioButton).to.have.length(1);
-        radioButton.simulate('change', {target: {value: "other"}});
-        var inputField = secondPage.find(FormControl);
-        expect(inputField).to.have.length(1);
-        inputField.simulate('change', {target: {value: "elskerinne"}});
-        nextButton = secondPage.find('.next-btn');
-        expect(nextButton).to.have.length(1);
+        secondPage.find('.radio-other').simulate('change', {target: {value: "other"}});
+        secondPage.find(FormControl).simulate('change', {target: {value: "elskerinne"}});
         nextButton.simulate('click');
         //Other information should forward to step 3 ;
         expect(subject.state().step).to.equal(3);
@@ -271,11 +262,15 @@ describe("ApplicationIntegration", () => {
         });
         var eightPage = subject.find(SpecialNeeds);
         var nextButton = eightPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before something is entered
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-nxt should exist
+        expect(eightPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
+
         expect(subject.state().step).to.equal(8);
         eightPage.find(FormControl).first().simulate('change', {target: {value: 'Fordi jeg er gammel'}});
 
+        nextButton = eightPage.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
 
         expect(subject.state().step).to.equal(9);
