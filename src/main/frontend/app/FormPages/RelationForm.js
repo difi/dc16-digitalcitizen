@@ -141,12 +141,19 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = relation.value && ((nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value));
+        var errorMessage = null;
 
         if (clickNextButton && (valid == undefined)) {
             if (!relation.value) {
-                var errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
+                errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
             } else {
-                var errorMessage = <p>Vennligst fyll inn <b><i>hva er din relasjon til søker?</i></b>, før du kan gå videre.</p>;
+                if(relation.value == "guardian"){
+                    errorMessage = <p>Vennligst velg <b><i>hvem du fyller ut på vegne av</i></b>, før du går videre.</p>;
+                }
+                else{
+                    errorMessage = <p>Vennligst fyll inn <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
+                }
+
             }
 
             error =

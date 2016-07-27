@@ -63,7 +63,7 @@ export class SpecialNeedsClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = <p>Vennligst svar på spørsmålet <b><i>{changes.error}</i></b>, før du kan gå videre.</p>
+            var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>
 
             content =
                 <componentClass>
@@ -154,7 +154,7 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.changes)) {
-        errors.changes = "hva er grunnen til at det søkes om plass på sykehjem?";
+        errors.changes = "hva som er grunnen til at det søkes om plass på sykehjem";
     }
     return errors;
 };

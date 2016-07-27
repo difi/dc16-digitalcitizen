@@ -55,7 +55,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du kan gå videre.</p>;
+            var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du går videre.</p>;
 
             content =
                 <componentClass>
