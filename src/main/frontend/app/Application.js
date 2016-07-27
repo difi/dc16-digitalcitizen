@@ -28,7 +28,7 @@ import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
 
 
-export const fields=[
+export const fields = [
     "applyingForSelf",
     "pnr",
     "name",
@@ -98,29 +98,34 @@ export class ApplicationClass extends React.Component {
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
 
+        // The following if-sentences needs to be commented out of the code if the
+        // ApplicationIntegration-test is going to run as expected
+
         //add method for test data
-        if(this.props.fields.applyingForSelf.onChange()){
+        if (this.props.fields.applyingForSelf.onChange()) {
             this.testScriptPerson();
         }
 
-        if(this.props.fields.relation.onChange()){
+        if (this.props.fields.relation.onChange()) {
             this.testScriptRelations();
         }
 
         //dependent form 1
-        if(this.props.fields.form1.name.onChange()){
+        if (this.props.fields.form1.name.onChange()) {
             this.testScriptAddDependent1();
         }
         //dependent form 2
-        if(this.props.fields.form2.name.onChange()){
+        if (this.props.fields.form2.name.onChange()) {
             this.testScriptAddDependent2();
         }
         //dependent form 3
-        if(this.props.fields.form3.name.onChange()){
+        if (this.props.fields.form3.name.onChange()) {
             this.testScriptAddDependent3();
         }
     }
 
+    // Testscript needs to be commented out of the code if the
+    // ApplicationIntegration-test is going to run as expected
     testScriptPerson() {
 
         //person with need
@@ -155,7 +160,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.homeApp.onChange();
     }
 
-    testScriptRelations(){
+    testScriptRelations() {
         //relations
         this.props.fields.relation.onChange(); //guardian; family; other for choosing radio button
         this.props.fields.typeOfRelation.onChange();
@@ -165,7 +170,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.guardianFor.onChange();
     }
 
-    testScriptAddDependent1(){
+    testScriptAddDependent1() {
         //add dependent
         this.props.fields.form1.name.onChange("Solfrid Solfridsen");
         this.props.fields.form1.phone.onChange("99999995");
@@ -173,14 +178,14 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form1.relation.onChange("Søsken");
     }
 
-    testScriptAddDependent2(){
+    testScriptAddDependent2() {
         this.props.fields.form2.name.onChange("Mia Miasen");
         this.props.fields.form2.phone.onChange("99999993");
         this.props.fields.form2.mail.onChange("test@test.sexy");
         this.props.fields.form2.relation.onChange("Barn");
     }
 
-    testScriptAddDependent3(){
+    testScriptAddDependent3() {
         this.props.fields.form3.name.onChange("Vegard den tøffe gutten");
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
@@ -206,6 +211,7 @@ export class ApplicationClass extends React.Component {
             }.bind(this)
         });
     }
+
     //This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
     resetDependent() {
         const {fields: {form1}} = this.props;
@@ -217,7 +223,7 @@ export class ApplicationClass extends React.Component {
     }
 
     saveDependents() {
-        const {fields: {form1, form2, form3, numDep}} = this.props
+        const {fields: {form1, form2, form3, numDep}} = this.props;
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
@@ -359,7 +365,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                 />;
+                />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
@@ -367,7 +373,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                   />;
+                />;
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -455,17 +461,14 @@ export class ApplicationClass extends React.Component {
     }
 }
 
-
 ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
-
 
 const Application = reduxForm({
     form: 'application',
     fields: fields,
     destroyOnUnmount: false,
 })(ApplicationClass);
-
 
 export default Application

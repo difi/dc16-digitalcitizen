@@ -84,13 +84,15 @@ describe("Integration of PersonWithNeedForm", () => {
         const name = subject.find('.formName');
         const pnr = subject.find('.formPnr');
         // We change the value to a correct value and expect no errormessage
-        name.simulate('change', {target: {value: 'Eldar'}});
+        name.simulate('change', {target: {value: 'Kari'}});
         pnr.simulate('change', {target: {value: '13019870019'}});
 
         // need to push button to be able to maybe see the error message. And the button is supposed to be of
         // the type disabledButton, and not next-btn
         const nextButton = subject.find('.disabledButton-nxt');
         expect (nextButton).to.have.length.of(1);
+        //expect(subject.find('.next-btn')).to.have.length(0);
+
         nextButton.simulate('click');
 
         const errorMessage = subject.find('.error');
