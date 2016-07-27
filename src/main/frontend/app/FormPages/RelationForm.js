@@ -159,7 +159,6 @@ export class RelationFormClass extends React.Component {
                 alertMessage = false;
             }
         }
-        console.log("Relasjon valgt: " + relation.value);
 
         switch (relation.value) {
             case "guardian":
