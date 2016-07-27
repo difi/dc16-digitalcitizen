@@ -4,6 +4,8 @@
 [![Codecov](https://codecov.io/gh/difi/dc16-digitalcitizen/branch/master/graph/badge.svg)](https://codecov.io/gh/difi/dc16-digitalcitizen)
 [![Stories in Ready](https://badge.waffle.io/difi/dc16-digitalcitizen.png?label=ready&title=Ready)](https://waffle.io/difi/dc16-digitalcitizen)
 
+Oppgavetekst
+======
 Det er i dag den enkelte kommunes ansvar å tilby en elektronisk løsning for sykehjemsplass. Dette er en søknad som i stor grad består av ustrukturert informasjon (fritekst) og er ofte «digitalisert» gjennom et PDF-skjema. 
 
 Oppgaven bygger videre på det underliggende tankesettet i referansearkitekturen for meldingsutveksling, der ideen er å skjule hver deltaker for kompleksiteten ved varierende grad av modenhet hos de man kommuniserer med. Det som er nytt er at den ene parten er en innbygger. Forslaget er å lage en enkel web-applikasjon med et skjema for å søke om sykehjemsplass. Dette gir en søknad i form av en meldingstype med strukturert informasjon. For de kommuner som er i stand til å ta imot informasjonen denne meldingen direkte så blir den sendt gjennom dertil egnet infrastruktur. For de kommuner som ikke kan håndtere meldingen direkte så blir det laget et fysisk brev (her kan man bruke DPI sin print-tjeneste) som blir sendt til kommunen. 
@@ -15,20 +17,16 @@ Søknad om sykehjemsplass er valgt fordi denne illustrerer hvordan innbyggere m�
 Tanken er å løse oppgaven med stor grad av bruk av dagens fellesløsninger – meldingsutveksling, Altinn REST API og DPI.
 
 
+Getting started
+-----------
+1. Clone the repository
 
-For å kjøre Webpack med Hot Reload.
+2. To run a complete install of all necessary node modules and launch the application localhost:8080:
 
-Kjør Application på vanlig måte.
+    `mvn clean package spring-boot:run`
 
-I terminalen naviger til src/main/frontend
+3. To run webpack with hot reload, for developing, run the application file, cd into src/main/frontend:
 
-Første ganng må en del ekstra tillegg installeres:(
-npm install
-)
+    `npm start`
 
-For å starte opp dev server - kjør
-npm start.
-
-Applikasjonen vil nå kjøre på localhost:9090 og vil av og til oppdatere seg med om du lagrer .js filene.
-
-Om den skulle stoppe Avbryt terminalscriptet og kjør på nytt.
+This will launch the application at localhost:9090.

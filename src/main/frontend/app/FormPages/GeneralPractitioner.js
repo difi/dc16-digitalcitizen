@@ -71,13 +71,13 @@ export class GeneralPractitionerClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('generalPract').innerHTML;
+            var errorMessage = <p>Vennligst fyll inn <b><i>fastlege</i></b>, før du går videre.</p>
 
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -103,7 +103,7 @@ export class GeneralPractitionerClass extends React.Component {
                                 <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect"
                                            labelKey="name"
                                            selected={doctorName.value? [{name: doctorName.value}]: []}
-                                           textValue={onlyLettersInString}
+                                           textReducer={onlyLettersInString}
                                            onInputChange={value=> doctorName.onChange(value)}
                                 />
                             </FormGroup>

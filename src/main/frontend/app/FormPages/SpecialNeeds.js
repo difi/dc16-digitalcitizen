@@ -63,13 +63,13 @@ export class SpecialNeedsClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('changesLabel').innerHTML;
+            var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>;
 
             content =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
-                            Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -93,7 +93,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormGroup
-                                validationState={changes.error && (changes.touched || alertMessage)  ? "error" : ""}>
+                                validationState={changes.error && (changes.touched || alertMessage) ? "error" : ""}>
                                 <FormControl componentClass="textarea" className="special-needs-textarea"
                                              id="mandatoryField"
                                              ref="conditionChanges" {...changes}
@@ -145,7 +145,7 @@ export class SpecialNeedsClass extends React.Component {
 }
 SpecialNeedsClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired
+    nextStep: React.PropTypes.func.isRequired
 };
 
 
@@ -154,7 +154,7 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.changes)) {
-        errors.changes = "Dette feltet må fylles ut. ";
+        errors.changes = "hva som er grunnen til at det søkes om plass på sykehjem";
     }
     return errors;
 };

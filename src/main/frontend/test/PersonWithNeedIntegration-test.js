@@ -75,7 +75,7 @@ describe("Integration of PersonWithNeedForm", () => {
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Vennligst fyll inn et fødselsnummer med 11 siffer.");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn et ellevesifret fødselsnummer.");
     });
 
     it("Shows errormessage when name and pnr is not matching, and checkbox is not checked", function () {
