@@ -102,7 +102,7 @@ export class ApplicationClass extends React.Component {
         // ApplicationIntegration-test is going to run as expected
 
         //add method for test data
-        /*if (this.props.fields.applyingForSelf.onChange()) {
+        if (this.props.fields.applyingForSelf.onChange()) {
             this.testScriptPerson();
         }
 
@@ -190,7 +190,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
         this.props.fields.form3.relation.onChange("Barn");
-        */
+        
     }
 
     getUserData() {
