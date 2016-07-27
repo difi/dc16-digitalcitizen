@@ -50,7 +50,7 @@ export class PersonWithNeedClass extends React.Component {
 
         } else {
             //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
-         
+
 
             if (this.props.fields.checked.value) {
                 console.log("State 4");
@@ -88,12 +88,7 @@ export class PersonWithNeedClass extends React.Component {
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         var errormessage = null;
-        console.log(valid);
-        console.log(name.value);
-        console.log(pnr.value);
-        console.log(pnr.error);
-        console.log(name.error);
-        console.log(asyncValidating)
+
         //Decide which errormessage is the correct one to show to the user
         if (name.error && pnr.error && !checked.value) {
             errormessage = "Vennligst fyll inn et navn, og et fødselsnummer med 11 siffer."

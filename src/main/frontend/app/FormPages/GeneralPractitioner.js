@@ -103,7 +103,7 @@ export class GeneralPractitionerClass extends React.Component {
                                 <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect"
                                            labelKey="name"
                                            selected={doctorName.value? [{name: doctorName.value}]: []}
-                                           textValue={onlyLettersInString}
+                                           textReducer={onlyLettersInString}
                                            onInputChange={value=> doctorName.onChange(value)}
                                 />
                             </FormGroup>
