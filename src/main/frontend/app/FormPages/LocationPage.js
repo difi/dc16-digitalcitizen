@@ -86,8 +86,9 @@ export class LocationPageClass extends React.Component {
     }
 
     onInputChangeHandler(event){
+        console.log(event);
         inputChangeRun+=1;
-        this.props.fields.municipalityApp.onChange("" + event);
+        this.props.fields.municipalityApp.onChange(event);
         if(this.validateMun(event)){
             this.municipalityChange(event);
         }
@@ -95,7 +96,7 @@ export class LocationPageClass extends React.Component {
 
     onChangeHandler(event){
         if (inputChangeRun == 1){
-            this.props.fields.municipalityApp.onChange("" + event);
+            this.props.fields.municipalityApp.onChange(event);
         }
     }
 
@@ -114,18 +115,15 @@ export class LocationPageClass extends React.Component {
         var valid = this.validateMun(municipalityApp.value);
         var homes = null;
 
-        console.log("Validd: " + valid);
-
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('mun').innerHTML;
-            console.log(errorMessage);
+            var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen  i</i></b>, før du går videre.</p>
 
             content =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
-                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -137,7 +135,7 @@ export class LocationPageClass extends React.Component {
                 alertMessage = false;
             }
         }
-
+        //To prevent error on first render, calls this function to create homeOptions field.
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
@@ -161,7 +159,7 @@ export class LocationPageClass extends React.Component {
                     <form className="location">
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label className="municipality" id="mun">I hvilken kommune ønskes plassen?</label>
+                                <label className="municipality">I hvilken kommune ønskes plassen?</label>
                             </Col>
                             <Col sm={6} md={6}>
                                 <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
@@ -191,9 +189,8 @@ export class LocationPageClass extends React.Component {
     }
 }
 LocationPageClass.propTypes = {
-
     previousStep: React.PropTypes.func.isRequired,
-    nextStep: React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
 };
 
 const LocationPage = reduxForm({

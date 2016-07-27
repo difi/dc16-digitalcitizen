@@ -22,13 +22,12 @@ export class SpecialNeedsClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-        this.saveFieldValues = this.saveFieldValues.bind(this);
+
         this.limitTextFields = this.limitTextFields.bind(this);
     }
 
 
     handleClickBack() {
-        this.saveFieldValues();
         console.log("State 6");
         (this.props.previousStep(7));
     }
@@ -42,37 +41,10 @@ export class SpecialNeedsClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            this.saveFieldValues();
             console.log("State 9");
             this.props.nextStep(9);
         }
 
-    }
-
-    saveFieldValues() {
-        // Get values via this.refs
-        const {fields: {medical, changes, other}} = this.props;
-
-        var med = medical.value;
-        var cha = changes.value;
-        var oth = other.value;
-
-        if (medical.value) {
-            med = med.replace(/[\n]/g, '. ');
-        }
-        if (changes.value) {
-            cha = cha.replace(/[\n]/g, '. ');
-        }
-        if (other.value) {
-            oth = oth.replace(/[\n]/g, '. ');
-        }
-
-        var data = {
-            medicalNeeds: med,
-            conditionChanges: cha,
-            otherNeeds: oth
-        };
-     
     }
 
     limitTextFields(e, field) {
@@ -91,13 +63,13 @@ export class SpecialNeedsClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = document.getElementById('changesLabel').innerHTML;
+            var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>;
 
             content =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
-                            Vennligst svar på spørsmålet <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                            {errorMessage}
                         </Alert>
                     </div>
                 </componentClass>;
@@ -121,7 +93,7 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                         <Col sm={12} md={12}>
                             <FormGroup
-                                validationState={changes.error && (changes.touched || alertMessage)  ? "error" : ""}>
+                                validationState={changes.error && (changes.touched || alertMessage) ? "error" : ""}>
                                 <FormControl componentClass="textarea" className="special-needs-textarea"
                                              id="mandatoryField"
                                              ref="conditionChanges" {...changes}
@@ -173,7 +145,7 @@ export class SpecialNeedsClass extends React.Component {
 }
 SpecialNeedsClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired
+    nextStep: React.PropTypes.func.isRequired
 };
 
 
@@ -182,7 +154,7 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.changes)) {
-        errors.changes = "Dette feltet må fylles ut. ";
+        errors.changes = "hva som er grunnen til at det søkes om plass på sykehjem";
     }
     return errors;
 };

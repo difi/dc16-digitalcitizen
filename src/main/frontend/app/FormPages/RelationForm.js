@@ -9,15 +9,21 @@ import NavigationButtons from './Components/NavigationButtons.js';
 
 import dropdownContent from '../static_data/dropdown-list-content.js';
 
-var ReactDOM = require('react-dom');
+import {fieldIsEmpty} from './Utilities/validation.js';
+
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
+var Alert = require('react-bootstrap/lib/Alert');
 
+var error = null;
+var clickNextButton = false;
+export var alertMessage = false;
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
@@ -40,9 +46,12 @@ export class RelationFormClass extends React.Component {
             success: function (data) {
                 console.log(data);
                 data = data.map(data => {
-                    return  {value: data.pnr + ":" + data.name + ":" + data.address + ":" + data.telephone, name: data.name}
+                    return {
+                        value: data.pnr + ":" + data.name + ":" + data.address + ":" + data.telephone,
+                        name: data.name
+                    }
                 });
-                
+
                 data.unshift({value: 0, name: "Velg..."});
                 this.props.fields.guardianFor.onChange(data);
                 this.forceUpdate();
@@ -61,14 +70,23 @@ export class RelationFormClass extends React.Component {
     }
 
     handleClickNext() {
-        const {fields: {relation}} = this.props;
-        console.log("State 3");
-        this.saveFieldValues();
-        if (relation.value == "guardian") {
-            this.props.nextStep(6);
-        }
-        else {
-            this.props.nextStep(3);
+        const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
+        var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
+        //const {fields: {relation}} = this.props;
+
+        if ((valid == undefined || !valid)) {
+            clickNextButton = true;
+            this.forceUpdate();
+
+        } else {
+            console.log("State 3");
+            this.saveFieldValues();
+            if (relation.value == "guardian") {
+                this.props.nextStep(6);
+            }
+            else {
+                this.props.nextStep(3);
+            }
         }
     }
 
@@ -88,23 +106,28 @@ export class RelationFormClass extends React.Component {
         this.props.fields.typeOfRelation.onChange(null);
     }
 
-
+    resetDependent(event) {
+        this.props.fields.dependent.onChange(event.target.value);
+        if(!event.target.value){
+            this.props.resetDep();
+        }
+    }
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, nameOfChild}} = this.props;
+        const {fields: {relation, nameOfChild, dependent, pnr, name}} = this.props;
 
         if (relation.value == "guardian") {
-            var pnr = nameOfChild.value.split(":")[0];
-            this.props.fields.dependent.onChange(true);
-            this.props.fields.pnr.onChange(pnr);
+            dependent.onChange(true);
+            pnr.onChange(nameOfChild.value.split(":")[0]);
+            var pnrAjax = nameOfChild.value.split(":")[0];
+            name.onChange(nameOfChild.value.split(":")[1]);
 
             $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnrAjax,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
-                        this.props.fields.municipality.onChange(data);
-
+                    this.props.fields.municipality.onChange(data);
 
 
                 }.bind(this),
@@ -118,8 +141,38 @@ export class RelationFormClass extends React.Component {
     render() {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
-        var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
-       
+        var valid = relation.value && ((nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value));
+        var errorMessage = null;
+
+        if (clickNextButton && (valid == undefined)) {
+            if (!relation.value) {
+                errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
+            } else {
+                if(relation.value == "guardian"){
+                    errorMessage = <p>Vennligst velg <b><i>hvem du fyller ut på vegne av</i></b>, før du går videre.</p>;
+                }
+                else{
+                    errorMessage = <p>Vennligst oppgi <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
+                }
+            }
+
+            error =
+                <componentClass>
+                    <div className="error">
+                        <Alert bsStyle="danger">
+                            {errorMessage}
+                        </Alert>
+                    </div>
+                </componentClass>;
+            clickNextButton = false;
+            alertMessage = true;
+        } else {
+            if (valid  || relation.value) {
+                error = null;
+                alertMessage = false;
+            }
+        }
+
         switch (relation.value) {
             case "guardian":
                 content =
@@ -131,6 +184,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
+                                <FormGroup validationState={nameOfChild.touched || (alertMessage)? "error" : ""}>
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
@@ -142,9 +196,10 @@ export class RelationFormClass extends React.Component {
                                     //value={nameOfChild.value}
                                               onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
+                            </FormGroup>
                             </Col>
                         </Row>
-                    </componentClass>
+                    </componentClass>;
                 break;
             case "family":
                 content =
@@ -156,6 +211,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
+                                <FormGroup validationState={typeOfRelation.touched || (alertMessage) ? "error" : ""}>
                                 <DropdownList id="1"
                                               ref="familyRelation"
                                               className="family-rel"
@@ -165,14 +221,15 @@ export class RelationFormClass extends React.Component {
                                     {...typeOfRelation}
                                     //value={typeOfRelation.value}
                                               onChange={change => typeOfRelation.onChange(change.newValue)}/>
+                                </FormGroup>
                             </Col>
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende</Checkbox>
+                                <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende</Checkbox>
                             </Col>
                         </Row>
-                    </componentClass>
+                    </componentClass>;
                 break;
             case "other":
                 content = <componentClass>
@@ -183,21 +240,21 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <FormControl
-                                type="text"
-                                ref="otherRelation"
-                                className="other-rel"
-                                pattern="[A-Za-zæøåÆØÅ]"
-                                placeholder="Relasjon"
-                                {...otherRelation}
-                                //onChange={this.handleTextChange}
-                                //value={this.state.otherRelation}
-                            />
+                            <FormGroup validationState={otherRelation.error && (otherRelation.touched || alertMessage) ? "error" : ""}>
+                                <FormControl
+                                    type="text"
+                                    ref="otherRelation"
+                                    className="other-rel"
+                                    placeholder="Relasjon"
+                                    {...otherRelation}
+                                />
+                                <FormControl.Feedback />
+                            </FormGroup>
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende </Checkbox>
+                            <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende </Checkbox>
                         </Col>
                     </Row>
                 </componentClass>
@@ -210,22 +267,23 @@ export class RelationFormClass extends React.Component {
                     <form className="relation">
                         <input type="radio" id="guardian-radio" className="radio-Relation"
                                name="radio-buttons" {...relation} value="guardian"
-                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton} />Jeg er verge for søkeren
+                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton}/>Jeg er
+                        verge for søkeren
                         <br/>
                         <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"
-                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>Jeg er i familie med søkeren
+                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>Jeg er i
+                        familie med søkeren
                         <br/>
                         <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation}
                                value="other" checked={relation.value=="other"} onClick={this.handleOtherRadioButton}/>Annet
                     </form>
-
                     {content}
+                    {error}
                 </div>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={!valid}
-                    //disabled={!this.state.validForm}
+                    buttonDisabled={!valid}
                 />
             </div>
         )
@@ -233,14 +291,25 @@ export class RelationFormClass extends React.Component {
 }
 RelationFormClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
+};
+
+//Validation for form
+const validate = values => {
+    const errors = {};
+
+    if (fieldIsEmpty(values.otherRelation)) {
+        errors.otherRelation = "Skriv inn din relasjon.";
+    }
+    return errors;
 };
 
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr'],
-    destroyOnUnmount: false
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr', "name"],
+    destroyOnUnmount: false,
+    validate
 }, null, null)(RelationFormClass);
 
 export default RelationForm
