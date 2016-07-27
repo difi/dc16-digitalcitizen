@@ -42,7 +42,7 @@ export class PersonWithNeedClass extends React.Component {
 
     handleClickNext() {
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error && asyncValidating != 'name') || (name.value && checked.value);
+        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -50,15 +50,14 @@ export class PersonWithNeedClass extends React.Component {
 
         } else {
             //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
-            if (!this.props.fields.checked.value) {
-                this.savePerson();
-            }
+         
 
             if (this.props.fields.checked.value) {
                 console.log("State 4");
                 (this.props.nextStep(4));
             } else {
                 console.log("State 6");
+                this.savePerson();
                 (this.props.nextStep(6));
 
             }

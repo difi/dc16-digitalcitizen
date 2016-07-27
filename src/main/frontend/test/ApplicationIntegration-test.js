@@ -140,7 +140,7 @@ describe("ApplicationIntegration", () => {
      subject.update(); 
      var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
      nextButton.simulate('click');
-     /*expect(subject.state().step).to.equal(6);
+     expect(subject.state().step).to.equal(6);
      subject.setState({
      step: 3
      });
@@ -149,14 +149,13 @@ describe("ApplicationIntegration", () => {
      thirdPage = subject.find(PersonWithNeedForm);
      expect(thirdPage.find('.pnrCheck')).to.have.length(1);
      thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
-     //console.log(thirdPage.props());
-     thirdPage.find(FormControl).last().simulate('change', {target: {value: 'Snorre'}});
-     thirdPage.find(FormControl).first().simulate('change', {target: {value: ''}});
+     
+     thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
+     thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
      nextButton = subject.find(NavigationButtons).find('.next-btn');
      nextButton.simulate('click');
      expect(subject.state().step).to.equal(4);
-
-*/
+         
      });
 
     it("fourth page forwards you to correct step", () => {
