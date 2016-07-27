@@ -409,32 +409,6 @@ export class ApplicationClass extends React.Component {
         )
     }
 }
-/*
-Application.propTypes = {
-    fields: PropTypes.object.isRequired,
-    fieldValues: React.PropTypes.object.isRequired,
-    userData: React.PropTypes.object.isRequired
-};
-
-
-export default ApplicationAutofill
-*/
-
-/*
- Application.propTypes = {
- fieldValues: React.PropTypes.object.isRequired,
- userData: React.PropTypes.object.isRequired
- };
-
-const ApplicationAutofill = reduxForm({
- form: 'application',
-    fields: fields,
-    //initialValues: ,
-    destroyOnUnmount: false,
- })(Application);
-
- export default ApplicationAutofill
-*/
 
 
 ApplicationClass.propTypes = {
