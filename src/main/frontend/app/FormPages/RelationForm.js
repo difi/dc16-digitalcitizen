@@ -151,9 +151,8 @@ export class RelationFormClass extends React.Component {
                     errorMessage = <p>Vennligst velg <b><i>hvem du fyller ut på vegne av</i></b>, før du går videre.</p>;
                 }
                 else{
-                    errorMessage = <p>Vennligst fyll inn <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
+                    errorMessage = <p>Vennligst oppgi <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
                 }
-
             }
 
             error =

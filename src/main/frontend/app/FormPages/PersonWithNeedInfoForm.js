@@ -152,13 +152,13 @@ const validate = values => {
         errors.street = "en adresse, ";
     }
     if (values.postal == "Ugyldig postnr.") {
-        errors.zipcode = "et fire siffret postnummer, ";
+        errors.zipcode = "et firesifret postnummer, ";
     }
     if (!validPostCode(values.zipcode)) {
-        errors.zipcode = "et fire siffret postnummer, ";
+        errors.zipcode = "et firesifret postnummer, ";
     }
     if (!(checkPhoneNumber(values.number))) {
-        errors.number = "et åtte siffret telefonnummer, ";
+        errors.number = "et åttesifret telefonnummer, ";
     }
     return errors;
 };

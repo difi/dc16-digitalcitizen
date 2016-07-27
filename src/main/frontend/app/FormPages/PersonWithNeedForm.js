@@ -92,13 +92,13 @@ export class PersonWithNeedClass extends React.Component {
 
         //Decide which errormessage is the correct one to show to the user
         if (name.error && pnr.error && !checked.value) {
-            errormessage = "Vennligst fyll inn et navn, og et fødselsnummer med 11 siffer."
+            errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>, og <b><i>{pnr.error}</i></b>.</p>;
         }
         else if (name.error) {
-            errormessage = name.error;
+            errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>.</p>;
         }
         else if (pnr.error && !checked.value) {
-            errormessage = pnr.error;
+            errormessage = <p>Vennligst fyll inn <b><i>{pnr.error}</i></b>.</p>;
         }
 
         //If the user has clicked on next-button, and the form is not valid. Show errormessage.
@@ -230,11 +230,11 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "Vennligst fyll inn et navn.";
+        errors.name = "et navn";
     }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
-        errors.pnr = "Vennligst fyll inn et fødselsnummer med 11 siffer.";
+        errors.pnr = "et ellevesifret fødselsnummer";
     }
     return errors;
 };

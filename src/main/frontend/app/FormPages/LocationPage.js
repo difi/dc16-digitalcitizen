@@ -116,7 +116,7 @@ export class LocationPageClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen ønskes</i></b>, før du går videre.</p>
+            var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen  i</i></b>, før du går videre.</p>
 
             content =
                 <componentClass>
