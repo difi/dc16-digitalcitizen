@@ -92,13 +92,19 @@ export class PersonWithNeedClass extends React.Component {
 
         //Decide which errormessage is the correct one to show to the user
         if (name.error && pnr.error && !checked.value) {
-            errormessage = "Vennligst fyll inn et navn, og et fødselsnummer med 11 siffer."
+            errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>, og <b><i>{pnr.error}</i></b>.</p>;
         }
         else if (name.error) {
-            errormessage = name.error;
+            errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>.</p>;
         }
         else if (pnr.error && !checked.value) {
-            errormessage = pnr.error;
+            if(pnr.error == "et ellevesifret fødselsnummer"){
+                errormessage = <p>Vennligst fyll inn <b><i>{pnr.error}</i></b>.</p>;
+            }
+            else if(pnr.error == "matcher ikke"){
+                errormessage = <p><b><i>Fødselsnummer</i></b> og <b><i>navn</i></b> matcher ikke.</p>
+            }
+
         }
 
         //If the user has clicked on next-button, and the form is not valid. Show errormessage.
@@ -146,7 +152,7 @@ export class PersonWithNeedClass extends React.Component {
         }
         else {
             nameContent = <FormGroup
-                validationState={(name.error || pnr.error == "Fødselsnummer og navn matcher ikke.") && (name.touched || alertMessage) ? "error" : ""}>
+                validationState={(name.error || pnr.error == "matcher ikke") && (name.touched || alertMessage) ? "error" : ""}>
                 <FormControl
                     type="text"
                     className="formName"
@@ -230,11 +236,11 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "Vennligst fyll inn et navn.";
+        errors.name = "et navn";
     }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
-        errors.pnr = "Vennligst fyll inn et fødselsnummer med 11 siffer.";
+        errors.pnr = "et ellevesifret fødselsnummer";
     }
     return errors;
 };
@@ -253,7 +259,7 @@ const asyncValidate = (values) => {
                     if (data == true) {
                         resolve()
                     } else {
-                        reject({pnr: "Fødselsnummer og navn matcher ikke."});
+                        reject({pnr: "matcher ikke"});
                     }
                 }.bind(this),
                 error: function (xhr, status, err) {
@@ -261,7 +267,7 @@ const asyncValidate = (values) => {
                 }.bind(this)
             });
         } else {
-            //reject({name: "Fødselsnummer og navn matcher ikke."});
+            //reject({name: "matcher ikke"});
             resolve()
         }
     })

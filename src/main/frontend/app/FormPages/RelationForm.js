@@ -4,8 +4,9 @@ import {getValues} from 'redux-form';
 import $ from 'jquery'
 
 import RESTpaths from '../static_data/RESTpaths.js';
-import NavigationButtons from './Components/NavigationButtons.js';
 import DropdownList from './Components/DropdownList.js';
+import NavigationButtons from './Components/NavigationButtons.js';
+
 import dropdownContent from '../static_data/dropdown-list-content.js';
 
 import {fieldIsEmpty} from './Utilities/validation.js';
@@ -115,8 +116,6 @@ export class RelationFormClass extends React.Component {
         // Get values via this.refs
         const {fields: {relation, nameOfChild, dependent, pnr, name}} = this.props;
 
-        console.log(nameOfChild.value);
-
         if (relation.value == "guardian") {
             dependent.onChange(true);
             pnr.onChange(nameOfChild.value.split(":")[0]);
@@ -142,12 +141,18 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = relation.value && ((nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value));
+        var errorMessage = null;
 
         if (clickNextButton && (valid == undefined)) {
             if (!relation.value) {
-                var errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
+                errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
             } else {
-                var errorMessage = <p>Vennligst fyll inn <b><i>hva er din relasjon til søker?</i></b>, før du kan gå videre.</p>;
+                if(relation.value == "guardian"){
+                    errorMessage = <p>Vennligst velg <b><i>hvem du fyller ut på vegne av</i></b>, før du går videre.</p>;
+                }
+                else{
+                    errorMessage = <p>Vennligst oppgi <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
+                }
             }
 
             error =

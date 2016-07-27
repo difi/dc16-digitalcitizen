@@ -71,7 +71,7 @@ export class GeneralPractitionerClass extends React.Component {
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = <p>Vennligst fyll inn <b><i>fastlege</i></b>, før du kan gå videre.</p>
+            var errorMessage = <p>Vennligst fyll inn <b><i>fastlege</i></b>, før du går videre.</p>
 
             content =
                 <componentClass>
