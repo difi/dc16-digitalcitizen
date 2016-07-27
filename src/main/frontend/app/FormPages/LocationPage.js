@@ -86,8 +86,9 @@ export class LocationPageClass extends React.Component {
     }
 
     onInputChangeHandler(event){
+        console.log(event);
         inputChangeRun+=1;
-        this.props.fields.municipalityApp.onChange("" + event);
+        this.props.fields.municipalityApp.onChange(event);
         if(this.validateMun(event)){
             this.municipalityChange(event);
         }
@@ -95,7 +96,7 @@ export class LocationPageClass extends React.Component {
 
     onChangeHandler(event){
         if (inputChangeRun == 1){
-            this.props.fields.municipalityApp.onChange("" + event);
+            this.props.fields.municipalityApp.onChange(event);
         }
     }
 
@@ -134,7 +135,7 @@ export class LocationPageClass extends React.Component {
                 alertMessage = false;
             }
         }
-
+        //To prevent error on first render, calls this function to create homeOptions field.
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
