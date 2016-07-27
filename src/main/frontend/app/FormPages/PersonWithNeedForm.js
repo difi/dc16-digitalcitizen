@@ -32,7 +32,7 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
-  
+
     }
 
     handleClickBack() {
@@ -66,7 +66,7 @@ export class PersonWithNeedClass extends React.Component {
 
     savePerson() {
         var pnr = this.props.fields.pnr.value;
-        
+
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + pnr,
             dataType: 'json',
