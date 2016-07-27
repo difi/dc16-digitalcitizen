@@ -19,13 +19,13 @@ Tanken er å løse oppgaven med stor grad av bruk av dagens fellesløsninger –
 
 Getting started
 -----------
-Clone the repository
+1. Clone the repository
 
-To run a complete install of all necessary node modules and launch the application localhost:8080:
+2. To run a complete install of all necessary node modules and launch the application localhost:8080:
 
 `mvn clean package spring-boot:run`
 
-To run webpack with hot reload, for developing, run the application file, cd into src/main/frontend:
+3. To run webpack with hot reload, for developing, run the application file, cd into src/main/frontend:
 
 `npm start`
 
