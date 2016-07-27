@@ -88,15 +88,22 @@ export class RelationFormClass extends React.Component {
         this.props.fields.typeOfRelation.onChange(null);
     }
 
-
+    resetDependent(event) {
+        this.props.fields.dependent.onChange(event.target.value);
+        if(!event.target.value){
+            this.props.resetDep();
+        }
+    }
     saveFieldValues() {
         // Get values via this.refs
-        const {fields: {relation, nameOfChild}} = this.props;
+        const {fields: {relation, nameOfChild, dependent, pnr, name}} = this.props;
+
+        console.log(nameOfChild.value);
 
         if (relation.value == "guardian") {
-            var pnr = nameOfChild.value.split(":")[0];
-            this.props.fields.dependent.onChange(true);
-            this.props.fields.pnr.onChange(pnr);
+            dependent.onChange(true);
+            pnr.onChange(nameOfChild.value.split(":")[0]);
+            name.onChange(nameOfChild.value.split(":")[1]);
 
             $.ajax({
                 url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
@@ -134,7 +141,7 @@ export class RelationFormClass extends React.Component {
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
-                                              options={guardianFor.value}
+                                              options={guardianFor.value? guardianFor.value : []}
                                               labelField="name"
                                               valueField="value"
                                               defaultValue=""
@@ -169,7 +176,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende</Checkbox>
+                                <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende</Checkbox>
                             </Col>
                         </Row>
                     </componentClass>
@@ -197,7 +204,7 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...dependent}> Registrer meg som pårørende </Checkbox>
+                            <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende </Checkbox>
                         </Col>
                     </Row>
                 </componentClass>
@@ -239,7 +246,7 @@ RelationFormClass.propTypes = {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr'],
+    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr', "name"],
     destroyOnUnmount: false
 }, null, null)(RelationFormClass);
 

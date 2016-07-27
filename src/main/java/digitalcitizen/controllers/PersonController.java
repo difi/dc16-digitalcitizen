@@ -1,8 +1,7 @@
-/*Created by camp-cha on 12.07.2016.*/
-
 package digitalcitizen.controllers;
 
 import digitalcitizen.utilities.TestData;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
@@ -16,11 +15,5 @@ public class PersonController {
     @ResponseBody
     public Boolean gerPersonByPnr(@RequestParam("pnr") String pnr, @RequestParam("name") String name) {
         return TestData.PERSONS.stream().filter(p -> p.getPnr().equals(pnr) && p.getName().equals(name)).collect(Collectors.toList()).size() > 0;
-        /*for (Person person : TestData.PERSONS) {
-            if (person.getPnr().equals(pnr) && person.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;*/
     }
 }

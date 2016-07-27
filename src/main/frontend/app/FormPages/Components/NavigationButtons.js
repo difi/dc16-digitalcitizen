@@ -73,7 +73,7 @@ export default class NavigationButtons extends React.Component {
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
-                        className="disabledButton"
+                        className="disabledButton-nxt"
                         onClick={this.handleClickNext}
                         ref="nextBtn">
                         Neste &rarr;
@@ -91,15 +91,25 @@ export default class NavigationButtons extends React.Component {
             }
         }
         else {
-            rightButton =
-                <Button
-                    className="next-btn"
-                    ref="submitButton"
-                    bsStyle="primary"
-                    disabled={this.props.disabled}
-                    onClick={!isLoading ? this.handleSubmitClick : null}>
-                    {isLoading ? 'Sender...' : 'Send søknad'}
-                </Button>
+            if (this.props.buttonDisabled) {
+                rightButton =
+                    <Button
+                        className="disabledButton-submit"
+                        ref="submitButton"
+                        bsStyle="primary"
+                        onClick={this.handleSubmitClick}>
+                        Send søknad
+                    </Button>
+            } else {
+                rightButton =
+                    <Button
+                        className="next-btn"
+                        ref="submitButton"
+                        bsStyle="primary"
+                        onClick={!isLoading ? this.handleSubmitClick : null}>
+                        {isLoading ? 'Sender...' : 'Send søknad'}
+                    </Button>
+            }
         }
 
 

@@ -2,9 +2,6 @@ package digitalcitizen.models;
 
 import java.util.Collection;
 
-/**
- * Created by camp-vhe on 08.07.2016.
- */
 public class Guardian {
 
     private String pnr ;
@@ -16,7 +13,6 @@ public class Guardian {
     }
 
     public String getPNR() {
-
         return pnr;
     }
 

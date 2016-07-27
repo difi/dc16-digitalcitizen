@@ -1,8 +1,8 @@
 package digitalcitizen.controllers;
 
-
 import digitalcitizen.models.NursingHome;
 import digitalcitizen.utilities.TestData;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,6 @@ public class HomeController {
     @RequestMapping(value = "/api/homes", params = "mun", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<NursingHome> getDoctorsByLocation(@RequestParam("mun") String mun) {
-
         return (TestData.HOMES).stream().filter(home -> home.getMunicipality().equals(mun)).collect(Collectors.toList());
     }
 }

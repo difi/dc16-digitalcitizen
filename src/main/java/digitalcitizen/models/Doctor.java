@@ -1,8 +1,5 @@
 package digitalcitizen.models;
 
-/**
- * Created by camp-shj on 24.06.2016.
- */
 public class Doctor {
 
     private String name;
@@ -11,7 +8,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String name, String location){
+    public Doctor(String name, String location) {
         this.name = name;
         this.location = location;
     }

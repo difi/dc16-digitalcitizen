@@ -1,23 +1,29 @@
 import React from 'react';
-import NavigationButtons from './Components/NavigationButtons.js';
-import $ from 'jquery'
 import {reduxForm} from 'redux-form';
+import $ from 'jquery'
+
 import RESTpaths from '../static_data/RESTpaths.js';
+import NavigationButtons from './Components/NavigationButtons.js';
+import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
+
+import {onlyLettersInString} from './Utilities/validation.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
-require('!style!css!less!../Application.less');
 var Button = require('react-bootstrap/lib/Button');
-var ReactDOM = require('react-dom');
-import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
-import {onlyLettersInString} from './Utilities/validation.js';
+var FormGroup = require('react-bootstrap/lib/FormGroup');
+var FormControl = require('react-bootstrap/lib/FormControl');
+var Alert = require('react-bootstrap/lib/Alert');
+
+var content = null;
+var clickNextButton = false;
+export var alertMessage = false;
 
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-    
         this.getPractitionersByMunicipality = this.getPractitionersByMunicipality.bind(this);
         this.getPractitionersByMunicipality(this.props.fields.municipality.value);
     }
@@ -28,14 +34,22 @@ export class GeneralPractitionerClass extends React.Component {
     }
 
     handleClickNext() {
+        const {fields: {doctorName, doctors}} = this.props;
+        var valid = doctorName.value;
 
-        console.log("State 6");
-        this.props.nextStep(6);
+        if ((valid == undefined || !valid)) {
+            clickNextButton = true;
+            this.forceUpdate();
+
+        } else {
+            console.log("State 6");
+            this.props.nextStep(6);
+        }
     }
 
 
 
-    getPractitionersByMunicipality(municipality){
+    getPractitionersByMunicipality(municipality) {
         $.ajax({
             url: RESTpaths.PATHS.DOCTORS_BASE + '?loc=' + municipality,
             dataType: 'json',
@@ -54,7 +68,27 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-        console.log(doctorName.value);
+
+        if (clickNextButton && (valid == undefined || !valid)) {
+
+            var errorMessage = document.getElementById('generalPract').innerHTML;
+
+            content =
+                <componentClass>
+                    <div className="alertClass_Fdfs">
+                        <Alert bsStyle="danger">
+                            Vennligst fyll inn <b><i>{errorMessage}</i></b>, før du kan gå videre.
+                        </Alert>
+                    </div>
+                </componentClass>;
+            clickNextButton = false;
+            alertMessage = true;
+        } else {
+            if (valid) {
+                content = null;
+                alertMessage = false;
+            }
+        }
 
         return (
             <componentClass>
@@ -62,19 +96,25 @@ export class GeneralPractitionerClass extends React.Component {
                 <div className="form-container">
                     <Row className="form-row">
                         <Col sm={4} md={4}>
-                            <label className="genPract">Fastlege</label>
+                            <label className="genPract" id="generalPract">Fastlege</label>
                         </Col>
                         <Col sm={8} md={8}>
-                            <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect" labelKey="name"
-                                selected={doctorName.value? [{name: doctorName.value}]: []} textValue={onlyLettersInString} onInputChange={value=> doctorName.onChange(value)}
-                                      />
+                            <FormGroup validationState={(doctorName.touched || alertMessage) ? "error" : ""}>
+                                <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect"
+                                           labelKey="name"
+                                           selected={doctorName.value? [{name: doctorName.value}]: []}
+                                           textValue={onlyLettersInString}
+                                           onInputChange={value=> doctorName.onChange(value)}
+                                />
+                            </FormGroup>
                         </Col>
                     </Row>
+                    {content}
                 </div>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={!valid}
+                    buttonDisabled={!valid}
                 />
             </componentClass>
         );
@@ -83,7 +123,7 @@ export class GeneralPractitionerClass extends React.Component {
 GeneralPractitionerClass.propTypes = {
     fieldValues: React.PropTypes.object.isRequired,
     previousStep: React.PropTypes.func.isRequired,
-    nextStep:  React.PropTypes.func.isRequired,
+    nextStep:  React.PropTypes.func.isRequired
 };
 
 const GeneralPractitioner = reduxForm({

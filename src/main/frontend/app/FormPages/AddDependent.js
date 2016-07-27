@@ -91,7 +91,7 @@ export class AddDependentClass extends React.Component {
                         this.props.fields.form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
                         break;
                 }
-                this.forceUpdate();
+                //this.forceUpdate();
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());

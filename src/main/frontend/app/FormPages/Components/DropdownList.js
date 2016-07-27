@@ -62,7 +62,7 @@ var DropdownList = React.createClass({
         var options = self.props.options.map(function (option) {
             if(option[self.props.valueField]==0){
                 return (
-                    <option key={option[self.props.valueField]} selected disabled value={option[self.props.valueField]}>
+                    <option key={option[self.props.valueField]} value={option[self.props.valueField]}>
                         {option[self.props.labelField]}
                     </option>
                 )
