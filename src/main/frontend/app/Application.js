@@ -102,6 +102,7 @@ export class ApplicationClass extends React.Component {
         // ApplicationIntegration-test is going to run as expected
 
         //add method for test data
+        /*
         if (this.props.fields.applyingForSelf.onChange()) {
             this.testScriptPerson();
         }
@@ -121,7 +122,7 @@ export class ApplicationClass extends React.Component {
         //dependent form 3
         if (this.props.fields.form3.name.onChange()) {
             this.testScriptAddDependent3();
-        }
+        }*/
     }
 
     // Testscript needs to be commented out of the code if the

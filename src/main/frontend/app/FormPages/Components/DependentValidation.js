@@ -10,7 +10,7 @@ function feedback(data) {
     if (!(checkEmail(data.mail))) {
         errors.mail = "Dette er ikke en gyldig epostadresse";
     }
-    if ((fieldIsEmpty(data.name))) {
+    if ((fieldIsEmpty(data.name)) || data.name.replace(" ", "").length<=2) {
         errors.name = "Dette er ikke et gyldig navn";
     }
     return errors

@@ -44,6 +44,12 @@ const fields = [
     'typeOfRelation'
 ];
 
+/**
+ * @DISPLAY_FORM
+ * @HIDE_FORM
+ * Variables used to either show or hide the button to add a new dependent. The reason for this is because the user shall not add more than three dependents.
+ * The values of the variables is set in the style attribute to addDepButton.
+ */
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
 
@@ -64,12 +70,11 @@ export class AddDependentClass extends React.Component {
         }
     }
 
-
     /**
-     * Retrieves userdata to autofill the dependent-form
-     *
+     * If checked for dependent or guardian, this load the person logged in from the server to fill out the values.
      */
     getPersonToBeDependent() {
+        const {fields: {form1}} = this.props
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
@@ -77,19 +82,19 @@ export class AddDependentClass extends React.Component {
             success: function (data) {
                 console.log(data);
                 console.log(name);
-                this.props.fields.form1.name.onChange(data.name);
-                this.props.fields.form1.phone.onChange(data.telephone);
-                this.props.fields.form1.mail.onChange(data.mail);
+                form1.name.onChange(data.name);
+                form1.phone.onChange(data.telephone);
+                form1.mail.onChange(data.mail);
                 switch (this.props.fields.relation.value) {
                     case "guardian":
-                        this.props.fields.form1.relation.onChange("Verge");
+                        form1.relation.onChange("Verge");
                         break;
                     case "family":
-                        this.props.fields.form1.relation.onChange(this.props.fields.typeOfRelation.value);
+                        form1.relation.onChange(this.props.fields.typeOfRelation.value);
                         break;
                     case "other":
-                        this.props.fields.form1.relation.onChange('Annet');
-                        this.props.fields.form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
+                        form1.relation.onChange('Annet');
+                        form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
                         break;
                 }
                 //this.forceUpdate();
@@ -100,6 +105,10 @@ export class AddDependentClass extends React.Component {
         });
     }
 
+    /**
+     * @previousStep
+     * Sends you to different forms based on different earlier inputs.
+     */
     handleClickBack() {
         console.log(this.props.fields);
         if (this.props.fields.applyingForSelf.value) {
@@ -131,30 +140,31 @@ export class AddDependentClass extends React.Component {
      * If all three dependent-forms is displayed, the button to add new dependent is hidden.
      */
     handleClick() {
+        //Handles click on add another dependent. Should show 2 and 3, then disable itself until form 3 is removed.
         const {
-            fields: {numDep}
+            fields: {numDep, form2, form3, displayButton}
         } = this.props;
         if(!numDep.value){
             numDep.onChange(2);
-            this.props.fields.form2.show.onChange(true);
+            form2.show.onChange(true);
         }
         else if (numDep.value < 3) {
 
             if (numDep.value == 2) {
-                this.props.fields.displayButton.onChange(HIDE_FORM);
+                displayButton.onChange(HIDE_FORM);
             }
 
-            if (!this.props.fields.form2.show.value) {
-                this.props.fields.form2.show.onChange(true);
+            if (!form2.show.value) {
+                form2.show.onChange(true);
                 console.log("vis form 2");
-                if (this.props.fields.form3.show.value) {
-                    this.props.fields.displayButton.onChange(HIDE_FORM);
+                if (form3.show.value) {
+                    displayButton.onChange(HIDE_FORM);
                 }
                 numDep.onChange(numDep.value + 1);
             } else {
-                this.props.fields.form3.show.onChange(true);
+                form3.show.onChange(true);
                 console.log("vis form 3");
-                this.props.fields.displayButton.onChange(HIDE_FORM);
+                displayButton.onChange(HIDE_FORM);
                 numDep.onChange(numDep.value + 1);
             }
         }
@@ -224,7 +234,6 @@ export class AddDependentClass extends React.Component {
      * Decreases numDep-value
      */
     handleClickForm2() {
-
         this.props.fields.form2.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);

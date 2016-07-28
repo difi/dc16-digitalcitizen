@@ -37,7 +37,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     
     handleClickNext() {
         const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
-        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid = !name.error  && !street.error && !zipcode.error && !number.error;
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -51,7 +51,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid =  !name.error  && !street.error && !zipcode.error && !number.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
@@ -147,6 +147,9 @@ const validate = values => {
 
     if (fieldIsEmpty(values.name)) {
         errors.name = "et navn, ";
+    }
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
     }
     if (fieldIsEmpty(values.street)) {
         errors.street = "en adresse, ";
