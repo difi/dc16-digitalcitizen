@@ -93,6 +93,10 @@ public class PDFManager {
                     break;
                 case "dep1_rel":
                     value = submission.getDependents().get(0).getRelation();
+                    if(value.equals("Annet")) {
+                        field.setValue(submission.getDependents().get(0).getDepOtherRelation());
+                        break;
+                    }
                     field.setValue(value);
                     break;
                 case "dep1_email":
@@ -115,6 +119,10 @@ public class PDFManager {
                 case "dep2_rel":
                     if (submission.getDependents().get(1) != null) {
                         value = submission.getDependents().get(1).getRelation();
+                        if(value.equals("Annet")) {
+                            field.setValue(submission.getDependents().get(1).getDepOtherRelation());
+                            break;
+                        }
                         field.setValue(value);
                     }
                     break;
@@ -140,6 +148,10 @@ public class PDFManager {
                 case "dep3_rel":
                     if (submission.getDependents().get(2) != null) {
                         value = submission.getDependents().get(2).getRelation();
+                        if(value.equals("Annet")) {
+                            field.setValue(submission.getDependents().get(2).getDepOtherRelation());
+                            break;
+                        }
                         field.setValue(value);
                     }
                     break;
