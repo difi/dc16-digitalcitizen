@@ -13,10 +13,11 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 
-
 export const fields = ["name", "phone", "mail", "relation", "depOtherRelation"];
 
-//DependentForm is part of AddDependent and may render up to three times. 
+/**
+ * DependentForm is part of AddDependent and may render up to three times.
+ */
 class DependentForm extends React.Component {
     constructor(props) {
         super(props);
@@ -35,7 +36,7 @@ class DependentForm extends React.Component {
 
         const {name, phone, mail, relation, depOtherRelation}= this.props;
 
-        console.log("Pgone: " + name.error);
+        console.log("Phone: " + name.error);
 
         return (
             <div>
