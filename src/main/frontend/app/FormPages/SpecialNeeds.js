@@ -28,10 +28,8 @@ export class SpecialNeedsClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-
         this.limitTextFields = this.limitTextFields.bind(this);
     }
-
 
     handleClickBack() {
         console.log("State 6");
@@ -144,7 +142,6 @@ export class SpecialNeedsClass extends React.Component {
                     handleClickNext={this.handleClickNext}
                     buttonDisabled={!valid}
                 />
-
             </div>
         );
     }
