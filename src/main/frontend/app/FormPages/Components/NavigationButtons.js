@@ -16,18 +16,10 @@ export default class NavigationButtons extends React.Component {
             isLoading: false,
             isSubmit: this.props.isSubmit
         };
-        this.handleClickBack = this.handleClickBack.bind(this);
-        this.handleClickNext = this.handleClickNext.bind(this);
         this.handleSubmitClick = this.handleSubmitClick.bind(this);
     }
 
-    handleClickBack() {
-        this.props.handleClickBack();
-    }
 
-    handleClickNext() {
-        this.props.handleClickNext();
-    }
 
     handleSubmitClick() {
         var field2 = this.props.newFieldValues();
@@ -68,7 +60,7 @@ export default class NavigationButtons extends React.Component {
     render() {
         var isLoading = this.state.isLoading;
         var rightButton;
-
+        //Right button may be disabled, submit button instead of next and loading while sending to server. 
         if (!this.state.isSubmit) {
             var nextBtnIsLoading = this.props.nextBtnIsLoading;
             console.log("isLoading: "+nextBtnIsLoading);
@@ -76,7 +68,7 @@ export default class NavigationButtons extends React.Component {
                 rightButton =
                     <Button
                         className="disabledButton-nxt"
-                        onClick={this.handleClickNext}
+                        onClick={this.props.handleClickNext}
                         bsStyle="success"
                         ref="nextBtn">
                         Neste &rarr;
@@ -86,7 +78,7 @@ export default class NavigationButtons extends React.Component {
                 rightButton =
                     <Button
                         className="next-btn"
-                        onClick={!nextBtnIsLoading ? this.handleClickNext : null}
+                        onClick={!nextBtnIsLoading ? this.props.handleClickNext : null}
                         bsStyle="success"
                         ref="nextBtn">
                         {nextBtnIsLoading ? 'Venter...' : 'Neste \u2192'}
@@ -120,7 +112,7 @@ export default class NavigationButtons extends React.Component {
             <Row style={{marginTop: '15px'}}>
                 <hr/>
                 <Col xs={6} sm={6} md={6} lg={6}>
-                    <Button className="back-btn" onClick={this.handleClickBack}>&larr;
+                    <Button className="back-btn" onClick={this.props.handleClickBack}>&larr;
                         Tilbake</Button>
                 </Col>
                 <Col xs={6} sm={6} md={6} lg={6}>

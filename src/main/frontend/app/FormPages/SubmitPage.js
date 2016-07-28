@@ -8,7 +8,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-
 export const fields = ["name", "applyingForSelf"];
 
 export class SubmitSuccessClass extends React.Component {
@@ -18,7 +17,6 @@ export class SubmitSuccessClass extends React.Component {
         this.getValues = this.getValues.bind(this);
         this.handleClickOk = this.handleClickOk.bind(this);
     }
-
 
     getValues() {
         var data = {

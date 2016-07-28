@@ -24,6 +24,12 @@ var clickNextButton = false;
 var alertMessage = false;
 var nameContent = null;
 var pnrContent = null;
+export const fields = [
+    "pnr",
+    "name",
+    "checked",
+    "municipality"
+];
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
@@ -114,7 +120,6 @@ export class PersonWithNeedClass extends React.Component {
             success: function (data) {
                 this.props.fields.municipality.onChange(data.address.municipality);
 
-
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -125,7 +130,7 @@ export class PersonWithNeedClass extends React.Component {
     render() {
         //Add fields from redux form to component so they can be connected
         const {fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
+        var valid = (!pnr.error && !name.error) || (checked.value && !name.error);
         var errormessage = null;
 
         //Decide which errormessage is the correct one to show to the user
@@ -273,6 +278,9 @@ const validate = values => {
     if (fieldIsEmpty(values.name)) {
         errors.name = "et navn";
     }
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
+    }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";
@@ -284,9 +292,8 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
-    fields: ["pnr", "name", "checked", "municipality"],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-})(PersonWithNeedClass);
+    validate})(PersonWithNeedClass);
 
 export default PersonWithNeed

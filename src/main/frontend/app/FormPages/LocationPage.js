@@ -18,6 +18,12 @@ var inputChangeRun = 0;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "municipalityApp",
+    "homeApp",
+    "homeOptions",
+    "municipality"
+];
 
 export class LocationPageClass extends React.Component {
     constructor(props) {
@@ -30,7 +36,6 @@ export class LocationPageClass extends React.Component {
   
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fields.municipality.value);
-
     }
 
     findMunicipality(mun) {
@@ -47,7 +52,6 @@ export class LocationPageClass extends React.Component {
         this.props.previousStep(8);
     }
 
-
     //Handle the click on the next-button
     handleClickNext() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
@@ -60,12 +64,12 @@ export class LocationPageClass extends React.Component {
         } else {
             //Submit here?
             console.log("State 10");
-            //The next step is step 7 - SpecialNeeds
             this.props.nextStep(10);
         }
     }
 
     municipalityChange(value) {
+        //When switching municipality, updated home values from server.
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
@@ -86,7 +90,6 @@ export class LocationPageClass extends React.Component {
     }
 
     onInputChangeHandler(event){
-        console.log(event);
         inputChangeRun+=1;
         this.props.fields.municipalityApp.onChange(event);
         if(this.validateMun(event)){
@@ -195,10 +198,9 @@ LocationPageClass.propTypes = {
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp", "homeOptions", "municipality"],
+    fields: fields,
     destroyOnUnmount: false
 })(LocationPageClass);
-
 
 export default LocationPage
 
