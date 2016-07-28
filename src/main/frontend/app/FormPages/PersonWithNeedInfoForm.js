@@ -148,6 +148,9 @@ const validate = values => {
     if (fieldIsEmpty(values.name)) {
         errors.name = "et navn, ";
     }
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
+    }
     if (fieldIsEmpty(values.street)) {
         errors.street = "en adresse, ";
     }

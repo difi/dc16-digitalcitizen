@@ -237,6 +237,9 @@ const validate = values => {
     if (fieldIsEmpty(values.name)) {
         errors.name = "et navn";
     }
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
+    }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";
