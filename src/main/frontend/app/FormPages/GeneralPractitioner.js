@@ -18,6 +18,11 @@ var Alert = require('react-bootstrap/lib/Alert');
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "doctorName",
+    "doctors",
+    "municipality"
+];
 
 export class GeneralPractitionerClass extends React.Component {
     constructor(props) {
@@ -46,8 +51,6 @@ export class GeneralPractitionerClass extends React.Component {
             this.props.nextStep(6);
         }
     }
-
-
 
     getPractitionersByMunicipality(municipality) {
         $.ajax({
@@ -128,7 +131,7 @@ GeneralPractitionerClass.propTypes = {
 
 const GeneralPractitioner = reduxForm({
     form: 'application',
-    fields: ["doctorName", "doctors", "municipality"],
+    fields: fields,
     destroyOnUnmount: false
 })(GeneralPractitionerClass);
 

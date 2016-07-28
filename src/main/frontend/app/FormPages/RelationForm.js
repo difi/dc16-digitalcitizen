@@ -17,13 +17,23 @@ var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
-var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var error = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields= [
+    "relation",
+    "typeOfRelation",
+    "nameOfChild",
+    "dependent",
+    "otherRelation",
+    "guardianFor",
+    "municipality",
+    'pnr',
+    "name"
+];
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
@@ -36,7 +46,6 @@ export class RelationFormClass extends React.Component {
         this.getGuardianFor = this.getGuardianFor.bind(this);
         this.getGuardianFor();
     }
-
 
     getGuardianFor() {
         $.ajax({
@@ -61,7 +70,6 @@ export class RelationFormClass extends React.Component {
             }.bind(this)
         });
     }
-
 
     handleClickBack() {
         console.log("State 1");
@@ -128,8 +136,6 @@ export class RelationFormClass extends React.Component {
                 cache: false,
                 success: function (data) {
                     this.props.fields.municipality.onChange(data);
-
-
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -192,7 +198,7 @@ export class RelationFormClass extends React.Component {
                                               labelField="name"
                                               valueField="value"
                                               defaultValue=""
-                                    {...nameOfChild}
+                                              {...nameOfChild}
                                     //value={nameOfChild.value}
                                               onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
@@ -218,7 +224,7 @@ export class RelationFormClass extends React.Component {
                                               options={dropdownContent.FAMILYRELATIONS}
                                               labelField="relation"
                                               valueField="value"
-                                    {...typeOfRelation}
+                                              {...typeOfRelation}
                                     //value={typeOfRelation.value}
                                               onChange={change => typeOfRelation.onChange(change.newValue)}/>
                                 </FormGroup>
@@ -307,9 +313,8 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr', "name"],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-}, null, null)(RelationFormClass);
+    validate}, null, null)(RelationFormClass);
 
 export default RelationForm

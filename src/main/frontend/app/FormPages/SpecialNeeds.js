@@ -11,10 +11,16 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
+//var Glyphicon = require('react-bootstrap/lib/Glyphicon');
 
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "medical",
+    "changes",
+    "other"
+];
 
 export class SpecialNeedsClass extends React.Component {
     //const {fields: {medical, changes, other}} = this.props;
@@ -98,7 +104,7 @@ export class SpecialNeedsClass extends React.Component {
                                              id="mandatoryField"
                                              ref="conditionChanges" {...changes}
                                              onChange={event => this.limitTextFields(event, changes)}/>
-                                <FormControl.Feedback />
+                                <FormControl.Feedback/>
                             </FormGroup>
                         </Col>
                         <p className="info-label">{changes.value ? changes.value.length : 0}/300</p>
@@ -148,7 +154,6 @@ SpecialNeedsClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-
 //Validation for form
 const validate = values => {
     const errors = {};
@@ -161,10 +166,8 @@ const validate = values => {
 
 const SpecialNeeds = reduxForm({
     form: 'application',
-    fields: ["medical", "changes", "other"],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-
-}, null, null)(SpecialNeedsClass);
+    validate}, null, null)(SpecialNeedsClass);
 
 export default SpecialNeeds

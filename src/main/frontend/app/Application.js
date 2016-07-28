@@ -27,7 +27,7 @@ import {reduxForm} from 'redux-form';
 import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
 
-
+//fields for testScript-functions.
 export const fields=[
     "applyingForSelf",
     "pnr",
@@ -98,11 +98,14 @@ export class ApplicationClass extends React.Component {
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
 
-        //add method for test data
+        /**
+         * "Script" for auto filling the form divided into 5 functions, each called by an if-statement to easily keep or comment out depending on which information needed in the form.
+         */
+        //person applied for
         if(this.props.fields.applyingForSelf.onChange()){
             this.testScriptPerson();
         }
-
+        //relations form
         if(this.props.fields.relation.onChange()){
             this.testScriptRelations();
         }
@@ -120,7 +123,9 @@ export class ApplicationClass extends React.Component {
             this.testScriptAddDependent3();
         }
     }
-
+    /**
+     * Functions for person applied for; adding relations; forms for dependents.
+     */
     testScriptPerson() {
 
         //person with need
@@ -157,30 +162,32 @@ export class ApplicationClass extends React.Component {
 
     testScriptRelations(){
         //relations
-        this.props.fields.relation.onChange(); //guardian; family; other for choosing radio button
+        this.props.fields.relation.onChange(); //guardian; family; other for choosing radio button (String)
         this.props.fields.typeOfRelation.onChange();
         this.props.fields.nameOfChild.onChange();
-        this.props.fields.dependent.onChange(false); //true for register as dependent
+        this.props.fields.dependent.onChange(false); //true for register as dependent (Boolean)
         this.props.fields.otherRelation.onChange();
         this.props.fields.guardianFor.onChange();
     }
-
+    //AddDependent form 1
     testScriptAddDependent1(){
-        //add dependent
+        //add dependent, all information Strings
         this.props.fields.form1.name.onChange("Solfrid Solfridsen");
         this.props.fields.form1.phone.onChange("99999995");
         this.props.fields.form1.mail.onChange("test@test.com");
         this.props.fields.form1.relation.onChange("Søsken");
     }
-
+    //AddDependent form 2
     testScriptAddDependent2(){
+        //add dependent, all information Strings
         this.props.fields.form2.name.onChange("Mia Miasen");
         this.props.fields.form2.phone.onChange("99999993");
         this.props.fields.form2.mail.onChange("test@test.sexy");
         this.props.fields.form2.relation.onChange("Barn");
     }
-
+    //AddDependent form 3
     testScriptAddDependent3(){
+        //add dependent, all information Strings
         this.props.fields.form3.name.onChange("Vegard den tøffe gutten");
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
@@ -455,17 +462,14 @@ export class ApplicationClass extends React.Component {
     }
 }
 
-
 ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
-
 
 const Application = reduxForm({
     form: 'application',
     fields: fields,
     destroyOnUnmount: false,
 })(ApplicationClass);
-
 
 export default Application
