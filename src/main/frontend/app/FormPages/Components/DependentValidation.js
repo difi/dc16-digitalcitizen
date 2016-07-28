@@ -5,13 +5,16 @@ import {fieldIsEmpty} from '../Utilities/validation';
 function feedback(data) {
     var errors = {};
     if (!(checkPhoneNumber(data.phone))) {
-        errors.phone = "Dette er ikke et gyldig telefonnummer";
+        errors.phone = "et åttesifret telefonnummer, ";
     }
     if (!(checkEmail(data.mail))) {
-        errors.mail = "Dette er ikke en gyldig epostadresse";
+        errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
     }
     if ((fieldIsEmpty(data.name))) {
-        errors.name = "Dette er ikke et gyldig navn";
+        errors.name = "et navn, ";
+    }
+    if (!data.relation) {
+        errors.relation = "relasjon, "
     }
     return errors
 }
