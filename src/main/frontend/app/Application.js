@@ -190,7 +190,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
         this.props.fields.form3.relation.onChange("Barn");
-        
+
     }
 
     getUserData() {

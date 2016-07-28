@@ -32,6 +32,8 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
+        this.validToGoNext = this.validToGoNext.bind(this);
+        this.notValidToGoNext = this.notValidToGoNext.bind(this);
 
     }
 
@@ -41,26 +43,52 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     handleClickNext() {
-        const {asyncValidating, fields: {pnr, checked, name}} = this.props;
+        const {fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
 
-        if ((valid == undefined || !valid)) {
-            clickNextButton = true;
-            this.forceUpdate();
+        // Checks if pnr and name match if a full-length pnr is typed, //TODO: and a name is given
+        if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
+            $.ajax({
+                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pnr + '&name=' + name,
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    //console.log(data);
+                    if (data == true) {
+                        this.validToGoNext();
+                    } else {
+                        pnr.error = "matcher ikke";
+                        this.notValidToGoNext();
+                    }
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error("url", status, err.toString());
+                }.bind(this)
+            });
+        } else{
+            if ((valid == undefined || !valid)) {
+                this.notValidToGoNext();
 
-        } else {
-            //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
-
-
-            if (this.props.fields.checked.value) {
-                console.log("State 4");
-                (this.props.nextStep(4));
             } else {
-                console.log("State 6");
-                this.savePerson();
-                (this.props.nextStep(6));
-
+                this.validToGoNext();
             }
+        }
+    }
+
+    notValidToGoNext(){
+        clickNextButton = true;
+        this.forceUpdate();
+    }
+
+    validToGoNext(){
+        //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
+        if (this.props.fields.checked.value) {
+            console.log("State 4");
+            (this.props.nextStep(4));
+        } else {
+            console.log("State 6");
+            this.savePerson();
+            (this.props.nextStep(6));
         }
     }
 
@@ -85,7 +113,7 @@ export class PersonWithNeedClass extends React.Component {
 
     render() {
         //Add fields from redux form to component so they can be connected
-        const {asyncValidating, fields: {pnr, checked, name}} = this.props;
+        const {fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
         var errormessage = null;
 
@@ -103,7 +131,6 @@ export class PersonWithNeedClass extends React.Component {
             else if(pnr.error == "matcher ikke"){
                 errormessage = <p><b><i>Fødselsnummer</i></b> og <b><i>navn</i></b> matcher ikke.</p>
             }
-
         }
 
         //If the user has clicked on next-button, and the form is not valid. Show errormessage.
@@ -160,7 +187,6 @@ export class PersonWithNeedClass extends React.Component {
                     {...name}
                     onChange={name.onBlur}
                 />
-                {asyncValidating === 'name'}
                 <FormControl.Feedback />
             </FormGroup>;
 
@@ -175,7 +201,6 @@ export class PersonWithNeedClass extends React.Component {
                     //Connects field to redux form component//
                     {...pnr}
                 />
-                {asyncValidating === 'pnr'}
                 <FormControl.Feedback />
             </FormGroup>;
         }
@@ -225,7 +250,6 @@ export class PersonWithNeedClass extends React.Component {
 }
 
 PersonWithNeedClass.propTypes = {
-    asyncValidating: React.PropTypes.string.isRequired,
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired
 };
@@ -241,43 +265,14 @@ const validate = values => {
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";
     }
+
     return errors;
-};
-
-const asyncValidate = (values) => {
-    return new Promise((resolve, reject) => {
-
-        // Checks if pnr and name match if a full-length pnr is typed
-        if (values.pnr.length > 10 && !checked.value) {
-            $.ajax({
-                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + values.pnr + '&name=' + values.name,
-                dataType: 'json',
-                cache: false,
-                success: function (data) {
-                    //console.log(data);
-                    if (data == true) {
-                        resolve()
-                    } else {
-                        reject({pnr: "matcher ikke"});
-                    }
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error("url", status, err.toString());
-                }.bind(this)
-            });
-        } else {
-            //reject({name: "matcher ikke"});
-            resolve()
-        }
-    })
 };
 
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
     fields: ["pnr", "name", "checked", "municipality"],
-    asyncValidate,
-    asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,
     validate
 })(PersonWithNeedClass);
