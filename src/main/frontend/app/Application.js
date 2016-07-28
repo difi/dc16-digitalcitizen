@@ -124,7 +124,10 @@ export class ApplicationClass extends React.Component {
     }
     /**
      * Functions for person applied for; adding relations; forms for dependents.
+     *
+     * Testscript needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
      */
+
     testScriptPerson() {
 
         //person with need
@@ -333,11 +336,8 @@ export class ApplicationClass extends React.Component {
     }
 
     render() {
-
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
-
         var content;
-
         var userData = this.state.userData;
 
         switch (this.state.step) {
@@ -365,7 +365,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                 />;
+                />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
@@ -373,7 +373,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                   />;
+                />;
                 break;
             case 5:
                 content = <GeneralPractitioner
