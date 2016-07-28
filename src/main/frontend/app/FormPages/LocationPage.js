@@ -18,6 +18,12 @@ var inputChangeRun = 0;
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "municipalityApp",
+    "homeApp",
+    "homeOptions",
+    "municipality"
+];
 
 export class LocationPageClass extends React.Component {
     constructor(props) {
@@ -30,7 +36,6 @@ export class LocationPageClass extends React.Component {
   
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fields.municipality.value);
-
     }
 
     findMunicipality(mun) {
@@ -46,7 +51,6 @@ export class LocationPageClass extends React.Component {
 
         this.props.previousStep(8);
     }
-
 
     //Handle the click on the next-button
     handleClickNext() {
@@ -194,10 +198,9 @@ LocationPageClass.propTypes = {
 
 const LocationPage = reduxForm({
     form: 'application',
-    fields: ["municipalityApp", "homeApp", "homeOptions", "municipality"],
+    fields: fields,
     destroyOnUnmount: false
 })(LocationPageClass);
-
 
 export default LocationPage
 
