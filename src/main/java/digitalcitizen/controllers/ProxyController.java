@@ -16,6 +16,12 @@ public class ProxyController {
     // TODO: Map SessionId to pnr
     //private HashMap<String, String> pnrNumbers = new HashMap<>();
 
+    /**
+     * Handles the request sent by the proxy on log in. Retrieves data from the HTTP header
+     * for further use, and redirects the user to index.html.
+     *
+     * @return Redirect route to "index.html"
+     */
     @RequestMapping(value = "/")
     public String getRequest(HttpServletRequest request) {
 
@@ -26,6 +32,12 @@ public class ProxyController {
         return "index.html";
     }
 
+    /**
+     * Retrieves the PID of a signed in user.
+     * PID is automatically requested when a user is redirected to index.html.
+     *
+     * @return {@link Person} containing the PID
+     */
     @CrossOrigin
     @RequestMapping(value = "/api/getPNR", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
