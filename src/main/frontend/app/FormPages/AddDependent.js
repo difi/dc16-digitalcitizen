@@ -14,6 +14,8 @@ var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
 import RESTpaths from '../static_data/RESTpaths.js';
 
+
+
 const fields = [
     'form1.name',
     'form1.mail',
@@ -116,6 +118,13 @@ export class AddDependentClass extends React.Component {
         this.props.nextStep(7);
     }
 
+
+    /**
+     * @numDep: {integer}
+     * @form2.show
+     * The value of numDep controls which dependent-form to show in application.
+     * First time button is clicked, numDep is set to 2, and second dependent-form is displayed.
+     */
     handleClick() {
         const {
             fields: {numDep}
@@ -203,6 +212,12 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * @form2.show
+     * @numDep
+     * Hides second dependent-form
+     * Decreases numDep-value
+     */
     handleClickForm2() {
 
         this.props.fields.form2.show.onChange(false);
@@ -210,6 +225,12 @@ export class AddDependentClass extends React.Component {
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
+    /**
+     * @form3.show
+     * @numDep
+     * Hides third dependent-form
+     * Displays button to add new dependent
+     */
     handleClickForm3() {
         this.props.fields.form3.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
@@ -221,10 +242,20 @@ export class AddDependentClass extends React.Component {
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
+        /**
+         * @numDep: {integer}
+         * validates only tbe forms displayed. The value of numDep indicates the number of forms that is displayed.
+         */
         var valid = this.validation(1);
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid
         }
+        /**
+         * @form1
+         * @form2
+         * @form3
+         *
+         */
         return (
             <div>
                 <div>
