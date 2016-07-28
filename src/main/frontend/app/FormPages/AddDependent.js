@@ -64,8 +64,12 @@ export class AddDependentClass extends React.Component {
         }
     }
 
-    getPersonToBeDependent() {
 
+    /**
+     * Retrieves userdata to autofill the dependent-form
+     *
+     */
+    getPersonToBeDependent() {
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
@@ -76,7 +80,6 @@ export class AddDependentClass extends React.Component {
                 this.props.fields.form1.name.onChange(data.name);
                 this.props.fields.form1.phone.onChange(data.telephone);
                 this.props.fields.form1.mail.onChange(data.mail);
-
                 switch (this.props.fields.relation.value) {
                     case "guardian":
                         this.props.fields.form1.relation.onChange("Verge");
@@ -122,8 +125,10 @@ export class AddDependentClass extends React.Component {
     /**
      * @numDep: {integer}
      * @form2.show
+     * @form3.show
      * The value of numDep controls which dependent-form to show in application.
      * First time button is clicked, numDep is set to 2, and second dependent-form is displayed.
+     * If all three dependent-forms is displayed, the button to add new dependent is hidden.
      */
     handleClick() {
         const {
@@ -250,12 +255,7 @@ export class AddDependentClass extends React.Component {
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid
         }
-        /**
-         * @form1
-         * @form2
-         * @form3
-         *
-         */
+
         return (
             <div>
                 <div>
