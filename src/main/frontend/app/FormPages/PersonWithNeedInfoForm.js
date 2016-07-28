@@ -22,6 +22,14 @@ var Alert = require('react-bootstrap/lib/Alert');
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "name",
+    "number",
+    "street",
+    "zipcode",
+    "postal",
+    "municipality"
+];
 
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
@@ -100,9 +108,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="adr" id="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <AddressField store={this.props.store} className="adr" ref='addressfield'
-                                              
-                                              includeCountry={false}/>
+                                <AddressField store={this.props.store} className="adr" ref='addressfield' includeCountry={false}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -134,7 +140,7 @@ export class PersonWithNeedInfoClass extends React.Component {
             </form>
         )
     }
-};
+}
 
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
@@ -169,9 +175,8 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({
     form: 'application',
-    fields: ["name", "number", "street", "zipcode", "postal", "municipality" ],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-}, null, null)(PersonWithNeedInfoClass);
+    validate}, null, null)(PersonWithNeedInfoClass);
 
 export default PersonWithNeedInfo

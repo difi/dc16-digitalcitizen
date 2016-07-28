@@ -11,10 +11,16 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
+//var Glyphicon = require('react-bootstrap/lib/Glyphicon');
 
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "medical",
+    "changes",
+    "other"
+];
 
 export class SpecialNeedsClass extends React.Component {
     //const {fields: {medical, changes, other}} = this.props;
@@ -22,10 +28,8 @@ export class SpecialNeedsClass extends React.Component {
         super(props);
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
-
         this.limitTextFields = this.limitTextFields.bind(this);
     }
-
 
     handleClickBack() {
         console.log("State 6");
@@ -98,7 +102,7 @@ export class SpecialNeedsClass extends React.Component {
                                              id="mandatoryField"
                                              ref="conditionChanges" {...changes}
                                              onChange={event => this.limitTextFields(event, changes)}/>
-                                <FormControl.Feedback />
+                                <FormControl.Feedback/>
                             </FormGroup>
                         </Col>
                         <p className="info-label">{changes.value ? changes.value.length : 0}/300</p>
@@ -138,7 +142,6 @@ export class SpecialNeedsClass extends React.Component {
                     handleClickNext={this.handleClickNext}
                     buttonDisabled={!valid}
                 />
-
             </div>
         );
     }
@@ -147,7 +150,6 @@ SpecialNeedsClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired
 };
-
 
 //Validation for form
 const validate = values => {
@@ -161,10 +163,8 @@ const validate = values => {
 
 const SpecialNeeds = reduxForm({
     form: 'application',
-    fields: ["medical", "changes", "other"],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-
-}, null, null)(SpecialNeedsClass);
+    validate}, null, null)(SpecialNeedsClass);
 
 export default SpecialNeeds
