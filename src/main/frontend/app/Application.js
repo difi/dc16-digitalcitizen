@@ -6,7 +6,6 @@ import {Form} from './unused/Form.jsx';
 
 var assign = require('object-assign');
 import WhosSearching from './FormPages/WhosSearchingForm.js';
-
 import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
@@ -26,7 +25,6 @@ import SubmitSuccess from './FormPages/SubmitPage';
 import {reduxForm} from 'redux-form';
 import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
-
 
 export const fields = [
     "applyingForSelf",
@@ -73,7 +71,6 @@ export const fields = [
     "setDependent"
 ];
 
-
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
 // add test values somewhere in here
@@ -85,7 +82,6 @@ export class ApplicationClass extends React.Component {
         this.state = {
             step: 1,
             prevStep: 1,
-
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
@@ -94,7 +90,6 @@ export class ApplicationClass extends React.Component {
         this.saveDependents = this.saveDependents.bind(this);
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.resetDependent = this.resetDependent.bind(this);
-
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
 
@@ -103,30 +98,33 @@ export class ApplicationClass extends React.Component {
 
         //add method for test data
         /*
-        if (this.props.fields.applyingForSelf.onChange()) {
-            this.testScriptPerson();
-        }
+         if (this.props.fields.applyingForSelf.onChange()) {
+         this.testScriptPerson();
+         }
 
-        if (this.props.fields.relation.onChange()) {
-            this.testScriptRelations();
-        }
+         if (this.props.fields.relation.onChange()) {
+         this.testScriptRelations();
+         }
 
-        //dependent form 1
-        if (this.props.fields.form1.name.onChange()) {
-            this.testScriptAddDependent1();
-        }
-        //dependent form 2
-        if (this.props.fields.form2.name.onChange()) {
-            this.testScriptAddDependent2();
-        }
-        //dependent form 3
-        if (this.props.fields.form3.name.onChange()) {
-            this.testScriptAddDependent3();
-        }*/
+         //dependent form 1
+         if (this.props.fields.form1.name.onChange()) {
+         this.testScriptAddDependent1();
+         }
+         //dependent form 2
+         if (this.props.fields.form2.name.onChange()) {
+         this.testScriptAddDependent2();
+         }
+         //dependent form 3
+         if (this.props.fields.form3.name.onChange()) {
+         this.testScriptAddDependent3();
+         }*/
     }
 
-    // Testscript needs to be commented out of the code if the
-    // ApplicationIntegration-test is going to run as expected
+    /**
+     * Functions for person applied for; adding relations; forms for dependents.
+     *
+     * Testscript needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
+     */
     testScriptPerson() {
 
         //person with need
@@ -191,7 +189,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
         this.props.fields.form3.relation.onChange("Barn");
-        
+
     }
 
     getUserData() {
@@ -203,9 +201,7 @@ export class ApplicationClass extends React.Component {
                 var user = {
                     pnr: data.pnr,
                     name: data.name
-
                 };
-
                 this.saveUserData(user);
             }.bind(this),
             error: function (xhr, status, err) {
@@ -238,7 +234,6 @@ export class ApplicationClass extends React.Component {
         if (numDep.value >= 2) {
             form2Data = {
                 name: form2.name.value,
-
                 telephone: form2.phone.value,
                 email: form2.mail.value,
                 relation: form2.relation.value,
@@ -327,7 +322,6 @@ export class ApplicationClass extends React.Component {
     }
 
     nextStep(step) {
-
         this.setState({
             prevStep: this.state.step,
             step: step
@@ -335,11 +329,8 @@ export class ApplicationClass extends React.Component {
     }
 
     render() {
-
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
-
         var content;
-
         var userData = this.state.userData;
 
         switch (this.state.step) {
@@ -420,8 +411,7 @@ export class ApplicationClass extends React.Component {
                         saveValues={this.saveValues}
                         saveUserData={this.saveUserData}
                         submitRegistration={this.handleSubmit}
-                        newFieldValues={this.saveValuesFromRedux}/>
-                ;
+                        newFieldValues={this.saveValuesFromRedux}/>;
                 break;
             case 10:
                 content =
@@ -432,7 +422,7 @@ export class ApplicationClass extends React.Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         userData={userData}
-                        submitRegistration={this.handleSubmit}/>
+                        submitRegistration={this.handleSubmit}/>;
                 break;
         }
 

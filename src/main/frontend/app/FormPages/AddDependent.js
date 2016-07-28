@@ -314,15 +314,12 @@ AddDependentClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired,
 };
 
-
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,
-
     destroyOnUnmount: false,
     validate
 })(AddDependentClass);
-
 
 export default AddDependent
 

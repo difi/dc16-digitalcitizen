@@ -25,6 +25,12 @@ var alertMessage = false;
 var nameContent = null;
 var pnrContent = null;
 var checked = false;
+export const fields = [
+    "pnr",
+    "name",
+    "checked",
+    "municipality"
+];
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
@@ -32,7 +38,6 @@ export class PersonWithNeedClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
-
     }
 
     handleClickBack() {
@@ -50,8 +55,6 @@ export class PersonWithNeedClass extends React.Component {
 
         } else {
             //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
-
-
             if (this.props.fields.checked.value) {
                 console.log("State 4");
                 (this.props.nextStep(4));
@@ -59,7 +62,6 @@ export class PersonWithNeedClass extends React.Component {
                 console.log("State 6");
                 this.savePerson();
                 (this.props.nextStep(6));
-
             }
         }
     }
@@ -74,14 +76,12 @@ export class PersonWithNeedClass extends React.Component {
             success: function (data) {
                 this.props.fields.municipality.onChange(data.address.municipality);
 
-
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
     }
-
 
     render() {
         //Add fields from redux form to component so they can be connected
@@ -103,7 +103,6 @@ export class PersonWithNeedClass extends React.Component {
             else if(pnr.error == "matcher ikke"){
                 errormessage = <p><b><i>Fødselsnummer</i></b> og <b><i>navn</i></b> matcher ikke.</p>
             }
-
         }
 
         //If the user has clicked on next-button, and the form is not valid. Show errormessage.
@@ -278,11 +277,10 @@ const asyncValidate = (values) => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeed = reduxForm({
     form: 'application',
-    fields: ["pnr", "name", "checked", "municipality"],
+    fields: fields,
     asyncValidate,
     asyncBlurFields: ['name', 'pnr'],
     destroyOnUnmount: false,
-    validate
-})(PersonWithNeedClass);
+    validate})(PersonWithNeedClass);
 
 export default PersonWithNeed
