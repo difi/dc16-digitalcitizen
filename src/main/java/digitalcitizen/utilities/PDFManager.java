@@ -3,7 +3,9 @@ package digitalcitizen.utilities;
 import digitalcitizen.models.Submission;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
@@ -37,6 +39,49 @@ public class PDFManager {
             pdfTemplate = PDDocument.load(dep3_template);
         }
 
+        Map<String, String> fieldsAndValues = new HashMap<String, String>() {
+            {
+                put("pnr", submission.getPerson().getPnr());
+                put("name", submission.getPerson().getName());
+                put("telephone", submission.getPerson().getTelephone());
+                put("address", submission.getPerson().getAddress().getStreet());
+                put("zipcode", submission.getPerson().getAddress().getZipcode());
+                put("municipality", submission.getPerson().getAddress().getMunicipality());
+                put("doctor", submission.getPerson().getDoctor().getName());
+                put("medicalNeeds", submission.getMedicalNeeds());
+                put("reason", submission.getConditionChanges());
+                put("otherNeeds", submission.getOtherNeeds());
+                put("nursing_mun", submission.getNursingHome().getMunicipality());
+                put("nursing_name", submission.getNursingHome().getName());
+                put("lengthOfStay", submission.getLengthOfStay().equals("long") ? "1" : "0");
+                put("dep1_name", submission.getDependents().get(0).getName());
+                put("dep1_telephone", submission.getDependents().get(0).getTelephone());
+                String dep1_rel = submission.getDependents().get(0).getRelation().equals("Annet") ?
+                        submission.getDependents().get(0).getDepOtherRelation() :
+                        submission.getDependents().get(0).getRelation();
+                put("dep1_rel", dep1_rel);
+                put("dep1_email", submission.getDependents().get(0).getEmail());
+                if (submission.getDependents().get(1) != null) {
+                    put("dep2_name", submission.getDependents().get(1).getName());
+                    put("dep2_telephone", submission.getDependents().get(1).getTelephone());
+                    String dep2_rel = submission.getDependents().get(1).getRelation().equals("Annet") ?
+                            submission.getDependents().get(1).getDepOtherRelation() :
+                            submission.getDependents().get(1).getRelation();
+                    put("dep2_rel", dep2_rel);
+                    put("dep2_email", submission.getDependents().get(1).getEmail());
+                }
+                if (submission.getDependents().get(2) != null) {
+                    put("dep3_name", submission.getDependents().get(2).getName());
+                    put("dep3_telephone", submission.getDependents().get(2).getTelephone());
+                    String dep3_rel = submission.getDependents().get(2).getRelation().equals("Annet") ?
+                            submission.getDependents().get(2).getDepOtherRelation() :
+                            submission.getDependents().get(2).getRelation();
+                    put("dep3_rel", dep3_rel);
+                    put("dep3_email", submission.getDependents().get(2).getEmail());
+                }
+            }
+        };
+
         PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
@@ -55,149 +100,7 @@ public class PDFManager {
         // Loop through each field in the array and write data
         for (String f : fieldArray) {
             PDField field = acroForm.getField(f);
-            String value;
-            switch (f) {
-                // PERSON
-                case "pnr":
-                    value = submission.getPerson().getPnr();
-                    field.setValue(value);
-                    break;
-                case "name":
-                    value = submission.getPerson().getName();
-                    field.setValue(value);
-                    break;
-                case "address":
-                    value = submission.getPerson().getAddress().getStreet();
-                    field.setValue(value);
-                    break;
-                case "zipcode":
-                    value = submission.getPerson().getAddress().getZipcode();
-                    field.setValue(value);
-                    break;
-                case "municipality":
-                    value = submission.getPerson().getAddress().getMunicipality();
-                    field.setValue(value);
-                    break;
-                case "telephone":
-                    value = submission.getPerson().getTelephone();
-                    field.setValue(value);
-                    break;
-                // DEPENDENT 1
-                case "dep1_name":
-                    value = submission.getDependents().get(0).getName();
-                    field.setValue(value);
-                    break;
-                case "dep1_telephone":
-                    value = submission.getDependents().get(0).getTelephone();
-                    field.setValue(value);
-                    break;
-                case "dep1_rel":
-                    value = submission.getDependents().get(0).getRelation();
-                    if(value.equals("Annet")) {
-                        field.setValue(submission.getDependents().get(0).getDepOtherRelation());
-                        break;
-                    }
-                    field.setValue(value);
-                    break;
-                case "dep1_email":
-                    value = submission.getDependents().get(0).getEmail();
-                    field.setValue(value);
-                    break;
-                // DEPENDENT 2
-                case "dep2_name":
-                    if (submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getName();
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep2_telephone":
-                    if (submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getTelephone();
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep2_rel":
-                    if (submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getRelation();
-                        if(value.equals("Annet")) {
-                            field.setValue(submission.getDependents().get(1).getDepOtherRelation());
-                            break;
-                        }
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep2_email":
-                    if (submission.getDependents().get(1) != null) {
-                        value = submission.getDependents().get(1).getEmail();
-                        field.setValue(value);
-                    }
-                    break;
-                // DEPENDENT 3
-                case "dep3_name":
-                    if (submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getName();
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep3_telephone":
-                    if (submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getTelephone();
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep3_rel":
-                    if (submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getRelation();
-                        if(value.equals("Annet")) {
-                            field.setValue(submission.getDependents().get(2).getDepOtherRelation());
-                            break;
-                        }
-                        field.setValue(value);
-                    }
-                    break;
-                case "dep3_email":
-                    if (submission.getDependents().get(2) != null) {
-                        value = submission.getDependents().get(2).getEmail();
-                        field.setValue(value);
-                    }
-                    break;
-                // NURSING HOME
-                case "nursing_mun":
-                    field.setValue(submission.getNursingHome().getMunicipality());
-                    break;
-                case "nursing_name":
-                    field.setValue(submission.getNursingHome().getName());
-                    break;
-                // LENGTH OF STAY RADIOBUTTONS
-                case "lengthOfStay":
-                    switch (submission.getLengthOfStay()) {
-                        case "long":
-                            field.setValue("1");
-                            break;
-                        case "short":
-                            field.setValue("0");
-                            break;
-                    }
-                    break;
-                // DIV
-                case "doctor":
-                    value = submission.getPerson().getDoctor().getName();
-                    field.setValue(value);
-                    break;
-                // NEEDS
-                case "medicalNeeds":
-                    value = submission.getMedicalNeeds();
-                    field.setValue(value);
-                    break;
-                case "reason":
-                    value = submission.getConditionChanges();
-                    field.setValue(value);
-                    break;
-                case "otherNeeds":
-                    value = submission.getOtherNeeds();
-                    field.setValue(value);
-                    break;
-            }
+            field.setValue(fieldsAndValues.get(f));
         }
 
         // TODO: Auto-generate name and change location of server stored PDF-files
@@ -210,7 +113,7 @@ public class PDFManager {
         return path;
     }
 
-    public static File getResourceAsFile(String resourcePath) {
+    private static File getResourceAsFile(String resourcePath) {
         try {
             InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
             if (in == null) {
