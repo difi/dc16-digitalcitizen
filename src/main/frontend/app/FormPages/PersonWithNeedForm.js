@@ -24,7 +24,6 @@ var clickNextButton = false;
 var alertMessage = false;
 var nameContent = null;
 var pnrContent = null;
-var checked = false;
 
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
@@ -52,15 +51,19 @@ export class PersonWithNeedClass extends React.Component {
         // Checks if pnr and name match if a full-length pnr is typed, //TODO: and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
             this.setState({nextBtnIsLoading: true});
+
             $.ajax({
-                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pnr + '&name=' + name,
+                url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pnr.value + '&name=' + name.value,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
-                    // TODO: Remove setTimeout. (Only used for testing)
-                    setTimeout(() => {
+                    // setTimeout is only used for testing
+                    //setTimeout(() => {
                         //console.log(data);
+                        //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
+
                         if (data == true) {
+                            console.log("Korrekt");
                             this.setState({nextBtnIsLoading: false});
                             this.validToGoNext();
                         } else {
@@ -68,7 +71,7 @@ export class PersonWithNeedClass extends React.Component {
                             this.setState({nextBtnIsLoading: false});
                             this.notValidToGoNext();
                         }
-                    }, 3000);
+                    //}, 3000);
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error("url", status, err.toString());

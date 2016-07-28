@@ -89,7 +89,7 @@ export default class NavigationButtons extends React.Component {
                         onClick={!nextBtnIsLoading ? this.handleClickNext : null}
                         bsStyle="success"
                         ref="nextBtn">
-                        {nextBtnIsLoading ? 'Jobber...' : 'Neste \u2192'}
+                        {nextBtnIsLoading ? 'Venter...' : 'Neste \u2192'}
                     </Button>
             }
         }
