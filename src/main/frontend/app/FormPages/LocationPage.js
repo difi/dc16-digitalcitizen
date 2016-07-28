@@ -64,12 +64,12 @@ export class LocationPageClass extends React.Component {
         } else {
             //Submit here?
             console.log("State 10");
-            //The next step is step 7 - SpecialNeeds
             this.props.nextStep(10);
         }
     }
 
     municipalityChange(value) {
+        //When switching municipality, updated home values from server.
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
@@ -90,7 +90,6 @@ export class LocationPageClass extends React.Component {
     }
 
     onInputChangeHandler(event){
-        console.log(event);
         inputChangeRun+=1;
         this.props.fields.municipalityApp.onChange(event);
         if(this.validateMun(event)){

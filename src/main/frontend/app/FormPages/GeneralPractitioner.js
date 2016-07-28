@@ -52,7 +52,7 @@ export class GeneralPractitionerClass extends React.Component {
         }
     }
 
-    getPractitionersByMunicipality(municipality) {
+    getPractitionersByMunicipality(municipality){
         $.ajax({
             url: RESTpaths.PATHS.DOCTORS_BASE + '?loc=' + municipality,
             dataType: 'json',

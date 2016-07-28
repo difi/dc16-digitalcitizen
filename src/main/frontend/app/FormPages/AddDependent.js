@@ -63,28 +63,27 @@ export class AddDependentClass extends React.Component {
     }
 
     getPersonToBeDependent() {
-
+        //If checked for dependent or guardian, this loads the person logged in from the server to fill out the values.
+        const {fields: {form1}} = this.props
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                console.log(data);
-                console.log(name);
-                this.props.fields.form1.name.onChange(data.name);
-                this.props.fields.form1.phone.onChange(data.telephone);
-                this.props.fields.form1.mail.onChange(data.mail);
+                form1.name.onChange(data.name);
+                form1.phone.onChange(data.telephone);
+                form1.mail.onChange(data.mail);
 
                 switch (this.props.fields.relation.value) {
                     case "guardian":
-                        this.props.fields.form1.relation.onChange("Verge");
+                        form1.relation.onChange("Verge");
                         break;
                     case "family":
-                        this.props.fields.form1.relation.onChange(this.props.fields.typeOfRelation.value);
+                        form1.relation.onChange(this.props.fields.typeOfRelation.value);
                         break;
                     case "other":
-                        this.props.fields.form1.relation.onChange('Annet');
-                        this.props.fields.form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
+                        form1.relation.onChange('Annet');
+                        form1.depOtherRelation.onChange(this.props.fields.otherRelation.value);
                         break;
                 }
                 //this.forceUpdate();
@@ -96,6 +95,7 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClickBack() {
+        //Sends you to different forms based on different earlier inputs.
         console.log(this.props.fields);
         if (this.props.fields.applyingForSelf.value) {
             (this.props.previousStep(1));
@@ -117,30 +117,31 @@ export class AddDependentClass extends React.Component {
     }
 
     handleClick() {
+        //Handles click on add another dependent. Should show 2 and 3, then disable itself until form 3 is removed.
         const {
-            fields: {numDep}
+            fields: {numDep, form2, form3, displayButton}
         } = this.props;
         if(!numDep.value){
             numDep.onChange(2);
-            this.props.fields.form2.show.onChange(true);
+            form2.show.onChange(true);
         }
         else if (numDep.value < 3) {
 
             if (numDep.value == 2) {
-                this.props.fields.displayButton.onChange(HIDE_FORM);
+                displayButton.onChange(HIDE_FORM);
             }
 
-            if (!this.props.fields.form2.show.value) {
-                this.props.fields.form2.show.onChange(true);
+            if (!form2.show.value) {
+                form2.show.onChange(true);
                 console.log("vis form 2");
-                if (this.props.fields.form3.show.value) {
-                    this.props.fields.displayButton.onChange(HIDE_FORM);
+                if (form3.show.value) {
+                    displayButton.onChange(HIDE_FORM);
                 }
                 numDep.onChange(numDep.value + 1);
             } else {
-                this.props.fields.form3.show.onChange(true);
+                form3.show.onChange(true);
                 console.log("vis form 3");
-                this.props.fields.displayButton.onChange(HIDE_FORM);
+                displayButton.onChange(HIDE_FORM);
                 numDep.onChange(numDep.value + 1);
             }
         }
@@ -202,7 +203,7 @@ export class AddDependentClass extends React.Component {
             return valid && other1;
         }
     }
-
+    //Functions for removing a form when the minus is clicked. 
     handleClickForm2() {
 
         this.props.fields.form2.show.onChange(false);
