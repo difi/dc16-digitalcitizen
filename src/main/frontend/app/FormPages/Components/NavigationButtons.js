@@ -70,6 +70,8 @@ export default class NavigationButtons extends React.Component {
         var rightButton;
 
         if (!this.state.isSubmit) {
+            var nextBtnIsLoading = this.props.nextBtnIsLoading;
+            console.log("isLoading: "+nextBtnIsLoading);
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
@@ -84,10 +86,10 @@ export default class NavigationButtons extends React.Component {
                 rightButton =
                     <Button
                         className="next-btn"
-                        onClick={this.handleClickNext}
+                        onClick={!nextBtnIsLoading ? this.handleClickNext : null}
                         bsStyle="success"
                         ref="nextBtn">
-                        Neste &rarr;
+                        {nextBtnIsLoading ? 'Jobber...' : 'Neste \u2192'}
                     </Button>
             }
         }

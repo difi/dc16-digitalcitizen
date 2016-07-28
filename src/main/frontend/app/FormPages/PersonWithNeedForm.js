@@ -29,6 +29,9 @@ var checked = false;
 export class PersonWithNeedClass extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            nextBtnIsLoading: false
+        };
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
         this.savePerson = this.savePerson.bind(this);
@@ -48,18 +51,24 @@ export class PersonWithNeedClass extends React.Component {
 
         // Checks if pnr and name match if a full-length pnr is typed, //TODO: and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
+            this.setState({nextBtnIsLoading: true});
             $.ajax({
                 url: RESTpaths.PATHS.PERSON_BASE + '?pnr=' + pnr + '&name=' + name,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
-                    //console.log(data);
-                    if (data == true) {
-                        this.validToGoNext();
-                    } else {
-                        pnr.error = "matcher ikke";
-                        this.notValidToGoNext();
-                    }
+                    // TODO: Remove setTimeout. (Only used for testing)
+                    setTimeout(() => {
+                        //console.log(data);
+                        if (data == true) {
+                            this.setState({nextBtnIsLoading: false});
+                            this.validToGoNext();
+                        } else {
+                            pnr.error = "matcher ikke";
+                            this.setState({nextBtnIsLoading: false});
+                            this.notValidToGoNext();
+                        }
+                    }, 3000);
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error("url", status, err.toString());
@@ -109,7 +118,6 @@ export class PersonWithNeedClass extends React.Component {
             }.bind(this)
         });
     }
-
 
     render() {
         //Add fields from redux form to component so they can be connected
@@ -242,6 +250,7 @@ export class PersonWithNeedClass extends React.Component {
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
                         buttonDisabled={!valid}
+                        nextBtnIsLoading = {this.state.nextBtnIsLoading}
                     />
                 </componentClass>
             </form >
