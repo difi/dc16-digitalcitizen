@@ -6,7 +6,6 @@ import {Form} from './unused/Form.jsx';
 
 var assign = require('object-assign');
 import WhosSearching from './FormPages/WhosSearchingForm.js';
-
 import PersonWithNeedInfoForm from './FormPages/PersonWithNeedInfoForm';
 var PageHeader = require('react-bootstrap/lib/PageHeader');
 var Row = require('react-bootstrap/lib/Row');
@@ -27,9 +26,54 @@ import {reduxForm} from 'redux-form';
 import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
 
+export const fields = [
+    "applyingForSelf",
+    "pnr",
+    "name",
+    "checked",
+    "number",
+    "street",
+    "zipcode",
+    "postal",
+    "municipality",
+    "doctorName",
+    'form1.name',
+    'form1.mail',
+    'form1.phone',
+    'form1.relation',
+    'form2.show',
+    'form2.name',
+    'form2.mail',
+    'form2.phone',
+    'form2.relation',
+    'form3.show',
+    'form3.name',
+    'form3.mail',
+    'form3.phone',
+    'form3.relation',
+    'displayButton',
+    'form1.depOtherRelation',
+    'form2.depOtherRelation',
+    'form3.depOtherRelation',
+    'numDep',
+    "relation",
+    "typeOfRelation",
+    "nameOfChild",
+    "dependent",
+    "otherRelation",
+    "guardianFor",
+    "need",
+    "medical",
+    "changes",
+    "other",
+    "municipalityApp",
+    "homeApp",
+    "setDependent"
+];
+
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
-
+// add test values somewhere in here
 export class ApplicationClass extends React.Component {
 
     constructor(props) {
@@ -38,21 +82,115 @@ export class ApplicationClass extends React.Component {
         this.state = {
             step: 1,
             prevStep: 1,
-
             userData: props.userData
         };
         this.nextStep = this.nextStep.bind(this);
-
         this.previousStep = this.previousStep.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
         this.saveDependents = this.saveDependents.bind(this);
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.resetDependent = this.resetDependent.bind(this);
         this.getUserData = this.getUserData.bind(this);
-
         this.getUserData();
+
+        // The following if-sentences needs to be commented out of the code if the
+        // ApplicationIntegration-test is going to run as expected
+
+        //add method for test data
+        /*
+         if (this.props.fields.applyingForSelf.onChange()) {
+         this.testScriptPerson();
+         }
+
+         if (this.props.fields.relation.onChange()) {
+         this.testScriptRelations();
+         }
+
+         //dependent form 1
+         if (this.props.fields.form1.name.onChange()) {
+         this.testScriptAddDependent1();
+         }
+         //dependent form 2
+         if (this.props.fields.form2.name.onChange()) {
+         this.testScriptAddDependent2();
+         }
+         //dependent form 3
+         if (this.props.fields.form3.name.onChange()) {
+         this.testScriptAddDependent3();
+         }*/
     }
 
+    /**
+     * Functions for person applied for; adding relations; forms for dependents.
+     *
+     * Testscript needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
+     */
+    testScriptPerson() {
+
+        //person with need
+        this.props.fields.applyingForSelf.onChange();
+        this.props.fields.pnr.onChange("15028047425");
+        this.props.fields.name.onChange("Elias Eliassen");
+        this.props.fields.checked.onChange(true); //check box for pnr
+        this.props.fields.number.onChange("99999991");
+        this.props.fields.street.onChange("testveien 2");
+        this.props.fields.zipcode.onChange("7030");
+        this.props.fields.postal.onChange("Trondheim");
+        this.props.fields.municipality.onChange("Trondheim");
+        this.props.fields.doctorName.onChange("Tore");
+
+        //needs form
+        this.props.fields.need.onChange("long");
+        this.props.fields.medical.onChange("No");
+        this.props.fields.changes.onChange("No");
+        this.props.fields.other.onChange("No");
+
+        //
+        this.props.fields.displayButton.onChange();
+
+        //
+        this.props.fields.form1.depOtherRelation.onChange();
+        this.props.fields.form2.depOtherRelation.onChange();
+        this.props.fields.form3.depOtherRelation.onChange();
+
+        //
+        this.props.fields.numDep.onChange(1);
+        this.props.fields.municipalityApp.onChange();
+        this.props.fields.homeApp.onChange();
+    }
+
+    testScriptRelations() {
+        //relations
+        this.props.fields.relation.onChange(); //guardian; family; other for choosing radio button
+        this.props.fields.typeOfRelation.onChange();
+        this.props.fields.nameOfChild.onChange();
+        this.props.fields.dependent.onChange(false); //true for register as dependent
+        this.props.fields.otherRelation.onChange();
+        this.props.fields.guardianFor.onChange();
+    }
+
+    testScriptAddDependent1() {
+        //add dependent
+        this.props.fields.form1.name.onChange("Solfrid Solfridsen");
+        this.props.fields.form1.phone.onChange("99999995");
+        this.props.fields.form1.mail.onChange("test@test.com");
+        this.props.fields.form1.relation.onChange("Søsken");
+    }
+
+    testScriptAddDependent2() {
+        this.props.fields.form2.name.onChange("Mia Miasen");
+        this.props.fields.form2.phone.onChange("99999993");
+        this.props.fields.form2.mail.onChange("test@test.sexy");
+        this.props.fields.form2.relation.onChange("Barn");
+    }
+
+    testScriptAddDependent3() {
+        this.props.fields.form3.name.onChange("Vegard den tøffe gutten");
+        this.props.fields.form3.phone.onChange("99999996");
+        this.props.fields.form3.mail.onChange("test@test.no");
+        this.props.fields.form3.relation.onChange("Barn");
+
+    }
 
     getUserData() {
         $.ajax({
@@ -63,9 +201,7 @@ export class ApplicationClass extends React.Component {
                 var user = {
                     pnr: data.pnr,
                     name: data.name
-
                 };
-
                 this.saveUserData(user);
             }.bind(this),
             error: function (xhr, status, err) {
@@ -73,6 +209,7 @@ export class ApplicationClass extends React.Component {
             }.bind(this)
         });
     }
+
     //This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
     resetDependent() {
         const {fields: {form1}} = this.props;
@@ -84,7 +221,7 @@ export class ApplicationClass extends React.Component {
     }
 
     saveDependents() {
-        const {fields: {form1, form2, form3, numDep}} = this.props
+        const {fields: {form1, form2, form3, numDep}} = this.props;
         var form2Data = null;
         var form3Data = null;
         var form1Data = {
@@ -97,7 +234,6 @@ export class ApplicationClass extends React.Component {
         if (numDep.value >= 2) {
             form2Data = {
                 name: form2.name.value,
-
                 telephone: form2.phone.value,
                 email: form2.mail.value,
                 relation: form2.relation.value,
@@ -172,7 +308,6 @@ export class ApplicationClass extends React.Component {
         return fields
     }
 
-
     saveUserData(field_value) {
         this.setState({
             userData: assign({}, this.state.userData, field_value)
@@ -187,7 +322,6 @@ export class ApplicationClass extends React.Component {
     }
 
     nextStep(step) {
-
         this.setState({
             prevStep: this.state.step,
             step: step
@@ -195,11 +329,8 @@ export class ApplicationClass extends React.Component {
     }
 
     render() {
-
         var header = <PageHeader>Søk sykehjemsplass</PageHeader>;
-
         var content;
-
         var userData = this.state.userData;
 
         switch (this.state.step) {
@@ -227,7 +358,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                 />;
+                />;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
@@ -235,7 +366,7 @@ export class ApplicationClass extends React.Component {
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
-                   />;
+                />;
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -280,8 +411,7 @@ export class ApplicationClass extends React.Component {
                         saveValues={this.saveValues}
                         saveUserData={this.saveUserData}
                         submitRegistration={this.handleSubmit}
-                        newFieldValues={this.saveValuesFromRedux}/>
-                ;
+                        newFieldValues={this.saveValuesFromRedux}/>;
                 break;
             case 10:
                 content =
@@ -292,13 +422,13 @@ export class ApplicationClass extends React.Component {
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
                         userData={userData}
-                        submitRegistration={this.handleSubmit}/>
+                        submitRegistration={this.handleSubmit}/>;
                 break;
         }
 
         return (
-            <div className="container">
-                <Navbar>
+            <div>
+                <Navbar staticTop>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <a href=".">Digitalcitizen</a>
@@ -311,13 +441,16 @@ export class ApplicationClass extends React.Component {
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
-                {header}
-                <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={3} xsOffset={2} md={6}
-                     xs={8} sm={6} lg={6}>
-                    <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
-                        {content}
+                <div className="container">
+
+                    {header}
+                    <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={0} xsOffset={0} md={6}
+                         xs={12} sm={12} lg={6}>
+                        <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
+                            {content}
+                        </Col>
                     </Col>
-                </Col>
+                </div>
             </div>
         )
     }
@@ -327,32 +460,10 @@ ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
 
-
 const Application = reduxForm({
     form: 'application',
-    fields: ["applyingForSelf", "pnr", "name", "checked", "number", "street", "zipcode", "postal", "municipality",
-        "doctorName",
-        'form1.name',
-        'form1.mail',
-        'form1.phone',
-        'form1.relation',
-        'form2.show',
-        'form2.name',
-        'form2.mail',
-        'form2.phone',
-        'form2.relation',
-        'form3.show',
-        'form3.name',
-        'form3.mail',
-        'form3.phone',
-        'form3.relation',
-        'displayButton',
-        'form1.depOtherRelation',
-        'form2.depOtherRelation',
-        'form3.depOtherRelation',
-        'numDep', "relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "need", "medical", "changes", "other", "municipalityApp", "homeApp"],
-    destroyOnUnmount: false
+    fields: fields,
+    destroyOnUnmount: false,
 })(ApplicationClass);
-
 
 export default Application

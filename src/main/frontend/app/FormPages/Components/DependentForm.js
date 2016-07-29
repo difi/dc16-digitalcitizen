@@ -19,6 +19,7 @@ var alertMessage = false;
 
 export const fields = ["name", "phone", "mail", "relation", "depOtherRelation"];
 
+//DependentForm is part of AddDependent and may render up to three times. 
 class DependentForm extends React.Component {
     constructor(props) {
         super(props);

@@ -22,6 +22,14 @@ var Alert = require('react-bootstrap/lib/Alert');
 var content = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields = [
+    "name",
+    "number",
+    "street",
+    "zipcode",
+    "postal",
+    "municipality"
+];
 
 export class PersonWithNeedInfoClass extends React.Component {
     constructor(props) {
@@ -37,7 +45,7 @@ export class PersonWithNeedInfoClass extends React.Component {
     
     handleClickNext() {
         const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
-        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid = !name.error  && !street.error && !zipcode.error && !number.error;
 
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
@@ -51,11 +59,11 @@ export class PersonWithNeedInfoClass extends React.Component {
 
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
-        var valid = name.value && !name.error && street.value && !street.error && zipcode.value && !zipcode.error && number.value && !number.error;
+        var valid =  !name.error  && !street.error && !zipcode.error && !number.error;
 
         if (clickNextButton && (valid == undefined || !valid)) {
 
-            var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du kan gå videre.</p>;
+            var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du går videre.</p>;
 
             content =
                 <componentClass>
@@ -100,9 +108,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 <label className="adr" id="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
-                                <AddressField store={this.props.store} className="adr" ref='addressfield'
-                                              
-                                              includeCountry={false}/>
+                                <AddressField store={this.props.store} className="adr" ref='addressfield' includeCountry={false}/>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -134,7 +140,7 @@ export class PersonWithNeedInfoClass extends React.Component {
             </form>
         )
     }
-};
+}
 
 PersonWithNeedInfoClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
@@ -148,17 +154,20 @@ const validate = values => {
     if (fieldIsEmpty(values.name)) {
         errors.name = "et navn, ";
     }
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
+    }
     if (fieldIsEmpty(values.street)) {
         errors.street = "en adresse, ";
     }
     if (values.postal == "Ugyldig postnr.") {
-        errors.zipcode = "et fire siffret postnummer, ";
+        errors.zipcode = "et firesifret postnummer, ";
     }
     if (!validPostCode(values.zipcode)) {
-        errors.zipcode = "et fire siffret postnummer, ";
+        errors.zipcode = "et firesifret postnummer, ";
     }
     if (!(checkPhoneNumber(values.number))) {
-        errors.number = "et åtte siffret telefonnummer, ";
+        errors.number = "et åttesifret telefonnummer, ";
     }
     return errors;
 };
@@ -166,9 +175,8 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const PersonWithNeedInfo = reduxForm({
     form: 'application',
-    fields: ["name", "number", "street", "zipcode", "postal", "municipality" ],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-}, null, null)(PersonWithNeedInfoClass);
+    validate}, null, null)(PersonWithNeedInfoClass);
 
 export default PersonWithNeedInfo

@@ -8,8 +8,6 @@ import dropdownContent from '../../static_data/dropdown-list-content.js';
 import {alertMessage} from '../PersonWithNeedInfoForm.js';
 
 import {checkPostCode} from '../Utilities/validation.js';
-import {onlyDigitsInString} from '../Utilities/validation.js'
-import {alphaNumericInString} from '../Utilities/validation.js'
 
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');

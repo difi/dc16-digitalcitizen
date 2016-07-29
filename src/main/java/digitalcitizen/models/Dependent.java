@@ -6,6 +6,7 @@ public class Dependent {
     private String telephone;
     private String email;
     private String relation;
+    private String depOtherRelation;
 
     public Dependent(){
     }
@@ -49,6 +50,14 @@ public class Dependent {
         this.telephone = telephone;
     }
 
+    public String getDepOtherRelation() {
+        return depOtherRelation;
+    }
+
+    public void setDepOtherRelation(String depOtherRelation) {
+        this.depOtherRelation = depOtherRelation;
+    }
+
     @Override
     public String toString() {
         return "Dependent{" +
@@ -56,6 +65,7 @@ public class Dependent {
                 ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", relation='" + relation + '\'' +
+                ", depOtherRelation='" + depOtherRelation + '\'' +
                 '}';
     }
 }

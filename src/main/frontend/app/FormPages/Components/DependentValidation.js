@@ -1,6 +1,6 @@
-import {checkPhoneNumber} from '../Utilities/validation';
-import {checkEmail} from '../Utilities/validation';
-import {fieldIsEmpty} from '../Utilities/validation';
+import {checkPhoneNumber} from '../Utilities/validation.js';
+import {checkEmail} from '../Utilities/validation.js';
+import {fieldIsEmpty} from '../Utilities/validation.js';
 
 function feedback(data) {
     var errors = {};
@@ -10,11 +10,11 @@ function feedback(data) {
     if (!(checkEmail(data.mail))) {
         errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
     }
-    if ((fieldIsEmpty(data.name))) {
+    if (fieldIsEmpty(data.name)|| data.name.replace(" ", "").length<=2) {
         errors.name = "et navn, ";
     }
     if (!data.relation) {
-        errors.relation = "relasjon, "
+        errors.relation = "relasjon, ";
     }
     return errors
 }

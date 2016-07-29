@@ -1,6 +1,5 @@
 "use strict";
 
-
 import {Provider} from 'react-redux';
 import {createStore, combineReducers} from 'redux';
 import reducers from './FormPages/Utilities/reducers.js';

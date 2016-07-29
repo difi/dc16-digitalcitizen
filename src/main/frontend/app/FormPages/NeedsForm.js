@@ -23,7 +23,6 @@ export class NeedsFormClass extends React.Component {
         this.props.previousStep(6);
     }
 
-
     //Handle the click on the next-button
     handleClickNext() {
         const {fields: {need}} = this.props;
@@ -56,7 +55,7 @@ export class NeedsFormClass extends React.Component {
                     <p/>
                     <div className="error">
                         <Alert bsStyle="danger">
-                            Vennligst velg et av alternativene.
+                            <p>Vennligst velg <b><i>et av alternativene</i></b>.</p>;
                         </Alert>
                     </div>
                 </componentClass>;
@@ -111,6 +110,5 @@ const NeedsForm = reduxForm({
     fields: ["need"],
     destroyOnUnmount: false
 }, null, null)(NeedsFormClass);
-
 
 export default NeedsForm

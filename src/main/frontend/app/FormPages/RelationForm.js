@@ -4,8 +4,9 @@ import {getValues} from 'redux-form';
 import $ from 'jquery'
 
 import RESTpaths from '../static_data/RESTpaths.js';
-import NavigationButtons from './Components/NavigationButtons.js';
 import DropdownList from './Components/DropdownList.js';
+import NavigationButtons from './Components/NavigationButtons.js';
+
 import dropdownContent from '../static_data/dropdown-list-content.js';
 
 import {fieldIsEmpty} from './Utilities/validation.js';
@@ -16,13 +17,23 @@ var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
-var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var error = null;
 var clickNextButton = false;
 export var alertMessage = false;
+export const fields= [
+    "relation",
+    "typeOfRelation",
+    "nameOfChild",
+    "dependent",
+    "otherRelation",
+    "guardianFor",
+    "municipality",
+    'pnr',
+    "name"
+];
 
 export class RelationFormClass extends React.Component {
     constructor(props) {
@@ -35,7 +46,6 @@ export class RelationFormClass extends React.Component {
         this.getGuardianFor = this.getGuardianFor.bind(this);
         this.getGuardianFor();
     }
-
 
     getGuardianFor() {
         $.ajax({
@@ -60,7 +70,6 @@ export class RelationFormClass extends React.Component {
             }.bind(this)
         });
     }
-
 
     handleClickBack() {
         console.log("State 1");
@@ -115,21 +124,18 @@ export class RelationFormClass extends React.Component {
         // Get values via this.refs
         const {fields: {relation, nameOfChild, dependent, pnr, name}} = this.props;
 
-        console.log(nameOfChild.value);
-
         if (relation.value == "guardian") {
             dependent.onChange(true);
             pnr.onChange(nameOfChild.value.split(":")[0]);
+            var pnrAjax = nameOfChild.value.split(":")[0];
             name.onChange(nameOfChild.value.split(":")[1]);
 
             $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnr,
+                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + pnrAjax,
                 dataType: 'text',
                 cache: false,
                 success: function (data) {
                     this.props.fields.municipality.onChange(data);
-
-
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -142,12 +148,18 @@ export class RelationFormClass extends React.Component {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
         var valid = relation.value && ((nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value));
+        var errorMessage = null;
 
         if (clickNextButton && (valid == undefined)) {
             if (!relation.value) {
-                var errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
+                errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
             } else {
-                var errorMessage = <p>Vennligst fyll inn <b><i>hva er din relasjon til søker?</i></b>, før du kan gå videre.</p>;
+                if(relation.value == "guardian"){
+                    errorMessage = <p>Vennligst velg <b><i>hvem du fyller ut på vegne av</i></b>, før du går videre.</p>;
+                }
+                else{
+                    errorMessage = <p>Vennligst oppgi <b><i>hva som er din relasjon til søker</i></b>, før du går videre.</p>;
+                }
             }
 
             error =
@@ -186,7 +198,7 @@ export class RelationFormClass extends React.Component {
                                               labelField="name"
                                               valueField="value"
                                               defaultValue=""
-                                    {...nameOfChild}
+                                              {...nameOfChild}
                                     //value={nameOfChild.value}
                                               onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
@@ -212,7 +224,7 @@ export class RelationFormClass extends React.Component {
                                               options={dropdownContent.FAMILYRELATIONS}
                                               labelField="relation"
                                               valueField="value"
-                                    {...typeOfRelation}
+                                              {...typeOfRelation}
                                     //value={typeOfRelation.value}
                                               onChange={change => typeOfRelation.onChange(change.newValue)}/>
                                 </FormGroup>
@@ -301,9 +313,8 @@ const validate = values => {
 //Sets up reduxForm - needs fields and validation functions
 const RelationForm = reduxForm({
     form: 'application',
-    fields: ["relation", "typeOfRelation", "nameOfChild", "dependent", "otherRelation", "guardianFor", "municipality", 'pnr', "name"],
+    fields: fields,
     destroyOnUnmount: false,
-    validate
-}, null, null)(RelationFormClass);
+    validate}, null, null)(RelationFormClass);
 
 export default RelationForm

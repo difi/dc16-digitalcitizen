@@ -9,6 +9,14 @@ import $ from 'jquery'
 import RESTpaths from '../static_data/RESTpaths.js';
 
 import {reduxForm} from 'redux-form';
+
+export const fields = [
+    'municipality',
+    'applyingForSelf',
+    'pnr',
+    'dependent'
+];
+
 export class WhosSearchingClass extends React.Component {
 
     constructor() {
@@ -36,8 +44,6 @@ export class WhosSearchingClass extends React.Component {
             })
     }
 
-
-    
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
@@ -75,7 +81,7 @@ export class WhosSearchingClass extends React.Component {
             </componentClass>
         )
     }
-};
+}
 
 WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
@@ -83,8 +89,8 @@ WhosSearchingClass.propTypes = {
 
 const WhosSearching = reduxForm({
     form: 'application',
-    fields: ['municipality', 'applyingForSelf', 'pnr', 'dependent'],
+    fields: fields,
         destroyOnUnmount: false,
-})(WhosSearchingClass)
+})(WhosSearchingClass);
 
 export default WhosSearching
