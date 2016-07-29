@@ -1,23 +1,22 @@
 import React from 'react';
+import {reduxForm} from 'redux-form';
 import $ from 'jquery'
 
+import RESTpaths from '../../static_data/RESTpaths.js';
 import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
+import {alertMessage} from '../PersonWithNeedInfoForm.js';
+
+import {checkPostCode} from '../Utilities/validation.js';
 
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
-import RESTpaths from '../../static_data/RESTpaths.js';
-import {checkPostCode} from '../Utilities/validation.js';
-import {onlyDigitsInString} from '../Utilities/validation.js'
-import {alphaNumericInString} from '../Utilities/validation.js'
-import {alertMessage} from '../PersonWithNeedInfoForm.js';
-import {reduxForm} from 'redux-form';
 
 var zipcodeError;
-var AddressField = React.createClass({
 
+var AddressField = React.createClass({
     propTypes: {
         includeCountry: React.PropTypes.bool,
         address: React.PropTypes.object

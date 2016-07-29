@@ -1,18 +1,16 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
+import $ from 'jquery'
 
+import RESTpaths from '../static_data/RESTpaths.js';
 import DependentForm from './Components/DependentForm.js';
 import NavigationButtons from './Components/NavigationButtons.js';
 import validate from './Components/DependentValidation';
 
-require('!style!css!less!../Application.less');
-import $ from 'jquery'
-var ReactDOM = require('react-dom');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
-import RESTpaths from '../static_data/RESTpaths.js';
 
 
 
@@ -50,6 +48,7 @@ const fields = [
  */
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
+var clickNextButton = false;
 
 export class AddDependentClass extends React.Component {
     constructor(props) {
@@ -61,9 +60,10 @@ export class AddDependentClass extends React.Component {
         this.handleClickNext = this.handleClickNext.bind(this);
         this.validation = this.validation.bind(this);
         this.getPersonToBeDependent = this.getPersonToBeDependent.bind(this);
-        props.fields.numDep.onChange(1);
+        if (!props.fields.numDep.value) {
+            props.fields.numDep.onChange(1);
+        }
         if (props.fields.dependent.value) {
-
             this.getPersonToBeDependent();
         }
     }
@@ -72,7 +72,7 @@ export class AddDependentClass extends React.Component {
      * If checked for dependent or guardian, this load the person logged in from the server to fill out the values.
      */
     getPersonToBeDependent() {
-        const {fields: {form1}} = this.props
+        const {fields: {form1}} = this.props;
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
@@ -127,9 +127,23 @@ export class AddDependentClass extends React.Component {
      * Handles the click on the next-button
      */
     handleClickNext() {
-        this.props.nextStep(7);
-    }
+        const {fields: {numDep}} = this.props;
+        var valid = this.validation(1);
+        for (var i = 1; i <= numDep.value; i++) {
+            valid = this.validation(i) && valid
+        }
 
+        if ((valid == undefined || !valid)) {
+
+                clickNextButton = true;
+                this.forceUpdate();
+
+
+        } else {
+            console.log("State 7");
+            this.props.nextStep(7);
+        }
+    }
 
     /**
      * The value of numDep controls which dependent-form to show in application.
@@ -141,7 +155,7 @@ export class AddDependentClass extends React.Component {
         const {
             fields: {numDep, form2, form3, displayButton}
         } = this.props;
-        if(!numDep.value){
+        if (!numDep.value) {
             numDep.onChange(2);
             form2.show.onChange(true);
         }
@@ -172,9 +186,7 @@ export class AddDependentClass extends React.Component {
      * Validates the displayed DependentForm's in the view 
      */
     validation(value) {
-        const {
-            fields: {form1, form2, form3}
-        } = this.props;
+        const {fields: {form1, form2, form3}} = this.props;
 
         // value for the combination of validation of each form included in the view
         var valid = true;
@@ -253,10 +265,8 @@ export class AddDependentClass extends React.Component {
      * @returns the view of AddDependent, containing a number of DependentForm's
      */
     render() {
-        
-        const {
-            fields: {form1, form2, form3, displayButton, numDep}
-        } = this.props;
+        const {fields: {form1, form2, form3, displayButton, numDep}} = this.props;
+
         var valid = this.validation(1);
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid
@@ -269,14 +279,16 @@ export class AddDependentClass extends React.Component {
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
-                                           autoFilled={this.props.fields.dependent.value}/>
+                                           autoFilled={this.props.fields.dependent.value} 
+                                           clickButtonNext={clickNextButton}/>
                         </div>
                         <br/>
                         <Collapse in={this.props.fields.form2.show.value}>
                             <div>
                                 <div id="dep2" className="depedent-form-wrapper">
                                     <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
-                                                   showDeleteButton={true} {...form2}/>
+                                                   showDeleteButton={true} {...form2} 
+                                                   clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
                         </Collapse>
@@ -285,30 +297,34 @@ export class AddDependentClass extends React.Component {
                             <div>
                                 <div id="dep3" className="depedent-form-wrapper">
                                     <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
-                                                   showDeleteButton={true} {...form3}/>
+                                                   showDeleteButton={true} {...form3} 
+                                                   clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
                         </Collapse>
                     </div>
                 </div>
                 <Row className="addDepButton from-row">
-                    <Button onClick={this.handleClick} style={{display: displayButton.value}} bsStyle="info">+ Legg
-                        til pårørende</Button>
+                    <Button onClick={this.handleClick}
+                            className="add-button"
+                            style={{display: displayButton.value}}
+                            bsStyle="info">
+                        + Legg til pårørende
+                    </Button>
                 </Row>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
                     handleClickNext={this.handleClickNext}
-                    disabled={!valid}
+                    buttonDisabled={!valid}
                 />
             </div>
         );
     }
-}
+};
 
 AddDependentClass.propTypes = {
-
     previousStep: React.PropTypes.func.isRequired,
-    nextStep: React.PropTypes.func.isRequired,
+    nextStep: React.PropTypes.func.isRequired
 };
 
 const AddDependent = reduxForm({
@@ -320,5 +336,3 @@ const AddDependent = reduxForm({
 
 export default AddDependent
 
-//Cant have initial values after refactor away from using fieldValues, but does it even matter? undefined equals to false when  evaluating. NumDep has been fixed with an if statement for first click
-//initialValues: {"form2.show": false, "form3.show": false, "numDep": 1},

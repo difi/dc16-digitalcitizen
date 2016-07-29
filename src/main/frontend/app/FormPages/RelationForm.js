@@ -49,7 +49,7 @@ export class RelationFormClass extends React.Component {
 
 
     /**
-     * Loads g
+     * Loads person(s) the logged in user is registered as guardian for from the server
      */
     getGuardianFor() {
         $.ajax({
@@ -166,10 +166,6 @@ export class RelationFormClass extends React.Component {
         }
     }
 
-
-    /**
-     * When chosen radiobutton for other relation, reset the other dropdowns
-     */
     render() {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
@@ -204,6 +200,7 @@ export class RelationFormClass extends React.Component {
                 alertMessage = false;
             }
         }
+
 
         switch (relation.value) {
             case "guardian":
