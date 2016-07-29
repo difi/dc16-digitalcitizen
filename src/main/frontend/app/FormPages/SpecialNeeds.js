@@ -11,7 +11,6 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
-//var Glyphicon = require('react-bootstrap/lib/Glyphicon');
 
 var content = null;
 var clickNextButton = false;
@@ -61,6 +60,12 @@ export class SpecialNeedsClass extends React.Component {
         }
     }
 
+    changeLimitColor(value) {
+        if (value) {
+            return value.length >= 250 ? {color: "#F38630"} : {color: "black"}
+        }
+    }
+
     render() {
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value && !changes.error;
@@ -105,7 +110,9 @@ export class SpecialNeedsClass extends React.Component {
                                 <FormControl.Feedback/>
                             </FormGroup>
                         </Col>
-                        <p className="info-label">{changes.value ? changes.value.length : 0}/300</p>
+                        <p className="info-label" style={this.changeLimitColor(changes.value)}>
+                            {changes.value ? changes.value.length : 0}/300
+                        </p>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
@@ -118,7 +125,9 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                     </Row>
                     <Row className="form-row-special">
-                        <p className="info-label">{medical.value ? medical.value.length : 0}/300</p>
+                        <p className="info-label" style={this.changeLimitColor(medical.value)}>
+                            {medical.value ? medical.value.length : 0}/300
+                        </p>
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
@@ -132,7 +141,9 @@ export class SpecialNeedsClass extends React.Component {
                         </Col>
                     </Row>
                     <Row className="form-row-special">
-                        <p className="info-label">{other.value ? other.value.length : 0}/300</p>
+                        <p className="info-label"  style={this.changeLimitColor(other.value)}>
+                            {other.value ? other.value.length : 0}/300
+                        </p>
                     </Row>
                     {content}
                 </div>
@@ -165,6 +176,7 @@ const SpecialNeeds = reduxForm({
     form: 'application',
     fields: fields,
     destroyOnUnmount: false,
-    validate}, null, null)(SpecialNeedsClass);
+    validate
+}, null, null)(SpecialNeedsClass);
 
 export default SpecialNeeds
