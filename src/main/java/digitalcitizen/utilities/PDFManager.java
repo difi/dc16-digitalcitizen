@@ -32,12 +32,16 @@ public class PDFManager {
         PDDocument pdfTemplate = new PDDocument();
 
         if (submission.getDependents().get(0) != null && submission.getDependents().get(1) == null && submission.getDependents().get(2) == null) {
+
             pdfTemplate = PDDocument.load(dep1_template);
         } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) == null) {
+
             pdfTemplate = PDDocument.load(dep2_template);
         } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) != null) {
+
             pdfTemplate = PDDocument.load(dep3_template);
         }
+
 
         Map<String, String> fieldsAndValues = new HashMap<String, String>() {
             {
