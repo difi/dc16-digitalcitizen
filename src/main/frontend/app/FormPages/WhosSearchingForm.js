@@ -64,8 +64,8 @@ export class WhosSearchingClass extends React.Component {
     render() {
         return (
             <componentClass>
-                <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
-                <div className="form-container">
+                <label htmlFor="container" className="form-header">Søker du sykehjemsplass for deg selv?</label>
+                <div className="form-container" id="container">
                     <Row>
                         <Col md={8} mdOffset={2}>
                             <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
