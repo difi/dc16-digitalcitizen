@@ -173,7 +173,7 @@ describe("ApplicationIntegration", () => {
 
     });
 
-    it("Third page forwards you to correct step", () => {
+    it("Ajax-call: Third page forwards you to correct step, to step 6 if both pnr and name is given", () => {
         subject.setState({
             step: 3
         });
@@ -186,18 +186,21 @@ describe("ApplicationIntegration", () => {
         var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(6);
+    });
+
+    it("Third page forwards you to correct step, from this, to step 4 if only name is given", () => {
         subject.setState({
             step: 3
         });
         //Checked for not knowing and name is filled - Does not yet work
 
-        thirdPage = subject.find(PersonWithNeedForm);
+        var thirdPage = subject.find(PersonWithNeedForm);
         expect(thirdPage.find('.pnrCheck')).to.have.length(1);
         thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
 
         thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
         thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
-        nextButton = subject.find(NavigationButtons).find('.next-btn');
+        var nextButton = subject.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(4);
 

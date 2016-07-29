@@ -61,7 +61,7 @@ var fieldValues = {
     otherNeeds: null            // String
 };
 
-describe("Integration of PersonWithNeedInfoForm", () => {
+describe("PersonWithNeedInfoIntegration", () => {
     let store = null;
     let subject = null;
 
