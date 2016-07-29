@@ -33,11 +33,17 @@ export class GeneralPractitionerClass extends React.Component {
         this.getPractitionersByMunicipality(this.props.fields.municipality.value);
     }
 
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
         console.log("State 4");
         this.props.previousStep(4);
     }
 
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;

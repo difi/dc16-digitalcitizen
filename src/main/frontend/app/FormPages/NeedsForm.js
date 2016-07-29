@@ -58,7 +58,7 @@ export class NeedsFormClass extends React.Component {
                     <p/>
                     <div className="error">
                         <Alert bsStyle="danger">
-                            <p>Vennligst velg <b><i>et av alternativene</i></b>.</p>;
+                            <p>Vennligst velg <b><i>et av alternativene</i></b>.</p>
                         </Alert>
                     </div>
                 </componentClass>;
