@@ -1,6 +1,4 @@
-/**
- * Created by camp-cha on 24.06.2016.
- */
+/*Created by camp-cha on 24.06.2016.*/
 
 import React from 'react';
 
@@ -49,8 +47,9 @@ export class WhosSearchingClass extends React.Component {
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
+        if(this.props.fields.dependent.value){
         this.props.resetDep();
-        this.props.fields.dependent.onChange(false);
+        this.props.fields.dependent.onChange(false);}
         this.saveFieldValues();
         this.props.nextStep(6)
     }
