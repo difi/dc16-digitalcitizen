@@ -45,8 +45,6 @@ const fields = [
 ];
 
 /**
- * @DISPLAY_FORM
- * @HIDE_FORM
  * Variables used to either show or hide the button to add a new dependent. The reason for this is because the user shall not add more than three dependents.
  * The values of the variables is set in the style attribute to addDepButton.
  */
@@ -106,7 +104,6 @@ export class AddDependentClass extends React.Component {
     }
 
     /**
-     * @previousStep
      * Sends you to different forms based on different earlier inputs.
      */
     handleClickBack() {
@@ -126,15 +123,15 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * Handles the click on the next-button
+     */
     handleClickNext() {
         this.props.nextStep(7);
     }
 
 
     /**
-     * @numDep: {integer}
-     * @form2.show
-     * @form3.show
      * The value of numDep controls which dependent-form to show in application.
      * First time button is clicked, numDep is set to 2, and second dependent-form is displayed.
      * If all three dependent-forms is displayed, the button to add new dependent is hidden.
@@ -170,6 +167,10 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * @param value
+     * Validates the displayed DependentForm's in the view 
+     */
     validation(value) {
         const {
             fields: {form1, form2, form3}
@@ -228,8 +229,6 @@ export class AddDependentClass extends React.Component {
     }
 
     /**
-     * @form2.show
-     * @numDep
      * Hides second dependent-form
      * Decreases numDep-value
      */
@@ -240,9 +239,8 @@ export class AddDependentClass extends React.Component {
     }
 
     /**
-     * @form3.show
-     * @numDep
      * Hides third dependent-form
+     * Decreases the numDep-value
      * Displays button to add new dependent
      */
     handleClickForm3() {
@@ -251,15 +249,14 @@ export class AddDependentClass extends React.Component {
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
+    /**
+     * @returns the view of AddDependent, containing a number of DependentForm's
+     */
     render() {
         
         const {
             fields: {form1, form2, form3, displayButton, numDep}
         } = this.props;
-        /**
-         * @numDep: {integer}
-         * validates only tbe forms displayed. The value of numDep indicates the number of forms that is displayed.
-         */
         var valid = this.validation(1);
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid

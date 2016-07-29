@@ -37,12 +37,18 @@ export class PersonWithNeedInfoClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
-    
+
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
         console.log("State 3");
         this.props.previousStep(3);
     }
-    
+
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {fields: {name, number, street, zipcode, postal, municipality}} = this.props;
         var valid = !name.error  && !street.error && !zipcode.error && !number.error;
@@ -57,6 +63,9 @@ export class PersonWithNeedInfoClass extends React.Component {
         }
     }
 
+    /**
+     * @returns the view of PersonWithNeedInfoForm 
+     */
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         var valid =  !name.error  && !street.error && !zipcode.error && !number.error;
@@ -147,7 +156,9 @@ PersonWithNeedInfoClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for form
+ */
 const validate = values => {
     const errors = {};
 
@@ -172,7 +183,9 @@ const validate = values => {
     return errors;
 };
 
-//Sets up reduxForm - needs fields and validation functions
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const PersonWithNeedInfo = reduxForm({
     form: 'application',
     fields: fields,

@@ -300,7 +300,9 @@ RelationFormClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for form
+ */
 const validate = values => {
     const errors = {};
 
@@ -310,7 +312,9 @@ const validate = values => {
     return errors;
 };
 
-//Sets up reduxForm - needs fields and validation functions
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const RelationForm = reduxForm({
     form: 'application',
     fields: fields,

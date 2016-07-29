@@ -52,6 +52,12 @@ export class GeneralPractitionerClass extends React.Component {
         }
     }
 
+
+    /**
+     * @param municipality 
+     * Loads the doctors located in the municipality from the server
+     * Adds the doctors to the TypeAhead-component 
+     */
     getPractitionersByMunicipality(municipality){
         $.ajax({
             url: RESTpaths.PATHS.DOCTORS_BASE + '?loc=' + municipality,

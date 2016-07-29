@@ -40,11 +40,17 @@ export class PersonWithNeedClass extends React.Component {
         this.savePerson = this.savePerson.bind(this);
     }
 
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {asyncValidating, fields: {pnr, checked, name}} = this.props;
         var valid = (!pnr.error && !name.error) || (checked.value && !name.error);
@@ -66,6 +72,9 @@ export class PersonWithNeedClass extends React.Component {
         }
     }
 
+    /**
+     * Handle the click on the next-button
+     */
     savePerson() {
         var pnr = this.props.fields.pnr.value;
 
@@ -229,7 +238,9 @@ PersonWithNeedClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for the form 
+ */
 const validate = values => {
     const errors = {};
 
@@ -274,7 +285,9 @@ const asyncValidate = (values) => {
     })
 };
 
-//Sets up reduxForm - needs fields and validation functions
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const PersonWithNeed = reduxForm({
     form: 'application',
     fields: fields,
