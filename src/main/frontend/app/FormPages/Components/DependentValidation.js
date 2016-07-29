@@ -10,9 +10,12 @@ function feedback(data) {
     if (!(checkEmail(data.mail))) {
         errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
     }
-    if (fieldIsEmpty(data.name)|| data.name.replace(" ", "").length<=2) {
+    if (fieldIsEmpty(data.name)) {
         errors.name = "et navn, ";
+    } else if(data.name.replace(" ", "").length<=2){
+        errors.name="et navn";
     }
+
     if (!data.relation) {
         errors.relation = "relasjon, ";
     }
@@ -30,3 +33,5 @@ const DependentValidation = data => {
 };
 
 export default DependentValidation
+
+//|| data.name.replace(" ", "").length<=2
