@@ -257,7 +257,7 @@ exports.FAMILYRELATIONS = [
     {value: "Samboer", relation: "Samboer"},
     {value: "Søsken", relation: "Søsken"},
     {value: "Barnebarn", relation: "Barnebarn"},
-    {value: "Nephew/Niece", relation: "Nevø/Niese"},
+    {value: "Nevø/Niese", relation: "Nevø/Niese"},
     //{value: "Annet", relation: "Annet"}
 ];
 
@@ -269,7 +269,7 @@ exports.DEPENDENTRELATIONS = [
     {value: "Samboer", relation: "Samboer"},
     {value: "Søsken", relation: "Søsken"},
     {value: "Barnebarn", relation: "Barnebarn"},
-    {value: "Nephew/Niece", relation: "Nevø/Niese"},
+    {value: "Nevø/Niese", relation: "Nevø/Niese"},
     {value: "Verge", relation: "Verge"},
     {value: "Annet", relation: "Annet"}
 ];
