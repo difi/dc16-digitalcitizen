@@ -12,6 +12,8 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
 
+
+
 const fields = [
     'form1.name',
     'form1.mail',
@@ -40,6 +42,10 @@ const fields = [
     'typeOfRelation'
 ];
 
+/**
+ * Variables used to either show or hide the button to add a new dependent. The reason for this is because the user shall not add more than three dependents.
+ * The values of the variables is set in the style attribute to addDepButton.
+ */
 var DISPLAY_FORM = 'block';
 var HIDE_FORM = 'none';
 var clickNextButton = false;
@@ -62,18 +68,21 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * If checked for dependent or guardian, this load the person logged in from the server to fill out the values.
+     */
     getPersonToBeDependent() {
-        //If checked for dependent or guardian, this loads the person logged in from the server to fill out the values.
         const {fields: {form1}} = this.props;
         $.ajax({
             url: RESTpaths.PATHS.DEPENDENT_BASE + '?pnr=' + this.props.userData.pnr,
             dataType: 'json',
             cache: false,
             success: function (data) {
+                console.log(data);
+                console.log(name);
                 form1.name.onChange(data.name);
                 form1.phone.onChange(data.telephone);
                 form1.mail.onChange(data.mail);
-
                 switch (this.props.fields.relation.value) {
                     case "guardian":
                         form1.relation.onChange("Verge");
@@ -94,8 +103,10 @@ export class AddDependentClass extends React.Component {
         });
     }
 
+    /**
+     * Sends you to different forms based on different earlier inputs.
+     */
     handleClickBack() {
-        //Sends you to different forms based on different earlier inputs.
         console.log(this.props.fields);
         if (this.props.fields.applyingForSelf.value) {
             (this.props.previousStep(1));
@@ -112,6 +123,9 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * Handles the click on the next-button
+     */
     handleClickNext() {
         const {fields: {numDep}} = this.props;
         var valid = this.validation(1);
@@ -131,6 +145,11 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * The value of numDep controls which dependent-form to show in application.
+     * First time button is clicked, numDep is set to 2, and second dependent-form is displayed.
+     * If all three dependent-forms is displayed, the button to add new dependent is hidden.
+     */
     handleClick() {
         //Handles click on add another dependent. Should show 2 and 3, then disable itself until form 3 is removed.
         const {
@@ -162,6 +181,10 @@ export class AddDependentClass extends React.Component {
         }
     }
 
+    /**
+     * @param value
+     * Validates the displayed DependentForm's in the view 
+     */
     validation(value) {
         const {fields: {form1, form2, form3}} = this.props;
 
@@ -216,20 +239,31 @@ export class AddDependentClass extends React.Component {
             return valid && other1;
         }
     }
-    //Functions for removing a form when the minus is clicked. 
-    handleClickForm2() {
 
+    /**
+     * Hides second dependent-form
+     * Decreases numDep-value
+     */
+    handleClickForm2() {
         this.props.fields.form2.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
+    /**
+     * Hides third dependent-form
+     * Decreases the numDep-value
+     * Displays button to add new dependent
+     */
     handleClickForm3() {
         this.props.fields.form3.show.onChange(false);
         this.props.fields.displayButton.onChange(DISPLAY_FORM);
         this.props.fields.numDep.onChange(this.props.fields.numDep.value - 1);
     }
 
+    /**
+     * @returns the view of AddDependent, containing a number of DependentForm's
+     */
     render() {
         const {fields: {form1, form2, form3, displayButton, numDep}} = this.props;
 
@@ -288,12 +322,10 @@ export class AddDependentClass extends React.Component {
     }
 };
 
-
 AddDependentClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,
     nextStep: React.PropTypes.func.isRequired
 };
-
 
 const AddDependent = reduxForm({
     form: 'application',

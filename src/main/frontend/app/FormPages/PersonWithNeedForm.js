@@ -45,11 +45,17 @@ export class PersonWithNeedClass extends React.Component {
 
     }
 
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
         console.log("State 2");
         (this.props.previousStep(2));
     }
 
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {fields: {pnr, checked, name}} = this.props;
         var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
@@ -297,7 +303,9 @@ PersonWithNeedClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for the form 
+ */
 const validate = values => {
     const errors = {};
 
@@ -315,7 +323,9 @@ const validate = values => {
     return errors;
 };
 
-//Sets up reduxForm - needs fields and validation functions
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const PersonWithNeed = reduxForm({
     form: 'application',
     fields: fields,
