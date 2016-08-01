@@ -58,7 +58,7 @@ export class PersonWithNeedClass extends React.Component {
      */
     handleClickNext() {
         const {fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
+        var valid = (!pnr.error && !name.error) || (checked.value && !name.error);
 
         // Checks if pnr and name match if a full-length pnr is typed, and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
@@ -75,7 +75,6 @@ export class PersonWithNeedClass extends React.Component {
                     //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
 
                     if (data == true) {
-                        console.log("Korrekt");
                         this.setState({nextBtnIsLoading: false});
                         this.validToGoNext();
                     } else {
@@ -90,7 +89,7 @@ export class PersonWithNeedClass extends React.Component {
                 }.bind(this)
             });
         } else {
-            if ((valid == undefined || !valid)) {
+            if ((valid == undefined || valid==false)) {
                 this.notValidToGoNext();
 
             } else {
@@ -310,10 +309,10 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "et navn";
+        errors.name = "et navn, ";
     }
-    else if (values.name.replace(" ", "").length <= 2) {
-        errors.name = "et navn";
+    else if(values.name.replace(" ", "").length<=2){
+        errors.name="et navn";
     }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
