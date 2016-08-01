@@ -2,10 +2,8 @@ import React from 'react';
 import {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form';
 import {getValues} from 'redux-form';
-
 import DropdownList from './DropdownList.js';
 import dropdownContent from '../../static_data/dropdown-list-content.js';
-
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Checkbox = require('react-bootstrap/lib/Checkbox');
@@ -13,13 +11,13 @@ var Button = require('react-bootstrap/lib/Button');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
-
 var content = null;
 var alertMessage = false;
-
 export const fields = ["name", "phone", "mail", "relation", "depOtherRelation"];
 
-//DependentForm is part of AddDependent and may render up to three times. 
+/**
+ * DependentForm is part of AddDependent and may render up to three times.
+ */
 class DependentForm extends React.Component {
     constructor(props) {
         super(props);
@@ -42,7 +40,7 @@ class DependentForm extends React.Component {
 
         const {name, phone, mail, relation, depOtherRelation}= this.props;
         var valid = !name.error && !phone.error && !mail.error && relation.value;
-
+        console.log("Phone: " + name.error);
         if (!valid && this.props.clickButtonNext) {
 
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{phone.error}</i></b><b><i>{mail.error}</i></b><b><i>{relation.error}</i></b>før du kan gå videre.</p>;

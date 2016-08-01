@@ -16,14 +16,18 @@ export class NeedsFormClass extends React.Component {
         this.handleClickBack = this.handleClickBack.bind(this);
         this.handleClickNext = this.handleClickNext.bind(this);
     }
-
-    //Handle the click on the back-button
+    
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
 
         this.props.previousStep(6);
     }
-
-    //Handle the click on the next-button
+    
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {fields: {need}} = this.props;
         var valid = need.value;
@@ -38,13 +42,12 @@ export class NeedsFormClass extends React.Component {
             this.props.nextStep(8);
         }
     }
-
-    //Handle change in the radio-buttons
-    //@param r - the radio button chosen
-
-    //RadioGroup: Showing radio-buttons. Call handleChange when a button is clicked, but
-    // do not send an argument, because react already knows which argument to use.
-    //@return The view of the NeedsForm.
+    
+    /**
+     * Handle change in the radiobuttons
+     * @need: value of the chosen radiobutton is saved here
+     * @returns the view of the NeedsForm
+     */
     render() {
         const {fields: {need}} = this.props;
         var valid = need.value;
