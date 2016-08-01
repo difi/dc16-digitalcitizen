@@ -45,7 +45,7 @@ public class SubmitControllerTest extends AbstractControllerTest {
 
         Assert.assertEquals("failure - expected HTTP status 200", 200, status);
         Assert.assertTrue("Failure - expected HTTP response body to have a value", content.trim().length() > 0);
-        Assert.assertEquals("This should be the first of submissions sent to server", content, "0");
+        //Assert.assertEquals("This should be the first of submissions sent to server", content, "0");
 
     }
 }
