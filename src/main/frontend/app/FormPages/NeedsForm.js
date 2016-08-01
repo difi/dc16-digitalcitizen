@@ -70,13 +70,13 @@ export class NeedsFormClass extends React.Component {
         return (
             <form className="needs">
                 <componentClass>
-                    <label className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
-                    <div className="form-container">
-                        <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short"
-                               checked={need.value == "short"}/> Kortidsopphold
+                    <label htmlFor="needsform" className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
+                    <div id="needsform" className="form-container">
+                        <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short" id="shortStay"
+                               checked={need.value == "short"}/> <label htmlFor="shortStay">Kortidsopphold</label>
                         <br/>
-                        <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long"
-                               checked={need.value == "long"}/> Langtidsopphold
+                        <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long" id="longStay"
+                               checked={need.value == "long"}/> <label htmlFor="longStay">Langtidsopphold</label>
                     </div>
                     {alertContent}
                     <NavigationButtons

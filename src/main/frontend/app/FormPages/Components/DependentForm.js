@@ -14,7 +14,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var content = null;
+var alertContent = null;
 var alertMessage = false;
 
 export const fields = ["name", "phone", "mail", "relation", "depOtherRelation"];
@@ -47,7 +47,7 @@ class DependentForm extends React.Component {
 
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{phone.error}</i></b><b><i>{mail.error}</i></b><b><i>{relation.error}</i></b>før du kan gå videre.</p>;
 
-            content =
+            alertContent =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
@@ -58,7 +58,7 @@ class DependentForm extends React.Component {
             alertMessage = true;
         } else {
             if (valid) {
-                content = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -69,11 +69,11 @@ class DependentForm extends React.Component {
                 <h4>Pårørende</h4>
                 <Row className="form-row">
                     <Col sm={4} md={4}>
-                        <label className="name">Navn</label>
+                        <label htmlFor="deptName" className="name">Navn</label>
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : null}>
-                            <FormControl className="nameField" ref="name" type="text" placeholder="Navn"
+                            <FormControl className="nameField" ref="name" type="text" placeholder="Navn" id="deptName"
                                          disabled={this.props.autoFilled} {...name}/>
                             <FormControl.Feedback />
                         </FormGroup>
@@ -81,11 +81,11 @@ class DependentForm extends React.Component {
                 </Row>
                 <Row className="formgroup-row">
                     <Col sm={4} md={4}>
-                        <label className="tlf">Telefon</label>
+                        <label htmlFor="depttlf" className="tlf">Telefon</label>
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={phone.error && (phone.touched || alertMessage) ? "error" : null}>
-                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr"
+                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr" id="depttlf"
                                          disabled={this.props.autoFilled} {...phone}/>
                             <FormControl.Feedback />
                         </FormGroup>
@@ -93,11 +93,11 @@ class DependentForm extends React.Component {
                 </Row>
                 <Row className="formgroup-row">
                     <Col sm={4} md={4}>
-                        <label className="mail">E-post</label>
+                        <label htmlFor="deptMail" className="mail">E-post</label>
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={mail.error && (mail.touched || alertMessage) ? "error" : null}>
-                            <FormControl className="mailForm" ref="mail" type="text" placeholder="E-post"
+                            <FormControl className="mailForm" ref="mail" type="text" placeholder="E-post" id="deptMail"
                                          disabled={this.props.autoFilled} {...mail}/>
                             <FormControl.Feedback />
                         </FormGroup>
@@ -105,7 +105,7 @@ class DependentForm extends React.Component {
                 </Row>
                 <Row className="form-row">
                     <Col sm={4} md={4}>
-                        <label className="depRel">Relasjon</label>
+                        <label htmlFor="test" className="depRel">Relasjon</label>
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={!relation.value && alertMessage ? "error" : null}>
@@ -117,13 +117,15 @@ class DependentForm extends React.Component {
                     </FormGroup>
                     </Col>
                 </Row>
-                {content}
+                {alertContent}
                 {this.props.relation.value == 'Annet' ?
                     <Row className="form-row">
                         <Col sm={4} md={4}>
+                            <label htmlFor="deptSpesRel">Spesifisert relasjon</label>
                         </Col>
                         <Col sm={8} md={8}>
                             <FormControl
+                                id="deptSpesRel"
                                 type="text"
                                 ref="depOtherRel"
                                 className="dep-other-rel"

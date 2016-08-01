@@ -15,7 +15,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var inputChangeRun = 0;
-var content = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
@@ -122,7 +122,7 @@ export class LocationPageClass extends React.Component {
 
             var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen  i</i></b>, før du går videre.</p>
 
-            content =
+            alertContent =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
@@ -134,7 +134,7 @@ export class LocationPageClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid) {
-                content = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -142,7 +142,7 @@ export class LocationPageClass extends React.Component {
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
-                    <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
+                    <label htmlFor="homes" className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
                     <DropdownList
@@ -157,20 +157,21 @@ export class LocationPageClass extends React.Component {
         }
         return (
             <componentClass>
-                <label className="form-header">Hvor ønskes det plass? </label>
+                <label htmlFor="locForm" className="form-header">Hvor ønskes det plass? </label>
                 <div className="form-container">
-                    <form className="location">
+                    <form id="locForm" className="location">
                         <Row className="form-row">
                             <Col sm={6} md={6}>
-                                <label className="municipality">I hvilken kommune ønskes plassen?</label>
+                                <label htmlFor="municip" className="municipality" id="mun">I hvilken kommune ønskes plassen?</label>
                             </Col>
                             <Col sm={6} md={6}>
-                                <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
+                                <FormGroup id="municip" validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
                                 <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                            ref="munSelect"
                                            className="municipTypeAhead"
                                            labelKey="name"
                                            selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                           aria-labelledby="mun"
                                            onInputChange={this.onInputChangeHandler}
                                            onChange={this.onChangeHandler}/>
                                     </FormGroup>
@@ -178,7 +179,7 @@ export class LocationPageClass extends React.Component {
                         </Row>
                         {homes}
                     </form>
-                    {content}
+                    {alertContent}
                 </div>
                 <NavigationButtons
                     buttonDisabled={!valid}

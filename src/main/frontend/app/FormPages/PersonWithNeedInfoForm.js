@@ -19,7 +19,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var content = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
@@ -65,7 +65,7 @@ export class PersonWithNeedInfoClass extends React.Component {
 
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du går videre.</p>;
 
-            content =
+            alertContent =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
@@ -77,7 +77,7 @@ export class PersonWithNeedInfoClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid) {
-                content = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -85,15 +85,16 @@ export class PersonWithNeedInfoClass extends React.Component {
         return (
             <form>
                 <div>
-                    <label className="form-header">Informasjon om søker</label>
-                    <div className="form-container">
+                    <label htmlFor="infoForm" className="form-header">Informasjon om søker</label>
+                    <div id="infoForm" className="form-container">
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="name" id="name">Navn</label>
+                                <label htmlFor="infoName" className="name" id="name">Navn</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                                     <FormControl
+                                        id="infoName"
                                         type="text"
                                         className="nameField"
                                         ref="name"
@@ -105,7 +106,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="adr" id="adr">Folkeregistrert adresse</label>
+                                <label htmlFor="adrField" className="adr" id="adr">Folkeregistrert adresse</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <AddressField store={this.props.store} className="adr" ref='addressfield' includeCountry={false}/>
@@ -113,11 +114,12 @@ export class PersonWithNeedInfoClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col sm={4} md={4}>
-                                <label className="tlf" id="tlf">Telefon</label>
+                                <label htmlFor="tlfNr" className="tlf" id="tlf">Telefon</label>
                             </Col>
                             <Col sm={8} md={8}>
                                 <FormGroup validationState={number.error && (number.touched || alertMessage) ? "error" : ""}>
                                     <FormControl
+                                        id="tlfNr"
                                         type="numeric"
                                         className="tlfFrom"
                                         ref="phone"
@@ -128,7 +130,7 @@ export class PersonWithNeedInfoClass extends React.Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        {content}
+                        {alertContent}
                     </div>
 
                     <NavigationButtons

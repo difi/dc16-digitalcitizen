@@ -20,7 +20,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var error = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields= [
@@ -162,7 +162,7 @@ export class RelationFormClass extends React.Component {
                 }
             }
 
-            error =
+            alertContent =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
@@ -174,7 +174,7 @@ export class RelationFormClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid  || relation.value) {
-                error = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -288,7 +288,7 @@ export class RelationFormClass extends React.Component {
                         <label htmlFor="other-radio">Annet</label>
                     </form>
                     {content}
-                    {error}
+                    {alertContent}
                 </div>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}

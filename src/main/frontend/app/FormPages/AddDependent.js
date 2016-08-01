@@ -241,8 +241,8 @@ export class AddDependentClass extends React.Component {
         return (
             <div>
                 <div>
-                    <label className="form-header"> Informasjon om pårørende </label>
-                    <div>
+                    <label htmlFor="dependentForm" className="form-header"> Informasjon om pårørende </label>
+                    <div id="dependentForm">
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
                                            autoFilled={this.props.fields.dependent.value} 
