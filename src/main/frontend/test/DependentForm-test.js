@@ -58,8 +58,7 @@ describe("DependentForm", function() {
     beforeEach(() => {
         // the fields that are individual for each page
         const props = {
-            firstName: 'ds',
-            lastName: 'sdf',
+            name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Søsken'},
@@ -115,14 +114,13 @@ describe("DependentForm", function() {
 
     it('if showDeleteButton=true, show delete button', function () {
         expect(wrapper).to.have.length(1);
-        expect(wrapper.find('.close')).to.have.length(1);
+        expect(wrapper.find('.close-button')).to.have.length(1);
     });
 
     it('if showDeleteButton=false, hide delete button', function () {
         // Because we need to redefine the value of showDeleteButton, we need to define all props again
         var defaultProps = {
-            firstName: 'ds',
-            lastName: 'sdf',
+            name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Søsken'},
@@ -131,13 +129,12 @@ describe("DependentForm", function() {
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
         //Expect to not find one element with the class name "close"
-        expect(wrapper.find('.close')).to.have.length(0);
+        expect(wrapper.find('.close-button')).to.have.length(0);
     });
 
     it('if you choose other, show textfield', function () {
         var defaultProps = {
-            firstName: 'ds',
-            lastName: 'sdf',
+            name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Annet'},

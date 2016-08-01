@@ -40,9 +40,11 @@ class DependentForm extends React.Component {
 
         const {name, phone, mail, relation, depOtherRelation}= this.props;
         var valid = !name.error && !phone.error && !mail.error && relation.value;
-        console.log("Phone: " + name.error);
-        if (!valid && this.props.clickButtonNext) {
+        //console.log("Phone: " + name.error);
 
+        console.log("Relasjon1: " + relation.value);
+        if (!valid && this.props.clickButtonNext) {
+            console.log("Relasjon2: " + relation.value);
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{phone.error}</i></b><b><i>{mail.error}</i></b><b><i>{relation.error}</i></b>før du kan gå videre.</p>;
 
             alertContent =
