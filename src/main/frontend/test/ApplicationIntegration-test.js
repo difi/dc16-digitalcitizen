@@ -266,8 +266,11 @@ describe("ApplicationIntegration", () => {
         });
         var sixthPage = subject.find(AddDependent);
         var nextButton = sixthPage.find(NavigationButtons).find('.next-btn');
-        nextButton.simulate('click');
-        //Button shouldnt be clickable before something is entered
+        //button with classname next-btn shouldnt exist before something is entered
+        expect(nextButton).to.have.length(0);
+        //button with classname disabledButton-nxt should exist
+        expect(sixthPage.find(NavigationButtons).find(".disabledButton-nxt")).to.have.length(1);
+
         expect(subject.state().step).to.equal(6);
 
         var firstAdd = sixthPage.find(DependentForm).first();
@@ -277,6 +280,7 @@ describe("ApplicationIntegration", () => {
         firstAdd.find(FormControl).at(2).simulate('change', {target: {value: 'ola@nordmann.no'}});
         firstAdd.find(DropdownList).simulate('change', {target: {value: 'sibling'}});
 
+        nextButton = sixthPage.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         //Should now redirect to state 7
         expect(subject.state().step).to.equal(7);

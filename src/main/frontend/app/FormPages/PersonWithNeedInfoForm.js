@@ -165,10 +165,10 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "et navn, ";
+        errors.name = "et navn på minst tre bokstaver, ";
     }
     else if(values.name.replace(" ", "").length<=2){
-        errors.name="et navn";
+        errors.name="et navn på minst tre bokstaver, ";
     }
     if (fieldIsEmpty(values.street)) {
         errors.street = "en adresse, ";
