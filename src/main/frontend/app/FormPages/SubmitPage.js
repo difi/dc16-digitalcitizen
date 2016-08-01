@@ -61,7 +61,7 @@ export class SubmitSuccessClass extends React.Component {
                     </Col>
                 </Row>
             </div>
-        )
+        );
         /*else {
          return (
          <div>

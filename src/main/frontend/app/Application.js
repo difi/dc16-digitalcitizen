@@ -93,10 +93,10 @@ export class ApplicationClass extends React.Component {
         this.getUserData = this.getUserData.bind(this);
         this.getUserData();
 
-        // The following if-sentences needs to be commented out of the code if the
-        // ApplicationIntegration-test is going to run as expected
+        /**
+         * The following if-sentences needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
+         */
 
-        //add method for test data
         /*
          if (this.props.fields.applyingForSelf.onChange()) {
          this.testScriptPerson();

@@ -94,32 +94,34 @@ export class GeneralPractitionerClass extends React.Component {
         }
 
         return (
-            <componentClass>
-                <label className="form-header">Velg søkers fastlege</label>
-                <div className="form-container">
-                    <Row className="form-row">
-                        <Col sm={4} md={4}>
-                            <label className="genPract" id="generalPract">Fastlege</label>
-                        </Col>
-                        <Col sm={8} md={8}>
-                            <FormGroup validationState={(doctorName.touched || alertMessage) ? "error" : ""}>
-                                <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect"
-                                           labelKey="name"
-                                           selected={doctorName.value? [{name: doctorName.value}]: []}
-                                           textReducer={onlyLettersInString}
-                                           onInputChange={value=> doctorName.onChange(value)}
-                                />
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    {content}
-                </div>
-                <NavigationButtons
-                    handleClickBack={this.handleClickBack}
-                    handleClickNext={this.handleClickNext}
-                    buttonDisabled={!valid}
-                />
-            </componentClass>
+            <div>
+                <componentClass>
+                    <label className="form-header">Velg søkers fastlege</label>
+                    <div className="form-container">
+                        <Row className="form-row">
+                            <Col sm={4} md={4}>
+                                <label className="genPract" id="generalPract">Fastlege</label>
+                            </Col>
+                            <Col sm={8} md={8}>
+                                <FormGroup validationState={(doctorName.touched || alertMessage) ? "error" : ""}>
+                                    <TypeAhead options={doctors.value ? doctors.value : [{name: " "}]} ref="doctorSelect"
+                                               labelKey="name"
+                                               selected={doctorName.value? [{name: doctorName.value}]: []}
+                                               textReducer={onlyLettersInString}
+                                               onInputChange={value=> doctorName.onChange(value)}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        {content}
+                    </div>
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        buttonDisabled={!valid}
+                    />
+                </componentClass>
+            </div>
         );
     }
 }

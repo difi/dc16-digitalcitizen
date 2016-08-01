@@ -6,9 +6,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-
-
-
 export default class NavigationButtons extends React.Component {
     constructor(props) {
         super(props);
@@ -18,8 +15,6 @@ export default class NavigationButtons extends React.Component {
         };
         this.handleSubmitClick = this.handleSubmitClick.bind(this);
     }
-
-
 
     handleSubmitClick() {
         var field2 = this.props.newFieldValues();
@@ -104,7 +99,6 @@ export default class NavigationButtons extends React.Component {
                     </Button>
             }
         }
-
 
         return (
             <Row style={{marginTop: '15px'}}>

@@ -28,7 +28,6 @@ export class WhosSearchingClass extends React.Component {
     }
 
     saveFieldValues(){
-
             //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
             this.props.fields.pnr.onChange(this.props.userData.pnr);
             $.ajax({
@@ -63,23 +62,25 @@ export class WhosSearchingClass extends React.Component {
 
     render() {
         return (
-            <componentClass>
-                <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
-                <div className="form-container">
-                    <Row>
-                        <Col md={8} mdOffset={2}>
-                            <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
-                                    bsSize="large" block>Ja, for meg selv</Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={8} mdOffset={2}>
-                            <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
+            <div>
+                <componentClass>
+                    <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
+                    <div className="form-container">
+                        <Row>
+                            <Col md={8} mdOffset={2}>
+                                <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
+                                        bsSize="large" block>Ja, for meg selv</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={8} mdOffset={2}>
+                                <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                     bsSize="large" block>Nei, for noen andre</Button>
-                        </Col>
-                    </Row>
-                </div>
-            </componentClass>
+                            </Col>
+                        </Row>
+                    </div>
+                </componentClass>
+            </div>
         )
     }
 }

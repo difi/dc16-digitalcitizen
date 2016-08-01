@@ -55,7 +55,7 @@ export class NeedsFormClass extends React.Component {
                     <p/>
                     <div className="error">
                         <Alert bsStyle="danger">
-                            <p>Vennligst velg <b><i>et av alternativene</i></b>.</p>;
+                            <p>Vennligst velg <b><i>et av alternativene</i></b>.</p>
                         </Alert>
                     </div>
                 </componentClass>;
@@ -68,24 +68,26 @@ export class NeedsFormClass extends React.Component {
         }
 
         return (
-            <form className="needs">
-                <componentClass>
-                    <label className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
-                    <div className="form-container">
-                        <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short"
-                               checked={need.value == "short"}/> Kortidsopphold
-                        <br/>
-                        <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long"
-                               checked={need.value == "long"}/> Langtidsopphold
-                    </div>
-                    {alertContent}
-                    <NavigationButtons
-                        handleClickBack={this.handleClickBack}
-                        handleClickNext={this.handleClickNext}
-                        buttonDisabled={!valid}
-                    />
-                </componentClass>
-            </form>
+            <div>
+                <form className="needs">
+                    <componentClass>
+                        <label className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
+                        <div className="form-container">
+                            <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short"
+                                   checked={need.value == "short"}/> Kortidsopphold
+                            <br/>
+                            <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long"
+                                   checked={need.value == "long"}/> Langtidsopphold
+                        </div>
+                        {alertContent}
+                        <NavigationButtons
+                            handleClickBack={this.handleClickBack}
+                            handleClickNext={this.handleClickNext}
+                            buttonDisabled={!valid}
+                        />
+                    </componentClass>
+                </form>
+            </div>
         )
     }
 }

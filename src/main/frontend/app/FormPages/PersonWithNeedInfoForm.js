@@ -83,61 +83,63 @@ export class PersonWithNeedInfoClass extends React.Component {
         }
 
         return (
-            <form>
-                <div>
-                    <label className="form-header">Informasjon om søker</label>
-                    <div className="form-container">
-                        <Row className="form-row">
-                            <Col sm={4} md={4}>
-                                <label className="name" id="name">Navn</label>
-                            </Col>
-                            <Col sm={8} md={8}>
-                                <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
-                                    <FormControl
-                                        type="text"
-                                        className="nameField"
-                                        ref="name"
-                                        placeholder="Navn"
-                                        {...name}/>
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row className="form-row">
-                            <Col sm={4} md={4}>
-                                <label className="adr" id="adr">Folkeregistrert adresse</label>
-                            </Col>
-                            <Col sm={8} md={8}>
-                                <AddressField store={this.props.store} className="adr" ref='addressfield' includeCountry={false}/>
-                            </Col>
-                        </Row>
-                        <Row className="form-row">
-                            <Col sm={4} md={4}>
-                                <label className="tlf" id="tlf">Telefon</label>
-                            </Col>
-                            <Col sm={8} md={8}>
-                                <FormGroup validationState={number.error && (number.touched || alertMessage) ? "error" : ""}>
-                                    <FormControl
-                                        type="numeric"
-                                        className="tlfFrom"
-                                        ref="phone"
-                                        placeholder="Telefonnr"
-                                        {...number}
-                                    />
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        {content}
-                    </div>
+            <div>
+                <form>
+                    <div>
+                        <label className="form-header">Informasjon om søker</label>
+                        <div className="form-container">
+                            <Row className="form-row">
+                                <Col sm={4} md={4}>
+                                    <label className="name" id="name">Navn</label>
+                                </Col>
+                                <Col sm={8} md={8}>
+                                    <FormGroup validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
+                                        <FormControl
+                                            type="text"
+                                            className="nameField"
+                                            ref="name"
+                                            placeholder="Navn"
+                                            {...name}/>
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row className="form-row">
+                                <Col sm={4} md={4}>
+                                    <label className="adr" id="adr">Folkeregistrert adresse</label>
+                                </Col>
+                                <Col sm={8} md={8}>
+                                    <AddressField store={this.props.store} className="adr" ref='addressfield' includeCountry={false}/>
+                                </Col>
+                            </Row>
+                            <Row className="form-row">
+                                <Col sm={4} md={4}>
+                                    <label className="tlf" id="tlf">Telefon</label>
+                                </Col>
+                                <Col sm={8} md={8}>
+                                    <FormGroup validationState={number.error && (number.touched || alertMessage) ? "error" : ""}>
+                                        <FormControl
+                                            type="numeric"
+                                            className="tlfFrom"
+                                            ref="phone"
+                                            placeholder="Telefonnr"
+                                            {...number}
+                                        />
+                                        <FormControl.Feedback />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            {content}
+                        </div>
 
-                    <NavigationButtons
-                        handleClickBack={this.handleClickBack}
-                        handleClickNext={this.handleClickNext}
-                        buttonDisabled={!valid}
-                    />
-                </div>
-            </form>
+                        <NavigationButtons
+                            handleClickBack={this.handleClickBack}
+                            handleClickNext={this.handleClickNext}
+                            buttonDisabled={!valid}
+                        />
+                    </div>
+                </form>
+            </div>
         )
     }
 }

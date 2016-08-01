@@ -156,38 +156,40 @@ export class LocationPageClass extends React.Component {
             </Row>;
         }
         return (
-            <componentClass>
-                <label className="form-header">Hvor ønskes det plass? </label>
-                <div className="form-container">
-                    <form className="location">
-                        <Row className="form-row">
-                            <Col sm={6} md={6}>
-                                <label className="municipality">I hvilken kommune ønskes plassen?</label>
-                            </Col>
-                            <Col sm={6} md={6}>
-                                <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
-                                <TypeAhead options={dropdownContent.MUNICIPALITIES}
-                                           ref="munSelect"
-                                           className="municipTypeAhead"
-                                           labelKey="name"
-                                           selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           onInputChange={this.onInputChangeHandler}
-                                           onChange={this.onChangeHandler}/>
-                                    </FormGroup>
-                            </Col>
-                        </Row>
-                        {homes}
-                    </form>
-                    {content}
-                </div>
-                <NavigationButtons
-                    buttonDisabled={!valid}
-                    handleClickBack={this.handleClickBack}
-                    handleClickNext={this.handleClickNext}
-                    isSubmit={true}
-                    saveUserData={this.props.saveUserData}
-                    newFieldValues = {this.props.newFieldValues}/>
-            </componentClass>
+            <div>
+                <componentClass>
+                    <label className="form-header">Hvor ønskes det plass? </label>
+                    <div className="form-container">
+                        <form className="location">
+                            <Row className="form-row">
+                                <Col sm={6} md={6}>
+                                    <label className="municipality">I hvilken kommune ønskes plassen?</label>
+                                </Col>
+                                <Col sm={6} md={6}>
+                                    <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
+                                    <TypeAhead options={dropdownContent.MUNICIPALITIES}
+                                               ref="munSelect"
+                                               className="municipTypeAhead"
+                                               labelKey="name"
+                                               selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                               onInputChange={this.onInputChangeHandler}
+                                               onChange={this.onChangeHandler}/>
+                                        </FormGroup>
+                                </Col>
+                            </Row>
+                            {homes}
+                        </form>
+                        {content}
+                    </div>
+                    <NavigationButtons
+                        buttonDisabled={!valid}
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        isSubmit={true}
+                        saveUserData={this.props.saveUserData}
+                        newFieldValues = {this.props.newFieldValues}/>
+                </componentClass>
+            </div>
         )
     }
 }

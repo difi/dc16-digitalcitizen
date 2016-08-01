@@ -266,7 +266,6 @@ export class RelationFormClass extends React.Component {
                 </componentClass>
         }
         return (
-
             <div>
                 <label className="form-header">Hva er din relasjon til søkeren?</label>
                 <div className="form-container">

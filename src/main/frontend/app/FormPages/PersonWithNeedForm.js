@@ -180,45 +180,47 @@ export class PersonWithNeedClass extends React.Component {
         }
 
         return (
-            <form>
-                <componentClass>
-                    <label className="form-header">Informasjon om søker</label>
-                    <div className="form-container">
-                        <Row className="formgroup-row">
-                            <Col sx={4} md={4}>
-                                <label className="name">Navn</label>
-                            </Col>
-                            <Col sx={8} md={8}>
-                                {nameContent}
-                            </Col>
-                            <Col sm={0} md={5}></Col>
-                        </Row>
-                        <Row className="form-row">
-                            <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
-                                <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
-                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
-                                fødselsnummeret
-                            </Col>
-                        </Row>
+            <div>
+                <form>
+                    <componentClass>
+                        <label className="form-header">Informasjon om søker</label>
+                        <div className="form-container">
+                            <Row className="formgroup-row">
+                                <Col sx={4} md={4}>
+                                    <label className="name">Navn</label>
+                                </Col>
+                                <Col sx={8} md={8}>
+                                    {nameContent}
+                                </Col>
+                                <Col sm={0} md={5}></Col>
+                            </Row>
+                            <Row className="form-row">
+                                <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
+                                    <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
+                                           checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
+                                    fødselsnummeret
+                                </Col>
+                            </Row>
 
-                        <Row className="formgroup-row">
-                            <Col sx={4} md={4}>
-                                <label className="fnr">Fødselsnummer</label>
-                            </Col>
-                            <Col sx={8} md={8}>
-                                {pnrContent}
-                            </Col>
-                        </Row>
-                        {alertContent}
-                    </div>
+                            <Row className="formgroup-row">
+                                <Col sx={4} md={4}>
+                                    <label className="fnr">Fødselsnummer</label>
+                                </Col>
+                                <Col sx={8} md={8}>
+                                    {pnrContent}
+                                </Col>
+                            </Row>
+                            {alertContent}
+                        </div>
 
-                    <NavigationButtons
-                        handleClickBack={this.handleClickBack}
-                        handleClickNext={this.handleClickNext}
-                        buttonDisabled={!valid}
-                    />
-                </componentClass>
-            </form >
+                        <NavigationButtons
+                            handleClickBack={this.handleClickBack}
+                            handleClickNext={this.handleClickNext}
+                            buttonDisabled={!valid}
+                        />
+                    </componentClass>
+                </form >
+            </div>
         )
     }
 }
