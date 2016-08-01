@@ -1,12 +1,20 @@
 package digitalcitizen.controllers;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fakemongo.Fongo;
+import com.google.gson.Gson;
+import com.mongodb.*;
+import com.mongodb.util.JSON;
 import digitalcitizen.Application;
 import digitalcitizen.models.Submission;
 import digitalcitizen.repositories.SubmissionRepository;
 import digitalcitizen.utilities.PDFManager;
 import digitalcitizen.utilities.SubmissionValidator;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,12 +27,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+
 
 @RestController
 public class SubmitController {
 
-    private ArrayList<Submission> submissions = new ArrayList<>();
+    private DB db = new Fongo("mongo server 1").getDB("digitalcitizen");
+    private DBCollection collection = db.getCollection("submissions");
 
     @Autowired
     private SubmissionRepository submissionRepository;
@@ -54,19 +63,20 @@ public class SubmitController {
         }*/
 
         if (Application.USE_MONGODB) {
-            // Add submission to database
-            System.out.println("Saving submission to database..");
-            String submissionId = submissionRepository.insert(handleSubmissionFields(submission)).getId();
-            System.out.println("Submission (" + submissionId + ") was successfully added to the database");
+            // Add submission to database and return the id
+            return submissionRepository.insert(handleSubmissionFields(submission)).getId();
+        } else {
+            //Converting Submission to BasicDBObject
+            Gson gson = new Gson();
+            BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(handleSubmissionFields(submission)));
 
-            // Return the id of the submission
-            return submissionId;
+            // Insert record and retrieve generated id
+            collection.insert(obj);
+            ObjectId submissionId = (ObjectId) obj.get("_id");
+
+            // Return the id of the Submission
+            return submissionId.toString();
         }
-
-        submissions.add(handleSubmissionFields(submission));
-
-        // Return the id of the submission
-        return Integer.toString(submissions.size() - 1);
     }
 
     /**
@@ -101,7 +111,13 @@ public class SubmitController {
             // Get Submission from database by the provided id
             submission = submissionRepository.findById(id);
         } else {
-            submission = submissions.get(Integer.parseInt(id));
+            // Retrieve Submission JSON from database by the provided ID
+            DBObject searchById = new BasicDBObject("_id", new ObjectId(id));
+            DBObject found = collection.findOne(searchById);
+
+            // Convert JSON to an instance of Submission
+            ObjectMapper mapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            submission = mapper.readValue(found.toString(), Submission.class);
         }
 
         // Generate PDF of the submission
