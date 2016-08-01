@@ -60,7 +60,7 @@ var fieldValues = {
 
 };
 
-describe("Integration of DependentForm", () => {
+describe("DependentFormIntegration", () => {
     let store = null;
     let subject = null;
     let wrapper = null;

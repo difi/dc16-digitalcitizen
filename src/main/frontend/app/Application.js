@@ -451,6 +451,13 @@ export class ApplicationClass extends React.Component {
                         </Col>
                     </Col>
                 </div>
+                <div>
+                    <Navbar fixedBottom>
+                            <Navbar.Text className="footer-text">
+                                Tjenesten er levert av Direktoratet for Forvaltning og IKT (Difi)
+                            </Navbar.Text>
+                    </Navbar>
+                </div>
             </div>
         )
     }

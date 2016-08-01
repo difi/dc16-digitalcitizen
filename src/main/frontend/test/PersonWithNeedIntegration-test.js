@@ -21,7 +21,7 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-describe("Integration of PersonWithNeedForm", () => {
+describe("PersonWithNeedIntegration", () => {
     let store = null;
     let subject = null;
 

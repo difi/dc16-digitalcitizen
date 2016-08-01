@@ -47,6 +47,10 @@ export class RelationFormClass extends React.Component {
         this.getGuardianFor();
     }
 
+
+    /**
+     * Loads person(s) the logged in user is registered as guardian for from the server
+     */
     getGuardianFor() {
         $.ajax({
             url: RESTpaths.PATHS.GUARDIAN_BASE + '?pnr=' + this.props.userData.pnr,
@@ -71,12 +75,20 @@ export class RelationFormClass extends React.Component {
         });
     }
 
+    /**
+     * Handle the click on the back-button
+     */
     handleClickBack() {
         console.log("State 1");
         this.saveFieldValues();
         (this.props.previousStep(1));
     }
 
+    /**
+     * Handle the click on the next-button
+     * If guardian-relation is chosen, the next step is step 6 - Add Dependent Page
+     * Otherwise, next step is step 3 - Person With Need Page
+     */
     handleClickNext() {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
@@ -99,20 +111,30 @@ export class RelationFormClass extends React.Component {
     }
 
 
+    /**
+     * When chosen radiobutton for guardian relation, reset the other dropdowns
+     */
     handleGuardianRadioButton() {
         this.props.fields.otherRelation.onChange(null);
         this.props.fields.typeOfRelation.onChange(null);
     }
 
+    /**
+     * When chosen radiobutton for family relation, reset the other dropdowns
+     */
     handleFamilyRadioButton() {
         this.props.fields.nameOfChild.onChange(null);
         this.props.fields.otherRelation.onChange(null);
     }
 
+    /**
+     * When chosen radiobutton for other relation, reset the other dropdowns
+     */
     handleOtherRadioButton() {
         this.props.fields.nameOfChild.onChange(null);
         this.props.fields.typeOfRelation.onChange(null);
     }
+
 
     resetDependent(event) {
         this.props.fields.dependent.onChange(event.target.value);
@@ -178,6 +200,7 @@ export class RelationFormClass extends React.Component {
                 alertMessage = false;
             }
         }
+
 
         switch (relation.value) {
             case "guardian":
@@ -299,7 +322,9 @@ RelationFormClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for form
+ */
 const validate = values => {
     const errors = {};
 
@@ -309,7 +334,9 @@ const validate = values => {
     return errors;
 };
 
-//Sets up reduxForm - needs fields and validation functions
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const RelationForm = reduxForm({
     form: 'application',
     fields: fields,

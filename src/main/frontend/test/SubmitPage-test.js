@@ -58,7 +58,7 @@ var userData = {
 
 };
 
-describe("SubmitSuccessClass", function() {
+describe("SubmitPageClass", function() {
     let wrapper = null;
 
     // this is run before each test (it ('...', function (){}))

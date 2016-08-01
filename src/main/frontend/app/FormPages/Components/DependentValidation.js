@@ -1,17 +1,23 @@
-import {checkPhoneNumber} from '../Utilities/validation';
-import {checkEmail} from '../Utilities/validation';
-import {fieldIsEmpty} from '../Utilities/validation';
+import {checkPhoneNumber} from '../Utilities/validation.js';
+import {checkEmail} from '../Utilities/validation.js';
+import {fieldIsEmpty} from '../Utilities/validation.js';
 
 function feedback(data) {
     var errors = {};
     if (!(checkPhoneNumber(data.phone))) {
-        errors.phone = "Dette er ikke et gyldig telefonnummer";
+        errors.phone = "et åttesifret telefonnummer, ";
     }
     if (!(checkEmail(data.mail))) {
-        errors.mail = "Dette er ikke en gyldig epostadresse";
+        errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
     }
-    if ((fieldIsEmpty(data.name)) || data.name.replace(" ", "").length<=2) {
-        errors.name = "Dette er ikke et gyldig navn";
+    if (fieldIsEmpty(data.name)) {
+        errors.name = "et navn, ";
+    } else if(data.name.replace(" ", "").length<=2){
+        errors.name="et navn";
+    }
+
+    if (!data.relation) {
+        errors.relation = "relasjon, ";
     }
     return errors
 }
@@ -27,3 +33,5 @@ const DependentValidation = data => {
 };
 
 export default DependentValidation
+
+//|| data.name.replace(" ", "").length<=2

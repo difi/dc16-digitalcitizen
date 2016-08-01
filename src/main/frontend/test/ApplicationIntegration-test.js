@@ -81,19 +81,24 @@ var fieldValues = {
 var fields = {
     form1: {
         name: {
-            onChange: function onChange () {}
+            onChange: function onChange() {
+            }
         },
         phone: {
-            onChange: function onChange () {}
+            onChange: function onChange() {
+            }
         },
         mail: {
-            onChange: function onChange () {}
+            onChange: function onChange() {
+            }
         },
         relation: {
-            onChange: function onChange () {}
+            onChange: function onChange() {
+            }
         },
         depOtherRelation: {
-            onChange: function onChange () {}
+            onChange: function onChange() {
+            }
         }
     }
 };
@@ -168,35 +173,38 @@ describe("ApplicationIntegration", () => {
 
     });
 
-     it("Third page forwards you to correct step", () => {
-     subject.setState({
-     step: 3
-     });
-     var thirdPage = subject.find(PersonWithNeedForm);
-     expect(thirdPage).to.have.length(1);
-     //With PNR it should forward you to page 6
-     thirdPage.find('.formPnr').simulate('change', {target: {value: '15028047425'}});
-     thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
-     subject.update(); 
-     var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
-     nextButton.simulate('click');
-     expect(subject.state().step).to.equal(6);
-     subject.setState({
-     step: 3
-     });
-     //Checked for not knowing and name is filled - Does not yet work
+    it("Ajax-call: Third page forwards you to correct step, to step 6 if both pnr and name is given", () => {
+        subject.setState({
+            step: 3
+        });
+        var thirdPage = subject.find(PersonWithNeedForm);
+        expect(thirdPage).to.have.length(1);
+        //With PNR it should forward you to page 6
+        thirdPage.find('.formPnr').simulate('change', {target: {value: '15028047425'}});
+        thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
+        subject.update();
+        var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        expect(subject.state().step).to.equal(6);
+    });
 
-     thirdPage = subject.find(PersonWithNeedForm);
-     expect(thirdPage.find('.pnrCheck')).to.have.length(1);
-     thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
-     
-     thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
-     thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
-     nextButton = subject.find(NavigationButtons).find('.next-btn');
-     nextButton.simulate('click');
-     expect(subject.state().step).to.equal(4);
-         
-     });
+    it("Third page forwards you to correct step, from this, to step 4 if only name is given", () => {
+        subject.setState({
+            step: 3
+        });
+        //Checked for not knowing and name is filled - Does not yet work
+
+        var thirdPage = subject.find(PersonWithNeedForm);
+        expect(thirdPage.find('.pnrCheck')).to.have.length(1);
+        thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
+
+        thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
+        thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
+        var nextButton = subject.find(NavigationButtons).find('.next-btn');
+        nextButton.simulate('click');
+        expect(subject.state().step).to.equal(4);
+
+    });
 
     it("fourth page forwards you to correct step", () => {
         subject.setState({
@@ -212,7 +220,7 @@ describe("ApplicationIntegration", () => {
         addressField.find(FormControl).first().simulate('change', {target: {value: "Testveien 7"}});
         var nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
         //Button with classname next-btn shouldnt exists before zipcode and phone number is entered.
-        expect (nextButton).to.have.length(0);
+        expect(nextButton).to.have.length(0);
         //button with classname disabledButton-nxt should exist
         expect(fourthPage.find(".disabledButton-nxt")).to.have.length(1);
 
@@ -221,7 +229,7 @@ describe("ApplicationIntegration", () => {
         fourthPage.find(FormControl).last().simulate('change', {target: {value: '222 22 222'}});
         //have to find nextButton again, to check if it exists after we inserted new values
         nextButton = fourthPage.find(NavigationButtons).find('.next-btn');
-        expect (nextButton).to.have.length(1);
+        expect(nextButton).to.have.length(1);
 
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(5);
@@ -401,10 +409,8 @@ describe("ApplicationIntegration", () => {
         app.props().fields.relation.onChange('guardian');
 
 
-
-
-         var backButton = app.find(NavigationButtons).find('.back-btn');
-         backButton.simulate('click');
+        var backButton = app.find(NavigationButtons).find('.back-btn');
+        backButton.simulate('click');
         expect(subject.state().step).to.equal(2);
     });
 
@@ -416,7 +422,7 @@ describe("ApplicationIntegration", () => {
         });
         var sixthPage = subject.find(AddDependentClass);
         var backButton = sixthPage.find(NavigationButtons).find('.back-btn');
-       sixthPage.props().fields.checked.onChange(true);
+        sixthPage.props().fields.checked.onChange(true);
 
         backButton.simulate('click');
         expect(subject.state().step).to.equal(5);

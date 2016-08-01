@@ -38,21 +38,27 @@ export class LocationPageClass extends React.Component {
         this.findMunicipality(this.props.fields.municipality.value);
     }
 
+    /**
+     * @param mun
+     * If user have not yet chosen a value here, the user's municipality is set as default 
+     */
     findMunicipality(mun) {
-        //If you have not yet chosen a value here - have your own municipality as default
         if (!this.props.fields.municipalityApp.value) {
             this.onInputChangeHandler(mun);
         }
     }
-
-    //Handle the click on the back-button
+    
+    /**
+     * Handle the click on the back-button
+     * If you are applying for yourself, the previous step is step 8 - Special Needs Page
+     */
     handleClickBack() {
-        //If you are applying for yourself, the previous step is step 8 - Special Needs Page
-
         this.props.previousStep(8);
     }
-
-    //Handle the click on the next-button
+    
+    /**
+     * Handle the click on the next-button
+     */
     handleClickNext() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid = this.validateMun(municipalityApp.value);
@@ -68,8 +74,12 @@ export class LocationPageClass extends React.Component {
         }
     }
 
+    /**
+     * @param value 
+     * Adds placeholder at first index in list 
+     * When switching municipality, update home values from server. 
+     */
     municipalityChange(value) {
-        //When switching municipality, updated home values from server.
         $.ajax({
             url: RESTpaths.PATHS.HOME_BASE + '?mun=' + value,
             dataType: 'json',
@@ -113,6 +123,10 @@ export class LocationPageClass extends React.Component {
         return false;
     }
 
+    /**
+     * Handles change of municipality 
+     * @returns the view of LocationPage
+     */
     render() {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid = this.validateMun(municipalityApp.value);
@@ -138,7 +152,8 @@ export class LocationPageClass extends React.Component {
                 alertMessage = false;
             }
         }
-        //To prevent error on first render, calls this function to create homeOptions field.
+
+        //To prevent error on first render, calls this function to create homeOptions field
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>

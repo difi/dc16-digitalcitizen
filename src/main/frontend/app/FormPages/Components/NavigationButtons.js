@@ -57,6 +57,8 @@ export default class NavigationButtons extends React.Component {
         var rightButton;
         //Right button may be disabled, submit button instead of next and loading while sending to server. 
         if (!this.state.isSubmit) {
+            var nextBtnIsLoading = this.props.nextBtnIsLoading;
+            console.log("isLoading: "+nextBtnIsLoading);
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
@@ -71,10 +73,10 @@ export default class NavigationButtons extends React.Component {
                 rightButton =
                     <Button
                         className="next-btn"
-                        onClick={this.props.handleClickNext}
+                        onClick={!nextBtnIsLoading ? this.props.handleClickNext : null}
                         bsStyle="success"
                         ref="nextBtn">
-                        Neste &rarr;
+                        {nextBtnIsLoading ? 'Venter...' : 'Neste \u2192'}
                     </Button>
             }
         }

@@ -11,14 +11,11 @@ const reducers = combineReducers({
     // ... your other reducers here ...
     form: form.normalize({
         application: {
-            'form1.firstName': (firstName) => onlyLettersInString(firstName),
-            'form1.lastName': (name) => onlyLettersInString(name),
+            'form1.name': (name) => onlyLettersInString(name),
             'form1.phone': (phone) => formatPhone(phone),
-            'form2.firstName': (firstName) => onlyLettersInString(firstName),
-            'form2.lastName': (name) => onlyLettersInString(name),
+            'form2.name': (name) => onlyLettersInString(name),
             'form2.phone': (phone) => formatPhone(phone),
-            'form3.firstName': (firstName) => onlyLettersInString(firstName),
-            'form3.lastName': (name) => onlyLettersInString(name),
+            'form3.name': (name) => onlyLettersInString(name),
             'form3.phone': (phone) => formatPhone(phone),
             'form3.mail': (mail) => email(mail),
             'form2.mail': (mail) => email(mail),
