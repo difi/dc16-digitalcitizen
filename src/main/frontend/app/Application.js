@@ -68,7 +68,8 @@ export const fields = [
     "other",
     "municipalityApp",
     "homeApp",
-    "setDependent"
+    "setDependent",
+    'guardianPnr'
 ];
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
@@ -91,6 +92,7 @@ export class ApplicationClass extends React.Component {
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.resetDependent = this.resetDependent.bind(this);
         this.getUserData = this.getUserData.bind(this);
+        this.props.fields.guardianPnr.onChange(this.state.userData.pnr);
         this.getUserData();
 
         // The following if-sentences needs to be commented out of the code if the
@@ -203,6 +205,7 @@ export class ApplicationClass extends React.Component {
                     name: data.name
                 };
                 this.saveUserData(user);
+                this.props.fields.guardianPnr.onChange(data.pnr)
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -254,7 +257,7 @@ export class ApplicationClass extends React.Component {
     }
 
     saveValuesFromRedux() {
-        const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp}} = this.props;
+        const {fields: {applyingForSelf, pnr, name, checked, number, street, zipcode, postal, municipality, doctorName, form1, form2, form3, relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor, need, medical, changes, other, municipalityApp, homeApp, guardianPnr}} = this.props;
         var dependents = this.saveDependents();
 
         //fixes Special Needs Values so they will fit the pdf.
@@ -296,13 +299,14 @@ export class ApplicationClass extends React.Component {
             },
             dependents: dependents,                                     // List of Dependent objects { name: '', address: '', telephone: ''}
             lengthOfStay: need.value,                                   // String
-            medicalNeeds: med,         // String
-            conditionChanges: cha,     // String
-            otherNeeds: oth,             // String
+            medicalNeeds: med,                                          // String
+            conditionChanges: cha,                                      // String
+            otherNeeds: oth,                                            // String
             nursingHome: {                                              // NursingHome Object
                 municipality: municipalityApp.value,                        // String
                 name: homeApp.value                                         // String
-            }
+            },
+            guardianPnr: guardianPnr.value
         };
         console.log("Returning fields");
         return fields

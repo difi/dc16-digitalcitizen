@@ -21,6 +21,7 @@ public class Submission {
     private Person person;
     private String relation;
     private String typeOfRelation;
+    private String guardianPnr;
 
     public Submission() {
     }
@@ -140,6 +141,14 @@ public class Submission {
         this.typeOfRelation = typeOfRelation;
     }
 
+    public String getGuardianPnr() {
+        return guardianPnr;
+    }
+
+    public void setGuardianPnr(String guardianPnr) {
+        this.guardianPnr = guardianPnr;
+    }
+
     @Override
     public String toString() {
         return "Submission{" +
@@ -156,6 +165,7 @@ public class Submission {
                 ", person=" + person +
                 ", relation='" + relation + '\'' +
                 ", typeOfRelation='" + typeOfRelation + '\'' +
+                ", guardianPnr='" + guardianPnr + '\'' +
                 '}';
     }
 }
