@@ -4,6 +4,8 @@ target
 /workspace
 /validator.properties
 testPDF1.pdf
+testPDF2.pdf
+mergeTest.pdf
 
 # Logs
 logs
