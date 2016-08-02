@@ -39,7 +39,7 @@ class DependentForm extends React.Component {
              : '';
 
         const {name, phone, mail, relation, depOtherRelation}= this.props;
-        var valid = !name.error && !phone.error && !mail.error && relation.value;
+        var valid = !name.error && !phone.error && !mail.error && !relation.error;
         //console.log("Phone: " + name.error);
 
         if (!valid && this.props.clickButtonNext) {
@@ -106,7 +106,7 @@ class DependentForm extends React.Component {
                         <label htmlFor="test" className="depRel">Relasjon</label>
                     </Col>
                     <Col sm={8} md={8}>
-                        <FormGroup validationState={!relation.value && alertMessage ? "error" : null}>
+                        <FormGroup validationState={relation.error && alertMessage ? "error" : null}>
                         <DropdownList className="depRel" ref='relation' options={dropdownContent.DEPENDENTRELATIONS}
                                       id="test"
                                       valueField="value" labelField="relation"

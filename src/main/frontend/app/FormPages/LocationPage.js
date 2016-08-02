@@ -88,7 +88,7 @@ export class LocationPageClass extends React.Component {
                 data = data.map(data => {
                     return {muni: data.num + ":" + data.municipality, name: data.name}
                 });
-                data.unshift({muni: 0, name: "Velg..."});
+                data.unshift({muni: 0, name: "Har ikke ønske"});
                 this.props.fields.municipalityApp.onChange(value);
                 this.props.fields.homeOptions.onChange(data);
                 this.forceUpdate();
