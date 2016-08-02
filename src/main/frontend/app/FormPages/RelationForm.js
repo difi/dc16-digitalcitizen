@@ -255,8 +255,8 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <input type="checkbox" id="checkboxFamily" ref="setDependent" {...dependent} onChange={this.resetDependent}>
-                                    <label htmlFor="checkboxFamily"> Registrer meg som pårørende</label></input>
+                                <input type="checkbox" id="checkboxFamily" ref="setDependent" {...dependent} onChange={this.resetDependent}/>
+                                    <label htmlFor="checkboxFamily" className="check-button-label"> Registrer meg som pårørende</label>
                             </Col>
                         </Row>
                     </componentClass>;
@@ -286,7 +286,7 @@ export class RelationFormClass extends React.Component {
                     <Row className="form-row">
                         <Col>
                             <input type="checkbox" id="checkboxOther" ref="setDependent" {...dependent} onChange={this.resetDependent}/>
-                                <label htmlFor="checkboxOther"> Registrer meg som pårørende </label>
+                                <label htmlFor="checkboxOther" className="check-button-label"> Registrer meg som pårørende </label>
                         </Col>
                     </Row>
                 </componentClass>
@@ -300,15 +300,15 @@ export class RelationFormClass extends React.Component {
                         <input type="radio" id="guardian-radio" className="radio-Relation"
                                name="radio-buttons" {...relation} value="guardian"
                                checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton}/>
-                        <label htmlFor="guardian-radio">Jeg er verge for søkeren</label>
+                        <label htmlFor="guardian-radio" className="button-label">Jeg er verge for søkeren</label>
                         <br/>
                         <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"
                                checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>
-                        <label htmlFor="family-radio">Jeg er i familie med søkeren</label>
+                        <label htmlFor="family-radio" className="button-label">Jeg er i familie med søkeren</label>
                         <br/>
                         <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation}
                                value="other" checked={relation.value=="other"} onClick={this.handleOtherRadioButton}/>
-                        <label htmlFor="other-radio">Annet</label>
+                        <label htmlFor="other-radio" className="button-label">Annet</label>
                     </form>
                     {content}
                     {alertContent}

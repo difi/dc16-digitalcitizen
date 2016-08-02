@@ -160,10 +160,10 @@ var AddressField = React.createClass({
 
                     <Row className="form-row-address">
                         <Col sm={6} md={6} className="from-col-address">
-                            <label htmlFor="postNr">Postnummer</label>
+                            <label htmlFor="postNr" className="adressLabel">Postnummer</label>
                         </Col>
                         <Col sm={6} md={6} className="from-col-address">
-                            <label htmlFor="pSted">Sted</label>
+                            <label htmlFor="pSted" className="adressLabel">Sted</label>
                         </Col>
                     </Row>
                     <Row className="form-row-address">

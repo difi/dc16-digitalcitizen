@@ -197,9 +197,9 @@ export class AddDependentClass extends React.Component {
         var other3 = true;
 
         // values for the validation of each form
-        var form1validate = (form1.name.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.phone.error && !form1.mail.error);
-        var form2validate = (form2.name.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.phone.error && !form2.mail.error);
-        var form3validate = (form3.name.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.phone.error && !form3.mail.error);
+        var form1validate = (form1.name.value && form1.phone.value && form1.mail.value && form1.relation.value && !form1.name.error && !form1.phone.error && !form1.mail.error && !form1.relation.error);
+        var form2validate = (form2.name.value && form2.phone.value && form2.mail.value && form2.relation.value && !form2.name.error && !form2.phone.error && !form2.mail.error && !form2.relation.error);
+        var form3validate = (form3.name.value && form3.phone.value && form3.mail.value && form3.relation.value && !form3.name.error && !form3.phone.error && !form3.mail.error && !form3.relation.error);
 
         if (value == "3") {
             // All three forms has to be valid if you want to continue

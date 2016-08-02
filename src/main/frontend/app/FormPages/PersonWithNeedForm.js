@@ -275,7 +275,7 @@ export class PersonWithNeedClass extends React.Component {
                             <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
                                 <input id="pnrCheck" type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
                                        checked={checked.value} onChange={value=>checked.onChange(value)}/>
-                                <label htmlFor="pnrCheck"> Jeg kan ikke fødselsnummeret</label>
+                                <label htmlFor="pnrCheck" className="check-button-label"> Jeg kan ikke fødselsnummeret</label>
                             </Col>
                         </Row>
 
