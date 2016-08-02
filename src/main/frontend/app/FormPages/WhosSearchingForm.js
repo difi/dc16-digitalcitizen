@@ -61,7 +61,7 @@ export class WhosSearchingClass extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="form-start">
                 <componentClass>
                     <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
                     <div className="form-container">

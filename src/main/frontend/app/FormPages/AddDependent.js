@@ -267,7 +267,7 @@ export class AddDependentClass extends React.Component {
         }
 
         return (
-            <div>
+            <div className="dependent-start">
                 <div>
                     <label className="form-header"> Informasjon om pårørende </label>
                     <div>
