@@ -273,7 +273,7 @@ export class AddDependentClass extends React.Component {
                     <div>
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
-                                           autoFilled={this.props.fields.dependent.value} 
+                                           autoFilled={this.props.fields.dependent.value}
                                            clickButtonNext={clickNextButton}/>
                         </div>
                         <br/>
@@ -281,7 +281,7 @@ export class AddDependentClass extends React.Component {
                             <div>
                                 <div id="dep2" className="depedent-form-wrapper">
                                     <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
-                                                   showDeleteButton={true} {...form2} 
+                                                   showDeleteButton={true} {...form2}
                                                    clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
@@ -291,7 +291,7 @@ export class AddDependentClass extends React.Component {
                             <div>
                                 <div id="dep3" className="depedent-form-wrapper">
                                     <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
-                                                   showDeleteButton={true} {...form3} 
+                                                   showDeleteButton={true} {...form3}
                                                    clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
