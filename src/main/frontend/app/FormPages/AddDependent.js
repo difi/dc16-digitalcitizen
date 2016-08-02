@@ -12,8 +12,6 @@ var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 var Collapse = require('react-bootstrap/lib/Collapse');
 
-
-
 const fields = [
     'form1.name',
     'form1.mail',
@@ -132,13 +130,10 @@ export class AddDependentClass extends React.Component {
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid
         }
-
         if ((valid == undefined || !valid)) {
 
                 clickNextButton = true;
                 this.forceUpdate();
-
-
         } else {
             console.log("State 7");
             this.props.nextStep(7);
@@ -266,20 +261,19 @@ export class AddDependentClass extends React.Component {
      */
     render() {
         const {fields: {form1, form2, form3, displayButton, numDep}} = this.props;
-
         var valid = this.validation(1);
         for (var i = 1; i <= numDep.value; i++) {
             valid = this.validation(i) && valid
         }
 
         return (
-            <div>
+            <div className="dependent-start">
                 <div>
                     <label htmlFor="dependentForm" className="form-header"> Informasjon om pårørende </label>
                     <div id="dependentForm">
                         <div id="dep1" className="depedent-form-wrapper">
                             <DependentForm ref="form1" formKey="1" showDeleteButton={false} {...form1}
-                                           autoFilled={this.props.fields.dependent.value} 
+                                           autoFilled={this.props.fields.dependent.value}
                                            clickButtonNext={clickNextButton}/>
                         </div>
                         <br/>
@@ -287,7 +281,7 @@ export class AddDependentClass extends React.Component {
                             <div>
                                 <div id="dep2" className="depedent-form-wrapper">
                                     <DependentForm ref="form2" formKey="2" onClick={this.handleClickForm2}
-                                                   showDeleteButton={true} {...form2} 
+                                                   showDeleteButton={true} {...form2}
                                                    clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
@@ -297,7 +291,7 @@ export class AddDependentClass extends React.Component {
                             <div>
                                 <div id="dep3" className="depedent-form-wrapper">
                                     <DependentForm ref="form3" formKey="3" onClick={this.handleClickForm3}
-                                                   showDeleteButton={true} {...form3} 
+                                                   showDeleteButton={true} {...form3}
                                                    clickButtonNext={clickNextButton}/>
                                 </div>
                             </div>
@@ -320,7 +314,7 @@ export class AddDependentClass extends React.Component {
             </div>
         );
     }
-};
+}
 
 AddDependentClass.propTypes = {
     previousStep: React.PropTypes.func.isRequired,

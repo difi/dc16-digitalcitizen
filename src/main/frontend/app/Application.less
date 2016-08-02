@@ -1,7 +1,7 @@
 html {
-   margin: 0;
-   padding: 0;
- }
+  margin: 0;
+  padding: 0;
+}
 
 body {
   margin: 0;
@@ -35,7 +35,6 @@ h1 {
   .footer {
     display: none;
   }
-
 }
 
 .button-label {
@@ -51,7 +50,13 @@ h1 {
 .adressLabel{
   margin-top: 0;
 }
-
+/*unused*/
+.application-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 450px;
+  background-color: white;
+}
 
 @media (min-width: 768px) {
   .nav-header{
@@ -65,7 +70,6 @@ h1 {
   .footer{
     margin-top:40px;
   }
-
 }
 
 @media (min-width: 1200px) {
@@ -95,7 +99,7 @@ h1 {
 
 .dependent-wrapper { /* Wraps all the dependent-forms in AddDependent */
   width:700px;
-  background: #FFF;
+  background: #ececec;
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -117,14 +121,14 @@ h1 {
 
 .form-style-10 .inner-wrap{
   padding: 30px;
-  background: #F8F8F8;
+  background: white;
   border-radius: 6px;
   margin-bottom: 5px;
 }
 
 .depedent-form-wrapper {
-  background-color: #eeeeee;
-  border: 1px solid #ccc;
+  background-color: #F8F8F8;
+  border: 1px white;
   border-radius: 4px;
   padding: 7px;
 }
@@ -146,8 +150,6 @@ h1 {
 .from-col-address {
   padding-left: 15px;
 }
-
-
 
 .submit-name {
   font-size: 13pt;
@@ -202,9 +204,9 @@ select option[disabled]:first-child {
   display: none;
 }
 
- .back-forward-buttons {
-    width: 400px;
-  }
+.back-forward-buttons {
+  width: 400px;
+}
 
 
 .back-btn {
@@ -226,8 +228,13 @@ select option[disabled]:first-child {
   float: right;
   color: white;
 }
-
-
+/*
+.back-btn, .back-btn:hover, .back-btn:focus{
+  background-color: rgb(136,204,136);
+  float: left;
+  color: white;
+}
+*/
 
 hr {
   display: block;
@@ -237,17 +244,9 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
-
-  /*
-
-  .form-container {
-    height: 450px;
-    width: 200px;
-  }
-
-  .back-forward-buttons {
-    width: 200px;
-    margin-left: 15px;
-  }
-  */
-
+/**
+.back-forward-buttons {
+  width: 200px;
+  margin-left: 15px;
+}
+*/

@@ -56,7 +56,6 @@ export class PersonWithNeedInfoClass extends React.Component {
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
             this.forceUpdate();
-
         } else {
             console.log("State 5");
             this.props.nextStep(5);
@@ -64,16 +63,13 @@ export class PersonWithNeedInfoClass extends React.Component {
     }
 
     /**
-     * @returns the view of PersonWithNeedInfoForm 
+     * @returns the view of PersonWithNeedInfoForm
      */
     render() {
         const {fields: {name, number, street, zipcode, postal}} = this.props;
         var valid =  !name.error  && !street.error && !zipcode.error && !number.error;
-
         if (clickNextButton && (valid == undefined || !valid)) {
-
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{street.error}</i></b><b><i>{zipcode.error}</i></b><b><i>{number.error}</i></b>før du går videre.</p>;
-
             alertContent =
                 <componentClass>
                     <div className="error">
@@ -141,7 +137,6 @@ export class PersonWithNeedInfoClass extends React.Component {
                         </Row>
                         {alertContent}
                     </div>
-
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}

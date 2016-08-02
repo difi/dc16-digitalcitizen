@@ -58,11 +58,10 @@ export class GeneralPractitionerClass extends React.Component {
         }
     }
 
-
     /**
-     * @param municipality 
+     * @param municipality
      * Loads the doctors located in the municipality from the server
-     * Adds the doctors to the TypeAhead-component 
+     * Adds the doctors to the TypeAhead-component
      */
     getPractitionersByMunicipality(municipality){
         $.ajax({
@@ -83,11 +82,8 @@ export class GeneralPractitionerClass extends React.Component {
     render() {
         const {fields: {doctorName, doctors}} = this.props;
         var valid = doctorName.value;
-
         if (clickNextButton && (valid == undefined || !valid)) {
-
             var errorMessage = <p>Vennligst fyll inn <b><i>fastlege</i></b>, før du går videre.</p>
-
             alertContent =
                 <componentClass>
                     <div className="alertClass_Fdfs">

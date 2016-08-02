@@ -27,29 +27,29 @@ export class WhosSearchingClass extends React.Component {
 
     saveFieldValues(){
 
-            //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
-            this.props.fields.pnr.onChange(this.props.userData.pnr);
-            $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
-                dataType: 'text',
-                cache: false,
-                success: function (data) {
+        //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
+        this.props.fields.pnr.onChange(this.props.userData.pnr);
+        $.ajax({
+            url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+            dataType: 'text',
+            cache: false,
+            success: function (data) {
 
-                    this.props.fields.municipality.onChange(data);
+                this.props.fields.municipality.onChange(data);
 
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error("municipality error", status, err.toString());
-                }.bind(this)
-            })
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error("municipality error", status, err.toString());
+            }.bind(this)
+        })
     }
 
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
         if(this.props.fields.dependent.value){
-        this.props.resetDep();
-        this.props.fields.dependent.onChange(false);}
+            this.props.resetDep();
+            this.props.fields.dependent.onChange(false);}
         this.saveFieldValues();
         this.props.nextStep(6)
     }
@@ -90,7 +90,7 @@ WhosSearchingClass.propTypes = {
 const WhosSearching = reduxForm({
     form: 'application',
     fields: fields,
-        destroyOnUnmount: false,
+    destroyOnUnmount: false,
 })(WhosSearchingClass);
 
 export default WhosSearching

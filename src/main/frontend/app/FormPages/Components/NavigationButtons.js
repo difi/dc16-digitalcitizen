@@ -6,9 +6,6 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-
-
-
 export default class NavigationButtons extends React.Component {
     constructor(props) {
         super(props);
@@ -18,8 +15,6 @@ export default class NavigationButtons extends React.Component {
         };
         this.handleSubmitClick = this.handleSubmitClick.bind(this);
     }
-
-
 
     handleSubmitClick() {
         var field2 = this.props.newFieldValues();
@@ -106,12 +101,14 @@ export default class NavigationButtons extends React.Component {
             }
         }
 
-
         return (
             <Row style={{marginTop: '15px'}}>
                 <hr/>
                 <Col xs={6} sm={6} md={6} lg={6}>
-                    <Button className="back-btn" onClick={this.props.handleClickBack}>&larr;
+                    <Button
+                        className="back-btn"
+                        bsStyle="success"
+                        onClick={this.props.handleClickBack}>&larr;
                         Tilbake</Button>
                 </Col>
                 <Col xs={6} sm={6} md={6} lg={6}>
