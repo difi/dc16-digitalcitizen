@@ -58,9 +58,9 @@ export class PersonWithNeedClass extends React.Component {
      */
     handleClickNext() {
         const {fields: {pnr, checked, name}} = this.props;
-        var valid = (name.value && pnr.value && !pnr.error && !name.error) || (name.value && checked.value);
+        var valid = (!pnr.error && !name.error) || (checked.value && !name.error);
 
-        // Checks if pnr and name match if a full-length pnr is typed, //TODO: and a name is given
+        // Checks if pnr and name match if a full-length pnr is typed, and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
             this.setState({nextBtnIsLoading: true});
 
@@ -71,26 +71,25 @@ export class PersonWithNeedClass extends React.Component {
                 success: function (data) {
                     // setTimeout is only used for testing
                     //setTimeout(() => {
-                        //console.log(data);
-                        //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
+                    //console.log(data);
+                    //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
 
-                        if (data == true) {
-                            console.log("Korrekt");
-                            this.setState({nextBtnIsLoading: false});
-                            this.validToGoNext();
-                        } else {
-                            pnr.error = "matcher ikke";
-                            this.setState({nextBtnIsLoading: false});
-                            this.notValidToGoNext();
-                        }
+                    if (data == true) {
+                        this.setState({nextBtnIsLoading: false});
+                        this.validToGoNext();
+                    } else {
+                        pnr.error = "matcher ikke";
+                        this.setState({nextBtnIsLoading: false});
+                        this.notValidToGoNext();
+                    }
                     //}, 3000);
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error("url", status, err.toString());
                 }.bind(this)
             });
-        } else{
-            if ((valid == undefined || !valid)) {
+        } else {
+            if ((valid == undefined || valid==false)) {
                 this.notValidToGoNext();
 
             } else {
@@ -99,12 +98,12 @@ export class PersonWithNeedClass extends React.Component {
         }
     }
 
-    notValidToGoNext(){
+    notValidToGoNext() {
         clickNextButton = true;
         this.forceUpdate();
     }
 
-    validToGoNext(){
+    validToGoNext() {
         //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
         if (this.props.fields.checked.value) {
             console.log("State 4");
@@ -147,10 +146,10 @@ export class PersonWithNeedClass extends React.Component {
             errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>.</p>;
         }
         else if (pnr.error && !checked.value) {
-            if(pnr.error == "et ellevesifret fødselsnummer"){
+            if (pnr.error == "et ellevesifret fødselsnummer") {
                 errormessage = <p>Vennligst fyll inn <b><i>{pnr.error}</i></b>.</p>;
             }
-            else if(pnr.error == "matcher ikke"){
+            else if (pnr.error == "matcher ikke") {
                 errormessage = <p><b><i>Fødselsnummer</i></b> og <b><i>navn</i></b> matcher ikke.</p>
             }
         }
@@ -176,86 +175,112 @@ export class PersonWithNeedClass extends React.Component {
         }
 
         if (checked.value) {
-            nameContent = <FormGroup
-                validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
-                <FormControl
-                    type="text"
-                    className="formName"
-                    placeholder="Navn"
-                    ref="name"
-                    {...name}/>
-                <FormControl.Feedback />
-            </FormGroup>;
-            pnrContent = <FormGroup>
-                <FormControl
-                    type="text"
-                    className="formPnr"
-                    placeholder="Fødselsnummer"
-                    ref="pno"
-                    //value={this.state.pnr}
-                    //onChange={this.handlePNRChange}
-                    //{...pnr} Removing this resets the text field
-                    disabled/>
-            </FormGroup>;
+            nameContent =
+                <div>
+                    <Col sx={4} md={4}>
+                        <label htmlFor="checkedName" className="name">Navn</label>
+                    </Col>
+                    <Col sx={8} md={8}>
+                        <FormGroup
+                            validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
+                            <FormControl
+                                id="checkedName"
+                                type="text"
+                                className="formName"
+                                placeholder="Navn"
+                                ref="name"
+                                {...name}/>
+                            <FormControl.Feedback />
+                        </FormGroup>
+                    </Col>
+                </div>;
+            pnrContent =
+                <div>
+                    <Col sx={4} md={4}>
+                        <label htmlFor="checkedPnr" className="fnr">Fødselsnummer</label>
+                    </Col>
+                    <Col sx={8} md={8}>
+                        <FormGroup>
+                            <FormControl
+                                id="checkedPnr"
+                                type="text"
+                                className="formPnr"
+                                placeholder="Fødselsnummer"
+                                ref="pno"
+                                //value={this.state.pnr}
+                                //onChange={this.handlePNRChange}
+                                //{...pnr} Removing this resets the text field
+                                disabled/>
+                        </FormGroup>
+                    </Col>
+                </div>;
         }
         else {
-            nameContent = <FormGroup
-                validationState={(name.error || pnr.error == "matcher ikke") && (name.touched || alertMessage) ? "error" : ""}>
-                <FormControl
-                    type="text"
-                    className="formName"
-                    placeholder="Navn"
-                    ref="name"
-                    {...name}
-                    onChange={name.onBlur}
-                />
-                <FormControl.Feedback />
-            </FormGroup>;
+            nameContent =
+                <div>
+                    <Col sx={4} md={4}>
+                        <label htmlFor="notCheckedName" className="name">Navn</label>
+                    </Col>
+                    <Col sx={8} md={8}>
+                        <FormGroup
+                            validationState={(name.error || pnr.error == "matcher ikke") && (name.touched || alertMessage) ? "error" : ""}>
+                            <FormControl
+                                id="notCheckedName"
+                                type="text"
+                                className="formName"
+                                placeholder="Navn"
+                                ref="name"
+                                {...name}
+                                onChange={name.onBlur}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                    </Col>
+                </div>;
 
-            pnrContent = <FormGroup
-                validationState={(pnr.touched || alertMessage) && pnr.error ? "error" : null}>
-                <FormControl
-                    type="text"
-                    name="pno"
-                    className="formPnr"
-                    placeholder="Fødselsnummer"
-                    ref="pno"
-                    //Connects field to redux form component//
-                    {...pnr}
-                />
-                <FormControl.Feedback />
-            </FormGroup>;
+            pnrContent =
+                <div>
+                    <Col sx={4} md={4}>
+                        <label htmlFor="notCheckedPnr" className="fnr">Fødselsnummer</label>
+                    </Col>
+                    <Col sx={8} md={8}>
+                        <FormGroup
+                            validationState={(pnr.touched || alertMessage) && pnr.error ? "error" : null}>
+                            <FormControl
+                                id="notCheckedPnr"
+                                type="text"
+                                name="pno"
+                                className="formPnr"
+                                placeholder="Fødselsnummer"
+                                ref="pno"
+                                //Connects field to redux form component//
+                                {...pnr}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                    </Col>
+                </div>;
         }
 
         return (
             <form>
                 <componentClass>
-                    <label className="form-header">Informasjon om søker</label>
-                    <div className="form-container">
+                    <label htmlFor="infoAbout" className="form-header">Informasjon om søker</label>
+                    <div id="infoAbout" className="form-container">
                         <Row className="formgroup-row">
-                            <Col sx={4} md={4}>
-                                <label className="name">Navn</label>
-                            </Col>
-                            <Col sx={8} md={8}>
-                                {nameContent}
-                            </Col>
+                            {nameContent}
                             <Col sm={0} md={5}></Col>
                         </Row>
                         <Row className="form-row">
                             <Col sxOffset={4} mdOffset={4} sx={8} md={8}>
-                                <input type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
-                                       checked={checked.value} onChange={value=>checked.onChange(value)}/> Jeg kan ikke
-                                fødselsnummeret
+                                <input id="pnrCheck" type="checkbox" name="noPno" className="pnrCheck" style={{marginBottom: '15px'}}
+                                       checked={checked.value} onChange={value=>checked.onChange(value)}/>
+                                <label htmlFor="pnrCheck" className="check-button-label"> Jeg kan ikke fødselsnummeret</label>
                             </Col>
                         </Row>
 
                         <Row className="formgroup-row">
-                            <Col sx={4} md={4}>
-                                <label className="fnr">Fødselsnummer</label>
-                            </Col>
-                            <Col sx={8} md={8}>
-                                {pnrContent}
-                            </Col>
+                            {pnrContent}
                         </Row>
                         {alertContent}
                     </div>
@@ -264,7 +289,7 @@ export class PersonWithNeedClass extends React.Component {
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
                         buttonDisabled={!valid}
-                        nextBtnIsLoading = {this.state.nextBtnIsLoading}
+                        nextBtnIsLoading={this.state.nextBtnIsLoading}
                     />
                 </componentClass>
             </form >
@@ -284,10 +309,10 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "et navn";
+        errors.name = "et navn på minst tre bokstaver";
     }
     else if(values.name.replace(" ", "").length<=2){
-        errors.name="et navn";
+        errors.name="et navn på minst tre bokstaver";
     }
 
     if (!(checkPersonalnumberNo(values.pnr))) {
@@ -304,6 +329,7 @@ const PersonWithNeed = reduxForm({
     form: 'application',
     fields: fields,
     destroyOnUnmount: false,
-    validate})(PersonWithNeedClass);
+    validate
+})(PersonWithNeedClass);
 
 export default PersonWithNeed

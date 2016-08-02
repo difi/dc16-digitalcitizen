@@ -60,6 +60,10 @@ var fieldValues = {
 
 };
 
+/*
+* If the errormessage does not exists you are able to move to the next page.
+* This functionality is tested in ApplicationIntegration-test
+*/
 describe("DependentFormIntegration", () => {
     let store = null;
     let subject = null;
@@ -71,73 +75,126 @@ describe("DependentFormIntegration", () => {
 
         const props = {
             store,
-            fieldValues
+            name: 'ds',
+            mail: {value: '', error: " ", touched: false},
+            phone: {value: '', error: " ", touched: false},
+            relation: {value: ''},
+            fieldValues: {fieldValues},
+            showDeleteButton: true
         };
         subject = mount(<AddDependent {...props}/>);
         // Find the first element of DependentForm in AddDependent.
         wrapper = subject.find(DependentForm).first();
     });
-    it("Shows error message when telephone field is touched", () => {
+
+    /*
+    * Was not able to set the correct value for the DropdownList, so this will alway be wrong.
+    */
+
+    it("Shows error message when name and relation fields has wrong input", () => {
         //expect wrapper to exist
         expect(wrapper).to.have.length(1);
 
-        // Find the element with classname "tlfForm
-        const input = wrapper.find('.tlfForm');
-        expect(input).to.have.length(1);
+        //Need to fill in valid info into the fields we are not going to test
+        const name = wrapper.find(".nameField");
+        expect (name).to.have.length(1);
+        name.simulate('change', {target: {value: "O"}});
 
-        // Our form component only shows error messages (help text) if the
-        // field has been touched. To mimic touching the field, we simulate a
-        // blur event, which means the input's onBlur method will run, which
-        // will call the onBlur method supplied by Redux-Form.
-        input.simulate('blur');
-        const errorMessage = subject.find('.error');
+        //Need to fill in valid info into the fields we are not going to test
+        const tlf = wrapper.find('.tlfForm');
+        expect(tlf).to.have.length(1);
+        tlf.simulate('change', {target: {value: "123 45 678"}});
+
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const mail = wrapper.find('.mailForm');
+        expect(mail).to.have.length(1);
+        mail.simulate('change', {target: {value: "fgf@gmail.com"}});
+
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const rel = wrapper.find('.depRel');
+        expect(rel).to.have.length(1);
+        rel.simulate('change', {target: {value: "K"}});
+
+        const nextButton = subject.find('.disabledButton-nxt');
+        expect(nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
+
+        const errorMessage = wrapper.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn et navn på minst tre bokstaver, relasjon, før du kan gå videre.");
 
     });
 
-    it("Do not show error message when telephone field has correct value", () => {
+
+    it("Shows error message when email and relation fields has wrong input", () => {
+        //expect wrapper to exist
         expect(wrapper).to.have.length(1);
 
-        const input = wrapper.find('.tlfForm');
-        expect(input).to.have.length(1);
+        //Need to fill in valid info into the fields we are not going to test
+        const name = wrapper.find(".nameField");
+        expect (name).to.have.length(1);
+        name.simulate('change', {target: {value: "Ola"}});
 
-        input.simulate('blur');
-        input.simulate('change', {target: {value: "123 45 678"}});
-        const errorMessage = subject.find('.error');
-        // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(0);
-        //expect(errorMessage.text()).to.equal("Dette er ikke et gyldig telefonnummer");
-    });
+        //Need to fill in valid info into the fields we are not going to test
+        const tlf = wrapper.find('.tlfForm');
+        expect(tlf).to.have.length(1);
+        tlf.simulate('change', {target: {value: "123 45 678"}});
 
-    it("Shows error message when email field is touched", () => {
-        expect(wrapper).to.have.length(1);
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const mail = wrapper.find('.mailForm');
+        expect(mail).to.have.length(1);
+        mail.simulate('change', {target: {value: ""}});
 
-        const input = wrapper.find('.mailForm');
-        expect(input).to.have.length(1);
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const rel = wrapper.find('.depRel');
+        expect(rel).to.have.length(1);
+        rel.simulate('change', {target: {value: "K"}});
 
-        input.simulate('blur');
-        input.simulate('change', {target: {value: "email"}});
-        const errorMessage = subject.find('.error');
+        const nextButton = subject.find('.disabledButton-nxt');
+        expect(nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
+
+        const errorMessage = wrapper.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Dette er ikke en gyldig epostadresse");
-
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn en epostadresse på formatet \"epost-id@domene-navn\", relasjon, før du kan gå videre.");
 
     });
 
-    it("Do not show error message when email field has correct value", () => {
+    it("Shows error message when telephone and relation fields has wrong input", () => {
+        //expect wrapper to exist
         expect(wrapper).to.have.length(1);
 
-        const input = wrapper.find('.mailForm');
-        expect(input).to.have.length(1);
+        //Need to fill in valid info into the fields we are not going to test
+        const name = wrapper.find(".nameField");
+        expect (name).to.have.length(1);
+        name.simulate('change', {target: {value: "Ola"}});
 
-        input.simulate('blur');
-        input.simulate('change', {target: {value: "vh@f.no"}});
-        const errorMessage = subject.find('.error');
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const tlf = wrapper.find('.tlfForm');
+        expect(tlf).to.have.length(1);
+        tlf.simulate('change', {target: {value: "123"}});
+
+        //Need to fill in valid info into the fields we are not going to test
+        const mail = wrapper.find('.mailForm');
+        expect(mail).to.have.length(1);
+        mail.simulate('change', {target: {value: "fgf@gmail.com"}});
+
+        // Need to fill in unvalid info into the fields we want to get errormessage from
+        const rel = wrapper.find('.depRel');
+        expect(rel).to.have.length(1);
+        rel.simulate('change', {target: {value: "K"}});
+
+        const nextButton = subject.find('.disabledButton-nxt');
+        expect(nextButton).to.have.length.of(1);
+        nextButton.simulate('click');
+
+        const errorMessage = wrapper.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
-        expect(errorMessage).to.have.length.of(0);
+        expect(errorMessage).to.have.length.of(1);
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn et åttesifret telefonnummer, relasjon, før du kan gå videre.");
+
     });
 
 });
