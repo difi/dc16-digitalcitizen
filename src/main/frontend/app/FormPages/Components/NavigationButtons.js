@@ -106,7 +106,10 @@ export default class NavigationButtons extends React.Component {
             <Row style={{marginTop: '15px'}}>
                 <hr/>
                 <Col xs={6} sm={6} md={6} lg={6}>
-                    <Button className="back-btn" onClick={this.props.handleClickBack}>&larr;
+                    <Button
+                        className="back-btn"
+                        bsStyle="success"
+                        onClick={this.props.handleClickBack}>&larr;
                         Tilbake</Button>
                 </Col>
                 <Col xs={6} sm={6} md={6} lg={6}>
