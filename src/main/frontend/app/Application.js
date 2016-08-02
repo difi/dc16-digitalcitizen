@@ -95,11 +95,10 @@ export class ApplicationClass extends React.Component {
         this.props.fields.guardianPnr.onChange(this.state.userData.pnr);
         this.getUserData();
 
-        // The following if-sentences needs to be commented out of the code if the
-        // ApplicationIntegration-test is going to run as expected
+        /**
+         * The following if-sentences needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
+         */
 
-        //add method for test data
-        /*
          if (this.props.fields.applyingForSelf.onChange()) {
          this.testScriptPerson();
          }
@@ -119,7 +118,7 @@ export class ApplicationClass extends React.Component {
          //dependent form 3
          if (this.props.fields.form3.name.onChange()) {
          this.testScriptAddDependent3();
-         }*/
+         }
     }
 
     /**
@@ -429,7 +428,7 @@ export class ApplicationClass extends React.Component {
                         submitRegistration={this.handleSubmit}/>;
                 break;
         }
-
+        /* className="well application-wrapper"*/
         return (
             <div>
                 <Navbar staticTop>
@@ -454,7 +453,7 @@ export class ApplicationClass extends React.Component {
                 <div className="container">
                     <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}> {header} </Col>
-                    <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}>
                         <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
                             {content}

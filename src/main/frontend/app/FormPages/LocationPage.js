@@ -33,21 +33,21 @@ export class LocationPageClass extends React.Component {
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
         this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
-  
+
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fields.municipality.value);
     }
 
     /**
      * @param mun
-     * If user have not yet chosen a value here, the user's municipality is set as default 
+     * If user have not yet chosen a value here, the user's municipality is set as default
      */
     findMunicipality(mun) {
         if (!this.props.fields.municipalityApp.value) {
             this.onInputChangeHandler(mun);
         }
     }
-    
+
     /**
      * Handle the click on the back-button
      * If you are applying for yourself, the previous step is step 8 - Special Needs Page
@@ -55,7 +55,7 @@ export class LocationPageClass extends React.Component {
     handleClickBack() {
         this.props.previousStep(8);
     }
-    
+
     /**
      * Handle the click on the next-button
      */
@@ -75,9 +75,9 @@ export class LocationPageClass extends React.Component {
     }
 
     /**
-     * @param value 
-     * Adds placeholder at first index in list 
-     * When switching municipality, update home values from server. 
+     * @param value
+     * Adds placeholder at first index in list
+     * When switching municipality, update home values from server.
      */
     municipalityChange(value) {
         $.ajax({
@@ -124,7 +124,7 @@ export class LocationPageClass extends React.Component {
     }
 
     /**
-     * Handles change of municipality 
+     * Handles change of municipality
      * @returns the view of LocationPage
      */
     render() {
@@ -181,15 +181,15 @@ export class LocationPageClass extends React.Component {
                             </Col>
                             <Col sm={6} md={6}>
                                 <FormGroup id="municip" validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
-                                <TypeAhead options={dropdownContent.MUNICIPALITIES}
-                                           ref="munSelect"
-                                           className="municipTypeAhead"
-                                           labelKey="name"
-                                           selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
-                                           aria-labelledby="mun"
-                                           onInputChange={this.onInputChangeHandler}
-                                           onChange={this.onChangeHandler}/>
-                                    </FormGroup>
+                                    <TypeAhead options={dropdownContent.MUNICIPALITIES}
+                                               ref="munSelect"
+                                               className="municipTypeAhead"
+                                               labelKey="name"
+                                               selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                               aria-labelledby="mun"
+                                               onInputChange={this.onInputChangeHandler}
+                                               onChange={this.onChangeHandler}/>
+                                </FormGroup>
                             </Col>
                         </Row>
                         {homes}

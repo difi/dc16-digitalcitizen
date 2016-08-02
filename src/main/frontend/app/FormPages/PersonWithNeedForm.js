@@ -284,7 +284,6 @@ export class PersonWithNeedClass extends React.Component {
                         </Row>
                         {alertContent}
                     </div>
-
                     <NavigationButtons
                         handleClickBack={this.handleClickBack}
                         handleClickNext={this.handleClickNext}
@@ -303,7 +302,7 @@ PersonWithNeedClass.propTypes = {
 };
 
 /**
- * Validation for the form 
+ * Validation for the form
  */
 const validate = values => {
     const errors = {};
@@ -314,7 +313,6 @@ const validate = values => {
     else if(values.name.replace(" ", "").length<=2){
         errors.name="et navn på minst tre bokstaver";
     }
-
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";
     }
