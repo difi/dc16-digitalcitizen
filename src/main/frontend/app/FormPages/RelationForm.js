@@ -172,9 +172,6 @@ export class RelationFormClass extends React.Component {
         var valid = relation.value && ((nameOfChild.value && !nameOfChild.error) || (typeOfRelation.value && !typeOfRelation.error) || (otherRelation.value && !otherRelation.error));
         var errorMessage = null;
 
-        console.log("valid: " + valid);
-        console.log("navn på barn: " + nameOfChild.value);
-
         if (clickNextButton && (valid == undefined || !valid)) {
             if (!relation.value) {
                 errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
