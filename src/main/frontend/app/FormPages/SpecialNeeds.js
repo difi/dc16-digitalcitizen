@@ -12,7 +12,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var content = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
@@ -74,7 +74,7 @@ export class SpecialNeedsClass extends React.Component {
 
             var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>;
 
-            content =
+            alertContent =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
@@ -86,18 +86,18 @@ export class SpecialNeedsClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid) {
-                content = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
 
         return (
             <div>
-                <label className="form-header">Utfyllende informasjon </label>
-                <div className="form-container">
+                <label htmlFor="specialNeeds" className="form-header">Utfyllende informasjon </label>
+                <div id="specialNeeds" className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address" id="changesLabel">Hva er grunnen til at det søkes om
+                            <label htmlFor="mandatoryField" className="from-col-address" id="changesLabel">Hva er grunnen til at det søkes om
                                 plass på sykehjem?</label>
                         </Col>
                         <Col sm={12} md={12}>
@@ -116,10 +116,11 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address">Er det noen medisinske behov vi burde vite om?</label>
+                            <label htmlFor="medicalNeeds" className="from-col-address">Er det noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
+                                         id="medicalNeeds"
                                          ref="medicalNeeds" {...medical}
                                          onChange={event => this.limitTextFields(event, medical)}/>
                         </Col>
@@ -131,11 +132,11 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label className="from-col-address">Er det andre behov vi burde vite om? -Behov for tolk,
+                            <label htmlFor="otherNeeds" className="from-col-address">Er det andre behov vi burde vite om? -Behov for tolk,
                                 hørselapparat e.l.</label>
                         </Col>
                         <Col sm={12} md={12}>
-                            <FormControl componentClass="textarea" className="special-needs-textarea"
+                            <FormControl componentClass="textarea" className="special-needs-textarea" id="otherNeeds"
                                          ref="otherNeeds" {...other}
                                          onChange={event => this.limitTextFields(event, other)}/>
                         </Col>
@@ -145,7 +146,7 @@ export class SpecialNeedsClass extends React.Component {
                             {other.value ? other.value.length : 0}/300
                         </p>
                     </Row>
-                    {content}
+                    {alertContent}
                 </div>
 
                 <NavigationButtons
