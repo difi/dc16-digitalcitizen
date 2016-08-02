@@ -429,34 +429,39 @@ export class ApplicationClass extends React.Component {
         return (
             <div>
                 <Navbar staticTop>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href=".">Digitalcitizen</a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Navbar.Text>
-                            Logget inn som: <Navbar.Link href="#">{userData.name}</Navbar.Link>
-                        </Navbar.Text>
-                    </Navbar.Collapse>
+                    <Row>
+                        <Col mdOffset={3} lgOffset={3} smOffset={2}>
+                            <Navbar.Header className="nav-header">
+                                <Navbar.Brand>
+                                    <a href=".">Digitalcitizen</a>
+                                </Navbar.Brand>
+                                <Navbar.Toggle />
+                            </Navbar.Header>
+                        </Col>
+                        <Col>
+                            <Navbar.Collapse>
+                                <Navbar.Text>
+                                    Logget inn som: <Navbar.Link href="#">{userData.name}</Navbar.Link>
+                                </Navbar.Text>
+                            </Navbar.Collapse>
+                        </Col>
+                    </Row>
                 </Navbar>
                 <div className="container">
                     <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}> {header} </Col>
-                    <Col className="well" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}>
                         <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
                             {content}
                         </Col>
                     </Col>
-                </div>
-                <div>
-                    <Navbar fixedBottom>
-                            <Navbar.Text className="footer-text">
-                                Tjenesten er levert av Direktoratet for Forvaltning og IKT (Difi)
-                            </Navbar.Text>
-                    </Navbar>
+                    <Col className="footer" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                         xs={12} sm={8} lg={6}>
+                        <div className="footer-wrapper">
+                            <p className="footer-text"> Tlf: 800 30 300 | Driftet av Direktoratet for forvaltning og IKT(Difi)</p>
+                        </div>
+                    </Col>
                 </div>
             </div>
         )

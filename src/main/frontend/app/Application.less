@@ -8,9 +8,13 @@ body {
   padding: 0;
 }
 
+.footer-wrapper {
+  border-top: 0.5px solid #e6e6e6;
+}
+
 .footer-text{
   font-size: 10px;
-  text-align: center;
+  margin-top:10px;
 }
 
 label {
@@ -27,8 +31,28 @@ h1 {
   margin-bottom: 20px;
 }
 
-.application-wrapper {
-  max-width: 450px;
+@media (max-width: 500px) {
+  .footer{
+    display:none;
+  }
+
+}
+
+
+
+@media (min-width: 768px) {
+  .nav-header{
+    margin-left:10px;
+  }
+
+  .application-wrapper {
+    margin-top: 40px;
+  }
+
+  .footer{
+    margin-top:40px;
+  }
+
 }
 
 @media (min-width: 1200px) {
@@ -39,18 +63,14 @@ h1 {
     font-size: 30px;
   }
 
-  .application-wrapper {
-    margin-top: 40px;
-  }
-
   .form-header {
     font-size: 15pt;
     font-weight: bold;
     margin-bottom: 20px;
   }
+
   .footer-text{
     font-size: 12px;
-    text-align:center;
   }
 }
 
