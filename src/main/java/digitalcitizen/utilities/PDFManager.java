@@ -1,47 +1,123 @@
 package digitalcitizen.utilities;
 
+import digitalcitizen.models.Person;
 import digitalcitizen.models.Submission;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
+/**
+ * A class that utilizes the PDFBox library in order to fill PDF templates with data
+ * from a {@link Submission}.
+ */
 public class PDFManager {
 
-    // TODO: Add more templates?
     private File dep1_template = getResourceAsFile("formTemplate_dep1.pdf");
     private File dep2_template = getResourceAsFile("formTemplate_dep2.pdf");
     private File dep3_template = getResourceAsFile("formTemplate_dep3.pdf");
+    private File additional_info_template = getResourceAsFile("additional_info.pdf");
 
     /**
-     * A method that utilizes the PDFBox library in order to fill a PDF template with data
-     * from a {@link Submission}. The generated PDF-file is saved on the server.
+     * A method that decides the type of PDF document to generate based upon a provided {@link Submission}.
      *
-     * @param submission A {@link Submission} containing the data needed to fill the template.
-     * @return The method returns the location (path) of the file on the server.
+     * @param submission A {@link Submission} containing the data needed to generate PDFs.
+     * @return The method returns the location (path) of the generated PDF on the server.
      * @throws IOException
      */
     public String generatePDFofSubmission(Submission submission) throws IOException {
 
+        System.out.println("[PDFManager] Creating PDF of " + submission);
+        if (submission.isApplyingForSelf()) {
+            return generateApplicationPDF(submission).getPath();
+        } else {
+            File[] documents = {generateApplicationPDF(submission), generateAdditionalInfoPDF(submission)};
+            System.out.println("[PDFManager] Merging documents..");
+            return mergeDocuments(documents).getPath();
+        }
+    }
+
+    /**
+     * Generates a PDF file with additional information concerning the applicant and patient.
+     *
+     * @param submission A {@link Submission} that contains data needed to generate the PDF.
+     * @return The method returns the generated PDF file.
+     * @throws IOException
+     */
+    private File generateAdditionalInfoPDF(Submission submission) throws IOException {
+
+        Person guardian = new Person();
+        guardian.setPnr(submission.getGuardianPnr());
+        guardian.updateValuesByPnr();
+
+        System.out.println("[PDFManager] " + guardian);
+
+        PDDocument pdfTemplate = PDDocument.load(additional_info_template);
+
+        Map<String, String> fieldsAndValues = new HashMap<String, String>() {
+            {
+                put("guardian_name", guardian.getName());
+                put("person_name", submission.getPerson().getName());
+            }
+        };
+
+        PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
+        PDAcroForm acroForm = docCatalog.getAcroForm();
+
+        // Get field names
+        List<PDField> fieldList = acroForm.getFields();
+
+        // String the object array
+        String[] fieldArray = new String[fieldList.size()];
+        int i = 0;
+        for (PDField sField : fieldList) {
+            fieldArray[i] = sField.getFullyQualifiedName();
+            i++;
+        }
+
+        // Loop through each field in the array and write data
+        for (String f : fieldArray) {
+            PDField field = acroForm.getField(f);
+            field.setValue(fieldsAndValues.get(f));
+        }
+
+        // TODO: Auto-generate name and change location of server stored PDF files
+        String path = "testPDF2.pdf";
+        File output = new File(path);
+
+        pdfTemplate.save(output);
+        pdfTemplate.close();
+
+        System.out.println("[PDFManager] Additional info PDF was created successfully");
+        return new File(path);
+    }
+
+    /**
+     * Generates a PDF file of the application.
+     *
+     * @param submission A {@link Submission} that contains data needed to generate the PDF.
+     * @return The method returns the generated PDF file.
+     * @throws IOException
+     */
+    private File generateApplicationPDF(Submission submission) throws IOException {
+
         PDDocument pdfTemplate = new PDDocument();
 
         if (submission.getDependents().get(0) != null && submission.getDependents().get(1) == null && submission.getDependents().get(2) == null) {
-
             pdfTemplate = PDDocument.load(dep1_template);
         } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) == null) {
-
             pdfTemplate = PDDocument.load(dep2_template);
         } else if (submission.getDependents().get(0) != null && submission.getDependents().get(1) != null && submission.getDependents().get(2) != null) {
-
             pdfTemplate = PDDocument.load(dep3_template);
         }
-
 
         Map<String, String> fieldsAndValues = new HashMap<String, String>() {
             {
@@ -89,7 +165,6 @@ public class PDFManager {
         PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
 
-        System.out.println("Creating pdf of " + submission);
         // Get field names
         List<PDField> fieldList = acroForm.getFields();
 
@@ -107,14 +182,37 @@ public class PDFManager {
             field.setValue(fieldsAndValues.get(f));
         }
 
-        // TODO: Auto-generate name and change location of server stored PDF-files
+        // TODO: Auto-generate name and change location of server stored PDF files
         String path = "testPDF1.pdf";
         File output = new File("testPDF1.pdf");
 
         pdfTemplate.save(output);
         pdfTemplate.close();
-        System.out.println("PDF was created successfully");
-        return path;
+
+        System.out.println("[PDFManager] Application PDF was created successfully");
+        return new File(path);
+    }
+
+    /**
+     * A method that merges two or more PDF documents into a single PDF file.
+     *
+     * @param documents An array of {@link File} containing the PDF documents to be merged.
+     * @return The method returns a single, merged, PDF document.
+     * @throws IOException
+     */
+    private File mergeDocuments(File[] documents) throws IOException {
+
+        String fileDestination = "mergeTest.pdf";
+        PDFMergerUtility ut = new PDFMergerUtility();
+
+        for (File f : documents) {
+            ut.addSource(f);
+        }
+        ut.setDestinationFileName(fileDestination);
+        ut.mergeDocuments();
+
+        System.out.println("[PDFManager] Documents merged successfully");
+        return new File(fileDestination);
     }
 
     private static File getResourceAsFile(String resourcePath) {

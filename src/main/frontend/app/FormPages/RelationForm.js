@@ -13,14 +13,14 @@ import {fieldIsEmpty} from './Utilities/validation.js';
 
 var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Radio = require('react-bootstrap/lib/Radio');
-var Checkbox = require('react-bootstrap/lib/Checkbox');
+//var Checkbox = require('react-bootstrap/lib/Checkbox');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormControl = require('react-bootstrap/lib/FormControl');
 var Button = require('react-bootstrap/lib/Button');
 var Alert = require('react-bootstrap/lib/Alert');
 
-var error = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields= [
@@ -184,7 +184,7 @@ export class RelationFormClass extends React.Component {
                 }
             }
 
-            error =
+            alertContent =
                 <componentClass>
                     <div className="error">
                         <Alert bsStyle="danger">
@@ -196,7 +196,7 @@ export class RelationFormClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid  || relation.value) {
-                error = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -208,7 +208,7 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label className="guardian-rel">Jeg fyller ut på vegne av</label>
+                                <label htmlFor="1" className="guardian-rel">Jeg fyller ut på vegne av</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -235,7 +235,7 @@ export class RelationFormClass extends React.Component {
                     <componentClass>
                         <Row className="form-row">
                             <Col>
-                                <label className="family-rel">Hva er din relasjon til søker?</label>
+                                <label htmlFor="1" className="family-rel">Hva er din relasjon til søker?</label>
                             </Col>
                         </Row>
                         <Row className="form-row">
@@ -255,7 +255,8 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende</Checkbox>
+                                <input type="checkbox" id="checkboxFamily" ref="setDependent" {...dependent} onChange={this.resetDependent}/>
+                                    <label htmlFor="checkboxFamily" className="check-button-label"> Registrer meg som pårørende</label>
                             </Col>
                         </Row>
                     </componentClass>;
@@ -264,13 +265,14 @@ export class RelationFormClass extends React.Component {
                 content = <componentClass>
                     <Row className="form-row">
                         <Col>
-                            <label className="other-rel">Hva er din relasjon til søker?</label>
+                            <label htmlFor="otherRelForm" className="other-rel">Hva er din relasjon til søker?</label>
                         </Col>
                     </Row>
                     <Row className="form-row">
                         <Col>
                             <FormGroup validationState={otherRelation.error && (otherRelation.touched || alertMessage) ? "error" : ""}>
                                 <FormControl
+                                    id="otherRelForm"
                                     type="text"
                                     ref="otherRelation"
                                     className="other-rel"
@@ -283,7 +285,8 @@ export class RelationFormClass extends React.Component {
                     </Row>
                     <Row className="form-row">
                         <Col>
-                            <Checkbox ref="setDependent" {...dependent} onChange={this.resetDependent}> Registrer meg som pårørende </Checkbox>
+                            <input type="checkbox" id="checkboxOther" ref="setDependent" {...dependent} onChange={this.resetDependent}/>
+                                <label htmlFor="checkboxOther" className="check-button-label"> Registrer meg som pårørende </label>
                         </Col>
                     </Row>
                 </componentClass>
@@ -291,23 +294,24 @@ export class RelationFormClass extends React.Component {
         return (
 
             <div>
-                <label className="form-header">Hva er din relasjon til søkeren?</label>
+                <label htmlFor="radioForm" className="form-header">Hva er din relasjon til søkeren?</label>
                 <div className="form-container">
-                    <form className="relation">
+                    <form id="radioForm" className="relation">
                         <input type="radio" id="guardian-radio" className="radio-Relation"
                                name="radio-buttons" {...relation} value="guardian"
-                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton}/>Jeg er
-                        verge for søkeren
+                               checked={relation.value=="guardian"} onClick={this.handleGuardianRadioButton}/>
+                        <label htmlFor="guardian-radio" className="button-label">Jeg er verge for søkeren</label>
                         <br/>
                         <input type="radio" id="family-radio" name="radio-buttons" {...relation} value="family"
-                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>Jeg er i
-                        familie med søkeren
+                               checked={relation.value=="family"} onClick={this.handleFamilyRadioButton}/>
+                        <label htmlFor="family-radio" className="button-label">Jeg er i familie med søkeren</label>
                         <br/>
                         <input type="radio" id="other-radio" name="radio-buttons" className="radio-other" {...relation}
-                               value="other" checked={relation.value=="other"} onClick={this.handleOtherRadioButton}/>Annet
+                               value="other" checked={relation.value=="other"} onClick={this.handleOtherRadioButton}/>
+                        <label htmlFor="other-radio" className="button-label">Annet</label>
                     </form>
                     {content}
-                    {error}
+                    {alertContent}
                 </div>
                 <NavigationButtons
                     handleClickBack={this.handleClickBack}
