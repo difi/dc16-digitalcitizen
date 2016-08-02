@@ -50,14 +50,41 @@ public class PDFManager {
 
         System.out.println("[PDFManager] " + guardian);
 
+        PDDocument pdfTemplate = PDDocument.load(additional_info_template);
+
+        Map<String, String> fieldsAndValues = new HashMap<String, String>() {
+            {
+                put("guardian_name", guardian.getName());
+                put("person_name", submission.getPerson().getName());
+            }
+        };
+
+        PDDocumentCatalog docCatalog = pdfTemplate.getDocumentCatalog();
+        PDAcroForm acroForm = docCatalog.getAcroForm();
+
+        // Get field names
+        List<PDField> fieldList = acroForm.getFields();
+
+        // String the object array
+        String[] fieldArray = new String[fieldList.size()];
+        int i = 0;
+        for (PDField sField : fieldList) {
+            fieldArray[i] = sField.getFullyQualifiedName();
+            i++;
+        }
+
+        // Loop through each field in the array and write data
+        for (String f : fieldArray) {
+            PDField field = acroForm.getField(f);
+            field.setValue(fieldsAndValues.get(f));
+        }
 
         // TODO: Auto-generate name and change location of server stored PDF-files
         String path = "testPDF2.pdf";
         File output = new File(path);
 
-        /*
         pdfTemplate.save(output);
-        pdfTemplate.close(); */
+        pdfTemplate.close();
 
         System.out.println("[PDFManager] Additional info PDF was created successfully");
         return new File(path);
