@@ -71,26 +71,24 @@ export class NeedsFormClass extends React.Component {
         }
 
         return (
-            <div>
-                <form className="needs">
-                    <componentClass>
-                        <label className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
-                        <div className="form-container">
-                            <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short"
-                                   checked={need.value == "short"}/> Kortidsopphold
-                            <br/>
-                            <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long"
-                                   checked={need.value == "long"}/> Langtidsopphold
-                        </div>
-                        {alertContent}
-                        <NavigationButtons
-                            handleClickBack={this.handleClickBack}
-                            handleClickNext={this.handleClickNext}
-                            buttonDisabled={!valid}
-                        />
-                    </componentClass>
-                </form>
-            </div>
+            <form className="needs">
+                <componentClass>
+                    <label htmlFor="needsform" className="form-header">Søkes det om kortidsopphold eller langtidsopphold?</label>
+                    <div id="needsform" className="form-container">
+                        <input type="radio" className="radio-short" name="radio-buttons" {...need} value="short" id="shortStay"
+                               checked={need.value == "short"}/> <label htmlFor="shortStay" className="button-label">Kortidsopphold</label>
+                        <br/>
+                        <input type="radio" className="radio-long" name="radio-buttons" {...need} value="long" id="longStay"
+                               checked={need.value == "long"}/> <label htmlFor="longStay" className="button-label">Langtidsopphold</label>
+                    </div>
+                    {alertContent}
+                    <NavigationButtons
+                        handleClickBack={this.handleClickBack}
+                        handleClickNext={this.handleClickNext}
+                        buttonDisabled={!valid}
+                    />
+                </componentClass>
+            </form>
         )
     }
 }

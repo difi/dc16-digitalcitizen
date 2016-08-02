@@ -37,11 +37,11 @@ export class SubmitSuccessClass extends React.Component {
 
         return (
             <div>
-                <label className="form-header">Du har nå søkt på sykehjemsplass for</label>
+                <label htmlFor="user" className="form-header">Du har nå søkt på sykehjemsplass for</label>
                 <div className="form-container">
                     <Row>
                         <Col className="submit-name">
-                            <label className="submittedName">{user}</label>
+                            <label id="user" className="submittedName">{user}</label>
                         </Col>
                     </Row>
                 </div>

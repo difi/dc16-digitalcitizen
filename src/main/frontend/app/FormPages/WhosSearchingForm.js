@@ -26,29 +26,30 @@ export class WhosSearchingClass extends React.Component {
     }
 
     saveFieldValues(){
-            //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
-            this.props.fields.pnr.onChange(this.props.userData.pnr);
-            $.ajax({
-                url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
-                dataType: 'text',
-                cache: false,
-                success: function (data) {
 
-                    this.props.fields.municipality.onChange(data);
+        //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
+        this.props.fields.pnr.onChange(this.props.userData.pnr);
+        $.ajax({
+            url: RESTpaths.PATHS.MUNICIPALITY_BASE + '?pnr=' + this.props.userData.pnr,
+            dataType: 'text',
+            cache: false,
+            success: function (data) {
 
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error("municipality error", status, err.toString());
-                }.bind(this)
-            })
+                this.props.fields.municipality.onChange(data);
+
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error("municipality error", status, err.toString());
+            }.bind(this)
+        })
     }
 
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
         if(this.props.fields.dependent.value){
-        this.props.resetDep();
-        this.props.fields.dependent.onChange(false);}
+            this.props.resetDep();
+            this.props.fields.dependent.onChange(false);}
         this.saveFieldValues();
         this.props.nextStep(6)
     }
@@ -61,25 +62,23 @@ export class WhosSearchingClass extends React.Component {
 
     render() {
         return (
-            <div className="form-start">
-                <componentClass>
-                    <label className="form-header">Søker du sykehjemsplass for deg selv?</label>
-                    <div className="form-container">
-                        <Row>
-                            <Col md={8} mdOffset={2}>
-                                <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
-                                        bsSize="large" block>Ja, for meg selv</Button>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={8} mdOffset={2}>
-                                <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
+            <componentClass>
+                <label htmlFor="container" className="form-header">Søker du sykehjemsplass for deg selv?</label>
+                <div className="form-container" id="container">
+                    <Row>
+                        <Col md={8} mdOffset={2}>
+                            <Button onClick={this.handleClickMe} className="button-search" bsStyle="primary"
+                                    bsSize="large" block>Ja, for meg selv</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8} mdOffset={2}>
+                            <Button onClick={this.handleClickOther} className="button-search" bsStyle="primary"
                                     bsSize="large" block>Nei, for noen andre</Button>
-                            </Col>
-                        </Row>
-                    </div>
-                </componentClass>
-            </div>
+                        </Col>
+                    </Row>
+                </div>
+            </componentClass>
         )
     }
 }
@@ -91,7 +90,7 @@ WhosSearchingClass.propTypes = {
 const WhosSearching = reduxForm({
     form: 'application',
     fields: fields,
-        destroyOnUnmount: false,
+    destroyOnUnmount: false,
 })(WhosSearchingClass);
 
 export default WhosSearching

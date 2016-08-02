@@ -21,7 +21,7 @@ var fastleger = ["Ola Nordmann", "Kari Nordmann"];
 
 var user = {
     pnr: "01108019146",
-    name: "TestPerson1",
+    name: "Eldar Eldarsen",
     submissionId: null
 };
 

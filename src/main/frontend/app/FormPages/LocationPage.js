@@ -15,7 +15,7 @@ var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Alert = require('react-bootstrap/lib/Alert');
 
 var inputChangeRun = 0;
-var content = null;
+var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
@@ -33,21 +33,21 @@ export class LocationPageClass extends React.Component {
         this.findMunicipality = this.findMunicipality.bind(this);
         this.municipalityChange = this.municipalityChange.bind(this);
         this.onInputChangeHandler = this.onInputChangeHandler.bind(this);
-  
+
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.findMunicipality(this.props.fields.municipality.value);
     }
 
     /**
      * @param mun
-     * If user have not yet chosen a value here, the user's municipality is set as default 
+     * If user have not yet chosen a value here, the user's municipality is set as default
      */
     findMunicipality(mun) {
         if (!this.props.fields.municipalityApp.value) {
             this.onInputChangeHandler(mun);
         }
     }
-    
+
     /**
      * Handle the click on the back-button
      * If you are applying for yourself, the previous step is step 8 - Special Needs Page
@@ -55,7 +55,7 @@ export class LocationPageClass extends React.Component {
     handleClickBack() {
         this.props.previousStep(8);
     }
-    
+
     /**
      * Handle the click on the next-button
      */
@@ -75,9 +75,9 @@ export class LocationPageClass extends React.Component {
     }
 
     /**
-     * @param value 
-     * Adds placeholder at first index in list 
-     * When switching municipality, update home values from server. 
+     * @param value
+     * Adds placeholder at first index in list
+     * When switching municipality, update home values from server.
      */
     municipalityChange(value) {
         $.ajax({
@@ -124,7 +124,7 @@ export class LocationPageClass extends React.Component {
     }
 
     /**
-     * Handles change of municipality 
+     * Handles change of municipality
      * @returns the view of LocationPage
      */
     render() {
@@ -136,7 +136,7 @@ export class LocationPageClass extends React.Component {
 
             var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen  i</i></b>, før du går videre.</p>
 
-            content =
+            alertContent =
                 <componentClass>
                     <div className="alertClass_Fdfs">
                         <Alert bsStyle="danger">
@@ -148,7 +148,7 @@ export class LocationPageClass extends React.Component {
             alertMessage = true;
         } else {
             if (valid) {
-                content = null;
+                alertContent = null;
                 alertMessage = false;
             }
         }
@@ -157,7 +157,7 @@ export class LocationPageClass extends React.Component {
         if (valid && homeOptions.value) {
             homes = <Row className="form-row">
                 <Col sm={6} md={6}>
-                    <label className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
+                    <label htmlFor="homes" className="home">Hvilket sykehjem ønskes som 1. prioritet?</label>
                 </Col>
                 <Col sm={6} md={6}>
                     <DropdownList
@@ -171,40 +171,39 @@ export class LocationPageClass extends React.Component {
             </Row>;
         }
         return (
-            <div>
-                <componentClass>
-                    <label className="form-header">Hvor ønskes det plass? </label>
-                    <div className="form-container">
-                        <form className="location">
-                            <Row className="form-row">
-                                <Col sm={6} md={6}>
-                                    <label className="municipality">I hvilken kommune ønskes plassen?</label>
-                                </Col>
-                                <Col sm={6} md={6}>
-                                    <FormGroup validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
+            <componentClass>
+                <label htmlFor="locForm" className="form-header">Hvor ønskes det plass? </label>
+                <div className="form-container">
+                    <form id="locForm" className="location">
+                        <Row className="form-row">
+                            <Col sm={6} md={6}>
+                                <label htmlFor="municip" className="municipality" id="mun">I hvilken kommune ønskes plassen?</label>
+                            </Col>
+                            <Col sm={6} md={6}>
+                                <FormGroup id="municip" validationState={(municipalityApp.touched || alertMessage) ? "error" : ""}>
                                     <TypeAhead options={dropdownContent.MUNICIPALITIES}
                                                ref="munSelect"
                                                className="municipTypeAhead"
                                                labelKey="name"
                                                selected={municipalityApp.value? [{name: municipalityApp.value}]: []}
+                                               aria-labelledby="mun"
                                                onInputChange={this.onInputChangeHandler}
                                                onChange={this.onChangeHandler}/>
-                                        </FormGroup>
-                                </Col>
-                            </Row>
-                            {homes}
-                        </form>
-                        {content}
-                    </div>
-                    <NavigationButtons
-                        buttonDisabled={!valid}
-                        handleClickBack={this.handleClickBack}
-                        handleClickNext={this.handleClickNext}
-                        isSubmit={true}
-                        saveUserData={this.props.saveUserData}
-                        newFieldValues = {this.props.newFieldValues}/>
-                </componentClass>
-            </div>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        {homes}
+                    </form>
+                    {alertContent}
+                </div>
+                <NavigationButtons
+                    buttonDisabled={!valid}
+                    handleClickBack={this.handleClickBack}
+                    handleClickNext={this.handleClickNext}
+                    isSubmit={true}
+                    saveUserData={this.props.saveUserData}
+                    newFieldValues = {this.props.newFieldValues}/>
+            </componentClass>
         )
     }
 }

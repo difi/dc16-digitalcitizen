@@ -11,9 +11,9 @@ function feedback(data) {
         errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
     }
     if (fieldIsEmpty(data.name)) {
-        errors.name = "et navn, ";
+        errors.name = "et navn på minst tre bokstaver, ";
     } else if(data.name.replace(" ", "").length<=2){
-        errors.name="et navn";
+        errors.name="et navn på minst tre bokstaver, ";
     }
 
     if (!data.relation) {

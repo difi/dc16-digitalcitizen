@@ -21,15 +21,15 @@ var AddressField = React.createClass({
         includeCountry: React.PropTypes.bool,
         address: React.PropTypes.object
     },
-/*
-    getDefaultProps: function () {
-        return {includeCountry: true};
-    },
+    /*
+     getDefaultProps: function () {
+     return {includeCountry: true};
+     },
 
-    getInitialState: function () {
-        return {country: this.props.address.country};
-    },
-*/
+     getInitialState: function () {
+     return {country: this.props.address.country};
+     },
+     */
     /**Makes a call to the GeoNames API with the postal code given by the user
      * in order to retrieve the corresponding postal
      *
@@ -144,8 +144,10 @@ var AddressField = React.createClass({
                 <div>
                     <Row className="form-row-address">
                         <Col sm={12} md={12} className="from-col-address">
-                            <FormGroup validationState={(!street.value && (street.touched || alertMessage)) ? "error" : ""}>
+                            <FormGroup
+                                validationState={(!street.value && (street.touched || alertMessage)) ? "error" : ""}>
                                 <FormControl
+                                    id="adrField"
                                     type="text"
                                     placeholder='Adresse'
                                     className='adressField'
@@ -155,10 +157,21 @@ var AddressField = React.createClass({
                             </FormGroup>
                         </Col>
                     </Row>
+
                     <Row className="form-row-address">
                         <Col sm={6} md={6} className="from-col-address">
-                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
+                            <label htmlFor="postNr" className="adressLabel">Postnummer</label>
+                        </Col>
+                        <Col sm={6} md={6} className="from-col-address">
+                            <label htmlFor="pSted" className="adressLabel">Sted</label>
+                        </Col>
+                    </Row>
+                    <Row className="form-row-address">
+                        <Col sm={6} md={6} className="from-col-address">
+                            <FormGroup
+                                validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
                                 <FormControl
+                                    id="postNr"
                                     type="text"
                                     placeholder="Postnr."
                                     className='zipcode'
@@ -172,6 +185,7 @@ var AddressField = React.createClass({
                         </Col>
                         <Col sm={6} md={6} className="from-col-address">
                             <FormControl
+                                id="pSted"
                                 type="text"
                                 placeholder='Sted'
                                 ref="postal"
