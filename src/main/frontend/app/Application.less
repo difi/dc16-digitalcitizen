@@ -8,9 +8,13 @@ body {
   padding: 0;
 }
 
+.footer-wrapper {
+  border-top: 0.5px solid #e6e6e6;
+}
+
 .footer-text{
   font-size: 10px;
-  text-align: center;
+  margin-top:10px;
 }
 
 label {
@@ -25,6 +29,12 @@ h1 {
   font-size: 12pt;
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .footer {
+    display: none;
+  }
 }
 
 .button-label {
@@ -48,16 +58,26 @@ h1 {
   background-color: white;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    width: 970px;
-  }
-  h1 {
-    font-size: 36px;
+@media (min-width: 768px) {
+  .nav-header{
+    margin-left:10px;
   }
 
   .application-wrapper {
     margin-top: 40px;
+  }
+
+  .footer{
+    margin-top:40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    //width: 970px;
+  }
+  h1 {
+    font-size: 30px;
   }
 
   .form-header {
@@ -65,6 +85,7 @@ h1 {
     font-weight: bold;
     margin-bottom: 20px;
   }
+
   .footer-text{
     font-size: 12px;
   }
@@ -84,6 +105,7 @@ h1 {
 }
 
 /* Start DependentForm style */
+
 .close-button { /* X button to delete a dependent */
   float: right;
   margin-top: -5px;
@@ -177,6 +199,7 @@ input[type=radio] {
   margin-bottom: 20px;
 }
 
+//placeholder
 select option[disabled]:first-child {
   display: none;
 }
