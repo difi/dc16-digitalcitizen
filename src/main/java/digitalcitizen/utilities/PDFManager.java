@@ -15,6 +15,10 @@ import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
+/**
+ * A class that utilizes the PDFBox library in order to fill PDF templates with data
+ * from a {@link Submission}.
+ */
 public class PDFManager {
 
     private File dep1_template = getResourceAsFile("formTemplate_dep1.pdf");
@@ -23,11 +27,10 @@ public class PDFManager {
     private File additional_info_template = getResourceAsFile("additional_info.pdf");
 
     /**
-     * A method that utilizes the PDFBox library in order to fill a PDF template with data
-     * from a {@link Submission}. The generated PDF-file is saved on the server.
+     * A method that decides the type of PDF document to generate based upon a provided {@link Submission}.
      *
-     * @param submission A {@link Submission} containing the data needed to fill the template.
-     * @return The method returns the location (path) of the file on the server.
+     * @param submission A {@link Submission} containing the data needed to generate PDFs.
+     * @return The method returns the location (path) of the generated PDF on the server.
      * @throws IOException
      */
     public String generatePDFofSubmission(Submission submission) throws IOException {
@@ -42,6 +45,13 @@ public class PDFManager {
         }
     }
 
+    /**
+     * Generates a PDF file with additional information concerning the applicant and patient.
+     *
+     * @param submission A {@link Submission} that contains data needed to generate the PDF.
+     * @return The method returns the generated PDF file.
+     * @throws IOException
+     */
     private File generateAdditionalInfoPDF(Submission submission) throws IOException {
 
         Person guardian = new Person();
@@ -79,7 +89,7 @@ public class PDFManager {
             field.setValue(fieldsAndValues.get(f));
         }
 
-        // TODO: Auto-generate name and change location of server stored PDF-files
+        // TODO: Auto-generate name and change location of server stored PDF files
         String path = "testPDF2.pdf";
         File output = new File(path);
 
@@ -90,6 +100,13 @@ public class PDFManager {
         return new File(path);
     }
 
+    /**
+     * Generates a PDF file of the application.
+     *
+     * @param submission A {@link Submission} that contains data needed to generate the PDF.
+     * @return The method returns the generated PDF file.
+     * @throws IOException
+     */
     private File generateApplicationPDF(Submission submission) throws IOException {
 
         PDDocument pdfTemplate = new PDDocument();
@@ -165,7 +182,7 @@ public class PDFManager {
             field.setValue(fieldsAndValues.get(f));
         }
 
-        // TODO: Auto-generate name and change location of server stored PDF-files
+        // TODO: Auto-generate name and change location of server stored PDF files
         String path = "testPDF1.pdf";
         File output = new File("testPDF1.pdf");
 
@@ -176,6 +193,13 @@ public class PDFManager {
         return new File(path);
     }
 
+    /**
+     * A method that merges two or more PDF documents into a single PDF file.
+     *
+     * @param documents An array of {@link File} containing the PDF documents to be merged.
+     * @return The method returns a single, merged, PDF document.
+     * @throws IOException
+     */
     private File mergeDocuments(File[] documents) throws IOException {
 
         String fileDestination = "mergeTest.pdf";
