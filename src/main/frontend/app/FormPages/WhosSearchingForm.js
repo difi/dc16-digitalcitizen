@@ -56,6 +56,9 @@ export class WhosSearchingClass extends React.Component {
 
     handleClickOther() {
         console.log("State 2");
+        if (this.props.fields.pnr) {
+            this.props.fields.pnr.onChange(null);
+        }
         this.props.fields.applyingForSelf.onChange(false);
         this.props.nextStep(2);
     }
