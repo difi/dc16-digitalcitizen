@@ -12,7 +12,8 @@ public class DoctorController {
 
     /**
      * Handles requests made to "/api/doctors". The method returns a list of all the {@link Doctor} located
-     * at a given location (municipality). The request requires a "loc" parameter.
+     * at a given location (municipality).
+     * The request requires a "loc" argument.
      *
      * @return A list of {@link Doctor} in JSON format.
      */

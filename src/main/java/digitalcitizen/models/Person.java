@@ -2,6 +2,9 @@ package digitalcitizen.models;
 
 import digitalcitizen.utilities.TestData;
 
+/**
+ * The Person model is used for storing data concerning the patient.
+ */
 public class Person {
 
     private String pnr;
