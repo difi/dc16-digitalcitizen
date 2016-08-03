@@ -65,6 +65,9 @@ export class SubmitSuccessClass extends React.Component {
     }
 }
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const SubmitSuccess = reduxForm({
     form: 'application',
     fields,

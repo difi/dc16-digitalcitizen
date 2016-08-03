@@ -212,6 +212,9 @@ LocationPageClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const LocationPage = reduxForm({
     form: 'application',
     fields: fields,

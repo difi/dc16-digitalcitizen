@@ -85,6 +85,9 @@ WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const WhosSearching = reduxForm({
     form: 'application',
     fields: fields,

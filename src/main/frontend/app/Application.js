@@ -103,7 +103,7 @@ export class ApplicationClass extends React.Component {
          * The following if-sentences needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
          */
 
-         /*if (this.props.fields.applyingForSelf.onChange()) {
+         if (this.props.fields.applyingForSelf.onChange()) {
          this.testScriptPerson();
          }
 
@@ -122,7 +122,7 @@ export class ApplicationClass extends React.Component {
          //dependent form 3
          if (this.props.fields.form3.name.onChange()) {
          this.testScriptAddDependent3();
-         }*/
+         }
     }
 
     /**
@@ -192,7 +192,6 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
         this.props.fields.form3.relation.onChange("Barn");
-
     }
 
     getUserData() {
@@ -434,7 +433,7 @@ export class ApplicationClass extends React.Component {
                         <Col mdOffset={3} lgOffset={3} smOffset={2}>
                             <Navbar.Header className="nav-header">
                                 <Navbar.Brand>
-                                    <a href=".">Digitalcitizen</a>
+                                    <a href=".">DigitalCitizen</a>
                                 </Navbar.Brand>
                                 <Navbar.Toggle />
                             </Navbar.Header>
@@ -473,6 +472,9 @@ ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const Application = reduxForm({
     form: 'application',
     fields: fields,

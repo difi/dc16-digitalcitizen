@@ -108,6 +108,9 @@ NeedsFormClass.propTypes = {
  return errors;
  };*/
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const NeedsForm = reduxForm({
     form: 'application',
     fields: ["need"],
