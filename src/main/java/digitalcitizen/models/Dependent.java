@@ -1,5 +1,8 @@
 package digitalcitizen.models;
 
+/**
+ * The Dependent model is used for storing details about a dependent and their relation to an applicant.
+ */
 public class Dependent {
 
     private String name;

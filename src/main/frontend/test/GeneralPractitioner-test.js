@@ -14,43 +14,6 @@ import {GeneralPractitionerClass} from '../app/FormPages/GeneralPractitioner.js'
 //Import TypeAhead to be able to find the fields where it is used
 import TypeAhead from '../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
-//Added these values from Application to simulate that this file have received these values from Application,
-// because it is dependent on these Application values
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    dontGotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: null,                  // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null            // String
-};
-
 describe("GeneralPractitionerClass", function() {
     let wrapper = null;
 
@@ -64,8 +27,7 @@ describe("GeneralPractitionerClass", function() {
                 municipality: {
                     value: "Oslo"
                 }
-            },
-            fieldValues
+            }
         };
 
         //Renders the GeneralPractitionerClass with props

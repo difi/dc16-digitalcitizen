@@ -13,43 +13,6 @@ import {expect} from 'chai';
 //Import the file we want to test.
 import {RelationFormClass} from '../app/FormPages/RelationForm.js';
 
-//Added these values from Application to simulate that this file have received these values from Application,
-// because it is dependent on these Application values
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    dontGotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: null,                  // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null            // String
-};
-
 var userData = {
     pnr: "01108019146",
     name: "TestPerson1",
@@ -74,7 +37,6 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues,
             userData
         };
 
@@ -121,7 +83,6 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues,
             userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
@@ -145,7 +106,6 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues,
             userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
@@ -168,7 +128,6 @@ describe("RelationFormClass", function() {
                     onChange: function onChange () {}
                 }
             },
-            fieldValues,
             userData
         };
         const wrapper = shallow(<RelationFormClass {...defaultProps}/>);
@@ -176,8 +135,6 @@ describe("RelationFormClass", function() {
         expect(wrapper.find('label.other-rel')).to.have.length(1);
         expect(wrapper.find('FormControl.other-rel')).to.have.length(1);
      });
-
-
 
     it('If none of the radio buttons are pressed, only the radiobuttons and the header is going to be shown', function () {
         expect(wrapper).to.have.length(1);
