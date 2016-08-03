@@ -58,7 +58,6 @@ export default class NavigationButtons extends React.Component {
         //Right button may be disabled, submit button instead of next and loading while sending to server. 
         if (!this.state.isSubmit) {
             var nextBtnIsLoading = this.props.nextBtnIsLoading;
-            console.log("isLoading: "+nextBtnIsLoading);
             if (this.props.buttonDisabled) {
                 rightButton =
                     <Button
