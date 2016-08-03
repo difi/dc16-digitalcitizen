@@ -452,15 +452,15 @@ export class ApplicationClass extends React.Component {
                     </Row>
                 </Navbar>
                 <div className="container">
-                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={1} md={6}
                          xs={12} sm={8} lg={6}> {header} </Col>
-                    <Col className="well application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col className="application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}>
-                        <Col md={11} xs={11} sm={11} lg={11} mdOffset={1} lgOffset={1} smOffset={1} xsOffset={1}>
+                        <Col md={12} xs={13} sm={12} lg={11} xsOffset={1} smOffset={0} mdOffset={0} lgOffset={0}>
                             {content}
                         </Col>
                     </Col>
-                    <Col className="footer" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col className="footer" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={1} md={6}
                          xs={12} sm={8} lg={6}>
                         <div className="footer-wrapper">
                             <p className="footer-text"> Tlf: 800 30 300 | Driftet av Direktoratet for forvaltning og IKT(Difi)</p>

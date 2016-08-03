@@ -9,16 +9,18 @@ body {
 }
 
 .footer-wrapper {
+  margin-top: 20px;
   border-top: 0.5px solid #e6e6e6;
 }
 
 .footer-text{
-  font-size: 10px;
+  font-size: 12px;
   margin-top:10px;
 }
 
 label {
   margin-top: 5px;
+  font-size:16px;
 }
 
 h1 {
@@ -29,13 +31,6 @@ h1 {
   font-size: 12pt;
   font-weight: bold;
   margin-bottom: 20px;
-}
-
-@media (max-width: 500px) {
-  .footer {
-    display: none;
-  }
-
 }
 
 .button-label {
@@ -52,8 +47,18 @@ h1 {
   margin-top: 0;
 }
 
+@media (max-width: 500px) {
+  .footer {
+    display: none;
+  }
+}
 
 @media (min-width: 768px) {
+  label {
+    margin-top: 5px;
+    font-size:15px;
+  }
+
   .nav-header{
     margin-left:10px;
   }
@@ -63,15 +68,18 @@ h1 {
   }
 
   .footer{
-    margin-top:40px;
+    margin-top:50px;
   }
 
 }
 
 @media (min-width: 1200px) {
-  .container {
-    //width: 970px;
+  .info-label {
+    padding-left: 15px;
+    font-size: 15pt;
+    float: right;
   }
+
   h1 {
     font-size: 30px;
   }
@@ -81,16 +89,6 @@ h1 {
     font-weight: bold;
     margin-bottom: 20px;
   }
-
-  .footer-text{
-    font-size: 12px;
-  }
-}
-
-.info-label {
-  padding-left: 15px;
-  font-size: 9pt;
-  float: right;
 }
 
 .dependent-wrapper { /* Wraps all the dependent-forms in AddDependent */
@@ -175,7 +173,6 @@ h1 {
 
 .button-search {
   margin-bottom: 15px;
-  margin-left: 15px;
 }
 
 .download-link {
@@ -205,7 +202,6 @@ select option[disabled]:first-child {
  .back-forward-buttons {
     width: 400px;
   }
-
 
 .back-btn {
   margin-left: 15px;
