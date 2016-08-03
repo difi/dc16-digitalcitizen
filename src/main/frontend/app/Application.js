@@ -453,7 +453,7 @@ export class ApplicationClass extends React.Component {
                     </Row>
                 </Navbar>
                 <div className="container">
-                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
+                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={1} md={6}
                          xs={12} sm={8} lg={6}> {header} </Col>
                     <Col className="application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
                          xs={12} sm={8} lg={6}>

@@ -184,10 +184,9 @@ export class PersonWithNeedClass extends React.Component {
                         <FormGroup
                             validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                             <FormControl
-                                className="form-input"
                                 id="checkedName"
                                 type="text"
-                                className="form-input"
+                                className="formName"
                                 placeholder="Navn"
                                 ref="name"
                                 {...name}/>
@@ -205,7 +204,7 @@ export class PersonWithNeedClass extends React.Component {
                             <FormControl
                                 id="checkedPnr"
                                 type="text"
-                                className="form-input"
+                                className="formPnr"
                                 placeholder="Fødselsnummer"
                                 ref="pno"
                                 //value={this.state.pnr}
@@ -228,7 +227,7 @@ export class PersonWithNeedClass extends React.Component {
                             <FormControl
                                 id="notCheckedName"
                                 type="text"
-                                className="form-input"
+                                className="formName"
                                 placeholder="Navn"
                                 ref="name"
                                 {...name}
@@ -251,7 +250,7 @@ export class PersonWithNeedClass extends React.Component {
                                 id="notCheckedPnr"
                                 type="text"
                                 name="pno"
-                                className="form-input"
+                                className="formPnr"
                                 placeholder="Fødselsnummer"
                                 ref="pno"
                                 //Connects field to redux form component//
