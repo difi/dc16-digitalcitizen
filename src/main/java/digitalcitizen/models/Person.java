@@ -30,10 +30,6 @@ public class Person {
         this.doctor = doctor;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
     public String getPnr() {
         return pnr;
     }
@@ -72,6 +68,10 @@ public class Person {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
     }
 
     public void setDoctor(Doctor doctor) {
