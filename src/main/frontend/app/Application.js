@@ -92,7 +92,11 @@ export class ApplicationClass extends React.Component {
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.resetDependent = this.resetDependent.bind(this);
         this.getUserData = this.getUserData.bind(this);
-        //this.props.fields.guardianPnr.onChange(this.state.userData.pnr);
+
+        /**
+         * At the moment the following line must be commented out if the ApplicationIntegration-test is going to run as expected
+         */
+        this.props.fields.guardianPnr.onChange(this.state.userData.pnr);
         this.getUserData();
 
         /**

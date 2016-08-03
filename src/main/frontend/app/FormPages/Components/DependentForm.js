@@ -30,13 +30,15 @@ class DependentForm extends React.Component {
 
     render() {
         var deleteButton = this.props.showDeleteButton ?
-            <Button
-                className="close-button"
-                onClick={this.handleClickRemove}
-                bsStyle="danger">
-                &minus;
-            </Button>
-             : '';
+            <Row className="close-button-row">
+                <Button
+                    className="close-button"
+                    onClick={this.handleClickRemove}
+                    bsStyle="danger">
+                    - Fjern pårørende
+                </Button>
+            </Row>
+            : '';
 
         const {name, phone, mail, relation, depOtherRelation}= this.props;
         var valid = !name.error && !phone.error && !mail.error && !relation.error;
@@ -63,9 +65,8 @@ class DependentForm extends React.Component {
 
         return (
             <div>
-                {deleteButton}
                 <h4>Pårørende</h4>
-                <Row className="form-row">
+                <Row className="formgroup-row">
                     <Col sm={4} md={4}>
                         <label htmlFor="deptName" className="name">Navn</label>
                     </Col>
@@ -83,7 +84,8 @@ class DependentForm extends React.Component {
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={phone.error && (phone.touched || alertMessage) ? "error" : null}>
-                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr" id="depttlf"
+                            <FormControl className="tlfForm" ref="phone" type="text" placeholder="Telefonnr"
+                                         id="depttlf"
                                          disabled={this.props.autoFilled} {...phone}/>
                             <FormControl.Feedback />
                         </FormGroup>
@@ -107,14 +109,15 @@ class DependentForm extends React.Component {
                     </Col>
                     <Col sm={8} md={8}>
                         <FormGroup validationState={relation.error && alertMessage ? "error" : null}>
-                        <DropdownList className="depRel" ref='relation' options={dropdownContent.DEPENDENTRELATIONS}
-                                      id="test"
-                                      valueField="value" labelField="relation"
-                                      disabled={this.props.autoFilled} {...relation}
-                                      onChange={change => relation.onChange(change.newValue)}/>
-                    </FormGroup>
+                            <DropdownList className="depRel" ref='relation' options={dropdownContent.DEPENDENTRELATIONS}
+                                          id="test"
+                                          valueField="value" labelField="relation"
+                                          disabled={this.props.autoFilled} {...relation}
+                                          onChange={change => relation.onChange(change.newValue)}/>
+                        </FormGroup>
                     </Col>
                 </Row>
+                {deleteButton}
                 {alertContent}
                 {this.props.relation.value == 'Annet' ?
                     <Row className="form-row">
