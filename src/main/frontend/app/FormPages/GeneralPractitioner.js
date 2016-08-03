@@ -20,9 +20,9 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "doctorName",
-    "doctors",
-    "municipality"
+    'doctorName',
+    'doctors',
+    'municipality'
 ];
 
 export class GeneralPractitionerClass extends React.Component {

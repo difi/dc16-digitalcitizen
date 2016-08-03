@@ -24,15 +24,15 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields= [
-    "relation",
-    "typeOfRelation",
-    "nameOfChild",
-    "dependent",
-    "otherRelation",
-    "guardianFor",
-    "municipality",
+    'relation',
+    'typeOfRelation',
+    'nameOfChild',
+    'dependent',
+    'otherRelation',
+    'guardianFor',
+    'municipality',
     'pnr',
-    "name"
+    'name'
 ];
 
 export class RelationFormClass extends React.Component {

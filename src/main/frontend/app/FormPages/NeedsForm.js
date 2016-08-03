@@ -113,7 +113,7 @@ NeedsFormClass.propTypes = {
  */
 const NeedsForm = reduxForm({
     form: 'application',
-    fields: ["need"],
+    fields: ['need'],
     destroyOnUnmount: false
 }, null, null)(NeedsFormClass);
 

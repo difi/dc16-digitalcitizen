@@ -25,10 +25,10 @@ var alertMessage = false;
 var nameContent = null;
 var pnrContent = null;
 export const fields = [
-    "pnr",
-    "name",
-    "checked",
-    "municipality"
+    'pnr',
+    'name',
+    'checked',
+    'municipality'
 ];
 
 export class PersonWithNeedClass extends React.Component {

@@ -19,10 +19,10 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "municipalityApp",
-    "homeApp",
-    "homeOptions",
-    "municipality"
+    'municipalityApp',
+    'homeApp',
+    'homeOptions',
+    'municipality'
 ];
 
 export class LocationPageClass extends React.Component {

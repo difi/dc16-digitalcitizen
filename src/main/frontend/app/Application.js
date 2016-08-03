@@ -27,16 +27,16 @@ import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
 
 export const fields = [
-    "applyingForSelf",
-    "pnr",
-    "name",
-    "checked",
-    "number",
-    "street",
-    "zipcode",
-    "postal",
-    "municipality",
-    "doctorName",
+    'applyingForSelf',
+    'pnr',
+    'name',
+    'checked',
+    'number',
+    'street',
+    'zipcode',
+    'postal',
+    'municipality',
+    'doctorName',
     'form1.name',
     'form1.mail',
     'form1.phone',
@@ -56,19 +56,19 @@ export const fields = [
     'form2.depOtherRelation',
     'form3.depOtherRelation',
     'numDep',
-    "relation",
-    "typeOfRelation",
-    "nameOfChild",
-    "dependent",
-    "otherRelation",
-    "guardianFor",
-    "need",
-    "medical",
-    "changes",
-    "other",
-    "municipalityApp",
-    "homeApp",
-    "setDependent",
+    'relation',
+    'typeOfRelation',
+    'nameOfChild',
+    'dependent',
+    'otherRelation',
+    'guardianFor',
+    'need',
+    'medical',
+    'changes',
+    'other',
+    'municipalityApp',
+    'homeApp',
+    'setDependent',
     'guardianPnr'
 ];
 
@@ -142,7 +142,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.need.onChange("long");
         this.props.fields.medical.onChange("No");
         this.props.fields.changes.onChange("No");
-        this.props.fields.other.onChange("No");
+        this.props.fields.other.onChange("Blomsterpotten har åtte blomster, åtte blomstrende potteblomster. Blomstrer blomstene, blomstrer åtte potteblomster i blomsterpotte.");
 
         //
         this.props.fields.displayButton.onChange();

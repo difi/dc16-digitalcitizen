@@ -16,9 +16,9 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "medical",
-    "changes",
-    "other"
+    'medical',
+    'changes',
+    'other'
 ];
 
 export class SpecialNeedsClass extends React.Component {

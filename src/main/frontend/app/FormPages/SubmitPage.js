@@ -8,7 +8,10 @@ var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Button = require('react-bootstrap/lib/Button');
 
-export const fields = ["name", "applyingForSelf"];
+export const fields = [
+    'name',
+    'applyingForSelf'
+];
 
 export class SubmitSuccessClass extends React.Component {
 

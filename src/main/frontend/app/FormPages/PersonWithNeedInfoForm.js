@@ -23,12 +23,12 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "name",
-    "number",
-    "street",
-    "zipcode",
-    "postal",
-    "municipality"
+    'name',
+    'number',
+    'street',
+    'zipcode',
+    'postal',
+    'municipality'
 ];
 
 export class PersonWithNeedInfoClass extends React.Component {
