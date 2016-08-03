@@ -8,7 +8,7 @@ function feedback(data) {
         errors.phone = "et åttesifret telefonnummer, ";
     }
     if (!(checkEmail(data.mail))) {
-        errors.mail = "en epostadresse (eksempel: kari@eksempel.no)\", ";
+        errors.mail = "en epostadresse (eksempel: kari@eksempel.no), ";
     }
     if (fieldIsEmpty(data.name)) {
         errors.name = "fullt navn, ";
