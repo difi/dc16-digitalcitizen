@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MunicipalityController {
 
+    /**
+     * Handles requests made to "/api/municipality". Used for retrieving the municipality of a person.
+     * The request requires a "pnr" argument.
+     *
+     * @return boolean
+     */
     @CrossOrigin
     @RequestMapping(value = "/api/municipality", params = "pnr", method = RequestMethod.GET, produces = "text/plain")
     @ResponseBody
