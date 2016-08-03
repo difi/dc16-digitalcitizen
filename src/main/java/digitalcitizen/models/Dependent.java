@@ -16,7 +16,9 @@ public class Dependent {
         this.telephone = telephone;
         this.email = email;
         this.relation = relation;
-    }  public Dependent(String name, String telephone, String email, String relation, String otherRelation) {
+    }
+
+    public Dependent(String name, String telephone, String email, String relation, String otherRelation) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -30,6 +32,14 @@ public class Dependent {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getEmail() {
@@ -46,14 +56,6 @@ public class Dependent {
 
     public void setRelation(String relation) {
         this.relation = relation;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 
     public String getDepOtherRelation() {

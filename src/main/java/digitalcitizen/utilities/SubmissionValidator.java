@@ -12,10 +12,7 @@ public class SubmissionValidator {
     }
 
     public boolean validateAllFields(Submission submission) {
-        return (
-                validatePerson(submission.getPerson()) &&
-                        validateDependents(submission.getDependents())
-        );
+        return (validatePerson(submission.getPerson()) && validateDependents(submission.getDependents()));
     }
 
     private boolean validatePerson(Person person) {
