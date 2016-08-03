@@ -40,7 +40,6 @@ var userData = {
     submissionId: null
 };
 
-
 //Added these values from Application to simulate that this file have received these values from Application,
 // because it is dependent on these Application values
 var fieldValues = {
@@ -58,7 +57,8 @@ var fieldValues = {
         name: null,                 // String
         address: {                  // Address Object
             country: "NO",              // String
-            streetAddress: null,        // String
+            municipality: null,                           // String
+            street: null,                                       // String
             zipcode: null,              // String
             postal: null                // String
         },
@@ -75,7 +75,17 @@ var fieldValues = {
     // Seventh form
     medicalNeeds: null,         // String
     conditionChanges: null,     // String
-    otherNeeds: null            // String
+    otherNeeds: null,            // String
+    nursingHome: {                                              // NursingHome Object
+        municipality: null,                        // String
+        name: null                                         // String
+    },
+    guardianPnr: {
+        value: null,
+        onChange: function onChange() {
+
+        }
+    }
 };
 
 var fields = {

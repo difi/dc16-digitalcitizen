@@ -27,16 +27,12 @@ public class Address {
         this.postal = postal;
     }
 
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getMunicipality() {
@@ -47,16 +43,20 @@ public class Address {
         this.municipality = municipality;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getStreet() {
         return street;
     }
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     @Override
@@ -72,7 +72,6 @@ public class Address {
             return false;
         if (street != null ? !street.equals(address.street) : address.street != null) return false;
         return zipcode != null ? zipcode.equals(address.zipcode) : address.zipcode == null;
-
     }
 
     @Override

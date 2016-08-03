@@ -92,6 +92,10 @@ export class ApplicationClass extends React.Component {
         this.saveValuesFromRedux = this.saveValuesFromRedux.bind(this);
         this.resetDependent = this.resetDependent.bind(this);
         this.getUserData = this.getUserData.bind(this);
+
+        /**
+         * At the moment the following line must be commented out if the ApplicationIntegration-test is going to run as expected
+         */
         this.props.fields.guardianPnr.onChange(this.state.userData.pnr);
         this.getUserData();
 
@@ -99,7 +103,7 @@ export class ApplicationClass extends React.Component {
          * The following if-sentences needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
          */
 
-         if (this.props.fields.applyingForSelf.onChange()) {
+         /*if (this.props.fields.applyingForSelf.onChange()) {
          this.testScriptPerson();
          }
 
@@ -118,13 +122,11 @@ export class ApplicationClass extends React.Component {
          //dependent form 3
          if (this.props.fields.form3.name.onChange()) {
          this.testScriptAddDependent3();
-         }
+         }*/
     }
 
     /**
      * Functions for person applied for; adding relations; forms for dependents.
-     *
-     * Testscript needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
      */
     testScriptPerson() {
 

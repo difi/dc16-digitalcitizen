@@ -91,7 +91,7 @@ export class RelationFormClass extends React.Component {
      */
     handleClickNext() {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
-        var valid = (nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value);
+        var valid = relation.value && ((nameOfChild.value && !nameOfChild.error) || (typeOfRelation.value && !typeOfRelation.error) || (otherRelation.value && !otherRelation.error));
         //const {fields: {relation}} = this.props;
 
         if ((valid == undefined || !valid)) {
@@ -169,10 +169,10 @@ export class RelationFormClass extends React.Component {
     render() {
         const {fields: {relation, typeOfRelation, nameOfChild, dependent, otherRelation, guardianFor}} = this.props;
         var content = <p/>;
-        var valid = relation.value && ((nameOfChild.value) || (typeOfRelation.value) || (otherRelation.value));
+        var valid = relation.value && ((nameOfChild.value && !nameOfChild.error) || (typeOfRelation.value && !typeOfRelation.error) || (otherRelation.value && !otherRelation.error));
         var errorMessage = null;
 
-        if (clickNextButton && (valid == undefined)) {
+        if (clickNextButton && (valid == undefined || !valid)) {
             if (!relation.value) {
                 errorMessage = <p>Vennligst velg <b><i>din relasjon til søker</i></b></p>;
             } else {
@@ -213,7 +213,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <FormGroup validationState={nameOfChild.touched || (alertMessage)? "error" : ""}>
+                                <FormGroup validationState={nameOfChild.error && (nameOfChild.touched || (alertMessage)) ? "error" : ""}>
                                 <DropdownList id="1"
                                               ref="nameOfChild"
                                               className="guardian-rel"
@@ -240,7 +240,7 @@ export class RelationFormClass extends React.Component {
                         </Row>
                         <Row className="form-row">
                             <Col>
-                                <FormGroup validationState={typeOfRelation.touched || (alertMessage) ? "error" : ""}>
+                                <FormGroup validationState={typeOfRelation.error && (typeOfRelation.touched || (alertMessage)) ? "error" : ""}>
                                 <DropdownList id="1"
                                               ref="familyRelation"
                                               className="family-rel"
@@ -332,8 +332,17 @@ RelationFormClass.propTypes = {
 const validate = values => {
     const errors = {};
 
+    if(values.nameOfChild == 0){
+        console.log("I error");
+        errors.nameOfChild = "Vennligst velg hvem du fyller ut på vegne av, før du går videre."
+    }
+
+    if(values.typeOfRelation == 0){
+        errors.typeOfRelation = "Vennligst velg fra listen hva som er din relasjon til søker, før du går videre."
+    }
+
     if (fieldIsEmpty(values.otherRelation)) {
-        errors.otherRelation = "Skriv inn din relasjon.";
+        errors.otherRelation = "Vennligst oppgi hva som er din relasjon til søker, før du går videre.";
     }
     return errors;
 };

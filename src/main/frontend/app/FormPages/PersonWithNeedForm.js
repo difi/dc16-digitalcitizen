@@ -139,7 +139,7 @@ export class PersonWithNeedClass extends React.Component {
         var errormessage = null;
 
         //Decide which errormessage is the correct one to show to the user
-        if (name.error && pnr.error && !checked.value) {
+        if (name.error && pnr.error && (pnr.error != "matcher ikke") && !checked.value) {
             errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>, og <b><i>{pnr.error}</i></b>.</p>;
         }
         else if (name.error) {
@@ -308,10 +308,10 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "et navn på minst tre bokstaver";
+        errors.name = "fullt navn";
     }
     else if(values.name.replace(" ", "").length<=2){
-        errors.name="et navn på minst tre bokstaver";
+        errors.name="fullt navn";
     }
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";

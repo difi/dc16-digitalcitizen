@@ -15,6 +15,6 @@ public class GuardianController {
     @RequestMapping(value = "/api/guardians", params = "pnr", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public Collection<Person> getGuardiansByLocation(@RequestParam("pnr") String pnr) {
-        return TestData.GUARDIANS.stream().filter(guardian -> guardian.getPNR().equals(pnr)).map(Guardian::getGuardianFor).findFirst().get();
+        return TestData.GUARDIANS.stream().filter(guardian -> guardian.getPnr().equals(pnr)).map(Guardian::getGuardianFor).findFirst().get();
     }
 }
