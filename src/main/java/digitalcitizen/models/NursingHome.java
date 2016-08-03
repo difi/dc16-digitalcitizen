@@ -2,9 +2,9 @@ package digitalcitizen.models;
 
 public class NursingHome {
 
+    private int num;
     private String name;
     private String municipality;
-    private int num;
 
     public NursingHome() {
     }
