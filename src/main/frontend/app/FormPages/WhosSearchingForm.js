@@ -14,7 +14,8 @@ export const fields = [
     'municipality',
     'applyingForSelf',
     'pnr',
-    'dependent'
+    'dependent',
+    'guardianPnr'
 ];
 
 export class WhosSearchingClass extends React.Component {
@@ -56,7 +57,7 @@ export class WhosSearchingClass extends React.Component {
 
     handleClickOther() {
         console.log("State 2");
-        if (this.props.fields.pnr) {
+        if (this.props.fields.pnr.value == this.props.fields.guardianPnr.value) {
             this.props.fields.pnr.onChange(null);
         }
         this.props.fields.applyingForSelf.onChange(false);
