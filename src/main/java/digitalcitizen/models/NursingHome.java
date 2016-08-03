@@ -27,16 +27,16 @@ public class NursingHome {
         return municipality;
     }
 
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
+    }
+
     public int getNum() {
         return num;
     }
 
     public void setNum(int num) {
         this.num = num;
-    }
-
-    public void setMunicipality(String municipality) {
-        this.municipality = municipality;
     }
 
     @Override

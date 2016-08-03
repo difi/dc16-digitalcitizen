@@ -38,7 +38,6 @@ public class Doctor {
 
         if (!name.equals(doctor.name)) return false;
         return location.equals(doctor.location);
-
     }
 
     @Override

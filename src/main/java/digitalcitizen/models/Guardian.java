@@ -12,11 +12,11 @@ public class Guardian {
         this.guardianFor = guardianFor;
     }
 
-    public String getPNR() {
+    public String getPnr() {
         return pnr;
     }
 
-    public void setPNR(String pnr) {
+    public void setPnr(String pnr) {
         this.pnr = pnr;
     }
 
@@ -26,5 +26,13 @@ public class Guardian {
 
     public void setGuardianFor(Collection<Person> guardianFor) {
         this.guardianFor = guardianFor;
+    }
+
+    @Override
+    public String toString() {
+        return "Guardian{" +
+                "pnr='" + pnr + '\'' +
+                ", guardianFor=" + guardianFor +
+                '}';
     }
 }
