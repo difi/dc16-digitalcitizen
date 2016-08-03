@@ -52,20 +52,18 @@ public class SubmitController {
     @ResponseBody
     String post(@RequestBody final Submission submission, HttpServletRequest request) throws IOException {
 
-        // Validate form
         printSubmissionRequest(submission, request);
+
+        // Validate form
         boolean submissionIsValid = new SubmissionValidator().validateAllFields(submission);
 
         // TODO: Add logic for handling disapproved submissions
-        /*
-        if(!submissionIsValid) {
-            return "";
-        }*/
 
         if (Application.USE_MONGODB) {
             // Add submission to database and return the id
             return submissionRepository.insert(handleSubmissionFields(submission)).getId();
         } else {
+
             //Converting Submission to BasicDBObject
             Gson gson = new Gson();
             BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(handleSubmissionFields(submission)));
@@ -111,6 +109,7 @@ public class SubmitController {
             // Get Submission from database by the provided id
             submission = submissionRepository.findById(id);
         } else {
+
             // Retrieve Submission JSON from database by the provided ID
             DBObject searchById = new BasicDBObject("_id", new ObjectId(id));
             DBObject found = collection.findOne(searchById);
@@ -137,8 +136,9 @@ public class SubmitController {
     }
 
     private void printSubmissionRequest(Submission submission, HttpServletRequest request) {
-        String s = "Submission received from: " + request.getRemoteAddr()
-                + '\n' + submission;
+        String s = "[SubmitController] Submission received from: "
+                + request.getRemoteAddr()
+                + '\n' + "[SubmitController] " + submission;
         System.out.println(s);
     }
 }
