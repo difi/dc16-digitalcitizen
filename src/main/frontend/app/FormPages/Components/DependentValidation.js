@@ -8,15 +8,15 @@ function feedback(data) {
         errors.phone = "et åttesifret telefonnummer, ";
     }
     if (!(checkEmail(data.mail))) {
-        errors.mail = "en epostadresse på formatet \"epost-id@domene-navn\", ";
+        errors.mail = "en epostadresse (eksempel: kari@eksempel.no), ";
     }
     if (fieldIsEmpty(data.name)) {
-        errors.name = "et navn på minst tre bokstaver, ";
+        errors.name = "fullt navn, ";
     } else if(data.name.replace(" ", "").length<=2){
-        errors.name="et navn på minst tre bokstaver, ";
+        errors.name="fullt navn, ";
     }
 
-    if (!data.relation) {
+    if (!data.relation || data.relation == 0) {
         errors.relation = "relasjon, ";
     }
     return errors

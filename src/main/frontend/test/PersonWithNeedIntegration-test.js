@@ -54,7 +54,7 @@ describe("PersonWithNeedIntegration", () => {
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Vennligst fyll inn et navn på minst tre bokstaver.");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn fullt navn.");
     });
 
     it("Shows errormessage when only name have correct value, and checkbox is not checked", function () {

@@ -122,7 +122,7 @@ describe("DependentFormIntegration", () => {
         const errorMessage = wrapper.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Vennligst fyll inn et navn på minst tre bokstaver, relasjon, før du kan gå videre.");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn fullt navn, relasjon, før du kan gå videre.");
 
     });
 
@@ -158,7 +158,7 @@ describe("DependentFormIntegration", () => {
         const errorMessage = wrapper.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Vennligst fyll inn en epostadresse på formatet \"epost-id@domene-navn\", relasjon, før du kan gå videre.");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn en epostadresse (eksempel: kari@eksempel.no), relasjon, før du kan gå videre.");
 
     });
 
