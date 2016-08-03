@@ -39,8 +39,8 @@ describe("PersonWithNeedIntegration", () => {
     it("Shows errormessage when only pnr have correct value, and checkbox is not checked", function () {
         expect(subject).to.have.length(1);
 
-        const name = subject.find('.formName');
-        const pnr = subject.find('.formPnr');
+        const name = subject.find('#notCheckedName');
+        const pnr = subject.find('#notCheckedPnr');
         // We change the value to a correct value and expect no errormessage
         name.simulate('change', {target: {value: ''}});
         pnr.simulate('change', {target: {value: '01108019146'}});
@@ -54,14 +54,14 @@ describe("PersonWithNeedIntegration", () => {
         const errorMessage = subject.find('.error');
         // Ensure only one node is returned, otherwise our call to text() below will yell at us.
         expect(errorMessage).to.have.length.of(1);
-        expect(errorMessage.text()).to.equal("Vennligst fyll inn et navn på minst tre bokstaver.");
+        expect(errorMessage.text()).to.equal("Vennligst fyll inn fullt navn.");
     });
 
     it("Shows errormessage when only name have correct value, and checkbox is not checked", function () {
         expect(subject).to.have.length(1);
 
-        const name = subject.find('.formName');
-        const pnr = subject.find('.formPnr');
+        const name = subject.find('#notCheckedName');
+        const pnr = subject.find('#notCheckedPnr');
         // We change the value to a correct value and expect no errormessage
         name.simulate('change', {target: {value: 'Eldar'}});
         pnr.simulate('change', {target: {value: ''}});
@@ -84,7 +84,7 @@ describe("PersonWithNeedIntegration", () => {
     it("Do not show error message when name has a valid value and checkbox is checked", function () {
         expect(subject).to.have.length(1);
 
-        const name = subject.find('.formName');
+        const name = subject.find('#notCheckedName');
         // We change the value to a correct value and expect no errormessage
         name.simulate('change', {target: {value: 'Eldar'}});
 

@@ -139,7 +139,7 @@ export class PersonWithNeedClass extends React.Component {
         var errormessage = null;
 
         //Decide which errormessage is the correct one to show to the user
-        if (name.error && pnr.error && !checked.value) {
+        if (name.error && pnr.error && (pnr.error != "matcher ikke") && !checked.value) {
             errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>, og <b><i>{pnr.error}</i></b>.</p>;
         }
         else if (name.error) {
@@ -184,9 +184,10 @@ export class PersonWithNeedClass extends React.Component {
                         <FormGroup
                             validationState={name.error && (name.touched || alertMessage) ? "error" : ""}>
                             <FormControl
+                                className="form-input"
                                 id="checkedName"
                                 type="text"
-                                className="formName"
+                                className="form-input"
                                 placeholder="Navn"
                                 ref="name"
                                 {...name}/>
@@ -204,7 +205,7 @@ export class PersonWithNeedClass extends React.Component {
                             <FormControl
                                 id="checkedPnr"
                                 type="text"
-                                className="formPnr"
+                                className="form-input"
                                 placeholder="Fødselsnummer"
                                 ref="pno"
                                 //value={this.state.pnr}
@@ -227,7 +228,7 @@ export class PersonWithNeedClass extends React.Component {
                             <FormControl
                                 id="notCheckedName"
                                 type="text"
-                                className="formName"
+                                className="form-input"
                                 placeholder="Navn"
                                 ref="name"
                                 {...name}
@@ -250,7 +251,7 @@ export class PersonWithNeedClass extends React.Component {
                                 id="notCheckedPnr"
                                 type="text"
                                 name="pno"
-                                className="formPnr"
+                                className="form-input"
                                 placeholder="Fødselsnummer"
                                 ref="pno"
                                 //Connects field to redux form component//
@@ -308,10 +309,10 @@ const validate = values => {
     const errors = {};
 
     if (fieldIsEmpty(values.name)) {
-        errors.name = "et navn på minst tre bokstaver";
+        errors.name = "fullt navn";
     }
     else if(values.name.replace(" ", "").length<=2){
-        errors.name="et navn på minst tre bokstaver";
+        errors.name="fullt navn";
     }
     if (!(checkPersonalnumberNo(values.pnr))) {
         errors.pnr = "et ellevesifret fødselsnummer";

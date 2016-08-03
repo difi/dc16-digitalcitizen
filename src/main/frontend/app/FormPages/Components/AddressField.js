@@ -44,14 +44,11 @@ var AddressField = React.createClass({
         }
     },
     handleChange: function (event) {
-        console.log(event.target.value);
-
         var zipcode = checkPostCode(event.target.value);
 
         if (!zipcode) {
             return;
         }
-        console.log(zipcode);
 
         //We only make a call to the API if the number of characters in the input field is greater than 3.
         if (zipcode.length > 3) {
