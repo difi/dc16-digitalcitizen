@@ -360,16 +360,14 @@ export class ApplicationClass extends React.Component {
                     store={this.props.store}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                />;
+                    saveValues={this.saveValues}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                />;
+                    saveValues={this.saveValues}/>;
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -381,7 +379,6 @@ export class ApplicationClass extends React.Component {
             case 6:
                 content = < AddDependent
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -408,7 +405,6 @@ export class ApplicationClass extends React.Component {
                 content =
                     < LocationPage
                         store={this.props.store}
-
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}

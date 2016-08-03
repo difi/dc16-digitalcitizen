@@ -62,35 +62,6 @@ export class SubmitSuccessClass extends React.Component {
                 </Row>
             </div>
         );
-        /*else {
-         return (
-         <div>
-         <label className="form-header">Du har nå søkt på sykehjemsplass for (VERGE?):</label>
-         <div className="form-container">
-         <Row>
-         <Col className="submit-name">
-         <label>{this.props.fieldValues.person.name}</label>
-         </Col>
-         </Row>
-         </div>
-         <Row style={{marginTop: '15px'}}>
-         <hr/>
-         <Col xs={8} sm={8} md={8} lg={8}>
-         <img src={require('./resources/images/pdfIcon.png')} />
-         <a
-         className="download-link"
-         href={RESTpaths.PATHS.GETPDF_BASE + "?id=" + this.props.userData.submissionId}
-         target="_blank">
-         Last ned søknad som PDF
-         </a>
-         </Col>
-         <Col xs={4} sm={4} md={4} lg={4}>
-         <Button bsStyle="success" className="next-btn" onClick={this.handleClickOk}>Ok</Button>
-         </Col>
-         </Row>
-         </div>
-         )
-         }*/
     }
 }
 

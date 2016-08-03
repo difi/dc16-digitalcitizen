@@ -34,9 +34,7 @@ export class WhosSearchingClass extends React.Component {
             dataType: 'text',
             cache: false,
             success: function (data) {
-
                 this.props.fields.municipality.onChange(data);
-
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error("municipality error", status, err.toString());
