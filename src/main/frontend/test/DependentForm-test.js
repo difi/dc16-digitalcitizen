@@ -13,43 +13,7 @@ import {expect} from 'chai';
 //Import the file we want to test.
 import DependentForm from '../app/FormPages/Components/DependentForm.js';
 
-//Added these values from Application to simulate that this file have received these values from Application,
-// because it is dependent on these Application values
-var fieldValues = {
-    // First form
-    applyingForSelf: null,    // Boolean
-    // Second form
-    relation: null,             // String
-    guardianName: null,          //String
-    typeOfRelation: null,        //String
-    dependent: null,          // Boolean
-    dontGotPNRnumber: false,        //Boolean
-    // Third form
-    person: {                   // Person object
-        pnr: null,                  // String
-        name: null,                 // String
-        address: {                  // Address Object
-            country: "NO",              // String
-            streetAddress: null,        // String
-            zipcode: null,              // String
-            postal: null                // String
-        },
-        telephone: null             // String
-    },
-    // Fourth form
-    doctor: {                   // Doctor Object (add more fields?)
-        name: null                  // String
-    },
-    // Fifth form
-    dependents: [],             // List of Dependent objects { name: '', address: '', telephone: ''} (add more fields?)
-    // Sixth form
-    lengthOfStay: null,         // String
-    // Seventh form
-    medicalNeeds: null,         // String
-    conditionChanges: null,     // String
-    otherNeeds: null            // String
 
-};
 
 describe("DependentForm", function() {
     let wrapper = null;
@@ -62,7 +26,6 @@ describe("DependentForm", function() {
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Søsken'},
-            fieldValues: {fieldValues},
             showDeleteButton: true
         };
 
@@ -124,7 +87,6 @@ describe("DependentForm", function() {
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
             relation: {value: 'Søsken'},
-            fieldValues: {fieldValues},
             showDeleteButton: false
         };
         const wrapper = shallow(<DependentForm {...defaultProps}/> );
@@ -137,8 +99,7 @@ describe("DependentForm", function() {
             name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
             phone: {value: '12345678', error: " ", touched: false},
-            relation: {value: 'Annet'},
-            fieldValues: {fieldValues}
+            relation: {value: 'Annet'}
         };
 
         const wrapper = shallow(<DependentForm {...defaultProps}/>);

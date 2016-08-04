@@ -2,6 +2,10 @@ package digitalcitizen.models;
 
 import java.util.Collection;
 
+/**
+ * The Guardian model is used for mapping the pnr of a guardian to multiple {@link Person} objects.
+ * (One-to-many relation).
+ */
 public class Guardian {
 
     private String pnr ;

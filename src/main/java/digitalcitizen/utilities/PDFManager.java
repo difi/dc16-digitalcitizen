@@ -186,6 +186,13 @@ public class PDFManager {
         return new File(path);
     }
 
+    /**
+     * A method that merges two or more PDF documents into a single PDF file.
+     *
+     * @param documents An array of {@link File} containing the PDF documents to be merged.
+     * @return The method returns a single, merged, PDF document.
+     * @throws IOException
+     */
     private File mergeDocuments(File[] documents) throws IOException {
 
         String fileDestination = "mergeTest.pdf";
