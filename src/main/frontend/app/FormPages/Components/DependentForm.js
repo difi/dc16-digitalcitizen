@@ -35,7 +35,7 @@ class DependentForm extends React.Component {
                     className="close-button"
                     onClick={this.handleClickRemove}
                     bsStyle="danger">
-                    - Fjern pårørende
+                    Fjern pårørende
                 </Button>
             </Row>
             : '';
