@@ -97,7 +97,7 @@ export class SpecialNeedsClass extends React.Component {
                 <div id="specialNeeds" className="form-container">
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label htmlFor="mandatoryField" className="from-col-address" id="changesLabel">Hva er grunnen til at det søkes om
+                            <label htmlFor="mandatoryField" className="from-col-address label-textarea" id="changesLabel">Hva er grunnen til at det søkes om
                                 plass på sykehjem?</label>
                         </Col>
                         <Col sm={12} md={12}>
@@ -116,7 +116,7 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label htmlFor="medicalNeeds" className="from-col-address">Er det noen medisinske behov vi burde vite om?</label>
+                            <label htmlFor="medicalNeeds" className="from-col-address label-textarea">Er det noen medisinske behov vi burde vite om?</label>
                         </Col>
                         <Col sm={12} md={12}>
                             <FormControl componentClass="textarea" className="special-needs-textarea"
@@ -132,7 +132,7 @@ export class SpecialNeedsClass extends React.Component {
                     </Row>
                     <Row className="form-row-special">
                         <Col sm={12} md={12}>
-                            <label htmlFor="otherNeeds" className="from-col-address">Er det andre behov vi burde vite om? -Behov for tolk,
+                            <label htmlFor="otherNeeds" className="from-col-address label-textarea">Er det andre behov vi burde vite om? -Behov for tolk,
                                 hørselapparat e.l.</label>
                         </Col>
                         <Col sm={12} md={12}>
