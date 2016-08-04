@@ -140,22 +140,8 @@ describe("ApplicationIntegration", () => {
 
     });
 
-    // Was not able to simulate ajax-call, nor call the validToGoNext()-function, so this won't work.
-    /*it("Ajax-call: Third page forwards you to correct step, to step 6 if both pnr and name is given", () => {
-        subject.setState({
-            step: 3
-        });
-        var thirdPage = subject.find(PersonWithNeedForm);
-        expect(thirdPage).to.have.length(1);
-        //With PNR it should forward you to page 6
-        thirdPage.find('.formPnr').simulate('change', {target: {value: '15028047425'}});
-        thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
-        subject.update();
-        var nextButton = thirdPage.find(NavigationButtons).find('.next-btn');
-        expect (nextButton).to.have.length(1);
-        nextButton.simulate('click');
-        expect(subject.state().step).to.equal(6);
-    });*/
+    // Was not able to simulate ajax-call because this would result in a call to validToGoNext or
+    // notValidToGoNext, and we are not allowed by the testing-framework to directly call a function.
 
     it("Third page forwards you to correct step, from this, to step 4 if only name is given", () => {
         subject.setState({

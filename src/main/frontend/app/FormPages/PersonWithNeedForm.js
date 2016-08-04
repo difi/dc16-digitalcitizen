@@ -62,6 +62,8 @@ export class PersonWithNeedClass extends React.Component {
 
         // Checks if pnr and name match if a full-length pnr is typed, and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
+
+            //State need some time to be set, so if you print the state-value just after this, you wont be able to get the correct result
             this.setState({nextBtnIsLoading: true});
 
             $.ajax({
@@ -71,9 +73,6 @@ export class PersonWithNeedClass extends React.Component {
                 success: function (data) {
                     // setTimeout is only used for testing
                     //setTimeout(() => {
-                    //console.log(data);
-                    //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
-
                     if (data == true) {
                         this.setState({nextBtnIsLoading: false});
                         this.validToGoNext();
