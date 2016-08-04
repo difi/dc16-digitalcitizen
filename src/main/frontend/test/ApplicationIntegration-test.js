@@ -167,8 +167,8 @@ describe("ApplicationIntegration", () => {
         expect(thirdPage.find('.pnrCheck')).to.have.length(1);
         thirdPage.find('.pnrCheck').simulate('change', {target: {value: true}});
 
-        thirdPage.find('#notCheckedPnr').simulate('change', {target: {value: ''}});
-        thirdPage.find('#notCheckedName').simulate('change', {target: {value: 'Elias Eliassen'}});
+        thirdPage.find('.formPnr').simulate('change', {target: {value: ''}});
+        thirdPage.find('.formName').simulate('change', {target: {value: 'Elias Eliassen'}});
         var nextButton = subject.find(NavigationButtons).find('.next-btn');
         nextButton.simulate('click');
         expect(subject.state().step).to.equal(4);
