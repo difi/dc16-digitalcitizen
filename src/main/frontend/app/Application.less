@@ -8,17 +8,30 @@ body {
   padding: 0;
 }
 
+.info-label {
+  padding-left: 15px;
+  font-size: 9pt;
+  float: right;
+}
+
+input[type=text], input[type=numeric], input[type=radio], textarea, select, option, .form-control{
+  font-size:16px;
+}
+
 .footer-wrapper {
+  margin-top: 20px;
   border-top: 0.5px solid #e6e6e6;
 }
 
 .footer-text{
-  font-size: 10px;
+  font-size: 12px;
   margin-top:10px;
 }
 
 label {
   margin-top: 5px;
+  font-size:16px;
+  font-weight: bold;
 }
 
 h1 {
@@ -26,7 +39,7 @@ h1 {
 }
 
 .form-header {
-  font-size: 12pt;
+  font-size: 14pt;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -50,63 +63,55 @@ h1 {
 .adressLabel{
   margin-top: 0;
 }
-/*unused*/
-.application-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 450px;
-  background-color: white;
+
+@media (max-width: 500px) {
+  .footer {
+    display: none;
+  }
+
 }
 
 @media (min-width: 768px) {
-  .nav-header{
-    margin-left:10px;
+  label {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: normal;
+  }
+
+  .nav-header {
+    margin-left: 10px;
   }
 
   .application-wrapper {
     margin-top: 40px;
   }
 
-  .footer{
-    margin-top:40px;
+  .footer {
+    margin-top: 50px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container {
-    //width: 970px;
-  }
   h1 {
     font-size: 30px;
   }
 
   .form-header {
-    font-size: 15pt;
+    font-size: 18pt;
     font-weight: bold;
     margin-bottom: 20px;
-    margin-left: 15px;
   }
-
-  .footer-text{
-    font-size: 12px;
-  }
-}
-
-.info-label {
-  padding-left: 15px;
-  font-size: 9pt;
-  float: right;
 }
 
 .dependent-wrapper { /* Wraps all the dependent-forms in AddDependent */
-  width:700px;
+  width: 700px;
   background: #ececec;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-/* Start DependentForm style */
 
+/* Start DependentForm style */
 .close-button { /* X button to delete a dependent */
   float: right;
 }
@@ -123,8 +128,7 @@ h1 {
   margin-left: 15px;
 }
 
-/*unused*/
-.form-style-10 .inner-wrap{
+.form-style-10 .inner-wrap {
   padding: 30px;
   background: white;
   border-radius: 6px;
@@ -139,8 +143,8 @@ h1 {
 }
 
 .addDepButton {
-  margin-top:15px;
-  margin-bottom:15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 /* End DependentForm style */
@@ -182,7 +186,7 @@ h1 {
 
 .button-search {
   margin-bottom: 15px;
-  margin-left: 15px;
+  margin-left:10px;
 }
 
 .download-link {
@@ -200,6 +204,7 @@ h1 {
 input[type=radio] {
   margin: 6px;
 }
+
 .form-row-special {
   margin-bottom: 20px;
 }
@@ -209,7 +214,6 @@ select option[disabled]:first-child {
   display: none;
 }
 
-/*Back/ forward buttons*/
 .back-forward-buttons {
   width: 400px;
 }
@@ -222,17 +226,18 @@ select option[disabled]:first-child {
   float: right;
 }
 
-.disabledButton-nxt, .disabledButton-nxt:hover, .disabledButton-nxt:focus{
+.disabledButton-nxt, .disabledButton-nxt:hover, .disabledButton-nxt:focus {
   background-color: rgb(149, 209, 149);
   float: right;
   color: white;
 }
 
-.disabledButton-submit, .disabledButton-submit:hover, .disabledButton-submit:focus{
+.disabledButton-submit, .disabledButton-submit:hover, .disabledButton-submit:focus {
   background-color: rgb(120, 166, 205);
   float: right;
   color: white;
 }
+
 /*
 .back-btn, .back-btn:hover, .back-btn:focus{
   background-color: rgb(136,204,136);
@@ -240,7 +245,6 @@ select option[disabled]:first-child {
   color: white;
 }
 */
-/*bottom border*/
 hr {
   display: block;
   height: 1px;
@@ -249,5 +253,9 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
-
-
+/**
+.back-forward-buttons {
+  width: 200px;
+  margin-left: 15px;
+}
+*/

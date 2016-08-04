@@ -13,6 +13,7 @@ var FormControl = require('react-bootstrap/lib/FormControl');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var FormGroup = require('react-bootstrap/lib/FormGroup');
+var ControlLabel = require('react-bootstrap/lib/ControlLabel');
 
 var zipcodeError;
 
@@ -154,19 +155,10 @@ var AddressField = React.createClass({
                             </FormGroup>
                         </Col>
                     </Row>
-
                     <Row className="form-row-address">
                         <Col sm={6} md={6} className="from-col-address">
                             <label htmlFor="postNr" className="adressLabel">Postnummer</label>
-                        </Col>
-                        <Col sm={6} md={6} className="from-col-address">
-                            <label htmlFor="pSted" className="adressLabel">Sted</label>
-                        </Col>
-                    </Row>
-                    <Row className="form-row-address">
-                        <Col sm={6} md={6} className="from-col-address">
-                            <FormGroup
-                                validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
+                            <FormGroup validationState={(zipcodeError || (!zipcode.value)) && (zipcode.touched || alertMessage) ? "error" : ""}>
                                 <FormControl
                                     id="postNr"
                                     type="text"
@@ -181,6 +173,7 @@ var AddressField = React.createClass({
 
                         </Col>
                         <Col sm={6} md={6} className="from-col-address">
+                            <label htmlFor="pSted" className="adressLabel">Sted</label>
                             <FormControl
                                 id="pSted"
                                 type="text"
