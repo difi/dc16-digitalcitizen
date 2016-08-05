@@ -48,6 +48,7 @@ export class PersonWithNeedClass extends React.Component {
      * Handle the click on the back-button
      */
     handleClickBack() {
+        //Sends the  user to state 2 - RelationForm
         console.log("State 2");
         (this.props.previousStep(2));
     }
@@ -106,9 +107,11 @@ export class PersonWithNeedClass extends React.Component {
          * Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
          */
         if (this.props.fields.checked.value) {
+            //Sends the  user to state 4 - PersonWithNeedInfoForm
             console.log("State 4");
             (this.props.nextStep(4));
         } else {
+            //Sends the  user to state 6 - AddDependent
             console.log("State 6");
             this.savePerson();
             (this.props.nextStep(6));

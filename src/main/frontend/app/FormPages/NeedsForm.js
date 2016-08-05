@@ -21,7 +21,8 @@ export class NeedsFormClass extends React.Component {
      * Handle the click on the back-button
      */
     handleClickBack() {
-
+        //Sends the  user to state 6 - AddDependent
+        console.log("State 6");
         this.props.previousStep(6);
     }
     
@@ -37,8 +38,8 @@ export class NeedsFormClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            console.log("State 7");
-            //The next step is step 7 - SpecialNeeds
+            console.log("State 8");
+            //The next step is step 8 - SpecialNeeds
             this.props.nextStep(8);
         }
     }

@@ -1,26 +1,25 @@
-/**
- * Created by camp-vha on 06.07.2016.
- */
-
 import React from 'react';
 
-//Shallow renders only our component without touching the DOM.
-//Mount gives full DOM rendering.
-//Render renders react components to static HTML and analyze the resulting HTML structure.
-
+/**
+ * Shallow renders only our component without touching the DOM.
+ * Mount gives full DOM rendering.
+ * Render renders react components to static HTML and analyze the resulting HTML structure.
+ */
 import { shallow } from 'enzyme';
 import {expect} from 'chai';
 //Import the file we want to test.
 import DependentForm from '../app/FormPages/Components/DependentForm.js';
 
-
-
+/**
+ * Describe is the start of the test-class. Since we want to test DependentForm, we
+ * note this in quotation marks (this is the name of the test)
+ */
 describe("DependentForm", function() {
     let wrapper = null;
 
     // this is run before each test (it ('...', function (){}))
     beforeEach(() => {
-        // the fields that are individual for each page
+        // the fields that are individual for each page in the program
         const props = {
             name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
@@ -28,33 +27,24 @@ describe("DependentForm", function() {
             relation: {value: 'Søsken'},
             showDeleteButton: true
         };
-
         //Renders the DependentForm with props
         wrapper = shallow(<DependentForm {...props}/>);
     });
 
-    //it('should have two elements with classname=fname', function () {
-    //    //expect wrapper to exist
-    //    expect(wrapper).to.have.length(1);
-    //    //Expect to find two elements with the class name "fName"
-    //    expect (wrapper.find('.fName')).to.have.length(2);
-    //    //Expect to find one label-element with the class name "fName"
-    //    expect(wrapper.find('label.fName')).to.have.length(1);
-    //    expect(wrapper.find('FormControl.fName')).to.have.length(1);
-    //});
-
-    it('should have two HTML-elements with classname=name', function () {
+    /**
+     * A test is described with the text in the quotation marks, and this will also be
+     * what the test is called when run in Karma. If you want to look at one particular test
+     * you just find the description under the name of the test-class.
+     *
+     * In the following tests we look for the elements we expect to exists
+     * (there exists one element when lenthg is 1 and two if the length is 2)
+     */
+    it('should have two HTML-elements that are connected to name', function () {
+        //Expect the rendered dependentform to exist
         expect(wrapper).to.have.length(1);
         expect(wrapper.find('.name')).to.have.length(1);
         expect(wrapper.find('.nameField')).to.have.length(1);
     });
-
-    //it('should have two elements with classname=eName', function () {
-    //    expect(wrapper).to.have.length(1);
-    //    expect (wrapper.find('.eName')).to.have.length(2);
-    //    expect(wrapper.find('label.eName')).to.have.length(1);
-    //    expect(wrapper.find('FormControl.eName')).to.have.length(1);
-    //});
 
     it('should have two elements with classname=tlf', function () {
         expect(wrapper).to.have.length(1);
@@ -81,7 +71,8 @@ describe("DependentForm", function() {
     });
 
     it('if showDeleteButton=false, hide delete button', function () {
-        // Because we need to redefine the value of showDeleteButton, we need to define all props again
+        // Because we need to redefine the value of showDeleteButton,
+        // we need to define all props again, and render the class with these props
         var defaultProps = {
             name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
@@ -95,6 +86,8 @@ describe("DependentForm", function() {
     });
 
     it('if you choose other, show textfield', function () {
+        // Because we need to redefine the value of relation,
+        // we need to define all props again, and render the class with these props
         var defaultProps = {
             name: 'ds',
             mail: {value: 'df@df.no', error: " ", touched: false},
@@ -103,12 +96,15 @@ describe("DependentForm", function() {
         };
 
         const wrapper = shallow(<DependentForm {...defaultProps}/>);
+        //Expect to fin the textfield where you can write the specification of your relation.
         expect(wrapper.find('.dep-other-rel')).to.have.length(1);
     });
 
     it('if you choose sibling, do not show textfield', function () {
+        //Expect the rendered dependentform to exist
         expect(wrapper).to.have.length(1);
-
+        // If you choose anything else (for example sibling) as relation, the text
+        // field should not exist.
         expect(wrapper.find('.dep-other-rel')).to.have.length(0);
     });
 

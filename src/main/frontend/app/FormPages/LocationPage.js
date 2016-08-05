@@ -53,6 +53,8 @@ export class LocationPageClass extends React.Component {
      * If you are applying for yourself, the previous step is step 8 - Special Needs Page
      */
     handleClickBack() {
+        //Sends the  user to state 8 - SpecialNeeds
+        console.log("State 8");
         this.props.previousStep(8);
     }
 
@@ -69,6 +71,7 @@ export class LocationPageClass extends React.Component {
 
         } else {
             //Submit here?
+            //After submit sends the  user to state 10 - SubmitPage
             console.log("State 10");
             this.props.nextStep(10);
         }

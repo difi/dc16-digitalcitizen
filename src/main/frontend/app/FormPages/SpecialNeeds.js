@@ -31,7 +31,8 @@ export class SpecialNeedsClass extends React.Component {
     }
 
     handleClickBack() {
-        console.log("State 6");
+        //Sends the  user to state 7 - NeedsForm
+        console.log("State 7");
         (this.props.previousStep(7));
     }
 
@@ -44,6 +45,7 @@ export class SpecialNeedsClass extends React.Component {
             this.forceUpdate();
 
         } else {
+            //Sends the  user to state 9 - LocationPage
             console.log("State 9");
             this.props.nextStep(9);
         }
