@@ -203,7 +203,6 @@ export class RelationFormClass extends React.Component {
             }
         }
 
-
         switch (relation.value) {
             case "guardian":
                 content =
@@ -224,7 +223,7 @@ export class RelationFormClass extends React.Component {
                                               valueField="value"
                                               defaultValue=""
                                               {...nameOfChild}
-                                    //value={nameOfChild.value}
+                                              //value={nameOfChild.value}
                                               onChange={change => nameOfChild.onChange(change.newValue)}
                                 />
                             </FormGroup>
@@ -250,7 +249,7 @@ export class RelationFormClass extends React.Component {
                                               labelField="relation"
                                               valueField="value"
                                               {...typeOfRelation}
-                                    //value={typeOfRelation.value}
+                                              //value={typeOfRelation.value}
                                               onChange={change => typeOfRelation.onChange(change.newValue)}/>
                                 </FormGroup>
                             </Col>
@@ -338,11 +337,9 @@ const validate = values => {
         console.log("I error");
         errors.nameOfChild = "Vennligst velg hvem du fyller ut på vegne av, før du går videre."
     }
-
     if(values.typeOfRelation == 0){
         errors.typeOfRelation = "Vennligst velg fra listen hva som er din relasjon til søker, før du går videre."
     }
-
     if (fieldIsEmpty(values.otherRelation)) {
         errors.otherRelation = "Vennligst oppgi hva som er din relasjon til søker, før du går videre.";
     }

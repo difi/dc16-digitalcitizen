@@ -74,7 +74,6 @@ export const fields = [
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
-// add test values somewhere in here
 export class ApplicationClass extends React.Component {
 
     constructor(props) {
@@ -209,7 +208,9 @@ export class ApplicationClass extends React.Component {
         });
     }
 
-    //This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
+    /**
+     * This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
+     */
     resetDependent() {
         const {fields: {form1}} = this.props;
         form1.name.onChange(null);

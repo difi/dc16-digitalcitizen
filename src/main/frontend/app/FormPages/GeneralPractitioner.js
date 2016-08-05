@@ -52,7 +52,6 @@ export class GeneralPractitionerClass extends React.Component {
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
             this.forceUpdate();
-
         } else {
             console.log("State 6");
             this.props.nextStep(6);

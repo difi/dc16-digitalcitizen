@@ -37,7 +37,6 @@ export class SubmitSuccessClass extends React.Component {
     render() {
         const {fields: {name, applyingForSelf}} = this.props;
         var user = applyingForSelf.value ? this.props.userData.name : name.value;
-
         return (
             <div>
                 <label htmlFor="user" className="form-header">Du har nå søkt på sykehjemsplass for</label>

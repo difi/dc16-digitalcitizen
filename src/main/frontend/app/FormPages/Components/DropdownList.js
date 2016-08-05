@@ -99,7 +99,6 @@ var DropdownList = React.createClass({
         }
         this.setState({selected: e.target.value});
     }
-
 });
 
 export default DropdownList

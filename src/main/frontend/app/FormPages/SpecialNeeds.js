@@ -69,11 +69,8 @@ export class SpecialNeedsClass extends React.Component {
     render() {
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value && !changes.error;
-
         if (clickNextButton && (valid == undefined || !valid)) {
-
             var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>;
-
             alertContent =
                 <componentClass>
                     <div className="error">

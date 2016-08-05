@@ -321,6 +321,9 @@ AddDependentClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const AddDependent = reduxForm({
     form: 'application',
     fields: fields,

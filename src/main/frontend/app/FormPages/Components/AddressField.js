@@ -17,6 +17,13 @@ var ControlLabel = require('react-bootstrap/lib/ControlLabel');
 
 var zipcodeError;
 
+export const fields = [
+    'street',
+    'zipcode',
+    'postal',
+    'municipality'
+];
+
 var AddressField = React.createClass({
     propTypes: {
         includeCountry: React.PropTypes.bool,
@@ -76,7 +83,6 @@ var AddressField = React.createClass({
             this.props.fields.postal.onChange('Ugyldig postnr.');
         }
     },
-
 
     /**Updates the country state when the user selects a new option in
      * the {@link DropdownList}. Clears previous retrieved data.
@@ -192,7 +198,7 @@ var AddressField = React.createClass({
 
 AddressField = reduxForm({
     form: 'application',
-    fields: ["street", "zipcode", "postal", "municipality"],
+    fields: fields,
     destroyOnUnmount: false,
 }, null, null)(AddressField);
 

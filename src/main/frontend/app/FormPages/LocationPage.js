@@ -131,11 +131,8 @@ export class LocationPageClass extends React.Component {
         const {fields: {municipalityApp, homeApp, homeOptions}} = this.props;
         var valid = this.validateMun(municipalityApp.value);
         var homes = null;
-
         if (clickNextButton && (valid == undefined || !valid)) {
-
             var errorMessage = <p>Vennligst informer om <b><i>hvilken kommune plassen  i</i></b>, før du går videre.</p>
-
             alertContent =
                 <componentClass>
                     <div className="alertClass_Fdfs">
