@@ -1,9 +1,11 @@
 package digitalcitizen.controllers;
 
+import digitalcitizen.Application;
 import digitalcitizen.utilities.TestData;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
 
 
