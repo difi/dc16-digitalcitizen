@@ -100,13 +100,15 @@ export class RelationFormClass extends React.Component {
             this.forceUpdate();
 
         } else {
-            //Sends the  user to state 3 - PersonWithNeedForm
-            console.log("State 3");
             this.saveFieldValues();
             if (relation.value == "guardian") {
+                //Sends the  user to state 6 - AddDependent
+                console.log("State 6");
                 this.props.nextStep(6);
             }
             else {
+                //Sends the  user to state 3 - PersonWithNeedForm
+                console.log("State 3");
                 this.props.nextStep(3);
             }
         }

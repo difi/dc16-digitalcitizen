@@ -107,16 +107,24 @@ export class AddDependentClass extends React.Component {
     handleClickBack() {
         console.log(this.props.fields);
         if (this.props.fields.applyingForSelf.value) {
+            //Sends the  user to state 1 - WhosSearchingForm
+            console.log("State 1");
             (this.props.previousStep(1));
         }
 
         else if (this.props.fields.relation.value == "guardian") {
+            //Sends the  user to state 2 - RelationForm
+            console.log("State 2");
             this.props.previousStep(2);
         }
         else if (this.props.fields.checked.value) {
+            //Sends the  user to state 5 - GeneralPractitioner
+            console.log("State 5");
             (this.props.previousStep(5));
         }
         else {
+            //Sends the  user to state 3 - PersonWithNeedForm
+            console.log("State 3");
             (this.props.previousStep(3));
         }
     }
@@ -135,6 +143,7 @@ export class AddDependentClass extends React.Component {
                 clickNextButton = true;
                 this.forceUpdate();
         } else {
+            //Sends the  user to state 7 - NeedsForm
             console.log("State 7");
             this.props.nextStep(7);
         }

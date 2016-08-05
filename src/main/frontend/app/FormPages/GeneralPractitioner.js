@@ -37,6 +37,7 @@ export class GeneralPractitionerClass extends React.Component {
      * Handle the click on the back-button
      */
     handleClickBack() {
+        //Sends the  user to state 4 - PersonWithNeedInfoForm
         console.log("State 4");
         this.props.previousStep(4);
     }
@@ -53,6 +54,7 @@ export class GeneralPractitionerClass extends React.Component {
             this.forceUpdate();
 
         } else {
+            //Sends the  user to state 6 - AddDependent
             console.log("State 6");
             this.props.nextStep(6);
         }
