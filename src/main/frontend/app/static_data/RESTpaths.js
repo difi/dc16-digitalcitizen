@@ -18,7 +18,7 @@ exports.PATHS = {
     HOME_BASE: BASE_URL + 'api/homes',
     MUNICIPALITY_BASE: BASE_URL + 'api/municipality',
     PERSON_BASE: BASE_URL + 'api/person',
-    USER_BASE: BASE_URL + 'api/getPNR',
+    USER_BASE: BASE_URL + 'api/getName',
     SUBMIT: POST_URL + 'send',
     GETPDF_BASE: POST_URL + 'getpdf/'
 };
