@@ -46,7 +46,6 @@ class DependentForm extends React.Component {
 
         if (!valid && this.props.clickButtonNext) {
             var errorMessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b><b><i>{phone.error}</i></b><b><i>{mail.error}</i></b><b><i>{relation.error}</i></b>før du kan gå videre.</p>;
-
             alertContent =
                 <componentClass>
                     <div className="error">

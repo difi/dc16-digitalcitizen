@@ -7,6 +7,7 @@ import NavigationButtons from './Components/NavigationButtons.js';
 import TypeAhead from '../../node_modules/react-bootstrap-typeahead/lib/Typeahead.react.js';
 
 import {onlyLettersInString} from './Utilities/validation.js';
+import {fieldIsEmpty} from './Utilities/validation.js';
 
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -19,9 +20,9 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "doctorName",
-    "doctors",
-    "municipality"
+    'doctorName',
+    'doctors',
+    'municipality'
 ];
 
 export class GeneralPractitionerClass extends React.Component {
@@ -52,7 +53,6 @@ export class GeneralPractitionerClass extends React.Component {
         if ((valid == undefined || !valid)) {
             clickNextButton = true;
             this.forceUpdate();
-
         } else {
             //Sends the  user to state 6 - AddDependent
             console.log("State 6");
@@ -142,6 +142,9 @@ GeneralPractitionerClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const GeneralPractitioner = reduxForm({
     form: 'application',
     fields: fields,
@@ -149,3 +152,4 @@ const GeneralPractitioner = reduxForm({
 })(GeneralPractitionerClass);
 
 export default GeneralPractitioner
+

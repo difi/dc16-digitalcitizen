@@ -16,9 +16,9 @@ var alertContent = null;
 var clickNextButton = false;
 export var alertMessage = false;
 export const fields = [
-    "medical",
-    "changes",
-    "other"
+    'medical',
+    'changes',
+    'other'
 ];
 
 export class SpecialNeedsClass extends React.Component {
@@ -71,11 +71,8 @@ export class SpecialNeedsClass extends React.Component {
     render() {
         const {fields: {medical, changes, other}} = this.props;
         var valid = changes.value && !changes.error;
-
         if (clickNextButton && (valid == undefined || !valid)) {
-
             var errorMessage = <p>Vennligst svar på <b><i>{changes.error}</i></b>, før du går videre.</p>;
-
             alertContent =
                 <componentClass>
                     <div className="error">
@@ -165,7 +162,9 @@ SpecialNeedsClass.propTypes = {
     nextStep: React.PropTypes.func.isRequired
 };
 
-//Validation for form
+/**
+ * Validation for form
+ */
 const validate = values => {
     const errors = {};
 
@@ -175,6 +174,9 @@ const validate = values => {
     return errors;
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const SpecialNeeds = reduxForm({
     form: 'application',
     fields: fields,
