@@ -79,6 +79,7 @@ export class RelationFormClass extends React.Component {
      * Handle the click on the back-button
      */
     handleClickBack() {
+        //Sends the  user to state 1 - WhosSearchingForm
         console.log("State 1");
         this.saveFieldValues();
         (this.props.previousStep(1));
@@ -99,6 +100,7 @@ export class RelationFormClass extends React.Component {
             this.forceUpdate();
 
         } else {
+            //Sends the  user to state 3 - PersonWithNeedForm
             console.log("State 3");
             this.saveFieldValues();
             if (relation.value == "guardian") {

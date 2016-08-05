@@ -61,7 +61,6 @@ export default class NavigationButtons extends React.Component {
                         className="disabledButton-nxt"
                         onClick={this.props.handleClickNext}
                         bsStyle="success"
-                        block
                         ref="nextBtn">
                         Neste &rarr;
                     </Button>
@@ -72,7 +71,6 @@ export default class NavigationButtons extends React.Component {
                         className="next-btn"
                         onClick={!nextBtnIsLoading ? this.props.handleClickNext : null}
                         bsStyle="success"
-                        block
                         ref="nextBtn">
                         {nextBtnIsLoading ? 'Venter...' : 'Neste \u2192'}
                     </Button>
@@ -107,11 +105,10 @@ export default class NavigationButtons extends React.Component {
                     <Button
                         className="back-btn"
                         bsStyle="success"
-                        block
                         onClick={this.props.handleClickBack}>&larr;
                         Tilbake</Button>
                 </Col>
-                <Col xs={4} sm={4} md={4} lg={4}  xsOffset={4} smOffset={4} mdOffset={4} lgOffset={4}>
+                <Col xs={4} sm={4} md={4} lg={4}  xsOffset={4} smOffset={4} mdOffset={4} lgOffset={4} style={{paddingRight: 0}}>
                     {rightButton}
                 </Col>
             </Row>

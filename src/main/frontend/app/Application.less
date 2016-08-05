@@ -1,21 +1,43 @@
 html {
   margin: 0;
-  padding: 0;
+  paddin-right:0;
+}
+
+label {
+  margin-top: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.form-control {
+  height:36px;
 }
 
 body {
   margin: 0;
-  padding: 0;
+}
+
+.btn {
+  font-size: 1.5em;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.container {
+  max-width: 800px;
 }
 
 .info-label {
-  padding-left: 15px;
   font-size: 9pt;
   float: right;
+  margin-right:15px;
 }
 
-input[type=text], input[type=numeric], input[type=radio], textarea, select, option, .form-control{
-  font-size:16px;
+input[type=text], input[type=numeric], input[type=radio], textarea, select, .form-control{
+  font-size: 1.5em;
 }
 
 .footer-wrapper {
@@ -28,26 +50,25 @@ input[type=text], input[type=numeric], input[type=radio], textarea, select, opti
   margin-top:10px;
 }
 
-label {
-  margin-top: 5px;
-  font-size:16px;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: 22px;
-}
-
 .form-header {
-  font-size: 14pt;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 30px;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 500px) {
   .footer {
     display: none;
   }
+
+  .form-header {
+    font-size: 20px;
+
+  }
+
+  .button-search {
+
+  }
+
 }
 
 .button-label {
@@ -64,17 +85,10 @@ h1 {
   margin-top: 0;
 }
 
-@media (max-width: 500px) {
-  .footer {
-    display: none;
-  }
-
-}
-
 @media (min-width: 768px) {
   label {
     margin-top: 5px;
-    font-size: 18px;
+    font-size: 1.5em;
     font-weight: normal;
   }
 
@@ -94,12 +108,6 @@ h1 {
 @media (min-width: 1200px) {
   h1 {
     font-size: 30px;
-  }
-
-  .form-header {
-    font-size: 18pt;
-    font-weight: bold;
-    margin-bottom: 20px;
   }
 }
 
@@ -122,10 +130,6 @@ h1 {
   font-size: 10pt;
   font-weight: bold;
   padding-bottom: 7px;
-}
-
-.add-button {
-  margin-left: 15px;
 }
 
 .form-style-10 .inner-wrap {
@@ -156,10 +160,6 @@ h1 {
   padding-left: 0;
 }
 
-.from-col-address {
-  padding-left: 15px;
-}
-
 .submit-name {
   font-size: 13pt;
   text-align: center;
@@ -186,7 +186,11 @@ h1 {
 
 .button-search {
   margin-bottom: 15px;
-  margin-left:10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;
+  font-size: 25px;
+  padding: 23px 16px;
 }
 
 .download-link {
@@ -195,10 +199,6 @@ h1 {
 
 .form-radio-group {
   margin-bottom: 40px;
-}
-
-.special-needs-textarea {
-  margin-left: 15px;
 }
 
 input[type=radio] {
@@ -216,10 +216,6 @@ select option[disabled]:first-child {
 
 .back-forward-buttons {
   width: 400px;
-}
-
-.back-btn {
-  margin-left: 15px;
 }
 
 .next-btn {
@@ -246,7 +242,6 @@ select option[disabled]:first-child {
 }
 */
 hr {
-  display: block;
   height: 1px;
   border: 0;
   border-top: 1px solid #AAA;

@@ -44,6 +44,7 @@ export class WhosSearchingClass extends React.Component {
     }
 
     handleClickMe() {
+        //Sends the user to state 6 - AddDependent
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
         if(this.props.fields.dependent.value){
@@ -54,6 +55,7 @@ export class WhosSearchingClass extends React.Component {
     }
 
     handleClickOther() {
+        //Sends the  user to state 2 - RelationForm
         console.log("State 2");
         if (this.props.fields.pnr.value == this.props.fields.guardianPnr.value) {
             this.props.fields.pnr.onChange(null);
