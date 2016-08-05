@@ -31,6 +31,7 @@ public class TestData {
             new Person("06126620649", "Solfrid Solfridsen", new Address("Sogndal", "NO", "Sogndal", "testveien 6", "6856"), "99999995", "test@test.com", new Doctor("Ola", "Sogndal")),
             new Person("27072118958", "Tom Tomsen", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Vegard", "Sogndal")),
             new Person("10115914931", "Line", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Nils", "Sogndal")),
+            new Person("08023549930", "Ola Nordmann", new Address("Sogndal", "NO", "Sogndal", "testveien 7", "6856"), "99999996", "test@test.no", new Doctor("Nils", "Sogndal")),
             new Person("17079493538", "Ola Nordmann", new Address("Oslo", "NO", "Oslo", "Nordstrandveien 3", "1167"), "99999996", "test@test.no", new Doctor("Henrik", "Oslo"))
     );
 
