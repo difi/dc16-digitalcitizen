@@ -431,7 +431,7 @@ export class ApplicationClass extends React.Component {
             <div>
                 <Navbar staticTop>
                     <Row>
-                        <Col mdOffset={3} lgOffset={3} smOffset={2}>
+                        <Col>
                             <Navbar.Header className="nav-header">
                                 <Navbar.Brand>
                                     <a href=".">Digitalcitizen</a>
@@ -449,16 +449,12 @@ export class ApplicationClass extends React.Component {
                     </Row>
                 </Navbar>
                 <div className="container">
-                    <Col mdOffset={3} lgOffset={3} smOffset={2} xsOffset={1} md={6}
-                         xs={12} sm={8} lg={6}> {header} </Col>
-                    <Col className="application-wrapper" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={0} md={6}
-                         xs={12} sm={8} lg={6}>
-                        <Col md={12} xs={14} sm={12} lg={11} xsOffset={1} smOffset={0} mdOffset={0} lgOffset={0}>
+                    <Col md={12} xs={12} sm={12} lg={12}> {header} </Col>
+                        <Col md={12} xs={12} sm={12} lg={12}>
                             {content}
                         </Col>
-                    </Col>
-                    <Col className="footer" mdOffset={3} lgOffset={3} smOffset={2} xsOffset={1} md={6}
-                         xs={12} sm={8} lg={6}>
+                    <Col className="footer"  md={12}
+                         xs={12} sm={12} lg={12}>
                         <div className="footer-wrapper">
                             <p className="footer-text"> Tlf: 800 30 300 | Driftet av Direktoratet for forvaltning og IKT(Difi)</p>
                         </div>
