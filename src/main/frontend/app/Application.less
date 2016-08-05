@@ -9,8 +9,13 @@ label {
   font-weight: bold;
 }
 
+//makes font in list with general practitioners bigger
+.dropdown-menu>li>a {
+  font-size: 1.5em;
+}
+
 .form-control {
-  height:36px;
+  height:38px;
 }
 
 body {
@@ -63,9 +68,6 @@ input[type=text], input[type=numeric], input[type=radio], textarea, select, .for
   .form-header {
     font-size: 20px;
   }
-
-  .button-search {
-  }
 }
 
 .button-label {
@@ -82,7 +84,7 @@ input[type=text], input[type=numeric], input[type=radio], textarea, select, .for
   margin-top: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 500px) {
   label {
     margin-top: 5px;
     font-size: 1.5em;
@@ -104,7 +106,7 @@ input[type=text], input[type=numeric], input[type=radio], textarea, select, .for
 
 @media (min-width: 1200px) {
   h1 {
-    font-size: 30px;
+    font-size: 36px;
   }
 }
 
@@ -114,7 +116,6 @@ input[type=text], input[type=numeric], input[type=radio], textarea, select, .for
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
 
 /* Start DependentForm style */
 .close-button { /* X button to delete a dependent */

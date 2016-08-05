@@ -147,7 +147,7 @@ var AddressField = React.createClass({
             return (
                 <div>
                     <Row className="form-row-address">
-                        <Col sm={12} md={12} className="from-col-address">
+                        <Col>
                             <FormGroup
                                 validationState={(!street.value && (street.touched || alertMessage)) ? "error" : ""}>
                                 <FormControl
