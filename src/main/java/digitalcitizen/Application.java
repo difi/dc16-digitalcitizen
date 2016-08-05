@@ -20,6 +20,9 @@ import java.util.ArrayList;
 public class Application {
 
     public static boolean USE_MONGODB = false;
+    // Set to false if requests are not going through the proxy(such as when testing on localhost:8090 or localhost:9090).
+    // If true the pnr is extracted from the HTTP header of each request instead of as an argument.
+    public static boolean IS_USING_PROXY = false;
 
     public static void main(String[] args) {
         Injector injector = Guice.createInjector(new ArrayList<Module>() {{

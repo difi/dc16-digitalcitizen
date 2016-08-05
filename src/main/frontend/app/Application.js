@@ -198,8 +198,9 @@ export class ApplicationClass extends React.Component {
             cache: false,
             success: function (data) {
                 var user = {
-                    pnr: data.pnr,
-                    name: data.name
+                    name: data.name,
+                    // pnr is only used for testing on localhost:8090 and localhost:9090.
+                    pnr: data.pnr
                 };
                 this.saveUserData(user);
                 this.props.fields.guardianPnr.onChange(data.pnr)
