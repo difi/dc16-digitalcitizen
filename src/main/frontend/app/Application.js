@@ -27,16 +27,16 @@ import $ from 'jquery';
 import RESTpaths from './static_data/RESTpaths.js';
 
 export const fields = [
-    "applyingForSelf",
-    "pnr",
-    "name",
-    "checked",
-    "number",
-    "street",
-    "zipcode",
-    "postal",
-    "municipality",
-    "doctorName",
+    'applyingForSelf',
+    'pnr',
+    'name',
+    'checked',
+    'number',
+    'street',
+    'zipcode',
+    'postal',
+    'municipality',
+    'doctorName',
     'form1.name',
     'form1.mail',
     'form1.phone',
@@ -56,25 +56,24 @@ export const fields = [
     'form2.depOtherRelation',
     'form3.depOtherRelation',
     'numDep',
-    "relation",
-    "typeOfRelation",
-    "nameOfChild",
-    "dependent",
-    "otherRelation",
-    "guardianFor",
-    "need",
-    "medical",
-    "changes",
-    "other",
-    "municipalityApp",
-    "homeApp",
-    "setDependent",
+    'relation',
+    'typeOfRelation',
+    'nameOfChild',
+    'dependent',
+    'otherRelation',
+    'guardianFor',
+    'need',
+    'medical',
+    'changes',
+    'other',
+    'municipalityApp',
+    'homeApp',
+    'setDependent',
     'guardianPnr'
 ];
 
 // TODO: Update object fields to match the form data & make matching model(s) on the server.
 
-// add test values somewhere in here
 export class ApplicationClass extends React.Component {
 
     constructor(props) {
@@ -99,7 +98,7 @@ export class ApplicationClass extends React.Component {
          * The following if-sentences needs to be commented out of the code if the ApplicationIntegration-test is going to run as expected
          */
 
-         /*if (this.props.fields.applyingForSelf.onChange()) {
+         if (this.props.fields.applyingForSelf.onChange()) {
          this.testScriptPerson();
          }
 
@@ -118,7 +117,7 @@ export class ApplicationClass extends React.Component {
          //dependent form 3
          if (this.props.fields.form3.name.onChange()) {
          this.testScriptAddDependent3();
-         }*/
+         }
     }
 
     /**
@@ -142,7 +141,7 @@ export class ApplicationClass extends React.Component {
         this.props.fields.need.onChange("long");
         this.props.fields.medical.onChange("No");
         this.props.fields.changes.onChange("No");
-        this.props.fields.other.onChange("No");
+        this.props.fields.other.onChange("Blomsterpotten har åtte blomster, åtte blomstrende potteblomster. Blomstrer blomstene, blomstrer åtte potteblomster i blomsterpotte.");
 
         //
         this.props.fields.displayButton.onChange();
@@ -188,7 +187,6 @@ export class ApplicationClass extends React.Component {
         this.props.fields.form3.phone.onChange("99999996");
         this.props.fields.form3.mail.onChange("test@test.no");
         this.props.fields.form3.relation.onChange("Barn");
-
     }
 
     getUserData() {
@@ -211,7 +209,9 @@ export class ApplicationClass extends React.Component {
         });
     }
 
-    //This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
+    /**
+     * This function exists as callback to the forms that may change the value of dependent. It exists to reset the dependent form that may have been autofilled. Very specific use-case.
+     */
     resetDependent() {
         const {fields: {form1}} = this.props;
         form1.name.onChange(null);
@@ -359,16 +359,14 @@ export class ApplicationClass extends React.Component {
                     store={this.props.store}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                />;
+                    saveValues={this.saveValues}/>;
                 break;
             case 4:
                 content = <PersonWithNeedInfoForm
                     store={this.props.store}
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                />;
+                    saveValues={this.saveValues}/>;
                 break;
             case 5:
                 content = <GeneralPractitioner
@@ -380,7 +378,6 @@ export class ApplicationClass extends React.Component {
             case 6:
                 content = < AddDependent
                     store={this.props.store}
-
                     previousStep={this.previousStep}
                     nextStep={this.nextStep}
                     saveValues={this.saveValues}
@@ -407,7 +404,6 @@ export class ApplicationClass extends React.Component {
                 content =
                     < LocationPage
                         store={this.props.store}
-
                         previousStep={this.previousStep}
                         nextStep={this.nextStep}
                         saveValues={this.saveValues}
@@ -435,7 +431,7 @@ export class ApplicationClass extends React.Component {
                         <Col>
                             <Navbar.Header className="nav-header">
                                 <Navbar.Brand>
-                                    <a href=".">Digitalcitizen</a>
+                                    <a href=".">DigitalCitizen</a>
                                 </Navbar.Brand>
                                 <Navbar.Toggle />
                             </Navbar.Header>
@@ -470,6 +466,9 @@ ApplicationClass.propTypes = {
     userData: React.PropTypes.object.isRequired
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const Application = reduxForm({
     form: 'application',
     fields: fields,

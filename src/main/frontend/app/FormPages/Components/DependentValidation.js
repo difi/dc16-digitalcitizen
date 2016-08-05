@@ -15,7 +15,6 @@ function feedback(data) {
     } else if(data.name.replace(" ", "").length<=2){
         errors.name="fullt navn, ";
     }
-
     if (!data.relation || data.relation == 0) {
         errors.relation = "relasjon, ";
     }

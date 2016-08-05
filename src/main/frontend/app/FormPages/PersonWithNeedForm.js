@@ -25,10 +25,10 @@ var alertMessage = false;
 var nameContent = null;
 var pnrContent = null;
 export const fields = [
-    "pnr",
-    "name",
-    "checked",
-    "municipality"
+    'pnr',
+    'name',
+    'checked',
+    'municipality'
 ];
 
 export class PersonWithNeedClass extends React.Component {
@@ -42,7 +42,6 @@ export class PersonWithNeedClass extends React.Component {
         this.savePerson = this.savePerson.bind(this);
         this.validToGoNext = this.validToGoNext.bind(this);
         this.notValidToGoNext = this.notValidToGoNext.bind(this);
-
     }
 
     /**
@@ -62,6 +61,8 @@ export class PersonWithNeedClass extends React.Component {
 
         // Checks if pnr and name match if a full-length pnr is typed, and a name is given
         if ((pnr.value && pnr.value.length > 10) && !checked.value && name.value) {
+
+            //State need some time to be set, so if you print the state-value just after this, you wont be able to get the correct result
             this.setState({nextBtnIsLoading: true});
 
             $.ajax({
@@ -71,9 +72,6 @@ export class PersonWithNeedClass extends React.Component {
                 success: function (data) {
                     // setTimeout is only used for testing
                     //setTimeout(() => {
-                    //console.log(data);
-                    //console.log("Pnr: " + pnr.value + ", Navn: " + name.value);
-
                     if (data == true) {
                         this.setState({nextBtnIsLoading: false});
                         this.validToGoNext();
@@ -104,7 +102,9 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     validToGoNext() {
-        //Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
+        /**
+         * Saves value from ajax call to person if PNR is known, otherwise saves inputted field values.
+         */
         if (this.props.fields.checked.value) {
             console.log("State 4");
             (this.props.nextStep(4));
@@ -133,12 +133,16 @@ export class PersonWithNeedClass extends React.Component {
     }
 
     render() {
-        //Add fields from redux form to component so they can be connected
+        /**
+         * Add fields from redux form to component so they can be connected
+         */
         const {fields: {pnr, checked, name}} = this.props;
         var valid = (!pnr.error && !name.error) || (checked.value && !name.error);
         var errormessage = null;
 
-        //Decide which errormessage is the correct one to show to the user
+        /**
+         * Decide which errormessage is the correct one to show to the user
+         */
         if (name.error && pnr.error && (pnr.error != "matcher ikke") && !checked.value) {
             errormessage = <p>Vennligst fyll inn <b><i>{name.error}</i></b>, og <b><i>{pnr.error}</i></b>.</p>;
         }
@@ -154,7 +158,9 @@ export class PersonWithNeedClass extends React.Component {
             }
         }
 
-        //If the user has clicked on next-button, and the form is not valid. Show errormessage.
+        /**
+         * If the user has clicked on next-button, and the form is not valid. Show errormessage.
+         */
         if (clickNextButton && (valid == undefined || !valid)) {
             alertContent =
                 <componentClass>
@@ -278,7 +284,6 @@ export class PersonWithNeedClass extends React.Component {
                                 <label htmlFor="pnrCheck" className="check-button-label"> Jeg kan ikke fødselsnummeret</label>
                             </Col>
                         </Row>
-
                         <Row className="formgroup-row">
                             {pnrContent}
                         </Row>

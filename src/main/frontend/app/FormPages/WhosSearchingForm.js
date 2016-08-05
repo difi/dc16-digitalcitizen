@@ -27,7 +27,6 @@ export class WhosSearchingClass extends React.Component {
     }
 
     saveFieldValues(){
-
         //First sends dependent to fieldValues as it is needed in dependent Form. NB: Should be refactored.
         this.props.fields.pnr.onChange(this.props.userData.pnr);
         $.ajax({
@@ -35,9 +34,7 @@ export class WhosSearchingClass extends React.Component {
             dataType: 'text',
             cache: false,
             success: function (data) {
-
                 this.props.fields.municipality.onChange(data);
-
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error("municipality error", status, err.toString());
@@ -45,6 +42,9 @@ export class WhosSearchingClass extends React.Component {
         })
     }
 
+    /**
+     * Sends the user to state 6 - AddDependent
+     */
     handleClickMe() {
         console.log("State 6");
         this.props.fields.applyingForSelf.onChange(true);
@@ -55,6 +55,9 @@ export class WhosSearchingClass extends React.Component {
         this.props.nextStep(6)
     }
 
+    /**
+     * Sends the  user to state 2 - RelationForm
+     */
     handleClickOther() {
         console.log("State 2");
         if (this.props.fields.pnr.value == this.props.fields.guardianPnr.value) {
@@ -91,6 +94,9 @@ WhosSearchingClass.propTypes = {
     nextStep:  React.PropTypes.func.isRequired,
 };
 
+/**
+ * Sets up reduxForm - needs fields and validation functions
+ */
 const WhosSearching = reduxForm({
     form: 'application',
     fields: fields,

@@ -14,11 +14,8 @@ import Buttons from './unused/buttons.jsx';
 import GeneralPractitioner from './FormPages/GeneralPractitioner.js';
 import PersonWithNeedForm from './FormPages/PersonWithNeedForm.js';
 
-
 const store = createStore(reducers);
-
 var fastleger = ["Ola Nordmann", "Kari Nordmann"];
-
 var user = {
     pnr: "01108019146",
     name: "Eldar Eldarsen",
